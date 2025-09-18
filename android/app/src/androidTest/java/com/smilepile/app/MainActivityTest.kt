@@ -1,6 +1,8 @@
 package com.smilepile.app
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.swipeLeft
+import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -19,6 +21,16 @@ class MainActivityTest {
     @Test
     fun testActivityLaunches() {
         // Test that the activity launches successfully
-        onView(withId(R.id.imageView)).check(matches(isDisplayed()))
+        onView(withId(R.id.viewPager)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testSwipeGestures() {
+        // Test swipe functionality
+        onView(withId(R.id.viewPager))
+            .check(matches(isDisplayed()))
+            .perform(swipeLeft())
+            .perform(swipeLeft())
+            .perform(swipeRight())
     }
 }

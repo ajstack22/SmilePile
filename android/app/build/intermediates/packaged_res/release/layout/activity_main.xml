@@ -4,12 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/test_image"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/app_name" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

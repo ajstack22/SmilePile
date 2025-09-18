@@ -257,6 +257,25 @@
     <incident
         id="GradleDependency"
         severity="warning"
+        message="A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0">
+        <fix-replace
+            description="Change to 1.1.0"
+            family="Update versions"
+            oldString="1.0.0"
+            replacement="1.1.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="44"
+            column="21"
+            startOffset="1166"
+            endLine="44"
+            endColumn="57"
+            endOffset="1202"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
         message="A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0">
         <fix-replace
             description="Change to 1.3.0"
@@ -265,12 +284,12 @@
             replacement="1.3.0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="46"
+            line="47"
             column="32"
-            startOffset="1223"
-            endLine="46"
+            startOffset="1282"
+            endLine="47"
             endColumn="61"
-            endOffset="1252"/>
+            endOffset="1311"/>
     </incident>
 
     <incident
@@ -284,12 +303,12 @@
             replacement="3.7.0"/>
         <location
             file="${:app*projectDir}/build.gradle.kts"
-            line="47"
+            line="48"
             column="32"
-            startOffset="1286"
-            endLine="47"
+            startOffset="1345"
+            endLine="48"
             endColumn="74"
-            endOffset="1328"/>
+            endOffset="1387"/>
     </incident>
 
     <incident
