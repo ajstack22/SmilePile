@@ -708,48 +708,6 @@ Landroidx/lifecycle/Transformations$2$1;
 Landroidx/lifecycle/Transformations$2;
 Landroidx/lifecycle/Transformations;
 
-# Baseline profiles for lifecycle-process
-
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;-><init>()V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityResumed(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStarted(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;-><init>()V
-HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/LifecycleDispatcher;-><clinit>()V
-HSPLandroidx/lifecycle/LifecycleDispatcher;->init(Landroid/content/Context;)V
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;-><init>()V
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Landroidx/lifecycle/LifecycleOwner;
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Ljava/lang/Object;
-HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->dependencies()Ljava/util/List;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$2;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner$3;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostResumed(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostStarted(Landroid/app/Activity;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPreCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><clinit>()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><init>()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityResumed()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityStarted()V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->attach(Landroid/content/Context;)V
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->get()Landroidx/lifecycle/LifecycleOwner;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;
-HSPLandroidx/lifecycle/ProcessLifecycleOwner;->init(Landroid/content/Context;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityDestroyed(Landroid/app/Activity;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityPaused(Landroid/app/Activity;)V
-PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner$1;->run()V
-PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPaused(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityStopped(Landroid/app/Activity;)V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->activityPaused()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->activityStopped()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchPauseIfNeeded()V
-PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchStopIfNeeded()V
-
 # Baseline profiles for lifecycle-livedata-core
 
 HSPLandroidx/lifecycle/LiveData$1;-><init>(Landroidx/lifecycle/LiveData;)V
@@ -791,21 +749,47 @@ HSPLandroidx/lifecycle/MutableLiveData;-><init>()V
 HSPLandroidx/lifecycle/MutableLiveData;->setValue(Ljava/lang/Object;)V
 PLandroidx/lifecycle/LiveData$LifecycleBoundObserver;->detachObserver()V
 
-# Baseline profiles for Lifecycle ViewModel
+# Baseline profiles for lifecycle-process
 
-HSPLandroidx/lifecycle/ViewModel;-><init>()V
-HSPLandroidx/lifecycle/ViewModelLazy;-><init>(Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
-HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Ljava/lang/Object;
-HSPLandroidx/lifecycle/ViewModelProvider;-><init>(Landroidx/lifecycle/ViewModelStore;Landroidx/lifecycle/ViewModelProvider$Factory;)V
-HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelStore;-><init>()V
-HSPLandroidx/lifecycle/ViewModelStore;->get(Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
-HSPLandroidx/lifecycle/ViewModelStore;->put(Ljava/lang/String;Landroidx/lifecycle/ViewModel;)V
-PLandroidx/lifecycle/ViewModel;->clear()V
-PLandroidx/lifecycle/ViewModel;->onCleared()V
-PLandroidx/lifecycle/ViewModelStore;->clear()V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;-><init>()V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityResumed(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStarted(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;-><init>()V
+HSPLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/LifecycleDispatcher;-><clinit>()V
+HSPLandroidx/lifecycle/LifecycleDispatcher;->init(Landroid/content/Context;)V
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;-><init>()V
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Landroidx/lifecycle/LifecycleOwner;
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->create(Landroid/content/Context;)Ljava/lang/Object;
+HSPLandroidx/lifecycle/ProcessLifecycleInitializer;->dependencies()Ljava/util/List;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$2;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner$3;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostResumed(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3$1;->onActivityPostStarted(Landroid/app/Activity;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;-><init>(Landroidx/lifecycle/ProcessLifecycleOwner;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPreCreated(Landroid/app/Activity;Landroid/os/Bundle;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><clinit>()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;-><init>()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityResumed()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->activityStarted()V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->attach(Landroid/content/Context;)V
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->get()Landroidx/lifecycle/LifecycleOwner;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->getLifecycle()Landroidx/lifecycle/Lifecycle;
+HSPLandroidx/lifecycle/ProcessLifecycleOwner;->init(Landroid/content/Context;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityDestroyed(Landroid/app/Activity;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityPaused(Landroid/app/Activity;)V
+PLandroidx/lifecycle/EmptyActivityLifecycleCallbacks;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/LifecycleDispatcher$DispatcherActivityCallback;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner$1;->run()V
+PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityPaused(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner$3;->onActivityStopped(Landroid/app/Activity;)V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->activityPaused()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->activityStopped()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchPauseIfNeeded()V
+PLandroidx/lifecycle/ProcessLifecycleOwner;->dispatchStopIfNeeded()V
 
 # Baseline Profile rules for lifecycle-runtime
 
@@ -857,6 +841,22 @@ PLandroidx/lifecycle/ReportFragment$LifecycleCallbacks;->onActivityStopped(Landr
 PLandroidx/lifecycle/ReportFragment;->onDestroy()V
 PLandroidx/lifecycle/ReportFragment;->onPause()V
 PLandroidx/lifecycle/ReportFragment;->onStop()V
+
+# Baseline profiles for Lifecycle ViewModel
+
+HSPLandroidx/lifecycle/ViewModel;-><init>()V
+HSPLandroidx/lifecycle/ViewModelLazy;-><init>(Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelLazy;->getValue()Ljava/lang/Object;
+HSPLandroidx/lifecycle/ViewModelProvider;-><init>(Landroidx/lifecycle/ViewModelStore;Landroidx/lifecycle/ViewModelProvider$Factory;)V
+HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelProvider;->get(Ljava/lang/String;Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelStore;-><init>()V
+HSPLandroidx/lifecycle/ViewModelStore;->get(Ljava/lang/String;)Landroidx/lifecycle/ViewModel;
+HSPLandroidx/lifecycle/ViewModelStore;->put(Ljava/lang/String;Landroidx/lifecycle/ViewModel;)V
+PLandroidx/lifecycle/ViewModel;->clear()V
+PLandroidx/lifecycle/ViewModel;->onCleared()V
+PLandroidx/lifecycle/ViewModelStore;->clear()V
 
 # Baseline Profile Rules for androidx.startup
 

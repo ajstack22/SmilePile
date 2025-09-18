@@ -1,37 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<testsuite name="com.smilepile.app.MainActivityTest" tests="4" failures="1" errors="0" skipped="0" time="19.441" timestamp="2025-09-18T21:28:55" hostname="localhost">
+<testsuite name="com.smilepile.app.MainActivityTest" tests="4" failures="0" errors="0" skipped="0" time="13.153" timestamp="2025-09-18T21:58:12" hostname="localhost">
   <properties>
     <property name="device" value="Pixel_9(AVD) - 16" />
     <property name="flavor" value="" />
     <property name="project" value=":app" />
   </properties>
-  <testcase name="testImagePagerAdapterWithSampleImages" classname="com.smilepile.app.MainActivityTest" time="2.331" />
-  <testcase name="testSwipeGestures" classname="com.smilepile.app.MainActivityTest" time="13.094">
-    <failure>androidx.test.espresso.base.RootViewPicker$RootViewWithoutFocusException: Waited for the root of the view hierarchy to have window focus and not request layout for 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Root:
-Root{application-window-token=android.view.ViewRootImpl$W&#64;a25bce, window-token=android.view.ViewRootImpl$W&#64;a25bce, has-window-focus=false, layout-params-type=1, layout-params-string={(0,0)(fillxfill) ty=BASE_APPLICATION wanim=0x103030e
-fl=LAYOUT_IN_SCREEN FULLSCREEN LAYOUT_INSET_DECOR SPLIT_TOUCH HARDWARE_ACCELERATED DRAWS_SYSTEM_BAR_BACKGROUNDS
-pfl=NO_MOVE_ANIMATION FORCE_DRAW_STATUS_BAR_BACKGROUND FIT_INSETS_CONTROLLED
-bhv=DEFAULT
-fitSides=
-frameRateBoostOnTouch=true
-dvrrWindowFrameRateHint=true}, decor-view-string=DecorView{id=-1, visibility=VISIBLE, width=1080, height=2282, has-focus=false, has-focusable=true, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, layout-params={(0,0)(fillxfill) ty=BASE_APPLICATION wanim=0x103030e
-fl=LAYOUT_IN_SCREEN FULLSCREEN LAYOUT_INSET_DECOR SPLIT_TOUCH HARDWARE_ACCELERATED DRAWS_SYSTEM_BAR_BACKGROUNDS
-pfl=NO_MOVE_ANIMATION FORCE_DRAW_STATUS_BAR_BACKGROUND FIT_INSETS_CONTROLLED
-bhv=DEFAULT
-fitSides=
-frameRateBoostOnTouch=true
-dvrrWindowFrameRateHint=true}, tag=null, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1}}
-at dalvik.system.VMStack.getThreadStackTrace(Native Method)
-at java.lang.Thread.getStackTrace(Thread.java:1960)
-at androidx.test.espresso.base.EspressoExceptionHandler.handleSafely(EspressoExceptionHandler.java:2)
-at androidx.test.espresso.base.EspressoExceptionHandler.handleSafely(EspressoExceptionHandler.java:1)
-at androidx.test.espresso.base.DefaultFailureHandler$TypedFailureHandler.handle(DefaultFailureHandler.java:4)
-at androidx.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:5)
-at androidx.test.espresso.ViewInteraction.waitForAndHandleInteractionResults(ViewInteraction.java:8)
-at androidx.test.espresso.ViewInteraction.desugaredPerform(ViewInteraction.java:11)
-at androidx.test.espresso.ViewInteraction.perform(ViewInteraction.java:8)
-at com.smilepile.app.MainActivityTest.testSwipeGestures(MainActivityTest.kt:35)</failure>
-  </testcase>
-  <testcase name="testActivityLaunches" classname="com.smilepile.app.MainActivityTest" time="1.296" />
-  <testcase name="testDynamicImageLoading" classname="com.smilepile.app.MainActivityTest" time="1.632" />
+  <testcase name="testImagePagerAdapterWithSampleImages" classname="com.smilepile.app.MainActivityTest" time="3.797" />
+  <testcase name="testSwipeGestures" classname="com.smilepile.app.MainActivityTest" time="3.344" />
+  <testcase name="testActivityLaunches" classname="com.smilepile.app.MainActivityTest" time="2.381" />
+  <testcase name="testDynamicImageLoading" classname="com.smilepile.app.MainActivityTest" time="2.331" />
 </testsuite>

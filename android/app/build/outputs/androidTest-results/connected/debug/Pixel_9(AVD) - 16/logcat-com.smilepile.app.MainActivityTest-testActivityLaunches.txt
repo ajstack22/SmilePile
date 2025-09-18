@@ -1,94 +1,108 @@
-09-18 16:28:51.423 14063 14078 I TestRunner: started: testActivityLaunches(com.smilepile.app.MainActivityTest)
-09-18 16:28:51.445 14063 14078 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
-09-18 16:28:51.467  1051  1051 D RecentsView: onTaskRemoved: 89, not handling task stack changes
-09-18 16:28:51.467  1051  1051 D RecentsView: onTaskRemoved: 89, not handling task stack changes
-09-18 16:28:51.467  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
-09-18 16:28:51.469  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
-09-18 16:28:51.469  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.smilepile, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
-09-18 16:28:51.472   661  1951 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@94ead83b does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
-09-18 16:28:51.483  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
-09-18 16:28:51.511   661   751 I ImeTracker: system_server:49cd5039: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
-09-18 16:28:51.520   503  1141 I BpBinder: onLastStrongRef automatically unlinking death recipients:
-09-18 16:28:51.520   567  3371 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:51.520   567  3371 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:51.533   661   710 I ImeTracker: system_server:49cd5039: onCancelled at PHASE_SERVER_SHOULD_HIDE
-09-18 16:28:51.584 14063 14063 I m.smilepile.app: AssetManager2(0xb400007355817258) locale list changing from [] to [en-US]
-09-18 16:28:51.589 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: PRE_ON_CREATE
-09-18 16:28:51.589 14063 14063 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
-09-18 16:28:51.622  1618  2048 I bdee    : (REDACTED) getHotwordActive::active query: %s, watch: %s, devices connected: %s
-09-18 16:28:51.627  9005  9062 I Finsky  : [61] SCH: Scheduling phonesky job Id: 1-1337, CT: 1758210512827, Constraints: [{ L: 34982842, D: 78182842, C: CHARGING_NONE, I: IDLE_NONE, N: NET_ANY, B: BATTERY_ANY }]
-09-18 16:28:51.634 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: CREATED
-09-18 16:28:51.634 14063 14063 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.smilepile.app.MainActivity@a9c89d5
-09-18 16:28:51.638 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: STARTED
-09-18 16:28:51.638 14063 14063 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.smilepile.app.MainActivity@a9c89d5
-09-18 16:28:51.639 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: RESUMED
-09-18 16:28:51.640 14063 14063 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.smilepile.app.MainActivity@a9c89d5
-09-18 16:28:51.641 14091 14091 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
-09-18 16:28:51.663   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 413 CompositionType fallback from 3 to 1
-09-18 16:28:51.683  9005  9057 I Finsky  : [60] SCH: Scheduling 1 system job(s)
-09-18 16:28:51.685  9005  9057 I Finsky  : [60] SCH: Scheduling system job Id: 9885, L: 14563986, D: 57763986, C: false, I: false, N: 1
-09-18 16:28:51.697  9005 14026 I Finsky  : [376] SCH: job service finished with id 9876.
-09-18 16:28:51.723  9005  9010 W android.vending: Suspending all threads took: 20.994ms
-09-18 16:28:51.727   503   557 I BpBinder: onLastStrongRef automatically unlinking death recipients:
-09-18 16:28:51.741  9005  9005 I Finsky  : [2] Memory trim requested to level 40
-09-18 16:28:51.741  9005  9005 I Finsky  : [2] Flushing in-memory image cache
-09-18 16:28:51.742  9008  9008 I Finsky:background: [2] Memory trim requested to level 40
-09-18 16:28:51.769 14063 14063 W HWUI    : Image decoding logging dropped!
-09-18 16:28:51.816   661   707 I ActivityTaskManager: Displayed com.smilepile.app/.MainActivity for user 0: +351ms
-09-18 16:28:51.853   661   794 I ImeTracker: com.smilepile.app:a349034d: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
-09-18 16:28:51.854 14063 14063 D InsetsController: hide(ime(), fromIme=false)
-09-18 16:28:51.854 14063 14063 I ImeTracker: com.smilepile.app:a349034d: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
-09-18 16:28:51.856  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
-09-18 16:28:51.856 14091 14091 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@6a3e0f0
-09-18 16:28:51.857   661  1954 I ImeTracker: system_server:3d3c60c7: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
-09-18 16:28:51.857  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
-09-18 16:28:51.857  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.smilepile.app, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
-09-18 16:28:51.858  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
-09-18 16:28:51.861 14091 14091 D ViewRootImpl: Skipping stats log for color mode
-09-18 16:28:51.864   661   710 I ImeTracker: system_server:3d3c60c7: onCancelled at PHASE_SERVER_SHOULD_HIDE
-09-18 16:28:51.921  1051  1051 D RecentsView: onTaskRemoved: 90, not handling task stack changes
-09-18 16:28:51.921  1051  1051 D RecentsView: onTaskRemoved: 90, not handling task stack changes
-09-18 16:28:51.947   921   926 I ndroid.systemui: CollectorTransition concurrent mark compact GC freed 6419KB AllocSpace bytes, 17(340KB) LOS objects, 49% free, 19MB/38MB, paused 2.254ms,16.180ms total 665.280ms
-09-18 16:28:51.978   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
-09-18 16:28:51.978   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
-09-18 16:28:51.978   661   828 D InetDiagMessage: Destroyed live tcp sockets for uids={10200} in 1ms
-09-18 16:28:52.051   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.052   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.052   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.055   921   928 W System  : A resource failed to call release.
-09-18 16:28:52.127   567   649 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:52.127   567   649 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:52.132   921  1089 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@95cd81a
-09-18 16:28:52.137   661   710 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:52.170 12366 12366 D VRI[SimpleMainActivity]: visibilityChanged oldVisibility=true newVisibility=false
-09-18 16:28:52.339 14063 14063 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131231200/com.smilepile.app:id/viewPager>
-09-18 16:28:52.345   661  2209 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@969fb0da does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
-09-18 16:28:52.360 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: PAUSED
-09-18 16:28:52.360 14063 14063 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.smilepile.app.MainActivity@a9c89d5
-09-18 16:28:52.362   503   503 I BpBinder: onLastStrongRef automatically unlinking death recipients:
-09-18 16:28:52.368 14091 14106 I EGL_emulation: Opening libGLESv1_CM_emulation.so
-09-18 16:28:52.369 14091 14106 I EGL_emulation: Opening libGLESv2_emulation.so
-09-18 16:28:52.374   567   649 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:52.374   567   649 W IPCThreadState: Sending oneway calls to frozen process.
-09-18 16:28:52.376 14091 14106 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
-09-18 16:28:52.377 14091 14106 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
-09-18 16:28:52.408   921   990 I ndroid.systemui: AssetManager2(0xb400007355866a38) locale list changing from [] to [en-US]
-09-18 16:28:52.420   921   990 I ndroid.systemui: AssetManager2(0xb40000735583e998) locale list changing from [] to [en-US]
-09-18 16:28:52.449   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 417 CompositionType fallback from 3 to 1
-09-18 16:28:52.494   661   707 I ActivityTaskManager: Displayed com.smilepile.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +144ms
-09-18 16:28:52.527   503   642 I BpBinder: onLastStrongRef automatically unlinking death recipients:
-09-18 16:28:52.551   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 420 CompositionType fallback from 2 to 1
-09-18 16:28:52.551   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 421 CompositionType fallback from 2 to 1
-09-18 16:28:52.567  1041  1221 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
-09-18 16:28:52.643 14091 14139 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.smilepile.app.test
-09-18 16:28:52.707 14063 14063 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
-09-18 16:28:52.732 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: STOPPED
-09-18 16:28:52.732 14063 14063 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.smilepile.app.MainActivity@a9c89d5
-09-18 16:28:52.734 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@a9c89d5 in: DESTROYED
-09-18 16:28:52.734 14063 14063 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
-09-18 16:28:52.735 14063 14078 I TestRunner: finished: testActivityLaunches(com.smilepile.app.MainActivityTest)
+09-18 16:58:06.185 15240 15254 I TestRunner: started: testActivityLaunches(com.smilepile.app.MainActivityTest)
+09-18 16:58:06.190 15240 15254 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+09-18 16:58:06.197  1051  1051 D RecentsView: onTaskRemoved: 113, not handling task stack changes
+09-18 16:58:06.201  1051  1051 D RecentsView: onTaskRemoved: 113, not handling task stack changes
+09-18 16:58:06.213   661  1172 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@9f27ebf5 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-18 16:58:06.265 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: PRE_ON_CREATE
+09-18 16:58:06.270 15240 15240 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+09-18 16:58:06.282   503   643 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:58:06.298 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: CREATED
+09-18 16:58:06.298 15240 15240 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.smilepile.app.MainActivity@2e6133d
+09-18 16:58:06.301 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: STARTED
+09-18 16:58:06.302 15240 15240 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.smilepile.app.MainActivity@2e6133d
+09-18 16:58:06.304 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: RESUMED
+09-18 16:58:06.304 15240 15240 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.smilepile.app.MainActivity@2e6133d
+09-18 16:58:06.363   567   649 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:06.365   567   649 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:06.389 15240 15266 W HWUI    : Image decoding logging dropped!
+09-18 16:58:06.467   921  1089 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@c1af528
+09-18 16:58:06.479   661   707 I ActivityTaskManager: Displayed com.smilepile.app/.MainActivity for user 0: +184ms
+09-18 16:58:06.519 15273 15273 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
+09-18 16:58:06.545   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 543 CompositionType fallback from 3 to 1
+09-18 16:58:06.548 15273 15273 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@446f4a2
+09-18 16:58:06.553 15273 15273 D ViewRootImpl: Skipping stats log for color mode
+09-18 16:58:06.586   661   794 I ImeTracker: com.smilepile.app:9ffa8b0b: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+09-18 16:58:06.602 15240 15240 D InsetsController: hide(ime(), fromIme=false)
+09-18 16:58:06.602 15240 15240 I ImeTracker: com.smilepile.app:9ffa8b0b: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-18 16:58:06.604  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
+09-18 16:58:06.605  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+09-18 16:58:06.607  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.smilepile.app, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+09-18 16:58:06.612  1051  1051 D RecentsView: onTaskRemoved: 114, not handling task stack changes
+09-18 16:58:06.613  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+09-18 16:58:06.614  1051  1051 D RecentsView: onTaskRemoved: 114, not handling task stack changes
+09-18 16:58:06.618   661  1845 I ImeTracker: system_server:e65756bf: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+09-18 16:58:06.619   661   710 I ImeTracker: system_server:e65756bf: onCancelled at PHASE_SERVER_SHOULD_HIDE
+09-18 16:58:06.887   921  1089 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@53fb3f7
+09-18 16:58:06.926   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.926   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.926   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:06.935   921   928 W System  : A resource failed to call release.
+09-18 16:58:07.066 12366 12366 D VRI[SimpleMainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+09-18 16:58:07.489  1618  1901 I bdee    : (REDACTED) getHotwordActive::active query: %s, watch: %s, devices connected: %s
+09-18 16:58:07.547   661   671 I system_server: NativeAlloc concurrent mark compact GC freed 25MB AllocSpace bytes, 48(1384KB) LOS objects, 42% free, 32MB/56MB, paused 2.081ms,4.921ms total 345.785ms
+09-18 16:58:07.576   661   673 W System  : A resource failed to call release.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call HardwareBuffer.close.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call release.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call release.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call HardwareBuffer.close.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call release.
+09-18 16:58:07.576   661   673 W System  : A resource failed to call release.
+09-18 16:58:08.120 15240 15240 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131231200/com.smilepile.app:id/viewPager>
+09-18 16:58:08.128   661  1111 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@a0dcc494 does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-18 16:58:08.142   503   642 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:58:08.153   567   649 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.153   567   649 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.167 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: PAUSED
+09-18 16:58:08.167 15240 15240 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.smilepile.app.MainActivity@2e6133d
+09-18 16:58:08.170 15240 15245 W m.smilepile.app: Cleared Reference was only reachable from finalizer (only reported once)
+09-18 16:58:08.178   503   503 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:58:08.195 15273 15287 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+09-18 16:58:08.197 15273 15287 I EGL_emulation: Opening libGLESv2_emulation.so
+09-18 16:58:08.207   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.208   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.208   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.209   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.210   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.211   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.211   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.212   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.212   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.212   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.212   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.213   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:58:08.229 15273 15287 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+09-18 16:58:08.230 15273 15287 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+09-18 16:58:08.256   921   990 I ndroid.systemui: AssetManager2(0xb400007355865778) locale list changing from [] to [en-US]
+09-18 16:58:08.271   921   990 I ndroid.systemui: AssetManager2(0xb40000735585b4f8) locale list changing from [] to [en-US]
+09-18 16:58:08.294   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 547 CompositionType fallback from 3 to 1
+09-18 16:58:08.374   661   707 I ActivityTaskManager: Displayed com.smilepile.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +240ms
+09-18 16:58:08.406   503   643 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:58:08.411   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 550 CompositionType fallback from 2 to 1
+09-18 16:58:08.532 15240 15240 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+09-18 16:58:08.534  1041  1221 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+09-18 16:58:08.544   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 551 CompositionType fallback from 3 to 1
+09-18 16:58:08.562 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: STOPPED
+09-18 16:58:08.563 15240 15240 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.smilepile.app.MainActivity@2e6133d
+09-18 16:58:08.565 15240 15240 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@2e6133d in: DESTROYED
+09-18 16:58:08.565 15240 15240 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+09-18 16:58:08.565 15240 15240 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@e2bd92e
+09-18 16:58:08.565 15240 15254 I TestRunner: finished: testActivityLaunches(com.smilepile.app.MainActivityTest)

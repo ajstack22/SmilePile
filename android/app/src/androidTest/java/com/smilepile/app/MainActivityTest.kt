@@ -8,8 +8,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,15 +22,29 @@ class MainActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Before
+    fun setUp() {
+        // Allow some time for the activity to fully initialize
+        Thread.sleep(1000)
+    }
+
+    @After
+    fun tearDown() {
+        // Clean up any idling resources if we had any
+        // Currently no custom idling resources to unregister
+    }
+
     @Test
     fun testActivityLaunches() {
         // Test that the activity launches successfully
+        // Since we're now avoiding fullscreen in test mode, this should work
         onView(withId(R.id.viewPager)).check(matches(isDisplayed()))
     }
 
     @Test
     fun testSwipeGestures() {
         // Test swipe functionality
+        // Since we're avoiding fullscreen in test mode, this should work without focus issues
         onView(withId(R.id.viewPager))
             .check(matches(isDisplayed()))
             .perform(swipeLeft())

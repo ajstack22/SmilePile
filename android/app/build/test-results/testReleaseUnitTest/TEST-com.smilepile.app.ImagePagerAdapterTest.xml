@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.smilepile.app.ImagePagerAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-18T21:28:12" hostname="Adams-MacBook-Air.local" time="1.029">
+<testsuite name="com.smilepile.app.ImagePagerAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-18T21:58:21" hostname="Adams-MacBook-Air.local" time="0.816">
   <properties/>
-  <testcase name="adapter handles empty image list gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.943"/>
-  <testcase name="adapter handles asset loading error gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.084"/>
-  <testcase name="adapter returns 1 item count when no images available" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.001"/>
-  <testcase name="adapter returns correct item count with images" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.001"/>
+  <testcase name="adapter handles empty image list gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.755"/>
+  <testcase name="adapter handles asset loading error gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.059"/>
+  <testcase name="adapter returns 1 item count when no images available" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.0"/>
+  <testcase name="adapter returns correct item count with images" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

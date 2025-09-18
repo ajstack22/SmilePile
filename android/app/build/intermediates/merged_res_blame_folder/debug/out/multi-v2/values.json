@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.smilepile.app-mergeDebugResources-33:/values/values.xml",
+            "outputFile": "com.smilepile.app-mergeDebugResources-34:/values/values.xml",
             "map": [
                 {
                     "source": "/Users/adamstack/.gradle/caches/transforms-3/f9c85a9eb837a3b2135348a55f4d3036/transformed/viewpager2-1.0.0/res/values/values.xml",
@@ -23,20 +23,20 @@
                     }
                 },
                 {
-                    "source": "/Users/adamstack/.gradle/caches/transforms-3/526b13b730a18e28fc11ad8f90d964b4/transformed/lifecycle-viewmodel-2.6.1/res/values/values.xml",
+                    "source": "/Users/adamstack/.gradle/caches/transforms-3/61e58967546653404389896cbc189708/transformed/lifecycle-runtime-2.7.0/res/values/values.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
-                        "endColumns": "49",
-                        "endOffsets": "100"
+                        "endColumns": "42",
+                        "endOffsets": "93"
                     },
                     "to": {
-                        "startLines": "1870",
+                        "startLines": "1867",
                         "startColumns": "4",
-                        "startOffsets": "123656",
-                        "endColumns": "49",
-                        "endOffsets": "123701"
+                        "startOffsets": "123499",
+                        "endColumns": "42",
+                        "endOffsets": "123537"
                     }
                 },
                 {
@@ -56,6 +56,23 @@
                         "endLines": "109,9153,11117,11201",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "5821,635534,706759,711275"
+                    }
+                },
+                {
+                    "source": "/Users/adamstack/.gradle/caches/transforms-3/b4d4effe07c1ad8688e6ec3188e43236/transformed/lifecycle-viewmodel-2.7.0/res/values/values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "49",
+                        "endOffsets": "100"
+                    },
+                    "to": {
+                        "startLines": "1870",
+                        "startColumns": "4",
+                        "startOffsets": "123656",
+                        "endColumns": "49",
+                        "endOffsets": "123701"
                     }
                 },
                 {
@@ -130,23 +147,6 @@
                         "endLines": "1801,1834,1871,11384,11388",
                         "endColumns": "56,64,63,24,24",
                         "endOffsets": "120156,121851,123765,717852,718001"
-                    }
-                },
-                {
-                    "source": "/Users/adamstack/.gradle/caches/transforms-3/32eb621d5953e7cbfc039573e6c7ca6f/transformed/lifecycle-runtime-2.6.1/res/values/values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "42",
-                        "endOffsets": "93"
-                    },
-                    "to": {
-                        "startLines": "1867",
-                        "startColumns": "4",
-                        "startOffsets": "123499",
-                        "endColumns": "42",
-                        "endOffsets": "123537"
                     }
                 },
                 {

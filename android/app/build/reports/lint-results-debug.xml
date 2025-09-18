@@ -118,6 +118,54 @@
     <issue
         id="GradleDependency"
         severity="Warning"
+        message="A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
+            line="47"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
+            line="48"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.core:core than 1.12.0 is available: 1.17.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation(&quot;androidx.core:core:1.12.0&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
+            line="51"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
         message="A newer version of androidx.test:core than 1.5.0 is available: 1.7.0"
         category="Correctness"
         priority="4"
@@ -127,7 +175,7 @@
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
-            line="48"
+            line="55"
             column="25"/>
     </issue>
 
@@ -143,7 +191,7 @@
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
-            line="49"
+            line="56"
             column="32"/>
     </issue>
 
@@ -159,7 +207,23 @@
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
-            line="50"
+            line="57"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of androidx.test.uiautomator:uiautomator than 2.2.0 is available: 2.3.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    androidTestImplementation(&quot;androidx.test.uiautomator:uiautomator:2.2.0&quot;)"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
+            line="58"
             column="32"/>
     </issue>
 
@@ -465,6 +529,24 @@
             file="/Users/adamstack/SmilePile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.xml"
             line="2"
             column="1"/>
+    </issue>
+
+    <issue
+        id="KtxExtensionAvailable"
+        severity="Information"
+        message="Add suffix `-ktx` to enable the Kotlin extensions for this library"
+        category="Productivity"
+        priority="4"
+        summary="KTX Extension Available"
+        explanation="Android KTX extensions augment some libraries with support for modern Kotlin language features like extension functions, extension properties, lambdas, named parameters, coroutines, and more.&#xA;&#xA;In Kotlin projects, use the KTX version of a library by replacing the dependency in your `build.gradle` file. For example, you can replace `androidx.fragment:fragment` with `androidx.fragment:fragment-ktx`."
+        url="https://developer.android.com/kotlin/ktx"
+        urls="https://developer.android.com/kotlin/ktx"
+        errorLine1="    implementation(&quot;androidx.core:core:1.12.0&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/adamstack/SmilePile/android/app/build.gradle.kts"
+            line="51"
+            column="21"/>
     </issue>
 
 </issues>

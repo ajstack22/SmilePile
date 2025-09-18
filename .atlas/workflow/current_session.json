@@ -1,0 +1,25 @@
+{
+  "workflow_id": "WF20250918163024",
+  "story_id": "F0008",
+  "developer": "Developer",
+  "reviewer": "Reviewer",
+  "status": "started",
+  "phase": "implementation",
+  "started_at": "2025-09-18T16:30:24.264388",
+  "phases_completed": [
+    {
+      "phase": "review",
+      "executed_at": "2025-09-18T16:30:29.607566",
+      "data": {},
+      "status": "completed",
+      "next_phase": "implementation",
+      "review_passed": false,
+      "feedback": []
+    }
+  ],
+  "review_cycles": 1,
+  "quality_scores": [
+    0
+  ],
+  "evidence": {}
+}

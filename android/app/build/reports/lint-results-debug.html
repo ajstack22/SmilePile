@@ -177,9 +177,9 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 29 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 33 warnings</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 16:28:16 CDT 2025 by AGP (8.2.0)</nav>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 16:58:26 CDT 2025 by AGP (8.2.0)</nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -187,10 +187,11 @@ document.getElementById(id).style.display = 'none';
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#overview"><i class="material-icons">dashboard</i>Overview</a>
       <a class="mdl-navigation__link" href="#OldTargetApi"><i class="material-icons warning-icon">warning</i>Target SDK attribute is not targeting latest version (1)</a>
-      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (9)</a>
+      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (13)</a>
       <a class="mdl-navigation__link" href="#Overdraw"><i class="material-icons warning-icon">warning</i>Overdraw: Painting regions more than once (1)</a>
       <a class="mdl-navigation__link" href="#UnusedResources"><i class="material-icons warning-icon">warning</i>Unused resources (8)</a>
       <a class="mdl-navigation__link" href="#MonochromeLauncherIcon"><i class="material-icons warning-icon">warning</i>Monochrome icon is not defined (10)</a>
+      <a class="mdl-navigation__link" href="#KtxExtensionAvailable"><i class="material-icons warning-icon">warning</i>KTX Extension Available (1)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -209,7 +210,7 @@ document.getElementById(id).style.display = 'none';
 <td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#OldTargetApi">OldTargetApi</a>: Target SDK attribute is not targeting latest version</td></tr>
 <tr>
-<td class="countColumn">9</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">13</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#GradleDependency">GradleDependency</a>: Obsolete Gradle Dependency</td></tr>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Performance">Performance</a>
 </td></tr>
@@ -224,7 +225,12 @@ document.getElementById(id).style.display = 'none';
 <tr>
 <td class="countColumn">10</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#MonochromeLauncherIcon">MonochromeLauncherIcon</a>: Monochrome icon is not defined</td></tr>
-<tr><td></td><td class="categoryColumn"><a href="#ExtraIssues">Included Additional Checks (22)</a>
+<tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Productivity">Productivity</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#KtxExtensionAvailable">KtxExtensionAvailable</a>: KTX Extension Available</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#ExtraIssues">Included Additional Checks (23)</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (39)</a>
 </td></tr>
@@ -341,10 +347,10 @@ Dismiss</button>            </div>
 <span class="caretline"><span class="lineno"> 43 </span>    implementation("<span class="warning">androidx.constraintlayout:constraintlayout:2.1.4</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
 <span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno"> 46 </span>    // Coroutines for async image loading
 </pre>
 
-<button class="mdl-button mdl-js-button mdl-button--primary" id="GradleDependencyDivLink" onclick="reveal('GradleDependencyDiv');" />+ 4 More Occurrences...</button>
+<button class="mdl-button mdl-js-button mdl-button--primary" id="GradleDependencyDivLink" onclick="reveal('GradleDependencyDiv');" />+ 8 More Occurrences...</button>
 <div id="GradleDependencyDiv" style="display: none">
 <span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:44</span>: <span class="message">A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
 <span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
@@ -352,33 +358,73 @@ Dismiss</button>            </div>
 <span class="lineno"> 43 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 <span class="caretline"><span class="lineno"> 44 </span>    implementation("<span class="warning">androidx.viewpager2:viewpager2:1.0.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 47 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="lineno"> 46 </span>    // Coroutines for async image loading
+<span class="lineno"> 47 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:48</span>: <span class="message">A newer version of androidx.test:core than 1.5.0 is available: 1.7.0</span><br /><pre class="errorlines">
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:47</span>: <span class="message">A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0</span><br /><pre class="errorlines">
+<span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
 <span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 47 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="caretline"><span class="lineno"> 48 </span>    testImplementation("<span class="warning">androidx.test:core:1.5.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 49 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-<span class="lineno"> 50 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-<span class="lineno"> 51 </span>}</pre>
+<span class="lineno"> 46 </span>    // Coroutines for async image loading
+<span class="caretline"><span class="lineno"> 47 </span>    implementation("<span class="warning">org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno"> 49 </span>
+<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
+</pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:49</span>: <span class="message">A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0</span><br /><pre class="errorlines">
-<span class="lineno"> 46 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 47 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="lineno"> 48 </span>    testImplementation("androidx.test:core:1.5.0")
-<span class="caretline"><span class="lineno"> 49 </span>    androidTestImplementation("<span class="warning">androidx.test.ext:junit:1.1.5</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 50 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-<span class="lineno"> 51 </span>}</pre>
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:48</span>: <span class="message">A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4</span><br /><pre class="errorlines">
+<span class="lineno"> 45 </span>
+<span class="lineno"> 46 </span>    // Coroutines for async image loading
+<span class="lineno"> 47 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+<span class="caretline"><span class="lineno"> 48 </span>    implementation("<span class="warning">androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 49 </span>
+<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
+<span class="lineno"> 51 </span>    implementation("androidx.core:core:1.12.0")
+</pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:50</span>: <span class="message">A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0</span><br /><pre class="errorlines">
-<span class="lineno"> 47 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="lineno"> 48 </span>    testImplementation("androidx.test:core:1.5.0")
-<span class="lineno"> 49 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-<span class="caretline"><span class="lineno"> 50 </span>    androidTestImplementation("<span class="warning">androidx.test.espresso:espresso-core:3.5.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 51 </span>}</pre>
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:51</span>: <span class="message">A newer version of androidx.core:core than 1.12.0 is available: 1.17.0</span><br /><pre class="errorlines">
+<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno"> 49 </span>
+<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
+<span class="caretline"><span class="lineno"> 51 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 52 </span>
+<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:55</span>: <span class="message">A newer version of androidx.test:core than 1.5.0 is available: 1.7.0</span><br /><pre class="errorlines">
+<span class="lineno"> 52 </span>
+<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="caretline"><span class="lineno"> 55 </span>    testImplementation("<span class="warning">androidx.test:core:1.5.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:56</span>: <span class="message">A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0</span><br /><pre class="errorlines">
+<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="caretline"><span class="lineno"> 56 </span>    androidTestImplementation("<span class="warning">androidx.test.ext:junit:1.1.5</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+<span class="lineno"> 59 </span>}</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:57</span>: <span class="message">A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0</span><br /><pre class="errorlines">
+<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="caretline"><span class="lineno"> 57 </span>    androidTestImplementation("<span class="warning">androidx.test.espresso:espresso-core:3.5.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+<span class="lineno"> 59 </span>}</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:58</span>: <span class="message">A newer version of androidx.test.uiautomator:uiautomator than 2.2.0 is available: 2.3.0</span><br /><pre class="errorlines">
+<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="caretline"><span class="lineno"> 58 </span>    androidTestImplementation("<span class="warning">androidx.test.uiautomator:uiautomator:2.2.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 59 </span>}</pre>
 
 </div>
 </div>
@@ -681,6 +727,57 @@ Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id
 Dismiss</button>            </div>
             </div>
           </section>
+<a name="Productivity"></a>
+<a name="KtxExtensionAvailable"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="KtxExtensionAvailableCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">KTX Extension Available</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:51</span>: <span class="message">Add suffix <code>-ktx</code> to enable the Kotlin extensions for this library</span><br /><pre class="errorlines">
+<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno"> 49 </span>
+<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
+<span class="caretline"><span class="lineno"> 51 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 52 </span>
+<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationKtxExtensionAvailable" style="display: none;">
+Android KTX extensions augment some libraries with support for modern Kotlin language features like extension functions, extension properties, lambdas, named parameters, coroutines, and more.<br/>
+<br/>
+In Kotlin projects, use the KTX version of a library by replacing the dependency in your <code>build.gradle</code> file. For example, you can replace <code>androidx.fragment:fragment</code> with <code>androidx.fragment:fragment-ktx</code>.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/kotlin/ktx">https://developer.android.com/kotlin/ktx</a>
+</div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
+To suppress this error, use the issue id "KtxExtensionAvailable" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">KtxExtensionAvailable</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Productivity</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Information</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 4/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationKtxExtensionAvailableLink" onclick="reveal('explanationKtxExtensionAvailable');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="KtxExtensionAvailableCardLink" onclick="hideid('KtxExtensionAvailableCard');">
+Dismiss</button>            </div>
+            </div>
+          </section>
 <a name="ExtraIssues"></a>
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="ExtraIssuesCard" style="display: block;">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
@@ -781,6 +878,21 @@ In order to use the ActivityResult APIs you must upgrade your                 Fr
 Vendor: Android Open Source Project<br/>
 Identifier: androidx.activity<br/>
 Feedback: <a href="https://issuetracker.google.com/issues/new?component=527362">https://issuetracker.google.com/issues/new?component=527362</a><br/>
+</div>
+<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">NullSafeMutableLiveData<div class="issueSeparator"></div>
+</div>
+<div class="metadata"><div class="explanation">
+This check ensures that LiveData values are not null when explicitly                 declared as non-nullable.<br/>
+<br/>
+                Kotlin interoperability does not support enforcing explicit null-safety when using                 generic Java type parameters. Since LiveData is a Java class its value can always                 be null even when its type is explicitly declared as non-nullable. This can lead                 to runtime exceptions from reading a null LiveData value that is assumed to be                 non-nullable.<br/><div class="vendor">
+Vendor: Android Open Source Project<br/>
+Identifier: androidx.lifecycle<br/>
+Feedback: <a href="https://issuetracker.google.com/issues/new?component=413132">https://issuetracker.google.com/issues/new?component=413132</a><br/>
 </div>
 <br/>
 <br/></div>

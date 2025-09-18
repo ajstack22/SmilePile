@@ -38,15 +38,27 @@
 /Users/adamstack/SmilePile/android/app/build.gradle.kts:44: Warning: A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0 [GradleDependency]
     implementation("androidx.viewpager2:viewpager2:1.0.0")
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/adamstack/SmilePile/android/app/build.gradle.kts:48: Warning: A newer version of androidx.test:core than 1.5.0 is available: 1.7.0 [GradleDependency]
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:47: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0 [GradleDependency]
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:48: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:51: Warning: A newer version of androidx.core:core than 1.12.0 is available: 1.17.0 [GradleDependency]
+    implementation("androidx.core:core:1.12.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:55: Warning: A newer version of androidx.test:core than 1.5.0 is available: 1.7.0 [GradleDependency]
     testImplementation("androidx.test:core:1.5.0")
                         ~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/adamstack/SmilePile/android/app/build.gradle.kts:49: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:56: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/adamstack/SmilePile/android/app/build.gradle.kts:50: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:57: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:58: Warning: A newer version of androidx.test.uiautomator:uiautomator than 2.2.0 is available: 2.3.0 [GradleDependency]
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    Explanation for issues of type "GradleDependency":
    This detector looks for usages of libraries where the version you are using
@@ -162,4 +174,19 @@
    application iconwill not show if your monochrome attribute is not also
    specified in android:roundIcon.
 
-0 errors, 29 warnings
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:51: Information: Add suffix -ktx to enable the Kotlin extensions for this library [KtxExtensionAvailable]
+    implementation("androidx.core:core:1.12.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "KtxExtensionAvailable":
+   Android KTX extensions augment some libraries with support for modern
+   Kotlin language features like extension functions, extension properties,
+   lambdas, named parameters, coroutines, and more.
+
+   In Kotlin projects, use the KTX version of a library by replacing the
+   dependency in your build.gradle file. For example, you can replace
+   androidx.fragment:fragment with androidx.fragment:fragment-ktx.
+
+   https://developer.android.com/kotlin/ktx
+
+0 errors, 33 warnings
