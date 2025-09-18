@@ -1,0 +1,499 @@
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:13: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk = 34
+        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:60: Warning: A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.17.0 [GradleDependency]
+    implementation("androidx.core:core-ktx:1.12.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:61: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:62: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1 [GradleDependency]
+    implementation("androidx.appcompat:appcompat:1.6.1")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:65: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.13.0 [GradleDependency]
+    implementation("com.google.android.material:material:1.11.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:76: Warning: A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0 [GradleDependency]
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:77: Warning: A newer version of androidx.fragment:fragment-ktx than 1.6.2 is available: 1.8.9 [GradleDependency]
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:81: Warning: A newer version of androidx.room:room-runtime than 2.6.0 is available: 2.8.0 [GradleDependency]
+    implementation("androidx.room:room-runtime:$roomVersion")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:82: Warning: A newer version of androidx.room:room-ktx than 2.6.0 is available: 2.8.0 [GradleDependency]
+    implementation("androidx.room:room-ktx:$roomVersion")
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:90: Warning: A newer version of androidx.navigation:navigation-fragment-ktx than 2.7.6 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:91: Warning: A newer version of androidx.navigation:navigation-ui-ktx than 2.7.6 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:95: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:96: Warning: A newer version of androidx.lifecycle:lifecycle-livedata-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:100: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0 [GradleDependency]
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:104: Warning: A newer version of androidx.room:room-testing than 2.6.0 is available: 2.8.0 [GradleDependency]
+    testImplementation("androidx.room:room-testing:$roomVersion")
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:107: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:108: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/Users/adamstack/SmilePile/android/app/src/main/AndroidManifest.xml:42: Warning: Expecting android:screenOrientation="unspecified" or "fullSensor" for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices [LockedOrientationActivity]
+            android:screenOrientation="portrait">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LockedOrientationActivity":
+   The <activity> element should not be locked to any orientation so that
+   users can take advantage of the multi-window environments and larger
+   screens available on Android. To fix the issue, consider declaring the
+   corresponding activity element with `screenOrientation="unspecified"or
+   "fullSensor"` attribute.
+
+   https://developer.android.com/topic/arc/window-management
+
+/Users/adamstack/SmilePile/android/app/src/main/res/mipmap-anydpi-v26: Warning: This folder configuration (v26) is unnecessary; minSdkVersion is 26. Merge all the resources in this folder into mipmap-anydpi. [ObsoleteSdkInt]
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/category_card_foreground.xml:2: Warning: The resource R.drawable.category_card_foreground appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/category_image_background.xml:2: Warning: The resource R.drawable.category_image_background appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/category_overlay_background.xml:2: Warning: The resource R.drawable.category_overlay_background appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/category_placeholder.xml:2: Warning: The resource R.drawable.category_placeholder appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/child_friendly_button_background.xml:2: Warning: The resource R.drawable.child_friendly_button_background appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:30: Warning: The resource R.color.md_theme_dark_primary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_primary">#D0BCFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:31: Warning: The resource R.color.md_theme_dark_onPrimary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onPrimary">#381E72</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:32: Warning: The resource R.color.md_theme_dark_primaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_primaryContainer">#4F378B</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:33: Warning: The resource R.color.md_theme_dark_onPrimaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onPrimaryContainer">#EADDFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:34: Warning: The resource R.color.md_theme_dark_secondary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_secondary">#CCC2DC</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:35: Warning: The resource R.color.md_theme_dark_onSecondary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onSecondary">#332D41</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:36: Warning: The resource R.color.md_theme_dark_secondaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_secondaryContainer">#4A4458</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:37: Warning: The resource R.color.md_theme_dark_onSecondaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onSecondaryContainer">#E8DEF8</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:38: Warning: The resource R.color.md_theme_dark_tertiary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_tertiary">#EFB8C8</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:39: Warning: The resource R.color.md_theme_dark_onTertiary appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onTertiary">#492532</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:40: Warning: The resource R.color.md_theme_dark_tertiaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_tertiaryContainer">#633B48</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:41: Warning: The resource R.color.md_theme_dark_onTertiaryContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onTertiaryContainer">#FFD8E4</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:42: Warning: The resource R.color.md_theme_dark_error appears to be unused [UnusedResources]
+    <color name="md_theme_dark_error">#FFB4AB</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:43: Warning: The resource R.color.md_theme_dark_onError appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onError">#690005</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:44: Warning: The resource R.color.md_theme_dark_errorContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:45: Warning: The resource R.color.md_theme_dark_onErrorContainer appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:46: Warning: The resource R.color.md_theme_dark_background appears to be unused [UnusedResources]
+    <color name="md_theme_dark_background">#1C1B1F</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:47: Warning: The resource R.color.md_theme_dark_onBackground appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onBackground">#E6E1E5</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:48: Warning: The resource R.color.md_theme_dark_surface appears to be unused [UnusedResources]
+    <color name="md_theme_dark_surface">#1C1B1F</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:49: Warning: The resource R.color.md_theme_dark_onSurface appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onSurface">#E6E1E5</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:50: Warning: The resource R.color.md_theme_dark_surfaceVariant appears to be unused [UnusedResources]
+    <color name="md_theme_dark_surfaceVariant">#49454F</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:51: Warning: The resource R.color.md_theme_dark_onSurfaceVariant appears to be unused [UnusedResources]
+    <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:52: Warning: The resource R.color.md_theme_dark_outline appears to be unused [UnusedResources]
+    <color name="md_theme_dark_outline">#938F99</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:53: Warning: The resource R.color.md_theme_dark_outlineVariant appears to be unused [UnusedResources]
+    <color name="md_theme_dark_outlineVariant">#49454F</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:59: Warning: The resource R.color.smile_primary_dark appears to be unused [UnusedResources]
+    <color name="smile_primary_dark">#E55530</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:60: Warning: The resource R.color.smile_primary_light appears to be unused [UnusedResources]
+    <color name="smile_primary_light">#FF8A65</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:63: Warning: The resource R.color.smile_secondary appears to be unused [UnusedResources]
+    <color name="smile_secondary">#4CAF50</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:64: Warning: The resource R.color.smile_secondary_dark appears to be unused [UnusedResources]
+    <color name="smile_secondary_dark">#388E3C</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:65: Warning: The resource R.color.smile_secondary_light appears to be unused [UnusedResources]
+    <color name="smile_secondary_light">#81C784</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:69: Warning: The resource R.color.smile_background_surface appears to be unused [UnusedResources]
+    <color name="smile_background_surface">#F8F9FA</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:74: Warning: The resource R.color.smile_text_hint appears to be unused [UnusedResources]
+    <color name="smile_text_hint">#757575</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:78: Warning: The resource R.color.category_pink appears to be unused [UnusedResources]
+    <color name="category_pink">#E91E63</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:79: Warning: The resource R.color.category_purple appears to be unused [UnusedResources]
+    <color name="category_purple">#9C27B0</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:81: Warning: The resource R.color.category_cyan appears to be unused [UnusedResources]
+    <color name="category_cyan">#00BCD4</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:82: Warning: The resource R.color.category_teal appears to be unused [UnusedResources]
+    <color name="category_teal">#009688</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:88: Warning: The resource R.color.smile_ripple appears to be unused [UnusedResources]
+    <color name="smile_ripple">#33FF6B35</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:89: Warning: The resource R.color.smile_pressed appears to be unused [UnusedResources]
+    <color name="smile_pressed">#1AFF6B35</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:90: Warning: The resource R.color.smile_focused appears to be unused [UnusedResources]
+    <color name="smile_focused">#4DFF6B35</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:93: Warning: The resource R.color.white appears to be unused [UnusedResources]
+    <color name="white">#FFFFFF</color>
+           ~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:94: Warning: The resource R.color.black appears to be unused [UnusedResources]
+    <color name="black">#000000</color>
+           ~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:95: Warning: The resource R.color.transparent appears to be unused [UnusedResources]
+    <color name="transparent">#00000000</color>
+           ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:98: Warning: The resource R.color.shadow_light appears to be unused [UnusedResources]
+    <color name="shadow_light">#1F000000</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:99: Warning: The resource R.color.shadow_medium appears to be unused [UnusedResources]
+    <color name="shadow_medium">#33000000</color>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/default_animals_cover.xml:2: Warning: The resource R.drawable.default_animals_cover appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/default_category_cover.xml:2: Warning: The resource R.drawable.default_category_cover appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/default_family_cover.xml:2: Warning: The resource R.drawable.default_family_cover appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/default_fun_cover.xml:2: Warning: The resource R.drawable.default_fun_cover appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/default_nature_cover.xml:2: Warning: The resource R.drawable.default_nature_cover appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:18: Warning: The resource R.dimen.spacing_tiny appears to be unused [UnusedResources]
+    <dimen name="spacing_tiny">4dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:19: Warning: The resource R.dimen.spacing_small appears to be unused [UnusedResources]
+    <dimen name="spacing_small">8dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:20: Warning: The resource R.dimen.spacing_medium appears to be unused [UnusedResources]
+    <dimen name="spacing_medium">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:21: Warning: The resource R.dimen.spacing_large appears to be unused [UnusedResources]
+    <dimen name="spacing_large">24dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:22: Warning: The resource R.dimen.spacing_extra_large appears to be unused [UnusedResources]
+    <dimen name="spacing_extra_large">32dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:23: Warning: The resource R.dimen.spacing_huge appears to be unused [UnusedResources]
+    <dimen name="spacing_huge">48dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:26: Warning: The resource R.dimen.corner_radius_small appears to be unused [UnusedResources]
+    <dimen name="corner_radius_small">8dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:27: Warning: The resource R.dimen.corner_radius_medium appears to be unused [UnusedResources]
+    <dimen name="corner_radius_medium">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:28: Warning: The resource R.dimen.corner_radius_large appears to be unused [UnusedResources]
+    <dimen name="corner_radius_large">24dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:29: Warning: The resource R.dimen.corner_radius_extra_large appears to be unused [UnusedResources]
+    <dimen name="corner_radius_extra_large">32dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:32: Warning: The resource R.dimen.category_card_width appears to be unused [UnusedResources]
+    <dimen name="category_card_width">200dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:33: Warning: The resource R.dimen.category_card_height appears to be unused [UnusedResources]
+    <dimen name="category_card_height">160dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:34: Warning: The resource R.dimen.category_card_image_height appears to be unused [UnusedResources]
+    <dimen name="category_card_image_height">100dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:37: Warning: The resource R.dimen.elevation_low appears to be unused [UnusedResources]
+    <dimen name="elevation_low">4dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:38: Warning: The resource R.dimen.elevation_medium appears to be unused [UnusedResources]
+    <dimen name="elevation_medium">8dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:39: Warning: The resource R.dimen.elevation_high appears to be unused [UnusedResources]
+    <dimen name="elevation_high">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:42: Warning: The resource R.dimen.photo_viewer_controls_height appears to be unused [UnusedResources]
+    <dimen name="photo_viewer_controls_height">80dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:43: Warning: The resource R.dimen.photo_viewer_thumbnail_size appears to be unused [UnusedResources]
+    <dimen name="photo_viewer_thumbnail_size">60dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:46: Warning: The resource R.dimen.page_indicator_size appears to be unused [UnusedResources]
+    <dimen name="page_indicator_size">12dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/dimens.xml:47: Warning: The resource R.dimen.page_indicator_margin appears to be unused [UnusedResources]
+    <dimen name="page_indicator_margin">6dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/gradient_bottom_overlay.xml:2: Warning: The resource R.drawable.gradient_bottom_overlay appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/ic_chevron_left_24.xml:2: Warning: The resource R.drawable.ic_chevron_left_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/ic_chevron_right_24.xml:2: Warning: The resource R.drawable.ic_chevron_right_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/ic_close_24.xml:2: Warning: The resource R.drawable.ic_close_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/ic_error.xml:2: Warning: The resource R.drawable.ic_error appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/ic_share_24.xml:2: Warning: The resource R.drawable.ic_share_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/photo_placeholder.xml:2: Warning: The resource R.drawable.photo_placeholder appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/photo_viewer_controls_background.xml:2: Warning: The resource R.drawable.photo_viewer_controls_background appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/values/plurals.xml:3: Warning: The resource R.plurals.photo_count appears to be unused [UnusedResources]
+    <plurals name="photo_count">
+             ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:4: Warning: The resource R.string.welcome_message appears to be unused [UnusedResources]
+    <string name="welcome_message">Welcome to SmilePile!\nYour happy photo sharing app.</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:7: Warning: The resource R.string.nav_home appears to be unused [UnusedResources]
+    <string name="nav_home">Home</string>
+            ~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:8: Warning: The resource R.string.nav_gallery appears to be unused [UnusedResources]
+    <string name="nav_gallery">Gallery</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:9: Warning: The resource R.string.nav_camera appears to be unused [UnusedResources]
+    <string name="nav_camera">Camera</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:10: Warning: The resource R.string.nav_profile appears to be unused [UnusedResources]
+    <string name="nav_profile">Profile</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:13: Warning: The resource R.string.action_ok appears to be unused [UnusedResources]
+    <string name="action_ok">OK</string>
+            ~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:14: Warning: The resource R.string.action_cancel appears to be unused [UnusedResources]
+    <string name="action_cancel">Cancel</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:15: Warning: The resource R.string.action_save appears to be unused [UnusedResources]
+    <string name="action_save">Save</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:16: Warning: The resource R.string.action_delete appears to be unused [UnusedResources]
+    <string name="action_delete">Delete</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:17: Warning: The resource R.string.action_share appears to be unused [UnusedResources]
+    <string name="action_share">Share</string>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:18: Warning: The resource R.string.action_edit appears to be unused [UnusedResources]
+    <string name="action_edit">Edit</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:21: Warning: The resource R.string.cd_photo appears to be unused [UnusedResources]
+    <string name="cd_photo">Photo</string>
+            ~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:22: Warning: The resource R.string.cd_add_photo appears to be unused [UnusedResources]
+    <string name="cd_add_photo">Add photo</string>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:23: Warning: The resource R.string.cd_menu appears to be unused [UnusedResources]
+    <string name="cd_menu">Menu</string>
+            ~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:24: Warning: The resource R.string.cd_back appears to be unused [UnusedResources]
+    <string name="cd_back">Back</string>
+            ~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:27: Warning: The resource R.string.placeholder_loading appears to be unused [UnusedResources]
+    <string name="placeholder_loading">Loading…</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:28: Warning: The resource R.string.placeholder_empty appears to be unused [UnusedResources]
+    <string name="placeholder_empty">No photos yet</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:29: Warning: The resource R.string.placeholder_error appears to be unused [UnusedResources]
+    <string name="placeholder_error">Something went wrong</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:32: Warning: The resource R.string.category_family appears to be unused [UnusedResources]
+    <string name="category_family">Family</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:33: Warning: The resource R.string.category_friends appears to be unused [UnusedResources]
+    <string name="category_friends">Friends</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:34: Warning: The resource R.string.category_pets appears to be unused [UnusedResources]
+    <string name="category_pets">Pets</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:35: Warning: The resource R.string.category_vacation appears to be unused [UnusedResources]
+    <string name="category_vacation">Vacation</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:36: Warning: The resource R.string.category_birthday appears to be unused [UnusedResources]
+    <string name="category_birthday">Birthday</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:37: Warning: The resource R.string.category_school appears to be unused [UnusedResources]
+    <string name="category_school">School</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:38: Warning: The resource R.string.category_holidays appears to be unused [UnusedResources]
+    <string name="category_holidays">Holidays</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:39: Warning: The resource R.string.category_outdoors appears to be unused [UnusedResources]
+    <string name="category_outdoors">Outdoors</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:40: Warning: The resource R.string.category_home appears to be unused [UnusedResources]
+    <string name="category_home">Home</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:43: Warning: The resource R.string.photo_viewer_title appears to be unused [UnusedResources]
+    <string name="photo_viewer_title">Photo Viewer</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:44: Warning: The resource R.string.photo_viewer_close appears to be unused [UnusedResources]
+    <string name="photo_viewer_close">Close</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:45: Warning: The resource R.string.photo_viewer_previous appears to be unused [UnusedResources]
+    <string name="photo_viewer_previous">Previous</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:46: Warning: The resource R.string.photo_viewer_next appears to be unused [UnusedResources]
+    <string name="photo_viewer_next">Next</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:47: Warning: The resource R.string.photo_viewer_share appears to be unused [UnusedResources]
+    <string name="photo_viewer_share">Share</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:48: Warning: The resource R.string.photo_counter_format appears to be unused [UnusedResources]
+    <string name="photo_counter_format">%1$d of %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:51: Warning: The resource R.string.content_description_category_card appears to be unused [UnusedResources]
+    <string name="content_description_category_card">Category: %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:52: Warning: The resource R.string.content_description_photo appears to be unused [UnusedResources]
+    <string name="content_description_photo">Photo %1$d of %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:53: Warning: The resource R.string.content_description_close_button appears to be unused [UnusedResources]
+    <string name="content_description_close_button">Close</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:54: Warning: The resource R.string.content_description_previous_button appears to be unused [UnusedResources]
+    <string name="content_description_previous_button">Previous photo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:55: Warning: The resource R.string.content_description_next_button appears to be unused [UnusedResources]
+    <string name="content_description_next_button">Next photo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:56: Warning: The resource R.string.content_description_share_button appears to be unused [UnusedResources]
+    <string name="content_description_share_button">Share photo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:59: Warning: The resource R.string.feedback_category_selected appears to be unused [UnusedResources]
+    <string name="feedback_category_selected">Category selected</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:60: Warning: The resource R.string.feedback_photo_opened appears to be unused [UnusedResources]
+    <string name="feedback_photo_opened">Photo opened</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:63: Warning: The resource R.string.category_cover_description appears to be unused [UnusedResources]
+    <string name="category_cover_description">Category cover image</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/strings.xml:64: Warning: The resource R.string.error_loading_image appears to be unused [UnusedResources]
+    <string name="error_loading_image">Unable to load image</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/themes.xml:34: Warning: The resource R.style.Theme_SmilePile_ChildFriendly appears to be unused [UnusedResources]
+    <style name="Theme.SmilePile.ChildFriendly" parent="Theme.SmilePile">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/values/themes.xml:72: Warning: The resource R.style.Theme_SmilePile_FullScreen appears to be unused [UnusedResources]
+    <style name="Theme.SmilePile.FullScreen" parent="Theme.SmilePile.ChildFriendly">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+0 errors, 146 warnings

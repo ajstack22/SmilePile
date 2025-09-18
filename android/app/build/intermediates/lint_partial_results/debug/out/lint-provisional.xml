@@ -32,37 +32,19 @@
             replacement="">
             <range
                 file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
-                startOffset="1448"
-                endOffset="1468"/>
+                startOffset="1565"
+                endOffset="1585"/>
         </fix-replace>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
-            line="33"
+            line="36"
             column="9"
-            startOffset="1448"
-            endLine="33"
+            startOffset="1565"
+            endLine="36"
             endColumn="29"
-            endOffset="1468"/>
+            endOffset="1585"/>
         <map>
             <condition minGE="ffffffffc0000000"/>
-        </map>
-    </incident>
-
-    <incident
-        id="PermissionImpliesUnsupportedChromeOsHardware"
-        severity="error"
-        message="Permission exists without corresponding hardware `&lt;uses-feature android:name=&quot;android.hardware.camera&quot; required=&quot;false&quot;>` tag">
-        <fix-data featureName="android.hardware.camera"/>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
-            line="17"
-            column="6"
-            startOffset="779"
-            endLine="17"
-            endColumn="21"
-            endOffset="794"/>
-        <map>
-            <condition library="false"/>
         </map>
     </incident>
 
@@ -79,12 +61,12 @@
             value="fullSensor"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
-            line="39"
+            line="42"
             column="13"
-            startOffset="1629"
-            endLine="39"
+            startOffset="1746"
+            endLine="42"
             endColumn="49"
-            endOffset="1665"/>
+            endOffset="1782"/>
         <map>
             <condition library="false"/>
         </map>
@@ -451,54 +433,6 @@
             <entry
                 name="containsGradient"
                 boolean="false"/>
-        </map>
-    </incident>
-
-    <incident
-        id="NewApi"
-        severity="error"
-        message="">
-        <fix-data minSdk="ffffffffff800000" requiresApi="fffffffffc000000"/>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/themes.xml"
-            line="62"
-            column="15"
-            startOffset="3684"
-            endLine="62"
-            endColumn="54"
-            endOffset="3723"/>
-        <map>
-            <api-levels id="minSdk"
-                value="ffffffffff800000"/>
-            <api-levels id="requiresApi"
-                value="fffffffffc000000"/>
-            <entry
-                name="message"
-                string="`android:windowLightNavigationBar` requires API level 27 (current min is %1$s)"/>
-        </map>
-    </incident>
-
-    <incident
-        id="NewApi"
-        severity="error"
-        message="">
-        <fix-data minSdk="ffffffffff800000" requiresApi="fffffffffc000000"/>
-        <location
-            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/themes.xml"
-            line="78"
-            column="15"
-            startOffset="4448"
-            endLine="78"
-            endColumn="61"
-            endOffset="4494"/>
-        <map>
-            <api-levels id="minSdk"
-                value="ffffffffff800000"/>
-            <api-levels id="requiresApi"
-                value="fffffffffc000000"/>
-            <entry
-                name="message"
-                string="`android:windowLayoutInDisplayCutoutMode` requires API level 27 (current min is %1$s)"/>
         </map>
     </incident>
 

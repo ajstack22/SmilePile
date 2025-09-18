@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smilepile"
+    package="com.smilepile.app"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="2025.09.18.003" >
 
     <uses-sdk
-        android:minSdkVersion="24"
+        android:minSdkVersion="26"
         android:targetSdkVersion="34" />
 
     <!-- Internet permission for image loading and potential future features -->
@@ -23,17 +23,22 @@
     <!-- Camera permission for potential future photo capture -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- Hardware features -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <!-- Vibration permission for haptic feedback -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <permission
-        android:name="com.smilepile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.smilepile.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.smilepile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.smilepile.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="com.smilepile.SmilePileApplication"
+        android:name="com.smilepile.app.SmilePileApplication"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -46,7 +51,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmilePile" >
         <activity
-            android:name="com.smilepile.MainActivity"
+            android:name="com.smilepile.app.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SmilePile" >
@@ -57,14 +62,9 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="androidx.room.MultiInstanceInvalidationService"
-            android:directBootAware="true"
-            android:exported="false" />
-
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.smilepile.androidx-startup"
+            android:authorities="com.smilepile.app.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -76,6 +76,18 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:directBootAware="true"
+            android:exported="false" />
 
         <receiver
             android:name="androidx.profileinstaller.ProfileInstallReceiver"
