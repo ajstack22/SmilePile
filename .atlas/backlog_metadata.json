@@ -1,0 +1,1151 @@
+{
+  "next_feature_id": 29,
+  "next_bug_id": 1,
+  "next_tech_debt_id": 1,
+  "next_epic_id": 9,
+  "features": [
+    {
+      "id": "F0001",
+      "type": "feature",
+      "title": "Create Android Project Structure",
+      "description": "Set up new Android project with proper configuration for tablet targeting",
+      "acceptance_criteria": [
+        "Android project created with Kotlin",
+        "Target SDK 26+ (Android 8.0+)",
+        "Tablet-optimized configuration",
+        "Build system configured",
+        "Version strategy implemented (YYYY.MM.DD.VVV)"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:10.558284",
+      "file_path": "features/F0001.md"
+    },
+    {
+      "id": "F0002",
+      "type": "feature",
+      "title": "Display Single Image Fullscreen",
+      "description": "Display one hardcoded image in fullscreen mode as the foundation for the photo viewer",
+      "acceptance_criteria": [
+        "Single image displayed fullscreen",
+        "Image scales properly for tablets",
+        "Simple MainActivity implementation",
+        "Image loads from resources",
+        "App compiles and runs successfully"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:15.528368",
+      "file_path": "features/F0002.md"
+    },
+    {
+      "id": "F0003",
+      "type": "feature",
+      "title": "Create Basic Test Suite",
+      "description": "Implement basic testing infrastructure with one test to validate the app works",
+      "acceptance_criteria": [
+        "Test framework configured",
+        "Basic UI test for image display",
+        "Unit test for MainActivity",
+        "Tests run and pass",
+        "CI/CD foundation setup"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:19.285344",
+      "file_path": "features/F0003.md"
+    },
+    {
+      "id": "F0004",
+      "type": "feature",
+      "title": "Implement ViewPager2 Integration",
+      "description": "Add ViewPager2 to enable swipe navigation between images",
+      "acceptance_criteria": [
+        "ViewPager2 dependency added",
+        "ViewPager2 configured in MainActivity",
+        "Adapter created for image fragments",
+        "Swipe gestures work left/right",
+        "Smooth animation between pages"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:23.905389",
+      "file_path": "features/F0004.md"
+    },
+    {
+      "id": "F0005",
+      "type": "feature",
+      "title": "Load Multiple Hardcoded Images",
+      "description": "Extend image display to show 3 hardcoded images that users can swipe between",
+      "acceptance_criteria": [
+        "3 sample images added to resources",
+        "Image array/list implementation",
+        "Fragment for individual image display",
+        "Images load correctly in ViewPager2",
+        "All images display properly fullscreen"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:28.349861",
+      "file_path": "features/F0005.md"
+    },
+    {
+      "id": "F0006",
+      "type": "feature",
+      "title": "Enhance Swipe Gesture Testing",
+      "description": "Create comprehensive tests for swipe navigation functionality",
+      "acceptance_criteria": [
+        "Swipe gesture tests implemented",
+        "Navigation state testing",
+        "ViewPager2 position validation",
+        "Performance testing for swipes",
+        "Edge case testing (first/last image)"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:33.168591",
+      "file_path": "features/F0006.md"
+    },
+    {
+      "id": "F0007",
+      "type": "feature",
+      "title": "Create Sample Images Folder Structure",
+      "description": "Set up folder structure and sample images for dynamic loading",
+      "acceptance_criteria": [
+        "Assets folder structure created",
+        "Sample images provided (various formats)",
+        "Image naming convention established",
+        "Folder organization documented",
+        "Images optimized for tablet display"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:37.742380",
+      "file_path": "features/F0007.md"
+    },
+    {
+      "id": "F0008",
+      "type": "feature",
+      "title": "Implement Dynamic Image Loading",
+      "description": "Load images dynamically from folder instead of hardcoded resources",
+      "acceptance_criteria": [
+        "File system image discovery",
+        "Dynamic adapter population",
+        "Support for common image formats (PNG, JPG, WEBP)",
+        "Image loading utility class",
+        "Memory-efficient loading strategy"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:41.984616",
+      "file_path": "features/F0008.md"
+    },
+    {
+      "id": "F0009",
+      "type": "feature",
+      "title": "Handle Empty Folder Scenarios",
+      "description": "Graceful handling when no images are found in the folder",
+      "acceptance_criteria": [
+        "Empty folder detection",
+        "User-friendly empty state UI",
+        "Error handling for file access",
+        "Fallback to default images",
+        "Appropriate messaging for empty state"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:46.356337",
+      "file_path": "features/F0009.md"
+    },
+    {
+      "id": "F0010",
+      "type": "feature",
+      "title": "Create Category Data Structure",
+      "description": "Define data models and structures for organizing images into categories",
+      "acceptance_criteria": [
+        "Category data class/model defined",
+        "Photo metadata structure",
+        "Category-to-photos relationship",
+        "In-memory category management",
+        "Data validation for categories"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:51.179860",
+      "file_path": "features/F0010.md"
+    },
+    {
+      "id": "F0011",
+      "type": "feature",
+      "title": "Build Category Selection UI",
+      "description": "Create the main category view where children can see and select categories",
+      "acceptance_criteria": [
+        "Category grid/list view",
+        "Visible category names for literacy",
+        "Category cover images",
+        "Child-friendly UI design",
+        "Horizontal swipe between categories"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:56.636368",
+      "file_path": "features/F0011.md"
+    },
+    {
+      "id": "F0012",
+      "type": "feature",
+      "title": "Implement Category to Photo Navigation",
+      "description": "Enable navigation from category view into photo viewing mode and back",
+      "acceptance_criteria": [
+        "Category selection triggers photo view",
+        "Swipe up or tap to enter category",
+        "Photo navigation within category",
+        "Back navigation to category view",
+        "Navigation state management"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:01.558840",
+      "file_path": "features/F0012.md"
+    },
+    {
+      "id": "F0013",
+      "type": "feature",
+      "title": "Set Up Room Database",
+      "description": "Configure Room database for local data persistence",
+      "acceptance_criteria": [
+        "Room dependencies added",
+        "Database class created",
+        "Database configuration",
+        "Migration strategy defined",
+        "Database initialization"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:06.185819",
+      "file_path": "features/F0013.md"
+    },
+    {
+      "id": "F0014",
+      "type": "feature",
+      "title": "Create Database Entities",
+      "description": "Define Room entities for Category and Photo data models",
+      "acceptance_criteria": [
+        "Category entity with Room annotations",
+        "Photo entity with Room annotations",
+        "Relationship definitions (one-to-many)",
+        "Primary keys and indexes",
+        "Entity validation"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:10.562439",
+      "file_path": "features/F0014.md"
+    },
+    {
+      "id": "F0015",
+      "type": "feature",
+      "title": "Implement Data Access Objects",
+      "description": "Create DAOs for database operations on categories and photos",
+      "acceptance_criteria": [
+        "CategoryDao with CRUD operations",
+        "PhotoDao with CRUD operations",
+        "Query methods for category-photo relationships",
+        "Async database operations",
+        "DAO testing"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:14.241402",
+      "file_path": "features/F0015.md"
+    },
+    {
+      "id": "F0016",
+      "type": "feature",
+      "title": "Implement File Picker Integration",
+      "description": "Add file picker functionality to allow selecting photos from device storage",
+      "acceptance_criteria": [
+        "File picker library integration",
+        "Multi-select photo capability",
+        "Image format filtering",
+        "File picker UI integration",
+        "Selected files handling"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:18.781990",
+      "file_path": "features/F0016.md"
+    },
+    {
+      "id": "F0017",
+      "type": "feature",
+      "title": "Handle Storage Permissions",
+      "description": "Implement proper permission handling for accessing device storage",
+      "acceptance_criteria": [
+        "Storage permission requests",
+        "Permission rationale dialogs",
+        "Graceful permission denial handling",
+        "Runtime permission management",
+        "Permission state persistence"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:22.892641",
+      "file_path": "features/F0017.md"
+    },
+    {
+      "id": "F0018",
+      "type": "feature",
+      "title": "Photo Import Workflow",
+      "description": "Complete workflow for importing photos and assigning them to categories",
+      "acceptance_criteria": [
+        "Photo import UI for parents",
+        "Category assignment during import",
+        "Photo copying/processing",
+        "Database updates after import",
+        "Import progress feedback"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:27.308771",
+      "file_path": "features/F0018.md"
+    },
+    {
+      "id": "F0019",
+      "type": "feature",
+      "title": "Category Management Interface",
+      "description": "Build UI for parents to create, edit, and delete categories",
+      "acceptance_criteria": [
+        "Create new category UI",
+        "Edit category names and details",
+        "Delete category with confirmation",
+        "Category list management",
+        "Validation for category names"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:31.794286",
+      "file_path": "features/F0019.md"
+    },
+    {
+      "id": "F0020",
+      "type": "feature",
+      "title": "Photo Reordering System",
+      "description": "Allow parents to reorder photos within categories",
+      "acceptance_criteria": [
+        "Drag and drop photo reordering",
+        "Touch-based reordering for tablets",
+        "Visual feedback during reordering",
+        "Database updates for photo order",
+        "Order persistence"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:36.210850",
+      "file_path": "features/F0020.md"
+    },
+    {
+      "id": "F0021",
+      "type": "feature",
+      "title": "Category Cover Image Management",
+      "description": "Enable parents to set and manage cover images for categories",
+      "acceptance_criteria": [
+        "Cover image selection from category photos",
+        "Default cover image logic",
+        "Cover image preview",
+        "Cover image updating",
+        "Visual indication of current cover"
+      ],
+      "priority": "low",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:42.203018",
+      "file_path": "features/F0021.md"
+    },
+    {
+      "id": "F0022",
+      "type": "feature",
+      "title": "Implement Image Caching with Coil",
+      "description": "Add Coil library for efficient image loading and caching",
+      "acceptance_criteria": [
+        "Coil dependency integration",
+        "Image caching configuration",
+        "Memory management optimization",
+        "Placeholder image handling",
+        "Cache invalidation strategy"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:47.862156",
+      "file_path": "features/F0022.md"
+    },
+    {
+      "id": "F0023",
+      "type": "feature",
+      "title": "Enhance UI Animations",
+      "description": "Add smooth animations for better user experience",
+      "acceptance_criteria": [
+        "Smooth category transitions",
+        "Photo swipe animations",
+        "Loading state animations",
+        "Gesture feedback animations",
+        "Animation performance optimization"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:51.435362",
+      "file_path": "features/F0023.md"
+    },
+    {
+      "id": "F0024",
+      "type": "feature",
+      "title": "Comprehensive Error Handling",
+      "description": "Implement robust error handling throughout the application",
+      "acceptance_criteria": [
+        "File access error handling",
+        "Database error recovery",
+        "Network/storage failure handling",
+        "User-friendly error messages",
+        "Crash prevention and recovery"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:56.485706",
+      "file_path": "features/F0024.md"
+    },
+    {
+      "id": "F0025",
+      "type": "feature",
+      "title": "Performance Optimization",
+      "description": "Optimize app performance to meet target requirements",
+      "acceptance_criteria": [
+        "App launch under 2 seconds",
+        "Image load under 500ms",
+        "Swipe response under 100ms",
+        "Database queries under 50ms",
+        "Memory usage optimization"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:00.020436",
+      "file_path": "features/F0025.md"
+    },
+    {
+      "id": "F0026",
+      "type": "feature",
+      "title": "Child-Safe Design Implementation",
+      "description": "Ensure the app is completely child-safe with no external connectivity",
+      "acceptance_criteria": [
+        "No network connectivity",
+        "No external sharing capabilities",
+        "Child-appropriate UI design",
+        "No ads or external content",
+        "Offline-only functionality"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:05.143598",
+      "file_path": "features/F0026.md"
+    },
+    {
+      "id": "F0027",
+      "type": "feature",
+      "title": "Tablet Optimization",
+      "description": "Optimize the app specifically for tablet devices (10+ inch screens)",
+      "acceptance_criteria": [
+        "Tablet-specific layouts",
+        "Large screen UI optimization",
+        "Touch target sizing for tablets",
+        "Landscape and portrait support",
+        "High DPI display support"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:09.861804",
+      "file_path": "features/F0027.md"
+    },
+    {
+      "id": "F0028",
+      "type": "feature",
+      "title": "Accessibility Features",
+      "description": "Implement accessibility features for children with different needs",
+      "acceptance_criteria": [
+        "Screen reader support",
+        "High contrast mode support",
+        "Large text options",
+        "Voice navigation support",
+        "Motor accessibility considerations"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:13.795561",
+      "file_path": "features/F0028.md"
+    }
+  ],
+  "bugs": [],
+  "tech_debt": [],
+  "epics": [
+    {
+      "id": "E001",
+      "type": "epic",
+      "title": "Minimal Working System",
+      "description": "Display one hardcoded image fullscreen to establish basic Android project structure",
+      "stories": [],
+      "objectives": [
+        "Create Android project",
+        "Display single image",
+        "One basic test",
+        "Must compile and run"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:32.649230",
+      "file_path": "epics/E001.md"
+    },
+    {
+      "id": "E002",
+      "type": "epic",
+      "title": "Basic Swipe Navigation",
+      "description": "Implement swipe navigation between 3 hardcoded images using ViewPager2",
+      "stories": [],
+      "objectives": [
+        "Add ViewPager2",
+        "Load 3 hardcoded images",
+        "Implement swipe gestures",
+        "Test swipe navigation"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:36.324800",
+      "file_path": "epics/E002.md"
+    },
+    {
+      "id": "E003",
+      "type": "epic",
+      "title": "Dynamic Image Loading",
+      "description": "Load and display all images from a folder dynamically",
+      "stories": [],
+      "objectives": [
+        "Create sample images folder",
+        "Dynamic image loading",
+        "Handle empty folder case",
+        "Test image loading"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:40.499736",
+      "file_path": "epics/E003.md"
+    },
+    {
+      "id": "E004",
+      "type": "epic",
+      "title": "Category System",
+      "description": "Group images into categories with navigation between category view and photo view",
+      "stories": [],
+      "objectives": [
+        "Category data structure",
+        "Category view with titles",
+        "Navigation into category",
+        "Test category switching"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:44.652841",
+      "file_path": "epics/E004.md"
+    },
+    {
+      "id": "E005",
+      "type": "epic",
+      "title": "Database Integration",
+      "description": "Persist categories and photo metadata using Room database",
+      "stories": [],
+      "objectives": [
+        "Room database setup",
+        "Category and Photo entities",
+        "Basic CRUD operations",
+        "Test data persistence"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:48.259327",
+      "file_path": "epics/E005.md"
+    },
+    {
+      "id": "E006",
+      "type": "epic",
+      "title": "Photo Import",
+      "description": "Import photos from device storage with proper permissions",
+      "stories": [],
+      "objectives": [
+        "File picker integration",
+        "Permission handling",
+        "Add photos to categories",
+        "Test import flow"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:53.149447",
+      "file_path": "epics/E006.md"
+    },
+    {
+      "id": "E007",
+      "type": "epic",
+      "title": "Parent Management UI",
+      "description": "Category management interface for parents to organize photos",
+      "stories": [],
+      "objectives": [
+        "Create/edit/delete categories",
+        "Reorder photos",
+        "Set cover images",
+        "Test management features"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:02:57.217239",
+      "file_path": "epics/E007.md"
+    },
+    {
+      "id": "E008",
+      "type": "epic",
+      "title": "Polish & Performance",
+      "description": "Production-ready optimizations and polish",
+      "stories": [],
+      "objectives": [
+        "Image caching (Coil)",
+        "Smooth animations",
+        "Error handling",
+        "Performance optimization"
+      ],
+      "status": "planning",
+      "created_at": "2025-09-18T16:03:01.350832",
+      "file_path": "epics/E008.md"
+    }
+  ],
+  "stories": [
+    {
+      "id": "F0001",
+      "type": "feature",
+      "title": "Create Android Project Structure",
+      "description": "Set up new Android project with proper configuration for tablet targeting",
+      "acceptance_criteria": [
+        "Android project created with Kotlin",
+        "Target SDK 26+ (Android 8.0+)",
+        "Tablet-optimized configuration",
+        "Build system configured",
+        "Version strategy implemented (YYYY.MM.DD.VVV)"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:10.558284",
+      "file_path": "features/F0001.md"
+    },
+    {
+      "id": "F0002",
+      "type": "feature",
+      "title": "Display Single Image Fullscreen",
+      "description": "Display one hardcoded image in fullscreen mode as the foundation for the photo viewer",
+      "acceptance_criteria": [
+        "Single image displayed fullscreen",
+        "Image scales properly for tablets",
+        "Simple MainActivity implementation",
+        "Image loads from resources",
+        "App compiles and runs successfully"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:15.528368",
+      "file_path": "features/F0002.md"
+    },
+    {
+      "id": "F0003",
+      "type": "feature",
+      "title": "Create Basic Test Suite",
+      "description": "Implement basic testing infrastructure with one test to validate the app works",
+      "acceptance_criteria": [
+        "Test framework configured",
+        "Basic UI test for image display",
+        "Unit test for MainActivity",
+        "Tests run and pass",
+        "CI/CD foundation setup"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:19.285344",
+      "file_path": "features/F0003.md"
+    },
+    {
+      "id": "F0004",
+      "type": "feature",
+      "title": "Implement ViewPager2 Integration",
+      "description": "Add ViewPager2 to enable swipe navigation between images",
+      "acceptance_criteria": [
+        "ViewPager2 dependency added",
+        "ViewPager2 configured in MainActivity",
+        "Adapter created for image fragments",
+        "Swipe gestures work left/right",
+        "Smooth animation between pages"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:23.905389",
+      "file_path": "features/F0004.md"
+    },
+    {
+      "id": "F0005",
+      "type": "feature",
+      "title": "Load Multiple Hardcoded Images",
+      "description": "Extend image display to show 3 hardcoded images that users can swipe between",
+      "acceptance_criteria": [
+        "3 sample images added to resources",
+        "Image array/list implementation",
+        "Fragment for individual image display",
+        "Images load correctly in ViewPager2",
+        "All images display properly fullscreen"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:28.349861",
+      "file_path": "features/F0005.md"
+    },
+    {
+      "id": "F0006",
+      "type": "feature",
+      "title": "Enhance Swipe Gesture Testing",
+      "description": "Create comprehensive tests for swipe navigation functionality",
+      "acceptance_criteria": [
+        "Swipe gesture tests implemented",
+        "Navigation state testing",
+        "ViewPager2 position validation",
+        "Performance testing for swipes",
+        "Edge case testing (first/last image)"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:33.168591",
+      "file_path": "features/F0006.md"
+    },
+    {
+      "id": "F0007",
+      "type": "feature",
+      "title": "Create Sample Images Folder Structure",
+      "description": "Set up folder structure and sample images for dynamic loading",
+      "acceptance_criteria": [
+        "Assets folder structure created",
+        "Sample images provided (various formats)",
+        "Image naming convention established",
+        "Folder organization documented",
+        "Images optimized for tablet display"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:37.742380",
+      "file_path": "features/F0007.md"
+    },
+    {
+      "id": "F0008",
+      "type": "feature",
+      "title": "Implement Dynamic Image Loading",
+      "description": "Load images dynamically from folder instead of hardcoded resources",
+      "acceptance_criteria": [
+        "File system image discovery",
+        "Dynamic adapter population",
+        "Support for common image formats (PNG, JPG, WEBP)",
+        "Image loading utility class",
+        "Memory-efficient loading strategy"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:41.984616",
+      "file_path": "features/F0008.md"
+    },
+    {
+      "id": "F0009",
+      "type": "feature",
+      "title": "Handle Empty Folder Scenarios",
+      "description": "Graceful handling when no images are found in the folder",
+      "acceptance_criteria": [
+        "Empty folder detection",
+        "User-friendly empty state UI",
+        "Error handling for file access",
+        "Fallback to default images",
+        "Appropriate messaging for empty state"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:46.356337",
+      "file_path": "features/F0009.md"
+    },
+    {
+      "id": "F0010",
+      "type": "feature",
+      "title": "Create Category Data Structure",
+      "description": "Define data models and structures for organizing images into categories",
+      "acceptance_criteria": [
+        "Category data class/model defined",
+        "Photo metadata structure",
+        "Category-to-photos relationship",
+        "In-memory category management",
+        "Data validation for categories"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:51.179860",
+      "file_path": "features/F0010.md"
+    },
+    {
+      "id": "F0011",
+      "type": "feature",
+      "title": "Build Category Selection UI",
+      "description": "Create the main category view where children can see and select categories",
+      "acceptance_criteria": [
+        "Category grid/list view",
+        "Visible category names for literacy",
+        "Category cover images",
+        "Child-friendly UI design",
+        "Horizontal swipe between categories"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:03:56.636368",
+      "file_path": "features/F0011.md"
+    },
+    {
+      "id": "F0012",
+      "type": "feature",
+      "title": "Implement Category to Photo Navigation",
+      "description": "Enable navigation from category view into photo viewing mode and back",
+      "acceptance_criteria": [
+        "Category selection triggers photo view",
+        "Swipe up or tap to enter category",
+        "Photo navigation within category",
+        "Back navigation to category view",
+        "Navigation state management"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:01.558840",
+      "file_path": "features/F0012.md"
+    },
+    {
+      "id": "F0013",
+      "type": "feature",
+      "title": "Set Up Room Database",
+      "description": "Configure Room database for local data persistence",
+      "acceptance_criteria": [
+        "Room dependencies added",
+        "Database class created",
+        "Database configuration",
+        "Migration strategy defined",
+        "Database initialization"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:06.185819",
+      "file_path": "features/F0013.md"
+    },
+    {
+      "id": "F0014",
+      "type": "feature",
+      "title": "Create Database Entities",
+      "description": "Define Room entities for Category and Photo data models",
+      "acceptance_criteria": [
+        "Category entity with Room annotations",
+        "Photo entity with Room annotations",
+        "Relationship definitions (one-to-many)",
+        "Primary keys and indexes",
+        "Entity validation"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:10.562439",
+      "file_path": "features/F0014.md"
+    },
+    {
+      "id": "F0015",
+      "type": "feature",
+      "title": "Implement Data Access Objects",
+      "description": "Create DAOs for database operations on categories and photos",
+      "acceptance_criteria": [
+        "CategoryDao with CRUD operations",
+        "PhotoDao with CRUD operations",
+        "Query methods for category-photo relationships",
+        "Async database operations",
+        "DAO testing"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:14.241402",
+      "file_path": "features/F0015.md"
+    },
+    {
+      "id": "F0016",
+      "type": "feature",
+      "title": "Implement File Picker Integration",
+      "description": "Add file picker functionality to allow selecting photos from device storage",
+      "acceptance_criteria": [
+        "File picker library integration",
+        "Multi-select photo capability",
+        "Image format filtering",
+        "File picker UI integration",
+        "Selected files handling"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:18.781990",
+      "file_path": "features/F0016.md"
+    },
+    {
+      "id": "F0017",
+      "type": "feature",
+      "title": "Handle Storage Permissions",
+      "description": "Implement proper permission handling for accessing device storage",
+      "acceptance_criteria": [
+        "Storage permission requests",
+        "Permission rationale dialogs",
+        "Graceful permission denial handling",
+        "Runtime permission management",
+        "Permission state persistence"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:22.892641",
+      "file_path": "features/F0017.md"
+    },
+    {
+      "id": "F0018",
+      "type": "feature",
+      "title": "Photo Import Workflow",
+      "description": "Complete workflow for importing photos and assigning them to categories",
+      "acceptance_criteria": [
+        "Photo import UI for parents",
+        "Category assignment during import",
+        "Photo copying/processing",
+        "Database updates after import",
+        "Import progress feedback"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:27.308771",
+      "file_path": "features/F0018.md"
+    },
+    {
+      "id": "F0019",
+      "type": "feature",
+      "title": "Category Management Interface",
+      "description": "Build UI for parents to create, edit, and delete categories",
+      "acceptance_criteria": [
+        "Create new category UI",
+        "Edit category names and details",
+        "Delete category with confirmation",
+        "Category list management",
+        "Validation for category names"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:31.794286",
+      "file_path": "features/F0019.md"
+    },
+    {
+      "id": "F0020",
+      "type": "feature",
+      "title": "Photo Reordering System",
+      "description": "Allow parents to reorder photos within categories",
+      "acceptance_criteria": [
+        "Drag and drop photo reordering",
+        "Touch-based reordering for tablets",
+        "Visual feedback during reordering",
+        "Database updates for photo order",
+        "Order persistence"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:36.210850",
+      "file_path": "features/F0020.md"
+    },
+    {
+      "id": "F0021",
+      "type": "feature",
+      "title": "Category Cover Image Management",
+      "description": "Enable parents to set and manage cover images for categories",
+      "acceptance_criteria": [
+        "Cover image selection from category photos",
+        "Default cover image logic",
+        "Cover image preview",
+        "Cover image updating",
+        "Visual indication of current cover"
+      ],
+      "priority": "low",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:42.203018",
+      "file_path": "features/F0021.md"
+    },
+    {
+      "id": "F0022",
+      "type": "feature",
+      "title": "Implement Image Caching with Coil",
+      "description": "Add Coil library for efficient image loading and caching",
+      "acceptance_criteria": [
+        "Coil dependency integration",
+        "Image caching configuration",
+        "Memory management optimization",
+        "Placeholder image handling",
+        "Cache invalidation strategy"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:47.862156",
+      "file_path": "features/F0022.md"
+    },
+    {
+      "id": "F0023",
+      "type": "feature",
+      "title": "Enhance UI Animations",
+      "description": "Add smooth animations for better user experience",
+      "acceptance_criteria": [
+        "Smooth category transitions",
+        "Photo swipe animations",
+        "Loading state animations",
+        "Gesture feedback animations",
+        "Animation performance optimization"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:51.435362",
+      "file_path": "features/F0023.md"
+    },
+    {
+      "id": "F0024",
+      "type": "feature",
+      "title": "Comprehensive Error Handling",
+      "description": "Implement robust error handling throughout the application",
+      "acceptance_criteria": [
+        "File access error handling",
+        "Database error recovery",
+        "Network/storage failure handling",
+        "User-friendly error messages",
+        "Crash prevention and recovery"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:04:56.485706",
+      "file_path": "features/F0024.md"
+    },
+    {
+      "id": "F0025",
+      "type": "feature",
+      "title": "Performance Optimization",
+      "description": "Optimize app performance to meet target requirements",
+      "acceptance_criteria": [
+        "App launch under 2 seconds",
+        "Image load under 500ms",
+        "Swipe response under 100ms",
+        "Database queries under 50ms",
+        "Memory usage optimization"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:00.020436",
+      "file_path": "features/F0025.md"
+    },
+    {
+      "id": "F0026",
+      "type": "feature",
+      "title": "Child-Safe Design Implementation",
+      "description": "Ensure the app is completely child-safe with no external connectivity",
+      "acceptance_criteria": [
+        "No network connectivity",
+        "No external sharing capabilities",
+        "Child-appropriate UI design",
+        "No ads or external content",
+        "Offline-only functionality"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:05.143598",
+      "file_path": "features/F0026.md"
+    },
+    {
+      "id": "F0027",
+      "type": "feature",
+      "title": "Tablet Optimization",
+      "description": "Optimize the app specifically for tablet devices (10+ inch screens)",
+      "acceptance_criteria": [
+        "Tablet-specific layouts",
+        "Large screen UI optimization",
+        "Touch target sizing for tablets",
+        "Landscape and portrait support",
+        "High DPI display support"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:09.861804",
+      "file_path": "features/F0027.md"
+    },
+    {
+      "id": "F0028",
+      "type": "feature",
+      "title": "Accessibility Features",
+      "description": "Implement accessibility features for children with different needs",
+      "acceptance_criteria": [
+        "Screen reader support",
+        "High contrast mode support",
+        "Large text options",
+        "Voice navigation support",
+        "Motor accessibility considerations"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-18T16:05:13.795561",
+      "file_path": "features/F0028.md"
+    }
+  ],
+  "next_story_id": 1
+}
