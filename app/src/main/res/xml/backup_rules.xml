@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Include database in backups -->
+    <include domain="database" path="." />
+    <!-- Exclude cache from backups -->
+    <exclude domain="cache" />
+</full-backup-content>

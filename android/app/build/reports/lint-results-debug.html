@@ -177,9 +177,9 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 146 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 153 warnings</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 14:20:55 CDT 2025 by AGP (8.2.0)</nav>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 15:30:32 CDT 2025 by AGP (8.2.0)</nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -189,8 +189,12 @@ document.getElementById(id).style.display = 'none';
       <a class="mdl-navigation__link" href="#OldTargetApi"><i class="material-icons warning-icon">warning</i>Target SDK attribute is not targeting latest version (1)</a>
       <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (16)</a>
       <a class="mdl-navigation__link" href="#LockedOrientationActivity"><i class="material-icons warning-icon">warning</i>Incompatible screenOrientation value (1)</a>
+      <a class="mdl-navigation__link" href="#NotifyDataSetChanged"><i class="material-icons warning-icon">warning</i>Invalidating All RecyclerView Data (2)</a>
       <a class="mdl-navigation__link" href="#ObsoleteSdkInt"><i class="material-icons warning-icon">warning</i>Obsolete SDK_INT Version Check (1)</a>
+      <a class="mdl-navigation__link" href="#VectorPath"><i class="material-icons warning-icon">warning</i>Long vector paths (1)</a>
+      <a class="mdl-navigation__link" href="#Overdraw"><i class="material-icons warning-icon">warning</i>Overdraw: Painting regions more than once (2)</a>
       <a class="mdl-navigation__link" href="#UnusedResources"><i class="material-icons warning-icon">warning</i>Unused resources (127)</a>
+      <a class="mdl-navigation__link" href="#SetTextI18n"><i class="material-icons warning-icon">warning</i>TextView Internationalization (2)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -217,11 +221,25 @@ document.getElementById(id).style.display = 'none';
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Performance">Performance</a>
 </td></tr>
 <tr>
+<td class="countColumn">2</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#NotifyDataSetChanged">NotifyDataSetChanged</a>: Invalidating All RecyclerView Data</td></tr>
+<tr>
 <td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#ObsoleteSdkInt">ObsoleteSdkInt</a>: Obsolete SDK_INT Version Check</td></tr>
 <tr>
+<td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#VectorPath">VectorPath</a>: Long vector paths</td></tr>
+<tr>
+<td class="countColumn">2</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#Overdraw">Overdraw</a>: Overdraw: Painting regions more than once</td></tr>
+<tr>
 <td class="countColumn">127</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#UnusedResources">UnusedResources</a>: Unused resources</td></tr>
+<tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Internationalization">Internationalization</a>
+</td></tr>
+<tr>
+<td class="countColumn">2</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#SetTextI18n">SetTextI18n</a>: TextView Internationalization</td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#ExtraIssues">Included Additional Checks (30)</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (39)</a>
@@ -528,7 +546,61 @@ Dismiss</button>            </div>
             </div>
           </section>
 <a name="Performance"></a>
-<a name="ObsoleteSdkInt"></a>
+<a name="NotifyDataSetChanged"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="NotifyDataSetChangedCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Invalidating All RecyclerView Data</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt">../../src/main/java/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt</a>:31</span>: <span class="message">It will always be more efficient to use more specific change events if you can. Rely on <code>notifyDataSetChanged</code> as a last resort.</span><br /><pre class="errorlines">
+<span class="lineno"> 28 </span>        <span class="keyword">when</span> {
+<span class="lineno"> 29 </span>            oldSize == <span class="number">0</span> &amp;&amp; newSize > <span class="number">0</span> -> {
+<span class="lineno"> 30 </span>                <span class="comment">// Initial load</span>
+<span class="caretline"><span class="lineno"> 31 </span>                <span class="warning">notifyDataSetChanged()</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 32 </span>            }
+<span class="lineno"> 33 </span>            oldSize > <span class="number">0</span> &amp;&amp; newSize == <span class="number">0</span> -> {
+<span class="lineno"> 34 </span>                <span class="comment">// All items removed</span></pre>
+
+<span class="location"><a href="../../src/main/java/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt">../../src/main/java/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt</a>:49</span>: <span class="message">It will always be more efficient to use more specific change events if you can. Rely on <code>notifyDataSetChanged</code> as a last resort.</span><br /><pre class="errorlines">
+<span class="lineno"> 46 </span>            }
+<span class="lineno"> 47 </span>            <span class="keyword">else</span> -> {
+<span class="lineno"> 48 </span>                <span class="comment">// Same size, items might have changed</span>
+<span class="caretline"><span class="lineno"> 49 </span>                <span class="warning">notifyDataSetChanged()</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 50 </span>            }
+<span class="lineno"> 51 </span>        }
+<span class="lineno"> 52 </span>    }
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationNotifyDataSetChanged" style="display: none;">
+The <code>RecyclerView</code> adapter's <code>onNotifyDataSetChanged</code> method does not specify what about the data set has changed, forcing any observers to assume that all existing items and structure may no longer be valid. `LayoutManager`s will be forced to fully rebind and relayout all visible views.<br/>To suppress this error, use the issue id "NotifyDataSetChanged" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">NotifyDataSetChanged</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Performance</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 8/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationNotifyDataSetChangedLink" onclick="reveal('explanationNotifyDataSetChanged');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="NotifyDataSetChangedCardLink" onclick="hideid('NotifyDataSetChangedCard');">
+Dismiss</button>            </div>
+            </div>
+          </section><a name="ObsoleteSdkInt"></a>
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="ObsoleteSdkIntCard" style="display: block;">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
   <div class="mdl-card__title">
@@ -565,6 +637,112 @@ To suppress this error, use the issue id "ObsoleteSdkInt" as explained in the <a
               <div class="mdl-card__actions mdl-card--border">
 <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationObsoleteSdkIntLink" onclick="reveal('explanationObsoleteSdkInt');">
 Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="ObsoleteSdkIntCardLink" onclick="hideid('ObsoleteSdkIntCard');">
+Dismiss</button>            </div>
+            </div>
+          </section><a name="VectorPath"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="VectorPathCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Long vector paths</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/drawable/ic_settings_24.xml">../../src/main/res/drawable/ic_settings_24.xml</a>:9</span>: <span class="message">Very long vector path (904 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.</span><br /><pre class="errorlines">
+<span class="lineno">  6 </span>    <span class="prefix">android:</span><span class="attribute">tint</span>=<span class="value">"?attr/colorOnSurface"</span>>
+<span class="lineno">  7 </span>  <span class="tag">&lt;path</span><span class="attribute">
+</span><span class="lineno">  8 </span><span class="attribute">      </span><span class="prefix">android:</span><span class="attribute">fillColor</span>=<span class="value">"@android:color/white"</span>
+<span class="caretline"><span class="lineno">  9 </span>      <span class="prefix">android:</span><span class="attribute">pathData</span>=<span class="value">"</span><span class="warning"><span class="value">M19.14,12.94c0.04,-0.3 0.06,-0.61 0.06,-0.94c0,-0.32 -0.02,-0.64 -0.07,-0.94l2.03,-1.58c0.18,-0.14 0.23,-0.41 0.12,-0.61l-1.92,-3.32c-0.12,-0.22 -0.37,-0.29 -0.59,-0.22l-2.39,0.96c-0.5,-0.38 -1.03,-0.7 -1.62,-0.94L14.4,2.81c-0.04,-0.24 -0.24,-0.41 -0.48,-0.41h-3.84c-0.24,0 -0.43,0.17 -0.47,0.41L9.25,5.35C8.66,5.59 8.12,5.92 7.63,6.29L5.24,5.33c-0.22,-0.08 -0.47,0 -0.59,0.22L2.74,8.87C2.62,9.08 2.66,9.34 2.86,9.48l2.03,1.58C4.84,11.36 4.8,11.69 4.8,12s0.02,0.64 0.07,0.94l-2.03,1.58c-0.18,0.14 -0.23,0.41 -0.12,0.61l1.92,3.32c0.12,0.22 0.37,0.29 0.59,0.22l2.39,-0.96c0.5,0.38 1.03,0.7 1.62,0.94l0.36,2.54c0.05,0.24 0.24,0.41 0.48,0.41h3.84c0.24,0 0.44,-0.17 0.47,-0.41l0.36,-2.54c0.59,-0.24 1.13,-0.56 1.62,-0.94l2.39,0.96c0.22,0.08 0.47,0 0.59,-0.22l1.92,-3.32c0.12,-0.22 0.07,-0.47 -0.12,-0.61L19.14,12.94zM12,15.6c-1.98,0 -3.6,-1.62 -3.6,-3.6s1.62,-3.6 3.6,-3.6s3.6,1.62 3.6,3.6S13.98,15.6 12,15.6z</span></span><span class="value">"</span>/></span>
+<span class="lineno"> 10 </span><span class="tag">&lt;/vector></span></pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationVectorPath" style="display: none;">
+Using long vector paths is bad for performance. There are several ways to make the <code>pathData</code> shorter:<br/>
+* Using less precision<br/>
+* Removing some minor details<br/>
+* Using the Android Studio vector conversion tool<br/>
+* Rasterizing the image (converting to PNG)<br/>To suppress this error, use the issue id "VectorPath" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">VectorPath</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Performance</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 5/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationVectorPathLink" onclick="reveal('explanationVectorPath');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="VectorPathCardLink" onclick="hideid('VectorPathCard');">
+Dismiss</button>            </div>
+            </div>
+          </section><a name="Overdraw"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="OverdrawCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Overdraw: Painting regions more than once</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_main.xml">../../src/main/res/layout/activity_main.xml</a>:7</span>: <span class="message">Possible overdraw: Root element paints background <code>@color/smile_background_light</code> with a theme that also paints a background (inferred theme is <code>@style/Theme_SmilePile</code>)</span><br /><pre class="errorlines">
+<span class="lineno">   4 </span>    <span class="prefix">xmlns:</span><span class="attribute">tools</span>=<span class="value">"http://schemas.android.com/tools"</span>
+<span class="lineno">   5 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno">   6 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
+<span class="caretline"><span class="lineno">   7 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/smile_background_light"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">   8 </span>    <span class="prefix">tools:</span><span class="attribute">context</span>=<span class="value">".ui.MainActivity"</span>>
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>    <span class="comment">&lt;!-- AppBar for navigation and app title --></span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/fragment_category.xml">../../src/main/res/layout/fragment_category.xml</a>:8</span>: <span class="message">Possible overdraw: Root element paints background <code>@color/smile_background_light</code> with a theme that also paints a background (inferred theme is <code>@style/Theme.SmilePile</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  5 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno">  6 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
+<span class="lineno">  7 </span>    <span class="prefix">android:</span><span class="attribute">padding</span>=<span class="value">"@dimen/spacing_medium"</span>
+<span class="caretline"><span class="lineno">  8 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/smile_background_light"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  9 </span>    <span class="prefix">android:</span><span class="attribute">clickable</span>=<span class="value">"true"</span>
+<span class="lineno"> 10 </span>    <span class="prefix">android:</span><span class="attribute">focusable</span>=<span class="value">"true"</span>
+<span class="lineno"> 11 </span>    <span class="prefix">android:</span><span class="attribute">foreground</span>=<span class="value">"?android:attr/selectableItemBackground"</span>>
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationOverdraw" style="display: none;">
+If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called "overdraw".<br/>
+<br/>
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it's currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.<br/>
+<br/>
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.<br/>
+<br/>
+Of course it's possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.<br/>To suppress this error, use the issue id "Overdraw" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Overdraw</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Performance</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 3/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationOverdrawLink" onclick="reveal('explanationOverdraw');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="OverdrawCardLink" onclick="hideid('OverdrawCard');">
 Dismiss</button>            </div>
             </div>
           </section><a name="UnusedResources"></a>
@@ -842,24 +1020,6 @@ Dismiss</button>            </div>
 <span class="lineno">  61 </span>
 <span class="lineno">  62 </span>    <span class="comment">&lt;!-- Secondary Colors --></span></pre>
 
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:60</span>: <span class="message">The resource <code>R.color.smile_primary_light</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  57 </span>    <span class="comment">&lt;!-- Primary Brand Colors --></span>
-<span class="lineno">  58 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_primary"</span>>#FF6B35<span class="tag">&lt;/color></span>
-<span class="lineno">  59 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_primary_dark"</span>>#E55530<span class="tag">&lt;/color></span>
-<span class="caretline"><span class="lineno">  60 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"smile_primary_light"</span></span>>#FF8A65<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  61 </span>
-<span class="lineno">  62 </span>    <span class="comment">&lt;!-- Secondary Colors --></span>
-<span class="lineno">  63 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_secondary"</span>>#4CAF50<span class="tag">&lt;/color></span></pre>
-
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:63</span>: <span class="message">The resource <code>R.color.smile_secondary</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  60 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_primary_light"</span>>#FF8A65<span class="tag">&lt;/color></span>
-<span class="lineno">  61 </span>
-<span class="lineno">  62 </span>    <span class="comment">&lt;!-- Secondary Colors --></span>
-<span class="caretline"><span class="lineno">  63 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"smile_secondary"</span></span>>#4CAF50<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  64 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_secondary_dark"</span>>#388E3C<span class="tag">&lt;/color></span>
-<span class="lineno">  65 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_secondary_light"</span>>#81C784<span class="tag">&lt;/color></span>
-</pre>
-
 <span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:64</span>: <span class="message">The resource <code>R.color.smile_secondary_dark</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  61 </span>
 <span class="lineno">  62 </span>    <span class="comment">&lt;!-- Secondary Colors --></span>
@@ -886,15 +1046,6 @@ Dismiss</button>            </div>
 <span class="lineno">  70 </span>
 <span class="lineno">  71 </span>    <span class="comment">&lt;!-- High contrast text colors --></span>
 <span class="lineno">  72 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_text_primary"</span>>#212121<span class="tag">&lt;/color></span></pre>
-
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:74</span>: <span class="message">The resource <code>R.color.smile_text_hint</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  71 </span>    <span class="comment">&lt;!-- High contrast text colors --></span>
-<span class="lineno">  72 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_text_primary"</span>>#212121<span class="tag">&lt;/color></span>
-<span class="lineno">  73 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_text_secondary"</span>>#424242<span class="tag">&lt;/color></span>
-<span class="caretline"><span class="lineno">  74 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"smile_text_hint"</span></span>>#757575<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  75 </span>
-<span class="lineno">  76 </span>    <span class="comment">&lt;!-- Category Colors (Bright and cheerful) --></span>
-<span class="lineno">  77 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"category_red"</span>>#F44336<span class="tag">&lt;/color></span></pre>
 
 <span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:78</span>: <span class="message">The resource <code>R.color.category_pink</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  75 </span>
@@ -932,15 +1083,6 @@ Dismiss</button>            </div>
 <span class="lineno">  84 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"category_yellow"</span>>#FFEB3B<span class="tag">&lt;/color></span>
 <span class="lineno">  85 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"category_orange"</span>>#FF9800<span class="tag">&lt;/color></span></pre>
 
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:88</span>: <span class="message">The resource <code>R.color.smile_ripple</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  85 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"category_orange"</span>>#FF9800<span class="tag">&lt;/color></span>
-<span class="lineno">  86 </span>
-<span class="lineno">  87 </span>    <span class="comment">&lt;!-- Interactive States --></span>
-<span class="caretline"><span class="lineno">  88 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"smile_ripple"</span></span>>#33FF6B35<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  89 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_pressed"</span>>#1AFF6B35<span class="tag">&lt;/color></span>
-<span class="lineno">  90 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_focused"</span>>#4DFF6B35<span class="tag">&lt;/color></span>
-</pre>
-
 <span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:89</span>: <span class="message">The resource <code>R.color.smile_pressed</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  86 </span>
 <span class="lineno">  87 </span>    <span class="comment">&lt;!-- Interactive States --></span>
@@ -958,15 +1100,6 @@ Dismiss</button>            </div>
 <span class="lineno">  91 </span>
 <span class="lineno">  92 </span>    <span class="comment">&lt;!-- System Colors --></span>
 <span class="lineno">  93 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"white"</span>>#FFFFFF<span class="tag">&lt;/color></span></pre>
-
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:93</span>: <span class="message">The resource <code>R.color.white</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  90 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"smile_focused"</span>>#4DFF6B35<span class="tag">&lt;/color></span>
-<span class="lineno">  91 </span>
-<span class="lineno">  92 </span>    <span class="comment">&lt;!-- System Colors --></span>
-<span class="caretline"><span class="lineno">  93 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"white"</span></span>>#FFFFFF<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno">  94 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"black"</span>>#000000<span class="tag">&lt;/color></span>
-<span class="lineno">  95 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"transparent"</span>>#00000000<span class="tag">&lt;/color></span>
-</pre>
 
 <span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:94</span>: <span class="message">The resource <code>R.color.black</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  91 </span>
@@ -1015,6 +1148,45 @@ Dismiss</button>            </div>
 <span class="lineno">  4 </span>
 <span class="lineno">  5 </span>    <span class="tag">&lt;gradient</span></pre>
 
+<span class="location"><a href="../../src/main/res/drawable/default_family_cover.xml">../../src/main/res/drawable/default_family_cover.xml</a>:2</span>: <span class="message">The resource <code>R.drawable.default_family_cover</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  1 </span><span class="prologue">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span class="caretline"><span class="lineno">  2 </span><span class="warning"><span class="tag">&lt;shape</span><span class="attribute"> </span><span class="prefix">xmlns:</span><span class="attribute">android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  3 </span>    <span class="prefix">android:</span><span class="attribute">shape</span>=<span class="value">"rectangle"</span>>
+<span class="lineno">  4 </span>
+<span class="lineno">  5 </span>    <span class="tag">&lt;gradient</span></pre>
+
+<span class="location"><a href="../../src/main/res/drawable/default_fun_cover.xml">../../src/main/res/drawable/default_fun_cover.xml</a>:2</span>: <span class="message">The resource <code>R.drawable.default_fun_cover</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  1 </span><span class="prologue">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span class="caretline"><span class="lineno">  2 </span><span class="warning"><span class="tag">&lt;shape</span><span class="attribute"> </span><span class="prefix">xmlns:</span><span class="attribute">android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  3 </span>    <span class="prefix">android:</span><span class="attribute">shape</span>=<span class="value">"rectangle"</span>>
+<span class="lineno">  4 </span>
+<span class="lineno">  5 </span>    <span class="tag">&lt;gradient</span></pre>
+
+<span class="location"><a href="../../src/main/res/drawable/default_nature_cover.xml">../../src/main/res/drawable/default_nature_cover.xml</a>:2</span>: <span class="message">The resource <code>R.drawable.default_nature_cover</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  1 </span><span class="prologue">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span class="caretline"><span class="lineno">  2 </span><span class="warning"><span class="tag">&lt;shape</span><span class="attribute"> </span><span class="prefix">xmlns:</span><span class="attribute">android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  3 </span>    <span class="prefix">android:</span><span class="attribute">shape</span>=<span class="value">"rectangle"</span>>
+<span class="lineno">  4 </span>
+<span class="lineno">  5 </span>    <span class="tag">&lt;gradient</span></pre>
+
+<span class="location"><a href="../../src/main/res/values/dimens.xml">../../src/main/res/values/dimens.xml</a>:18</span>: <span class="message">The resource <code>R.dimen.spacing_tiny</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno"> 15 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"text_size_caption"</span>>18sp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 16 </span>
+<span class="lineno"> 17 </span>    <span class="comment">&lt;!-- Spacing and Margins --></span>
+<span class="caretline"><span class="lineno"> 18 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"spacing_tiny"</span></span>>4dp<span class="tag">&lt;/dimen></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 19 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"spacing_small"</span>>8dp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 20 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"spacing_medium"</span>>16dp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 21 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"spacing_large"</span>>24dp<span class="tag">&lt;/dimen></span></pre>
+
+<span class="location"><a href="../../src/main/res/values/dimens.xml">../../src/main/res/values/dimens.xml</a>:26</span>: <span class="message">The resource <code>R.dimen.corner_radius_small</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno"> 23 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"spacing_huge"</span>>48dp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 24 </span>
+<span class="lineno"> 25 </span>    <span class="comment">&lt;!-- Corner Radius for Soft Design --></span>
+<span class="caretline"><span class="lineno"> 26 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"corner_radius_small"</span></span>>8dp<span class="tag">&lt;/dimen></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 27 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"corner_radius_medium"</span>>16dp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 28 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"corner_radius_large"</span>>24dp<span class="tag">&lt;/dimen></span>
+<span class="lineno"> 29 </span>    <span class="tag">&lt;dimen</span><span class="attribute"> name</span>=<span class="value">"corner_radius_extra_large"</span>>32dp<span class="tag">&lt;/dimen></span></pre>
+
 <br/><b>NOTE: 77 results omitted.</b><br/><br/></div>
 </div>
 <div class="metadata"><div class="explanation" id="explanationUnusedResources" style="display: none;">
@@ -1047,6 +1219,67 @@ To suppress this error, use the issue id "UnusedResources" as explained in the <
               <div class="mdl-card__actions mdl-card--border">
 <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationUnusedResourcesLink" onclick="reveal('explanationUnusedResources');">
 Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="UnusedResourcesCardLink" onclick="hideid('UnusedResourcesCard');">
+Dismiss</button>            </div>
+            </div>
+          </section>
+<a name="Internationalization"></a>
+<a name="SetTextI18n"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="SetTextI18nCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">TextView Internationalization</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/com/smilepile/app/ui/fragments/CategoryFragment.kt">../../src/main/java/com/smilepile/app/ui/fragments/CategoryFragment.kt</a>:64</span>: <span class="message">Do not concatenate text displayed with <code>setText</code>. Use resource string with placeholders.</span><br /><pre class="errorlines">
+<span class="lineno"> 61 </span>
+<span class="lineno"> 62 </span>        <span class="comment">// Set category data</span>
+<span class="lineno"> 63 </span>        categoryNameText.text = categoryName
+<span class="caretline"><span class="lineno"> 64 </span>        photoCountText.text = <span class="warning"><span class="string">"$photoCount photos"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 65 </span>
+<span class="lineno"> 66 </span>        <span class="comment">// Set placeholder image based on category name</span>
+<span class="lineno"> 67 </span>        <span class="keyword">val</span> imageResource = <span class="keyword">when</span> (categoryName.lowercase()) {
+</pre>
+
+<span class="location"><a href="../../src/main/java/com/smilepile/app/ui/fragments/CategoryFragment.kt">../../src/main/java/com/smilepile/app/ui/fragments/CategoryFragment.kt</a>:64</span>: <span class="message">String literal in <code>setText</code> can not be translated. Use Android resources instead.</span><br /><pre class="errorlines">
+<span class="lineno"> 61 </span>
+<span class="lineno"> 62 </span>        <span class="comment">// Set category data</span>
+<span class="lineno"> 63 </span>        categoryNameText.text = categoryName
+<span class="caretline"><span class="lineno"> 64 </span>        photoCountText.text = <span class="string">"$photoCount</span><span class="warning"><span class="string"> photos</span></span><span class="string">"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 65 </span>
+<span class="lineno"> 66 </span>        <span class="comment">// Set placeholder image based on category name</span>
+<span class="lineno"> 67 </span>        <span class="keyword">val</span> imageResource = <span class="keyword">when</span> (categoryName.lowercase()) {
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationSetTextI18n" style="display: none;">
+When calling <code>TextView#setText</code><br/>
+* Never call <code>Number#toString()</code> to format numbers; it will not handle fraction separators and locale-specific digits properly. Consider using <code>String#format</code> with proper format specifications (<code>%d</code> or <code>%f</code>) instead.<br/>
+* Do not pass a string literal (e.g. "Hello") to display text. Hardcoded text can not be properly translated to other languages. Consider using Android resource strings instead.<br/>
+* Do not build messages by concatenating text chunks. Such messages can not be properly translated.<br/><div class="moreinfo">More info: <a href="https://developer.android.com/guide/topics/resources/localization.html">https://developer.android.com/guide/topics/resources/localization.html</a>
+</div>To suppress this error, use the issue id "SetTextI18n" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">SetTextI18n</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Internationalization</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 6/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationSetTextI18nLink" onclick="reveal('explanationSetTextI18n');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="SetTextI18nCardLink" onclick="hideid('SetTextI18nCard');">
 Dismiss</button>            </div>
             </div>
           </section>

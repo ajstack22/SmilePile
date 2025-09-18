@@ -4,16 +4,32 @@
         "source": "com.smilepile.app-main-55:/drawable/ic_launcher_foreground.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/navigation_nav_graph.xml.flat",
+        "source": "com.smilepile.app-main-55:/navigation/nav_graph.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/drawable_category_overlay_background.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/category_overlay_background.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/anim_fade_out.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/fade_out.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_category_placeholder.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/category_placeholder.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/layout_fragment_category.xml.flat",
+        "source": "com.smilepile.app-main-55:/layout/fragment_category.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/xml_backup_rules.xml.flat",
         "source": "com.smilepile.app-main-55:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_in_up.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_in_up.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/xml_data_extraction_rules.xml.flat",
@@ -28,8 +44,16 @@
         "source": "com.smilepile.app-main-55:/drawable/photo_placeholder.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_in_right.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_in_right.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/drawable_child_friendly_button_background.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/child_friendly_button_background.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/drawable_ic_photo_library_24.xml.flat",
+        "source": "com.smilepile.app-main-55:/drawable/ic_photo_library_24.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_default_animals_cover.xml.flat",
@@ -64,8 +88,16 @@
         "source": "com.smilepile.app-main-55:/drawable/ic_share_24.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/anim_fade_in.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/fade_in.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/drawable_ic_chevron_left_24.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/ic_chevron_left_24.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/drawable_ic_settings_24.xml.flat",
+        "source": "com.smilepile.app-main-55:/drawable/ic_settings_24.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_photo_viewer_controls_background.xml.flat",
@@ -76,16 +108,44 @@
         "source": "com.smilepile.app-main-55:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_in_left.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_in_left.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/layout_activity_main.xml.flat",
+        "source": "com.smilepile.app-main-55:/layout/activity_main.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/drawable_category_card_foreground.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/category_card_foreground.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_out_down.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_out_down.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_out_left.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_out_left.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_category_image_background.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/category_image_background.xml"
     },
     {
+        "merged": "com.smilepile.app-merged_res-53:/anim_slide_out_right.xml.flat",
+        "source": "com.smilepile.app-main-55:/anim/slide_out_right.xml"
+    },
+    {
         "merged": "com.smilepile.app-merged_res-53:/drawable_ic_launcher_background.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/drawable_ic_photo_library_empty.xml.flat",
+        "source": "com.smilepile.app-main-55:/drawable/ic_photo_library_empty.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/menu_bottom_navigation_menu.xml.flat",
+        "source": "com.smilepile.app-main-55:/menu/bottom_navigation_menu.xml"
     },
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_default_nature_cover.xml.flat",
@@ -94,5 +154,9 @@
     {
         "merged": "com.smilepile.app-merged_res-53:/drawable_default_family_cover.xml.flat",
         "source": "com.smilepile.app-main-55:/drawable/default_family_cover.xml"
+    },
+    {
+        "merged": "com.smilepile.app-merged_res-53:/drawable_ic_add_photo_24.xml.flat",
+        "source": "com.smilepile.app-main-55:/drawable/ic_add_photo_24.xml"
     }
 ]

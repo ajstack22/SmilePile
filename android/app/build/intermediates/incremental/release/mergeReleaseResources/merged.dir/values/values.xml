@@ -2013,6 +2013,9 @@
     <string name="action_ok">OK</string>
     <string name="action_save">Save</string>
     <string name="action_share">Share</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="add_photos_to_get_started">Add some photos to get started</string>
+    <string name="add_your_first_photo">Add Your First Photo</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="app_name">SmilePile</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
@@ -2031,6 +2034,7 @@
     <string name="call_notification_screening_text">Screening an incoming call</string>
     <string name="category_birthday">Birthday</string>
     <string name="category_cover_description">Category cover image</string>
+    <string name="category_cover_image">Category cover image</string>
     <string name="category_family">Family</string>
     <string name="category_friends">Friends</string>
     <string name="category_holidays">Holidays</string>
@@ -2054,6 +2058,7 @@
     <string name="content_description_previous_button">Previous photo</string>
     <string name="content_description_share_button">Share photo</string>
     <string name="dest_title">destination title</string>
+    <string name="empty_photo_library">Empty photo library</string>
     <string description="Screen reader announcement for when a checkbox is on error. [CHAR LIMIT=NONE]" name="error_a11y_label">
     Error: invalid
   </string>
@@ -2173,12 +2178,15 @@
     <string name="mtrl_switch_track_path" translatable="false">M0,16 A16,16 0 0,1 16,0 H36 A16,16 0 0,1 36,32 H16 A16,16 0 0,1 0,16</string>
     <string description="Button text to indicate that the widget will ignore the user&apos;s selection [CHAR_LIMIT=16]" name="mtrl_timepicker_cancel">Cancel</string>
     <string description="Button text to indicate that the widget will save the user&apos;s selection [CHAR_LIMIT=16]" name="mtrl_timepicker_confirm">OK</string>
+    <string name="nav_about">About</string>
     <string name="nav_app_bar_navigate_up_description">Navigate up</string>
     <string name="nav_app_bar_open_drawer_description">Open navigation drawer</string>
-    <string name="nav_camera">Camera</string>
-    <string name="nav_gallery">Gallery</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_profile">Profile</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_import_photos">Add Photos</string>
+    <string name="nav_privacy">Privacy</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_share_photo">Share Photo</string>
+    <string name="no_photos_yet">No photos yet!</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
@@ -6405,6 +6413,36 @@
     <style name="TextAppearance.MaterialComponents.Tooltip" parent="TextAppearance.MaterialComponents.Body2">
     <item name="android:textColor">?attr/colorOnPrimary</item>
   </style>
+    <style name="TextAppearance.SmilePile.Body" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/smile_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+    <style name="TextAppearance.SmilePile.BottomNav" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:textColor">@color/smile_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="TextAppearance.SmilePile.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="TextAppearance.SmilePile.Headline" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_size_heading</item>
+        <item name="android:textColor">@color/smile_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.SmilePile.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/smile_text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="TextAppearance.Widget.AppCompat.ExpandedMenu.Item" parent="Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item">
     </style>
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Subtitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
@@ -6656,7 +6694,15 @@
         <item name="android:navigationBarColor">@color/smile_background_light</item>
 
         
+        <item name="textAppearanceHeadline1">@style/TextAppearance.SmilePile.Headline</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.SmilePile.Title</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.SmilePile.Body</item>
+        <item name="textAppearanceButton">@style/TextAppearance.SmilePile.Button</item>
+
         
+        <item name="materialButtonStyle">@style/Widget.SmilePile.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.SmilePile.Card</item>
+        <item name="bottomNavigationStyle">@style/Widget.SmilePile.BottomNavigation</item>
 
         
         <item name="colorControlHighlight">@color/smile_ripple</item>
@@ -9306,6 +9352,45 @@
     <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Tooltip</item>
     <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.Tooltip</item>
   </style>
+    <style name="Widget.SmilePile.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/TextAppearance.SmilePile.BottomNav</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.SmilePile.BottomNav</item>
+        <item name="itemIconSize">@dimen/spacing_extra_large</item>
+        <item name="itemRippleColor">@color/smile_ripple</item>
+        <item name="elevation">@dimen/elevation_medium</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="Widget.SmilePile.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:minWidth">@dimen/touch_target_extra_large</item>
+        <item name="android:textAppearance">@style/TextAppearance.SmilePile.Button</item>
+        <item name="backgroundTint">@color/smile_primary</item>
+        <item name="cornerRadius">@dimen/corner_radius_large</item>
+        <item name="elevation">@dimen/elevation_medium</item>
+        <item name="rippleColor">@color/smile_ripple</item>
+        <item name="android:layout_margin">@dimen/spacing_small</item>
+    </style>
+    <style name="Widget.SmilePile.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:minWidth">@dimen/touch_target_extra_large</item>
+        <item name="android:textAppearance">@style/TextAppearance.SmilePile.Button</item>
+        <item name="android:textColor">@color/smile_primary</item>
+        <item name="strokeColor">@color/smile_primary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="cornerRadius">@dimen/corner_radius_large</item>
+        <item name="rippleColor">@color/smile_ripple</item>
+    </style>
+    <style name="Widget.SmilePile.Button.Secondary" parent="Widget.SmilePile.Button">
+        <item name="backgroundTint">@color/smile_secondary</item>
+    </style>
+    <style name="Widget.SmilePile.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/corner_radius_medium</item>
+        <item name="cardElevation">@dimen/elevation_medium</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="contentPadding">@dimen/spacing_medium</item>
+        <item name="rippleColor">@color/smile_ripple</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
         <item name="statusBarBackground">#000000</item>
     </style>

@@ -2,12 +2,82 @@
 <incidents format="6" by="lint 8.2.0" type="incidents">
 
     <incident
+        id="VectorPath"
+        severity="warning"
+        message="Very long vector path (904 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_settings_24.xml"
+            line="9"
+            column="25"
+            startOffset="301"
+            endLine="9"
+            endColumn="929"
+            endOffset="1205"/>
+    </incident>
+
+    <incident
         id="ObsoleteSdkInt"
         severity="warning"
         message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
         <fix-data file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/mipmap-anydpi-v26" folderName="mipmap-anydpi" requiresApi="26"/>
         <location
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/mipmap-anydpi-v26"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt"
+            line="31"
+            column="17"
+            startOffset="983"
+            endLine="31"
+            endColumn="39"
+            endOffset="1005"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smilepile/app/ui/adapters/CategoryPagerAdapter.kt"
+            line="49"
+            column="17"
+            startOffset="1659"
+            endLine="49"
+            endColumn="39"
+            endOffset="1681"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smilepile/app/ui/fragments/CategoryFragment.kt"
+            line="64"
+            column="31"
+            startOffset="2256"
+            endLine="64"
+            endColumn="51"
+            endOffset="2276"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smilepile/app/ui/fragments/CategoryFragment.kt"
+            line="64"
+            column="43"
+            startOffset="2268"
+            endLine="64"
+            endColumn="50"
+            endOffset="2275"/>
     </incident>
 
     <incident
@@ -315,6 +385,34 @@
             endLine="108"
             endColumn="74"
             endOffset="3666"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/smile_background_light` with a theme that also paints a background (inferred theme is `@style/Theme_SmilePile`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="7"
+            column="5"
+            startOffset="343"
+            endLine="7"
+            endColumn="55"
+            endOffset="393"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/smile_background_light` with a theme that also paints a background (inferred theme is `@style/Theme.SmilePile`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_category.xml"
+            line="8"
+            column="5"
+            startOffset="385"
+            endLine="8"
+            endColumn="55"
+            endOffset="435"/>
     </incident>
 
 </incidents>

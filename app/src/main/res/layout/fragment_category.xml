@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Full-screen category cover image -->
+    <ImageView
+        android:id="@+id/category_cover_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/category_cover_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/category_info_container"
+        tools:src="@drawable/photo_placeholder" />
+
+    <!-- Gradient overlay for better text readability over image -->
+    <View
+        android:id="@+id/gradient_overlay"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:background="@drawable/gradient_bottom_overlay"
+        app:layout_constraintBottom_toBottomOf="@+id/category_cover_image"
+        app:layout_constraintStart_toStartOf="@+id/category_cover_image"
+        app:layout_constraintEnd_toEndOf="@+id/category_cover_image" />
+
+    <!-- Category information container -->
+    <LinearLayout
+        android:id="@+id/category_info_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large"
+        android:background="@color/surface"
+        android:elevation="@dimen/elevation_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Category name - prominent for child learning to read -->
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_heading"
+            android:textStyle="bold"
+            android:textColor="@color/category_text"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:minHeight="@dimen/touch_target_min"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            tools:text="Animals" />
+
+        <!-- Photo count -->
+        <TextView
+            android:id="@+id/photo_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/on_surface"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            tools:text="12 photos" />
+
+    </LinearLayout>
+
+    <!-- Empty state view (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/empty_state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/spacing_huge"
+        android:background="@color/background"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Empty state icon -->
+        <ImageView
+            android:id="@+id/empty_state_icon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:src="@drawable/photo_placeholder"
+            android:alpha="0.5"
+            android:contentDescription="@string/no_photos_available" />
+
+        <!-- Empty state title -->
+        <TextView
+            android:id="@+id/empty_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_photos_in_category"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
+            android:textColor="@color/on_surface"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_medium" />
+
+        <!-- Empty state message -->
+        <TextView
+            android:id="@+id/empty_state_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_photos_to_see_them_here"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="@color/on_surface"
+            android:gravity="center"
+            android:alpha="0.7" />
+
+    </LinearLayout>
+
+    <!-- Loading indicator (optional - can be added later) -->
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
