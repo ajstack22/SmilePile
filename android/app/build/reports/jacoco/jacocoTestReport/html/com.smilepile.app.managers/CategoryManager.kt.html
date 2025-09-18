@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoryManager.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.smilepile.app.managers</a> &gt; <span class="el_source">CategoryManager.kt</span></div><h1>CategoryManager.kt</h1><pre class="source lang-java linenums">package com.smilepile.app.managers
+
+import com.smilepile.app.models.Category
+import com.smilepile.app.models.Photo
+import com.smilepile.app.models.CategoryWithPhotos
+
+/**
+ * Manages categories and photos in the SmilePile app.
+ * Provides in-memory storage and operations for category and photo data.
+ */
+<span class="fc" id="L11">class CategoryManager {</span>
+<span class="fc" id="L12">    private val categories = mutableMapOf&lt;String, Category&gt;()</span>
+<span class="fc" id="L13">    private val photos = mutableMapOf&lt;String, Photo&gt;()</span>
+<span class="fc" id="L14">    private val categoryPhotos = mutableMapOf&lt;String, MutableList&lt;String&gt;&gt;()</span>
+
+<span class="fc" id="L16">    init {</span>
+<span class="fc" id="L17">        initializeSampleData()</span>
+<span class="fc" id="L18">    }</span>
+
+    /**
+     * Gets all categories sorted by position
+     */
+    fun getCategories(): List&lt;Category&gt; {
+<span class="fc" id="L24">        return categories.values.sortedBy { it.position }</span>
+    }
+
+    /**
+     * Gets a category by ID
+     */
+    fun getCategory(categoryId: String): Category? {
+<span class="fc" id="L31">        return categories[categoryId]</span>
+    }
+
+    /**
+     * Gets all photos for a specific category
+     */
+    fun getPhotosForCategory(categoryId: String): List&lt;Photo&gt; {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        val photoIds = categoryPhotos[categoryId] ?: return emptyList()</span>
+<span class="fc" id="L39">        return photoIds.mapNotNull { photos[it] }.sortedBy { it.position }</span>
+    }
+
+    /**
+     * Gets a category with its photos
+     */
+    fun getCategoryWithPhotos(categoryId: String): CategoryWithPhotos? {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        val category = getCategory(categoryId) ?: return null</span>
+<span class="fc" id="L47">        val categoryPhotos = getPhotosForCategory(categoryId)</span>
+<span class="fc" id="L48">        return CategoryWithPhotos(category, categoryPhotos)</span>
+    }
+
+    /**
+     * Gets all categories with their photos
+     */
+    fun getAllCategoriesWithPhotos(): List&lt;CategoryWithPhotos&gt; {
+<span class="fc" id="L55">        return getCategories().map { category -&gt;</span>
+<span class="fc" id="L56">            CategoryWithPhotos(category, getPhotosForCategory(category.id))</span>
+        }
+    }
+
+    /**
+     * Gets all photos across all categories
+     */
+    fun getAllPhotos(): List&lt;Photo&gt; {
+<span class="fc" id="L64">        return photos.values.sortedWith(compareBy({ it.categoryId }, { it.position }))</span>
+    }
+
+    /**
+     * Gets all photo paths for use with ImagePagerAdapter (maintains backward compatibility)
+     */
+    fun getAllPhotoPaths(): List&lt;String&gt; {
+<span class="fc" id="L71">        return getAllPhotos().map { it.getAssetPath() }</span>
+    }
+
+    /**
+     * Adds a new category
+     */
+    fun addCategory(category: Category): Boolean {
+<span class="fc bfc" id="L78" title="All 4 branches covered.">        if (!category.isValid() || categories.containsKey(category.id)) {</span>
+<span class="fc" id="L79">            return false</span>
+        }
+<span class="fc" id="L81">        categories[category.id] = category</span>
+<span class="fc" id="L82">        categoryPhotos[category.id] = mutableListOf()</span>
+<span class="fc" id="L83">        return true</span>
+    }
+
+    /**
+     * Adds a new photo to a category
+     */
+    fun addPhoto(photo: Photo): Boolean {
+<span class="pc bpc" id="L90" title="1 of 6 branches missed.">        if (!photo.isValid() || photos.containsKey(photo.id) || !categories.containsKey(photo.categoryId)) {</span>
+<span class="fc" id="L91">            return false</span>
+        }
+<span class="fc" id="L93">        photos[photo.id] = photo</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        categoryPhotos[photo.categoryId]?.add(photo.id)</span>
+
+        // Update category photo count
+<span class="fc" id="L97">        val category = categories[photo.categoryId]</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (category != null) {</span>
+<span class="fc" id="L99">            val updatedCategory = category.copy(photoCount = getPhotosForCategory(photo.categoryId).size)</span>
+<span class="fc" id="L100">            categories[photo.categoryId] = updatedCategory</span>
+        }
+<span class="fc" id="L102">        return true</span>
+    }
+
+    /**
+     * Removes a category and all its photos
+     */
+    fun removeCategory(categoryId: String): Boolean {
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (!categories.containsKey(categoryId)) {</span>
+<span class="fc" id="L110">            return false</span>
+        }
+
+        // Remove all photos in this category
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        categoryPhotos[categoryId]?.forEach { photoId -&gt;</span>
+<span class="fc" id="L115">            photos.remove(photoId)</span>
+<span class="fc" id="L116">        }</span>
+
+        // Remove category and its photo mapping
+<span class="fc" id="L119">        categories.remove(categoryId)</span>
+<span class="fc" id="L120">        categoryPhotos.remove(categoryId)</span>
+<span class="fc" id="L121">        return true</span>
+    }
+
+    /**
+     * Removes a photo from its category
+     */
+    fun removePhoto(photoId: String): Boolean {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        val photo = photos[photoId] ?: return false</span>
+
+<span class="fc" id="L130">        photos.remove(photoId)</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        categoryPhotos[photo.categoryId]?.remove(photoId)</span>
+
+        // Update category photo count
+<span class="fc" id="L134">        val category = categories[photo.categoryId]</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        if (category != null) {</span>
+<span class="fc" id="L136">            val updatedCategory = category.copy(photoCount = getPhotosForCategory(photo.categoryId).size)</span>
+<span class="fc" id="L137">            categories[photo.categoryId] = updatedCategory</span>
+        }
+<span class="fc" id="L139">        return true</span>
+    }
+
+    /**
+     * Initializes the manager with sample data distributed across 3 categories
+     */
+    private fun initializeSampleData() {
+        // Sample image files from assets/sample_images/
+<span class="fc" id="L147">        val sampleImages = listOf(</span>
+<span class="fc" id="L148">            &quot;image1.png&quot;, &quot;image2.jpg&quot;, &quot;image3.png&quot;,</span>
+<span class="fc" id="L149">            &quot;image4.jpg&quot;, &quot;image5.png&quot;, &quot;image6.jpg&quot;</span>
+        )
+
+        // Create 3 sample categories
+<span class="fc" id="L153">        val animalsCategory = Category(</span>
+<span class="fc" id="L154">            id = &quot;animals&quot;,</span>
+<span class="fc" id="L155">            name = &quot;animals&quot;,</span>
+<span class="fc" id="L156">            displayName = &quot;Animals&quot;,</span>
+<span class="fc" id="L157">            coverImagePath = null,</span>
+<span class="fc" id="L158">            description = &quot;Fun animal pictures&quot;,</span>
+<span class="fc" id="L159">            position = 0</span>
+        )
+
+<span class="fc" id="L162">        val familyCategory = Category(</span>
+<span class="fc" id="L163">            id = &quot;family&quot;,</span>
+<span class="fc" id="L164">            name = &quot;family&quot;,</span>
+<span class="fc" id="L165">            displayName = &quot;Family&quot;,</span>
+<span class="fc" id="L166">            coverImagePath = null,</span>
+<span class="fc" id="L167">            description = &quot;Happy family moments&quot;,</span>
+<span class="fc" id="L168">            position = 1</span>
+        )
+
+<span class="fc" id="L171">        val funTimesCategory = Category(</span>
+<span class="fc" id="L172">            id = &quot;fun_times&quot;,</span>
+<span class="fc" id="L173">            name = &quot;fun_times&quot;,</span>
+<span class="fc" id="L174">            displayName = &quot;Fun Times&quot;,</span>
+<span class="fc" id="L175">            coverImagePath = null,</span>
+<span class="fc" id="L176">            description = &quot;Good times and memories&quot;,</span>
+<span class="fc" id="L177">            position = 2</span>
+        )
+
+        // Add categories
+<span class="fc" id="L181">        addCategory(animalsCategory)</span>
+<span class="fc" id="L182">        addCategory(familyCategory)</span>
+<span class="fc" id="L183">        addCategory(funTimesCategory)</span>
+
+        // Distribute sample images across categories
+<span class="fc" id="L186">        sampleImages.forEachIndexed { index, imageName -&gt;</span>
+<span class="fc bfc" id="L187" title="All 3 branches covered.">            val categoryId = when (index % 3) {</span>
+<span class="fc" id="L188">                0 -&gt; &quot;animals&quot;</span>
+<span class="fc" id="L189">                1 -&gt; &quot;family&quot;</span>
+<span class="fc" id="L190">                else -&gt; &quot;fun_times&quot;</span>
+            }
+
+<span class="fc" id="L193">            val photo = Photo(</span>
+<span class="fc" id="L194">                id = &quot;photo_${index + 1}&quot;,</span>
+<span class="fc" id="L195">                path = imageName,</span>
+<span class="fc" id="L196">                name = imageName.substringBeforeLast('.'),</span>
+<span class="fc" id="L197">                categoryId = categoryId,</span>
+<span class="fc" id="L198">                position = index / 3,</span>
+<span class="fc" id="L199">                isFromAssets = true</span>
+            )
+
+<span class="fc" id="L202">            addPhoto(photo)</span>
+<span class="fc" id="L203">        }</span>
+<span class="fc" id="L204">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

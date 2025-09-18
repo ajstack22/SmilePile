@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,6 +14,9 @@ import androidx.viewpager2.widget.ViewPager2
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navigationManager: NavigationManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,10 +28,27 @@ class MainActivity : AppCompatActivity() {
         // Hide system UI for fullscreen experience using modern API
         hideSystemUI()
 
-        // Set up ViewPager2 with images from assets folder
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        // Initialize navigation manager
+        navigationManager = NavigationManager(this, R.id.fragmentContainer)
+
+        // Load photos and initialize navigation
         val imagePaths = loadImagePathsFromAssets()
+        val photos = Photo.fromImagePaths(imagePaths)
+        navigationManager.initialize(photos)
+
+        // Keep legacy ViewPager2 setup for backward compatibility (hidden)
+        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
         viewPager.adapter = ImagePagerAdapter(this, imagePaths)
+
+        // Set up modern back navigation handling
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!navigationManager.navigateBack()) {
+                    // If NavigationManager doesn't handle it, exit the app
+                    finish()
+                }
+            }
+        })
     }
 
     private fun loadImagePathsFromAssets(): List<String> {
@@ -87,4 +108,39 @@ class MainActivity : AppCompatActivity() {
         // Re-hide system UI when activity resumes
         hideSystemUI()
     }
+
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        // Handle back navigation through NavigationManager
+        if (!navigationManager.navigateBack()) {
+            // If NavigationManager doesn't handle it, use default behavior
+            super.onBackPressed()
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // Restore navigation state after configuration change
+        navigationManager.onConfigurationChanged()
+    }
+
+    /**
+     * Public methods for navigation (can be used by tests or external components)
+     */
+    fun showCategorySelection() {
+        navigationManager.showCategorySelection()
+    }
+
+    fun showPhotosForCategory(categoryId: String) {
+        navigationManager.showPhotosForCategory(categoryId)
+    }
+
+    fun navigateBack(): Boolean {
+        return navigationManager.navigateBack()
+    }
+
+    /**
+     * Expose navigation manager for testing
+     */
+    fun getNavigationManager(): NavigationManager = navigationManager
 }

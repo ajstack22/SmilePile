@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainActivity.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.smilepile.app</a> &gt; <span class="el_source">MainActivity.kt</span></div><h1>MainActivity.kt</h1><pre class="source lang-java linenums">package com.smilepile.app
+
+import android.os.Build
+import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.viewpager2.widget.ViewPager2
+import java.io.IOException
+
+<span class="nc" id="L16">class MainActivity : AppCompatActivity() {</span>
+
+    private lateinit var navigationManager: NavigationManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+<span class="nc" id="L21">        super.onCreate(savedInstanceState)</span>
+
+        // Enable edge-to-edge display
+<span class="nc" id="L24">        WindowCompat.setDecorFitsSystemWindows(window, false)</span>
+
+<span class="nc" id="L26">        setContentView(R.layout.activity_main)</span>
+
+        // Hide system UI for fullscreen experience using modern API
+<span class="nc" id="L29">        hideSystemUI()</span>
+
+        // Initialize navigation manager
+<span class="nc" id="L32">        navigationManager = NavigationManager(this, R.id.fragmentContainer)</span>
+
+        // Load photos and initialize navigation
+<span class="nc" id="L35">        val imagePaths = loadImagePathsFromAssets()</span>
+<span class="nc" id="L36">        val photos = Photo.fromImagePaths(imagePaths)</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        navigationManager.initialize(photos)</span>
+
+        // Keep legacy ViewPager2 setup for backward compatibility (hidden)
+<span class="nc" id="L40">        val viewPager = findViewById&lt;ViewPager2&gt;(R.id.viewPager)</span>
+<span class="nc" id="L41">        viewPager.adapter = ImagePagerAdapter(this, imagePaths)</span>
+
+        // Set up modern back navigation handling
+<span class="nc" id="L44">        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {</span>
+            override fun handleOnBackPressed() {
+<span class="nc bnc" id="L46" title="All 4 branches missed.">                if (!navigationManager.navigateBack()) {</span>
+                    // If NavigationManager doesn't handle it, exit the app
+<span class="nc" id="L48">                    finish()</span>
+                }
+<span class="nc" id="L50">            }</span>
+        })
+<span class="nc" id="L52">    }</span>
+
+    private fun loadImagePathsFromAssets(): List&lt;String&gt; {
+<span class="nc" id="L55">        return try {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            val imageFiles = assets.list(&quot;sample_images&quot;) ?: emptyArray()</span>
+<span class="nc" id="L57">            imageFiles</span>
+<span class="nc bnc" id="L58" title="All 6 branches missed.">                .filter { it.endsWith(&quot;.png&quot;, ignoreCase = true) || it.endsWith(&quot;.jpg&quot;, ignoreCase = true) || it.endsWith(&quot;.jpeg&quot;, ignoreCase = true) }</span>
+<span class="nc" id="L59">                .map { &quot;sample_images/$it&quot; }</span>
+<span class="nc" id="L60">                .sorted()</span>
+<span class="nc" id="L61">        } catch (e: IOException) {</span>
+            // If we can't read the assets folder, return an empty list
+<span class="nc" id="L63">            emptyList()</span>
+        }
+    }
+
+    /**
+     * Hide system UI using modern WindowInsetsController API with fallback for older versions
+     */
+    private fun hideSystemUI() {
+        // Skip fullscreen for testing to avoid focus issues in UI tests
+<span class="nc" id="L72">        val isInTestMode = try {</span>
+<span class="nc" id="L73">            Class.forName(&quot;androidx.test.espresso.Espresso&quot;)</span>
+<span class="nc" id="L74">            true</span>
+<span class="nc" id="L75">        } catch (e: ClassNotFoundException) {</span>
+<span class="nc" id="L76">            false</span>
+        }
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (isInTestMode) {</span>
+            // In test mode, just dim the system bars instead of hiding them
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.R) {</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                window.insetsController?.let { controller -&gt;</span>
+<span class="nc" id="L83">                    controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</span>
+<span class="nc" id="L84">                }</span>
+            } else {
+<span class="nc" id="L86">                val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)</span>
+<span class="nc" id="L87">                windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</span>
+            }
+<span class="nc" id="L89">            return</span>
+        }
+
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.R) {</span>
+            // For API 30+ use the new WindowInsetsController
+<span class="nc bnc" id="L94" title="All 2 branches missed.">            window.insetsController?.let { controller -&gt;</span>
+<span class="nc" id="L95">                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())</span>
+<span class="nc" id="L96">                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</span>
+<span class="nc" id="L97">            }</span>
+        } else {
+            // For older versions, use WindowInsetsControllerCompat
+<span class="nc" id="L100">            val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)</span>
+<span class="nc" id="L101">            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())</span>
+<span class="nc" id="L102">            windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</span>
+        }
+<span class="nc" id="L104">    }</span>
+
+    override fun onResume() {
+<span class="nc" id="L107">        super.onResume()</span>
+        // Re-hide system UI when activity resumes
+<span class="nc" id="L109">        hideSystemUI()</span>
+<span class="nc" id="L110">    }</span>
+
+    @Suppress(&quot;DEPRECATION&quot;)
+    override fun onBackPressed() {
+        // Handle back navigation through NavigationManager
+<span class="nc bnc" id="L115" title="All 4 branches missed.">        if (!navigationManager.navigateBack()) {</span>
+            // If NavigationManager doesn't handle it, use default behavior
+<span class="nc" id="L117">            super.onBackPressed()</span>
+        }
+<span class="nc" id="L119">    }</span>
+
+    override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
+<span class="nc" id="L122">        super.onConfigurationChanged(newConfig)</span>
+        // Restore navigation state after configuration change
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        navigationManager.onConfigurationChanged()</span>
+<span class="nc" id="L125">    }</span>
+
+    /**
+     * Public methods for navigation (can be used by tests or external components)
+     */
+    fun showCategorySelection() {
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        navigationManager.showCategorySelection()</span>
+<span class="nc" id="L132">    }</span>
+
+    fun showPhotosForCategory(categoryId: String) {
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        navigationManager.showPhotosForCategory(categoryId)</span>
+<span class="nc" id="L136">    }</span>
+
+    fun navigateBack(): Boolean {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        return navigationManager.navigateBack()</span>
+    }
+
+    /**
+     * Expose navigation manager for testing
+     */
+<span class="nc bnc" id="L145" title="All 2 branches missed.">    fun getNavigationManager(): NavigationManager = navigationManager</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.smilepile.app.PhotoUtilsTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2025-09-18T22:42:30" hostname="Adams-MacBook-Air.local" time="0.001">
+  <properties/>
+  <testcase name="inferCategoryFromFileName should categorize sample files correctly" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo filterByCategory should handle empty photo list" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo fromImagePaths should generate correct IDs" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo getCategories should handle empty photo list" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo data class should have correct hashCode behavior" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo data class should have correct equals behavior" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo constructor should create photo with correct properties" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo filterByCategory should return empty list for non-existent category" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo filterByCategory should return photos for specified category" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo fromImagePaths should create photos with correct categories" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo getCategories should return unique categories sorted" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <testcase name="Photo constructor should use default displayName" classname="com.smilepile.app.PhotoUtilsTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

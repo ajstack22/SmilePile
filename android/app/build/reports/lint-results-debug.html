@@ -177,9 +177,9 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 33 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 43 warnings</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 16:58:26 CDT 2025 by AGP (8.2.0)</nav>
+      <nav class="mdl-navigation mdl-layout--large-screen-only">Check performed at Thu Sep 18 17:37:23 CDT 2025 by AGP (8.2.0)</nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -187,11 +187,14 @@ document.getElementById(id).style.display = 'none';
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="#overview"><i class="material-icons">dashboard</i>Overview</a>
       <a class="mdl-navigation__link" href="#OldTargetApi"><i class="material-icons warning-icon">warning</i>Target SDK attribute is not targeting latest version (1)</a>
-      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (13)</a>
-      <a class="mdl-navigation__link" href="#Overdraw"><i class="material-icons warning-icon">warning</i>Overdraw: Painting regions more than once (1)</a>
-      <a class="mdl-navigation__link" href="#UnusedResources"><i class="material-icons warning-icon">warning</i>Unused resources (8)</a>
+      <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (16)</a>
+      <a class="mdl-navigation__link" href="#NotifyDataSetChanged"><i class="material-icons warning-icon">warning</i>Invalidating All RecyclerView Data (1)</a>
+      <a class="mdl-navigation__link" href="#Overdraw"><i class="material-icons warning-icon">warning</i>Overdraw: Painting regions more than once (4)</a>
+      <a class="mdl-navigation__link" href="#UnusedResources"><i class="material-icons warning-icon">warning</i>Unused resources (7)</a>
       <a class="mdl-navigation__link" href="#MonochromeLauncherIcon"><i class="material-icons warning-icon">warning</i>Monochrome icon is not defined (10)</a>
       <a class="mdl-navigation__link" href="#KtxExtensionAvailable"><i class="material-icons warning-icon">warning</i>KTX Extension Available (1)</a>
+      <a class="mdl-navigation__link" href="#ClickableViewAccessibility"><i class="material-icons warning-icon">warning</i>Accessibility in Custom Views (1)</a>
+      <a class="mdl-navigation__link" href="#HardcodedText"><i class="material-icons warning-icon">warning</i>Hardcoded text (3)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -210,15 +213,18 @@ document.getElementById(id).style.display = 'none';
 <td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#OldTargetApi">OldTargetApi</a>: Target SDK attribute is not targeting latest version</td></tr>
 <tr>
-<td class="countColumn">13</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">16</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#GradleDependency">GradleDependency</a>: Obsolete Gradle Dependency</td></tr>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Performance">Performance</a>
 </td></tr>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#NotifyDataSetChanged">NotifyDataSetChanged</a>: Invalidating All RecyclerView Data</td></tr>
+<tr>
+<td class="countColumn">4</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#Overdraw">Overdraw</a>: Overdraw: Painting regions more than once</td></tr>
 <tr>
-<td class="countColumn">8</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">7</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#UnusedResources">UnusedResources</a>: Unused resources</td></tr>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Usability:Icons">Usability:Icons</a>
 </td></tr>
@@ -230,7 +236,17 @@ document.getElementById(id).style.display = 'none';
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#KtxExtensionAvailable">KtxExtensionAvailable</a>: KTX Extension Available</td></tr>
-<tr><td></td><td class="categoryColumn"><a href="#ExtraIssues">Included Additional Checks (23)</a>
+<tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Accessibility">Accessibility</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#ClickableViewAccessibility">ClickableViewAccessibility</a>: Accessibility in Custom Views</td></tr>
+<tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Internationalization">Internationalization</a>
+</td></tr>
+<tr>
+<td class="countColumn">3</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<a href="#HardcodedText">HardcodedText</a>: Hardcoded text</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#ExtraIssues">Included Additional Checks (24)</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (39)</a>
 </td></tr>
@@ -251,13 +267,13 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:13</span>: <span class="message">Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.</span><br /><pre class="errorlines">
-<span class="lineno"> 10 </span>    defaultConfig {
-<span class="lineno"> 11 </span>        applicationId = "com.smilepile.app"
-<span class="lineno"> 12 </span>        minSdk = 26
-<span class="caretline"><span class="lineno"> 13 </span>        <span class="warning">targetSdk = 34</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 14 </span>        versionCode = 1
-<span class="lineno"> 15 </span>        versionName = "1.0"
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:14</span>: <span class="message">Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details.</span><br /><pre class="errorlines">
+<span class="lineno">  11 </span>    defaultConfig {
+<span class="lineno">  12 </span>        applicationId = "com.smilepile.app"
+<span class="lineno">  13 </span>        minSdk = 26
+<span class="caretline"><span class="lineno">  14 </span>        <span class="warning">targetSdk = 34</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  15 </span>        versionCode = 1
+<span class="lineno">  16 </span>        versionName = "1.0"
 </pre>
 
 </div>
@@ -301,130 +317,165 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:39</span>: <span class="message">A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.17.0</span><br /><pre class="errorlines">
-<span class="lineno"> 36 </span>}
-<span class="lineno"> 37 </span>
-<span class="lineno"> 38 </span>dependencies {
-<span class="caretline"><span class="lineno"> 39 </span>    implementation("<span class="warning">androidx.core:core-ktx:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 40 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
-<span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
-<span class="lineno"> 42 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:44</span>: <span class="message">A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.17.0</span><br /><pre class="errorlines">
+<span class="lineno">  41 </span>}
+<span class="lineno">  42 </span>
+<span class="lineno">  43 </span>dependencies {
+<span class="caretline"><span class="lineno">  44 </span>    implementation("<span class="warning">androidx.core:core-ktx:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  45 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
+<span class="lineno">  46 </span>    implementation("com.google.android.material:material:1.10.0")
+<span class="lineno">  47 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:40</span>: <span class="message">A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1</span><br /><pre class="errorlines">
-<span class="lineno"> 37 </span>
-<span class="lineno"> 38 </span>dependencies {
-<span class="lineno"> 39 </span>    implementation("androidx.core:core-ktx:1.12.0")
-<span class="caretline"><span class="lineno"> 40 </span>    implementation("<span class="warning">androidx.appcompat:appcompat:1.6.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
-<span class="lineno"> 42 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
-<span class="lineno"> 43 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:45</span>: <span class="message">A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1</span><br /><pre class="errorlines">
+<span class="lineno">  42 </span>
+<span class="lineno">  43 </span>dependencies {
+<span class="lineno">  44 </span>    implementation("androidx.core:core-ktx:1.12.0")
+<span class="caretline"><span class="lineno">  45 </span>    implementation("<span class="warning">androidx.appcompat:appcompat:1.6.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  46 </span>    implementation("com.google.android.material:material:1.10.0")
+<span class="lineno">  47 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
+<span class="lineno">  48 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:41</span>: <span class="message">A newer version of com.google.android.material:material than 1.10.0 is available: 1.13.0</span><br /><pre class="errorlines">
-<span class="lineno"> 38 </span>dependencies {
-<span class="lineno"> 39 </span>    implementation("androidx.core:core-ktx:1.12.0")
-<span class="lineno"> 40 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
-<span class="caretline"><span class="lineno"> 41 </span>    implementation("<span class="warning">com.google.android.material:material:1.10.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 42 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
-<span class="lineno"> 43 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-<span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:46</span>: <span class="message">A newer version of com.google.android.material:material than 1.10.0 is available: 1.13.0</span><br /><pre class="errorlines">
+<span class="lineno">  43 </span>dependencies {
+<span class="lineno">  44 </span>    implementation("androidx.core:core-ktx:1.12.0")
+<span class="lineno">  45 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
+<span class="caretline"><span class="lineno">  46 </span>    implementation("<span class="warning">com.google.android.material:material:1.10.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  47 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
+<span class="lineno">  48 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+<span class="lineno">  49 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:42</span>: <span class="message">A newer version of androidx.activity:activity-ktx than 1.8.1 is available: 1.11.0</span><br /><pre class="errorlines">
-<span class="lineno"> 39 </span>    implementation("androidx.core:core-ktx:1.12.0")
-<span class="lineno"> 40 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
-<span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
-<span class="caretline"><span class="lineno"> 42 </span>    implementation("<span class="warning">androidx.activity:activity-ktx:1.8.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 43 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-<span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:47</span>: <span class="message">A newer version of androidx.activity:activity-ktx than 1.8.1 is available: 1.11.0</span><br /><pre class="errorlines">
+<span class="lineno">  44 </span>    implementation("androidx.core:core-ktx:1.12.0")
+<span class="lineno">  45 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
+<span class="lineno">  46 </span>    implementation("com.google.android.material:material:1.10.0")
+<span class="caretline"><span class="lineno">  47 </span>    implementation("<span class="warning">androidx.activity:activity-ktx:1.8.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  48 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+<span class="lineno">  49 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
+<span class="lineno">  50 </span>    implementation("androidx.cardview:cardview:1.0.0")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:43</span>: <span class="message">A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1</span><br /><pre class="errorlines">
-<span class="lineno"> 40 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
-<span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
-<span class="lineno"> 42 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
-<span class="caretline"><span class="lineno"> 43 </span>    implementation("<span class="warning">androidx.constraintlayout:constraintlayout:2.1.4</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    // Coroutines for async image loading
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:48</span>: <span class="message">A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1</span><br /><pre class="errorlines">
+<span class="lineno">  45 </span>    implementation("androidx.appcompat:appcompat:1.6.1")
+<span class="lineno">  46 </span>    implementation("com.google.android.material:material:1.10.0")
+<span class="lineno">  47 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
+<span class="caretline"><span class="lineno">  48 </span>    implementation("<span class="warning">androidx.constraintlayout:constraintlayout:2.1.4</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  49 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
+<span class="lineno">  50 </span>    implementation("androidx.cardview:cardview:1.0.0")
+<span class="lineno">  51 </span>    implementation("androidx.recyclerview:recyclerview:1.3.0")
 </pre>
 
-<button class="mdl-button mdl-js-button mdl-button--primary" id="GradleDependencyDivLink" onclick="reveal('GradleDependencyDiv');" />+ 8 More Occurrences...</button>
+<button class="mdl-button mdl-js-button mdl-button--primary" id="GradleDependencyDivLink" onclick="reveal('GradleDependencyDiv');" />+ 11 More Occurrences...</button>
 <div id="GradleDependencyDiv" style="display: none">
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:44</span>: <span class="message">A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
-<span class="lineno"> 41 </span>    implementation("com.google.android.material:material:1.10.0")
-<span class="lineno"> 42 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
-<span class="lineno"> 43 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-<span class="caretline"><span class="lineno"> 44 </span>    implementation("<span class="warning">androidx.viewpager2:viewpager2:1.0.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    // Coroutines for async image loading
-<span class="lineno"> 47 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:49</span>: <span class="message">A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
+<span class="lineno">  46 </span>    implementation("com.google.android.material:material:1.10.0")
+<span class="lineno">  47 </span>    implementation("androidx.activity:activity-ktx:1.8.1")
+<span class="lineno">  48 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+<span class="caretline"><span class="lineno">  49 </span>    implementation("<span class="warning">androidx.viewpager2:viewpager2:1.0.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  50 </span>    implementation("androidx.cardview:cardview:1.0.0")
+<span class="lineno">  51 </span>    implementation("androidx.recyclerview:recyclerview:1.3.0")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:47</span>: <span class="message">A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0</span><br /><pre class="errorlines">
-<span class="lineno"> 44 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    // Coroutines for async image loading
-<span class="caretline"><span class="lineno"> 47 </span>    implementation("<span class="warning">org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-<span class="lineno"> 49 </span>
-<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:51</span>: <span class="message">A newer version of androidx.recyclerview:recyclerview than 1.3.0 is available: 1.4.0</span><br /><pre class="errorlines">
+<span class="lineno">  48 </span>    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+<span class="lineno">  49 </span>    implementation("androidx.viewpager2:viewpager2:1.0.0")
+<span class="lineno">  50 </span>    implementation("androidx.cardview:cardview:1.0.0")
+<span class="caretline"><span class="lineno">  51 </span>    implementation("<span class="warning">androidx.recyclerview:recyclerview:1.3.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    // Coroutines for async image loading
+<span class="lineno">  54 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:48</span>: <span class="message">A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4</span><br /><pre class="errorlines">
-<span class="lineno"> 45 </span>
-<span class="lineno"> 46 </span>    // Coroutines for async image loading
-<span class="lineno"> 47 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-<span class="caretline"><span class="lineno"> 48 </span>    implementation("<span class="warning">androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 49 </span>
-<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
-<span class="lineno"> 51 </span>    implementation("androidx.core:core:1.12.0")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:54</span>: <span class="message">A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.7.3 is available: 1.9.0</span><br /><pre class="errorlines">
+<span class="lineno">  51 </span>    implementation("androidx.recyclerview:recyclerview:1.3.0")
+<span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    // Coroutines for async image loading
+<span class="caretline"><span class="lineno">  54 </span>    implementation("<span class="warning">org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  55 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    // WindowInsetsController for modern fullscreen API
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:51</span>: <span class="message">A newer version of androidx.core:core than 1.12.0 is available: 1.17.0</span><br /><pre class="errorlines">
-<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-<span class="lineno"> 49 </span>
-<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
-<span class="caretline"><span class="lineno"> 51 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 52 </span>
-<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:55</span>: <span class="message">A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4</span><br /><pre class="errorlines">
+<span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    // Coroutines for async image loading
+<span class="lineno">  54 </span>    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+<span class="caretline"><span class="lineno">  55 </span>    implementation("<span class="warning">androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    // WindowInsetsController for modern fullscreen API
+<span class="lineno">  58 </span>    implementation("androidx.core:core:1.12.0")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:55</span>: <span class="message">A newer version of androidx.test:core than 1.5.0 is available: 1.7.0</span><br /><pre class="errorlines">
-<span class="lineno"> 52 </span>
-<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="caretline"><span class="lineno"> 55 </span>    testImplementation("<span class="warning">androidx.test:core:1.5.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:58</span>: <span class="message">A newer version of androidx.core:core than 1.12.0 is available: 1.17.0</span><br /><pre class="errorlines">
+<span class="lineno">  55 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    // WindowInsetsController for modern fullscreen API
+<span class="caretline"><span class="lineno">  58 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  59 </span>
+<span class="lineno">  60 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno">  61 </span>    testImplementation("io.mockk:mockk:1.13.8")
 </pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:56</span>: <span class="message">A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0</span><br /><pre class="errorlines">
-<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
-<span class="caretline"><span class="lineno"> 56 </span>    androidTestImplementation("<span class="warning">androidx.test.ext:junit:1.1.5</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
-<span class="lineno"> 59 </span>}</pre>
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:62</span>: <span class="message">A newer version of androidx.test:core than 1.5.0 is available: 1.7.0</span><br /><pre class="errorlines">
+<span class="lineno">  59 </span>
+<span class="lineno">  60 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno">  61 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="caretline"><span class="lineno">  62 </span>    testImplementation("<span class="warning">androidx.test:core:1.5.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  63 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="lineno">  64 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno">  65 </span>    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+</pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:57</span>: <span class="message">A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0</span><br /><pre class="errorlines">
-<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
-<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
-<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-<span class="caretline"><span class="lineno"> 57 </span>    androidTestImplementation("<span class="warning">androidx.test.espresso:espresso-core:3.5.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 58 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
-<span class="lineno"> 59 </span>}</pre>
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:63</span>: <span class="message">A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0</span><br /><pre class="errorlines">
+<span class="lineno">  60 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno">  61 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="lineno">  62 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="caretline"><span class="lineno">  63 </span>    androidTestImplementation("<span class="warning">androidx.test.ext:junit:1.1.5</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  64 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno">  65 </span>    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+<span class="lineno">  66 </span>    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
+</pre>
 
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:58</span>: <span class="message">A newer version of androidx.test.uiautomator:uiautomator than 2.2.0 is available: 2.3.0</span><br /><pre class="errorlines">
-<span class="lineno"> 55 </span>    testImplementation("androidx.test:core:1.5.0")
-<span class="lineno"> 56 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-<span class="lineno"> 57 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-<span class="caretline"><span class="lineno"> 58 </span>    androidTestImplementation("<span class="warning">androidx.test.uiautomator:uiautomator:2.2.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 59 </span>}</pre>
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:64</span>: <span class="message">A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0</span><br /><pre class="errorlines">
+<span class="lineno">  61 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="lineno">  62 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="lineno">  63 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="caretline"><span class="lineno">  64 </span>    androidTestImplementation("<span class="warning">androidx.test.espresso:espresso-core:3.5.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  65 </span>    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+<span class="lineno">  66 </span>    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
+<span class="lineno">  67 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:65</span>: <span class="message">A newer version of androidx.test.espresso:espresso-contrib than 3.5.1 is available: 3.7.0</span><br /><pre class="errorlines">
+<span class="lineno">  62 </span>    testImplementation("androidx.test:core:1.5.0")
+<span class="lineno">  63 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="lineno">  64 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="caretline"><span class="lineno">  65 </span>    androidTestImplementation("<span class="warning">androidx.test.espresso:espresso-contrib:3.5.1</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  66 </span>    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
+<span class="lineno">  67 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+<span class="lineno">  68 </span>}
+</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:66</span>: <span class="message">A newer version of androidx.fragment:fragment-testing than 1.6.2 is available: 1.8.9</span><br /><pre class="errorlines">
+<span class="lineno">  63 </span>    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+<span class="lineno">  64 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno">  65 </span>    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+<span class="caretline"><span class="lineno">  66 </span>    androidTestImplementation("<span class="warning">androidx.fragment:fragment-testing:1.6.2</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  67 </span>    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+<span class="lineno">  68 </span>}
+</pre>
+
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:67</span>: <span class="message">A newer version of androidx.test.uiautomator:uiautomator than 2.2.0 is available: 2.3.0</span><br /><pre class="errorlines">
+<span class="lineno">  64 </span>    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+<span class="lineno">  65 </span>    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+<span class="lineno">  66 </span>    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
+<span class="caretline"><span class="lineno">  67 </span>    androidTestImplementation("<span class="warning">androidx.test.uiautomator:uiautomator:2.2.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  68 </span>}
+<span class="lineno">  69 </span>
+<span class="lineno">  70 </span>// Jacoco configuration for test coverage
+</pre>
 
 </div>
 </div>
@@ -456,7 +507,50 @@ Dismiss</button>            </div>
             </div>
           </section>
 <a name="Performance"></a>
-<a name="Overdraw"></a>
+<a name="NotifyDataSetChanged"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="NotifyDataSetChangedCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Invalidating All RecyclerView Data</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/com/smilepile/app/CategoryFragment.kt">../../src/main/java/com/smilepile/app/CategoryFragment.kt</a>:111</span>: <span class="message">It will always be more efficient to use more specific change events if you can. Rely on <code>notifyDataSetChanged</code> as a last resort.</span><br /><pre class="errorlines">
+<span class="lineno"> 108 </span><span class="javadoc">     */</span>
+<span class="lineno"> 109 </span>    <span class="keyword">fun</span> updatePhotos(newPhotos: List&lt;Photo>) {
+<span class="lineno"> 110 </span>        photos = newPhotos
+<span class="caretline"><span class="lineno"> 111 </span>        <span class="warning">view?.findViewById&lt;RecyclerView>(R.id.categoryRecyclerView)?.adapter?.notifyDataSetChanged()</span></span>
+<span class="lineno"> 112 </span>    }
+<span class="lineno"> 113 </span>}</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationNotifyDataSetChanged" style="display: none;">
+The <code>RecyclerView</code> adapter's <code>onNotifyDataSetChanged</code> method does not specify what about the data set has changed, forcing any observers to assume that all existing items and structure may no longer be valid. `LayoutManager`s will be forced to fully rebind and relayout all visible views.<br/>To suppress this error, use the issue id "NotifyDataSetChanged" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">NotifyDataSetChanged</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Performance</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 8/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationNotifyDataSetChangedLink" onclick="reveal('explanationNotifyDataSetChanged');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="NotifyDataSetChangedCardLink" onclick="hideid('NotifyDataSetChangedCard');">
+Dismiss</button>            </div>
+            </div>
+          </section><a name="Overdraw"></a>
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="OverdrawCard" style="display: block;">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
   <div class="mdl-card__title">
@@ -471,8 +565,35 @@ Dismiss</button>            </div>
 <span class="lineno">  4 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
 <span class="caretline"><span class="lineno">  5 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/black"</span></span>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno">  6 </span>
+<span class="lineno">  7 </span>    <span class="comment">&lt;!-- Fragment container for navigation --></span>
+<span class="lineno">  8 </span>    <span class="tag">&lt;FrameLayout</span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/fragment_category.xml">../../src/main/res/layout/fragment_category.xml</a>:5</span>: <span class="message">Possible overdraw: Root element paints background <code>@color/black</code> with a theme that also paints a background (inferred theme is <code>@style/Theme.SmilePile</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  2 </span><span class="tag">&lt;FrameLayout</span><span class="attribute"> </span><span class="prefix">xmlns:</span><span class="attribute">android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="lineno">  3 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno">  4 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
+<span class="caretline"><span class="lineno">  5 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/black"</span></span>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  6 </span>
+<span class="lineno">  7 </span>    <span class="tag">&lt;androidx.recyclerview.widget.RecyclerView</span><span class="attribute">
+</span><span class="lineno">  8 </span><span class="attribute">        </span><span class="prefix">android:</span><span class="attribute">id</span>=<span class="value">"@+id/categoryRecyclerView"</span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/fragment_category_selection.xml">../../src/main/res/layout/fragment_category_selection.xml</a>:6</span>: <span class="message">Possible overdraw: Root element paints background <code>@color/black</code> with a theme that also paints a background (inferred theme is <code>@style/Theme.SmilePile</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  3 </span>    <span class="prefix">xmlns:</span><span class="attribute">app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span>
+<span class="lineno">  4 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno">  5 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
+<span class="caretline"><span class="lineno">  6 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/black"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  7 </span>    <span class="prefix">android:</span><span class="attribute">padding</span>=<span class="value">"16dp"</span>>
+<span class="lineno">  8 </span>
+<span class="lineno">  9 </span>    <span class="tag">&lt;androidx.recyclerview.widget.RecyclerView</span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/fragment_photo.xml">../../src/main/res/layout/fragment_photo.xml</a>:5</span>: <span class="message">Possible overdraw: Root element paints background <code>@color/black</code> with a theme that also paints a background (inferred theme is <code>@style/Theme.SmilePile</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  2 </span><span class="tag">&lt;FrameLayout</span><span class="attribute"> </span><span class="prefix">xmlns:</span><span class="attribute">android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="lineno">  3 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno">  4 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>
+<span class="caretline"><span class="lineno">  5 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@color/black"</span></span>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  6 </span>
 <span class="lineno">  7 </span>    <span class="tag">&lt;androidx.viewpager2.widget.ViewPager2</span><span class="attribute">
-</span><span class="lineno">  8 </span><span class="attribute">        </span><span class="prefix">android:</span><span class="attribute">id</span>=<span class="value">"@+id/viewPager"</span></pre>
+</span><span class="lineno">  8 </span><span class="attribute">        </span><span class="prefix">android:</span><span class="attribute">id</span>=<span class="value">"@+id/photoViewPager"</span></pre>
 
 </div>
 <div class="metadata"><div class="explanation" id="explanationOverdraw" style="display: none;">
@@ -548,13 +669,6 @@ Dismiss</button>            </div>
 <span class="caretline"><span class="lineno">  7 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"teal_700"</span></span>>#FF018786<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno">  8 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"black"</span>>#FF000000<span class="tag">&lt;/color></span>
 <span class="lineno">  9 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"white"</span>>#FFFFFFFF<span class="tag">&lt;/color></span>
-<span class="lineno"> 10 </span><span class="tag">&lt;/resources></span></pre>
-
-<span class="location"><a href="../../src/main/res/values/colors.xml">../../src/main/res/values/colors.xml</a>:9</span>: <span class="message">The resource <code>R.color.white</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  6 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"teal_200"</span>>#FF03DAC5<span class="tag">&lt;/color></span>
-<span class="lineno">  7 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"teal_700"</span>>#FF018786<span class="tag">&lt;/color></span>
-<span class="lineno">  8 </span>    <span class="tag">&lt;color</span><span class="attribute"> name</span>=<span class="value">"black"</span>>#FF000000<span class="tag">&lt;/color></span>
-<span class="caretline"><span class="lineno">  9 </span>    <span class="tag">&lt;color</span><span class="attribute"> </span><span class="warning"><span class="attribute">name</span>=<span class="value">"white"</span></span>>#FFFFFFFF<span class="tag">&lt;/color></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <span class="lineno"> 10 </span><span class="tag">&lt;/resources></span></pre>
 
 <span class="location"><a href="../../src/main/res/drawable/test_image.xml">../../src/main/res/drawable/test_image.xml</a>:2</span>: <span class="message">The resource <code>R.drawable.test_image</code> appears to be unused</span><br /><pre class="errorlines">
@@ -737,14 +851,14 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:51</span>: <span class="message">Add suffix <code>-ktx</code> to enable the Kotlin extensions for this library</span><br /><pre class="errorlines">
-<span class="lineno"> 48 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-<span class="lineno"> 49 </span>
-<span class="lineno"> 50 </span>    // WindowInsetsController for modern fullscreen API
-<span class="caretline"><span class="lineno"> 51 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 52 </span>
-<span class="lineno"> 53 </span>    testImplementation("junit:junit:4.13.2")
-<span class="lineno"> 54 </span>    testImplementation("io.mockk:mockk:1.13.8")
+<span class="location"><a href="../../build.gradle.kts">../../build.gradle.kts</a>:58</span>: <span class="message">Add suffix <code>-ktx</code> to enable the Kotlin extensions for this library</span><br /><pre class="errorlines">
+<span class="lineno">  55 </span>    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    // WindowInsetsController for modern fullscreen API
+<span class="caretline"><span class="lineno">  58 </span>    implementation("<span class="warning">androidx.core:core:1.12.0</span>")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  59 </span>
+<span class="lineno">  60 </span>    testImplementation("junit:junit:4.13.2")
+<span class="lineno">  61 </span>    testImplementation("io.mockk:mockk:1.13.8")
 </pre>
 
 </div>
@@ -775,6 +889,124 @@ To suppress this error, use the issue id "KtxExtensionAvailable" as explained in
               <div class="mdl-card__actions mdl-card--border">
 <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationKtxExtensionAvailableLink" onclick="reveal('explanationKtxExtensionAvailable');">
 Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="KtxExtensionAvailableCardLink" onclick="hideid('KtxExtensionAvailableCard');">
+Dismiss</button>            </div>
+            </div>
+          </section>
+<a name="Accessibility"></a>
+<a name="ClickableViewAccessibility"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="ClickableViewAccessibilityCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Accessibility in Custom Views</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/com/smilepile/app/PhotoFragment.kt">../../src/main/java/com/smilepile/app/PhotoFragment.kt</a>:94</span>: <span class="message"><code>onTouch</code> lambda should call <code>View#performClick</code> when a click is detected</span><br /><pre class="errorlines">
+<span class="lineno">  91 </span>            }
+<span class="lineno">  92 </span>        })
+<span class="lineno">  93 </span>
+<span class="caretline"><span class="lineno">  94 </span>        view.setOnTouchListener <span class="warning">{ _, event -></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  95 </span>            gestureDetector.onTouchEvent(event)
+<span class="lineno">  96 </span>            <span class="keyword">false</span> <span class="comment">// Don't consume the event, let ViewPager2 handle swipes</span>
+<span class="lineno">  97 </span>        }
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationClickableViewAccessibility" style="display: none;">
+If a <code>View</code> that overrides <code>onTouchEvent</code> or uses an <code>OnTouchListener</code> does not also implement <code>performClick</code> and call it when clicks are detected, the <code>View</code> may not handle accessibility actions properly. Logic handling the click actions should ideally be placed in <code>View#performClick</code> as some accessibility services invoke <code>performClick</code> when a click action should occur.<br/>To suppress this error, use the issue id "ClickableViewAccessibility" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">ClickableViewAccessibility</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Accessibility</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 6/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationClickableViewAccessibilityLink" onclick="reveal('explanationClickableViewAccessibility');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="ClickableViewAccessibilityCardLink" onclick="hideid('ClickableViewAccessibilityCard');">
+Dismiss</button>            </div>
+            </div>
+          </section>
+<a name="Internationalization"></a>
+<a name="HardcodedText"></a>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="HardcodedTextCard" style="display: block;">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Hardcoded text</h2>
+  </div>
+              <div class="mdl-card__supporting-text">
+<div class="issue">
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/fragment_photo.xml">../../src/main/res/layout/fragment_photo.xml</a>:18</span>: <span class="message">Hardcoded string "Back", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno"> 15 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"wrap_content"</span>
+<span class="lineno"> 16 </span>        <span class="prefix">android:</span><span class="attribute">layout_gravity</span>=<span class="value">"top|start"</span>
+<span class="lineno"> 17 </span>        <span class="prefix">android:</span><span class="attribute">layout_margin</span>=<span class="value">"16dp"</span>
+<span class="caretline"><span class="lineno"> 18 </span>        <span class="warning"><span class="prefix">android:</span><span class="attribute">text</span>=<span class="value">"Back"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 19 </span>        <span class="prefix">android:</span><span class="attribute">background</span>=<span class="value">"@drawable/rounded_button"</span>
+<span class="lineno"> 20 </span>        <span class="prefix">android:</span><span class="attribute">textColor</span>=<span class="value">"@color/white"</span>
+<span class="lineno"> 21 </span>        <span class="prefix">android:</span><span class="attribute">padding</span>=<span class="value">"12dp"</span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/item_category.xml">../../src/main/res/layout/item_category.xml</a>:24</span>: <span class="message">Hardcoded string "Category image", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno"> 21 </span>            <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno"> 22 </span>            <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"0dp"</span>
+<span class="lineno"> 23 </span>            <span class="prefix">android:</span><span class="attribute">layout_weight</span>=<span class="value">"1"</span>
+<span class="caretline"><span class="lineno"> 24 </span>            <span class="warning"><span class="prefix">android:</span><span class="attribute">contentDescription</span>=<span class="value">"Category image"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 25 </span>            <span class="prefix">android:</span><span class="attribute">scaleType</span>=<span class="value">"centerCrop"</span> />
+<span class="lineno"> 26 </span>
+<span class="lineno"> 27 </span>        <span class="tag">&lt;TextView</span></pre>
+
+<span class="location"><a href="../../src/main/res/layout/item_category.xml">../../src/main/res/layout/item_category.xml</a>:33</span>: <span class="message">Hardcoded string "Category Name", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno"> 30 </span>            <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"wrap_content"</span>
+<span class="lineno"> 31 </span>            <span class="prefix">android:</span><span class="attribute">layout_marginTop</span>=<span class="value">"8dp"</span>
+<span class="lineno"> 32 </span>            <span class="prefix">android:</span><span class="attribute">gravity</span>=<span class="value">"center"</span>
+<span class="caretline"><span class="lineno"> 33 </span>            <span class="warning"><span class="prefix">android:</span><span class="attribute">text</span>=<span class="value">"Category Name"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 34 </span>            <span class="prefix">android:</span><span class="attribute">textColor</span>=<span class="value">"@android:color/black"</span>
+<span class="lineno"> 35 </span>            <span class="prefix">android:</span><span class="attribute">textSize</span>=<span class="value">"18sp"</span>
+<span class="lineno"> 36 </span>            <span class="prefix">android:</span><span class="attribute">textStyle</span>=<span class="value">"bold"</span> />
+</pre>
+
+</div>
+<div class="metadata"><div class="explanation" id="explanationHardcodedText" style="display: none;">
+Hardcoding text attributes directly in layout files is bad for several reasons:<br/>
+<br/>
+* When creating configuration variations (for example for landscape or portrait) you have to repeat the actual text (and keep it up to date when making changes)<br/>
+<br/>
+* The application cannot be translated to other languages by just adding new translations for existing string resources.<br/>
+<br/>
+There are quickfixes to automatically extract this hardcoded string into a resource lookup.<br/>To suppress this error, use the issue id "HardcodedText" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+<br/></div>
+</div>
+</div>
+<div class="chips">
+<span class="mdl-chip">
+    <span class="mdl-chip__text">HardcodedText</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Internationalization</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Warning</span>
+</span>
+<span class="mdl-chip">
+    <span class="mdl-chip__text">Priority 5/10</span>
+</span>
+</div>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationHardcodedTextLink" onclick="reveal('explanationHardcodedText');">
+Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="HardcodedTextCardLink" onclick="hideid('HardcodedTextCard');">
 Dismiss</button>            </div>
             </div>
           </section>
@@ -878,6 +1110,19 @@ In order to use the ActivityResult APIs you must upgrade your                 Fr
 Vendor: Android Open Source Project<br/>
 Identifier: androidx.activity<br/>
 Feedback: <a href="https://issuetracker.google.com/issues/new?component=527362">https://issuetracker.google.com/issues/new?component=527362</a><br/>
+</div>
+<br/>
+<br/></div>
+</div>
+</div>
+<div class="issue">
+<div class="id">InvalidSetHasFixedSize<div class="issueSeparator"></div>
+</div>
+<div class="metadata"><div class="explanation">
+When a RecyclerView uses <code>setHasFixedSize(...)</code> you cannot use <code>wrap_content</code> for  size in the scrolling direction.<br/><div class="vendor">
+Vendor: Android Open Source Project<br/>
+Identifier: androidx.recyclerview<br/>
+Feedback: <a href="https://issuetracker.google.com/issues/new?component=460887">https://issuetracker.google.com/issues/new?component=460887</a><br/>
 </div>
 <br/>
 <br/></div>

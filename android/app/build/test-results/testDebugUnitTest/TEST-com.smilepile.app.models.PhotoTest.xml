@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.smilepile.app.models.PhotoTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2025-09-18T22:42:30" hostname="Adams-MacBook-Air.local" time="0.001">
+  <properties/>
+  <testcase name="isValid should return false for photo with blank id" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="isValid should return false for photo with blank categoryId" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="getAssetPath should add sample_images prefix when from assets and path doesn't already have it" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="getAssetPath should return original path when not from assets" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="data class equality should work correctly" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="isValid should return true for valid photo" classname="com.smilepile.app.models.PhotoTest" time="0.001"/>
+  <testcase name="photo creation with default parameters should work correctly" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="isValid should return false for photo with blank name" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="isValid should return false for photo with blank path" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="getAssetPath should not add prefix when path already has sample_images" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <testcase name="photo creation with all parameters should work correctly" classname="com.smilepile.app.models.PhotoTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

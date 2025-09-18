@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.smilepile.app.managers.CategoryManagerTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2025-09-18T22:42:28" hostname="Adams-MacBook-Air.local" time="0.003">
+  <properties/>
+  <testcase name="getCategories should return categories sorted by position" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addPhoto should fail for non-existent category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="removePhoto should remove photo from category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.001"/>
+  <testcase name="initialization should create sample data" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getAllCategoriesWithPhotos should return all categories with their photos" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getCategoryWithPhotos should return null for non-existent category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getAllPhotoPaths should return all photo paths for backward compatibility" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="removeCategory should remove category and all its photos" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.001"/>
+  <testcase name="getCategory should return correct category by id" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="removeCategory should fail for non-existent category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addCategory should add valid category successfully" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getCategory should return null for non-existent id" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addPhoto should add valid photo successfully" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getPhotosForCategory should return photos for specific category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addPhoto should fail for invalid photo" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.001"/>
+  <testcase name="removePhoto should fail for non-existent photo" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addCategory should fail for invalid category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="addCategory should fail for duplicate category id" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getPhotosForCategory should return empty list for non-existent category" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <testcase name="getCategoryWithPhotos should return category with its photos" classname="com.smilepile.app.managers.CategoryManagerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

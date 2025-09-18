@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoryAdapter.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.smilepile.app</a> &gt; <span class="el_source">CategoryAdapter.kt</span></div><h1>CategoryAdapter.kt</h1><pre class="source lang-java linenums">package com.smilepile.app
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.IOException
+import kotlin.math.max
+
+<span class="nc" id="L19">class CategoryAdapter(</span>
+<span class="nc" id="L20">    private val context: Context,</span>
+<span class="nc" id="L21">    private val categories: List&lt;String&gt;,</span>
+<span class="nc" id="L22">    private val photos: List&lt;Photo&gt;,</span>
+<span class="nc" id="L23">    private val onCategoryClick: (String) -&gt; Unit</span>
+<span class="nc" id="L24">) : RecyclerView.Adapter&lt;CategoryAdapter.CategoryViewHolder&gt;() {</span>
+
+<span class="nc" id="L26">    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {</span>
+<span class="nc" id="L27">        val categoryImage: ImageView = itemView.findViewById(R.id.categoryImage)</span>
+<span class="nc" id="L28">        val categoryName: TextView = itemView.findViewById(R.id.categoryName)</span>
+<span class="nc" id="L29">        var loadedBitmap: Bitmap? = null</span>
+
+<span class="nc" id="L31">        init {</span>
+<span class="nc" id="L32">            itemView.setOnClickListener {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                if (adapterPosition != RecyclerView.NO_POSITION) {</span>
+<span class="nc" id="L34">                    onCategoryClick(categories[adapterPosition])</span>
+                }
+<span class="nc" id="L36">            }</span>
+<span class="nc" id="L37">        }</span>
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+<span class="nc" id="L41">        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)</span>
+<span class="nc" id="L42">        return CategoryViewHolder(view)</span>
+    }
+
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+<span class="nc" id="L46">        val category = categories[position]</span>
+
+        // Recycle previous bitmap to prevent memory leaks
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        holder.loadedBitmap?.let { bitmap -&gt;</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (!bitmap.isRecycled) {</span>
+<span class="nc" id="L51">                bitmap.recycle()</span>
+            }
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">        holder.loadedBitmap = null</span>
+
+        // Set category name
+<span class="nc" id="L57">        holder.categoryName.text = category</span>
+
+        // Show placeholder while loading
+<span class="nc" id="L60">        holder.categoryImage.setImageResource(android.R.drawable.ic_menu_gallery)</span>
+
+        // Load the first image from this category as preview
+<span class="nc" id="L63">        val categoryPhotos = Photo.filterByCategory(photos, category)</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">        if (categoryPhotos.isNotEmpty()) {</span>
+<span class="nc" id="L65">            val previewPhoto = categoryPhotos.first()</span>
+
+            // Load category image asynchronously
+<span class="nc" id="L68">            CoroutineScope(Dispatchers.Main).launch {</span>
+<span class="nc" id="L69">                try {</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                    val bitmap = withContext(Dispatchers.IO) {</span>
+<span class="nc" id="L71">                        loadBitmapSafely(previewPhoto.path, 300, 300) // Smaller size for category thumbnails</span>
+                    }
+
+                    // Check if the holder is still valid (not recycled)
+<span class="nc bnc" id="L75" title="All 4 branches missed.">                    if (holder.adapterPosition == position &amp;&amp; bitmap != null) {</span>
+<span class="nc" id="L76">                        holder.loadedBitmap = bitmap</span>
+<span class="nc" id="L77">                        holder.categoryImage.setImageBitmap(bitmap)</span>
+                    }
+<span class="nc" id="L79">                } catch (e: Exception) {</span>
+                    // Handle error by keeping the placeholder
+                    // Error already shown as placeholder
+                }
+<span class="nc" id="L83">            }</span>
+        }
+<span class="nc" id="L85">    }</span>
+
+<span class="nc" id="L87">    override fun getItemCount(): Int = categories.size</span>
+
+    override fun onViewRecycled(holder: CategoryViewHolder) {
+<span class="nc" id="L90">        super.onViewRecycled(holder)</span>
+        // Recycle bitmap when view is recycled to prevent memory leaks
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        holder.loadedBitmap?.let { bitmap -&gt;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            if (!bitmap.isRecycled) {</span>
+<span class="nc" id="L94">                bitmap.recycle()</span>
+            }
+<span class="nc" id="L96">        }</span>
+<span class="nc" id="L97">        holder.loadedBitmap = null</span>
+<span class="nc" id="L98">        holder.categoryImage.setImageDrawable(null)</span>
+<span class="nc" id="L99">    }</span>
+
+    /**
+     * Safely loads a bitmap with proper memory management using inSampleSize
+     * to prevent OutOfMemoryError - reused from ImagePagerAdapter
+     */
+    private fun loadBitmapSafely(imagePath: String, targetWidth: Int, targetHeight: Int): Bitmap? {
+<span class="nc" id="L106">        return try {</span>
+<span class="nc" id="L107">            val inputStream = context.assets.open(imagePath)</span>
+
+            // First pass: get image dimensions without loading the full bitmap
+<span class="nc" id="L110">            val options = BitmapFactory.Options().apply {</span>
+<span class="nc" id="L111">                inJustDecodeBounds = true</span>
+<span class="nc" id="L112">            }</span>
+<span class="nc" id="L113">            BitmapFactory.decodeStream(inputStream, null, options)</span>
+<span class="nc" id="L114">            inputStream.close()</span>
+
+            // Calculate inSampleSize to reduce memory usage
+<span class="nc" id="L117">            val sampleSize = calculateInSampleSize(options, targetWidth, targetHeight)</span>
+
+            // Second pass: load the bitmap with calculated sample size
+<span class="nc" id="L120">            val actualInputStream = context.assets.open(imagePath)</span>
+<span class="nc" id="L121">            val finalOptions = BitmapFactory.Options().apply {</span>
+<span class="nc" id="L122">                inJustDecodeBounds = false</span>
+<span class="nc" id="L123">                inSampleSize = sampleSize</span>
+<span class="nc" id="L124">                inPreferredConfig = Bitmap.Config.RGB_565 // Use less memory than ARGB_8888</span>
+<span class="nc" id="L125">            }</span>
+
+<span class="nc" id="L127">            val bitmap = BitmapFactory.decodeStream(actualInputStream, null, finalOptions)</span>
+<span class="nc" id="L128">            actualInputStream.close()</span>
+<span class="nc" id="L129">            bitmap</span>
+<span class="nc" id="L130">        } catch (e: IOException) {</span>
+<span class="nc" id="L131">            null</span>
+        }
+    }
+
+    /**
+     * Calculate the largest inSampleSize value that is a power of 2 and keeps both
+     * height and width larger than the requested height and width.
+     */
+    private fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+<span class="nc" id="L140">        val height = options.outHeight</span>
+<span class="nc" id="L141">        val width = options.outWidth</span>
+<span class="nc" id="L142">        var inSampleSize = 1</span>
+
+        // Use reasonable defaults if target dimensions are not available
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        val targetWidth = if (reqWidth &gt; 0) reqWidth else 300</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        val targetHeight = if (reqHeight &gt; 0) reqHeight else 300</span>
+
+<span class="nc bnc" id="L148" title="All 4 branches missed.">        if (height &gt; targetHeight || width &gt; targetWidth) {</span>
+<span class="nc" id="L149">            val halfHeight = height / 2</span>
+<span class="nc" id="L150">            val halfWidth = width / 2</span>
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+<span class="nc bnc" id="L154" title="All 4 branches missed.">            while (halfHeight / inSampleSize &gt;= targetHeight &amp;&amp; halfWidth / inSampleSize &gt;= targetWidth) {</span>
+<span class="nc" id="L155">                inSampleSize *= 2</span>
+            }
+        }
+
+<span class="nc" id="L159">        return max(1, inSampleSize)</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

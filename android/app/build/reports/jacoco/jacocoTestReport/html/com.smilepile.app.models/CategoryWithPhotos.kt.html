@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoryWithPhotos.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.smilepile.app.models</a> &gt; <span class="el_source">CategoryWithPhotos.kt</span></div><h1>CategoryWithPhotos.kt</h1><pre class="source lang-java linenums">package com.smilepile.app.models
+
+/**
+ * Represents a category with its associated photos for easy access and display.
+ * This composite data class provides convenient access to category data and photo counts.
+ */
+<span class="fc" id="L7">data class CategoryWithPhotos(</span>
+<span class="fc" id="L8">    val category: Category,</span>
+<span class="fc" id="L9">    val photos: List&lt;Photo&gt;</span>
+) {
+    /**
+     * Returns the actual number of photos in this category
+     */
+<span class="fc" id="L14">    val photoCount: Int get() = photos.size</span>
+
+    /**
+     * Returns the cover image path - either the first photo or the category's set cover image
+     */
+<span class="pc bpc" id="L19" title="1 of 4 branches missed.">    val coverImage: String? get() = photos.firstOrNull()?.path ?: category.coverImagePath</span>
+
+    /**
+     * Returns photos sorted by position
+     */
+<span class="fc" id="L24">    val sortedPhotos: List&lt;Photo&gt; get() = photos.sortedBy { it.position }</span>
+
+    /**
+     * Validates that the category and all photos are valid
+     */
+    fun isValid(): Boolean {
+<span class="fc bfc" id="L30" title="All 6 branches covered.">        return category.isValid() &amp;&amp; photos.all { it.isValid() &amp;&amp; it.categoryId == category.id }</span>
+    }
+
+    /**
+     * Gets all photo paths for use with ImagePagerAdapter
+     */
+    fun getPhotoPaths(): List&lt;String&gt; {
+<span class="fc" id="L37">        return sortedPhotos.map { it.getAssetPath() }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

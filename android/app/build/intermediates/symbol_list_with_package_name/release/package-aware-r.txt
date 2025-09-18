@@ -43,6 +43,10 @@ anim m3_side_sheet_exit_to_right
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim slide_in_left
+anim slide_in_right
+anim slide_out_left
+anim slide_out_right
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -3052,6 +3056,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable rounded_button
 drawable test_image
 drawable test_image2
 drawable test_image3
@@ -3145,6 +3150,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backButton
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3161,6 +3167,9 @@ id cache_measures
 id callMeasure
 id cancel_button
 id carryVelocity
+id categoryImage
+id categoryName
+id categoryRecyclerView
 id center
 id centerCrop
 id centerInside
@@ -3254,6 +3263,7 @@ id fixed
 id flip
 id floating
 id forever
+id fragmentContainer
 id fragment_container_view_tag
 id frost
 id fullscreen_header
@@ -3285,6 +3295,7 @@ id indeterminate
 id info
 id invisible
 id inward
+id is_pooling_container_tag
 id italic
 id item_touch_helper_previous_elevation
 id jumpToEnd
@@ -3408,7 +3419,9 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id photoViewPager
 id pin
+id pooling_container_listener_holder_tag
 id position
 id postLayout
 id pressed
@@ -3687,8 +3700,12 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_category
+layout fragment_category_selection
+layout fragment_photo
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_category
 layout item_image
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
