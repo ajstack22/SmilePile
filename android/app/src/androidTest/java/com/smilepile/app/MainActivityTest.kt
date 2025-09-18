@@ -8,6 +8,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,5 +34,41 @@ class MainActivityTest {
             .perform(swipeLeft())
             .perform(swipeLeft())
             .perform(swipeRight())
+    }
+
+    @Test
+    fun testDynamicImageLoading() {
+        // Test that ViewPager2 loads images from assets
+        activityRule.scenario.onActivity { activity ->
+            val viewPager = activity.findViewById<androidx.viewpager2.widget.ViewPager2>(R.id.viewPager)
+            val adapter = viewPager.adapter as ImagePagerAdapter
+
+            // Should have at least 1 item (either images or placeholder)
+            assertTrue("Adapter should have at least 1 item", adapter.itemCount >= 1)
+        }
+    }
+
+    @Test
+    fun testImagePagerAdapterWithSampleImages() {
+        // Test that the adapter properly loads sample images
+        activityRule.scenario.onActivity { activity ->
+            val imagePaths = try {
+                val imageFiles = activity.assets.list("sample_images") ?: emptyArray()
+                imageFiles
+                    .filter { it.endsWith(".png", ignoreCase = true) || it.endsWith(".jpg", ignoreCase = true) || it.endsWith(".jpeg", ignoreCase = true) }
+                    .map { "sample_images/$it" }
+                    .sorted()
+            } catch (e: Exception) {
+                emptyList()
+            }
+
+            val adapter = ImagePagerAdapter(activity, imagePaths)
+
+            if (imagePaths.isNotEmpty()) {
+                assertEquals("Adapter count should match image count", imagePaths.size, adapter.itemCount)
+            } else {
+                assertEquals("Adapter should show 1 placeholder when no images", 1, adapter.itemCount)
+            }
+        }
     }
 }

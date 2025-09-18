@@ -38,10 +38,13 @@
 /Users/adamstack/SmilePile/android/app/build.gradle.kts:44: Warning: A newer version of androidx.viewpager2:viewpager2 than 1.0.0 is available: 1.1.0 [GradleDependency]
     implementation("androidx.viewpager2:viewpager2:1.0.0")
                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/adamstack/SmilePile/android/app/build.gradle.kts:47: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:48: Warning: A newer version of androidx.test:core than 1.5.0 is available: 1.7.0 [GradleDependency]
+    testImplementation("androidx.test:core:1.5.0")
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:49: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/adamstack/SmilePile/android/app/build.gradle.kts:48: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+/Users/adamstack/SmilePile/android/app/build.gradle.kts:50: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -92,6 +95,15 @@
 /Users/adamstack/SmilePile/android/app/src/main/res/values/colors.xml:9: Warning: The resource R.color.white appears to be unused [UnusedResources]
     <color name="white">#FFFFFFFF</color>
            ~~~~~~~~~~~~
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/test_image.xml:2: Warning: The resource R.drawable.test_image appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/test_image2.xml:2: Warning: The resource R.drawable.test_image2 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/adamstack/SmilePile/android/app/src/main/res/drawable/test_image3.xml:2: Warning: The resource R.drawable.test_image3 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
 
    Explanation for issues of type "UnusedResources":
    Unused resources make applications larger and slow down builds.
@@ -150,4 +162,4 @@
    application iconwill not show if your monochrome attribute is not also
    specified in android:roundIcon.
 
-0 errors, 25 warnings
+0 errors, 29 warnings

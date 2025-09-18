@@ -8,6 +8,14 @@
             </map>
     </map>
     <map id="UnusedResources">
+        <location id="R.drawable.test_image3"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/test_image3.xml"
+            line="2"
+            column="1"
+            startOffset="39"
+            endLine="15"
+            endColumn="10"
+            endOffset="588"/>
         <location id="R.color.teal_700"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
             line="7"
@@ -24,6 +32,14 @@
             endLine="9"
             endColumn="24"
             endOffset="347"/>
+        <location id="R.drawable.test_image2"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/test_image2.xml"
+            line="2"
+            column="1"
+            startOffset="39"
+            endLine="15"
+            endColumn="10"
+            endOffset="588"/>
         <location id="R.color.purple_700"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
             line="5"
@@ -32,6 +48,14 @@
             endLine="5"
             endColumn="29"
             endOffset="173"/>
+        <location id="R.drawable.test_image"
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/test_image.xml"
+            line="2"
+            column="1"
+            startOffset="39"
+            endLine="15"
+            endColumn="10"
+            endOffset="588"/>
         <location id="R.color.purple_200"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
             line="3"
@@ -42,7 +66,7 @@
             endOffset="79"/>
         <entry
             name="model"
-            string="color[purple_200(D),black(U),teal_200(D),white(D),teal_700(D),purple_700(D),purple_500(U)],drawable[test_image3(U),test_image2(U),ic_launcher_foreground(U),ic_launcher_background(U),test_image(U)],id[imageView(U),viewPager(U)],layout[activity_main(U),item_image(U)],mipmap[ic_launcher_round(U),ic_launcher(U)],string[app_name(U)],style[Base_Theme_SmilePile(U),Theme_SmilePile(U),Theme_SmilePile_NoActionBar(U),Theme(R),Theme_Material3_DayNight(R)],xml[data_extraction_rules(U),backup_rules(U)];e^1,f^12,10^a^9,11^a^9,13^17^6,14^13,15^14^16;;;"/>
+            string="color[purple_200(D),black(U),teal_200(D),white(D),teal_700(D),purple_700(D),purple_500(U)],drawable[test_image3(D),test_image2(D),ic_launcher_foreground(U),ic_launcher_background(U),test_image(D)],id[imageView(U),viewPager(U)],layout[activity_main(U),item_image(U)],mipmap[ic_launcher_round(U),ic_launcher(U)],string[app_name(U)],style[Base_Theme_SmilePile(U),Theme_SmilePile(U),Theme_SmilePile_NoActionBar(U),Theme(R),Theme_Material3_DayNight(R)],xml[data_extraction_rules(U),backup_rules(U)];e^1,f^12,10^a^9,11^a^9,13^17^6,14^13,15^14^16;;;"/>
         <location id="R.color.teal_200"
             file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/colors.xml"
             line="6"

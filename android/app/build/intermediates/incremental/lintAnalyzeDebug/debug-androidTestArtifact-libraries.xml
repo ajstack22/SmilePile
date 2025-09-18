@@ -566,6 +566,19 @@
       name=":@@:app::debug"
       project=":app"/>
   <library
+      name="androidx.test:core:1.5.0@aar"
+      jars="/Users/adamstack/.gradle/caches/transforms-3/9a16e8218e1eae0bfe45840bf3e16766/transformed/core-1.5.0/jars/classes.jar"
+      resolved="androidx.test:core:1.5.0"
+      folder="/Users/adamstack/.gradle/caches/transforms-3/9a16e8218e1eae0bfe45840bf3e16766/transformed/core-1.5.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="junit:junit:4.13.2@jar"
       jars="/Users/adamstack/.gradle/caches/modules-2/files-2.1/junit/junit/4.13.2/8ac9e16d933b6fb43bc7f576336b8f4d7eb5ba12/junit-4.13.2.jar"
       resolved="junit:junit:4.13.2"/>
@@ -573,6 +586,36 @@
       name="org.hamcrest:hamcrest-core:1.3@jar"
       jars="/Users/adamstack/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar"
       resolved="org.hamcrest:hamcrest-core:1.3"/>
+  <library
+      name="androidx.test.services:storage:1.4.2@aar"
+      jars="/Users/adamstack/.gradle/caches/transforms-3/06a1aea85a3d2da3dfef212400c98840/transformed/storage-1.4.2/jars/classes.jar"
+      resolved="androidx.test.services:storage:1.4.2"
+      folder="/Users/adamstack/.gradle/caches/transforms-3/06a1aea85a3d2da3dfef212400c98840/transformed/storage-1.4.2"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.test:annotation:1.0.1@aar"
+      jars="/Users/adamstack/.gradle/caches/transforms-3/437a08ac8a1b22e063c7db54f2141839/transformed/annotation-1.0.1/jars/classes.jar"
+      resolved="androidx.test:annotation:1.0.1"
+      folder="/Users/adamstack/.gradle/caches/transforms-3/437a08ac8a1b22e063c7db54f2141839/transformed/annotation-1.0.1"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="com.google.code.findbugs:jsr305:2.0.2@jar"
+      jars="/Users/adamstack/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.2/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.2.jar"
+      resolved="com.google.code.findbugs:jsr305:2.0.2"/>
   <library
       name="androidx.test.ext:junit:1.1.5@aar"
       jars="/Users/adamstack/.gradle/caches/transforms-3/8dc16dc1a4060f0b121b3fd3fec8437d/transformed/junit-1.1.5/jars/classes.jar"
@@ -591,19 +634,6 @@
       jars="/Users/adamstack/.gradle/caches/transforms-3/a1fd868b4fde000c2df81b9c5dc154cb/transformed/espresso-core-3.5.1/jars/classes.jar"
       resolved="androidx.test.espresso:espresso-core:3.5.1"
       folder="/Users/adamstack/.gradle/caches/transforms-3/a1fd868b4fde000c2df81b9c5dc154cb/transformed/espresso-core-3.5.1"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.test:core:1.5.0@aar"
-      jars="/Users/adamstack/.gradle/caches/transforms-3/9a16e8218e1eae0bfe45840bf3e16766/transformed/core-1.5.0/jars/classes.jar"
-      resolved="androidx.test:core:1.5.0"
-      folder="/Users/adamstack/.gradle/caches/transforms-3/9a16e8218e1eae0bfe45840bf3e16766/transformed/core-1.5.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -634,36 +664,10 @@
       jars="/Users/adamstack/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.3/4785a3c21320980282f9f33d0d1264a69040538f/hamcrest-library-1.3.jar"
       resolved="org.hamcrest:hamcrest-library:1.3"/>
   <library
-      name="androidx.test.services:storage:1.4.2@aar"
-      jars="/Users/adamstack/.gradle/caches/transforms-3/06a1aea85a3d2da3dfef212400c98840/transformed/storage-1.4.2/jars/classes.jar"
-      resolved="androidx.test.services:storage:1.4.2"
-      folder="/Users/adamstack/.gradle/caches/transforms-3/06a1aea85a3d2da3dfef212400c98840/transformed/storage-1.4.2"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="androidx.test:monitor:1.6.1@aar"
       jars="/Users/adamstack/.gradle/caches/transforms-3/b447ec2030b50dc4a2c0f2a149d235a3/transformed/monitor-1.6.1/jars/classes.jar"
       resolved="androidx.test:monitor:1.6.1"
       folder="/Users/adamstack/.gradle/caches/transforms-3/b447ec2030b50dc4a2c0f2a149d235a3/transformed/monitor-1.6.1"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.test:annotation:1.0.1@aar"
-      jars="/Users/adamstack/.gradle/caches/transforms-3/437a08ac8a1b22e063c7db54f2141839/transformed/annotation-1.0.1/jars/classes.jar"
-      resolved="androidx.test:annotation:1.0.1"
-      folder="/Users/adamstack/.gradle/caches/transforms-3/437a08ac8a1b22e063c7db54f2141839/transformed/annotation-1.0.1"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -686,10 +690,6 @@
       symbolFile="R.txt"
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
-  <library
-      name="com.google.code.findbugs:jsr305:2.0.2@jar"
-      jars="/Users/adamstack/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.2/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.2.jar"
-      resolved="com.google.code.findbugs:jsr305:2.0.2"/>
   <library
       name="androidx.test.espresso:espresso-idling-resource:3.5.1@aar"
       jars="/Users/adamstack/.gradle/caches/transforms-3/f4b521ce724c44f48b02e2b935eb3e7d/transformed/espresso-idling-resource-3.5.1/jars/classes.jar"

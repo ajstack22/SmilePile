@@ -1,0 +1,316 @@
+09-18 16:28:38.269 14063 14078 I TestRunner: started: testSwipeGestures(com.smilepile.app.MainActivityTest)
+09-18 16:28:38.271   503   557 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10227 pid=0
+09-18 16:28:38.271   503   557 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10227 => denied (365 us)
+09-18 16:28:38.272   503   642 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10227 pid=14091
+09-18 16:28:38.272   503   642 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10227 => denied (354 us)
+09-18 16:28:38.272   503   642 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10227 pid=14091
+09-18 16:28:38.272   503   642 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10227 => denied (601 us)
+09-18 16:28:38.273   503   642 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10227 pid=14091
+09-18 16:28:38.273   503   642 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10227 => denied (659 us)
+09-18 16:28:38.274   503   557 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10227 pid=0
+09-18 16:28:38.274   503   557 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10227 => denied (2143 us)
+09-18 16:28:38.274  1051  1051 D RecentsView: onTaskRemoved: 87, not handling task stack changes
+09-18 16:28:38.275 14063 14078 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+09-18 16:28:38.281   661  1825 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@94ead83b does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-18 16:28:38.289   503   643 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:28:38.312   503   503 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:28:38.355   661  1825 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10227 pid=0
+09-18 16:28:38.355   661  1825 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10227 => denied (291 us)
+09-18 16:28:38.355   661  1825 W ServiceManagerCppClient: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10227 pid=0
+09-18 16:28:38.355   661  1825 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10227 => denied (63 us)
+09-18 16:28:38.355   661  1825 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10227 pid=0
+09-18 16:28:38.355   661  1825 D PermissionCache: checking android.permission.INTERNAL_SYSTEM_WINDOW for uid=10227 => denied (22 us)
+09-18 16:28:38.360   661   707 I ActivityTaskManager: Displayed com.smilepile.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +1s2ms
+09-18 16:28:38.397   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 401 CompositionType fallback from 3 to 1
+09-18 16:28:38.398 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: PRE_ON_CREATE
+09-18 16:28:38.398 14063 14063 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+09-18 16:28:38.439 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: CREATED
+09-18 16:28:38.440 14063 14063 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=com.smilepile.app.MainActivity@6612a1f
+09-18 16:28:38.446 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: STARTED
+09-18 16:28:38.446 14063 14063 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=com.smilepile.app.MainActivity@6612a1f
+09-18 16:28:38.460 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: RESUMED
+09-18 16:28:38.461 14063 14063 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=com.smilepile.app.MainActivity@6612a1f
+09-18 16:28:38.535   503   557 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:28:38.563 14063 14063 W HWUI    : Image decoding logging dropped!
+09-18 16:28:38.601   661   707 I ActivityTaskManager: Displayed com.smilepile.app/.MainActivity for user 0: +319ms
+09-18 16:28:38.626   661   794 I ImeTracker: com.smilepile.app:f5fcbb0e: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+09-18 16:28:38.629 14063 14063 D InsetsController: hide(ime(), fromIme=false)
+09-18 16:28:38.629 14063 14063 I ImeTracker: com.smilepile.app:f5fcbb0e: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-18 16:28:38.631  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
+09-18 16:28:38.633  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+09-18 16:28:38.633  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.smilepile.app, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+09-18 16:28:38.633  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+09-18 16:28:38.634   661  1951 I ImeTracker: system_server:40198f75: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+09-18 16:28:38.635   661   710 I ImeTracker: system_server:40198f75: onCancelled at PHASE_SERVER_SHOULD_HIDE
+09-18 16:28:38.687   567  6121 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:38.688   567  6121 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:38.701   921  1089 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@110b43d
+09-18 16:28:38.905 14091 14091 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
+09-18 16:28:38.918 14091 14091 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@9646ba8
+09-18 16:28:38.929   921  1089 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@6bc9ec1
+09-18 16:28:38.935 14091 14091 D ViewRootImpl: Skipping stats log for color mode
+09-18 16:28:38.958  1051  1051 D RecentsView: onTaskRemoved: 88, not handling task stack changes
+09-18 16:28:38.960  1051  1051 D RecentsView: onTaskRemoved: 88, not handling task stack changes
+09-18 16:28:39.150 14063 14078 W FileTestStorage: Output properties is not supported.
+09-18 16:28:39.150 14063 14078 I Tracing : Tracer added: class androidx.test.platform.tracing.AndroidXTracer
+09-18 16:28:39.154 14063 14078 D CompatChangeReporter: Compat change id reported: 247079863; UID 10226; state: ENABLED
+09-18 16:28:39.163 14063 14078 D EventInjectionStrategy: Creating injection strategy with input manager.
+09-18 16:28:39.171 14063 14078 I m.smilepile.app: hiddenapi: Accessing hidden method Landroid/hardware/input/InputManager;->getInstance()Landroid/hardware/input/InputManager; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/InputManagerEventInjectionStrategy; (domain=app) using reflection: allowed
+09-18 16:28:39.173 14063 14078 I m.smilepile.app: hiddenapi: Accessing hidden method Landroid/hardware/input/InputManager;->injectInputEvent(Landroid/view/InputEvent;I)Z (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/InputManagerEventInjectionStrategy; (domain=app) using reflection: allowed
+09-18 16:28:39.173 14063 14078 I m.smilepile.app: hiddenapi: Accessing hidden field Landroid/hardware/input/InputManager;->INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH:I (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/InputManagerEventInjectionStrategy; (domain=app) using reflection: allowed
+09-18 16:28:39.192 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden method Landroid/os/MessageQueue;->next()Landroid/os/Message; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/Interrogator; (domain=app) using reflection: allowed
+09-18 16:28:39.192 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden field Landroid/os/MessageQueue;->mMessages:Landroid/os/Message; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/Interrogator; (domain=app) using reflection: allowed
+09-18 16:28:39.193 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden method Landroid/os/Message;->recycleUnchecked()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/Interrogator; (domain=app) using reflection: allowed
+09-18 16:28:39.197 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/RootsOracle; (domain=app) using reflection: allowed
+09-18 16:28:39.197 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/RootsOracle; (domain=app) using reflection: allowed
+09-18 16:28:39.197 14063 14063 I m.smilepile.app: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mParams:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/test/espresso/base/RootsOracle; (domain=app) using reflection: allowed
+09-18 16:28:39.201 14063 14063 I ViewInteraction: Checking 'MatchesViewAssertion{viewMatcher=(view has effective visibility <VISIBLE> and view.getGlobalVisibleRect() to return non-empty rectangle)}' assertion on view view.getId() is <2131231200/com.smilepile.app:id/viewPager>
+09-18 16:28:39.203 14063 14063 I ViewInteraction: Performing 'fast swipe' action on view view.getId() is <2131231200/com.smilepile.app:id/viewPager>
+09-18 16:28:39.239 14063 14063 W HWUI    : Image decoding logging dropped!
+09-18 16:28:39.360 14091 14097 I lepile.app.test: Compiler allocated 5111KB to compile void android.view.ViewRootImpl.performTraversals()
+09-18 16:28:39.409   661   794 I ImeTracker: com.android.systemui:37857948: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+09-18 16:28:39.410   921   921 D InsetsController: hide(ime(), fromIme=false)
+09-18 16:28:39.410   921   921 I ImeTracker: com.android.systemui:37857948: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-18 16:28:39.419  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
+09-18 16:28:39.420  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+09-18 16:28:39.421  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.android.systemui, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+09-18 16:28:39.423   661  1825 I ImeTracker: system_server:eabd2887: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+09-18 16:28:39.424   661   671 I system_server: NativeAlloc concurrent mark compact GC freed 24MB AllocSpace bytes, 46(1344KB) LOS objects, 42% free, 32MB/56MB, paused 994us,5.681ms total 392.078ms
+09-18 16:28:39.425  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+09-18 16:28:39.425   661   710 I ImeTracker: system_server:eabd2887: onCancelled at PHASE_SERVER_SHOULD_HIDE
+09-18 16:28:39.457 14063 14063 D RootViewPicker: Root not ready - waiting: 10ms for one to appear.
+09-18 16:28:39.460   661   673 W System  : A resource failed to call release.
+09-18 16:28:39.460   661   673 W System  : A resource failed to call release.
+09-18 16:28:39.460   661   673 W System  : A resource failed to call release.
+09-18 16:28:39.469 14063 14063 D RootViewPicker: Root not ready - waiting: 25ms for one to appear.
+09-18 16:28:39.506 14063 14063 D RootViewPicker: Root not ready - waiting: 50ms for one to appear.
+09-18 16:28:39.557 14063 14063 D RootViewPicker: Root not ready - waiting: 100ms for one to appear.
+09-18 16:28:39.577 14063 14063 W HWUI    : Image decoding logging dropped!
+09-18 16:28:39.660 14063 14063 D RootViewPicker: Root not ready - waiting: 200ms for one to appear.
+09-18 16:28:39.862 14063 14063 D RootViewPicker: Root not ready - waiting: 400ms for one to appear.
+09-18 16:28:40.265 14063 14063 D RootViewPicker: Root not ready - waiting: 800ms for one to appear.
+09-18 16:28:40.770 14063 14121 D ProfileInstaller: Installing profile for com.smilepile.app
+09-18 16:28:41.066 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:41.561   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-18 16:28:41.561   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-18 16:28:41.561   661   828 D InetDiagMessage: Destroyed live tcp sockets for uids={10208} in 1ms
+09-18 16:28:41.633   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-18 16:28:41.633   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-18 16:28:41.633   661   828 D InetDiagMessage: Destroyed live tcp sockets for uids={10105} in 1ms
+09-18 16:28:42.013  1331  1335 W ssioncontroller: Reducing the number of considered missed Gc histogram windows from 1362 to 100
+09-18 16:28:42.069 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:42.565  1041  1221 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+09-18 16:28:42.604   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-18 16:28:42.605   661   828 D InetDiagMessage: Destroyed 2 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-18 16:28:42.605   661   828 D InetDiagMessage: Destroyed live tcp sockets for uids={10144} in 1ms
+09-18 16:28:43.073 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:44.077 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:45.079 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:46.082 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:47.084 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:47.127   921  1036 E FrameTracker: force finish cuj, time out: J<DEFAULT_TASK_TO_TASK_ANIMATION>
+09-18 16:28:47.617  9886  9886 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+09-18 16:28:48.086 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:48.925   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-18 16:28:48.929   661   828 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-18 16:28:48.929   661   828 D InetDiagMessage: Destroyed live tcp sockets for uids={10227} in 6ms
+09-18 16:28:49.089 14063 14063 D RootViewPicker: Root not ready - waiting: 1000ms for one to appear.
+09-18 16:28:50.116 14063 14078 I UiAutomation: Initialized for user 0 on display 0
+09-18 16:28:50.125 14063 14068 W m.smilepile.app: Cleared Reference was only reachable from finalizer (only reported once)
+09-18 16:28:50.143   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.143   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.144  1613  1961 I AiAiEcho: Settings changed for uri: content://settings/secure/accessibility_enabled
+09-18 16:28:50.145   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.145   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.145   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.146   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.146   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.146   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.147   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.147   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.147   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.149   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.150   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.151   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.153   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.154   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.154   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.154   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.154   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.154   661   661 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.183 14063 14063 D takeScreenshot: Found 1 global views to redraw
+09-18 16:28:50.221  1613  1849 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+09-18 16:28:50.221  1613  1849 I AiAiEcho: EchoTargets:
+09-18 16:28:50.221  1613  1849 I AiAiEcho: Filtered by AiAi flag check:
+09-18 16:28:50.221  1613  1849 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+09-18 16:28:50.230  1613  1849 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+09-18 16:28:50.231  1613  1849 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+09-18 16:28:50.231  1613  1849 I AiAiEcho: EchoTargets:
+09-18 16:28:50.231  1613  1849 I AiAiEcho: Filtered by AiAi flag check:
+09-18 16:28:50.231  1613  1849 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+09-18 16:28:50.231  1613  1849 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+09-18 16:28:50.236  1613  1849 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+09-18 16:28:50.253  1613  1849 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0 (types=[])
+09-18 16:28:50.258  1051  1051 D SsBaseTemplateCard: No text view can be set up
+09-18 16:28:50.259  1051  1051 D SsBaseTemplateCard: Passed-in item info is null
+09-18 16:28:50.259  1051  1051 D SsBaseTemplateCard: Passed-in item info is null
+09-18 16:28:50.259  1051  1051 D SsBaseTemplateCard: Passed-in item info is null
+09-18 16:28:50.259  1051  1051 I SsBaseTemplateCard: Secondary card pane is null
+09-18 16:28:50.264   921   921 W PageIndicator: Total number of pages invalid: 0. Assuming 1 page.
+09-18 16:28:50.377  1587  2983 W MediaProvider: isAppCloneUserPair for user 0: false
+09-18 16:28:50.427  1587  1743 V MediaProvider: Created relation b/w 52 and com.smilepile.app::0
+09-18 16:28:50.507  1249 13878 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+09-18 16:28:50.541  1249 13454 I NetworkScheduler.Stats: (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+09-18 16:28:50.551  1249 14123 I TapAndPay: deviceSupportsHce has detected emulator [CONTEXT service_id=79 ]
+09-18 16:28:50.560  1249 14123 I .gms.persistent: AssetManager2(0xb40000735582e958) locale list changing from [] to [en-US]
+09-18 16:28:50.568  1249 14123 I TapAndPay: NfcAdapter is null while obtaining CardEmulation instance. [CONTEXT service_id=79 ]
+09-18 16:28:50.578  1249 13454 I NetworkScheduler.Stats: (REDACTED) Task %s/%s started execution. cause:%s exec_start_elapsed_seconds: %s
+09-18 16:28:50.579  1249 13454 I NetworkScheduler.Stats: (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+09-18 16:28:50.639   661  1075 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@969fb0da does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-18 16:28:50.657 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: PAUSED
+09-18 16:28:50.658 14063 14063 V ActivityScenario: Update currentActivityStage to PAUSED, currentActivity=com.smilepile.app.MainActivity@6612a1f
+09-18 16:28:50.662   661  1075 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.699 14091 14106 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+09-18 16:28:50.699   567  6121 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.699   567  6121 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.701 14091 14106 I EGL_emulation: Opening libGLESv2_emulation.so
+09-18 16:28:50.703   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.704   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.704   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.704   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.704   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.704   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.707 14091 14106 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+09-18 16:28:50.707   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.707 14091 14106 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+09-18 16:28:50.707   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.708   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.709   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.710   661   710 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:50.714   503   503 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:28:50.750  9008  9008 I Finsky:background: [2] Memory trim requested to level 40
+09-18 16:28:50.750  9005  9005 I Finsky  : [2] Memory trim requested to level 40
+09-18 16:28:50.751  9005  9005 I Finsky  : [2] Flushing in-memory image cache
+09-18 16:28:50.797   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 405 CompositionType fallback from 2 to 1
+09-18 16:28:50.797   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 406 CompositionType fallback from 3 to 1
+09-18 16:28:50.809  9005  9005 I Finsky  : [2] SCH: job service start with id 9876.
+09-18 16:28:50.884   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 408 CompositionType fallback from 2 to 1
+09-18 16:28:50.884   474   474 I RanchuHwc: logCompositionFallbackIfChanged: layer 409 CompositionType fallback from 2 to 1
+09-18 16:28:50.886  9005 13962 I Finsky  : [370] SCH: Satisfied jobs for 9876 are: 12-1
+09-18 16:28:50.904   661   707 I ActivityTaskManager: Displayed com.smilepile.app.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +256ms
+09-18 16:28:50.906  9005 14026 I Finsky  : [376] SCH: Job 12-1 starting
+09-18 16:28:50.915  9005  9005 I Finsky  : [2] WM::SCH: Logging work start for 12-1
+09-18 16:28:50.923   661   794 I ImeTracker: com.android.systemui:a88517ee: onRequestHide at ORIGIN_SERVER reason HIDE_SAME_WINDOW_FOCUSED_WITHOUT_EDITOR fromUser false
+09-18 16:28:50.937  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043
+09-18 16:28:50.939  9005  9005 I Finsky  : [2] [ContentSync] job started
+09-18 16:28:50.954  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+09-18 16:28:50.954  1521  1521 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.android.systemui, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+09-18 16:28:50.988  1521  1521 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+09-18 16:28:50.988  1521  1521 W NotificationCenter: NotificationCenter$NotificationQueue.notifyPendingNotificationsOnExecutor():877 Heavy notify work detected on UI thread: [kig->ilu, kig->jvb, kig->ilu, kig->fef, kig->ilu, kig->jnx, kig->ilu, kig->ilu, kig->ilu, kig->khc, kig->ilu, kig->lux, kig->ilu, kig->ijm, kig->imt, kig->gkl, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->fro, kig->khg, kig->fcb, kig->ilu, kig->ilu] takes 34ms
+09-18 16:28:51.027  1521  1521 W NotificationCenter: NotificationCenter$NotificationQueue.notifyPendingNotificationsOnExecutor():877 Heavy notify work detected on UI thread: [kig->jjs] takes 38ms
+09-18 16:28:51.155   921   921 I ImeTracker: com.android.systemui:e11fbf87: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_CLOSE_CURRENT_SESSION fromUser false
+09-18 16:28:51.155   921   921 I ImeTracker: com.android.systemui:e11fbf87: onFailed at PHASE_CLIENT_VIEW_SERVED
+09-18 16:28:51.155   921   921 W InputMethodManager: No current root view, ignoring closeCurrentInput()
+09-18 16:28:51.159   921   921 D InsetsController: hide(ime(), fromIme=false)
+09-18 16:28:51.159   921   921 I ImeTracker: com.android.systemui:a88517ee: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-18 16:28:51.172   503   558 I BpBinder: onLastStrongRef automatically unlinking death recipients:
+09-18 16:28:51.281 14063 14063 D VRI[MainActivity]: visibilityChanged oldVisibility=true newVisibility=false
+09-18 16:28:51.306   567  3371 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:51.306   567  3371 W IPCThreadState: Sending oneway calls to frozen process.
+09-18 16:28:51.310 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: STOPPED
+09-18 16:28:51.311 14063 14063 V ActivityScenario: Update currentActivityStage to STOPPED, currentActivity=com.smilepile.app.MainActivity@6612a1f
+09-18 16:28:51.319 14063 14063 D LifecycleMonitor: Lifecycle status change: com.smilepile.app.MainActivity@6612a1f in: DESTROYED
+09-18 16:28:51.319 14063 14063 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+09-18 16:28:51.319 14063 14063 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@74f8788
+09-18 16:28:51.319   661   711 I ImeTracker: system_server:d992b26b: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+09-18 16:28:51.322 14063 14078 E TestRunner: failed: testSwipeGestures(com.smilepile.app.MainActivityTest)
+09-18 16:28:51.322 14063 14078 E TestRunner: ----- begin exception -----
+09-18 16:28:51.325 14063 14078 E TestRunner: androidx.test.espresso.base.RootViewPicker$RootViewWithoutFocusException: Waited for the root of the view hierarchy to have window focus and not request layout for 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Root:
+09-18 16:28:51.325 14063 14078 E TestRunner: Root{application-window-token=android.view.ViewRootImpl$W@a25bce, window-token=android.view.ViewRootImpl$W@a25bce, has-window-focus=false, layout-params-type=1, layout-params-string={(0,0)(fillxfill) ty=BASE_APPLICATION wanim=0x103030e
+09-18 16:28:51.325 14063 14078 E TestRunner:   fl=LAYOUT_IN_SCREEN FULLSCREEN LAYOUT_INSET_DECOR SPLIT_TOUCH HARDWARE_ACCELERATED DRAWS_SYSTEM_BAR_BACKGROUNDS
+09-18 16:28:51.325 14063 14078 E TestRunner:   pfl=NO_MOVE_ANIMATION FORCE_DRAW_STATUS_BAR_BACKGROUND FIT_INSETS_CONTROLLED
+09-18 16:28:51.325 14063 14078 E TestRunner:   bhv=DEFAULT
+09-18 16:28:51.325 14063 14078 E TestRunner:   fitSides=
+09-18 16:28:51.325 14063 14078 E TestRunner:   frameRateBoostOnTouch=true
+09-18 16:28:51.325 14063 14078 E TestRunner:   dvrrWindowFrameRateHint=true}, decor-view-string=DecorView{id=-1, visibility=VISIBLE, width=1080, height=2282, has-focus=false, has-focusable=true, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, layout-params={(0,0)(fillxfill) ty=BASE_APPLICATION wanim=0x103030e
+09-18 16:28:51.325 14063 14078 E TestRunner:   fl=LAYOUT_IN_SCREEN FULLSCREEN LAYOUT_INSET_DECOR SPLIT_TOUCH HARDWARE_ACCELERATED DRAWS_SYSTEM_BAR_BACKGROUNDS
+09-18 16:28:51.325 14063 14078 E TestRunner:   pfl=NO_MOVE_ANIMATION FORCE_DRAW_STATUS_BAR_BACKGROUND FIT_INSETS_CONTROLLED
+09-18 16:28:51.325 14063 14078 E TestRunner:   bhv=DEFAULT
+09-18 16:28:51.325 14063 14078 E TestRunner:   fitSides=
+09-18 16:28:51.325 14063 14078 E TestRunner:   frameRateBoostOnTouch=true
+09-18 16:28:51.325 14063 14078 E TestRunner:   dvrrWindowFrameRateHint=true}, tag=null, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1}}
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at dalvik.system.VMStack.getThreadStackTrace(Native Method)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at java.lang.Thread.getStackTrace(Thread.java:1960)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.base.EspressoExceptionHandler.handleSafely(EspressoExceptionHandler.java:2)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.base.EspressoExceptionHandler.handleSafely(EspressoExceptionHandler.java:1)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.base.DefaultFailureHandler$TypedFailureHandler.handle(DefaultFailureHandler.java:4)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:5)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.ViewInteraction.waitForAndHandleInteractionResults(ViewInteraction.java:8)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.ViewInteraction.desugaredPerform(ViewInteraction.java:11)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.espresso.ViewInteraction.perform(ViewInteraction.java:8)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at com.smilepile.app.MainActivityTest.testSwipeGestures(MainActivityTest.kt:35)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at java.lang.reflect.Method.invoke(Native Method)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.rules.ExternalResource$1.evaluate(ExternalResource.java:54)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at androidx.test.ext.junit.runners.AndroidJUnit4.run(AndroidJUnit4.java:162)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:128)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:27)
+09-18 16:28:51.325 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:67)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:58)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:446)
+09-18 16:28:51.327 14063 14078 E TestRunner: 	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2597)
+09-18 16:28:51.330   661   710 I ImeTracker: system_server:d992b26b: onCancelled at PHASE_SERVER_SHOULD_HIDE
+09-18 16:28:51.331 14063 14078 E TestRunner: ----- end exception -----
+09-18 16:28:51.336  9005 14128 I Finsky  : [377] App states replicator found 10 unowned apps
+09-18 16:28:51.337 14063 14078 I TestRunner: finished: testSwipeGestures(com.smilepile.app.MainActivityTest)
