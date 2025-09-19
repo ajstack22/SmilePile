@@ -1,138 +1,150 @@
-# SmilePile - Iterative Development Template
+# SmilePile 📸
 
-A photo gallery app for children, built using the Atlas iterative development methodology.
+A child-safe photo gallery app for Android that creates a private, curated space for children to enjoy family photos.
 
-## 🎯 Purpose
+## 🎯 Overview
 
-This repository demonstrates how to build an Android app iteratively, ensuring each step produces working, tested software. It's both:
-1. A working photo gallery app for children
-2. A template for iterative development methodology
+SmilePile is an Android application designed specifically for young children to safely view and interact with family photos. The app features a simple, intuitive interface with parental controls and zero internet connectivity for maximum privacy and safety.
 
-## 📁 Repository Structure
+## ✨ Features
 
+### Child Mode
+- **Simple Category Navigation**: Large, colorful tiles for easy category selection
+- **Fullscreen Photo Viewing**: Swipe through photos with minimal UI distractions
+- **Child-Safe Design**: No ads, no internet access, no external sharing
+
+### Parent Mode
+- **Secure Access**: Math-based authentication to prevent accidental access
+- **Photo Import**: Import photos from device storage with category assignment
+- **Category Management**: Create, edit, and delete photo categories
+- **Privacy Controls**: EXIF metadata automatically stripped from all photos
+- **Permission Management**: Granular control over app permissions
+
+## 🔒 Privacy & Safety
+
+- **100% Offline**: No internet permissions or connectivity
+- **Local Storage Only**: All photos stored on device
+- **Metadata Removal**: EXIF data automatically stripped
+- **No Analytics**: No tracking or data collection
+- **Child-Safe**: No ads, in-app purchases, or external links
+
+## 📱 Compatibility
+
+- **Minimum SDK**: API 26 (Android 8.0)
+- **Target SDK**: API 35 (Android 16)
+- **Tested On**: Pixel 9 Emulator, various physical devices
+- **Screen Sizes**: Phones and tablets supported
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Android Studio (latest version)
+- Android SDK 35
+- Kotlin 1.9.0+
+- Gradle 8.2+
+
+### Building the App
+
+1. Clone the repository:
+```bash
+git clone https://github.com/ajstack22/SmilePile.git
+cd SmilePile
+```
+
+2. Open in Android Studio:
+- File → Open → Select the `SmilePile/android` directory
+
+3. Build and run:
+- Click "Run" or use `./gradlew assembleDebug`
+
+### Installation
+
+1. Enable Developer Options on your Android device
+2. Enable USB Debugging
+3. Connect device via USB
+4. Run: `adb install android/app/build/outputs/apk/debug/app-debug.apk`
+
+## 🏗️ Architecture
+
+### Tech Stack
+- **Language**: Kotlin
+- **UI**: Material Design Components
+- **Database**: Room Persistence Library
+- **Async**: Coroutines
+- **Image Loading**: Glide
+- **Architecture**: MVVM Pattern
+
+### Project Structure
 ```
 SmilePile/
-├── README.md               # This file
-├── REQUIREMENTS.md         # What we're building
-├── atlas/                  # Atlas framework
-│   ├── 00_Prompt.md       # Orchestrator instructions
-│   ├── 07_SCRIPTS_AND_AUTOMATION/
-│   │   ├── iteration_manager.py    # Validates progress
-│   │   ├── context_injector.py     # Provides context
-│   │   ├── doc_aggregator.py       # Documentation tracking
-│   │   └── ...                     # Other tools
-│   └── ...                # Methodology docs
-└── app/                    # Android app (created in Iteration 0)
+├── android/               # Android app source
+│   ├── app/
+│   │   ├── src/main/     # Main source code
+│   │   │   ├── java/     # Kotlin source files
+│   │   │   └── res/      # Resources (layouts, values, etc.)
+│   │   └── build.gradle.kts
+├── features/             # Feature specifications
+├── bugs/                 # Bug tracking
+└── .atlas/              # Development workflow tools
 ```
 
-## 🚀 Quick Start
+## 🔄 Current Status
 
-### For AI-Assisted Development
+### Completed Features ✅
+- Basic photo gallery with categories
+- Parent mode with secure access
+- Photo import from device storage
+- Category management (CRUD operations)
+- Android 16 compatibility
+- Storage permissions handling
+- EXIF metadata removal
 
-1. Give your AI orchestrator the `atlas/00_Prompt.md`
-2. It will build the app iteratively, starting with Iteration 0
-3. Each iteration is validated before proceeding
+### In Development 🚧
+- Photo reordering within categories
+- Category cover image selection
+- Enhanced animations
+- Tablet-optimized layouts
 
-### For Human Developers
+### Planned Features 📋
+- Backup/restore functionality
+- Multiple parent profiles
+- Voice narration for photos
+- Drawing/annotation tools
 
-Follow the iteration plan in `REQUIREMENTS.md`:
+## 🧪 Testing
 
-1. **Initialize tracking:**
-   ```bash
-   python3 atlas/07_SCRIPTS_AND_AUTOMATION/iteration_manager.py start "SmilePile" 8
-   ```
+Run unit tests:
+```bash
+./gradlew test
+```
 
-2. **Check current status:**
-   ```bash
-   python3 atlas/07_SCRIPTS_AND_AUTOMATION/iteration_manager.py context
-   ```
-
-3. **Validate before proceeding:**
-   ```bash
-   python3 atlas/07_SCRIPTS_AND_AUTOMATION/iteration_manager.py validate
-   ```
-
-4. **Move to next iteration:**
-   ```bash
-   python3 atlas/07_SCRIPTS_AND_AUTOMATION/iteration_manager.py proceed "Feature complete"
-   ```
-
-## 🔄 The Iteration Process
-
-Each iteration follows this pattern:
-
-1. **Build** - Add ONE feature to working code
-2. **Test** - Write tests for the new feature
-3. **Document** - Update documentation
-4. **Validate** - Ensure everything works
-5. **Commit** - Save working state
-6. **Proceed** - Move to next iteration
-
-## 📋 Iteration Plan
-
-| Iteration | Goal | Status |
-|-----------|------|--------|
-| 0 | Display one image | ⏳ Starting |
-| 1 | Swipe between images | ⏹️ Pending |
-| 2 | Load from folder | ⏹️ Pending |
-| 3 | Add categories | ⏹️ Pending |
-| 4 | Database integration | ⏹️ Pending |
-| 5 | Import photos | ⏹️ Pending |
-| 6 | Parent management | ⏹️ Pending |
-| 7 | Polish & optimize | ⏹️ Pending |
-
-## 🛠️ Key Tools
-
-### iteration_manager.py
-Enforces validation gates between iterations. Won't let you proceed until:
-- Code compiles ✅
-- Tests pass ✅
-- Coverage adequate ✅
-- Documentation exists ✅
-
-### context_injector.py
-Provides complete context to developers/agents including:
-- Current iteration state
-- Dependencies
-- Test requirements
-- Integration points
-
-### doc_aggregator.py
-Tracks documentation for:
-- Each iteration
-- Components
-- Architecture
-
-## 📚 Methodology
-
-This project follows the Atlas Iteration Methodology:
-- **Always have working software** - Can demo after any iteration
-- **Test as you go** - Coverage grows naturally
-- **Document as you build** - Stays current
-- **Integrate immediately** - No "big bang" integration
-
-## 🎓 Learning from Failure
-
-This approach was developed after a previous attempt that:
-- Built database ✅
-- Built UI ✅
-- Failed to integrate ❌
-
-The iterative approach prevents this by ensuring integration at each step.
+Run instrumented tests:
+```bash
+./gradlew connectedAndroidTest
+```
 
 ## 🤝 Contributing
 
-1. Follow the iteration methodology
-2. Each PR should be one complete iteration
-3. Must pass validation gates
-4. Include tests and documentation
+This is currently a personal project, but suggestions and feedback are welcome! Please open an issue for:
+- Bug reports
+- Feature requests
+- General feedback
 
 ## 📄 License
 
-MIT - Use this as a template for your own iterative projects!
+This project is currently proprietary. All rights reserved.
 
-## 🔗 More Information
+## 👨‍💻 Development Workflow
 
-- See `ITERATION_METHODOLOGY.md` for detailed methodology
-- See `REQUIREMENTS.md` for app specifications
-- See `AGENT_INSTRUCTIONS.md` for AI development guidelines
+The project uses the Atlas framework for development:
+- Adversarial workflow for quality assurance
+- Automated testing and validation
+- Feature tracking and bug management
+
+## 📧 Contact
+
+For questions or support, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ for families**
