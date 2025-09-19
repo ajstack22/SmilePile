@@ -29,12 +29,10 @@ class NavigationManager(private val activity: FragmentActivity, private val cont
     fun showCategorySelection() {
         currentState = NavigationState.CATEGORIES
 
-        val fragment = CategoryFragment.newInstance(photos)
-        fragment.setOnCategorySelectedListener { category ->
-            showPhotosForCategory(category)
-        }
+        // Use CategorySelectionFragment instead of CategoryFragment
+        val fragment = com.smilepile.app.fragments.CategorySelectionFragment.newInstance()
 
-        replaceFragment(fragment, "CategoryFragment")
+        replaceFragment(fragment, "CategorySelectionFragment")
     }
 
     /**

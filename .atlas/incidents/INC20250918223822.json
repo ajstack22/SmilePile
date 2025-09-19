@@ -1,0 +1,147 @@
+{
+  "incident_id": "INC20250918223822",
+  "title": "B0001: UI components not rendering on Android 16",
+  "severity": "high",
+  "affected_components": [
+    "UI",
+    "MaterialComponents",
+    "CategoryDropdown"
+  ],
+  "status": "completed",
+  "started_at": "2025-09-18T22:38:22.026422",
+  "timeline": [
+    {
+      "timestamp": "2025-09-18T22:38:22.026425",
+      "event": "Incident reported",
+      "details": "Title: B0001: UI components not rendering on Android 16, Severity: high"
+    },
+    {
+      "timestamp": "2025-09-18T22:38:36.141690",
+      "event": "Hypothesis added",
+      "details": "SDK Version Mismatch"
+    },
+    {
+      "timestamp": "2025-09-18T22:38:42.265197",
+      "event": "Hypothesis added",
+      "details": "Edge-to-Edge Display Enforcement"
+    },
+    {
+      "timestamp": "2025-09-18T22:38:47.665067",
+      "event": "Hypothesis added",
+      "details": "Database Access on Main Thread"
+    },
+    {
+      "timestamp": "2025-09-18T22:38:58.470608",
+      "event": "Hypothesis H01 tested",
+      "details": "Result: confirmed"
+    },
+    {
+      "timestamp": "2025-09-18T22:39:09.820964",
+      "event": "Hypothesis H02 tested",
+      "details": "Result: confirmed"
+    },
+    {
+      "timestamp": "2025-09-18T22:39:22.536917",
+      "event": "Hypothesis H03 tested",
+      "details": "Result: refuted"
+    },
+    {
+      "timestamp": "2025-09-18T22:39:28.643748",
+      "event": "Root cause identified",
+      "details": "SDK version mismatch and edge-to-edge display enforcement in Android 16 causing UI components to not render"
+    },
+    {
+      "timestamp": "2025-09-18T22:40:05.084032",
+      "event": "Resolution implemented",
+      "details": "Updated compileSdk and targetSdk to 35, removed fitsSystemWindows from layouts"
+    },
+    {
+      "timestamp": "2025-09-18T22:41:13.996273",
+      "event": "Resolution verified",
+      "details": "All checks passed"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H01",
+      "statement": "SDK Version Mismatch",
+      "reasoning": "App targets SDK 34 but running on Android 16 (API 35)",
+      "status": "confirmed",
+      "added_at": "2025-09-18T22:38:36.141685",
+      "test": {
+        "hypothesis_id": "H01",
+        "test_description": "Checked build.gradle.kts - compileSdk and targetSdk are both 34",
+        "result": "confirmed",
+        "tested_at": "2025-09-18T22:38:58.470603"
+      }
+    },
+    {
+      "id": "H02",
+      "statement": "Edge-to-Edge Display Enforcement",
+      "reasoning": "Android 16 enforces edge-to-edge display which may hide UI components",
+      "status": "confirmed",
+      "added_at": "2025-09-18T22:38:42.265189",
+      "test": {
+        "hypothesis_id": "H02",
+        "test_description": "Layout has fitsSystemWindows=true which conflicts with Android 16 edge-to-edge enforcement",
+        "result": "confirmed",
+        "tested_at": "2025-09-18T22:39:09.820955"
+      }
+    },
+    {
+      "id": "H03",
+      "statement": "Database Access on Main Thread",
+      "reasoning": "Category dropdown not populated - possible main thread blocking",
+      "status": "refuted",
+      "added_at": "2025-09-18T22:38:47.665060",
+      "test": {
+        "hypothesis_id": "H03",
+        "test_description": "ParentModeFragment already uses coroutines for async loading",
+        "result": "refuted",
+        "tested_at": "2025-09-18T22:39:22.536910"
+      }
+    }
+  ],
+  "findings": [],
+  "root_cause": {
+    "description": "SDK version mismatch and edge-to-edge display enforcement in Android 16 causing UI components to not render",
+    "evidence": [],
+    "identified_at": "2025-09-18T22:39:28.643743",
+    "confirmed_hypotheses": [
+      "H01",
+      "H02"
+    ]
+  },
+  "resolution": {
+    "description": "Updated compileSdk and targetSdk to 35, removed fitsSystemWindows from layouts",
+    "steps_taken": [
+      "Updated build.gradle.kts to use SDK 35",
+      "Removed fitsSystemWindows from fragment_category_selection.xml"
+    ],
+    "implemented_at": "2025-09-18T22:40:05.084026",
+    "verification": {
+      "ui_components_visible": true,
+      "import_button_visible": true,
+      "category_dropdown_functional": true,
+      "photo_import_working": true
+    }
+  },
+  "post_mortem": {
+    "incident_id": "INC20250918223822",
+    "title": "B0001: UI components not rendering on Android 16",
+    "severity": "high",
+    "duration_minutes": 2.96,
+    "timeline_events": 10,
+    "hypotheses_tested": 3,
+    "root_cause": "SDK version mismatch and edge-to-edge display enforcement in Android 16 causing UI components to not render",
+    "resolution": "Updated compileSdk and targetSdk to 35, removed fitsSystemWindows from layouts",
+    "lessons_learned": [
+      "SDK version must match Android API level for compatibility",
+      "Edge-to-edge display requires removing fitsSystemWindows in Android 16"
+    ],
+    "action_items": [
+      "Implement preventive measures for identified root cause"
+    ]
+  },
+  "completed_at": "2025-09-18T22:41:19.566027"
+}

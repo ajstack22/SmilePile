@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.smilepile.app.integration.CategoryIntegrationTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-09-18T22:42:28" hostname="Adams-MacBook-Air.local" time="0.083">
+<testsuite name="com.smilepile.app.integration.CategoryIntegrationTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-09-19T08:34:59" hostname="Adams-MacBook-Air.local" time="0.017">
   <properties/>
-  <testcase name="CategoryManager should provide backward compatible photo paths" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.079"/>
-  <testcase name="CategoryManager should maintain data integrity" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.003"/>
-  <testcase name="CategoryManager should distribute photos across 3 categories" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.0"/>
+  <testcase name="CategoryManager should provide backward compatible photo paths" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.013"/>
+  <testcase name="CategoryManager should maintain data integrity" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.002"/>
+  <testcase name="CategoryManager should distribute photos across 3 categories" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.001"/>
   <testcase name="CategoryManager should support adding new categories and photos" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.0"/>
   <testcase name="CategoryManager should provide photo paths compatible with ImagePagerAdapter" classname="com.smilepile.app.integration.CategoryIntegrationTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

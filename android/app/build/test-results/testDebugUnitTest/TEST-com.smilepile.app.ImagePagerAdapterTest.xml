@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.smilepile.app.ImagePagerAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-18T22:42:28" hostname="Adams-MacBook-Air.local" time="1.454">
+<testsuite name="com.smilepile.app.ImagePagerAdapterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-19T08:34:57" hostname="Adams-MacBook-Air.local" time="1.559">
   <properties/>
-  <testcase name="adapter handles empty image list gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="1.342"/>
-  <testcase name="adapter handles asset loading error gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.111"/>
+  <testcase name="adapter handles empty image list gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="1.444"/>
+  <testcase name="adapter handles asset loading error gracefully" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.112"/>
   <testcase name="adapter returns 1 item count when no images available" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.0"/>
-  <testcase name="adapter returns correct item count with images" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.0"/>
+  <testcase name="adapter returns correct item count with images" classname="com.smilepile.app.ImagePagerAdapterTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.lang.instrument.IllegalClassFormatException: Error while instrumenting com/smilepile/app/ImagePagerAdapter with JaCoCo 0.8.8.202204050719/5dcf34a.
 	at org.jacoco.agent.rt.internal_b6258fc.CoverageTransformer.transform(CoverageTransformer.java:94)

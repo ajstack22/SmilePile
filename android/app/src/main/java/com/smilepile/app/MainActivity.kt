@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         // Load photos and initialize navigation
         val imagePaths = loadImagePathsFromAssets()
         val photos = Photo.fromImagePaths(imagePaths)
+
+        // Initialize navigation with CategorySelectionFragment (child mode)
         navigationManager.initialize(photos)
 
         // Keep legacy ViewPager2 setup for backward compatibility (hidden)
