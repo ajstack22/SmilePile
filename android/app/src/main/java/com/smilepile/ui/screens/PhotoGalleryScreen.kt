@@ -30,6 +30,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ChildFriendly
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
@@ -41,6 +42,7 @@ import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Badge
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -53,6 +55,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.SmallFloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -92,6 +96,7 @@ import com.smilepile.data.models.Photo
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.viewmodels.PhotoImportViewModel
 import com.smilepile.ui.viewmodels.SearchViewModel
+import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.components.SearchBar
 import com.smilepile.ui.components.SearchFiltersRow
 import com.smilepile.ui.components.SearchResultsHeader
@@ -111,7 +116,8 @@ fun PhotoGalleryScreen(
     modifier: Modifier = Modifier,
     viewModel: PhotoGalleryViewModel = hiltViewModel(),
     importViewModel: PhotoImportViewModel = hiltViewModel(),
-    searchViewModel: SearchViewModel = hiltViewModel()
+    searchViewModel: SearchViewModel = hiltViewModel(),
+    modeViewModel: AppModeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val importUiState by importViewModel.uiState.collectAsState()
@@ -195,11 +201,21 @@ fun PhotoGalleryScreen(
             } else {
                 TopAppBar(
                     title = {
-                        Text(
-                            text = stringResource(R.string.photo_gallery),
-                            style = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.Bold
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.photo_gallery),
+                                style = MaterialTheme.typography.headlineSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Badge(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                            ) {
+                                Text("Edit Mode")
+                            }
+                        }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.surface,
@@ -209,21 +225,18 @@ fun PhotoGalleryScreen(
             }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
+            ParentModeFABs(
+                onAddPhotoClick = {
                     if (PermissionHandler.isStoragePermissionGranted(context)) {
                         showImportOptions = true
                     } else {
                         storagePermission.launchPermissionRequest()
                     }
                 },
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PhotoLibrary,
-                    contentDescription = "Import Photos"
-                )
-            }
+                onSwitchToKidsMode = {
+                    modeViewModel.requestModeToggle()
+                }
+            )
         },
         bottomBar = {
             if (uiState.isSelectionMode && uiState.hasSelectedPhotos) {
@@ -1003,4 +1016,46 @@ private fun BatchMoveToCategoryDialog(
             }
         }
     )
+}
+
+/**
+ * Dual FAB system for Parent Mode
+ * Primary: Switch to SmilePile (Kids Mode)
+ * Secondary: Add Photos
+ */
+@Composable
+private fun ParentModeFABs(
+    onAddPhotoClick: () -> Unit,
+    onSwitchToKidsMode: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Secondary FAB - Add Photos
+        SmallFloatingActionButton(
+            onClick = onAddPhotoClick,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Add Photos"
+            )
+        }
+
+        // Primary FAB - Switch to SmilePile (Kids Mode)
+        ExtendedFloatingActionButton(
+            onClick = onSwitchToKidsMode,
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ) {
+            Icon(
+                imageVector = Icons.Default.PhotoLibrary,
+                contentDescription = "Switch to SmilePile"
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("SmilePile")
+        }
+    }
 }

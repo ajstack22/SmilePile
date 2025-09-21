@@ -66,6 +66,13 @@ class SettingsViewModel @Inject constructor(
     }
 
     /**
+     * Refresh settings state
+     */
+    fun refreshSettings() {
+        loadSettings()
+    }
+
+    /**
      * Export app data
      */
     fun exportData() {

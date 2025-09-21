@@ -1,14 +1,21 @@
 package com.smilepile.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilepile.data.models.Photo
+import com.smilepile.mode.AppMode
+import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.screens.CategoryManagementScreen
+import com.smilepile.ui.screens.KidsModeGalleryScreen
 import com.smilepile.ui.screens.PhotoGalleryScreen
 import com.smilepile.ui.screens.PhotoViewerScreen
 import com.smilepile.ui.screens.SettingsScreen
@@ -62,15 +69,29 @@ fun AppNavHost(
     startDestination: String = NavigationRoutes.GALLERY,
     modifier: Modifier = Modifier
 ) {
+    // Get mode state
+    val modeViewModel: AppModeViewModel = hiltViewModel()
+    val modeState by modeViewModel.uiState.collectAsState()
+    val currentMode = modeState.currentMode
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier
     ) {
-        // Gallery Screen - Main photo browsing interface
+        // Gallery Screen - Shows Kids or Parent mode based on current state
         composable(NavigationRoutes.GALLERY) {
-            PhotoGalleryScreen(
-                onPhotoClick = { photo, photos ->
+            if (currentMode == AppMode.KIDS) {
+                KidsModeGalleryScreen(
+                    onPhotoClick = { photo ->
+                        // Kids mode - simple photo viewing
+                        navController.navigate(
+                            NavigationRoutes.photoViewerRoute(photo.id, 0)
+                        )
+                    }
+                )
+            } else {
+                PhotoGalleryScreen(
+                    onPhotoClick = { photo, photos ->
                     // Find the index of the clicked photo in the list
                     val photoIndex = photos.indexOfFirst { it.id == photo.id }
                     if (photoIndex != -1) {
@@ -79,10 +100,11 @@ fun AppNavHost(
                         )
                     }
                 },
-                onAddPhotoClick = {
-                    // Camera functionality removed - this callback is no longer used
-                }
-            )
+                    onAddPhotoClick = {
+                        // Camera functionality removed - this callback is no longer used
+                    }
+                )
+            }
         }
 
         // Categories Screen - Category management interface
@@ -94,16 +116,22 @@ fun AppNavHost(
             )
         }
 
-        // Settings Screen - App configuration and preferences
+        // Settings Screen - App configuration and preferences (Parent Mode only)
         composable(NavigationRoutes.SETTINGS) {
-            SettingsScreen(
-                onNavigateUp = {
-                    navController.navigateUp()
-                },
-                onNavigateToParentalControls = {
-                    navController.navigate(NavigationRoutes.PARENTAL_LOCK)
+            if (currentMode == AppMode.PARENT) {
+                SettingsScreen(
+                    onNavigateUp = {
+                        navController.navigateUp()
+                    }
+                )
+            } else {
+                // Settings not accessible in Kids Mode - redirect to gallery
+                LaunchedEffect(Unit) {
+                    navController.navigate(NavigationRoutes.GALLERY) {
+                        popUpTo(NavigationRoutes.SETTINGS) { inclusive = true }
+                    }
                 }
-            )
+            }
         }
 
         // Parental Lock Screen - Authentication required for parental controls

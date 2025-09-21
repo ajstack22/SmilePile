@@ -1,0 +1,238 @@
+name: Build Performance Monitoring
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
+
+jobs:
+  performance-baseline:
+    name: Performance Baseline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Clean build for accurate timing
+        working-directory: android
+        run: ./gradlew clean
+
+      - name: Build with performance profiling
+        working-directory: android
+        run: |
+          echo "Starting performance measurement at $(date)"
+          start_time=$(date +%s)
+
+          ./gradlew assembleDebug --profile --scan --build-cache --parallel \
+            -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false \
+            -Dorg.gradle.internal.operations.trace=true
+
+          end_time=$(date +%s)
+          build_duration=$((end_time - start_time))
+
+          echo "Build completed in ${build_duration} seconds"
+          echo "BUILD_DURATION=${build_duration}" >> $GITHUB_ENV
+
+      - name: Generate performance report
+        run: |
+          mkdir -p performance-reports
+          cat > performance-reports/build-performance.json << EOF
+          {
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "event": "${{ github.event_name }}",
+            "runner": "${{ runner.os }}",
+            "build_duration_seconds": ${BUILD_DURATION},
+            "gradle_version": "$(cd android && ./gradlew --version | grep Gradle | cut -d' ' -f2)",
+            "java_version": "${{ steps.setup-java.outputs.version }}",
+            "cache_enabled": true,
+            "parallel_enabled": true
+          }
+          EOF
+
+      - name: Upload performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report-${{ github.run_number }}
+          path: |
+            performance-reports/
+            android/build/reports/profile/
+          retention-days: 30
+
+      - name: Comment performance on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const buildDuration = process.env.BUILD_DURATION;
+            const body = `
+            ## 🚀 Build Performance Report
+
+            **Build Duration:** ${buildDuration} seconds
+            **Runner:** ${{ runner.os }}
+            **Cache:** Enabled
+            **Parallel:** Enabled
+
+            📊 Detailed performance profile available in artifacts.
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+  performance-comparison:
+    name: Performance Comparison
+    runs-on: ubuntu-latest
+    needs: performance-baseline
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build main branch for comparison
+        working-directory: android
+        run: |
+          ./gradlew clean
+          start_time=$(date +%s)
+          ./gradlew assembleDebug --build-cache --parallel
+          end_time=$(date +%s)
+          main_duration=$((end_time - start_time))
+          echo "MAIN_DURATION=${main_duration}" >> $GITHUB_ENV
+
+      - name: Download PR performance report
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-report-${{ github.run_number }}
+
+      - name: Compare performance
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const mainDuration = parseInt(process.env.MAIN_DURATION);
+
+            // Read PR performance data
+            const prData = JSON.parse(fs.readFileSync('performance-reports/build-performance.json', 'utf8'));
+            const prDuration = prData.build_duration_seconds;
+
+            const difference = prDuration - mainDuration;
+            const percentChange = ((difference / mainDuration) * 100).toFixed(2);
+
+            let emoji = '📊';
+            let status = 'neutral';
+
+            if (difference > 10) {
+              emoji = '🐌';
+              status = 'slower';
+            } else if (difference < -10) {
+              emoji = '🚀';
+              status = 'faster';
+            }
+
+            const body = `
+            ## ${emoji} Build Performance Comparison
+
+            | Metric | Main Branch | PR Branch | Difference |
+            |--------|-------------|-----------|------------|
+            | Build Time | ${mainDuration}s | ${prDuration}s | ${difference > 0 ? '+' : ''}${difference}s (${percentChange}%) |
+
+            **Status:** This PR makes the build **${status}** compared to main.
+
+            ${Math.abs(difference) > 30 ? '⚠️ **Warning:** Significant build time change detected!' : ''}
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+  resource-monitoring:
+    name: Resource Usage Monitoring
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Monitor resource usage during build
+        working-directory: android
+        run: |
+          # Start resource monitoring in background
+          (
+            while true; do
+              echo "$(date '+%Y-%m-%d %H:%M:%S'),$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2}'),$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)"
+              sleep 5
+            done
+          ) > ../resource-usage.csv &
+          MONITOR_PID=$!
+
+          # Run build
+          ./gradlew assembleDebug --build-cache --parallel
+
+          # Stop monitoring
+          kill $MONITOR_PID 2>/dev/null || true
+
+          # Generate resource report
+          echo "timestamp,memory_usage_percent,cpu_usage_percent" > ../resource-report.csv
+          cat ../resource-usage.csv >> ../resource-report.csv
+
+      - name: Upload resource monitoring report
+        uses: actions/upload-artifact@v4
+        with:
+          name: resource-monitoring-${{ github.run_number }}
+          path: resource-report.csv
+          retention-days: 7

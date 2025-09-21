@@ -16,7 +16,12 @@ import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -56,7 +61,6 @@ import com.smilepile.security.SecurePreferencesManager
 @Composable
 fun SettingsScreen(
     onNavigateUp: () -> Unit,
-    onNavigateToParentalControls: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
@@ -65,6 +69,8 @@ fun SettingsScreen(
     val uiState by viewModel.uiState.collectAsState()
     var showClearCacheDialog by remember { mutableStateOf(false) }
     var showAboutDialog by remember { mutableStateOf(false) }
+    var showPinDialog by remember { mutableStateOf(false) }
+    var showChangePinDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = modifier,
@@ -112,21 +118,40 @@ fun SettingsScreen(
             }
 
             item {
-                // Parental Controls Section
+                // Security Section
                 SettingsSection(
-                    title = stringResource(R.string.parental_controls)
+                    title = "Security"
                 ) {
+                    val hasPIN = securePreferencesManager.isPINEnabled()
+
                     SettingsActionItem(
-                        title = stringResource(R.string.parental_controls),
-                        subtitle = stringResource(R.string.parental_controls_subtitle),
+                        title = if (hasPIN) "Change PIN" else "Set PIN",
+                        subtitle = if (hasPIN) {
+                            "PIN protection is enabled for Parent Mode"
+                        } else {
+                            "Set a PIN to protect Parent Mode access"
+                        },
                         icon = Icons.Default.Lock,
                         onClick = {
-                            // Check if parental controls are already set up
-                            // For now, always navigate to parental controls
-                            // The ParentalLockScreen should handle the logic to skip to settings if no PIN exists
-                            onNavigateToParentalControls()
+                            if (hasPIN) {
+                                showChangePinDialog = true
+                            } else {
+                                showPinDialog = true
+                            }
                         }
                     )
+
+                    if (hasPIN) {
+                        SettingsActionItem(
+                            title = "Remove PIN",
+                            subtitle = "Remove PIN protection from Parent Mode",
+                            icon = Icons.Default.LockOpen,
+                            onClick = {
+                                securePreferencesManager.clearPIN()
+                                viewModel.refreshSettings()
+                            }
+                        )
+                    }
                 }
             }
 
@@ -208,6 +233,32 @@ fun SettingsScreen(
     if (showAboutDialog) {
         AboutDialog(
             onDismiss = { showAboutDialog = false }
+        )
+    }
+
+    // PIN Setup Dialog
+    if (showPinDialog) {
+        PinSetupDialog(
+            onDismiss = { showPinDialog = false },
+            onConfirm = { pin ->
+                securePreferencesManager.setPIN(pin)
+                showPinDialog = false
+                viewModel.refreshSettings()
+            }
+        )
+    }
+
+    // Change PIN Dialog
+    if (showChangePinDialog) {
+        ChangePinDialog(
+            onDismiss = { showChangePinDialog = false },
+            onConfirm = { oldPin, newPin ->
+                if (securePreferencesManager.validatePIN(oldPin)) {
+                    securePreferencesManager.setPIN(newPin)
+                    showChangePinDialog = false
+                    viewModel.refreshSettings()
+                }
+            }
         )
     }
 }
@@ -380,6 +431,182 @@ private fun AboutDialog(
         confirmButton = {
             TextButton(onClick = onDismiss) {
                 Text(stringResource(R.string.ok))
+            }
+        }
+    )
+}
+
+@Composable
+private fun PinSetupDialog(
+    onDismiss: () -> Unit,
+    onConfirm: (String) -> Unit
+) {
+    var pin by remember { mutableStateOf("") }
+    var confirmPin by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Set PIN") },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text("Enter a 4-6 digit PIN to protect Parent Mode access")
+
+                OutlinedTextField(
+                    value = pin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            pin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = confirmPin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            confirmPin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("Confirm PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                error?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    when {
+                        pin.length < 4 -> error = "PIN must be at least 4 digits"
+                        pin != confirmPin -> error = "PINs do not match"
+                        else -> onConfirm(pin)
+                    }
+                }
+            ) {
+                Text("Set PIN")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+private fun ChangePinDialog(
+    onDismiss: () -> Unit,
+    onConfirm: (String, String) -> Unit
+) {
+    var oldPin by remember { mutableStateOf("") }
+    var newPin by remember { mutableStateOf("") }
+    var confirmNewPin by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Change PIN") },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                OutlinedTextField(
+                    value = oldPin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            oldPin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("Current PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = newPin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            newPin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("New PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = confirmNewPin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            confirmNewPin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("Confirm New PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                error?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    when {
+                        oldPin.isEmpty() -> error = "Enter current PIN"
+                        newPin.length < 4 -> error = "New PIN must be at least 4 digits"
+                        newPin != confirmNewPin -> error = "New PINs do not match"
+                        else -> onConfirm(oldPin, newPin)
+                    }
+                }
+            ) {
+                Text("Change PIN")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
             }
         }
     )

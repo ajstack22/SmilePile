@@ -148,4 +148,10 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Additional testing dependencies
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
+    kspAndroidTest("com.google.dagger:hilt-compiler:2.48")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
 }
