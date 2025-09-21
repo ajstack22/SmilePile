@@ -1,0 +1,302 @@
+package com.smilepile.ui.viewmodels
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.smilepile.data.models.Category
+import com.smilepile.data.models.Photo
+import com.smilepile.data.repository.CategoryRepository
+import com.smilepile.data.repository.PhotoRepository
+import com.smilepile.operations.PhotoOperationsManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class PhotoGalleryViewModel @Inject constructor(
+    private val photoRepository: PhotoRepository,
+    private val categoryRepository: CategoryRepository,
+    private val photoOperationsManager: PhotoOperationsManager
+) : ViewModel() {
+
+    private val _selectedCategoryId = MutableStateFlow<Long?>(null)
+    val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error.asStateFlow()
+
+    // Multi-selection state
+    private val _isSelectionMode = MutableStateFlow(false)
+    val isSelectionMode: StateFlow<Boolean> = _isSelectionMode.asStateFlow()
+
+    private val _selectedPhotos = MutableStateFlow<Set<Long>>(emptySet())
+    val selectedPhotos: StateFlow<Set<Long>> = _selectedPhotos.asStateFlow()
+
+    private val _isBatchOperationInProgress = MutableStateFlow(false)
+    val isBatchOperationInProgress: StateFlow<Boolean> = _isBatchOperationInProgress.asStateFlow()
+
+    // Get all categories for the filter chips
+    val categories: StateFlow<List<Category>> = categoryRepository.getAllCategoriesFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    // Get photos based on selected category filter
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val photos: StateFlow<List<Photo>> = _selectedCategoryId
+        .flatMapLatest { categoryId ->
+            if (categoryId == null) {
+                photoRepository.getAllPhotosFlow()
+            } else {
+                photoRepository.getPhotosByCategoryFlow(categoryId)
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    // Combined UI state - split into two combines due to parameter limit
+    private val baseUiState = combine(
+        photos,
+        categories,
+        selectedCategoryId,
+        isLoading,
+        error
+    ) { photos, categories, selectedCategoryId, isLoading, error ->
+        BaseUiState(photos, categories, selectedCategoryId, isLoading, error)
+    }
+
+    private val selectionState = combine(
+        isSelectionMode,
+        selectedPhotos,
+        isBatchOperationInProgress
+    ) { isSelectionMode, selectedPhotos, isBatchOperationInProgress ->
+        SelectionState(isSelectionMode, selectedPhotos, isBatchOperationInProgress)
+    }
+
+    val uiState: StateFlow<PhotoGalleryUiState> = combine(
+        baseUiState,
+        selectionState
+    ) { base, selection ->
+        PhotoGalleryUiState(
+            photos = base.photos,
+            categories = base.categories,
+            selectedCategoryId = base.selectedCategoryId,
+            isLoading = base.isLoading,
+            error = base.error,
+            isSelectionMode = selection.isSelectionMode,
+            selectedPhotos = selection.selectedPhotos,
+            isBatchOperationInProgress = selection.isBatchOperationInProgress
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = PhotoGalleryUiState()
+    )
+
+    private data class BaseUiState(
+        val photos: List<Photo>,
+        val categories: List<Category>,
+        val selectedCategoryId: Long?,
+        val isLoading: Boolean,
+        val error: String?
+    )
+
+    private data class SelectionState(
+        val isSelectionMode: Boolean,
+        val selectedPhotos: Set<Long>,
+        val isBatchOperationInProgress: Boolean
+    )
+
+    fun selectCategory(categoryId: Long?) {
+        _selectedCategoryId.value = categoryId
+    }
+
+    fun toggleFavorite(photo: Photo) {
+        viewModelScope.launch {
+            try {
+                val updatedPhoto = photo.copy(isFavorite = !photo.isFavorite)
+                photoRepository.updatePhoto(updatedPhoto)
+            } catch (e: Exception) {
+                _error.value = "Failed to update favorite: ${e.message}"
+            }
+        }
+    }
+
+    fun deletePhoto(photo: Photo) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                photoRepository.deletePhoto(photo)
+            } catch (e: Exception) {
+                _error.value = "Failed to delete photo: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun movePhotoToCategory(photo: Photo, newCategoryId: Long) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                val updatedPhoto = photo.copy(categoryId = newCategoryId)
+                photoRepository.updatePhoto(updatedPhoto)
+            } catch (e: Exception) {
+                _error.value = "Failed to move photo: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    // Selection mode methods
+    fun enterSelectionMode() {
+        _isSelectionMode.value = true
+    }
+
+    fun exitSelectionMode() {
+        _isSelectionMode.value = false
+        _selectedPhotos.value = emptySet()
+    }
+
+    fun togglePhotoSelection(photoId: Long) {
+        val currentSelection = _selectedPhotos.value.toMutableSet()
+        if (currentSelection.contains(photoId)) {
+            currentSelection.remove(photoId)
+        } else {
+            currentSelection.add(photoId)
+        }
+        _selectedPhotos.value = currentSelection
+
+        // Exit selection mode if no photos are selected
+        if (currentSelection.isEmpty()) {
+            _isSelectionMode.value = false
+        }
+    }
+
+    fun selectAllPhotos() {
+        val allPhotoIds = uiState.value.photos.map { it.id }.toSet()
+        _selectedPhotos.value = allPhotoIds
+    }
+
+    fun deselectAllPhotos() {
+        _selectedPhotos.value = emptySet()
+        _isSelectionMode.value = false
+    }
+
+    // Batch operations
+    fun deleteSelectedPhotos() {
+        viewModelScope.launch {
+            try {
+                _isBatchOperationInProgress.value = true
+                val photosToDelete = uiState.value.photos.filter {
+                    _selectedPhotos.value.contains(it.id)
+                }
+
+                val result = photoOperationsManager.deletePhotos(photosToDelete)
+
+                if (result.isCompleteSuccess) {
+                    _error.value = "Successfully deleted ${result.successCount} photos"
+                } else {
+                    _error.value = "Deleted ${result.successCount} photos, failed to delete ${result.failureCount} photos"
+                }
+
+                exitSelectionMode()
+            } catch (e: Exception) {
+                _error.value = "Failed to delete photos: ${e.message}"
+            } finally {
+                _isBatchOperationInProgress.value = false
+            }
+        }
+    }
+
+    fun moveSelectedPhotosToCategory(categoryId: Long) {
+        viewModelScope.launch {
+            try {
+                _isBatchOperationInProgress.value = true
+                val photosToMove = uiState.value.photos.filter {
+                    _selectedPhotos.value.contains(it.id)
+                }
+
+                val result = photoOperationsManager.movePhotosToCategory(photosToMove, categoryId)
+
+                if (result.isCompleteSuccess) {
+                    _error.value = "Successfully moved ${result.successCount} photos"
+                } else {
+                    _error.value = "Moved ${result.successCount} photos, failed to move ${result.failureCount} photos"
+                }
+
+                exitSelectionMode()
+            } catch (e: Exception) {
+                _error.value = "Failed to move photos: ${e.message}"
+            } finally {
+                _isBatchOperationInProgress.value = false
+            }
+        }
+    }
+
+    fun setSelectedPhotosFavorite(isFavorite: Boolean) {
+        viewModelScope.launch {
+            try {
+                _isBatchOperationInProgress.value = true
+                val photosToUpdate = uiState.value.photos.filter {
+                    _selectedPhotos.value.contains(it.id)
+                }
+
+                val result = photoOperationsManager.updateFavoriteStatus(photosToUpdate, isFavorite)
+
+                val action = if (isFavorite) "added to" else "removed from"
+                if (result.isCompleteSuccess) {
+                    _error.value = "Successfully $action favorites: ${result.successCount} photos"
+                } else {
+                    _error.value = "$action favorites: ${result.successCount} photos, failed: ${result.failureCount} photos"
+                }
+
+                exitSelectionMode()
+            } catch (e: Exception) {
+                _error.value = "Failed to update favorites: ${e.message}"
+            } finally {
+                _isBatchOperationInProgress.value = false
+            }
+        }
+    }
+
+    fun clearError() {
+        _error.value = null
+    }
+}
+
+data class PhotoGalleryUiState(
+    val photos: List<Photo> = emptyList(),
+    val categories: List<Category> = emptyList(),
+    val selectedCategoryId: Long? = null,
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val isSelectionMode: Boolean = false,
+    val selectedPhotos: Set<Long> = emptySet(),
+    val isBatchOperationInProgress: Boolean = false
+) {
+    val selectedPhotosCount: Int
+        get() = selectedPhotos.size
+
+    val hasSelectedPhotos: Boolean
+        get() = selectedPhotos.isNotEmpty()
+
+    val isAllPhotosSelected: Boolean
+        get() = photos.isNotEmpty() && selectedPhotos.size == photos.size
+}

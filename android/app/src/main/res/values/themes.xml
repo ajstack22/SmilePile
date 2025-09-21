@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Base.Theme.SmilePile" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- Font will be added later -->
+        <!-- <item name="android:fontFamily">@font/child_friendly</item> -->
+    </style>
+
+    <!-- Light Theme -->
+    <style name="Theme.SmilePile.Light" parent="Base.Theme.SmilePile">
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimaryVariant">@color/light_primary_variant</item>
+        <item name="colorSecondary">@color/light_secondary</item>
+        <item name="colorSecondaryVariant">@color/light_secondary_variant</item>
+        <item name="android:colorBackground">@color/light_background</item>
+        <item name="colorSurface">@color/light_surface</item>
+        <item name="colorError">@color/light_error</item>
+        <item name="colorOnPrimary">@color/light_on_primary</item>
+        <item name="colorOnSecondary">@color/light_on_secondary</item>
+        <item name="colorOnBackground">@color/light_on_background</item>
+        <item name="colorOnSurface">@color/light_on_surface</item>
+        <item name="colorOnError">@color/light_on_error</item>
+        <item name="android:statusBarColor">@color/light_primary_variant</item>
+        <item name="android:navigationBarColor">@color/light_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Dark Theme -->
+    <style name="Theme.SmilePile.Dark" parent="Base.Theme.SmilePile">
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryVariant">@color/dark_primary_variant</item>
+        <item name="colorSecondary">@color/dark_secondary</item>
+        <item name="colorSecondaryVariant">@color/dark_secondary_variant</item>
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorError">@color/dark_error</item>
+        <item name="colorOnPrimary">@color/dark_on_primary</item>
+        <item name="colorOnSecondary">@color/dark_on_secondary</item>
+        <item name="colorOnBackground">@color/dark_on_background</item>
+        <item name="colorOnSurface">@color/dark_on_surface</item>
+        <item name="colorOnError">@color/dark_on_error</item>
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:navigationBarColor">@color/dark_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Rainbow Theme -->
+    <style name="Theme.SmilePile.Rainbow" parent="Base.Theme.SmilePile">
+        <item name="colorPrimary">@color/rainbow_primary</item>
+        <item name="colorPrimaryVariant">@color/rainbow_primary_variant</item>
+        <item name="colorSecondary">@color/rainbow_secondary</item>
+        <item name="colorSecondaryVariant">@color/rainbow_secondary_variant</item>
+        <item name="android:colorBackground">@color/rainbow_background</item>
+        <item name="colorSurface">@color/rainbow_surface</item>
+        <item name="colorError">@color/rainbow_error</item>
+        <item name="colorOnPrimary">@color/rainbow_on_primary</item>
+        <item name="colorOnSecondary">@color/rainbow_on_secondary</item>
+        <item name="colorOnBackground">@color/rainbow_on_background</item>
+        <item name="colorOnSurface">@color/rainbow_on_surface</item>
+        <item name="colorOnError">@color/rainbow_on_error</item>
+        <item name="android:statusBarColor">@color/rainbow_primary_variant</item>
+        <item name="android:navigationBarColor">@color/rainbow_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Fullscreen Theme for Photo Viewing -->
+    <style name="Theme.SmilePile.Fullscreen" parent="Theme.SmilePile.Light">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+</resources>

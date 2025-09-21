@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmilePile</string>
+
+    <!-- Category Names -->
+    <string name="category_animals">Animals</string>
+    <string name="category_nature">Nature</string>
+    <string name="category_fun">Fun</string>
+
+    <!-- Navigation -->
+    <string name="nav_gallery">Gallery</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_settings">Settings</string>
+    <string name="navigation_categories">Categories</string>
+    <string name="navigation_photos">Photos</string>
+    <string name="navigation_settings">Settings</string>
+
+    <!-- Parent Mode -->
+    <string name="parent_mode_title">Parent Mode</string>
+    <string name="parent_mode_prompt">Solve this to enter Parent Mode:</string>
+    <string name="parent_mode_incorrect">Try again!</string>
+    <string name="parent_mode_exit">Exit Parent Mode</string>
+
+    <!-- Import -->
+    <string name="import_photos">Import Photos</string>
+    <string name="select_category">Select Category</string>
+    <string name="importing">Importing…</string>
+    <string name="import_success">Photos imported successfully!</string>
+    <string name="import_error">Error importing photos</string>
+
+    <!-- Settings -->
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_rainbow">Rainbow</string>
+    <string name="change_theme">Change Theme</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_dark_mode_on">Dark theme enabled</string>
+    <string name="settings_dark_mode_off">Light theme enabled</string>
+
+    <string name="settings_data_management">Data Management</string>
+    <string name="settings_export_data">Export Data</string>
+    <string name="settings_export_data_subtitle">Backup your photos and categories</string>
+    <string name="settings_import_data">Import Data</string>
+    <string name="settings_import_data_subtitle">Restore from backup file</string>
+    <string name="settings_clear_cache">Clear Cache</string>
+    <string name="settings_clear_cache_subtitle">Free up storage space</string>
+
+    <string name="settings_about">About</string>
+    <string name="settings_about_app">About SmilePile</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="settings_about_description">A safe and fun photo gallery designed for children to explore and organize their favorite pictures.</string>
+    <string name="settings_about_child_safety">Child-safe design with parental controls</string>
+
+    <!-- Settings Dialogs -->
+    <string name="settings_clear_cache_dialog_title">Clear Cache?</string>
+    <string name="settings_clear_cache_dialog_message">This will free up storage space but may slow down image loading temporarily.</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <!-- Photo Gallery -->
+    <string name="photo_gallery">Photo Gallery</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="no_photos_found">No photos found</string>
+    <string name="tap_add_button_to_get_started">Tap the + button to get started</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+
+    <!-- Photo Viewer -->
+    <string name="navigate_back">Navigate back</string>
+    <string name="share_photo">Share photo</string>
+    <string name="delete_photo">Delete photo</string>
+
+    <!-- Parental Controls -->
+    <string name="parental_controls">Parental Controls</string>
+    <string name="parental_controls_subtitle">Manage child safety settings</string>
+    <string name="parental_lock_title">Parental Lock</string>
+    <string name="parental_lock_subtitle">Enter PIN or pattern to continue</string>
+    <string name="parental_lock_kid_message">Ask a grown-up for help!</string>
+    <string name="parental_lock_cooldown_message">Please wait %1$d seconds before trying again</string>
+
+    <!-- PIN/Pattern Setup -->
+    <string name="setup_pin_title">Set up PIN</string>
+    <string name="setup_pin_subtitle">Choose a 4-6 digit PIN</string>
+    <string name="setup_pattern_title">Set up Pattern</string>
+    <string name="setup_pattern_subtitle">Draw a pattern with at least 4 dots</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="enter_pattern">Draw Pattern</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="confirm_pattern">Confirm Pattern</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="change_pattern">Change Pattern</string>
+    <string name="switch_to_pattern">Use Pattern Instead</string>
+    <string name="switch_to_pin">Use PIN Instead</string>
+
+    <!-- PIN Validation -->
+    <string name="pin_too_short">PIN must be at least 4 digits</string>
+    <string name="pin_too_long">PIN must be no more than 6 digits</string>
+    <string name="pattern_too_short">Pattern must connect at least 4 dots</string>
+    <string name="pins_do_not_match">PINs do not match</string>
+    <string name="patterns_do_not_match">Patterns do not match</string>
+    <string name="invalid_pin_or_pattern">Incorrect PIN or pattern</string>
+
+    <!-- Child Safety Settings -->
+    <string name="child_safety_settings">Child Safety Settings</string>
+    <string name="kid_safe_mode">Kid-Safe Mode</string>
+    <string name="kid_safe_mode_subtitle">Simplified interface for children</string>
+    <string name="camera_access">Camera Access</string>
+    <string name="camera_access_subtitle">Allow taking new photos</string>
+    <string name="delete_protection">Delete Protection</string>
+    <string name="delete_protection_subtitle">Prevent accidental photo deletion</string>
+    <string name="time_limits">Time Limits</string>
+    <string name="time_limits_subtitle">Set daily usage limits (coming soon)</string>
+
+    <!-- Authentication -->
+    <string name="authentication_required">Authentication Required</string>
+    <string name="unlock_parental_controls">Unlock Parental Controls</string>
+    <string name="failed_attempts">Failed attempts: %1$d/%2$d</string>
+    <string name="try_again">Try again!</string>
+    <string name="access_denied">Access Denied</string>
+    <string name="unlock">Unlock</string>
+    <string name="lock">Lock</string>
+
+    <!-- Setup -->
+    <string name="initial_setup">Initial Setup</string>
+    <string name="setup_security">Set up Security</string>
+    <string name="setup_security_subtitle">Choose how to protect parental settings</string>
+    <string name="setup_complete">Setup Complete</string>
+    <string name="no_security_warning">Warning: No security method is set up. Anyone can access parental controls.</string>
+
+    <!-- Actions -->
+    <string name="save">Save</string>
+    <string name="skip">Skip</string>
+    <string name="continue_button">Continue</string>
+    <string name="back">Back</string>
+    <string name="done">Done</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+
+    <!-- Content Descriptions for Accessibility -->
+    <string name="cd_category_image">Category image</string>
+    <string name="cd_photo">Photo</string>
+    <string name="cd_back_button">Go back</string>
+    <string name="cd_settings_button">Open settings</string>
+    <string name="cd_add_photo">Add new photo</string>
+    <string name="cd_parental_lock">Parental controls lock</string>
+    <string name="cd_pin_digit">PIN digit</string>
+    <string name="cd_pattern_dot">Pattern dot</string>
+    <string name="cd_delete_digit">Delete last digit</string>
+</resources>
