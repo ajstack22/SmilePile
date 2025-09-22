@@ -137,13 +137,13 @@ class PhotoGalleryViewModel @Inject constructor(
         }
     }
 
-    fun deletePhoto(photo: Photo) {
+    fun removePhotoFromLibrary(photo: Photo) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                photoRepository.deletePhoto(photo)
+                photoRepository.removeFromLibrary(photo)
             } catch (e: Exception) {
-                _error.value = "Failed to delete photo: ${e.message}"
+                _error.value = "Failed to remove photo from library: ${e.message}"
             } finally {
                 _isLoading.value = false
             }
@@ -200,25 +200,25 @@ class PhotoGalleryViewModel @Inject constructor(
     }
 
     // Batch operations
-    fun deleteSelectedPhotos() {
+    fun removeSelectedPhotosFromLibrary() {
         viewModelScope.launch {
             try {
                 _isBatchOperationInProgress.value = true
-                val photosToDelete = uiState.value.photos.filter {
+                val photosToRemove = uiState.value.photos.filter {
                     _selectedPhotos.value.contains(it.id)
                 }
 
-                val result = photoOperationsManager.deletePhotos(photosToDelete)
+                val result = photoOperationsManager.removeFromLibrary(photosToRemove)
 
                 if (result.isCompleteSuccess) {
-                    _error.value = "Successfully deleted ${result.successCount} photos"
+                    _error.value = "Successfully removed ${result.successCount} photos from library"
                 } else {
-                    _error.value = "Deleted ${result.successCount} photos, failed to delete ${result.failureCount} photos"
+                    _error.value = "Removed ${result.successCount} photos from library, failed to remove ${result.failureCount} photos"
                 }
 
                 exitSelectionMode()
             } catch (e: Exception) {
-                _error.value = "Failed to delete photos: ${e.message}"
+                _error.value = "Failed to remove photos from library: ${e.message}"
             } finally {
                 _isBatchOperationInProgress.value = false
             }

@@ -1,0 +1,201 @@
+{
+  "next_feature_id": 5,
+  "next_bug_id": 1,
+  "next_tech_debt_id": 2,
+  "next_epic_id": 2,
+  "features": [
+    {
+      "id": "F0001",
+      "type": "feature",
+      "title": "Claude Code Task Tool Integration Hook",
+      "description": "Implement the actual integration mechanism to intercept Claude Code's Task tool calls and automatically inject context before agent execution. This is the critical missing piece that enables the entire auto-context injection system.",
+      "acceptance_criteria": [
+        "Task tool calls intercepted successfully",
+        "Context injection happens automatically",
+        "Performance meets <500ms requirement",
+        "Integration tests pass",
+        "No breaking changes to existing workflows"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "completed",
+      "created_at": "2025-09-19T20:30:50.271717",
+      "file_path": "features/_F0001_claude_code_task_tool_integrat.md",
+      "updated_at": "2025-09-19T20:58:44.741323",
+      "completed_at": "2025-09-19T20:58:44.741330"
+    },
+    {
+      "id": "F0002",
+      "type": "feature",
+      "title": "Performance Benchmarking and Optimization",
+      "description": "Implement comprehensive performance benchmarking to validate the system meets targets: <500ms injection speed per agent, <1s for 10 parallel agents, 80% cache hit rate. Add optimization for slow paths.",
+      "acceptance_criteria": [
+        "Benchmark suite implemented",
+        "<500ms injection speed validated",
+        "<1s parallel spawning validated",
+        "Cache hit rate >80%",
+        "Performance dashboard created"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "completed",
+      "created_at": "2025-09-19T20:30:57.136361",
+      "file_path": "features/_F0002_performance_benchmarking_and_o.md",
+      "updated_at": "2025-09-19T20:58:44.773359",
+      "completed_at": "2025-09-19T20:58:44.773378"
+    },
+    {
+      "id": "F0003",
+      "type": "feature",
+      "title": "Integration Test Suite for Context Injection",
+      "description": "Create comprehensive integration tests for the auto-context injection system including end-to-end scenarios, parallel agent spawning, context inheritance validation, and detection accuracy measurement.",
+      "acceptance_criteria": [
+        "E2E test scenarios created",
+        "Parallel spawning tests implemented",
+        "Context inheritance tests validated",
+        "95% detection accuracy measured",
+        "Test coverage >80%"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "completed",
+      "created_at": "2025-09-19T20:31:02.351652",
+      "file_path": "features/_F0003_integration_test_suite_for_con.md",
+      "updated_at": "2025-09-19T20:58:44.804519",
+      "completed_at": "2025-09-19T20:58:44.804525"
+    },
+    {
+      "id": "F0004",
+      "type": "feature",
+      "title": "Context Injection Documentation and Guides",
+      "description": "Create comprehensive documentation for the auto-context injection system including setup guides, configuration reference, troubleshooting guide, and examples for extending the system.",
+      "acceptance_criteria": [
+        "Setup documentation complete",
+        "Configuration reference created",
+        "Troubleshooting guide written",
+        "Extension examples provided",
+        "API documentation generated"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "completed",
+      "created_at": "2025-09-19T20:31:12.856729",
+      "file_path": "features/_F0004_context_injection_documentatio.md",
+      "updated_at": "2025-09-19T20:58:44.833799",
+      "completed_at": "2025-09-19T20:58:44.833805"
+    }
+  ],
+  "bugs": [],
+  "tech_debt": [
+    {
+      "id": "T0001",
+      "type": "tech_debt",
+      "title": "Production Hardening for Context Injection",
+      "description": "Add comprehensive error handling, circuit breaker patterns, monitoring/alerting implementation, and graceful degradation for the context injection system to ensure production readiness.",
+      "impact": "Without proper hardening, the system could cause agent failures or performance degradation in production, affecting all LLM operations.",
+      "effort": "large",
+      "priority": "medium",
+      "status": "completed",
+      "created_at": "2025-09-19T20:31:07.773546",
+      "file_path": "tech_debt/_T0001_production_hardening_for_conte.md",
+      "updated_at": "2025-09-19T20:58:44.862818",
+      "completed_at": "2025-09-19T20:58:44.862823"
+    }
+  ],
+  "epics": [
+    {
+      "id": "E001",
+      "type": "epic",
+      "title": "ATLAS-001 Auto Context Injection System",
+      "description": "Automatic LLM-Driven Context Injection System - Provides automatic context to agents spawned via Task tool with zero manual intervention",
+      "stories": [],
+      "objectives": [
+        "100% automatic context injection",
+        "Zero manual intervention required",
+        "<500ms injection speed",
+        "95% detection accuracy",
+        "Full Claude Code integration"
+      ],
+      "status": "completed",
+      "created_at": "2025-09-19T21:01:03.539580",
+      "file_path": "epics/_E001_atlas001_auto_context_injectio.md",
+      "updated_at": "2025-09-19T21:01:20.899548",
+      "completed_at": "2025-09-19T21:01:20.899555"
+    }
+  ],
+  "stories": [
+    {
+      "id": "F0001",
+      "type": "feature",
+      "title": "Claude Code Task Tool Integration Hook",
+      "description": "Implement the actual integration mechanism to intercept Claude Code's Task tool calls and automatically inject context before agent execution. This is the critical missing piece that enables the entire auto-context injection system.",
+      "acceptance_criteria": [
+        "Task tool calls intercepted successfully",
+        "Context injection happens automatically",
+        "Performance meets <500ms requirement",
+        "Integration tests pass",
+        "No breaking changes to existing workflows"
+      ],
+      "priority": "critical",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-19T20:30:50.271717",
+      "file_path": "features/F0001_claude_code_task_tool_integrat.md"
+    },
+    {
+      "id": "F0002",
+      "type": "feature",
+      "title": "Performance Benchmarking and Optimization",
+      "description": "Implement comprehensive performance benchmarking to validate the system meets targets: <500ms injection speed per agent, <1s for 10 parallel agents, 80% cache hit rate. Add optimization for slow paths.",
+      "acceptance_criteria": [
+        "Benchmark suite implemented",
+        "<500ms injection speed validated",
+        "<1s parallel spawning validated",
+        "Cache hit rate >80%",
+        "Performance dashboard created"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-19T20:30:57.136361",
+      "file_path": "features/F0002_performance_benchmarking_and_o.md"
+    },
+    {
+      "id": "F0003",
+      "type": "feature",
+      "title": "Integration Test Suite for Context Injection",
+      "description": "Create comprehensive integration tests for the auto-context injection system including end-to-end scenarios, parallel agent spawning, context inheritance validation, and detection accuracy measurement.",
+      "acceptance_criteria": [
+        "E2E test scenarios created",
+        "Parallel spawning tests implemented",
+        "Context inheritance tests validated",
+        "95% detection accuracy measured",
+        "Test coverage >80%"
+      ],
+      "priority": "high",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-19T20:31:02.351652",
+      "file_path": "features/F0003_integration_test_suite_for_con.md"
+    },
+    {
+      "id": "F0004",
+      "type": "feature",
+      "title": "Context Injection Documentation and Guides",
+      "description": "Create comprehensive documentation for the auto-context injection system including setup guides, configuration reference, troubleshooting guide, and examples for extending the system.",
+      "acceptance_criteria": [
+        "Setup documentation complete",
+        "Configuration reference created",
+        "Troubleshooting guide written",
+        "Extension examples provided",
+        "API documentation generated"
+      ],
+      "priority": "medium",
+      "business_value": null,
+      "status": "backlog",
+      "created_at": "2025-09-19T20:31:12.856729",
+      "file_path": "features/F0004_context_injection_documentatio.md"
+    }
+  ],
+  "next_story_id": 1
+}

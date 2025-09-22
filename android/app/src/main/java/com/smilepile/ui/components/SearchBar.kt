@@ -74,6 +74,27 @@ import com.smilepile.data.models.Category
 import com.smilepile.ui.viewmodels.DateRange
 import com.smilepile.ui.viewmodels.DateRangePreset
 
+/**
+ * Material3 search bar component with history and autocomplete support.
+ *
+ * Features:
+ * - Search query input with real-time updates
+ * - Search history management
+ * - Expandable search interface
+ * - Voice search support
+ * - Material3 DockedSearchBar implementation
+ *
+ * @param searchQuery Current search query text
+ * @param onSearchQueryChange Callback when search query changes
+ * @param searchHistory List of previous search queries
+ * @param onSearchHistoryItemClick Callback when history item is selected
+ * @param onRemoveFromHistory Callback to remove item from history
+ * @param onClearHistory Callback to clear all search history
+ * @param active Whether search bar is in active/expanded state
+ * @param onActiveChange Callback when active state changes
+ * @param onSearch Callback when search is performed
+ * @param modifier Modifier for customization
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(

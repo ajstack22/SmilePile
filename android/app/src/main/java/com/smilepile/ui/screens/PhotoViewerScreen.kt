@@ -22,13 +22,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.RemoveCircleOutline
 import androidx.compose.material.icons.filled.DriveFileMove
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.AlertDialog
+import com.smilepile.ui.components.dialogs.UniversalCrudDialog
+import com.smilepile.ui.components.dialogs.DialogBuilder
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -66,6 +69,8 @@ import coil.request.ImageRequest
 import com.smilepile.R
 import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
+import com.smilepile.mode.AppMode
+import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import android.content.Intent
 import androidx.core.content.FileProvider
@@ -84,7 +89,8 @@ fun PhotoViewerScreen(
     onSharePhoto: (Photo) -> Unit,
     onDeletePhoto: (Photo) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PhotoGalleryViewModel = hiltViewModel()
+    viewModel: PhotoGalleryViewModel = hiltViewModel(),
+    modeViewModel: AppModeViewModel = hiltViewModel()
 ) {
     val initialIndex = photos.indexOf(photo).takeIf { it >= 0 } ?: 0
     val pagerState = rememberPagerState(
@@ -97,7 +103,11 @@ fun PhotoViewerScreen(
     var showMoveDialog by remember { mutableStateOf(false) }
 
     val uiState by viewModel.uiState.collectAsState()
+    val modeState by modeViewModel.uiState.collectAsState()
     val context = LocalContext.current
+
+    // Check if we're in parent mode (edit controls available)
+    val isParentMode = modeState.currentMode == AppMode.PARENT
 
     Box(
         modifier = modifier
@@ -155,6 +165,7 @@ fun PhotoViewerScreen(
         if (isUIVisible) {
             PhotoControlsBar(
                 photo = photos[pagerState.currentPage],
+                isParentMode = isParentMode,
                 onFavoriteToggle = { viewModel.toggleFavorite(it) },
                 onSharePhoto = { photo ->
                     // Create share intent for photo
@@ -183,12 +194,12 @@ fun PhotoViewerScreen(
         }
     }
 
-    // Delete confirmation dialog
-    if (showDeleteDialog) {
-        DeleteConfirmationDialog(
+    // Remove from library confirmation dialog - only in parent mode
+    if (showDeleteDialog && isParentMode) {
+        RemoveFromLibraryConfirmationDialog(
             photoName = photos[pagerState.currentPage].displayName,
             onConfirm = {
-                viewModel.deletePhoto(photos[pagerState.currentPage])
+                viewModel.removePhotoFromLibrary(photos[pagerState.currentPage])
                 showDeleteDialog = false
                 onNavigateBack()
             },
@@ -196,8 +207,8 @@ fun PhotoViewerScreen(
         )
     }
 
-    // Move to category dialog
-    if (showMoveDialog) {
+    // Move to category dialog - only in parent mode
+    if (showMoveDialog && isParentMode) {
         MoveToCategoryDialog(
             categories = uiState.categories,
             currentCategoryId = photos[pagerState.currentPage].categoryId,
@@ -268,6 +279,7 @@ private fun ZoomableImage(
 @Composable
 private fun PhotoControlsBar(
     photo: Photo,
+    isParentMode: Boolean,
     onFavoriteToggle: (Photo) -> Unit,
     onSharePhoto: (Photo) -> Unit,
     onDeletePhoto: (Photo) -> Unit,
@@ -290,42 +302,44 @@ private fun PhotoControlsBar(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Action buttons
+            // Action buttons - conditional based on mode
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Favorite button
-                IconButton(
-                    onClick = { onFavoriteToggle(photo) },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            color = if (photo.isFavorite) {
-                                Color.Red.copy(alpha = 0.2f)
+                // Favorite button - available in both modes
+                if (isParentMode) {
+                    IconButton(
+                        onClick = { onFavoriteToggle(photo) },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                color = if (photo.isFavorite) {
+                                    Color.Red.copy(alpha = 0.2f)
+                                } else {
+                                    Color.White.copy(alpha = 0.1f)
+                                },
+                                shape = CircleShape
+                            )
+                    ) {
+                        Icon(
+                            imageVector = if (photo.isFavorite) {
+                                Icons.Filled.Favorite
                             } else {
-                                Color.White.copy(alpha = 0.1f)
+                                Icons.Outlined.FavoriteBorder
                             },
-                            shape = CircleShape
+                            contentDescription = if (photo.isFavorite) {
+                                stringResource(R.string.remove_from_favorites)
+                            } else {
+                                stringResource(R.string.add_to_favorites)
+                            },
+                            tint = if (photo.isFavorite) Color.Red else Color.White,
+                            modifier = Modifier.size(24.dp)
                         )
-                ) {
-                    Icon(
-                        imageVector = if (photo.isFavorite) {
-                            Icons.Filled.Favorite
-                        } else {
-                            Icons.Outlined.FavoriteBorder
-                        },
-                        contentDescription = if (photo.isFavorite) {
-                            stringResource(R.string.remove_from_favorites)
-                        } else {
-                            stringResource(R.string.add_to_favorites)
-                        },
-                        tint = if (photo.isFavorite) Color.Red else Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
+                    }
                 }
 
-                // Share button
+                // Share button - available in both modes
                 IconButton(
                     onClick = { onSharePhoto(photo) },
                     modifier = Modifier
@@ -343,40 +357,43 @@ private fun PhotoControlsBar(
                     )
                 }
 
-                // Move button
-                IconButton(
-                    onClick = { onMovePhoto(photo) },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            color = Color.White.copy(alpha = 0.1f),
-                            shape = CircleShape
+                // Parent mode only controls
+                if (isParentMode) {
+                    // Move button
+                    IconButton(
+                        onClick = { onMovePhoto(photo) },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                color = Color.White.copy(alpha = 0.1f),
+                                shape = CircleShape
+                            )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.DriveFileMove,
+                            contentDescription = "Move to Category",
+                            tint = Color.White,
+                            modifier = Modifier.size(24.dp)
                         )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.DriveFileMove,
-                        contentDescription = "Move to Category",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+                    }
 
-                // Delete button
-                IconButton(
-                    onClick = { onDeletePhoto(photo) },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            color = Color.Red.copy(alpha = 0.2f),
-                            shape = CircleShape
+                    // Remove from library button
+                    IconButton(
+                        onClick = { onDeletePhoto(photo) },
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(
+                                color = Color.White.copy(alpha = 0.1f),
+                                shape = CircleShape
+                            )
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.RemoveCircleOutline,
+                            contentDescription = "Remove from Library",
+                            tint = Color.White,
+                            modifier = Modifier.size(24.dp)
                         )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = stringResource(R.string.delete_photo),
-                        tint = Color.Red,
-                        modifier = Modifier.size(24.dp)
-                    )
+                    }
                 }
             }
         }
@@ -446,32 +463,23 @@ private fun formatFileSize(sizeInBytes: Long): String {
 }
 
 @Composable
-private fun DeleteConfirmationDialog(
+private fun RemoveFromLibraryConfirmationDialog(
     photoName: String,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Delete Photo") },
-        text = {
-            Text("Are you sure you want to delete \"$photoName\"? This action cannot be undone.")
-        },
-        confirmButton = {
-            Button(
-                onClick = onConfirm,
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
-            ) {
-                Text("Delete", color = MaterialTheme.colorScheme.onError)
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
-        }
+    UniversalCrudDialog(
+        config = DialogBuilder.confirmation(
+            title = "Remove from Library",
+            message = "Are you sure you want to remove \"$photoName\" from your SmilePile library? The photo will remain on your device but won't appear in the app.",
+            confirmText = "Remove",
+            cancelText = "Cancel",
+            isDestructive = false,
+            icon = Icons.Default.RemoveCircleOutline,
+            onConfirm = onConfirm,
+            onCancel = onDismiss
+        ),
+        onDismiss = onDismiss
     )
 }
 

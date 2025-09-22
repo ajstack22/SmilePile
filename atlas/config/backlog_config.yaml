@@ -1,0 +1,479 @@
+# Atlas Backlog Automation Configuration
+# This file controls all aspects of the backlog automation system
+
+# =============================================================================
+# AUTO-COMPLETION SETTINGS
+# =============================================================================
+auto_completion:
+  # Enable automatic scanning of commits for story completion
+  scan_commits: true
+
+  # Enable scanning code patterns for completion indicators
+  scan_code_patterns: true
+
+  # Enable quality gates before auto-completion
+  quality_gates: true
+
+  # Patterns to detect story completion in commit messages
+  commit_message_patterns:
+    - 'fix(?:es)?\s+([FBT]\d{4})'
+    - 'complete(?:s)?\s+([FBT]\d{4})'
+    - 'implement(?:s)?\s+([FBT]\d{4})'
+    - 'close(?:s)?\s+([FBT]\d{4})'
+    - 'resolve(?:s)?\s+([FBT]\d{4})'
+    - 'finish(?:es)?\s+([FBT]\d{4})'
+
+  # Code patterns that indicate story completion
+  code_completion_patterns:
+    - '(?:TODO|FIXME)\s+([FBT]\d{4}):\s*(?:Done|Fixed|Complete)'
+    - 'Story\s+([FBT]\d{4})\s*(?:completed|done|fixed)'
+    - '# ([FBT]\d{4})\s*-\s*(?:COMPLETED|DONE)'
+
+# =============================================================================
+# FILE NAMING CONVENTIONS
+# =============================================================================
+file_naming:
+  # Prefixes for different story states
+  completed_prefix: 'DONE_'
+  in_progress_prefix: 'WIP_'
+  blocked_prefix: 'BLOCKED_'
+  archived_prefix: 'ARCHIVED_'
+
+  # File naming patterns
+  story_file_pattern: '{story_id}.md'
+  wave_file_pattern: 'wave_{wave_number:03d}.json'
+
+  # Auto-rename files based on status changes
+  auto_rename_on_status_change: true
+
+# =============================================================================
+# PRIORITY MANAGEMENT
+# =============================================================================
+priorities:
+  # Score thresholds for priority levels
+  critical_threshold: 1000
+  high_threshold: 750
+  medium_threshold: 500
+  low_threshold: 250
+
+  # Auto-escalate stories after this many days
+  auto_escalate_age_days: 30
+
+  # Maximum percentage of stories that can be critical priority
+  max_critical_percentage: 15
+
+  # Priority boost factors
+  boost_factors:
+    dependency_blocker: 200    # Stories blocking other stories
+    security_issue: 300       # Security-related stories
+    production_bug: 250       # Production bugs
+    user_facing: 100          # User-facing features
+
+# =============================================================================
+# WAVE/SPRINT PLANNING
+# =============================================================================
+waves:
+  # Default number of stories per wave
+  default_size: 5
+
+  # Buffer factor for velocity-based planning (0.8 = 80% of historical velocity)
+  velocity_buffer: 0.8
+
+  # How many weeks ahead to plan
+  planning_ahead_weeks: 2
+
+  # Wave duration in days
+  default_duration_days: 14
+
+  # Auto-create new wave when current wave is X% complete
+  auto_create_threshold: 80
+
+  # Story selection strategy
+  selection_strategy: 'priority_weighted'  # priority_weighted, round_robin, type_balanced
+
+# =============================================================================
+# QUALITY GATES
+# =============================================================================
+quality:
+  # Minimum test coverage required for story completion
+  min_test_coverage: 80
+
+  # Maximum lint errors allowed
+  max_lint_errors: 0
+
+  # Maximum security warnings allowed
+  max_security_warnings: 0
+
+  # Performance threshold in milliseconds
+  performance_threshold: 2000
+
+  # Code complexity thresholds
+  complexity_thresholds:
+    max_cyclomatic_complexity: 10
+    max_function_length: 50
+    max_file_length: 500
+
+  # Auto-create stories for quality issues
+  auto_create_quality_stories: true
+
+  # Quality issue severity mapping
+  quality_issue_severity:
+    security_vulnerability: 'critical'
+    performance_regression: 'high'
+    test_coverage_drop: 'medium'
+    lint_errors: 'low'
+
+# =============================================================================
+# DEPENDENCY MANAGEMENT
+# =============================================================================
+dependencies:
+  # Auto-detect dependencies from story descriptions
+  auto_detect_dependencies: true
+
+  # Dependency detection patterns
+  dependency_patterns:
+    - '[Dd]epends\s+on\s+([FBT]\d{4})'
+    - '[Rr]equires\s+([FBT]\d{4})'
+    - '[Bb]locked\s+by\s+([FBT]\d{4})'
+    - '[Nn]eeds\s+([FBT]\d{4})'
+
+  # Auto-block stories with unmet dependencies
+  auto_block_on_dependencies: true
+
+  # Create warning when circular dependencies detected
+  warn_on_circular_dependencies: true
+
+# =============================================================================
+# NOTIFICATIONS
+# =============================================================================
+notifications:
+  # Slack integration
+  slack:
+    enabled: false
+    webhook_url: null
+    channel: '#backlog-updates'
+    notify_on:
+      - story_completed
+      - story_blocked
+      - wave_completed
+      - quality_issues
+
+  # Email notifications
+  email:
+    enabled: false
+    smtp_server: null
+    smtp_port: 587
+    username: null
+    password: null
+    recipients: []
+    notify_on:
+      - critical_bugs
+      - wave_at_risk
+      - long_blocked_stories
+
+  # Daily/weekly reports
+  reports:
+    daily_report: true
+    weekly_report: true
+    monthly_report: false
+
+    # Report recipients
+    daily_recipients: []
+    weekly_recipients: []
+
+# =============================================================================
+# GIT INTEGRATION
+# =============================================================================
+git:
+  # Automatically install git hooks
+  auto_install_hooks: true
+
+  # Git hook configuration
+  hooks:
+    pre_commit:
+      enabled: true
+      block_on_quality_issues: true
+      require_story_id: true
+
+    post_commit:
+      enabled: true
+      auto_update_stories: true
+      track_progress: true
+
+    post_merge:
+      enabled: true
+      auto_complete_stories: true
+      target_branches: ['main', 'master', 'develop']
+
+    pre_push:
+      enabled: true
+      validate_story_status: true
+      check_dependencies: true
+
+  # Branch naming conventions
+  branch_naming:
+    require_story_id: true
+    patterns:
+      - 'feature/([FBT]\d{4})-.*'
+      - 'bugfix/([FBT]\d{4})-.*'
+      - 'hotfix/([FBT]\d{4})-.*'
+
+# =============================================================================
+# AUTOMATION SCHEDULES
+# =============================================================================
+automation:
+  # Daily automation tasks
+  daily:
+    enabled: true
+    time: '09:00'
+    tasks:
+      - scan_for_completed_work
+      - update_story_priorities
+      - check_blocked_stories
+      - generate_daily_report
+
+  # Weekly automation tasks
+  weekly:
+    enabled: true
+    day: 'monday'
+    time: '08:00'
+    tasks:
+      - cleanup_backlog
+      - plan_next_wave
+      - generate_analytics_report
+      - archive_old_stories
+
+  # Monthly automation tasks
+  monthly:
+    enabled: false
+    day: 1
+    time: '07:00'
+    tasks:
+      - deep_analytics_review
+      - process_optimization_review
+
+# =============================================================================
+# ANALYTICS CONFIGURATION
+# =============================================================================
+analytics:
+  # Data retention periods
+  retention:
+    velocity_data_weeks: 26  # 6 months
+    cycle_time_data_weeks: 52  # 1 year
+    quality_metrics_weeks: 13  # 3 months
+
+  # Velocity calculation
+  velocity:
+    calculation_method: 'story_count'  # story_count, story_points, hybrid
+    smoothing_factor: 0.3  # For exponential smoothing
+    outlier_threshold: 2.0  # Standard deviations for outlier detection
+
+  # Cycle time analysis
+  cycle_time:
+    percentiles: [50, 75, 85, 95]
+    status_transitions:
+      - 'backlog -> ready'
+      - 'ready -> in_progress'
+      - 'in_progress -> in_review'
+      - 'in_review -> done'
+
+  # Predictive analytics
+  predictive:
+    enabled: true
+    models:
+      - completion_time_prediction
+      - quality_risk_assessment
+      - capacity_planning
+
+# =============================================================================
+# STORY GENERATION
+# =============================================================================
+story_generation:
+  # Template configuration
+  templates:
+    # Feature templates
+    features:
+      default_priority: 'medium'
+      default_business_value: 'medium'
+      default_effort: 'medium'
+
+      # Auto-generate acceptance criteria
+      auto_acceptance_criteria: true
+
+      # Standard acceptance criteria templates
+      standard_criteria:
+        ui_component:
+          - 'Component is visually consistent with design system'
+          - 'Component is responsive across all device sizes'
+          - 'Accessibility standards are met (WCAG 2.1 AA)'
+          - 'Loading states are handled gracefully'
+
+        api_endpoint:
+          - 'Endpoint follows REST conventions'
+          - 'Proper HTTP status codes returned'
+          - 'Input validation implemented'
+          - 'Error handling implemented'
+          - 'API documentation updated'
+          - 'Unit tests written'
+
+    # Bug templates
+    bugs:
+      default_severity: 'medium'
+      default_user_impact: 'medium'
+
+      # Auto-generate reproduction steps
+      auto_reproduction_steps: true
+
+    # Tech debt templates
+    tech_debt:
+      default_risk: 'medium'
+      default_effort: 'medium'
+
+      # Auto-generate impact assessment
+      auto_impact_assessment: true
+
+# =============================================================================
+# DASHBOARD CONFIGURATION
+# =============================================================================
+dashboard:
+  # Refresh intervals
+  refresh_intervals:
+    live_dashboard: 30  # seconds
+    cached_reports: 300  # 5 minutes
+    deep_analytics: 3600  # 1 hour
+
+  # Default chart configurations
+  charts:
+    velocity:
+      default_weeks: 8
+      show_trend_line: true
+      show_prediction: true
+
+    burndown:
+      show_ideal_line: true
+      show_scope_changes: true
+      highlight_weekends: true
+
+    cycle_time:
+      show_percentiles: true
+      group_by_type: true
+      show_bottlenecks: true
+
+  # Export formats
+  exports:
+    formats: ['html', 'pdf', 'json']
+    include_raw_data: false
+    compress_exports: true
+
+# =============================================================================
+# SECURITY SETTINGS
+# =============================================================================
+security:
+  # API access control
+  api:
+    require_authentication: false
+    allowed_hosts: ['localhost', '127.0.0.1']
+    rate_limiting: true
+    max_requests_per_minute: 100
+
+  # Data privacy
+  privacy:
+    anonymize_exports: false
+    exclude_personal_data: false
+    data_retention_days: 365
+
+  # Audit logging
+  audit:
+    enabled: true
+    log_level: 'INFO'
+    log_actions:
+      - story_creation
+      - story_completion
+      - status_changes
+      - priority_changes
+
+# =============================================================================
+# PERFORMANCE SETTINGS
+# =============================================================================
+performance:
+  # Caching
+  cache:
+    enabled: true
+    ttl_seconds: 300
+    max_cache_size_mb: 100
+
+  # Batch processing
+  batch:
+    max_batch_size: 100
+    batch_timeout_seconds: 30
+
+  # Parallel processing
+  parallel:
+    enabled: true
+    max_workers: 4
+    timeout_seconds: 60
+
+# =============================================================================
+# INTEGRATION SETTINGS
+# =============================================================================
+integrations:
+  # GitHub integration
+  github:
+    enabled: false
+    token: null
+    repository: null
+    auto_link_prs: true
+    auto_close_on_merge: true
+
+  # Jira integration
+  jira:
+    enabled: false
+    server_url: null
+    username: null
+    api_token: null
+    project_key: null
+
+  # Azure DevOps integration
+  azure_devops:
+    enabled: false
+    organization: null
+    project: null
+    personal_access_token: null
+
+# =============================================================================
+# EXPERIMENTAL FEATURES
+# =============================================================================
+experimental:
+  # AI-powered features
+  ai:
+    enabled: false
+
+    # AI story generation
+    story_generation:
+      enabled: false
+      model: 'gpt-3.5-turbo'
+      api_key: null
+
+    # AI priority suggestions
+    priority_suggestions:
+      enabled: false
+      confidence_threshold: 0.8
+
+    # AI risk assessment
+    risk_assessment:
+      enabled: false
+      factors: ['complexity', 'dependencies', 'team_experience']
+
+  # Advanced analytics
+  advanced_analytics:
+    enabled: false
+
+    # Predictive modeling
+    predictive_modeling:
+      enabled: false
+      models: ['completion_prediction', 'risk_assessment']
+
+    # Anomaly detection
+    anomaly_detection:
+      enabled: false
+      sensitivity: 'medium'

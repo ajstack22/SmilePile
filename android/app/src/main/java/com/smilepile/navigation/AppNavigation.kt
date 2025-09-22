@@ -99,10 +99,7 @@ fun AppNavHost(
                             NavigationRoutes.photoViewerRoute(photo.id, photoIndex)
                         )
                     }
-                },
-                    onAddPhotoClick = {
-                        // Camera functionality removed - this callback is no longer used
-                    }
+                }
                 )
             }
         }
@@ -179,31 +176,36 @@ fun AppNavHost(
             val photoId = backStackEntry.arguments?.getLong("photoId") ?: 0L
             val photoIndex = backStackEntry.arguments?.getInt("photoIndex") ?: 0
 
-            // TODO: We need to get the actual photo and photos list from the ViewModel
-            // For now, create a temporary photo object
-            val tempPhoto = Photo(
-                id = photoId,
-                path = "",
-                categoryId = 1L,
-                name = "Photo",
-                isFromAssets = false,
-                createdAt = System.currentTimeMillis(),
-                isFavorite = false
-            )
+            // Get the PhotoGalleryViewModel to access photo data
+            val photoGalleryViewModel: com.smilepile.ui.viewmodels.PhotoGalleryViewModel = hiltViewModel()
+            val galleryUiState by photoGalleryViewModel.uiState.collectAsState()
+            val photos = galleryUiState.photos
 
-            PhotoViewerScreen(
-                photo = tempPhoto,
-                photos = listOf(tempPhoto), // TODO: Get actual photos list
-                onNavigateBack = {
+            // Find the current photo by ID
+            val currentPhoto = photos.find { it.id == photoId }
+
+            if (currentPhoto != null) {
+                PhotoViewerScreen(
+                    photo = currentPhoto,
+                    photos = photos,
+                    onNavigateBack = {
+                        navController.navigateUp()
+                    },
+                    onSharePhoto = { photo ->
+                        // TODO: Implement share functionality using PhotoOperationsManager
+                    },
+                    onDeletePhoto = { photo ->
+                        // Use the new removeFromLibrary method for safe deletion
+                        photoGalleryViewModel.removePhotoFromLibrary(photo)
+                        navController.navigateUp()
+                    }
+                )
+            } else {
+                // Photo not found - navigate back
+                LaunchedEffect(Unit) {
                     navController.navigateUp()
-                },
-                onSharePhoto = { photo ->
-                    // TODO: Implement share functionality
-                },
-                onDeletePhoto = { photo ->
-                    // TODO: Implement delete functionality
                 }
-            )
+            }
         }
     }
 }

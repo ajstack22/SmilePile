@@ -18,6 +18,10 @@ interface PhotoRepository {
     suspend fun getPhotoCount(): Int
     suspend fun getPhotoCategoryCount(categoryId: Long): Int
 
+    // Remove from library (app only, not device)
+    suspend fun removeFromLibrary(photo: Photo)
+    suspend fun removeFromLibraryById(photoId: Long)
+
     // Search and filter methods
     fun searchPhotos(searchQuery: String): Flow<List<Photo>>
     fun searchPhotosInCategory(searchQuery: String, categoryId: Long): Flow<List<Photo>>

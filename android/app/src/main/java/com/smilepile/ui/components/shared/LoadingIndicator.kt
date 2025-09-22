@@ -1,4 +1,4 @@
-package com.smilepile.ui.components
+package com.smilepile.ui.components.shared
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode

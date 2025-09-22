@@ -1,4 +1,4 @@
-package com.smilepile.ui.components
+package com.smilepile.ui.components.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

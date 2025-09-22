@@ -6,13 +6,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Backup
 import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.CloudUpload
+import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Lock
@@ -24,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -156,24 +160,40 @@ fun SettingsScreen(
             }
 
             item {
+                // Backup & Restore Section
+                SettingsSection(
+                    title = "Backup & Restore"
+                ) {
+                    // Backup statistics
+                    uiState.backupStats?.let { stats ->
+                        BackupStatsCard(
+                            photoCount = stats.photoCount,
+                            categoryCount = stats.categoryCount,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+
+                    SettingsActionItem(
+                        title = "Export Data",
+                        subtitle = "Create a backup file of your photos and categories",
+                        icon = Icons.Default.CloudUpload,
+                        onClick = { viewModel.prepareExportAsync() }
+                    )
+
+                    SettingsActionItem(
+                        title = "Import Data",
+                        subtitle = "Restore from a backup file (coming soon)",
+                        icon = Icons.Default.CloudDownload,
+                        onClick = { /* TODO: Implement import */ }
+                    )
+                }
+            }
+
+            item {
                 // Data Management Section
                 SettingsSection(
                     title = stringResource(R.string.settings_data_management)
                 ) {
-                    SettingsActionItem(
-                        title = stringResource(R.string.settings_export_data),
-                        subtitle = stringResource(R.string.settings_export_data_subtitle),
-                        icon = Icons.Default.CloudUpload,
-                        onClick = viewModel::exportData
-                    )
-
-                    SettingsActionItem(
-                        title = stringResource(R.string.settings_import_data),
-                        subtitle = stringResource(R.string.settings_import_data_subtitle),
-                        icon = Icons.Default.CloudDownload,
-                        onClick = viewModel::importData
-                    )
-
                     SettingsActionItem(
                         title = stringResource(R.string.settings_clear_cache),
                         subtitle = stringResource(R.string.settings_clear_cache_subtitle),
@@ -259,6 +279,13 @@ fun SettingsScreen(
                     viewModel.refreshSettings()
                 }
             }
+        )
+    }
+
+    // Export Progress Dialog
+    if (uiState.isLoading) {
+        ExportProgressDialog(
+            onDismiss = { /* Can't dismiss while exporting */ }
         )
     }
 }
@@ -517,6 +544,48 @@ private fun PinSetupDialog(
 }
 
 @Composable
+private fun BackupStatsCard(
+    photoCount: Int,
+    categoryCount: Int,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
+        ),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Storage,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "Library Contents",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = "$photoCount photos in $categoryCount categories",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun ChangePinDialog(
     onDismiss: () -> Unit,
     onConfirm: (String, String) -> Unit
@@ -609,5 +678,28 @@ private fun ChangePinDialog(
                 Text("Cancel")
             }
         }
+    )
+}
+
+@Composable
+private fun ExportProgressDialog(
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                Text("Exporting Data")
+            }
+        },
+        text = {
+            Text("Preparing your photos and categories for backup. This may take a moment...")
+        },
+        confirmButton = { },
+        dismissButton = { }
     )
 }

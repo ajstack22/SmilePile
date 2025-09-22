@@ -225,6 +225,56 @@ class PhotoOperationsManager @Inject constructor(
     }
 
     /**
+     * Removes a photo from the app library only (NOT from device storage)
+     * This is the safe removal method that preserves photos on the device
+     */
+    suspend fun removeFromLibrary(photo: Photo): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                android.util.Log.d("PhotoOperations", "Removing photo from library only: ${photo.id}")
+                photoRepository.removeFromLibrary(photo)
+                true
+            } catch (e: Exception) {
+                android.util.Log.e("PhotoOperations", "Failed to remove photo from library: ${e.message}", e)
+                false
+            }
+        }
+    }
+
+    /**
+     * Removes multiple photos from the app library only (NOT from device storage)
+     * This is the safe batch removal method that preserves photos on the device
+     */
+    suspend fun removeFromLibrary(photos: List<Photo>): BatchOperationResult {
+        return withContext(Dispatchers.IO) {
+            var successCount = 0
+            var failureCount = 0
+            val failedPhotos = mutableListOf<Photo>()
+
+            android.util.Log.d("PhotoOperations", "Removing ${photos.size} photos from library only")
+
+            photos.forEach { photo ->
+                try {
+                    photoRepository.removeFromLibrary(photo)
+                    successCount++
+                } catch (e: Exception) {
+                    android.util.Log.e("PhotoOperations", "Failed to remove photo ${photo.id} from library: ${e.message}", e)
+                    failureCount++
+                    failedPhotos.add(photo)
+                }
+            }
+
+            android.util.Log.d("PhotoOperations", "Batch library removal complete: $successCount success, $failureCount failed")
+
+            BatchOperationResult(
+                successCount = successCount,
+                failureCount = failureCount,
+                failedItems = failedPhotos
+            )
+        }
+    }
+
+    /**
      * Copies an asset file to cache directory for sharing
      */
     private fun copyAssetToCache(photo: Photo): Uri? {

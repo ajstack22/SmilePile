@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.smilepile.data.models.Photo
+import com.smilepile.ui.components.shared.PhotoGridItemSkeleton
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**

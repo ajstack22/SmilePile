@@ -1,0 +1,20 @@
+{
+  "task_id": "3.3",
+  "task_name": "Image Loading System",
+  "agent": {
+    "id": "performance-1",
+    "name": "Performance Reviewer Agent",
+    "type": "performance",
+    "trust_score": 0.9
+  },
+  "status": "completed",
+  "started_at": "2025-09-21T08:01:34.524942",
+  "completed_at": null,
+  "deliverables": [
+    "Efficient bitmap loading",
+    "Memory management",
+    "Async loading with coroutines",
+    "Placeholder/error handling"
+  ],
+  "evidence_files": []
+}

@@ -28,6 +28,20 @@ import androidx.core.graphics.ColorUtils
 import com.smilepile.data.models.Category
 import com.smilepile.ui.theme.SmilePileTheme
 
+/**
+ * Reusable category chip component for displaying and selecting categories.
+ *
+ * Features:
+ * - Visual feedback for selected state
+ * - Color-coded category display
+ * - Material3 design compliance
+ * - Clickable interaction
+ *
+ * @param category The category to display
+ * @param isSelected Whether this chip is currently selected
+ * @param onClick Callback when chip is clicked, null for non-interactive chips
+ * @param modifier Modifier for customization
+ */
 @Composable
 fun CategoryChip(
     category: Category,

@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.smilepile.data.models.Photo
+import com.smilepile.ui.components.shared.shimmer
 
 /**
  * Enhanced photo grid item with performance optimizations and smooth animations.

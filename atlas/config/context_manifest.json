@@ -1,0 +1,460 @@
+{
+  "version": "1.0.0",
+  "description": "Atlas Framework Context Injection Manifest - Defines context profiles for LLM task execution",
+  "created": "2024-09-19",
+  "last_modified": "2024-09-19",
+
+  "context_profiles": {
+    "orchestration": {
+      "description": "Context for orchestration and coordination tasks",
+      "priority": 1,
+      "size_budget": 50000,
+      "files": {
+        "core": [
+          {
+            "path": "README.md",
+            "priority": 1,
+            "sections": ["overview", "quick-start", "architecture-principles"]
+          },
+          {
+            "path": "02_WORKFLOWS/00_ORCHESTRATION_PROCESS.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "02_WORKFLOWS/ATLAS_WORKFLOW.md",
+            "priority": 2
+          }
+        ],
+        "automation": [
+          {
+            "path": "07_AUTOMATION/orchestrator_status.py",
+            "priority": 2,
+            "summary_only": false
+          },
+          {
+            "path": "07_AUTOMATION/parallel_tracker.py",
+            "priority": 3
+          }
+        ]
+      },
+      "dependencies": ["workflow_basics", "agent_coordination"],
+      "includes_patterns": ["**/orchestrat*.md", "**/parallel*.py"],
+      "excludes_patterns": ["**/*.test.*", "**/examples/**"],
+      "metadata": {
+        "typical_token_usage": 35000,
+        "last_validated": "2024-09-19",
+        "success_rate": 0.92
+      }
+    },
+
+    "ui_development": {
+      "description": "Context for frontend and UI development tasks",
+      "priority": 2,
+      "size_budget": 40000,
+      "files": {
+        "core": [
+          {
+            "path": "03_AGENTS/ui_developer_prompt.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "05_TEMPLATES/BUG_REPORT_TEMPLATE.md",
+            "priority": 3
+          }
+        ],
+        "standards": [
+          {
+            "path": "01_CORE/UI_STANDARDS.md",
+            "priority": 2,
+            "sections": ["accessibility", "responsive-design"]
+          }
+        ]
+      },
+      "dependencies": ["frontend_patterns", "testing_standards"],
+      "feature_modifiers": {
+        "authentication": {
+          "additional_files": [
+            "03_AGENTS/security_reviewer_prompt.md",
+            "05_TEMPLATES/AUTH_TEMPLATE.md"
+          ],
+          "dependencies": ["security_standards"]
+        },
+        "performance": {
+          "additional_files": [
+            "03_AGENTS/performance_reviewer_prompt.md",
+            "04_METRICS/03_METRICS_DASHBOARD_TEMPLATE.md"
+          ]
+        }
+      }
+    },
+
+    "backend_development": {
+      "description": "Context for backend and API development",
+      "priority": 2,
+      "size_budget": 40000,
+      "files": {
+        "core": [
+          {
+            "path": "03_AGENTS/backend_developer_prompt.md",
+            "priority": 1,
+            "required": true
+          }
+        ],
+        "templates": [
+          {
+            "path": "05_TEMPLATES/02_BUILD_EVIDENCE.yaml",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["api_patterns", "database_standards", "testing_standards"]
+    },
+
+    "code_review": {
+      "description": "Context for code review and quality assessment",
+      "priority": 1,
+      "size_budget": 30000,
+      "files": {
+        "core": [
+          {
+            "path": "02_WORKFLOWS/REVIEW_PROCESS.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "04_METRICS/01_QUALITY_RUBRIC.md",
+            "priority": 1,
+            "required": true
+          }
+        ],
+        "checklists": [
+          {
+            "path": "06_CHECKLISTS/CODE_REVIEW_CHECKLIST.md",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["quality_standards", "review_verdicts"]
+    },
+
+    "testing": {
+      "description": "Context for test creation and execution",
+      "priority": 2,
+      "size_budget": 35000,
+      "files": {
+        "core": [
+          {
+            "path": "05_TEMPLATES/03_TEST_EVIDENCE.yaml",
+            "priority": 1
+          }
+        ],
+        "automation": [
+          {
+            "path": "07_AUTOMATION/atlas_validation_tests.py",
+            "priority": 2,
+            "summary_only": true
+          }
+        ]
+      },
+      "dependencies": ["testing_standards", "coverage_requirements"]
+    },
+
+    "troubleshooting": {
+      "description": "Context for debugging and issue resolution",
+      "priority": 1,
+      "size_budget": 30000,
+      "files": {
+        "core": [
+          {
+            "path": "02_WORKFLOWS/05_TROUBLESHOOTING_PROCESS.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "07_AUTOMATION/05_troubleshoot.py",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["debugging_patterns", "logging_standards"]
+    },
+
+    "research": {
+      "description": "Context for research and investigation tasks",
+      "priority": 2,
+      "size_budget": 25000,
+      "files": {
+        "core": [
+          {
+            "path": "02_WORKFLOWS/01_RESEARCH_PROCESS.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "07_AUTOMATION/01_research.py",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["research_methods"]
+    },
+
+    "documentation": {
+      "description": "Context for documentation creation and updates",
+      "priority": 3,
+      "size_budget": 25000,
+      "files": {
+        "core": [
+          {
+            "path": "07_AUTOMATION/doc_aggregator.py",
+            "priority": 1
+          }
+        ],
+        "templates": [
+          {
+            "path": "05_TEMPLATES/README.md",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["documentation_standards"]
+    },
+
+    "deployment": {
+      "description": "Context for deployment and release processes",
+      "priority": 2,
+      "size_budget": 30000,
+      "files": {
+        "core": [
+          {
+            "path": "02_WORKFLOWS/04_RELEASE_DEPLOYMENT_PROCESS.md",
+            "priority": 1,
+            "required": true
+          },
+          {
+            "path": "07_AUTOMATION/deploy_qual.py",
+            "priority": 2
+          }
+        ]
+      },
+      "dependencies": ["deployment_checklist", "rollback_procedures"]
+    },
+
+    "story_creation": {
+      "description": "Context for creating user stories and requirements",
+      "priority": 2,
+      "size_budget": 30000,
+      "files": {
+        "core": [
+          {
+            "path": "02_WORKFLOWS/02_STORY_CREATION_PROCESS.md",
+            "priority": 1,
+            "required": true
+          }
+        ],
+        "templates": [
+          {
+            "path": "05_TEMPLATES/BUG_REPORT_TEMPLATE.md",
+            "priority": 2
+          },
+          {
+            "path": "05_TEMPLATES/PULL_REQUEST_TEMPLATE.md",
+            "priority": 3
+          }
+        ]
+      },
+      "dependencies": ["story_templates", "acceptance_criteria"]
+    }
+  },
+
+  "dependency_definitions": {
+    "workflow_basics": {
+      "description": "Basic workflow concepts and patterns",
+      "files": [
+        "02_WORKFLOWS/README.md",
+        "02_WORKFLOWS/handoffs.md"
+      ]
+    },
+    "agent_coordination": {
+      "description": "Agent specialization and coordination patterns",
+      "files": [
+        "03_AGENTS/01_AGENT_SPECIALIZATIONS.md",
+        "03_AGENTS/README.md"
+      ]
+    },
+    "frontend_patterns": {
+      "description": "Frontend development patterns and standards",
+      "files": [
+        "01_CORE/FRONTEND_STANDARDS.md",
+        "01_CORE/COMPONENT_PATTERNS.md"
+      ]
+    },
+    "testing_standards": {
+      "description": "Testing requirements and patterns",
+      "files": [
+        "01_CORE/TESTING_STANDARDS.md",
+        "04_METRICS/02_VELOCITY_TRACKING.md"
+      ]
+    },
+    "quality_standards": {
+      "description": "Code quality standards and metrics",
+      "files": [
+        "04_METRICS/01_QUALITY_RUBRIC.md",
+        "06_CHECKLISTS/QUALITY_GATES.md"
+      ]
+    },
+    "review_verdicts": {
+      "description": "Review verdict definitions and criteria",
+      "files": [
+        "02_WORKFLOWS/REVIEW_PROCESS.md#verdicts"
+      ]
+    },
+    "security_standards": {
+      "description": "Security requirements and best practices",
+      "files": [
+        "01_CORE/SECURITY_STANDARDS.md",
+        "03_AGENTS/security_reviewer_prompt.md"
+      ]
+    },
+    "api_patterns": {
+      "description": "API design patterns and standards",
+      "files": [
+        "01_CORE/API_STANDARDS.md"
+      ]
+    },
+    "database_standards": {
+      "description": "Database design and optimization standards",
+      "files": [
+        "01_CORE/DATABASE_STANDARDS.md"
+      ]
+    },
+    "debugging_patterns": {
+      "description": "Debugging approaches and tools",
+      "files": [
+        "01_CORE/DEBUGGING_GUIDE.md"
+      ]
+    },
+    "logging_standards": {
+      "description": "Logging requirements and patterns",
+      "files": [
+        "01_CORE/LOGGING_STANDARDS.md"
+      ]
+    },
+    "research_methods": {
+      "description": "Research methodologies and templates",
+      "files": [
+        "01_CORE/RESEARCH_METHODS.md"
+      ]
+    },
+    "documentation_standards": {
+      "description": "Documentation requirements and templates",
+      "files": [
+        "01_CORE/DOCUMENTATION_STANDARDS.md",
+        "09_DOCUMENTATION/README.md"
+      ]
+    },
+    "deployment_checklist": {
+      "description": "Deployment verification checklist",
+      "files": [
+        "06_CHECKLISTS/DEPLOYMENT_CHECKLIST.md"
+      ]
+    },
+    "rollback_procedures": {
+      "description": "Rollback and recovery procedures",
+      "files": [
+        "01_CORE/ROLLBACK_PROCEDURES.md"
+      ]
+    },
+    "story_templates": {
+      "description": "User story and epic templates",
+      "files": [
+        "05_TEMPLATES/STORY_TEMPLATE.md"
+      ]
+    },
+    "acceptance_criteria": {
+      "description": "Acceptance criteria patterns",
+      "files": [
+        "01_CORE/ACCEPTANCE_CRITERIA_GUIDE.md"
+      ]
+    },
+    "coverage_requirements": {
+      "description": "Test coverage requirements by iteration",
+      "files": [
+        "04_METRICS/COVERAGE_REQUIREMENTS.md"
+      ]
+    }
+  },
+
+  "file_registry": {
+    "README.md": {
+      "size": 6800,
+      "tokens_estimate": 1700,
+      "tags": ["overview", "quickstart", "architecture"],
+      "last_updated": "2024-09-19"
+    },
+    "02_WORKFLOWS/00_ORCHESTRATION_PROCESS.md": {
+      "size": 12500,
+      "tokens_estimate": 3100,
+      "tags": ["orchestration", "coordination", "meta-process"],
+      "critical": true
+    },
+    "03_AGENTS/01_AGENT_SPECIALIZATIONS.md": {
+      "size": 15600,
+      "tokens_estimate": 3900,
+      "tags": ["agents", "specialization", "roles"],
+      "has_examples": true
+    },
+    "07_AUTOMATION/context_injector.py": {
+      "size": 22000,
+      "tokens_estimate": 5500,
+      "tags": ["automation", "context", "python"],
+      "executable": true
+    }
+  },
+
+  "global_settings": {
+    "default_size_budget": 40000,
+    "token_estimation_multiplier": 0.25,
+    "cache_enabled": true,
+    "cache_ttl_seconds": 900,
+    "parallel_file_loading": true,
+    "max_parallel_loads": 5,
+    "summary_generation": {
+      "enabled": true,
+      "max_summary_tokens": 500,
+      "excluded_file_threshold": 5000
+    },
+    "validation": {
+      "check_file_exists": true,
+      "check_circular_deps": true,
+      "max_dependency_depth": 5,
+      "warn_on_missing_optional": true
+    }
+  },
+
+  "profile_combinations": {
+    "full_stack_development": {
+      "profiles": ["ui_development", "backend_development", "testing"],
+      "size_budget": 80000
+    },
+    "quality_assurance": {
+      "profiles": ["testing", "code_review", "troubleshooting"],
+      "size_budget": 60000
+    },
+    "feature_delivery": {
+      "profiles": ["story_creation", "orchestration", "deployment"],
+      "size_budget": 70000
+    }
+  },
+
+  "metrics": {
+    "total_profiles": 10,
+    "total_dependencies": 18,
+    "average_profile_size": 35000,
+    "most_used_profile": "orchestration",
+    "last_validation": "2024-09-19T10:00:00Z",
+    "validation_status": "VALID"
+  }
+}

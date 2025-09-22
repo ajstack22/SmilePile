@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
 }
 
 android {
@@ -89,6 +90,9 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // Room Database
     implementation("androidx.room:room-runtime:2.6.1")

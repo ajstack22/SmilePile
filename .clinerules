@@ -1,0 +1,63 @@
+# Atlas Framework - Cline/Claude Dev Rules
+
+## CRITICAL: This is an Atlas Framework Project
+
+You are Claude Dev/Cline working in an Atlas project. You MUST:
+
+### 1. ALWAYS Check for Stories First
+Before any development:
+```bash
+ls atlas/09_STORIES/features/
+ls atlas/09_STORIES/bugs/
+```
+
+### 2. NEVER Skip Story Creation
+If no story exists for the task, create one first:
+"Create a story for [task description]"
+
+### 3. USE Atlas Prompts
+Reference `atlas/01_CORE/PROMPTS.md` for all standard operations
+
+### 4. FOLLOW Atlas Workflows
+- Research → Story → Development → Review → Deploy
+- No shortcuts allowed
+
+### 5. Let Context Injection Work
+When spawning agents, use proper types:
+- story-writer
+- bug-fixer
+- ui-developer
+- backend-developer
+- tester
+
+## Project Structure
+
+```
+atlas/              # Framework (don't modify)
+├── 01_CORE/       # Standards & prompts
+├── 02_WORKFLOWS/  # Required processes
+├── 09_STORIES/    # All work starts here
+└── config/        # System config
+```
+
+## Validation Commands
+
+```bash
+# Start of session
+python3 atlas/test_context_injection.py
+
+# Check stories
+ls atlas/09_STORIES/
+
+# View prompts
+cat atlas/01_CORE/PROMPTS.md
+```
+
+## Remember
+
+- Stories come first
+- Atlas workflows are mandatory
+- Context injection is automatic
+- Quality standards are enforced
+
+Trust the Atlas process - it's here to help.

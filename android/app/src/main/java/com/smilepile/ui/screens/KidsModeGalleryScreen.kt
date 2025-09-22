@@ -37,6 +37,7 @@ import com.smilepile.data.models.Photo
 import com.smilepile.mode.AppMode
 import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
+import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 
 /**
  * Simplified gallery screen for Kids Mode
@@ -118,7 +119,7 @@ fun KidsModeGalleryScreen(
         ) {
             // Category filter chips
             if (categories.isNotEmpty()) {
-                CategoryFilterRow(
+                CategoryFilterComponentKidsMode(
                     categories = categories,
                     selectedCategoryId = selectedCategoryId,
                     onCategorySelected = { selectedCategoryId = it }
@@ -172,46 +173,6 @@ fun KidsModeGalleryScreen(
     }
 }
 
-@Composable
-private fun CategoryFilterRow(
-    categories: List<Category>,
-    selectedCategoryId: Long?,
-    onCategorySelected: (Long?) -> Unit
-) {
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        // All photos chip
-        item {
-            FilterChip(
-                selected = selectedCategoryId == null,
-                onClick = { onCategorySelected(null) },
-                label = { Text("All Photos") },
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer
-                )
-            )
-        }
-
-        // Category chips
-        items(categories.size) { index ->
-            val category = categories[index]
-            FilterChip(
-                selected = selectedCategoryId == category.id,
-                onClick = {
-                    onCategorySelected(
-                        if (selectedCategoryId == category.id) null else category.id
-                    )
-                },
-                label = { Text(category.name) },
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer
-                )
-            )
-        }
-    }
-}
 
 @Composable
 private fun KidsPhotoGridItem(

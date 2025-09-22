@@ -1,0 +1,26 @@
+Atlas Orchestrator Prompt Files
+================================
+
+Main Prompt:
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/00_Prompt.md
+
+Supporting Context Files:
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/AGENT_INSTRUCTIONS.md
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/CLAUDE.md
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/SAFETY_REQUIREMENTS.md
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/PARALLEL_EXECUTION_ENFORCEMENT.md
+/Users/adamstack/chip/chip/10-AREAS/AI Development/Atlas/COMPILATION_VERIFICATION.md
+
+Usage:
+------
+1. Start with 00_Prompt.md as your main orchestrator prompt
+2. It ends with "In order to complete this work:"
+3. Add your specific project/story/requirements after that line
+4. Include the supporting files for additional context as needed
+
+The 00_Prompt.md file contains the core orchestrator instructions that:
+- Enforces git initialization first
+- Requires parallel agent execution (3-5 agents)
+- Mandates build verification before proceeding
+- Includes adversarial review requirements
+- Prevents destructive operations

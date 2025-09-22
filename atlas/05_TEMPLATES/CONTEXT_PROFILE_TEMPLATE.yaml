@@ -1,0 +1,183 @@
+# Context Profile Template for Atlas Enhanced Context Injection System
+# Copy this template to create new context profiles in config/context_manifest.json
+
+profile_name: "template_profile"  # Unique identifier for this profile
+
+metadata:
+  description: "Brief description of what this profile is used for"
+  author: "Your name or team"
+  created: "2024-09-19"
+  last_modified: "2024-09-19"
+  version: "1.0.0"
+
+configuration:
+  priority: 2  # 1=highest, used for sorting and selection (1-5)
+  size_budget: 40000  # Maximum bytes for this context (typical: 25000-50000)
+  cache_ttl: 900  # Cache time-to-live in seconds (optional, defaults to global)
+
+# Files to include in this profile
+files:
+  # Core files - always loaded first
+  core:
+    - path: "path/to/essential/file.md"
+      priority: 1  # Within-category priority (1=highest)
+      required: true  # Fail if this file is missing
+      sections:  # Optional: only extract these sections
+        - "overview"
+        - "api"
+
+    - path: "path/to/another/core/file.py"
+      priority: 2
+      summary_only: false  # If true, only include summary
+
+  # Supporting files - loaded after core
+  support:
+    - path: "path/to/support/file.md"
+      priority: 3
+
+  # Reference files - lowest priority
+  reference:
+    - path: "path/to/reference/doc.md"
+      priority: 4
+      max_lines: 100  # Optional: limit to first N lines
+
+# File patterns to include (glob patterns)
+includes_patterns:
+  - "**/*_test.py"  # Include all test files
+  - "docs/*.md"  # Include all markdown in docs
+  - "**/README.md"  # Include all READMEs
+
+# File patterns to exclude (overrides includes)
+excludes_patterns:
+  - "**/*.test.*"  # Exclude test files
+  - "**/node_modules/**"  # Exclude dependencies
+  - "**/.git/**"  # Exclude git files
+  - "**/build/**"  # Exclude build artifacts
+
+# Dependencies - references to dependency_definitions
+dependencies:
+  - "testing_standards"  # Must exist in dependency_definitions
+  - "code_patterns"
+  - "project_conventions"
+
+# Feature-specific modifications
+feature_modifiers:
+  authentication:
+    description: "Additional context for authentication features"
+    additional_files:
+      - "security/auth_guide.md"
+      - "templates/auth_template.py"
+    additional_dependencies:
+      - "security_standards"
+      - "oauth_patterns"
+    size_budget_increase: 10000  # Add to base budget
+
+  performance:
+    description: "Additional context for performance optimization"
+    additional_files:
+      - "metrics/performance_guide.md"
+      - "profiling/tools.md"
+    additional_dependencies:
+      - "performance_patterns"
+
+  database:
+    description: "Additional context for database work"
+    additional_files:
+      - "db/schema_guide.md"
+      - "db/migrations/README.md"
+    additional_dependencies:
+      - "database_patterns"
+      - "sql_standards"
+
+# Conditional inclusion rules
+conditionals:
+  - condition: "project_type == 'web'"
+    add_files:
+      - "web/framework_guide.md"
+    add_dependencies:
+      - "web_standards"
+
+  - condition: "language == 'python'"
+    add_files:
+      - "python/style_guide.md"
+    add_dependencies:
+      - "python_patterns"
+
+# Metadata for tracking and optimization
+profile_metrics:
+  typical_token_usage: 35000  # Expected token count
+  average_assembly_time: 0.5  # Seconds
+  success_rate: 0.95  # Task success rate with this profile
+  last_validated: "2024-09-19"
+  validation_status: "VALID"
+  usage_count: 0  # Track usage for optimization
+
+# Special processing instructions
+processing:
+  parallel_loading: true  # Load files in parallel
+  deduplication: true  # Remove duplicate content
+  compression: false  # Apply compression techniques
+  format: "markdown"  # Output format (markdown, plain, json)
+
+# Integration hooks
+hooks:
+  pre_assembly:  # Run before building context
+    - "validate_environment"
+    - "check_dependencies"
+
+  post_assembly:  # Run after building context
+    - "log_metrics"
+    - "update_cache"
+
+  on_error:  # Run if assembly fails
+    - "log_error"
+    - "notify_team"
+
+# Notes for profile maintainers
+notes: |
+  This profile is designed for [specific use case].
+
+  Important considerations:
+  - Keep size budget under 40K for optimal performance
+  - Update file paths when project structure changes
+  - Test with actual LLM tasks before deploying
+
+  Change log:
+  - 2024-09-19: Initial creation
+  - [Date]: [Change description]
+
+# Validation rules for this profile
+validation:
+  min_files: 3  # Minimum files required
+  max_files: 50  # Maximum files allowed
+  required_dependencies:  # Must have these deps
+    - "core_standards"
+  forbidden_patterns:  # Never include these
+    - "**/*secret*"
+    - "**/*private*"
+    - "**/.env"
+
+# Example usage
+examples:
+  - description: "Basic usage"
+    command: "python enhanced_context_injector.py build --task template_profile"
+    expected_output: "Context with ~35K tokens"
+
+  - description: "With feature modifier"
+    command: "python enhanced_context_injector.py build --task template_profile --feature authentication"
+    expected_output: "Context with ~45K tokens including auth context"
+
+  - description: "With additional files"
+    command: "python enhanced_context_injector.py build --task template_profile --additional-files src/main.py"
+    expected_output: "Context with core files plus src/main.py"
+
+# Testing checklist for new profiles
+testing_checklist:
+  - [ ] Validate all file paths exist
+  - [ ] Check total size stays within budget
+  - [ ] Verify no circular dependencies
+  - [ ] Test with each feature modifier
+  - [ ] Confirm success rate > 90%
+  - [ ] Document common use cases
+  - [ ] Add to profile registry
+  - [ ] Update main documentation

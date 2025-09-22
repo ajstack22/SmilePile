@@ -216,6 +216,35 @@ class PhotoRepositoryImpl @Inject constructor(
             photoEntities.map { it.toPhoto() }
         }
     }
+
+    // Remove from library methods - only delete from app database, NOT device storage
+    override suspend fun removeFromLibrary(photo: Photo): Unit = withContext(ioDispatcher) {
+        try {
+            android.util.Log.d("PhotoRepository", "Removing photo from library (app only): ${photo.id}")
+            val rowsAffected = photoDao.deleteById(photo.id.toString())
+            if (rowsAffected == 0) {
+                throw PhotoRepositoryException("Photo not found for removal from library: ${photo.id}")
+            }
+            android.util.Log.d("PhotoRepository", "Successfully removed photo from library: ${photo.id}")
+        } catch (e: Exception) {
+            if (e is PhotoRepositoryException) throw e
+            throw PhotoRepositoryException("Failed to remove photo from library: ${e.message}", e)
+        }
+    }
+
+    override suspend fun removeFromLibraryById(photoId: Long): Unit = withContext(ioDispatcher) {
+        try {
+            android.util.Log.d("PhotoRepository", "Removing photo from library by ID (app only): $photoId")
+            val rowsAffected = photoDao.deleteById(photoId.toString())
+            if (rowsAffected == 0) {
+                throw PhotoRepositoryException("Photo not found for removal from library: $photoId")
+            }
+            android.util.Log.d("PhotoRepository", "Successfully removed photo from library by ID: $photoId")
+        } catch (e: Exception) {
+            if (e is PhotoRepositoryException) throw e
+            throw PhotoRepositoryException("Failed to remove photo from library by ID: ${e.message}", e)
+        }
+    }
 }
 
 /**

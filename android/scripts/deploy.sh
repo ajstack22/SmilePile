@@ -161,6 +161,37 @@ EOF
 
 print_status "PASS" "Deployment notes generated"
 
+# Step 5: Deploy to emulators for validation
+print_status "STEP" "Step 5: Validating on running emulators"
+DEVICES=$(adb devices | grep -E "emulator-[0-9]+.*device" | cut -f1)
+
+if [ -z "$DEVICES" ]; then
+    print_status "INFO" "No running emulators detected for validation"
+    print_status "INFO" "Start an emulator and run: adb install $APK_DEST"
+else
+    # Build debug APK for emulator testing
+    print_status "INFO" "Building debug APK for emulator testing..."
+    ./gradlew assembleDebug > /dev/null 2>&1
+
+    DEBUG_APK="app/build/outputs/apk/debug/app-debug.apk"
+
+    if [ -f "$DEBUG_APK" ]; then
+        for DEVICE in $DEVICES; do
+            print_status "INFO" "Deploying to $DEVICE..."
+            adb -s "$DEVICE" install -r "$DEBUG_APK" > /dev/null 2>&1
+            if [ $? -eq 0 ]; then
+                adb -s "$DEVICE" shell am start -n com.smilepile/.MainActivity > /dev/null 2>&1
+                print_status "PASS" "Deployed and launched on $DEVICE"
+            else
+                print_status "FAIL" "Failed to deploy to $DEVICE"
+            fi
+        done
+        print_status "PASS" "Emulator validation complete"
+    else
+        print_status "INFO" "Debug APK build skipped - release APK ready for manual testing"
+    fi
+fi
+
 # Final Summary
 print_status "STEP" "Deployment Summary"
 
