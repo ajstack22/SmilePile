@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmilePile Logo Variations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --smile-yellow: #FFEB3B;
+            --pile-green: #4CAF50;
+            --pile-blue: #2196F3;
+            --pile-orange: #FF9800;
+            --pile-pink: #E91E63;
+            --dark-text: #212121;
+            --light-text: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #E0E0E0;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .background-swatch {
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .background-swatch:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Background Colors */
+        .bg-light { background-color: #FFFFFF; }
+        .bg-light-gray { background-color: #f4f7f9; }
+        .bg-dark-gray { background-color: #424242; }
+        .bg-dark { background-color: #212121; }
+
+        /* Logo Lockup */
+        .logo-lockup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .logo-lockup .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* SVG Icon Styling */
+        .logo-svg {
+            width: 64px;
+            height: 64px;
+        }
+
+        /* Default (Light Mode) SVG Colors */
+        .logo-svg .eye { fill: var(--dark-text); }
+        .logo-svg .mouth { stroke: var(--dark-text); }
+
+        /* Dark Mode SVG Overrides */
+        /* Eye and mouth color are now handled by default styles */
+        
+        /* Text Color Styling */
+        .text-smile,
+        .text-p,
+        .text-i,
+        .text-l,
+        .text-e {
+            /* Add a black border for high contrast */
+            -webkit-text-stroke: 2px var(--dark-text);
+            text-stroke: 2px var(--dark-text);
+            paint-order: stroke fill; /* Ensures stroke is behind the fill */
+        }
+
+        .text-smile { color: var(--smile-yellow); }
+        .text-p { color: var(--pile-green); }
+        .text-i { color: var(--pile-blue); }
+        .text-l { color: var(--pile-orange); }
+        .text-e { color: var(--pile-pink); }
+
+ 
+
+    </style>
+</head>
+<body>
+
+    <h1>Logo Variations</h1>
+
+    <div class="variations-grid">
+        
+        <!-- Light Mode Swatch -->
+        <div class="background-swatch bg-light">
+            <div class="logo-lockup">
+                <svg class="logo-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs><style>.disc{stroke:none}.mouth{fill:none;stroke-linecap:round;stroke-width:12}</style></defs><circle class="disc" cx="80" cy="176" r="64" fill="var(--pile-green)"/><g transform="translate(80,176) rotate(-135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="176" r="64" fill="var(--pile-blue)"/><g transform="translate(176,176) rotate(135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="80" r="64" fill="var(--pile-orange)"/><g transform="translate(176,80) rotate(45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="80" cy="80" r="64" fill="var(--pile-pink)"/><g transform="translate(80,80) rotate(-45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="128" cy="128" r="64" fill="var(--smile-yellow)"/><circle class="eye" cx="112" cy="116" r="8"/><circle class="eye" cx="144" cy="116" r="8"/><path class="mouth" d="M112,136 Q128,152 144,136"/></svg>
+                <div class="logo-text">
+                    <span class="text-smile">Smile</span><span class="text-p">P</span><span class="text-i">i</span><span class="text-l">l</span><span class="text-e">e</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Light Gray Mode Swatch -->
+        <div class="background-swatch bg-light-gray">
+            <div class="logo-lockup">
+                <svg class="logo-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs><style>.disc{stroke:none}.mouth{fill:none;stroke-linecap:round;stroke-width:12}</style></defs><circle class="disc" cx="80" cy="176" r="64" fill="var(--pile-green)"/><g transform="translate(80,176) rotate(-135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="176" r="64" fill="var(--pile-blue)"/><g transform="translate(176,176) rotate(135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="80" r="64" fill="var(--pile-orange)"/><g transform="translate(176,80) rotate(45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="80" cy="80" r="64" fill="var(--pile-pink)"/><g transform="translate(80,80) rotate(-45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="128" cy="128" r="64" fill="var(--smile-yellow)"/><circle class="eye" cx="112" cy="116" r="8"/><circle class="eye" cx="144" cy="116" r="8"/><path class="mouth" d="M112,136 Q128,152 144,136"/></svg>
+                <div class="logo-text">
+                    <span class="text-smile">Smile</span><span class="text-p">P</span><span class="text-i">i</span><span class="text-l">l</span><span class="text-e">e</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark Gray Mode Swatch -->
+        <div class="background-swatch bg-dark-gray dark-theme">
+            <div class="logo-lockup">
+                <svg class="logo-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs><style>.disc{stroke:none}.mouth{fill:none;stroke-linecap:round;stroke-width:12}</style></defs><circle class="disc" cx="80" cy="176" r="64" fill="var(--pile-green)"/><g transform="translate(80,176) rotate(-135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="176" r="64" fill="var(--pile-blue)"/><g transform="translate(176,176) rotate(135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="80" r="64" fill="var(--pile-orange)"/><g transform="translate(176,80) rotate(45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="80" cy="80" r="64" fill="var(--pile-pink)"/><g transform="translate(80,80) rotate(-45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="128" cy="128" r="64" fill="var(--smile-yellow)"/><circle class="eye" cx="112" cy="116" r="8"/><circle class="eye" cx="144" cy="116" r="8"/><path class="mouth" d="M112,136 Q128,152 144,136"/></svg>
+                <div class="logo-text">
+                    <span class="text-smile">Smile</span><span class="text-p">P</span><span class="text-i">i</span><span class="text-l">l</span><span class="text-e">e</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dark Mode Swatch -->
+        <div class="background-swatch bg-dark dark-theme">
+            <div class="logo-lockup">
+                <svg class="logo-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><defs><style>.disc{stroke:none}.mouth{fill:none;stroke-linecap:round;stroke-width:12}</style></defs><circle class="disc" cx="80" cy="176" r="64" fill="var(--pile-green)"/><g transform="translate(80,176) rotate(-135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="176" r="64" fill="var(--pile-blue)"/><g transform="translate(176,176) rotate(135)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="176" cy="80" r="64" fill="var(--pile-orange)"/><g transform="translate(176,80) rotate(45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="80" cy="80" r="64" fill="var(--pile-pink)"/><g transform="translate(80,80) rotate(-45)"><circle class="eye" cx="-16" cy="-12" r="8"/><circle class="eye" cx="16" cy="-12" r="8"/></g><circle class="disc" cx="128" cy="128" r="64" fill="var(--smile-yellow)"/><circle class="eye" cx="112" cy="116" r="8"/><circle class="eye" cx="144" cy="116" r="8"/><path class="mouth" d="M112,136 Q128,152 144,136"/></svg>
+                <div class="logo-text">
+                    <span class="text-smile">Smile</span><span class="text-p">P</span><span class="text-i">i</span><span class="text-l">l</span><span class="text-e">e</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

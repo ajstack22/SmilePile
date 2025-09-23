@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -157,8 +158,8 @@ fun MainScreen(
             AppNavHost(
                 navController = navController,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
+                    .fillMaxSize(),
+                paddingValues = paddingValues,
                 toastState = toastState
             )
         }
@@ -254,9 +255,9 @@ private fun SmilePileBottomNavigation(
 ) {
     NavigationBar(
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.onSurface,
-        tonalElevation = 8.dp
+        tonalElevation = 0.dp
     ) {
         items.forEach { item ->
             val isSelected = currentDestination?.hierarchy?.any {
@@ -283,11 +284,11 @@ private fun SmilePileBottomNavigation(
                 selected = isSelected,
                 onClick = { onNavigateToDestination(item.route) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                    selectedIconColor = Color(0xFF2196F3), // SmilePile blue from logo
+                    selectedTextColor = Color(0xFF2196F3), // SmilePile blue from logo
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer
+                    indicatorColor = Color(0xFF2196F3).copy(alpha = 0.12f) // Light blue background
                 )
             )
         }

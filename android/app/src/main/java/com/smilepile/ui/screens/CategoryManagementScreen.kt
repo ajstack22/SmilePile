@@ -67,7 +67,8 @@ import com.smilepile.ui.viewmodels.CategoryWithCount
 fun CategoryManagementScreen(
     onBackClick: () -> Unit,
     viewModel: CategoryViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(0.dp)
 ) {
     val categoriesWithCounts by viewModel.categoriesWithCountsFlow.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -127,7 +128,8 @@ fun CategoryManagementScreen(
             FloatingActionButton(
                 onClick = { viewModel.showAddCategoryDialog() },
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding())
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -139,11 +141,12 @@ fun CategoryManagementScreen(
             SnackbarHost(hostState = snackbarHostState)
         },
         containerColor = MaterialTheme.colorScheme.background
-    ) { paddingValues ->
+    ) { scaffoldPaddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(scaffoldPaddingValues)
+                .padding(bottom = paddingValues.calculateBottomPadding())
         ) {
             if (isLoading && categoriesWithCounts.isEmpty()) {
                 // Show loading indicator for initial load

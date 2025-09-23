@@ -1,0 +1,99 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="256dp"
+    android:height="256dp"
+    android:viewportWidth="256"
+    android:viewportHeight="256">
+
+  <!-- Bottom-left green circle with rotated eyes -->
+  <path
+      android:pathData="M80,176 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#4CAF50"/>
+
+  <!-- Bottom-left eyes (rotated -135 degrees) -->
+  <group
+      android:pivotX="80"
+      android:pivotY="176"
+      android:rotation="-135">
+    <path
+        android:pathData="M64,164 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+    <path
+        android:pathData="M96,164 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+  </group>
+
+  <!-- Bottom-right blue circle with rotated eyes -->
+  <path
+      android:pathData="M176,176 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#2196F3"/>
+
+  <!-- Bottom-right eyes (rotated 135 degrees) -->
+  <group
+      android:pivotX="176"
+      android:pivotY="176"
+      android:rotation="135">
+    <path
+        android:pathData="M160,164 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+    <path
+        android:pathData="M192,164 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+  </group>
+
+  <!-- Top-right orange circle with rotated eyes -->
+  <path
+      android:pathData="M176,80 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#FF9800"/>
+
+  <!-- Top-right eyes (rotated 45 degrees) -->
+  <group
+      android:pivotX="176"
+      android:pivotY="80"
+      android:rotation="45">
+    <path
+        android:pathData="M160,68 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+    <path
+        android:pathData="M192,68 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+  </group>
+
+  <!-- Top-left pink circle with rotated eyes -->
+  <path
+      android:pathData="M80,80 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#E91E63"/>
+
+  <!-- Top-left eyes (rotated -45 degrees) -->
+  <group
+      android:pivotX="80"
+      android:pivotY="80"
+      android:rotation="-45">
+    <path
+        android:pathData="M64,68 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+    <path
+        android:pathData="M96,68 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+        android:fillColor="#212121"/>
+  </group>
+
+  <!-- Center yellow smiley -->
+  <path
+      android:pathData="M128,128 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#FFEB3B"/>
+
+  <!-- Center eyes -->
+  <path
+      android:pathData="M112,116 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+      android:fillColor="#212121"/>
+  <path
+      android:pathData="M144,116 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"
+      android:fillColor="#212121"/>
+
+  <!-- Center smile -->
+  <path
+      android:pathData="M112,136 Q128,152 144,136"
+      android:strokeColor="#212121"
+      android:strokeWidth="12"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"/>
+</vector>

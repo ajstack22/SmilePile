@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="256"
+    android:viewportHeight="256">
+
+  <!-- Bottom-left green circle -->
+  <path
+      android:pathData="M80,176 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#4CAF50"/>
+
+  <!-- Bottom-right blue circle -->
+  <path
+      android:pathData="M176,176 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#2196F3"/>
+
+  <!-- Top-right orange circle -->
+  <path
+      android:pathData="M176,80 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#FF9800"/>
+
+  <!-- Top-left pink circle -->
+  <path
+      android:pathData="M80,80 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#E91E63"/>
+
+  <!-- Center yellow smiley -->
+  <path
+      android:pathData="M128,128 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
+      android:fillColor="#FFEB3B"/>
+  <!-- Eyes -->
+  <path
+      android:pathData="M112,116 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0"
+      android:fillColor="#212121"/>
+  <path
+      android:pathData="M144,116 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0"
+      android:fillColor="#212121"/>
+  <!-- Smile -->
+  <path
+      android:pathData="M112,136 Q128,152 144,136"
+      android:strokeColor="#212121"
+      android:strokeWidth="6"
+      android:strokeLineCap="round"
+      android:fillColor="#00000000"/>
+</vector>

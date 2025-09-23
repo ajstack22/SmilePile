@@ -96,14 +96,9 @@ class MainActivity : SecureActivity() {
         // Configure window for edge-to-edge display
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        // Set status bar colors based on theme and mode (only in Parent Mode)
+        // Set transparent status bar to allow our Surface to show through
         if (currentMode == AppMode.PARENT && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val statusBarColor = if (isDarkMode) {
-                Color(0xFF121212).toArgb() // Dark theme status bar
-            } else {
-                Color(0xFFFFFBFE).toArgb() // Light theme status bar
-            }
-            window.statusBarColor = statusBarColor
+            window.statusBarColor = Color.Transparent.toArgb()
 
             // Set light status bar icons for light theme
             val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
