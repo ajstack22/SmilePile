@@ -28,8 +28,6 @@ data class SettingsUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val backupStats: BackupStats? = null,
-    val exportJsonContent: String? = null,
-    val selectedBackupFormat: BackupFormat = BackupFormat.ZIP,
     val exportProgress: ImportProgress? = null,
     val importProgress: ImportProgress? = null
 )
@@ -48,7 +46,6 @@ class SettingsViewModel @Inject constructor(
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
 
     // Keep track of export data for later writing
-    private var pendingExportJson: String? = null
     private var pendingExportZipFile: File? = null
 
     init {
@@ -93,62 +90,38 @@ class SettingsViewModel @Inject constructor(
 
     /**
      * Prepare export data and create intent for Storage Access Framework
-     * @param format The backup format to use (JSON or ZIP)
      * @return Intent for file picker or null if export failed
      */
-    suspend fun prepareExport(format: BackupFormat = BackupFormat.ZIP): Intent? {
+    suspend fun prepareExport(): Intent? {
         return try {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
-            when (format) {
-                BackupFormat.JSON -> {
-                    // Export data to JSON using BackupManager
-                    val result = backupManager.exportToJson()
+            // Export data to ZIP with progress tracking
+            val result = backupManager.exportToZip { current, total, operation ->
+                val progress = ImportProgress(
+                    totalItems = total,
+                    processedItems = current,
+                    currentOperation = operation,
+                    errors = emptyList()
+                )
+                _uiState.value = _uiState.value.copy(exportProgress = progress)
+            }
 
-                    if (result.isSuccess) {
-                        _uiState.value = _uiState.value.copy(
-                            exportJsonContent = result.getOrNull(),
-                            isLoading = false
-                        )
-                        // Return SAF intent for JSON
-                        backupManager.createExportIntent(BackupFormat.JSON)
-                    } else {
-                        _uiState.value = _uiState.value.copy(
-                            error = result.exceptionOrNull()?.message ?: "Failed to export data",
-                            isLoading = false
-                        )
-                        null
-                    }
-                }
-                BackupFormat.ZIP -> {
-                    // Export data to ZIP with progress tracking
-                    val result = backupManager.exportToZip { current, total, operation ->
-                        val progress = ImportProgress(
-                            totalItems = total,
-                            processedItems = current,
-                            currentOperation = operation,
-                            errors = emptyList()
-                        )
-                        _uiState.value = _uiState.value.copy(exportProgress = progress)
-                    }
-
-                    if (result.isSuccess) {
-                        pendingExportZipFile = result.getOrNull()
-                        _uiState.value = _uiState.value.copy(
-                            isLoading = false,
-                            exportProgress = null
-                        )
-                        // Return SAF intent for ZIP
-                        backupManager.createExportIntent(BackupFormat.ZIP)
-                    } else {
-                        _uiState.value = _uiState.value.copy(
-                            error = result.exceptionOrNull()?.message ?: "Failed to export data",
-                            isLoading = false,
-                            exportProgress = null
-                        )
-                        null
-                    }
-                }
+            if (result.isSuccess) {
+                pendingExportZipFile = result.getOrNull()
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    exportProgress = null
+                )
+                // Return SAF intent for ZIP
+                backupManager.createExportIntent(BackupFormat.ZIP)
+            } else {
+                _uiState.value = _uiState.value.copy(
+                    error = result.exceptionOrNull()?.message ?: "Failed to export data",
+                    isLoading = false,
+                    exportProgress = null
+                )
+                null
             }
         } catch (e: Exception) {
             _uiState.value = _uiState.value.copy(
@@ -163,77 +136,47 @@ class SettingsViewModel @Inject constructor(
     /**
      * Complete the export by writing data to the selected file URI
      * @param uri The file URI selected by the user
-     * @param format The backup format being used
      */
-    fun completeExport(uri: Uri, format: BackupFormat = BackupFormat.ZIP) {
+    fun completeExport(uri: Uri) {
         viewModelScope.launch {
             try {
                 _uiState.value = _uiState.value.copy(isLoading = true, error = null)
 
-                when (format) {
-                    BackupFormat.JSON -> {
-                        // Use existing JSON content or prepare fresh
-                        val jsonContent = _uiState.value.exportJsonContent ?: run {
-                            val exportResult = backupManager.exportToJson()
-                            if (exportResult.isSuccess) {
-                                exportResult.getOrThrow()
-                            } else {
-                                throw Exception("Failed to prepare JSON export")
-                            }
-                        }
-
-                        // Write JSON to the selected URI
-                        val writeResult = backupManager.writeJsonToFile(jsonContent, uri)
-                        if (writeResult.isSuccess) {
-                            _uiState.value = _uiState.value.copy(
-                                isLoading = false,
-                                error = null
-                            )
-                        } else {
-                            _uiState.value = _uiState.value.copy(
-                                error = writeResult.exceptionOrNull()?.message ?: "Failed to save backup file",
-                                isLoading = false
-                            )
-                        }
+                // Use pending ZIP file or create fresh
+                val zipFile = pendingExportZipFile ?: run {
+                    val result = backupManager.exportToZip { current, total, operation ->
+                        val progress = ImportProgress(
+                            totalItems = total,
+                            processedItems = current,
+                            currentOperation = operation,
+                            errors = emptyList()
+                        )
+                        _uiState.value = _uiState.value.copy(exportProgress = progress)
                     }
-                    BackupFormat.ZIP -> {
-                        // Use pending ZIP file or create fresh
-                        val zipFile = pendingExportZipFile ?: run {
-                            val result = backupManager.exportToZip { current, total, operation ->
-                                val progress = ImportProgress(
-                                    totalItems = total,
-                                    processedItems = current,
-                                    currentOperation = operation,
-                                    errors = emptyList()
-                                )
-                                _uiState.value = _uiState.value.copy(exportProgress = progress)
-                            }
-                            if (result.isSuccess) {
-                                result.getOrThrow()
-                            } else {
-                                throw Exception("Failed to create ZIP export")
-                            }
-                        }
-
-                        // Write ZIP to the selected URI
-                        val writeResult = backupManager.writeZipToFile(zipFile, uri)
-                        if (writeResult.isSuccess) {
-                            _uiState.value = _uiState.value.copy(
-                                isLoading = false,
-                                error = null,
-                                exportProgress = null
-                            )
-                            // Clean up temp file
-                            pendingExportZipFile?.delete()
-                            pendingExportZipFile = null
-                        } else {
-                            _uiState.value = _uiState.value.copy(
-                                error = writeResult.exceptionOrNull()?.message ?: "Failed to save backup file",
-                                isLoading = false,
-                                exportProgress = null
-                            )
-                        }
+                    if (result.isSuccess) {
+                        result.getOrThrow()
+                    } else {
+                        throw Exception("Failed to create ZIP export")
                     }
+                }
+
+                // Write ZIP to the selected URI
+                val writeResult = backupManager.writeZipToFile(zipFile, uri)
+                if (writeResult.isSuccess) {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = null,
+                        exportProgress = null
+                    )
+                    // Clean up temp file
+                    pendingExportZipFile?.delete()
+                    pendingExportZipFile = null
+                } else {
+                    _uiState.value = _uiState.value.copy(
+                        error = writeResult.exceptionOrNull()?.message ?: "Failed to save backup file",
+                        isLoading = false,
+                        exportProgress = null
+                    )
                 }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
@@ -424,7 +367,6 @@ class SettingsViewModel @Inject constructor(
      */
     fun clearExportContent() {
         _uiState.value = _uiState.value.copy(
-            exportJsonContent = null,
             exportProgress = null
         )
         pendingExportZipFile?.delete()
@@ -432,30 +374,9 @@ class SettingsViewModel @Inject constructor(
     }
 
     /**
-     * Set the selected backup format
-     */
-    fun setBackupFormat(format: BackupFormat) {
-        _uiState.value = _uiState.value.copy(selectedBackupFormat = format)
-    }
-
-    /**
      * Clear import progress
      */
     fun clearImportProgress() {
         _uiState.value = _uiState.value.copy(importProgress = null)
-    }
-
-    /**
-     * Prepare export asynchronously and launch Storage Access Framework
-     */
-    fun prepareExportAsync(format: BackupFormat = BackupFormat.ZIP) {
-        viewModelScope.launch {
-            val intent = prepareExport(format)
-            intent?.let {
-                // In a real app, this would be handled by the UI layer
-                // For now, we'll just set the loading state
-                _uiState.value = _uiState.value.copy(isLoading = false)
-            }
-        }
     }
 }

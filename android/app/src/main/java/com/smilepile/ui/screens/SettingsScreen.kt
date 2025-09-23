@@ -23,7 +23,6 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Archive
-import androidx.compose.material.icons.filled.Description
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -65,7 +64,6 @@ import com.smilepile.R
 import com.smilepile.ui.viewmodels.SettingsViewModel
 import com.smilepile.security.SecurePreferencesManager
 import com.smilepile.security.SecureStorageManager
-import com.smilepile.data.backup.BackupFormat
 
 /**
  * Settings screen providing app configuration and management options
@@ -88,12 +86,10 @@ fun SettingsScreen(
 
     // Export launcher for Storage Access Framework
     val exportLauncher = rememberLauncherForActivityResult(
-        contract = androidx.activity.result.contract.ActivityResultContracts.CreateDocument(
-            if (uiState.selectedBackupFormat == BackupFormat.ZIP) "application/zip" else "application/json"
-        )
+        contract = androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")
     ) { uri ->
         uri?.let {
-            viewModel.completeExport(it, uiState.selectedBackupFormat)
+            viewModel.completeExport(it)
         }
     }
 
@@ -205,34 +201,22 @@ fun SettingsScreen(
                         )
                     }
 
-                    // Backup format selection
-                    BackupFormatSelector(
-                        selectedFormat = uiState.selectedBackupFormat,
-                        onFormatSelected = { format ->
-                            viewModel.setBackupFormat(format)
-                        }
-                    )
-
                     SettingsActionItem(
                         title = "Export Data",
-                        subtitle = when (uiState.selectedBackupFormat) {
-                            BackupFormat.JSON -> "Create a JSON backup file (metadata only)"
-                            BackupFormat.ZIP -> "Create a ZIP backup file (includes photos)"
-                        },
-                        icon = if (uiState.selectedBackupFormat == BackupFormat.ZIP) Icons.Default.Archive else Icons.Default.Description,
+                        subtitle = "Create a complete backup file (includes photos)",
+                        icon = Icons.Default.Archive,
                         onClick = {
                             val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
-                            val extension = if (uiState.selectedBackupFormat == BackupFormat.ZIP) ".zip" else ".json"
-                            exportLauncher.launch("smilepile_backup_$timestamp$extension")
+                            exportLauncher.launch("smilepile_backup_$timestamp.zip")
                         }
                     )
 
                     SettingsActionItem(
                         title = "Import Data",
-                        subtitle = "Restore from a backup file (JSON or ZIP)",
+                        subtitle = "Restore from a backup file",
                         icon = Icons.Default.CloudDownload,
                         onClick = {
-                            importLauncher.launch(arrayOf("application/json", "application/zip", "*/*"))
+                            importLauncher.launch(arrayOf("application/zip", "*/*"))
                         }
                     )
                 }
@@ -293,7 +277,6 @@ fun SettingsScreen(
     if (uiState.isLoading || uiState.exportProgress != null) {
         ExportProgressDialog(
             progress = uiState.exportProgress,
-            format = uiState.selectedBackupFormat,
             onDismiss = { /* Can't dismiss while exporting */ }
         )
     }
@@ -699,101 +682,6 @@ private fun ChangePinDialog(
     )
 }
 
-@Composable
-private fun BackupFormatSelector(
-    selectedFormat: BackupFormat,
-    onFormatSelected: (BackupFormat) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        ),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Backup Format",
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
-
-            // JSON Format Option
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = selectedFormat == BackupFormat.JSON,
-                    onClick = { onFormatSelected(BackupFormat.JSON) }
-                )
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 8.dp)
-                ) {
-                    Text(
-                        text = "JSON (Metadata Only)",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = "Smaller file size, photos not included",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Icon(
-                    imageVector = Icons.Default.Description,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-
-            // ZIP Format Option
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RadioButton(
-                    selected = selectedFormat == BackupFormat.ZIP,
-                    onClick = { onFormatSelected(BackupFormat.ZIP) }
-                )
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 8.dp)
-                ) {
-                    Text(
-                        text = "ZIP (Complete Backup)",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = "Includes all photos and metadata",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Icon(
-                    imageVector = Icons.Default.Archive,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-    }
-}
 
 @Composable
 private fun ImportProgressDialog(
@@ -863,7 +751,6 @@ private fun ImportProgressDialog(
 @Composable
 private fun ExportProgressDialog(
     progress: com.smilepile.data.backup.ImportProgress? = null,
-    format: BackupFormat = BackupFormat.ZIP,
     onDismiss: () -> Unit
 ) {
     AlertDialog(
@@ -882,11 +769,7 @@ private fun ExportProgressDialog(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    if (format == BackupFormat.ZIP) {
-                        "Creating ZIP backup with photos. This may take a moment..."
-                    } else {
-                        "Preparing JSON backup. This may take a moment..."
-                    }
+                    "Creating backup with photos. This may take a moment..."
                 )
 
                 progress?.let { prog ->
