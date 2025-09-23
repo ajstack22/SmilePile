@@ -10,13 +10,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 
 data class AppModeUiState(
     val currentMode: AppMode = AppMode.KIDS,
     val isTransitioning: Boolean = false,
     val requiresPinAuth: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    val isKidsFullscreen: Boolean = false  // Track if Kids Mode is in fullscreen photo view
 )
 
 @HiltViewModel
@@ -27,6 +30,9 @@ class AppModeViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(AppModeUiState())
     val uiState: StateFlow<AppModeUiState> = _uiState.asStateFlow()
+
+    // Mutex to prevent race conditions in state updates
+    private val stateMutex = Mutex()
 
     init {
         observeModeChanges()
@@ -55,11 +61,53 @@ class AppModeViewModel @Inject constructor(
     fun validatePinAndToggle(pin: String): Boolean {
         if (securePreferences.validatePIN(pin)) {
             performModeToggle()
-            _uiState.value = _uiState.value.copy(requiresPinAuth = false)
+            _uiState.value = _uiState.value.copy(
+                requiresPinAuth = false,
+                error = null
+            )
             return true
         } else {
             _uiState.value = _uiState.value.copy(
                 error = "Incorrect PIN"
+            )
+            return false
+        }
+    }
+
+    /**
+     * Validate PIN for exiting Kids Mode specifically
+     */
+    fun validatePinForKidsModeExit(pin: String): Boolean {
+        // If no PIN is set, allow direct switch to Parent Mode
+        if (!securePreferences.isPINEnabled()) {
+            viewModelScope.launch {
+                _uiState.value = _uiState.value.copy(isTransitioning = true)
+                modeManager.setMode(AppMode.PARENT)
+                _uiState.value = _uiState.value.copy(
+                    isTransitioning = false,
+                    requiresPinAuth = false,
+                    error = null
+                )
+            }
+            return true
+        }
+
+        // Validate the PIN
+        if (securePreferences.validatePIN(pin)) {
+            // Switch to Parent Mode
+            viewModelScope.launch {
+                _uiState.value = _uiState.value.copy(isTransitioning = true)
+                modeManager.setMode(AppMode.PARENT)
+                _uiState.value = _uiState.value.copy(
+                    isTransitioning = false,
+                    requiresPinAuth = false,
+                    error = null
+                )
+            }
+            return true
+        } else {
+            _uiState.value = _uiState.value.copy(
+                error = "Incorrect PIN. Please try again."
             )
             return false
         }
@@ -82,5 +130,39 @@ class AppModeViewModel @Inject constructor(
 
     fun clearError() {
         _uiState.value = _uiState.value.copy(error = null)
+    }
+
+    /**
+     * Force switch to Kids Mode (for security timeout)
+     */
+    fun forceKidsMode() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isTransitioning = true)
+            modeManager.setMode(AppMode.KIDS)
+            _uiState.value = _uiState.value.copy(isTransitioning = false)
+        }
+    }
+
+    /**
+     * Force switch to Parent Mode (when no PIN is set)
+     */
+    fun forceParentMode() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isTransitioning = true)
+            modeManager.setMode(AppMode.PARENT)
+            _uiState.value = _uiState.value.copy(isTransitioning = false)
+        }
+    }
+
+    /**
+     * Set whether Kids Mode is currently showing fullscreen photo
+     * Thread-safe to prevent race conditions
+     */
+    fun setKidsFullscreen(isFullscreen: Boolean) {
+        viewModelScope.launch {
+            stateMutex.withLock {
+                _uiState.value = _uiState.value.copy(isKidsFullscreen = isFullscreen)
+            }
+        }
     }
 }

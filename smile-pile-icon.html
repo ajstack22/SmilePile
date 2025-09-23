@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile Pile Icon (With Eyes)</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        svg {
+            width: 256px; /* Display it larger for easy viewing */
+            height: 256px;
+        }
+    </style>
+</head>
+<body>
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Bottom circle - largest pile element */}
+      <circle
+        cx="32"
+        cy="46"
+        r="16"
+        fill="#FFA726"
+        stroke="#000000"
+        strokeWidth="3"
+      />
+      
+      {/* Middle circle */}
+      <circle
+        cx="32"
+        cy="42"
+        r="14"
+        fill="#FFB74D"
+        stroke="#000000"
+        strokeWidth="3"
+      />
+      
+      {/* Top circle */}
+      <circle
+        cx="32"
+        cy="37"
+        r="12"
+        fill="#FFCC02"
+        stroke="#000000"
+        strokeWidth="3"
+      />
+      
+      {/* Eyes */}
+      <circle cx="28" cy="35" r="1.5" fill="#000000" />
+      <circle cx="36" cy="35" r="1.5" fill="#000000" />
+
+      {/* Simple smile on top circle */}
+      <path
+        d="M 26 39 Q 32 45 38 39"
+        stroke="#000000"
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+</body>
+</html>

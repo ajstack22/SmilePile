@@ -38,26 +38,34 @@ data class Category(
         fun getDefaultCategories(): List<Category> = listOf(
             Category(
                 id = 1,
-                name = "animals",
-                displayName = "Animals",
+                name = "family",
+                displayName = "Family",
                 position = 0,
-                colorHex = "#4CAF50",
+                colorHex = "#E91E63",  // Pink for family warmth
                 isDefault = true
             ),
             Category(
                 id = 2,
-                name = "nature",
-                displayName = "Nature",
+                name = "cars",
+                displayName = "Cars",
                 position = 1,
-                colorHex = "#2196F3",
+                colorHex = "#F44336",  // Red for cars/racing
                 isDefault = true
             ),
             Category(
                 id = 3,
-                name = "fun",
-                displayName = "Fun",
+                name = "games",
+                displayName = "Games",
                 position = 2,
-                colorHex = "#FF9800",
+                colorHex = "#9C27B0",  // Purple for games/fun
+                isDefault = true
+            ),
+            Category(
+                id = 4,
+                name = "sports",
+                displayName = "Sports",
+                position = 3,
+                colorHex = "#4CAF50",  // Green for sports/outdoors
                 isDefault = true
             )
         )

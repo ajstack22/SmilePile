@@ -79,6 +79,8 @@ fun CategoryManagementScreen(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     var categoryToDelete by remember { mutableStateOf<Category?>(null) }
+    var categoryPhotoCount by remember { mutableStateOf(0) }
+    var showDeleteWithPhotosDialog by remember { mutableStateOf(false) }
     var showValidationError by remember { mutableStateOf(false) }
     var validationErrorMessage by remember { mutableStateOf("") }
 
@@ -177,15 +179,21 @@ fun CategoryManagementScreen(
                         CategoryManagementCard(
                             categoryWithCount = categoryWithCount,
                             onEditClick = { viewModel.showEditCategoryDialog(it) },
-                            onDeleteClick = { category ->
-                                if (category.photoCount > 0) {
-                                    validationErrorMessage = "Cannot delete category '${category.category.displayName}' because it contains ${category.photoCount} photo(s). Please move or delete the photos first."
+                            onDeleteClick = { categoryWithCount ->
+                                val category = categoryWithCount.category
+                                // Check if this is the last category
+                                if (categoriesWithCounts.size <= 1) {
+                                    validationErrorMessage = "Cannot delete the last remaining category. At least one category must exist."
                                     showValidationError = true
-                                } else if (category.category.isDefault) {
-                                    validationErrorMessage = "Cannot delete default category '${category.category.displayName}'."
-                                    showValidationError = true
+                                } else if (categoryWithCount.photoCount > 0) {
+                                    // Has photos - show option to delete them too
+                                    categoryPhotoCount = categoryWithCount.photoCount
+                                    categoryToDelete = category
+                                    showDeleteWithPhotosDialog = true
                                 } else {
-                                    categoryToDelete = category.category
+                                    // No photos - can delete directly
+                                    categoryToDelete = category
+                                    showDeleteWithPhotosDialog = false
                                 }
                             }
                         )
@@ -221,54 +229,111 @@ fun CategoryManagementScreen(
         isVisible = showAddDialog,
         editingCategory = editingCategory,
         onDismiss = { viewModel.hideDialog() },
-        onSave = { name, displayName, colorHex ->
+        onSave = { displayName, colorHex ->
             if (editingCategory != null) {
-                viewModel.updateCategory(editingCategory!!, name, displayName, colorHex)
+                viewModel.updateCategory(editingCategory!!, displayName, colorHex)
             } else {
-                viewModel.addCategory(name, displayName, colorHex)
+                viewModel.addCategory(displayName, colorHex)
             }
         }
     )
 
     // Delete Confirmation Dialog
     categoryToDelete?.let { category ->
-        AlertDialog(
-            onDismissRequest = { categoryToDelete = null },
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Warning,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.error
-                )
-            },
-            title = {
-                Text(
-                    text = "Delete Category",
-                    fontWeight = FontWeight.SemiBold
-                )
-            },
-            text = {
-                Text("Are you sure you want to delete the category '${category.displayName}'? This action cannot be undone.")
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        viewModel.deleteCategory(category)
-                        categoryToDelete = null
-                    }
-                ) {
-                    Text(
-                        "Delete",
-                        color = MaterialTheme.colorScheme.error
+        if (showDeleteWithPhotosDialog && categoryPhotoCount > 0) {
+            // Dialog for category with photos
+            AlertDialog(
+                onDismissRequest = {
+                    categoryToDelete = null
+                    showDeleteWithPhotosDialog = false
+                },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error
                     )
+                },
+                title = {
+                    Text(
+                        text = "Delete Category with Photos",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                text = {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text("The category '${category.displayName}' contains $categoryPhotoCount photo${if (categoryPhotoCount != 1) "s" else ""}.")
+                        Text("")
+                        Text("Choose an option:", fontWeight = FontWeight.Medium)
+                        Text("• Delete category and all its photos")
+                        Text("• Cancel and keep everything")
+                    }
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.deleteCategory(category, deletePhotos = true)
+                            categoryToDelete = null
+                            showDeleteWithPhotosDialog = false
+                        }
+                    ) {
+                        Text(
+                            "Delete All",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        categoryToDelete = null
+                        showDeleteWithPhotosDialog = false
+                    }) {
+                        Text("Cancel")
+                    }
                 }
-            },
-            dismissButton = {
-                TextButton(onClick = { categoryToDelete = null }) {
-                    Text("Cancel")
+            )
+        } else {
+            // Regular delete dialog for empty category
+            AlertDialog(
+                onDismissRequest = { categoryToDelete = null },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                },
+                title = {
+                    Text(
+                        text = "Delete Category",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                text = {
+                    Text("Are you sure you want to delete the category '${category.displayName}'? This action cannot be undone.")
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.deleteCategory(category, deletePhotos = false)
+                            categoryToDelete = null
+                        }
+                    ) {
+                        Text(
+                            "Delete",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { categoryToDelete = null }) {
+                        Text("Cancel")
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 
     // Validation Error Dialog

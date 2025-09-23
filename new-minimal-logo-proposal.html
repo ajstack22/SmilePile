@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Minimal Logo Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-light: #BBDEFB;
+            --blue-medium: #64B5F6;
+            --blue-dark: #2196F3;
+            --text-dark: #212529;
+            --text-light: #495057;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+        body { font-family: 'Nunito', sans-serif; background-color: var(--bg-light); color: var(--text-light); margin: 0; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        header { text-align: center; padding: 2rem 0; margin-bottom: 2rem; }
+        h1 { font-size: 3rem; font-weight: 900; color: var(--text-dark); }
+        p.subtitle { font-size: 1.25rem; max-width: 60ch; margin: 1rem auto; }
+        h2 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 2rem; font-weight: 700; }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .font-display { font-size: 2.5rem; font-weight: 700; margin-top: 1.5rem; }
+
+        /* New Minimal Icon Style */
+        .minimal-icon .stroke { stroke-width: 5; stroke-linecap: round; fill: none; }
+        .minimal-icon .eyes { stroke: none; }
+
+        /* Color Themes */
+        .theme-blue .lines { stroke: var(--blue-dark); }
+        .theme-blue .eyes { fill: var(--blue-dark); }
+        .theme-blue .font-display { color: var(--blue-dark); }
+
+        .theme-green .lines { stroke: #4CAF50; }
+        .theme-green .eyes { fill: #4CAF50; }
+        .theme-green .font-display { color: #4CAF50; }
+
+        .theme-purple .lines { stroke: #673AB7; }
+        .theme-purple .eyes { fill: #673AB7; }
+        .theme-purple .font-display { color: #673AB7; }
+
+        .theme-black .lines, .theme-black .eyes, .theme-black .font-display { color: #000; stroke: #000; fill: #000; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>A New Minimal Logo Proposal</h1>
+            <p class="subtitle">This design deconstructs "SmilePile" into a more abstract and modern mark. The "pile" is represented by stacked geometric lines, and the "smile" is integrated as the top-most element.</p>
+        </header>
+
+        <section id="primary">
+            <h2>Primary Concept</h2>
+            <div class="card theme-blue">
+                <svg class="minimal-icon" viewBox="0 0 64 64" width="128" height="128">
+                    <path class="lines" d="M 16 48 H 48"/>
+                    <path class="lines" d="M 16 38 H 48"/>
+                    <path class="lines" d="M 16 28 C 24 36, 40 36, 48 28"/>
+                    <circle class="eyes" cx="26" cy="22" r="2.5"/>
+                    <circle class="eyes" cx="38" cy="22" r="2.5"/>
+                </svg>
+                <div class="font-display">SmilePile</div>
+            </div>
+        </section>
+
+        <section id="variations">
+            <h2>Color Variations</h2>
+            <div class="grid">
+                <div class="card theme-green">
+                    <svg class="minimal-icon" viewBox="0 0 64 64" width="96" height="96"><path class="lines" d="M 16 48 H 48"/><path class="lines" d="M 16 38 H 48"/><path class="lines" d="M 16 28 C 24 36, 40 36, 48 28"/><circle class="eyes" cx="26" cy="22" r="2.5"/><circle class="eyes" cx="38" cy="22" r="2.5"/></svg>
+                    <div class="font-display">SmilePile</div>
+                </div>
+                <div class="card theme-purple">
+                    <svg class="minimal-icon" viewBox="0 0 64 64" width="96" height="96"><path class="lines" d="M 16 48 H 48"/><path class="lines" d="M 16 38 H 48"/><path class="lines" d="M 16 28 C 24 36, 40 36, 48 28"/><circle class="eyes" cx="26" cy="22" r="2.5"/><circle class="eyes" cx="38" cy="22" r="2.5"/></svg>
+                    <div class="font-display">SmilePile</div>
+                </div>
+                <div class="card theme-black">
+                    <svg class="minimal-icon" viewBox="0 0 64 64" width="96" height="96"><path class="lines" d="M 16 48 H 48"/><path class="lines" d="M 16 38 H 48"/><path class="lines" d="M 16 28 C 24 36, 40 36, 48 28"/><circle class="eyes" cx="26" cy="22" r="2.5"/><circle class="eyes" cx="38" cy="22" r="2.5"/></svg>
+                    <div class="font-display">SmilePile</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

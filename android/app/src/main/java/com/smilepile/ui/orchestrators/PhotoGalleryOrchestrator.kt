@@ -69,27 +69,37 @@ fun PhotoGalleryOrchestrator(
     var showDateRangePicker by remember { mutableStateOf(false) }
     var searchBarActive by remember { mutableStateOf(false) }
 
-    // Permission handling
-    val storagePermission = rememberPermissionState(PermissionHandler.storagePermission) { isGranted ->
-        if (isGranted) {
-            showImportOptions = true
-        } else {
-            showPermissionDialog = true
-        }
-    }
+    // New state for category selection dialog
+    var pendingImportUris by remember { mutableStateOf<List<Uri>?>(null) }
+    var showCategorySelection by remember { mutableStateOf(false) }
 
     // Photo picker launchers
     val singlePhotoLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
-        uri?.let { importViewModel.importPhoto(it, galleryState.selectedCategoryId) }
+        uri?.let {
+            pendingImportUris = listOf(it)
+            showCategorySelection = true
+        }
     }
 
     val multiplePhotoLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 10)
     ) { uris: List<Uri> ->
         if (uris.isNotEmpty()) {
-            importViewModel.importPhotos(uris, galleryState.selectedCategoryId)
+            pendingImportUris = uris
+            showCategorySelection = true
+        }
+    }
+
+    // Permission handling
+    val storagePermission = rememberPermissionState(PermissionHandler.storagePermission) { isGranted ->
+        if (isGranted) {
+            multiplePhotoLauncher.launch(
+                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+            )
+        } else {
+            showPermissionDialog = true
         }
     }
 
@@ -130,6 +140,7 @@ fun PhotoGalleryOrchestrator(
         showBatchMoveDialog = showBatchMoveDialog,
         showDateRangePicker = showDateRangePicker,
         searchBarActive = searchBarActive,
+        showCategorySelection = showCategorySelection,
 
         // Photo operations
         onPhotoClick = { photo ->
@@ -195,7 +206,9 @@ fun PhotoGalleryOrchestrator(
         },
         onAddPhotoClick = {
             if (PermissionHandler.isStoragePermissionGranted(context)) {
-                showImportOptions = true
+                multiplePhotoLauncher.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
             } else {
                 storagePermission.launchPermissionRequest()
             }
@@ -213,6 +226,18 @@ fun PhotoGalleryOrchestrator(
         onShowBatchMoveDialog = { showBatchMoveDialog = it },
         onShowDateRangePicker = { showDateRangePicker = it },
         onSetSearchBarActive = { searchBarActive = it },
+        onShowCategorySelection = { showCategorySelection = it },
+        onCategorySelectedForImport = { categoryId ->
+            pendingImportUris?.let { uris ->
+                if (uris.size == 1) {
+                    importViewModel.importPhoto(uris.first(), categoryId)
+                } else {
+                    importViewModel.importPhotos(uris, categoryId)
+                }
+                pendingImportUris = null
+                showCategorySelection = false
+            }
+        },
 
         // Permission operations
         onRequestStoragePermission = { storagePermission.launchPermissionRequest() },
@@ -241,6 +266,7 @@ data class PhotoGalleryOrchestratorState(
     val showBatchMoveDialog: Boolean,
     val showDateRangePicker: Boolean,
     val searchBarActive: Boolean,
+    val showCategorySelection: Boolean,
 
     // Photo operations
     val onPhotoClick: (Photo) -> Unit,
@@ -290,6 +316,8 @@ data class PhotoGalleryOrchestratorState(
     val onShowBatchMoveDialog: (Boolean) -> Unit,
     val onShowDateRangePicker: (Boolean) -> Unit,
     val onSetSearchBarActive: (Boolean) -> Unit,
+    val onShowCategorySelection: (Boolean) -> Unit,
+    val onCategorySelectedForImport: (Long) -> Unit,
 
     // Permission operations
     val onRequestStoragePermission: () -> Unit,

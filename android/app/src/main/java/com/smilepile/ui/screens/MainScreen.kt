@@ -1,7 +1,12 @@
 package com.smilepile.ui.screens
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Collections
 import androidx.compose.material.icons.filled.PhotoLibrary
@@ -9,27 +14,46 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Collections
 import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.smilepile.R
+import com.smilepile.mode.AppMode
 import com.smilepile.navigation.AppNavHost
 import com.smilepile.navigation.NavigationRoutes
+import com.smilepile.ui.viewmodels.AppModeViewModel
+import com.smilepile.ui.toast.KidsModeToastUI
+import com.smilepile.ui.toast.ToastUI
+import com.smilepile.ui.toast.rememberToastState
+import com.smilepile.ui.toast.ToastManager
+import javax.inject.Inject
 
 /**
  * Data class representing a bottom navigation item
@@ -48,10 +72,31 @@ data class BottomNavigationItem(
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    showKidsModeExitDialog: Boolean = false,
+    onKidsModeExitDialogDismiss: () -> Unit = {},
+    modeViewModel: AppModeViewModel = hiltViewModel(),
+    toastManager: ToastManager? = null
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val modeState by modeViewModel.uiState.collectAsState()
+    val currentMode = modeState.currentMode
+
+    // Toast state
+    val scope = rememberCoroutineScope()
+    val toastState = rememberToastState(scope)
+
+    // Listen for toast events from ToastManager if provided
+    toastManager?.let { manager ->
+        val toastEvent by manager.toastEvent.collectAsState()
+        LaunchedEffect(toastEvent) {
+            toastEvent?.let {
+                toastState.showToast(it.data)
+                manager.clearToast()
+            }
+        }
+    }
 
     // Define bottom navigation items
     val bottomNavigationItems = listOf(
@@ -79,13 +124,13 @@ fun MainScreen(
     val shouldShowBottomNavigation = when (currentDestination?.route) {
         NavigationRoutes.GALLERY,
         NavigationRoutes.CATEGORIES,
-        NavigationRoutes.SETTINGS -> true
+        NavigationRoutes.SETTINGS -> currentMode == AppMode.PARENT // Only show in Parent mode
         else -> false
     }
 
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
+    Box(modifier = modifier.fillMaxSize()) {
+        Scaffold(
+            bottomBar = {
             if (shouldShowBottomNavigation) {
                 SmilePileBottomNavigation(
                     items = bottomNavigationItems,
@@ -109,13 +154,92 @@ fun MainScreen(
             }
         }
     ) { paddingValues ->
-        AppNavHost(
-            navController = navController,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            AppNavHost(
+                navController = navController,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                toastState = toastState
+            )
+        }
+
+        // Toast UI overlay
+        if (currentMode == AppMode.KIDS) {
+            KidsModeToastUI(toastState = toastState)
+        } else {
+            ToastUI(toastState = toastState)
+        }
+    }
+
+    // Kids Mode Exit Dialog
+    if (showKidsModeExitDialog) {
+        KidsModeExitDialog(
+            onDismiss = onKidsModeExitDialogDismiss,
+            onConfirm = { pin ->
+                if (modeViewModel.validatePinForKidsModeExit(pin)) {
+                    onKidsModeExitDialogDismiss()
+                }
+            },
+            error = modeState.error
         )
     }
+}
+
+@Composable
+private fun KidsModeExitDialog(
+    onDismiss: () -> Unit,
+    onConfirm: (String) -> Unit,
+    error: String?
+) {
+    var pin by remember { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Enter Edit Mode") },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text("Enter your PIN to access Edit Mode")
+
+                OutlinedTextField(
+                    value = pin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            pin = it
+                        }
+                    },
+                    label = { Text("PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                error?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onConfirm(pin) },
+                enabled = pin.length >= 4
+            ) {
+                Text("Switch Mode")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 /**

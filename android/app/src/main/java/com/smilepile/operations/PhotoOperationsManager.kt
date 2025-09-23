@@ -3,6 +3,7 @@ package com.smilepile.operations
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.FileProvider
 import com.smilepile.data.models.Photo
 import com.smilepile.data.repository.PhotoRepository
@@ -10,6 +11,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,16 +23,21 @@ class PhotoOperationsManager @Inject constructor(
 ) {
 
     /**
-     * Deletes a photo from both storage and database
+     * Deletes a photo from both internal storage and database
+     * Only works with photos in internal storage (all imported photos)
      */
     suspend fun deletePhoto(photo: Photo): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                // Only delete file if it's not from assets
+                // Only delete file if it's not from assets and is in internal storage
                 if (!photo.isFromAssets) {
                     val file = File(photo.path)
                     if (file.exists()) {
-                        file.delete()
+                        val deleted = file.delete()
+                        if (!deleted) {
+                            Log.w("PhotoOps", "Failed to delete photo file: ${photo.path}")
+                            // Continue with database removal even if file deletion fails
+                        }
                     }
                 }
 
@@ -37,7 +45,7 @@ class PhotoOperationsManager @Inject constructor(
                 photoRepository.deletePhoto(photo)
                 true
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("PhotoOps", "Error deleting photo: ${photo.path}", e)
                 false
             }
         }
@@ -54,11 +62,15 @@ class PhotoOperationsManager @Inject constructor(
 
             photos.forEach { photo ->
                 try {
-                    // Only delete file if it's not from assets
+                    // Only delete file if it's not from assets and is in internal storage
                     if (!photo.isFromAssets) {
                         val file = File(photo.path)
                         if (file.exists()) {
-                            file.delete()
+                            val deleted = file.delete()
+                            if (!deleted) {
+                                Log.w("PhotoOps", "Failed to delete photo file: ${photo.path}")
+                                // Continue with database removal even if file deletion fails
+                            }
                         }
                     }
 

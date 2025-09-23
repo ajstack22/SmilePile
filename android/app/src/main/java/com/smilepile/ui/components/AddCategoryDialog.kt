@@ -55,14 +55,11 @@ fun AddCategoryDialog(
     editingCategory: Category? = null,
     predefinedColors: List<String> = CategoryViewModel.PREDEFINED_COLORS,
     onDismiss: () -> Unit,
-    onSave: (name: String, displayName: String, colorHex: String) -> Unit,
+    onSave: (displayName: String, colorHex: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (!isVisible) return
 
-    var nameText by remember(editingCategory) {
-        mutableStateOf(TextFieldValue(editingCategory?.name ?: ""))
-    }
     var displayNameText by remember(editingCategory) {
         mutableStateOf(TextFieldValue(editingCategory?.displayName ?: ""))
     }
@@ -75,9 +72,8 @@ fun AddCategoryDialog(
     val saveButtonText = if (isEditing) "Update" else "Add"
 
     // Validation
-    val isNameValid = nameText.text.isNotBlank()
     val isDisplayNameValid = displayNameText.text.isNotBlank()
-    val isSaveEnabled = isNameValid && isDisplayNameValid
+    val isSaveEnabled = isDisplayNameValid
 
     Dialog(onDismissRequest = onDismiss) {
         Card(
@@ -103,23 +99,12 @@ fun AddCategoryDialog(
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
-                // Name field
-                OutlinedTextField(
-                    value = nameText,
-                    onValueChange = { nameText = it },
-                    label = { Text("Category Name") },
-                    placeholder = { Text("e.g., pets, vacation") },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    isError = !isNameValid && nameText.text.isNotEmpty()
-                )
-
-                // Display name field
+                // Category name field
                 OutlinedTextField(
                     value = displayNameText,
                     onValueChange = { displayNameText = it },
-                    label = { Text("Display Name") },
-                    placeholder = { Text("e.g., Pets, Vacation") },
+                    label = { Text("Category Name") },
+                    placeholder = { Text("e.g., Animals, Nature, Fun") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     isError = !isDisplayNameValid && displayNameText.text.isNotEmpty()
@@ -210,7 +195,6 @@ fun AddCategoryDialog(
                     Button(
                         onClick = {
                             onSave(
-                                nameText.text.trim(),
                                 displayNameText.text.trim(),
                                 selectedColorHex
                             )
@@ -304,7 +288,7 @@ private fun AddCategoryDialogPreview() {
         AddCategoryDialog(
             isVisible = true,
             onDismiss = {},
-            onSave = { _, _, _ -> }
+            onSave = { _, _ -> }
         )
     }
 }
@@ -326,7 +310,7 @@ private fun EditCategoryDialogPreview() {
             isVisible = true,
             editingCategory = sampleCategory,
             onDismiss = {},
-            onSave = { _, _, _ -> }
+            onSave = { _, _ -> }
         )
     }
 }

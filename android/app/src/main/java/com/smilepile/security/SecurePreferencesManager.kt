@@ -8,17 +8,19 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.security.MessageDigest
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * Secure storage manager for parental controls and child safety settings
- * Uses EncryptedSharedPreferences to store sensitive data securely
+ * Uses EncryptedSharedPreferences with Android Keystore for secure data storage
+ * Implements proper password hashing with salt using PBKDF2
  */
 @Singleton
 class SecurePreferencesManager @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val secureStorage: SecureStorageManager
 ) {
     companion object {
         private const val PREFS_NAME = "smilepile_secure_prefs"
@@ -29,6 +31,7 @@ class SecurePreferencesManager @Inject constructor(
         private const val KEY_KID_SAFE_MODE = "kid_safe_mode"
         private const val KEY_CAMERA_ACCESS_ALLOWED = "camera_access_allowed"
         private const val KEY_DELETE_PROTECTION_ENABLED = "delete_protection_enabled"
+        private const val KEY_BIOMETRIC_ENABLED = "biometric_enabled"
         private const val KEY_FAILED_ATTEMPTS = "failed_attempts"
         private const val KEY_LAST_FAILED_ATTEMPT = "last_failed_attempt"
 
@@ -62,7 +65,8 @@ class SecurePreferencesManager @Inject constructor(
      * PIN Management
      */
     fun setPIN(pin: String) {
-        val hashedPin = hashPassword(pin)
+        val salt = secureStorage.generateSalt()
+        val hashedPin = secureStorage.hashPasswordWithSalt(pin, salt)
         encryptedPrefs.edit()
             .putString(KEY_PARENTAL_PIN, hashedPin)
             .putBoolean(KEY_PIN_ENABLED, true)
@@ -71,8 +75,7 @@ class SecurePreferencesManager @Inject constructor(
 
     fun validatePIN(pin: String): Boolean {
         val storedHash = encryptedPrefs.getString(KEY_PARENTAL_PIN, null) ?: return false
-        val inputHash = hashPassword(pin)
-        return storedHash == inputHash
+        return secureStorage.verifyPassword(pin, storedHash)
     }
 
     fun isPINEnabled(): Boolean {
@@ -91,7 +94,8 @@ class SecurePreferencesManager @Inject constructor(
      */
     fun setPattern(pattern: List<Int>) {
         val patternString = pattern.joinToString(",")
-        val hashedPattern = hashPassword(patternString)
+        val salt = secureStorage.generateSalt()
+        val hashedPattern = secureStorage.hashPasswordWithSalt(patternString, salt)
         encryptedPrefs.edit()
             .putString(KEY_PARENTAL_PATTERN, hashedPattern)
             .putBoolean(KEY_PATTERN_ENABLED, true)
@@ -101,8 +105,7 @@ class SecurePreferencesManager @Inject constructor(
     fun validatePattern(pattern: List<Int>): Boolean {
         val storedHash = encryptedPrefs.getString(KEY_PARENTAL_PATTERN, null) ?: return false
         val patternString = pattern.joinToString(",")
-        val inputHash = hashPassword(patternString)
-        return storedHash == inputHash
+        return secureStorage.verifyPassword(patternString, storedHash)
     }
 
     fun isPatternEnabled(): Boolean {
@@ -198,22 +201,26 @@ class SecurePreferencesManager @Inject constructor(
         return encryptedPrefs.getBoolean(KEY_DELETE_PROTECTION_ENABLED, true) // Default to true for safety
     }
 
-
     /**
-     * Utility Methods
+     * Biometric Authentication Settings
      */
-    private fun hashPassword(password: String): String {
-        val bytes = password.toByteArray()
-        val md = MessageDigest.getInstance("SHA-256")
-        val digest = md.digest(bytes)
-        return digest.fold("") { str, it -> str + "%02x".format(it) }
+    fun setBiometricEnabled(enabled: Boolean) {
+        encryptedPrefs.edit()
+            .putBoolean(KEY_BIOMETRIC_ENABLED, enabled)
+            .apply()
     }
+
+    fun getBiometricEnabled(): Boolean {
+        return encryptedPrefs.getBoolean(KEY_BIOMETRIC_ENABLED, false) // Default to false, user must explicitly enable
+    }
+
 
     /**
      * Clear all parental control settings (for debugging/reset)
      */
     fun clearAllSettings() {
         encryptedPrefs.edit().clear().apply()
+        secureStorage.clearKeys()
 
         // Reset state flows to default values
         _kidSafeModeEnabled.value = true
@@ -228,6 +235,7 @@ class SecurePreferencesManager @Inject constructor(
         return SecuritySummary(
             hasPIN = isPINEnabled(),
             hasPattern = isPatternEnabled(),
+            biometricEnabled = getBiometricEnabled(),
             kidSafeModeEnabled = getKidSafeModeEnabled(),
             cameraAccessAllowed = getCameraAccessAllowed(),
             deleteProtectionEnabled = getDeleteProtectionEnabled(),
@@ -243,6 +251,7 @@ class SecurePreferencesManager @Inject constructor(
 data class SecuritySummary(
     val hasPIN: Boolean,
     val hasPattern: Boolean,
+    val biometricEnabled: Boolean,
     val kidSafeModeEnabled: Boolean,
     val cameraAccessAllowed: Boolean,
     val deleteProtectionEnabled: Boolean,

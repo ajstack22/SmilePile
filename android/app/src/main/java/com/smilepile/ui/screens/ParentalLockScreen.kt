@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
@@ -49,6 +50,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
@@ -58,6 +60,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.fragment.app.FragmentActivity
 import com.smilepile.R
 import com.smilepile.ui.viewmodels.AuthenticationMode
 import com.smilepile.ui.viewmodels.ParentalControlsViewModel
@@ -76,12 +79,21 @@ fun ParentalLockScreen(
     viewModel: ParentalControlsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.lockUiState.collectAsState()
+    val context = LocalContext.current
+    val activity = context as? FragmentActivity
 
     // If no PIN/Pattern is set up, go directly to settings
     LaunchedEffect(uiState) {
         val securitySummary = viewModel.uiState.value.securitySummary
         if (securitySummary != null && !securitySummary.hasPIN && !securitySummary.hasPattern) {
             onUnlocked() // This will navigate to ParentalSettingsScreen
+        }
+    }
+
+    // Handle biometric authentication prompt
+    LaunchedEffect(uiState.showBiometricPrompt) {
+        if (uiState.showBiometricPrompt && activity != null) {
+            viewModel.authenticateWithBiometrics(activity)
         }
     }
 
@@ -215,6 +227,15 @@ fun ParentalLockScreen(
                 // Authentication Interface
                 if (!uiState.isInCooldown) {
                     when (uiState.authenticationMode) {
+                        AuthenticationMode.BIOMETRIC -> {
+                            BiometricAuthenticationInterface(
+                                onRetryClick = {
+                                    activity?.let { viewModel.authenticateWithBiometrics(it) }
+                                },
+                                onUsePinClick = { viewModel.dismissBiometricPrompt() },
+                                isLoading = uiState.isLoading
+                            )
+                        }
                         AuthenticationMode.PIN -> {
                             PINEntryInterface(
                                 pinInput = uiState.pinInput,
@@ -251,8 +272,23 @@ fun ParentalLockScreen(
                         modifier = Modifier.padding(top = 16.dp)
                     ) {
                         val switchText = when (uiState.authenticationMode) {
-                            AuthenticationMode.PIN -> stringResource(R.string.switch_to_pattern)
-                            AuthenticationMode.PATTERN -> stringResource(R.string.switch_to_pin)
+                            AuthenticationMode.BIOMETRIC -> if (viewModel.uiState.value.securitySummary?.hasPIN == true) {
+                                "Use PIN Instead"
+                            } else {
+                                "Use Pattern Instead"
+                            }
+                            AuthenticationMode.PIN -> if (viewModel.uiState.value.securitySummary?.hasPattern == true) {
+                                stringResource(R.string.switch_to_pattern)
+                            } else if (uiState.biometricEnabled) {
+                                "Use Biometric"
+                            } else {
+                                stringResource(R.string.switch_to_pattern)
+                            }
+                            AuthenticationMode.PATTERN -> if (uiState.biometricEnabled) {
+                                "Use Biometric"
+                            } else {
+                                stringResource(R.string.switch_to_pin)
+                            }
                         }
                         Text(
                             text = switchText,
@@ -649,6 +685,78 @@ private fun PatternDot(
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.onPrimary)
             )
+        }
+    }
+}
+
+/**
+ * Biometric authentication interface
+ */
+@Composable
+private fun BiometricAuthenticationInterface(
+    onRetryClick: () -> Unit,
+    onUsePinClick: () -> Unit,
+    isLoading: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        // Biometric Icon
+        Card(
+            modifier = Modifier.size(100.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ),
+            shape = CircleShape,
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Fingerprint,
+                    contentDescription = "Biometric Authentication",
+                    modifier = Modifier.size(48.dp),
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
+        }
+
+        // Instructions
+        Text(
+            text = "Touch the fingerprint sensor or look at the camera",
+            style = MaterialTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        // Action Buttons
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Button(
+                onClick = onRetryClick,
+                enabled = !isLoading,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (isLoading) {
+                    Text("Authenticating...")
+                } else {
+                    Text("Try Again")
+                }
+            }
+
+            OutlinedButton(
+                onClick = onUsePinClick,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Use PIN Instead")
+            }
         }
     }
 }

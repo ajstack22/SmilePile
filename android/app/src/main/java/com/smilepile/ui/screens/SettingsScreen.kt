@@ -1,5 +1,6 @@
 package com.smilepile.ui.screens
 
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Backup
 import androidx.compose.material.icons.filled.CloudDownload
@@ -20,11 +20,17 @@ import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.LockOpen
+import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Archive
+import androidx.compose.material.icons.filled.Description
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -57,6 +63,8 @@ import com.smilepile.BuildConfig
 import com.smilepile.R
 import com.smilepile.ui.viewmodels.SettingsViewModel
 import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.SecureStorageManager
+import com.smilepile.data.backup.BackupFormat
 
 /**
  * Settings screen providing app configuration and management options
@@ -69,12 +77,32 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val securePreferencesManager = remember { SecurePreferencesManager(context) }
+    val secureStorageManager = remember { SecureStorageManager(context) }
+    val securePreferencesManager = remember { SecurePreferencesManager(context, secureStorageManager) }
     val uiState by viewModel.uiState.collectAsState()
-    var showClearCacheDialog by remember { mutableStateOf(false) }
     var showAboutDialog by remember { mutableStateOf(false) }
     var showPinDialog by remember { mutableStateOf(false) }
     var showChangePinDialog by remember { mutableStateOf(false) }
+
+    // Export launcher for Storage Access Framework
+    val exportLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.CreateDocument(
+            if (uiState.selectedBackupFormat == BackupFormat.ZIP) "application/zip" else "application/json"
+        )
+    ) { uri ->
+        uri?.let {
+            viewModel.completeExport(it, uiState.selectedBackupFormat)
+        }
+    }
+
+    // Import launcher for Storage Access Framework
+    val importLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let {
+            viewModel.importFromUri(it)
+        }
+    }
 
     Scaffold(
         modifier = modifier,
@@ -156,6 +184,7 @@ fun SettingsScreen(
                             }
                         )
                     }
+
                 }
             }
 
@@ -173,35 +202,40 @@ fun SettingsScreen(
                         )
                     }
 
+                    // Backup format selection
+                    BackupFormatSelector(
+                        selectedFormat = uiState.selectedBackupFormat,
+                        onFormatSelected = { format ->
+                            viewModel.setBackupFormat(format)
+                        }
+                    )
+
                     SettingsActionItem(
                         title = "Export Data",
-                        subtitle = "Create a backup file of your photos and categories",
-                        icon = Icons.Default.CloudUpload,
-                        onClick = { viewModel.prepareExportAsync() }
+                        subtitle = when (uiState.selectedBackupFormat) {
+                            BackupFormat.JSON -> "Create a JSON backup file (metadata only)"
+                            BackupFormat.ZIP -> "Create a ZIP backup file (includes photos)"
+                        },
+                        icon = if (uiState.selectedBackupFormat == BackupFormat.ZIP) Icons.Default.Archive else Icons.Default.Description,
+                        onClick = {
+                            val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
+                            val extension = if (uiState.selectedBackupFormat == BackupFormat.ZIP) ".zip" else ".json"
+                            exportLauncher.launch("smilepile_backup_$timestamp$extension")
+                        }
                     )
 
                     SettingsActionItem(
                         title = "Import Data",
-                        subtitle = "Restore from a backup file (coming soon)",
+                        subtitle = "Restore from a backup file (JSON or ZIP)",
                         icon = Icons.Default.CloudDownload,
-                        onClick = { /* TODO: Implement import */ }
+                        onClick = {
+                            importLauncher.launch(arrayOf("application/json", "application/zip", "*/*"))
+                        }
                     )
                 }
             }
 
-            item {
-                // Data Management Section
-                SettingsSection(
-                    title = stringResource(R.string.settings_data_management)
-                ) {
-                    SettingsActionItem(
-                        title = stringResource(R.string.settings_clear_cache),
-                        subtitle = stringResource(R.string.settings_clear_cache_subtitle),
-                        icon = Icons.Default.Delete,
-                        onClick = { showClearCacheDialog = true }
-                    )
-                }
-            }
+            // Data Management section removed - clear cache button no longer needed
 
             item {
                 // About Section
@@ -217,36 +251,6 @@ fun SettingsScreen(
                 }
             }
         }
-    }
-
-    // Clear Cache Confirmation Dialog
-    if (showClearCacheDialog) {
-        AlertDialog(
-            onDismissRequest = { showClearCacheDialog = false },
-            title = {
-                Text(stringResource(R.string.settings_clear_cache_dialog_title))
-            },
-            text = {
-                Text(stringResource(R.string.settings_clear_cache_dialog_message))
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        viewModel.clearCache()
-                        showClearCacheDialog = false
-                    }
-                ) {
-                    Text(stringResource(R.string.clear))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = { showClearCacheDialog = false }
-                ) {
-                    Text(stringResource(R.string.cancel))
-                }
-            }
-        )
     }
 
     // About App Dialog
@@ -283,11 +287,22 @@ fun SettingsScreen(
     }
 
     // Export Progress Dialog
-    if (uiState.isLoading) {
+    if (uiState.isLoading || uiState.exportProgress != null) {
         ExportProgressDialog(
+            progress = uiState.exportProgress,
+            format = uiState.selectedBackupFormat,
             onDismiss = { /* Can't dismiss while exporting */ }
         )
     }
+
+    // Import Progress Dialog
+    uiState.importProgress?.let { progress ->
+        ImportProgressDialog(
+            progress = progress,
+            onDismiss = { viewModel.clearImportProgress() }
+        )
+    }
+
 }
 
 /**
@@ -682,7 +697,170 @@ private fun ChangePinDialog(
 }
 
 @Composable
+private fun BackupFormatSelector(
+    selectedFormat: BackupFormat,
+    onFormatSelected: (BackupFormat) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
+        ),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Backup Format",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+
+            // JSON Format Option
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = selectedFormat == BackupFormat.JSON,
+                    onClick = { onFormatSelected(BackupFormat.JSON) }
+                )
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                ) {
+                    Text(
+                        text = "JSON (Metadata Only)",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "Smaller file size, photos not included",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Icon(
+                    imageVector = Icons.Default.Description,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            // ZIP Format Option
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = selectedFormat == BackupFormat.ZIP,
+                    onClick = { onFormatSelected(BackupFormat.ZIP) }
+                )
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                ) {
+                    Text(
+                        text = "ZIP (Complete Backup)",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "Includes all photos and metadata",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                Icon(
+                    imageVector = Icons.Default.Archive,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ImportProgressDialog(
+    progress: com.smilepile.data.backup.ImportProgress,
+    onDismiss: () -> Unit
+) {
+    val canDismiss = progress.currentOperation.contains("completed", ignoreCase = true) ||
+                    progress.errors.isNotEmpty()
+
+    AlertDialog(
+        onDismissRequest = { if (canDismiss) onDismiss() },
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                if (!canDismiss) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                }
+                Text("Importing Data")
+            }
+        },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = progress.currentOperation,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                if (progress.totalItems > 0) {
+                    Text(
+                        text = "Progress: ${progress.processedItems}/${progress.totalItems}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                if (progress.errors.isNotEmpty()) {
+                    Text(
+                        text = "Errors: ${progress.errors.size}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            if (canDismiss) {
+                TextButton(onClick = onDismiss) {
+                    Text("OK")
+                }
+            }
+        },
+        dismissButton = {
+            if (canDismiss && progress.errors.isNotEmpty()) {
+                TextButton(onClick = onDismiss) {
+                    Text("Dismiss")
+                }
+            }
+        }
+    )
+}
+
+@Composable
 private fun ExportProgressDialog(
+    progress: com.smilepile.data.backup.ImportProgress? = null,
+    format: BackupFormat = BackupFormat.ZIP,
     onDismiss: () -> Unit
 ) {
     AlertDialog(
@@ -697,9 +875,36 @@ private fun ExportProgressDialog(
             }
         },
         text = {
-            Text("Preparing your photos and categories for backup. This may take a moment...")
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    if (format == BackupFormat.ZIP) {
+                        "Creating ZIP backup with photos. This may take a moment..."
+                    } else {
+                        "Preparing JSON backup. This may take a moment..."
+                    }
+                )
+
+                progress?.let { prog ->
+                    Text(
+                        text = prog.currentOperation,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    if (prog.totalItems > 0) {
+                        Text(
+                            text = "Progress: ${prog.processedItems}/${prog.totalItems}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
         },
         confirmButton = { },
         dismissButton = { }
     )
 }
+

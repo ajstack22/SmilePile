@@ -1,7 +1,11 @@
 package com.smilepile.ui.viewmodels
 
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.smilepile.security.BiometricAvailability
+import com.smilepile.security.BiometricManager
+import com.smilepile.security.BiometricResult
 import com.smilepile.security.SecurePreferencesManager
 import com.smilepile.security.SecuritySummary
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +37,7 @@ data class ParentalControlsUiState(
  * Authentication modes available for parental controls
  */
 enum class AuthenticationMode {
+    BIOMETRIC,
     PIN,
     PATTERN
 }
@@ -43,14 +48,17 @@ enum class AuthenticationMode {
 data class ParentalLockUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
-    val authenticationMode: AuthenticationMode = AuthenticationMode.PIN,
+    val authenticationMode: AuthenticationMode = AuthenticationMode.BIOMETRIC,
     val pinInput: String = "",
     val patternInput: List<Int> = emptyList(),
     val isInCooldown: Boolean = false,
     val cooldownTimeRemaining: Long = 0L,
     val failedAttempts: Int = 0,
     val maxAttempts: Int = 5,
-    val showKidFriendlyMessage: Boolean = false
+    val showKidFriendlyMessage: Boolean = false,
+    val showBiometricPrompt: Boolean = false,
+    val biometricAvailable: BiometricAvailability = BiometricAvailability.UNKNOWN,
+    val biometricEnabled: Boolean = false
 )
 
 /**
@@ -58,7 +66,8 @@ data class ParentalLockUiState(
  */
 @HiltViewModel
 class ParentalControlsViewModel @Inject constructor(
-    private val securePreferencesManager: SecurePreferencesManager
+    private val securePreferencesManager: SecurePreferencesManager,
+    private val biometricManager: BiometricManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ParentalControlsUiState())
@@ -85,7 +94,9 @@ class ParentalControlsViewModel @Inject constructor(
                 val showInitialSetup = !hasParentalLock
 
                 // Determine default authentication mode
+                val biometricAvailable = biometricManager.isBiometricAvailable()
                 val authMode = when {
+                    biometricManager.shouldOfferBiometricFirst() -> AuthenticationMode.BIOMETRIC
                     securitySummary.hasPIN -> AuthenticationMode.PIN
                     securitySummary.hasPattern -> AuthenticationMode.PATTERN
                     else -> AuthenticationMode.PIN // Default for setup
@@ -104,7 +115,10 @@ class ParentalControlsViewModel @Inject constructor(
                     authenticationMode = authMode,
                     isInCooldown = securitySummary.isInCooldown,
                     failedAttempts = securitySummary.failedAttempts,
-                    showKidFriendlyMessage = securitySummary.isInCooldown
+                    showKidFriendlyMessage = securitySummary.isInCooldown,
+                    biometricAvailable = biometricAvailable,
+                    biometricEnabled = securitySummary.biometricEnabled,
+                    showBiometricPrompt = authMode == AuthenticationMode.BIOMETRIC && !securitySummary.isInCooldown
                 )
 
             } catch (e: Exception) {
@@ -199,15 +213,28 @@ class ParentalControlsViewModel @Inject constructor(
      */
     fun switchAuthenticationMode() {
         val newMode = when (_uiState.value.authenticationMode) {
-            AuthenticationMode.PIN -> {
-                if (securePreferencesManager.isPatternEnabled()) {
+            AuthenticationMode.BIOMETRIC -> {
+                if (securePreferencesManager.isPINEnabled()) {
+                    AuthenticationMode.PIN
+                } else if (securePreferencesManager.isPatternEnabled()) {
                     AuthenticationMode.PATTERN
                 } else {
                     AuthenticationMode.PIN
                 }
             }
+            AuthenticationMode.PIN -> {
+                if (securePreferencesManager.isPatternEnabled()) {
+                    AuthenticationMode.PATTERN
+                } else if (biometricManager.isBiometricEnabled()) {
+                    AuthenticationMode.BIOMETRIC
+                } else {
+                    AuthenticationMode.PIN
+                }
+            }
             AuthenticationMode.PATTERN -> {
-                if (securePreferencesManager.isPINEnabled()) {
+                if (biometricManager.isBiometricEnabled()) {
+                    AuthenticationMode.BIOMETRIC
+                } else if (securePreferencesManager.isPINEnabled()) {
                     AuthenticationMode.PIN
                 } else {
                     AuthenticationMode.PATTERN
@@ -224,7 +251,8 @@ class ParentalControlsViewModel @Inject constructor(
         _lockUiState.value = _lockUiState.value.copy(
             authenticationMode = newMode,
             pinInput = "",
-            patternInput = emptyList()
+            patternInput = emptyList(),
+            showBiometricPrompt = newMode == AuthenticationMode.BIOMETRIC && !_lockUiState.value.isInCooldown
         )
     }
 
@@ -281,6 +309,110 @@ class ParentalControlsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    /**
+     * Biometric Authentication
+     */
+    fun authenticateWithBiometrics(activity: FragmentActivity) {
+        viewModelScope.launch {
+            _lockUiState.value = _lockUiState.value.copy(
+                isLoading = true,
+                error = null,
+                showBiometricPrompt = false
+            )
+
+            try {
+                val result = biometricManager.authenticateWithBiometrics(
+                    activity = activity,
+                    title = "Parental Authentication",
+                    subtitle = "Use your fingerprint or face to unlock parental settings",
+                    description = "This protects your child safety settings"
+                )
+
+                when (result) {
+                    BiometricResult.SUCCESS -> {
+                        handleSuccessfulAuthentication()
+                    }
+                    BiometricResult.USER_CANCELED -> {
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = null,
+                            showBiometricPrompt = false
+                        )
+                        // Switch to PIN/Pattern fallback
+                        switchToFallbackAuthentication()
+                    }
+                    BiometricResult.LOCKED_OUT -> {
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = "Biometric authentication locked out. Use PIN instead.",
+                            showBiometricPrompt = false
+                        )
+                        switchToFallbackAuthentication()
+                    }
+                    BiometricResult.NO_BIOMETRICS_ENROLLED -> {
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = "No biometric authentication set up. Use PIN instead.",
+                            showBiometricPrompt = false
+                        )
+                        switchToFallbackAuthentication()
+                    }
+                    BiometricResult.HARDWARE_UNAVAILABLE -> {
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = "Biometric authentication unavailable. Use PIN instead.",
+                            showBiometricPrompt = false
+                        )
+                        switchToFallbackAuthentication()
+                    }
+                    BiometricResult.ERROR -> {
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = "Biometric authentication failed. Use PIN instead.",
+                            showBiometricPrompt = false
+                        )
+                        switchToFallbackAuthentication()
+                    }
+                }
+            } catch (e: Exception) {
+                _lockUiState.value = _lockUiState.value.copy(
+                    isLoading = false,
+                    error = "Authentication error. Use PIN instead.",
+                    showBiometricPrompt = false
+                )
+                switchToFallbackAuthentication()
+            }
+        }
+    }
+
+    private fun switchToFallbackAuthentication() {
+        val fallbackMode = if (securePreferencesManager.isPINEnabled()) {
+            AuthenticationMode.PIN
+        } else {
+            AuthenticationMode.PATTERN
+        }
+
+        _lockUiState.value = _lockUiState.value.copy(
+            authenticationMode = fallbackMode,
+            showBiometricPrompt = false
+        )
+    }
+
+    fun toggleBiometricAuthentication() {
+        viewModelScope.launch {
+            val currentlyEnabled = biometricManager.isBiometricEnabled()
+            biometricManager.setBiometricEnabled(!currentlyEnabled)
+            loadInitialState()
+        }
+    }
+
+    fun dismissBiometricPrompt() {
+        _lockUiState.value = _lockUiState.value.copy(
+            showBiometricPrompt = false
+        )
+        switchToFallbackAuthentication()
     }
 
     /**

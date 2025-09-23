@@ -1,0 +1,17 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Database Smile Logo</title>
+  <g stroke="black" stroke-width="2" fill="none">
+    <!-- Database layers -->
+    <path d="M 12,30 C 12,22 52,22 52,30" />
+    <path d="M 52,30 V 50 C 52,58 12,58 12,50 V 30" />
+    <path d="M 12,40 C 12,32 52,32 52,40" />
+
+    <!-- Smiley Face on top -->
+    <g transform="translate(32, 16)">
+      <circle cx="0" cy="0" r="12" fill="yellow" stroke="black" stroke-width="1.5"/>
+      <circle cx="-4" cy="-2" r="1.5" fill="black" />
+      <circle cx="4" cy="-2" r="1.5" fill="black" />
+      <path d="M -6, 4 a 8 8 0 0 0 12,0" fill="none" stroke="black" stroke-width="1.5" />
+    </g>
+  </g>
+</svg>

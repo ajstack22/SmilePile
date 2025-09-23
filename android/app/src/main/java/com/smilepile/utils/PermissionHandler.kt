@@ -25,7 +25,9 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 
 /**
- * Utility class for handling storage permissions for photo import functionality.
+ * Utility class for handling permissions for photo import functionality.
+ * Permissions are only required to select photos from device gallery for import.
+ * All imported photos are stored in app's internal storage (no external storage access needed).
  * Handles different permission requirements for Android 13+ (READ_MEDIA_IMAGES)
  * and older versions (READ_EXTERNAL_STORAGE).
  */
@@ -42,7 +44,8 @@ object PermissionHandler {
         }
 
     /**
-     * Check if storage permission is granted
+     * Check if photo selection permission is granted
+     * This permission is only needed to select photos from gallery for import
      */
     fun isStoragePermissionGranted(context: Context): Boolean {
         return ContextCompat.checkSelfPermission(
@@ -152,11 +155,11 @@ object PermissionRationale {
     const val STORAGE_PERMISSION_TITLE = "Photos Access Required"
 
     val STORAGE_PERMISSION_MESSAGE = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        "SmilePile needs access to your photos to import them into your gallery. " +
-        "This permission allows you to select and organize your favorite photos."
+        "SmilePile needs access to your photos to select them for import. " +
+        "Selected photos will be copied to the app's private storage for organization and security."
     } else {
-        "SmilePile needs storage access to import photos from your device. " +
-        "This permission allows you to select and organize your favorite photos."
+        "SmilePile needs photo access to select photos for import. " +
+        "Selected photos will be copied to the app's private storage for organization and security."
     }
 
     const val PERMISSION_DENIED_TITLE = "Permission Required"

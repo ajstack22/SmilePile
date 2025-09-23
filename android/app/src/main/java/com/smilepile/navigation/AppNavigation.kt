@@ -67,7 +67,8 @@ sealed class NavigationDestination(val route: String, val title: String) {
 fun AppNavHost(
     navController: NavHostController,
     startDestination: String = NavigationRoutes.GALLERY,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    toastState: com.smilepile.ui.toast.ToastState? = null
 ) {
     // Get mode state
     val modeViewModel: AppModeViewModel = hiltViewModel()
@@ -82,12 +83,11 @@ fun AppNavHost(
         composable(NavigationRoutes.GALLERY) {
             if (currentMode == AppMode.KIDS) {
                 KidsModeGalleryScreen(
-                    onPhotoClick = { photo ->
-                        // Kids mode - simple photo viewing
-                        navController.navigate(
-                            NavigationRoutes.photoViewerRoute(photo.id, 0)
-                        )
-                    }
+                    onPhotoClick = { photo, photoIndex ->
+                        // Kids mode - photo zoom is now handled internally
+                        // Navigation not needed for zoom-to-fit functionality
+                    },
+                    toastState = toastState
                 )
             } else {
                 PhotoGalleryScreen(

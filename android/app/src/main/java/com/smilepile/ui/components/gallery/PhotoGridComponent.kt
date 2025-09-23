@@ -64,7 +64,7 @@ fun PhotoGridComponent(
     isSelectionMode: Boolean = false,
     onPhotoClick: (Photo) -> Unit,
     onPhotoLongClick: (Photo) -> Unit = {},
-    onFavoriteToggle: (Photo) -> Unit = {},
+    onFavoriteToggle: ((Photo) -> Unit)? = null,
     modifier: Modifier = Modifier,
     columns: Int = 3,
     contentPadding: PaddingValues = PaddingValues(16.dp),
@@ -95,7 +95,7 @@ private fun PhotoGrid(
     isSelectionMode: Boolean,
     onPhotoClick: (Photo) -> Unit,
     onPhotoLongClick: (Photo) -> Unit,
-    onFavoriteToggle: (Photo) -> Unit,
+    onFavoriteToggle: ((Photo) -> Unit)?,
     modifier: Modifier = Modifier,
     columns: Int = 3,
     contentPadding: PaddingValues = PaddingValues(16.dp),
@@ -115,7 +115,7 @@ private fun PhotoGrid(
                 isSelectionMode = isSelectionMode,
                 onPhotoClick = { onPhotoClick(photo) },
                 onPhotoLongClick = { onPhotoLongClick(photo) },
-                onFavoriteToggle = { onFavoriteToggle(photo) }
+                onFavoriteToggle = { onFavoriteToggle?.invoke(photo) }
             )
         }
     }
@@ -181,38 +181,6 @@ private fun PhotoGridItem(
                         )
                         .padding(2.dp)
                 )
-            } else {
-                // Favorite button overlay (only in normal mode)
-                IconButton(
-                    onClick = onFavoriteToggle,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(4.dp)
-                        .size(32.dp)
-                        .background(
-                            color = Color.Black.copy(alpha = 0.3f),
-                            shape = CircleShape
-                        )
-                ) {
-                    Icon(
-                        imageVector = if (photo.isFavorite) {
-                            Icons.Filled.Favorite
-                        } else {
-                            Icons.Outlined.FavoriteBorder
-                        },
-                        contentDescription = if (photo.isFavorite) {
-                            stringResource(R.string.remove_from_favorites)
-                        } else {
-                            stringResource(R.string.add_to_favorites)
-                        },
-                        tint = if (photo.isFavorite) {
-                            Color.Red
-                        } else {
-                            Color.White
-                        },
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
             }
 
             // Selection overlay with check icon

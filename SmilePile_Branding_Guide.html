@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmilePile - Branding Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --blue-light: #BBDEFB;
+            --blue-medium: #64B5F6;
+            --blue-dark: #2196F3;
+            --stroke-color: #000000;
+            --text-dark: #212529;
+            --text-light: #495057;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        header { text-align: center; padding: 2rem 0; border-bottom: 1px solid var(--border-color); margin-bottom: 3rem; }
+        h1, h2, h3 { font-family: 'Nunito', sans-serif; color: var(--text-dark); font-weight: 900; }
+        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+        h2 { font-size: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 3rem; margin-bottom: 2rem; }
+        h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; }
+        section { margin-bottom: 3rem; }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        
+        /* Color Palette */
+        .color-swatch { text-align: center; }
+        .color-swatch .swatch {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+        .color-swatch code { background: #e9ecef; padding: 0.2em 0.4em; border-radius: 4px; }
+
+        /* Typography */
+        .type-example p { font-size: 1rem; max-width: 70ch; }
+
+        /* Iconography */
+        .icon-display-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 2rem; align-items: center; text-align: center; }
+        .icon-display-grid div p { margin-top: 0.5rem; font-weight: 700; color: var(--text-dark); }
+        .icon-asset { background: #e9ecef; padding: 2rem; border-radius: 8px; }
+        .icon-asset textarea { width: 100%; height: 200px; font-family: monospace; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); resize: vertical; }
+
+        /* Base Icon Style */
+        .smile-pile-icon .c1 { fill: var(--blue-light); }
+        .smile-pile-icon .c2 { fill: var(--blue-medium); }
+        .smile-pile-icon .c3 { fill: var(--blue-dark); }
+        .smile-pile-icon .stroke { stroke: var(--stroke-color); stroke-width: 3; }
+        .smile-pile-icon .face { stroke: var(--stroke-color); stroke-width: 3; stroke-linecap: round; fill: none; }
+        .smile-pile-icon .eyes { fill: var(--stroke-color); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>SmilePile Branding Guide</h1>
+            <p style="font-size: 1.25rem; color: var(--text-light);">Official brand assets and guidelines. Version 1.0</p>
+        </header>
+
+        <section id="logo">
+            <h2>Primary Logo</h2>
+            <div class="card" style="text-align: center; padding: 4rem;">
+                <svg class="smile-pile-icon" viewBox="0 0 64 64" width="256" height="256">
+                    <circle class="c1 stroke" cx="32" cy="46" r="16"/><circle class="c2 stroke" cx="32" cy="42" r="14"/><circle class="c3 stroke" cx="32" cy="37" r="12"/><circle class="eyes" cx="28" cy="35" r="1.5"/><circle class="eyes" cx="36" cy="35" r="1.5"/><path class="face" d="M 26 39 Q 32 45 38 39"/>
+                </svg>
+            </div>
+        </section>
+
+        <section id="colors">
+            <h2>Color Palette</h2>
+            <div class="card grid">
+                <div class="color-swatch"><div class="swatch" style="background-color: var(--blue-dark);"></div><h3>Primary Dark</h3><code>#2196F3</code></div>
+                <div class="color-swatch"><div class="swatch" style="background-color: var(--blue-medium);"></div><h3>Primary Medium</h3><code>#64B5F6</code></div>
+                <div class="color-swatch"><div class="swatch" style="background-color: var(--blue-light);"></div><h3>Primary Light</h3><code>#BBDEFB</code></div>
+                <div class="color-swatch"><div class="swatch" style="background-color: var(--stroke-color);"></div><h3>Stroke / Text</h3><code>#000000</code></div>
+            </div>
+        </section>
+
+        <section id="typography">
+            <h2>Typography</h2>
+            <div class="card type-example">
+                <h3>Primary Typeface: Nunito</h3>
+                <p>Nunito is used for all headings and body text to ensure a consistent, friendly, and modern voice.</p>
+                <hr style="border:0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+                <h1>Heading 1: The quick brown fox jumps over the lazy dog.</h1>
+                <h2>Heading 2: The quick brown fox jumps over the lazy dog.</h2>
+                <h3>Heading 3: The quick brown fox jumps over the lazy dog.</h3>
+                <p>Body Text: The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <a href="https://fonts.google.com/specimen/Nunito" target="_blank">Get Nunito from Google Fonts</a>
+            </div>
+        </section>
+
+        <section id="iconography">
+            <h2>Iconography</h2>
+            <div class="card">
+                <h3>Logo Scaling</h3>
+                <div class="icon-display-grid">
+                    <div title="256x256"><svg class="smile-pile-icon" viewBox="0 0 64 64" width="256" height="256"><circle class="c1 stroke" cx="32" cy="46" r="16"/><circle class="c2 stroke" cx="32" cy="42" r="14"/><circle class="c3 stroke" cx="32" cy="37" r="12"/><circle class="eyes" cx="28" cy="35" r="1.5"/><circle class="eyes" cx="36" cy="35" r="1.5"/><path class="face" d="M 26 39 Q 32 45 38 39"/></svg><p>256px</p></div>
+                    <div title="128x128"><svg class="smile-pile-icon" viewBox="0 0 64 64" width="128" height="128"><circle class="c1 stroke" cx="32" cy="46" r="16"/><circle class="c2 stroke" cx="32" cy="42" r="14"/><circle class="c3 stroke" cx="32" cy="37" r="12"/><circle class="eyes" cx="28" cy="35" r="1.5"/><circle class="eyes" cx="36" cy="35" r="1.5"/><path class="face" d="M 26 39 Q 32 45 38 39"/></svg><p>128px</p></div>
+                    <div title="64x64"><svg class="smile-pile-icon" viewBox="0 0 64 64" width="64" height="64"><circle class="c1 stroke" cx="32" cy="46" r="16"/><circle class="c2 stroke" cx="32" cy="42" r="14"/><circle class="c3 stroke" cx="32" cy="37" r="12"/><circle class="eyes" cx="28" cy="35" r="1.5"/><circle class="eyes" cx="36" cy="35" r="1.5"/><path class="face" d="M 26 39 Q 32 45 38 39"/></svg><p>64px</p></div>
+                    <div title="32x32"><svg class="smile-pile-icon" viewBox="0 0 64 64" width="32" height="32"><circle class="c1 stroke" cx="32" cy="46" r="16"/><circle class="c2 stroke" cx="32" cy="42" r="14"/><circle class="c3 stroke" cx="32" cy="37" r="12"/><circle class="eyes" cx="28" cy="35" r="1.5"/><circle class="eyes" cx="36" cy="35" r="1.5"/><path class="face" d="M 26 39 Q 32 45 38 39"/></svg><p>32px</p></div>
+                </div>
+                <h3 style="margin-top: 3rem;">Platform Icons</h3>
+                <div class="icon-display-grid">
+                    <div>
+                        <svg viewBox="0 0 100 100" width="128" height="128">
+                            <defs><path id="squircle" d="M 50,0 C 85,0 100,15 100,50 C 100,85 85,100 50,100 C 15,100 0,85 0,50 C 0,15 15,0 50,0 Z"/></defs>
+                            <clipPath id="squircle-clip"><use href="#squircle"/></clipPath>
+                            <use href="#squircle" fill="var(--blue-light)"/>
+                            <g clip-path="url(#squircle-clip)">
+                                <g transform="translate(0, 5)">
+                                    <circle fill="var(--blue-medium)" class="stroke" cx="50" cy="72" r="25"/>
+                                    <circle fill="var(--blue-dark)" class="stroke" cx="50" cy="62" r="22"/>
+                                    <circle fill="#FFC107" class="stroke" cx="50" cy="50" r="19"/>
+                                    <circle class="eyes" cx="42" cy="48" r="2.5"/><circle class="eyes" cx="58" cy="48" r="2.5"/>
+                                    <path class="face" d="M 40 55 Q 50 65 60 55"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <p>iOS App Icon</p>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 100 100" width="128" height="128">
+                            <circle cx="50" cy="50" r="50" fill="var(--blue-light)"/>
+                            <g transform="translate(0, 5)">
+                                <circle fill="var(--blue-medium)" class="stroke" cx="50" cy="72" r="25"/>
+                                <circle fill="var(--blue-dark)" class="stroke" cx="50" cy="62" r="22"/>
+                                <circle fill="#FFC107" class="stroke" cx="50" cy="50" r="19"/>
+                                <circle class="eyes" cx="42" cy="48" r="2.5"/><circle class="eyes" cx="58" cy="48" r="2.5"/>
+                                <path class="face" d="M 40 55 Q 50 65 60 55"/>
+                            </g>
+                        </svg>
+                        <p>Android (Circular)</p>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 100 100" width="128" height="128">
+                            <rect width="100" height="100" fill="var(--blue-light)"/>
+                            <g transform="translate(0, 5)">
+                                <circle fill="var(--blue-medium)" class="stroke" cx="50" cy="72" r="25"/>
+                                <circle fill="var(--blue-dark)" class="stroke" cx="50" cy="62" r="22"/>
+                                <circle fill="#FFC107" class="stroke" cx="50" cy="50" r="19"/>
+                                <circle class="eyes" cx="42" cy="48" r="2.5"/><circle class="eyes" cx="58" cy="48" r="2.5"/>
+                                <path class="face" d="M 40 55 Q 50 65 60 55"/>
+                            </g>
+                        </svg>
+                        <p>Favicon / Web</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="assets">
+            <h2>SVG Asset Code</h2>
+            <div class="card icon-asset">
+                <p>Copy the raw, unstyled SVG code below. Colors and size can be customized with CSS and attributes.</p>
+                <textarea readonly><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="32" cy="46" r="16"/>
+    <circle cx="32" cy="42" r="14"/>
+    <circle cx="32" cy="37" r="12"/>
+    <circle cx="28" cy="35" r="1.5"/>
+    <circle cx="36" cy="35" r="1.5"/>
+    <path d="M 26 39 Q 32 45 38 39"/>
+</svg></textarea>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

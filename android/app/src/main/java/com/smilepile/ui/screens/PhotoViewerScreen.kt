@@ -98,16 +98,17 @@ fun PhotoViewerScreen(
         pageCount = { photos.size }
     )
 
-    var isUIVisible by remember { mutableStateOf(true) }
-    var showDeleteDialog by remember { mutableStateOf(false) }
-    var showMoveDialog by remember { mutableStateOf(false) }
-
     val uiState by viewModel.uiState.collectAsState()
     val modeState by modeViewModel.uiState.collectAsState()
     val context = LocalContext.current
 
     // Check if we're in parent mode (edit controls available)
     val isParentMode = modeState.currentMode == AppMode.PARENT
+
+    // Start with UI hidden in Kids Mode for immersive experience
+    var isUIVisible by remember { mutableStateOf(isParentMode) }
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var showMoveDialog by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier

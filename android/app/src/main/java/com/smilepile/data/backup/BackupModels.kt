@@ -6,8 +6,18 @@ import kotlinx.serialization.Serializable
 
 /**
  * Backup version for compatibility checking
+ * Version 1: JSON format
+ * Version 2: ZIP format with photos and metadata
  */
-const val CURRENT_BACKUP_VERSION = 1
+const val CURRENT_BACKUP_VERSION = 2
+
+/**
+ * Backup format enumeration
+ */
+enum class BackupFormat {
+    JSON,   // Version 1: JSON export without photo files
+    ZIP     // Version 2: ZIP export with photo files included
+}
 
 /**
  * Root backup data structure containing all app data
@@ -17,9 +27,11 @@ data class AppBackup(
     val version: Int = CURRENT_BACKUP_VERSION,
     val exportDate: Long = System.currentTimeMillis(),
     val appVersion: String = "",
+    val format: String = BackupFormat.ZIP.name, // Default to ZIP for v2
     val categories: List<BackupCategory>,
     val photos: List<BackupPhoto>,
-    val settings: BackupSettings
+    val settings: BackupSettings,
+    val photoManifest: List<PhotoManifestEntry> = emptyList() // For ZIP format tracking
 )
 
 /**
@@ -150,6 +162,20 @@ data class ImportProgress(
 }
 
 /**
+ * Photo manifest entry for tracking photos in ZIP format
+ * Maps database photo entries to their file locations in the ZIP
+ */
+@Serializable
+data class PhotoManifestEntry(
+    val photoId: Long,
+    val originalPath: String,
+    val zipEntryName: String,
+    val fileName: String,
+    val fileSize: Long,
+    val checksum: String? = null // Optional for integrity verification
+)
+
+/**
  * Import result data
  */
 data class ImportResult(
@@ -157,6 +183,7 @@ data class ImportResult(
     val categoriesImported: Int,
     val photosImported: Int,
     val photosSkipped: Int,
+    val photoFilesRestored: Int = 0, // New for ZIP format
     val errors: List<String> = emptyList(),
     val warnings: List<String> = emptyList()
 )

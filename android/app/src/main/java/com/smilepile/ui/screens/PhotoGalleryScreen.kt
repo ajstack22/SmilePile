@@ -16,11 +16,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.RemoveCircleOutline
 import androidx.compose.material.icons.filled.DriveFileMove
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -129,8 +128,6 @@ fun PhotoGalleryScreen(
                         selectedCount = orchestratorState.galleryState.selectedPhotosCount,
                         onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
                         onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
-                        onFavoriteClick = { orchestratorState.onSetSelectedPhotosFavorite(true) },
-                        onUnfavoriteClick = { orchestratorState.onSetSelectedPhotosFavorite(false) },
                         onShareClick = {
                             // TODO: Implement batch share functionality
                         }
@@ -144,38 +141,7 @@ fun PhotoGalleryScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                // Search bar
-                SearchBar(
-                    searchQuery = orchestratorState.searchState.searchQuery,
-                    onSearchQueryChange = orchestratorState.onSearchQueryChange,
-                    searchHistory = orchestratorState.searchState.searchHistory,
-                    onSearchHistoryItemClick = orchestratorState.onSearchHistoryItemClick,
-                    onRemoveFromHistory = orchestratorState.onRemoveFromHistory,
-                    onClearHistory = orchestratorState.onClearHistory,
-                    active = orchestratorState.searchBarActive,
-                    onActiveChange = { active ->
-                        orchestratorState.onSetSearchBarActive(active)
-                        if (!active) {
-                            orchestratorState.onToggleFilters()
-                        }
-                    },
-                    onSearch = { orchestratorState.onSetSearchBarActive(false) },
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
-
-                // Search filters
-                SearchFiltersRow(
-                    selectedDateRange = orchestratorState.searchState.selectedDateRange,
-                    onDateRangeClick = { orchestratorState.onShowDateRangePicker(true) },
-                    favoritesOnly = orchestratorState.searchState.favoritesOnly,
-                    onFavoritesToggle = { orchestratorState.onSetFavoritesOnly(!orchestratorState.searchState.favoritesOnly) },
-                    selectedCategoryId = orchestratorState.searchState.selectedCategoryId,
-                    categories = orchestratorState.searchState.categories,
-                    onCategorySelect = orchestratorState.onSetCategoryFilter,
-                    showFilters = orchestratorState.searchState.showFilters,
-                    onToggleFilters = orchestratorState.onToggleFilters,
-                    onClearAllFilters = orchestratorState.onClearAllFilters
-                )
+                // Removed search bar and filters - simplified UI
 
                 // Import progress indicator
                 if (orchestratorState.importState.isImporting) {
@@ -191,18 +157,16 @@ fun PhotoGalleryScreen(
                     )
                 }
 
-                // Category filter chips (only show when not searching)
-                if (!orchestratorState.searchState.isSearchActive) {
-                    CategoryFilterComponent(
-                        categories = orchestratorState.galleryState.categories,
-                        selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
-                        onCategorySelected = orchestratorState.onCategorySelected
-                    )
-                }
+                // Category filter chips
+                CategoryFilterComponent(
+                    categories = orchestratorState.galleryState.categories,
+                    selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
+                    onCategorySelected = orchestratorState.onCategorySelected
+                )
 
-                // Photos grid - show search results when searching, otherwise show regular gallery
+                // Photos grid
                 when {
-                    orchestratorState.isSearching -> {
+                    orchestratorState.galleryState.isLoading -> {
                         Box(
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
@@ -210,46 +174,7 @@ fun PhotoGalleryScreen(
                             CircularProgressIndicator()
                         }
                     }
-                    orchestratorState.showSearchEmptyState -> {
-                        EmptySearchState(
-                            searchQuery = orchestratorState.searchState.searchQuery,
-                            hasFilters = orchestratorState.searchState.hasFilters,
-                            onClearFilters = orchestratorState.onClearAllFilters,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(32.dp)
-                        )
-                    }
-                    orchestratorState.showSearchResults -> {
-                        Column {
-                            // Search results header
-                            SearchResultsHeader(
-                                resultsCount = orchestratorState.searchState.resultsCount,
-                                searchQuery = orchestratorState.searchState.searchQuery,
-                                hasFilters = orchestratorState.searchState.hasFilters
-                            )
-
-                            // Search results grid
-                            PhotoGridComponent(
-                                photos = orchestratorState.searchState.searchResults,
-                                selectedPhotos = orchestratorState.galleryState.selectedPhotos,
-                                isSelectionMode = orchestratorState.galleryState.isSelectionMode,
-                                onPhotoClick = orchestratorState.onPhotoClick,
-                                onPhotoLongClick = orchestratorState.onPhotoLongClick,
-                                onFavoriteToggle = orchestratorState.onFavoriteToggle,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                    }
-                    orchestratorState.isLoading -> {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
-                    }
-                    orchestratorState.showEmptyState -> {
+                    orchestratorState.galleryState.photos.isEmpty() -> {
                         EmptyState(
                             onImportClick = orchestratorState.onAddPhotoClick,
                             modifier = Modifier.fillMaxSize()
@@ -262,28 +187,19 @@ fun PhotoGalleryScreen(
                             isSelectionMode = orchestratorState.galleryState.isSelectionMode,
                             onPhotoClick = orchestratorState.onPhotoClick,
                             onPhotoLongClick = orchestratorState.onPhotoLongClick,
-                            onFavoriteToggle = orchestratorState.onFavoriteToggle,
+                            onFavoriteToggle = null, // Removed favorite functionality
                             modifier = Modifier.fillMaxSize()
                         )
                     }
                 }
             }
 
-            // Import options dialog
-            if (orchestratorState.showImportOptions) {
-                UniversalCrudDialog(
-                    config = DialogBuilder.custom(
-                        title = "Add Photos",
-                        message = "Choose how you'd like to add photos from your gallery:",
-                        primaryText = "Import Multiple",
-                        secondaryText = "Import One",
-                        cancelText = "Cancel",
-                        icon = Icons.Default.Add,
-                        onPrimary = orchestratorState.onImportMultiplePhotos,
-                        onSecondary = orchestratorState.onImportSinglePhoto,
-                        onCancel = { orchestratorState.onShowImportOptions(false) }
-                    ),
-                    onDismiss = { orchestratorState.onShowImportOptions(false) }
+            // Category selection dialog for import
+            if (orchestratorState.showCategorySelection) {
+                CategorySelectionDialog(
+                    categories = orchestratorState.galleryState.categories,
+                    onCategorySelected = orchestratorState.onCategorySelectedForImport,
+                    onDismiss = { orchestratorState.onShowCategorySelection(false) }
                 )
             }
 
@@ -465,8 +381,6 @@ private fun BatchOperationsBottomBar(
     selectedCount: Int,
     onDeleteClick: () -> Unit,
     onMoveClick: () -> Unit,
-    onFavoriteClick: () -> Unit,
-    onUnfavoriteClick: () -> Unit,
     onShareClick: () -> Unit
 ) {
     BottomAppBar(
@@ -483,20 +397,6 @@ private fun BatchOperationsBottomBar(
                 Icon(
                     imageVector = Icons.Default.Share,
                     contentDescription = "Share selected"
-                )
-            }
-
-            IconButton(onClick = onFavoriteClick) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "Add to favorites"
-                )
-            }
-
-            IconButton(onClick = onUnfavoriteClick) {
-                Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = "Remove from favorites"
                 )
             }
 
@@ -591,18 +491,64 @@ private fun ParentModeFABs(
             )
         }
 
-        // Primary FAB - Switch to SmilePile (Kids Mode)
+        // Primary FAB - Switch to View Mode (Kids Mode)
         ExtendedFloatingActionButton(
             onClick = onSwitchToKidsMode,
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
         ) {
             Icon(
-                imageVector = Icons.Default.PhotoLibrary,
-                contentDescription = "Switch to SmilePile"
+                imageVector = Icons.Default.Visibility,
+                contentDescription = "Switch to View Mode"
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text("SmilePile")
+            Text("View Mode")
         }
     }
+}
+
+@Composable
+private fun CategorySelectionDialog(
+    categories: List<Category>,
+    onCategorySelected: (Long) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var selectedCategoryId by remember { mutableStateOf<Long?>(null) }
+
+    UniversalCrudDialog(
+        config = DialogBuilder.custom(
+            title = "Select Category",
+            message = "Choose a category for the imported photos:",
+            primaryText = "Select",
+            cancelText = "Cancel",
+            icon = Icons.Default.PhotoLibrary,
+            content = {
+                Spacer(modifier = Modifier.height(16.dp))
+                categories.forEach { category ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { selectedCategoryId = category.id }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = selectedCategoryId == category.id,
+                            onClick = { selectedCategoryId = category.id }
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = category.displayName,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
+            },
+            onPrimary = {
+                selectedCategoryId?.let { onCategorySelected(it) }
+            },
+            onCancel = onDismiss
+        ),
+        onDismiss = onDismiss
+    )
 }

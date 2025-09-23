@@ -13,8 +13,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +30,18 @@ class PhotoGalleryViewModel @Inject constructor(
 
     private val _selectedCategoryId = MutableStateFlow<Long?>(null)
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
+
+    init {
+        // Default to first category instead of "All Photos"
+        viewModelScope.launch {
+            categoryRepository.getAllCategoriesFlow().collect { categoriesList ->
+                if (_selectedCategoryId.value == null && categoriesList.isNotEmpty()) {
+                    _selectedCategoryId.value = categoriesList.first().id
+                    println("SmilePile Debug: Initialized with first category: ${categoriesList.first().id}")
+                }
+            }
+        }
+    }
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -53,7 +67,19 @@ class PhotoGalleryViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    // Get photos based on selected category filter
+    // Get ALL photos (unfiltered) for fullscreen navigation
+    val allPhotos: StateFlow<List<Photo>> = photoRepository.getAllPhotosFlow()
+        .catch { e ->
+            println("SmilePile Error: Failed to load all photos: ${e.message}")
+            emit(emptyList())
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
+
+    // Get photos based on selected category filter with error handling
     @OptIn(ExperimentalCoroutinesApi::class)
     val photos: StateFlow<List<Photo>> = _selectedCategoryId
         .flatMapLatest { categoryId ->
@@ -62,6 +88,11 @@ class PhotoGalleryViewModel @Inject constructor(
             } else {
                 photoRepository.getPhotosByCategoryFlow(categoryId)
             }
+        }
+        .catch { e ->
+            _error.value = "Failed to load photos: ${e.message}"
+            println("SmilePile Error: Failed to load photos: ${e.message}")
+            emit(emptyList())
         }
         .stateIn(
             scope = viewModelScope,
@@ -123,7 +154,18 @@ class PhotoGalleryViewModel @Inject constructor(
     )
 
     fun selectCategory(categoryId: Long?) {
-        _selectedCategoryId.value = categoryId
+        viewModelScope.launch {
+            try {
+                _selectedCategoryId.value = categoryId
+                _error.value = null
+
+                // Log category change for debugging
+                println("SmilePile Debug: Selected category changed to: $categoryId")
+            } catch (e: Exception) {
+                _error.value = "Failed to select category: ${e.message}"
+                println("SmilePile Error: Failed to select category: ${e.message}")
+            }
+        }
     }
 
     fun toggleFavorite(photo: Photo) {

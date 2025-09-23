@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smiley Close Icon Options</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            margin: 0;
+            padding: 2rem;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .icon-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .icon-container svg {
+            width: 64px;
+            height: 64px;
+        }
+        .icon-container p {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #606770;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smiley "Close" Icon Options</h1>
+
+    <div class="icon-grid">
+        <!-- Option 1: Outlined -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <!-- Eyes -->
+                    <circle cx="9.5" cy="10" r="0.5" fill="currentColor" />
+                    <circle cx="14.5" cy="10" r="0.5" fill="currentColor" />
+                    <!-- Smile -->
+                    <path d="M9 14c1.5 1.5 4.5 1.5 6 0" />
+                </g>
+            </svg>
+            <p>Outlined</p>
+        </div>
+
+        <!-- Option 2: Filled Background -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <g fill="currentColor">
+                    <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M9.5,10c0.55,0,1,0.45,1,1s-0.45,1-1,1 s-1-0.45-1-1S8.95,10,9.5,10z M14.5,10c0.55,0,1,0.45,1,1s-0.45,1-1,1s-1-0.45-1-1S13.95,10,14.5,10z" fill-opacity="0.3"/>
+                    <path d="M12 16c-1.48 0-2.75-.81-3.45-2H15.45C14.75 15.19 13.48 16 12 16z" fill="currentColor"/>
+                </g>
+                 <g fill="white">
+                    <circle cx="9.5" cy="11" r="1" />
+                    <circle cx="14.5" cy="11" r="1" />
+                </g>
+            </svg>
+            <p>Filled Background</p>
+        </div>
+
+        <!-- Option 3: Playful Color -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <g stroke-width="1.5" stroke="black">
+                    <circle cx="12" cy="12" r="10" fill="#FFD95A" />
+                    <!-- Eyes -->
+                    <circle cx="9.5" cy="10" r="1" fill="black" stroke="none"/>
+                    <circle cx="14.5" cy="10" r="1" fill="black" stroke="none"/>
+                    <!-- Smile -->
+                    <path d="M9 14c1.5 1.5 4.5 1.5 6 0" fill="none" stroke-linecap="round"/>
+                </g>
+            </svg>
+            <p>Playful Color</p>
+        </div>
+
+        <!-- Option 4: Winking Face -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <!-- Wink Eye -->
+                    <path d="M8.5 10.5l2 -1l-2 -1" />
+                    <!-- Regular Eye -->
+                    <circle cx="14.5" cy="10" r="0.5" fill="currentColor" />
+                    <!-- Smile -->
+                    <path d="M9 14c1.5 1.5 4.5 1.5 6 0" />
+                </g>
+            </svg>
+            <p>Winking</p>
+        </div>
+        
+        <!-- Option 5: Rounded Square -->
+        <div class="icon-container">
+            <svg viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="4" />
+                    <!-- Eyes -->
+                    <circle cx="9.5" cy="10" r="0.5" fill="currentColor" />
+                    <circle cx="14.5" cy="10" r="0.5" fill="currentColor" />
+                    <!-- Smile -->
+                    <path d="M9 14c1.5 1.5 4.5 1.5 6 0" />
+                </g>
+            </svg>
+            <p>Rounded Square</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

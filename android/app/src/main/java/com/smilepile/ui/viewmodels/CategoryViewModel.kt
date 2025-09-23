@@ -104,20 +104,21 @@ class CategoryViewModel @Inject constructor(
         _editingCategory.value = null
     }
 
-    fun addCategory(name: String, displayName: String, colorHex: String) {
+    fun addCategory(displayName: String, colorHex: String) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
 
-                // Validate category name
-                val existingCategory = categoryRepository.getCategoryByName(name.lowercase().trim())
-                if (existingCategory != null) {
-                    _error.value = "Category with name '$name' already exists"
+                if (displayName.isBlank()) {
+                    _error.value = "Category name cannot be empty"
                     return@launch
                 }
 
-                if (name.isBlank() || displayName.isBlank()) {
-                    _error.value = "Category name and display name cannot be empty"
+                // Check for duplicate display names
+                val normalizedName = displayName.trim().lowercase().replace(" ", "_")
+                val existingCategory = categoryRepository.getCategoryByName(normalizedName)
+                if (existingCategory != null) {
+                    _error.value = "Category '$displayName' already exists"
                     return@launch
                 }
 
@@ -126,7 +127,7 @@ class CategoryViewModel @Inject constructor(
                 val nextPosition = (categories.maxOfOrNull { it.position } ?: -1) + 1
 
                 val newCategory = Category(
-                    name = name.lowercase().trim(),
+                    name = displayName.trim().lowercase().replace(" ", "_"), // Auto-generate normalized name
                     displayName = displayName.trim(),
                     position = nextPosition,
                     colorHex = colorHex,
@@ -144,27 +145,28 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun updateCategory(category: Category, name: String, displayName: String, colorHex: String) {
+    fun updateCategory(category: Category, displayName: String, colorHex: String) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
 
-                // Validate category name (only if it changed)
-                if (name.lowercase().trim() != category.name) {
-                    val existingCategory = categoryRepository.getCategoryByName(name.lowercase().trim())
-                    if (existingCategory != null) {
-                        _error.value = "Category with name '$name' already exists"
+                if (displayName.isBlank()) {
+                    _error.value = "Category name cannot be empty"
+                    return@launch
+                }
+
+                // Check for duplicate display names (only if changed)
+                if (displayName.trim() != category.displayName) {
+                    val normalizedName = displayName.trim().lowercase().replace(" ", "_")
+                    val existingCategory = categoryRepository.getCategoryByName(normalizedName)
+                    if (existingCategory != null && existingCategory.id != category.id) {
+                        _error.value = "Category '$displayName' already exists"
                         return@launch
                     }
                 }
 
-                if (name.isBlank() || displayName.isBlank()) {
-                    _error.value = "Category name and display name cannot be empty"
-                    return@launch
-                }
-
                 val updatedCategory = category.copy(
-                    name = name.lowercase().trim(),
+                    name = displayName.trim().lowercase().replace(" ", "_"), // Auto-generate normalized name
                     displayName = displayName.trim(),
                     colorHex = colorHex
                 )
@@ -180,22 +182,40 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun deleteCategory(category: Category) {
+    fun canDeleteCategory(category: Category): Pair<Boolean, String?> {
+        // Check if this is the last category
+        val categoryCount = categoriesWithCountsFlow.value.size
+        if (categoryCount <= 1) {
+            return Pair(false, "Cannot delete the last remaining category")
+        }
+        return Pair(true, null)
+    }
+
+    fun getCategoryPhotoCount(categoryId: Long, callback: (Int) -> Unit) {
+        viewModelScope.launch {
+            val count = photoRepository.getPhotoCategoryCount(categoryId)
+            callback(count)
+        }
+    }
+
+    fun deleteCategory(category: Category, deletePhotos: Boolean = false) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
 
-                // Check if category has photos
-                val photoCount = photoRepository.getPhotoCategoryCount(category.id)
-                if (photoCount > 0) {
-                    _error.value = "Cannot delete category with photos. Please move or delete photos first."
+                // Check if this is the last category
+                val categoryCount = categoryRepository.getCategoryCount()
+                if (categoryCount <= 1) {
+                    _error.value = "Cannot delete the last remaining category"
                     return@launch
                 }
 
-                // Prevent deletion of default categories
-                if (category.isDefault) {
-                    _error.value = "Cannot delete default category"
-                    return@launch
+                // If deletePhotos is true, delete all photos in this category first
+                if (deletePhotos) {
+                    val photosInCategory = photoRepository.getPhotosByCategory(category.id)
+                    photosInCategory.forEach { photo ->
+                        photoRepository.deletePhoto(photo)
+                    }
                 }
 
                 categoryRepository.deleteCategory(category)

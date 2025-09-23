@@ -9,6 +9,7 @@ import android.util.Log
 import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.storage.ZipUtils
 import com.smilepile.theme.ThemeManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -19,10 +20,11 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.File
-import java.io.FileNotFoundException
+import java.io.*
+import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.zip.ZipOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,8 +42,10 @@ class BackupManager @Inject constructor(
 
     companion object {
         private const val TAG = "BackupManager"
-        private const val BACKUP_MIME_TYPE = "application/json"
-        private const val BACKUP_FILE_EXTENSION = ".json"
+        private const val BACKUP_MIME_TYPE_JSON = "application/json"
+        private const val BACKUP_MIME_TYPE_ZIP = "application/zip"
+        private const val BACKUP_FILE_EXTENSION_JSON = ".json"
+        private const val BACKUP_FILE_EXTENSION_ZIP = ".zip"
         private const val SMILEPILE_BACKUP_EXTENSION = ".smilepile"
         private const val MIN_SUPPORTED_VERSION = 1
         private const val MAX_SUPPORTED_VERSION = CURRENT_BACKUP_VERSION
@@ -53,7 +57,139 @@ class BackupManager @Inject constructor(
     }
 
     /**
-     * Export all app data to JSON format using Storage Access Framework
+     * Export all app data to ZIP format with photos included
+     * @param tempDir Temporary directory for staging files
+     * @param progressCallback Optional callback for progress updates
+     * @return Result containing the ZIP file path
+     */
+    suspend fun exportToZip(
+        tempDir: File? = null,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
+    ): Result<File> {
+        return try {
+            val workDir = tempDir ?: File(context.cacheDir, "backup_temp_${System.currentTimeMillis()}")
+            workDir.mkdirs()
+
+            progressCallback?.invoke(0, 100, "Gathering app data")
+
+            // Gather all data
+            val categories = categoryRepository.getAllCategories()
+            val photos = photoRepository.getAllPhotos()
+            val isDarkMode = themeManager.isDarkMode.first()
+            val securitySummary = securePreferencesManager.getSecuritySummary()
+
+            progressCallback?.invoke(20, 100, "Preparing metadata")
+
+            // Create photo manifest for ZIP tracking
+            val photoManifest = mutableListOf<PhotoManifestEntry>()
+            val photosDir = File(workDir, "photos")
+            photosDir.mkdirs()
+
+            progressCallback?.invoke(30, 100, "Copying photo files")
+
+            // Copy photos to staging directory and build manifest
+            var photosCopied = 0
+            photos.forEachIndexed { index, photo ->
+                try {
+                    if (!photo.isFromAssets) {
+                        val sourceFile = File(photo.path)
+                        if (sourceFile.exists()) {
+                            val fileName = "${photo.id}_${sourceFile.name}"
+                            val destFile = File(photosDir, fileName)
+                            sourceFile.copyTo(destFile, overwrite = true)
+
+                            // Calculate checksum for integrity
+                            val checksum = calculateMD5(destFile)
+
+                            photoManifest.add(
+                                PhotoManifestEntry(
+                                    photoId = photo.id,
+                                    originalPath = photo.path,
+                                    zipEntryName = "${ZipUtils.PHOTOS_DIR}$fileName",
+                                    fileName = fileName,
+                                    fileSize = destFile.length(),
+                                    checksum = checksum
+                                )
+                            )
+                            photosCopied++
+                        }
+                    }
+
+                    val progress = 30 + ((index + 1) * 40 / photos.size)
+                    progressCallback?.invoke(progress, 100, "Copying photos ($photosCopied/${photos.size})")
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to copy photo: ${photo.path}", e)
+                }
+            }
+
+            progressCallback?.invoke(70, 100, "Creating backup metadata")
+
+            // Convert to backup format
+            val backupCategories = categories.map { BackupCategory.fromCategory(it) }
+            val backupPhotos = photos.map { BackupPhoto.fromPhoto(it) }
+            val backupSettings = BackupSettings(
+                isDarkMode = isDarkMode,
+                securitySettings = BackupSecuritySettings(
+                    hasPIN = securitySummary.hasPIN,
+                    hasPattern = securitySummary.hasPattern,
+                    kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
+                    cameraAccessAllowed = securitySummary.cameraAccessAllowed,
+                    deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
+                )
+            )
+
+            val appVersion = try {
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+            } catch (e: Exception) {
+                "unknown"
+            }
+
+            val appBackup = AppBackup(
+                version = CURRENT_BACKUP_VERSION,
+                exportDate = System.currentTimeMillis(),
+                appVersion = appVersion,
+                format = BackupFormat.ZIP.name,
+                categories = backupCategories,
+                photos = backupPhotos,
+                settings = backupSettings,
+                photoManifest = photoManifest
+            )
+
+            // Write metadata.json
+            val metadataFile = File(workDir, ZipUtils.METADATA_FILE)
+            val jsonString = json.encodeToString(appBackup)
+            metadataFile.writeText(jsonString)
+
+            progressCallback?.invoke(80, 100, "Creating ZIP archive")
+
+            // Create ZIP file
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val zipFile = File(context.cacheDir, "smilepile_backup_$timestamp.zip")
+
+            val zipResult = ZipUtils.createZipFromDirectory(
+                sourceDir = workDir,
+                outputFile = zipFile
+            ) { current, total ->
+                val progress = 80 + (current * 20 / total)
+                progressCallback?.invoke(progress, 100, "Archiving files ($current/$total)")
+            }
+
+            // Clean up temp directory
+            workDir.deleteRecursively()
+
+            if (zipResult.isSuccess) {
+                progressCallback?.invoke(100, 100, "Export completed")
+                Result.success(zipFile)
+            } else {
+                Result.failure(zipResult.exceptionOrNull() ?: Exception("ZIP creation failed"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Export all app data to JSON format (v1 compatibility)
      * @return Result containing success status and any error message
      */
     suspend fun exportToJson(): Result<String> {
@@ -111,14 +247,16 @@ class BackupManager @Inject constructor(
                 "unknown"
             }
 
-            // Create backup object using the structure from BackupModels.kt
+            // Create backup object for JSON format (v1 compatibility)
             val appBackup = AppBackup(
-                version = CURRENT_BACKUP_VERSION,
+                version = 1, // Force version 1 for JSON format
                 exportDate = System.currentTimeMillis(),
                 appVersion = appVersion,
+                format = BackupFormat.JSON.name,
                 categories = backupCategories,
                 photos = backupPhotos,
-                settings = backupSettings
+                settings = backupSettings,
+                photoManifest = emptyList() // No photo manifest for JSON format
             )
 
             // Convert to JSON
@@ -132,16 +270,29 @@ class BackupManager @Inject constructor(
 
     /**
      * Create an intent for saving backup file using Storage Access Framework
+     * @param format Backup format to export (JSON or ZIP)
      * @return Intent for file picker
      */
-    fun createExportIntent(): Intent {
+    fun createExportIntent(format: BackupFormat = BackupFormat.ZIP): Intent {
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val fileName = "smilepile_backup_$timestamp$BACKUP_FILE_EXTENSION"
 
-        return Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = BACKUP_MIME_TYPE
-            putExtra(Intent.EXTRA_TITLE, fileName)
+        return when (format) {
+            BackupFormat.JSON -> {
+                val fileName = "smilepile_backup_$timestamp$BACKUP_FILE_EXTENSION_JSON"
+                Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = BACKUP_MIME_TYPE_JSON
+                    putExtra(Intent.EXTRA_TITLE, fileName)
+                }
+            }
+            BackupFormat.ZIP -> {
+                val fileName = "smilepile_backup_$timestamp$BACKUP_FILE_EXTENSION_ZIP"
+                Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = BACKUP_MIME_TYPE_ZIP
+                    putExtra(Intent.EXTRA_TITLE, fileName)
+                }
+            }
         }
     }
 
@@ -156,6 +307,25 @@ class BackupManager @Inject constructor(
             context.contentResolver.openOutputStream(uri)?.use { outputStream ->
                 outputStream.write(jsonContent.toByteArray())
                 outputStream.flush()
+            }
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Write ZIP file to the selected URI
+     * @param zipFile The ZIP file to copy
+     * @param uri The destination URI from Storage Access Framework
+     * @return Result indicating success or failure
+     */
+    suspend fun writeZipToFile(zipFile: File, uri: android.net.Uri): Result<Unit> {
+        return try {
+            context.contentResolver.openOutputStream(uri)?.use { outputStream ->
+                FileInputStream(zipFile).use { inputStream ->
+                    inputStream.copyTo(outputStream)
+                }
             }
             Result.success(Unit)
         } catch (e: Exception) {
@@ -188,7 +358,206 @@ class BackupManager @Inject constructor(
     }
 
     /**
-     * Import data from JSON backup file
+     * Import data from ZIP backup file
+     * @param zipFile ZIP backup file
+     * @param strategy Import strategy (MERGE or REPLACE)
+     * @param progressCallback Optional progress callback
+     * @return Flow of import progress
+     */
+    suspend fun importFromZip(
+        zipFile: File,
+        strategy: ImportStrategy = ImportStrategy.MERGE,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
+    ): Flow<ImportProgress> = flow {
+        val errors = mutableListOf<String>()
+        val warnings = mutableListOf<String>()
+        var categoriesImported = 0
+        var photosImported = 0
+        var photosSkipped = 0
+        var photoFilesRestored = 0
+
+        try {
+            emit(ImportProgress(1, 0, "Validating ZIP structure"))
+            progressCallback?.invoke(0, 100, "Validating ZIP structure")
+
+            // Validate ZIP structure
+            val structureResult = ZipUtils.validateZipStructure(zipFile)
+            if (structureResult.isFailure) {
+                throw IllegalArgumentException("Invalid ZIP structure: ${structureResult.exceptionOrNull()?.message}")
+            }
+
+            emit(ImportProgress(1, 0, "Extracting ZIP archive"))
+            progressCallback?.invoke(10, 100, "Extracting ZIP archive")
+
+            // Extract ZIP to temporary directory
+            val tempDir = File(context.cacheDir, "import_temp_${System.currentTimeMillis()}")
+            tempDir.mkdirs()
+
+            val extractResult = ZipUtils.extractZip(zipFile, tempDir)
+            if (extractResult.isFailure) {
+                throw Exception("Failed to extract ZIP: ${extractResult.exceptionOrNull()?.message}")
+            }
+
+            progressCallback?.invoke(30, 100, "Reading backup metadata")
+
+            // Read metadata.json
+            val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
+            if (!metadataFile.exists()) {
+                throw FileNotFoundException("metadata.json not found in ZIP")
+            }
+
+            val backupJson = metadataFile.readText()
+            val backupData = try {
+                json.decodeFromString<AppBackup>(backupJson)
+            } catch (e: Exception) {
+                throw IllegalArgumentException("Invalid backup metadata format: ${e.message}")
+            }
+
+            // Validate backup version
+            checkBackupVersion(backupData.version)
+
+            val totalItems = backupData.categories.size + backupData.photos.size
+            var processedItems = 0
+
+            emit(ImportProgress(totalItems, processedItems, "Starting import"))
+            progressCallback?.invoke(40, 100, "Starting import")
+
+            // Handle strategy
+            if (strategy == ImportStrategy.REPLACE) {
+                emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
+                progressCallback?.invoke(45, 100, "Clearing existing data")
+                clearAllData()
+            }
+
+            // Import categories first
+            emit(ImportProgress(totalItems, processedItems, "Importing categories"))
+            progressCallback?.invoke(50, 100, "Importing categories")
+
+            for ((index, categoryBackup) in backupData.categories.withIndex()) {
+                try {
+                    val existingCategory = categoryRepository.getCategoryByName(categoryBackup.name)
+
+                    if (strategy == ImportStrategy.MERGE && existingCategory != null) {
+                        val updatedCategory = categoryBackup.toCategory().copy(id = existingCategory.id)
+                        categoryRepository.updateCategory(updatedCategory)
+                        warnings.add("Updated existing category: ${categoryBackup.displayName}")
+                    } else {
+                        val categoryToInsert = if (strategy == ImportStrategy.REPLACE) {
+                            categoryBackup.toCategory()
+                        } else {
+                            categoryBackup.toCategory().copy(id = 0)
+                        }
+                        categoryRepository.insertCategory(categoryToInsert)
+                        categoriesImported++
+                    }
+                } catch (e: Exception) {
+                    errors.add("Failed to import category '${categoryBackup.displayName}': ${e.message}")
+                    Log.e(TAG, "Error importing category: ${categoryBackup.displayName}", e)
+                }
+
+                processedItems++
+                val progress = 50 + ((index + 1) * 20 / backupData.categories.size)
+                progressCallback?.invoke(progress, 100, "Importing categories (${index + 1}/${backupData.categories.size})")
+                emit(ImportProgress(totalItems, processedItems, "Importing categories", errors))
+            }
+
+            // Import photos and restore photo files
+            emit(ImportProgress(totalItems, processedItems, "Importing photos"))
+            progressCallback?.invoke(70, 100, "Importing photos")
+
+            val photosDir = File(tempDir, "photos")
+            val internalPhotosDir = File(context.filesDir, "photos")
+            internalPhotosDir.mkdirs()
+
+            for ((index, photoBackup) in backupData.photos.withIndex()) {
+                try {
+                    // Find corresponding file in extracted photos
+                    val manifestEntry = backupData.photoManifest.find { it.photoId == photoBackup.id }
+                    var newPhotoPath = photoBackup.path
+
+                    if (manifestEntry != null) {
+                        // Restore photo file from ZIP
+                        val sourceFile = File(photosDir, manifestEntry.fileName)
+                        if (sourceFile.exists()) {
+                            val destFile = File(internalPhotosDir, manifestEntry.fileName)
+                            sourceFile.copyTo(destFile, overwrite = true)
+                            newPhotoPath = destFile.absolutePath
+                            photoFilesRestored++
+                        } else {
+                            warnings.add("Photo file not found in ZIP: ${manifestEntry.fileName}")
+                        }
+                    }
+
+                    // Check for duplicates in merge mode
+                    if (strategy == ImportStrategy.MERGE) {
+                        val existingPhotos = photoRepository.getAllPhotos()
+                        val isDuplicate = existingPhotos.any { it.path == newPhotoPath }
+
+                        if (isDuplicate) {
+                            photosSkipped++
+                            warnings.add("Skipped duplicate photo: ${photoBackup.name}")
+                            processedItems++
+                            continue
+                        }
+                    }
+
+                    // Get the actual category ID for merge mode
+                    val actualCategoryId = if (strategy == ImportStrategy.REPLACE) {
+                        photoBackup.categoryId
+                    } else {
+                        val categoryBackupForPhoto = backupData.categories.find { it.id == photoBackup.categoryId }
+                        categoryBackupForPhoto?.let {
+                            categoryRepository.getCategoryByName(it.name)?.id
+                        } ?: photoBackup.categoryId
+                    }
+
+                    // Insert photo with updated path
+                    val photoToInsert = if (strategy == ImportStrategy.REPLACE) {
+                        photoBackup.toPhoto().copy(path = newPhotoPath)
+                    } else {
+                        photoBackup.toPhoto().copy(
+                            id = 0,
+                            categoryId = actualCategoryId,
+                            path = newPhotoPath
+                        )
+                    }
+
+                    photoRepository.insertPhoto(photoToInsert)
+                    photosImported++
+
+                } catch (e: Exception) {
+                    errors.add("Failed to import photo '${photoBackup.name}': ${e.message}")
+                    Log.e(TAG, "Error importing photo: ${photoBackup.name}", e)
+                }
+
+                processedItems++
+                val progress = 70 + ((index + 1) * 25 / backupData.photos.size)
+                progressCallback?.invoke(progress, 100, "Importing photos (${index + 1}/${backupData.photos.size})")
+                emit(ImportProgress(totalItems, processedItems, "Importing photos", errors))
+            }
+
+            // Clean up temp directory
+            tempDir.deleteRecursively()
+
+            progressCallback?.invoke(100, 100, "Import completed")
+            emit(ImportProgress(
+                totalItems,
+                processedItems,
+                "Import completed",
+                errors
+            ))
+
+            Log.i(TAG, "ZIP import completed: $categoriesImported categories, $photosImported photos, $photoFilesRestored files restored")
+
+        } catch (e: Exception) {
+            errors.add("Import failed: ${e.message}")
+            Log.e(TAG, "ZIP import failed", e)
+            emit(ImportProgress(0, 0, "Import failed", errors))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    /**
+     * Import data from JSON backup file (v1 compatibility)
      */
     suspend fun importFromJson(
         backupFile: File,
@@ -452,9 +821,15 @@ class BackupManager @Inject constructor(
                 return@withContext Result.failure(FileNotFoundException("Backup file not found"))
             }
 
-            if (!backupFile.name.endsWith(BACKUP_FILE_EXTENSION) &&
+            if (!backupFile.name.endsWith(BACKUP_FILE_EXTENSION_JSON) &&
+                !backupFile.name.endsWith(BACKUP_FILE_EXTENSION_ZIP) &&
                 !backupFile.name.endsWith(SMILEPILE_BACKUP_EXTENSION)) {
                 return@withContext Result.failure(IllegalArgumentException("Invalid backup file format"))
+            }
+
+            // Handle ZIP files differently
+            if (backupFile.name.endsWith(BACKUP_FILE_EXTENSION_ZIP)) {
+                return@withContext validateZipBackupFile(backupFile)
             }
 
             val backupJson = backupFile.readText()
@@ -495,13 +870,62 @@ class BackupManager @Inject constructor(
                 categoriesCount = backupData.categories.size,
                 photosCount = backupData.photos.size,
                 missingPhotosCount = missingPhotos.size,
-                missingPhotos = missingPhotos.map { "${it.name} (${it.path})" }
+                missingPhotos = missingPhotos.map { "${it.name} (${it.path})" },
+                isZipFormat = backupData.format == BackupFormat.ZIP.name
             )
 
             Result.success(preview)
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    /**
+     * Validate ZIP backup file
+     */
+    private suspend fun validateZipBackupFile(zipFile: File): Result<AppBackup> = withContext(Dispatchers.IO) {
+        try {
+            val structureResult = ZipUtils.validateZipStructure(zipFile)
+            if (structureResult.isFailure) {
+                return@withContext Result.failure(structureResult.exceptionOrNull()!!)
+            }
+
+            // Extract and read metadata
+            val tempDir = File(context.cacheDir, "validate_temp_${System.currentTimeMillis()}")
+            tempDir.mkdirs()
+
+            val extractResult = ZipUtils.extractZip(zipFile, tempDir)
+            if (extractResult.isFailure) {
+                tempDir.deleteRecursively()
+                return@withContext Result.failure(extractResult.exceptionOrNull()!!)
+            }
+
+            val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
+            val backupJson = metadataFile.readText()
+            val backupData = json.decodeFromString<AppBackup>(backupJson)
+
+            checkBackupVersion(backupData.version)
+
+            tempDir.deleteRecursively()
+            Result.success(backupData)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Calculate MD5 checksum for file integrity verification
+     */
+    private fun calculateMD5(file: File): String {
+        val digest = MessageDigest.getInstance("MD5")
+        file.inputStream().use { inputStream ->
+            val buffer = ByteArray(8192)
+            var bytesRead: Int
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                digest.update(buffer, 0, bytesRead)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
     }
 }
 
@@ -515,7 +939,8 @@ data class BackupPreview(
     val categoriesCount: Int,
     val photosCount: Int,
     val missingPhotosCount: Int,
-    val missingPhotos: List<String>
+    val missingPhotos: List<String>,
+    val isZipFormat: Boolean = false
 )
 
 /**

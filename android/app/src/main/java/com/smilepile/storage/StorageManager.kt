@@ -53,9 +53,10 @@ class StorageManager @Inject constructor(
     }
 
     /**
-     * Copy a photo from external storage to app's private storage
+     * Import a photo from any source (gallery, camera, etc.) to app's private internal storage
+     * All photos are stored in internal storage only for security and privacy
      * @param sourceUri The URI of the source photo
-     * @return Pair of (photo file path, thumbnail file path) or null if failed
+     * @return StorageResult with photo path, thumbnail path, etc. or null if failed
      */
     suspend fun importPhoto(sourceUri: Uri): StorageResult? = withContext(Dispatchers.IO) {
         try {
@@ -224,6 +225,143 @@ class StorageManager @Inject constructor(
      */
     fun hasEnoughSpace(estimatedSize: Long = 10 * 1024 * 1024): Boolean {
         return getAvailableSpace() > estimatedSize
+    }
+
+    /**
+     * Get all photos stored in internal storage
+     * @return List of photo file paths in internal storage
+     */
+    suspend fun getAllInternalPhotos(): List<String> = withContext(Dispatchers.IO) {
+        try {
+            photosDir.listFiles()
+                ?.filter { it.isFile && it.extension.lowercase() in setOf("jpg", "jpeg", "png", "webp") }
+                ?.map { it.absolutePath }
+                ?: emptyList()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting internal photos", e)
+            emptyList()
+        }
+    }
+
+    /**
+     * Copy a photo file to internal storage (used for migration)
+     * This method handles copying existing photos from any location to internal storage
+     * @param sourceFile The source file to copy
+     * @return StorageResult or null if failed
+     */
+    suspend fun copyPhotoToInternalStorage(sourceFile: java.io.File): StorageResult? = withContext(Dispatchers.IO) {
+        try {
+            if (!sourceFile.exists()) {
+                Log.e(TAG, "Source file does not exist: ${sourceFile.absolutePath}")
+                return@withContext null
+            }
+
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val uniqueId = UUID.randomUUID().toString().take(8)
+            val fileName = "IMG_${timestamp}_${uniqueId}.jpg"
+
+            val photoFile = File(photosDir, fileName)
+            val thumbnailFile = File(thumbnailsDir, "thumb_$fileName")
+
+            // Copy and resize the photo
+            val photoSuccess = copyAndResizePhotoFromFile(sourceFile, photoFile)
+            if (!photoSuccess) {
+                Log.e(TAG, "Failed to copy photo from ${sourceFile.absolutePath}")
+                return@withContext null
+            }
+
+            // Generate thumbnail
+            val thumbnailSuccess = generateThumbnail(photoFile, thumbnailFile)
+            if (!thumbnailSuccess) {
+                Log.w(TAG, "Failed to generate thumbnail for $fileName")
+            }
+
+            Log.d(TAG, "Successfully copied photo to internal storage: $fileName")
+            StorageResult(
+                photoPath = photoFile.absolutePath,
+                thumbnailPath = if (thumbnailSuccess) thumbnailFile.absolutePath else null,
+                fileName = fileName,
+                fileSize = photoFile.length()
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "Error copying photo to internal storage from ${sourceFile.absolutePath}", e)
+            null
+        }
+    }
+
+    /**
+     * Migrate external photos to internal storage
+     * This method helps consolidate storage to internal-only
+     * @param externalPhotoPaths List of external photo paths to migrate
+     * @return List of successful migration results
+     */
+    suspend fun migrateExternalPhotosToInternal(externalPhotoPaths: List<String>): List<StorageResult> = withContext(Dispatchers.IO) {
+        externalPhotoPaths.mapNotNull { externalPath ->
+            try {
+                val sourceFile = File(externalPath)
+                if (sourceFile.exists()) {
+                    copyPhotoToInternalStorage(sourceFile)
+                } else {
+                    Log.w(TAG, "External photo not found for migration: $externalPath")
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to migrate photo from $externalPath", e)
+                null
+            }
+        }
+    }
+
+    /**
+     * Check if a photo path is already in internal storage
+     * @param photoPath The photo path to check
+     * @return true if the photo is in internal storage
+     */
+    fun isInternalStoragePath(photoPath: String): Boolean {
+        return try {
+            val file = File(photoPath)
+            file.absolutePath.startsWith(photosDir.absolutePath)
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /**
+     * Copy and resize photo from file (for migration purposes)
+     */
+    private suspend fun copyAndResizePhotoFromFile(sourceFile: File, targetFile: File): Boolean = withContext(Dispatchers.IO) {
+        try {
+            FileInputStream(sourceFile).use { inputStream ->
+                // First, decode bounds to check dimensions
+                val options = BitmapFactory.Options().apply {
+                    inJustDecodeBounds = true
+                }
+                BitmapFactory.decodeStream(inputStream, null, options)
+
+                // Calculate sample size to resize if needed
+                val sampleSize = calculateSampleSize(options.outWidth, options.outHeight, MAX_PHOTO_SIZE)
+
+                // Reset stream and decode with sample size
+                FileInputStream(sourceFile).use { resetStream ->
+                    val decodeOptions = BitmapFactory.Options().apply {
+                        inSampleSize = sampleSize
+                        inJustDecodeBounds = false
+                    }
+
+                    val bitmap = BitmapFactory.decodeStream(resetStream, null, decodeOptions)
+                    bitmap?.let { bmp ->
+                        FileOutputStream(targetFile).use { outputStream ->
+                            bmp.compress(Bitmap.CompressFormat.JPEG, PHOTO_QUALITY, outputStream)
+                        }
+                        bmp.recycle()
+                        true
+                    } ?: false
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error copying and resizing photo from file", e)
+            false
+        }
     }
 
     private suspend fun copyAndResizePhoto(sourceUri: Uri, targetFile: File): Boolean = withContext(Dispatchers.IO) {

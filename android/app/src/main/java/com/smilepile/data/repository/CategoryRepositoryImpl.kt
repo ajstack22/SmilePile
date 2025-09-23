@@ -27,13 +27,13 @@ class CategoryRepositoryImpl @Inject constructor(
      */
     private fun CategoryEntity.toCategory(): Category {
         return Category(
-            id = this.id.toLongOrNull() ?: 0L, // Convert String ID to Long
-            name = this.name,
-            displayName = this.name.replaceFirstChar { it.uppercase() }, // Convert to display format
-            position = 0, // CategoryEntity doesn't store position, default to 0
+            id = this.id, // Now directly uses Long
+            name = this.displayName.lowercase().replace(" ", "_"), // Generate a normalized name from displayName
+            displayName = this.displayName,
+            position = this.position,
             iconResource = null, // CategoryEntity doesn't store icon resource
             colorHex = this.colorHex,
-            isDefault = false, // Will be determined by checking against default categories
+            isDefault = this.isDefault,
             createdAt = this.createdAt
         )
     }
@@ -43,9 +43,11 @@ class CategoryRepositoryImpl @Inject constructor(
      */
     private fun Category.toCategoryEntity(): CategoryEntity {
         return CategoryEntity(
-            id = if (this.id == 0L) java.util.UUID.randomUUID().toString() else this.id.toString(),
-            name = this.name,
+            id = this.id, // 0L means auto-generate
+            displayName = this.displayName,
             colorHex = this.colorHex ?: "#4CAF50", // Default color if none provided
+            position = this.position,
+            isDefault = this.isDefault,
             createdAt = this.createdAt
         )
     }
@@ -96,7 +98,7 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun getCategoryById(categoryId: Long): Category? = withContext(ioDispatcher) {
         try {
-            categoryDao.getById(categoryId.toString())?.toCategory()
+            categoryDao.getById(categoryId)?.toCategory()
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to get category by ID: ${e.message}", e)
         }
@@ -119,7 +121,9 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun getCategoryByName(name: String): Category? = withContext(ioDispatcher) {
         try {
-            categoryDao.getByName(name)?.toCategory()
+            // Convert name to display format for lookup
+            val displayName = name.split("_").joinToString(" ") { it.replaceFirstChar { char -> char.uppercase() } }
+            categoryDao.getByDisplayName(displayName)?.toCategory()
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to get category by name: ${e.message}", e)
         }

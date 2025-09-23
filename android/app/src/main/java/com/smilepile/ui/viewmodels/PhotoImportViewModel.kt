@@ -19,6 +19,7 @@ import javax.inject.Inject
 /**
  * ViewModel for handling photo import operations from device gallery.
  * Manages the import process including storage operations and database saves.
+ * All imported photos are stored in internal storage only for privacy and security.
  */
 @HiltViewModel
 class PhotoImportViewModel @Inject constructor(
@@ -36,7 +37,7 @@ class PhotoImportViewModel @Inject constructor(
     /**
      * Import a single photo from the device gallery
      */
-    fun importPhoto(uri: Uri, categoryId: Long? = null) {
+    fun importPhoto(uri: Uri, categoryId: Long) {
         viewModelScope.launch {
             try {
                 _uiState.value = _uiState.value.copy(
@@ -54,7 +55,7 @@ class PhotoImportViewModel @Inject constructor(
                     return@launch
                 }
 
-                // Import photo to app storage
+                // Import photo to app's internal storage (all photos stored internally for security)
                 val storageResult = storageManager.importPhoto(uri)
                 if (storageResult == null) {
                     _uiState.value = _uiState.value.copy(
@@ -99,7 +100,7 @@ class PhotoImportViewModel @Inject constructor(
     /**
      * Import multiple photos from the device gallery
      */
-    fun importPhotos(uris: List<Uri>, categoryId: Long? = null) {
+    fun importPhotos(uris: List<Uri>, categoryId: Long) {
         if (uris.isEmpty()) return
 
         viewModelScope.launch {
@@ -134,7 +135,7 @@ class PhotoImportViewModel @Inject constructor(
                             batchImportCompleted = index
                         )
 
-                        // Import individual photo
+                        // Import individual photo to internal storage
                         val storageResult = storageManager.importPhoto(uri)
                         if (storageResult != null) {
                             val photo = createPhotoFromStorageResult(storageResult, categoryId)
@@ -227,13 +228,13 @@ class PhotoImportViewModel @Inject constructor(
 
     private fun createPhotoFromStorageResult(
         storageResult: StorageResult,
-        categoryId: Long? = null
+        categoryId: Long
     ): Photo {
         return Photo(
             id = 0, // Will be set by database
-            path = storageResult.photoPath,
+            path = storageResult.photoPath, // Path is always internal storage
             name = storageResult.fileName,
-            categoryId = categoryId ?: 1L, // Default to first category if none specified
+            categoryId = categoryId, // Category is now required
             isFromAssets = false,
             createdAt = System.currentTimeMillis(),
             fileSize = storageResult.fileSize,

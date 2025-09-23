@@ -125,8 +125,9 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    // Security - Encrypted SharedPreferences
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    // Security - Encrypted SharedPreferences and Biometric Authentication
+    implementation("androidx.security:security-crypto:1.1.0")
+    implementation("androidx.biometric:biometric:1.1.0")
 
     // Permissions (Accompanist)
     implementation("com.google.accompanist:accompanist-permissions:0.32.0")

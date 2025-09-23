@@ -10,15 +10,21 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "category_entities")
 data class CategoryEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Long = 0L,
 
-    @ColumnInfo(name = "name")
-    val name: String,
+    @ColumnInfo(name = "display_name")
+    val displayName: String,
 
     @ColumnInfo(name = "color_hex")
     val colorHex: String,
+
+    @ColumnInfo(name = "position")
+    val position: Int = 0,
+
+    @ColumnInfo(name = "is_default")
+    val isDefault: Boolean = false,
 
     @ColumnInfo(name = "created_at")
     val createdAt: Long = System.currentTimeMillis()
