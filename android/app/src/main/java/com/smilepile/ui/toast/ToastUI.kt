@@ -1,6 +1,8 @@
 package com.smilepile.ui.toast
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
@@ -171,6 +173,86 @@ fun KidsModeToastUI(
                             fontSize = 18.sp, // Larger for kids
                             fontWeight = FontWeight.Medium
                         )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Category-specific toast UI that matches the category chip styling
+ * Appears at 25% from top with fade in/out animation
+ */
+@Composable
+fun CategoryToastUI(
+    toastState: ToastState,
+    categoryColorHex: String?,
+    modifier: Modifier = Modifier
+) {
+    val toast = toastState.currentToast
+    val isVisible = toastState.isVisible
+
+    // Parse the category color, fallback to primary if invalid
+    val categoryColor = categoryColorHex?.let {
+        try {
+            Color(android.graphics.Color.parseColor(it))
+        } catch (e: Exception) {
+            MaterialTheme.colorScheme.primary
+        }
+    } ?: MaterialTheme.colorScheme.primary
+
+    // Calculate if we need light or dark text based on background brightness
+    // Using simple luminance formula: 0.299*R + 0.587*G + 0.114*B
+    val luminance = (0.299f * categoryColor.red + 0.587f * categoryColor.green + 0.114f * categoryColor.blue)
+    val textColor = if (luminance > 0.5f) {
+        Color.Black
+    } else {
+        Color.White
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .zIndex(99999f)
+    ) {
+        AnimatedVisibility(
+            visible = isVisible && toast != null,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 80.dp) // Position at ~10% from top for better visibility
+        ) {
+            toast?.let { data ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    // Match the CategoryChip styling exactly, just slightly larger
+                    Card(
+                        modifier = Modifier
+                            .clickable { toastState.hideToast() },
+                        colors = CardDefaults.cardColors(
+                            containerColor = categoryColor.copy(alpha = 0.95f)
+                        ),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = data.message,
+                                color = textColor,
+                                fontSize = 18.sp, // Slightly larger than category chip
+                                fontWeight = FontWeight.Medium,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                     }
                 }
             }

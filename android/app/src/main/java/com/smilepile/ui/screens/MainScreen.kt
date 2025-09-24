@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Collections
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Collections
+import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.AlertDialog
@@ -50,7 +50,6 @@ import com.smilepile.mode.AppMode
 import com.smilepile.navigation.AppNavHost
 import com.smilepile.navigation.NavigationRoutes
 import com.smilepile.ui.viewmodels.AppModeViewModel
-import com.smilepile.ui.toast.KidsModeToastUI
 import com.smilepile.ui.toast.ToastUI
 import com.smilepile.ui.toast.rememberToastState
 import com.smilepile.ui.toast.ToastManager
@@ -109,8 +108,8 @@ fun MainScreen(
         ),
         BottomNavigationItem(
             route = NavigationRoutes.CATEGORIES,
-            selectedIcon = Icons.Filled.Collections,
-            unselectedIcon = Icons.Outlined.Collections,
+            selectedIcon = Icons.Filled.Category,
+            unselectedIcon = Icons.Outlined.Category,
             iconTextId = R.string.nav_categories
         ),
         BottomNavigationItem(
@@ -164,84 +163,24 @@ fun MainScreen(
             )
         }
 
-        // Toast UI overlay
-        if (currentMode == AppMode.KIDS) {
-            KidsModeToastUI(toastState = toastState)
-        } else {
+        // Toast UI overlay - Only show toast in Parent Mode
+        // Kids Mode handles its own toast in KidsModeGalleryScreen (only in fullscreen)
+        if (currentMode == AppMode.PARENT) {
             ToastUI(toastState = toastState)
         }
+        // No toast for Kids Mode - handled by KidsModeGalleryScreen
     }
 
-    // Kids Mode Exit Dialog
-    if (showKidsModeExitDialog) {
-        KidsModeExitDialog(
-            onDismiss = onKidsModeExitDialogDismiss,
-            onConfirm = { pin ->
-                if (modeViewModel.validatePinForKidsModeExit(pin)) {
-                    onKidsModeExitDialogDismiss()
-                }
-            },
-            error = modeState.error
-        )
-    }
-}
-
-@Composable
-private fun KidsModeExitDialog(
-    onDismiss: () -> Unit,
-    onConfirm: (String) -> Unit,
-    error: String?
-) {
-    var pin by remember { mutableStateOf("") }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Enter Edit Mode") },
-        text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text("Enter your PIN to access Edit Mode")
-
-                OutlinedTextField(
-                    value = pin,
-                    onValueChange = {
-                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
-                            pin = it
-                        }
-                    },
-                    label = { Text("PIN") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-                    visualTransformation = PasswordVisualTransformation(),
-                    isError = error != null,
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                error?.let {
-                    Text(
-                        text = it,
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = { onConfirm(pin) },
-                enabled = pin.length >= 4
-            ) {
-                Text("Switch Mode")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
+    // Navigate to ParentalLockScreen for Kids Mode Exit
+    LaunchedEffect(showKidsModeExitDialog) {
+        if (showKidsModeExitDialog) {
+            // Dismiss the dialog state and navigate to ParentalLockScreen
+            onKidsModeExitDialogDismiss()
+            navController.navigate("parental_lock_exit_kids")
         }
-    )
+    }
 }
+
 
 /**
  * Bottom navigation bar component for the SmilePile app

@@ -160,6 +160,17 @@ class ToastState(
             type = ToastType.INFO
         )
     }
+
+    /**
+     * Show category toast with short duration for non-intrusive feedback
+     */
+    fun showCategory(categoryName: String) {
+        showToast(
+            message = categoryName,
+            duration = 1500L, // 1.5 seconds for quick feedback
+            type = ToastType.INFO
+        )
+    }
 }
 
 /**

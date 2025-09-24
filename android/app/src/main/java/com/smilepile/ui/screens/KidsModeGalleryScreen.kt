@@ -52,6 +52,7 @@ import com.smilepile.mode.AppMode
 import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
+import com.smilepile.ui.toast.CategoryToastUI
 
 /**
  * Simplified gallery screen for Kids Mode
@@ -63,6 +64,7 @@ import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 @Composable
 fun KidsModeGalleryScreen(
     onPhotoClick: (Photo, Int) -> Unit,
+    onNavigateToParentalLock: () -> Unit = {},
     modifier: Modifier = Modifier,
     galleryViewModel: PhotoGalleryViewModel = hiltViewModel(),
     modeViewModel: AppModeViewModel = hiltViewModel(),
@@ -75,6 +77,7 @@ fun KidsModeGalleryScreen(
     val modeState by modeViewModel.uiState.collectAsState()
 
     var zoomedPhoto by remember { mutableStateOf<Photo?>(null) }
+    var maintainZoom by remember { mutableStateOf(false) }
 
     // Handle back button in Kids Mode - request mode toggle (will handle PIN internally)
     BackHandler {
@@ -96,6 +99,23 @@ fun KidsModeGalleryScreen(
         modeViewModel.setKidsFullscreen(zoomedPhoto != null)
     }
 
+    // Filter photos by selected category (works with all photos or category-specific photos)
+    val displayedPhotos = remember(allPhotos, selectedCategoryId) {
+        if (selectedCategoryId == null || allPhotos.isEmpty()) {
+            allPhotos
+        } else {
+            allPhotos.filter { it.categoryId == selectedCategoryId }
+        }
+    }
+
+    // When category changes while zoomed, update to first photo of new category
+    LaunchedEffect(selectedCategoryId, displayedPhotos) {
+        if (maintainZoom && displayedPhotos.isNotEmpty()) {
+            zoomedPhoto = displayedPhotos.first()
+            maintainZoom = false
+        }
+    }
+
     // Note: Removed photo count tracking as it was incorrectly triggering when switching categories
     // The photo count changes when filtering by category, not just when new photos are added
 
@@ -113,13 +133,9 @@ fun KidsModeGalleryScreen(
         }
     }
 
-    // Use photos directly from ViewModel - they're already filtered by selectedCategoryId
-    // The ViewModel's photos flow already reacts to selectedCategoryId changes
-    val displayedPhotos = remember(galleryState.photos) {
-        // Debug log
-        println("SmilePile Debug: Displaying ${galleryState.photos.size} photos for category: $selectedCategoryId")
-        galleryState.photos // Keep original order to show newest at top
-    }
+    // Photos are filtered by selected category above
+    // Debug log
+    println("SmilePile Debug: Displaying ${displayedPhotos.size} photos for category: $selectedCategoryId")
 
     // LazyColumn state for scrolling to bottom
     val listState = rememberLazyListState()
@@ -235,38 +251,49 @@ fun KidsModeGalleryScreen(
 
     // Zoomed photo overlay with swipe navigation
     zoomedPhoto?.let { photo ->
-        // Find the photo index in all photos
-        val actualPhotoIndex = allPhotos.indexOfFirst { it.id == photo.id }
+        // Find the photo index in the DISPLAYED photos (category-filtered), not all photos
+        val actualPhotoIndex = displayedPhotos.indexOfFirst { it.id == photo.id }
+        // If photo not in current category, use first photo instead of hiding overlay
+        val safePhotoIndex = if (actualPhotoIndex >= 0) actualPhotoIndex else 0
 
-        if (actualPhotoIndex >= 0) {
-            ZoomedPhotoOverlay(
-                allPhotos = allPhotos,
-                categories = categories,
-                currentCategoryId = selectedCategoryId ?: categories.firstOrNull()?.id ?: 0L,
-                initialPhotoIndex = actualPhotoIndex,
-                onDismiss = {
-                    zoomedPhoto = null
-                    modeViewModel.setKidsFullscreen(false)
-                },
-                onCategoryChange = { newCategoryId ->
-                    // Update the selected category via ViewModel
-                    galleryViewModel.selectCategory(newCategoryId)
-                    val categoryName = categories.find { it.id == newCategoryId }?.displayName ?: "Category"
-                    toastState?.showInfo(categoryName)
-                }
+        ZoomedPhotoOverlay(
+            allPhotos = displayedPhotos, // FIXED: Pass the filtered list, not all photos
+            categories = categories,
+            currentCategoryId = selectedCategoryId ?: categories.firstOrNull()?.id ?: 0L,
+            initialPhotoIndex = safePhotoIndex,
+            onDismiss = {
+                zoomedPhoto = null
+                modeViewModel.setKidsFullscreen(false)
+            },
+            onCategoryChange = { newCategoryId ->
+                // Update the selected category via ViewModel
+                maintainZoom = true
+                galleryViewModel.selectCategory(newCategoryId)
+                val categoryName = categories.find { it.id == newCategoryId }?.displayName ?: "Category"
+                toastState?.showCategory(categoryName)
+                // Keep fullscreen mode active
+            }
+        )
+    }
+
+    // Show category toast overlay when in fullscreen
+    if (zoomedPhoto != null) {
+        val currentCategory = categories.find { it.id == selectedCategoryId }
+        toastState?.let { toast ->
+            CategoryToastUI(
+                toastState = toast,
+                categoryColorHex = currentCategory?.colorHex
             )
         }
     }
 
-    // PIN Authentication Dialog for mode switching
-    if (modeState.requiresPinAuth) {
-        PinAuthDialog(
-            onDismiss = { modeViewModel.cancelPinAuth() },
-            onConfirm = { pin ->
-                modeViewModel.validatePinForKidsModeExit(pin)
-            },
-            error = modeState.error
-        )
+    // Navigate to ParentalLockScreen for biometric/PIN authentication
+    LaunchedEffect(modeState.requiresPinAuth) {
+        if (modeState.requiresPinAuth) {
+            // Reset the requiresPinAuth state and navigate to ParentalLockScreen
+            modeViewModel.cancelPinAuth()
+            onNavigateToParentalLock()
+        }
     }
 
 }
@@ -331,62 +358,6 @@ private fun EmptyKidsGallery() {
     }
 }
 
-@Composable
-private fun PinAuthDialog(
-    onDismiss: () -> Unit,
-    onConfirm: (String) -> Unit,
-    error: String?
-) {
-    var pin by remember { mutableStateOf("") }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Enter PIN") },
-        text = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text("Enter your PIN to switch to Edit Mode")
-
-                OutlinedTextField(
-                    value = pin,
-                    onValueChange = {
-                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
-                            pin = it
-                        }
-                    },
-                    label = { Text("PIN") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-                    visualTransformation = PasswordVisualTransformation(),
-                    isError = error != null,
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                error?.let {
-                    Text(
-                        text = it,
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = { onConfirm(pin) },
-                enabled = pin.length >= 4
-            ) {
-                Text("Unlock")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
-        }
-    )
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -412,10 +383,11 @@ private fun ZoomedPhotoOverlay(
         categoryIds.indexOf(currentCategoryId).coerceAtLeast(0)
     }
 
-    // Filter photos by current category
-    val displayedPhotos = remember(allPhotos, currentCategoryId) {
-        allPhotos.filter { it.categoryId == currentCategoryId }
-    }
+    // FIXED: Use the photos as passed - they're already filtered by the parent
+    val displayedPhotos = allPhotos
+
+    // Track if we've changed categories (to reset to first photo)
+    var hasChangedCategory by remember { mutableStateOf(false) }
 
     // Animate the appearance
     val animationProgress by animateFloatAsState(
@@ -424,16 +396,9 @@ private fun ZoomedPhotoOverlay(
         label = "zoom"
     )
 
-    // Find the initial photo in the filtered list
-    val initialFilteredIndex = remember(initialPhotoIndex, displayedPhotos, allPhotos) {
-        if (initialPhotoIndex >= 0 && initialPhotoIndex < allPhotos.size) {
-            val targetPhoto = allPhotos[initialPhotoIndex]
-            displayedPhotos.indexOfFirst { it.id == targetPhoto.id }.coerceAtLeast(0)
-        } else {
-            // Start at first photo (top/most recent)
-            0
-        }
-    }
+    // Use the passed index directly - it's already correct!
+    // The parent already calculated the right index in the filtered list
+    val initialFilteredIndex = initialPhotoIndex.coerceIn(0, (displayedPhotos.size - 1).coerceAtLeast(0))
 
     // Pager state for vertical scrolling through photos
     val pagerState = rememberPagerState(
@@ -441,12 +406,13 @@ private fun ZoomedPhotoOverlay(
         pageCount = { displayedPhotos.size.coerceAtLeast(1) }
     )
 
-    // Reset pager to first photo (top/most recent) when category changes
-    LaunchedEffect(currentCategoryId, displayedPhotos) {
-        if (displayedPhotos.isNotEmpty()) {
-            // Always go to the first photo when category changes
+    // Reset pager to first photo only when category actually changes (not on initial load)
+    LaunchedEffect(currentCategoryId) {
+        if (displayedPhotos.isNotEmpty() && hasChangedCategory) {
+            // Only go to first photo when category changes, not on initial load
             pagerState.scrollToPage(0)
         }
+        hasChangedCategory = true // Mark that we've loaded, so future changes will reset
     }
 
     // Handle horizontal swipe for categories with debouncing
