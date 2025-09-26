@@ -18,11 +18,24 @@ After extensive real-world usage, we discovered that success comes not from comp
 ### Core Workflow Scripts (The Foundation)
 ```
 core/
-├── atlas_workflow.py      # Main 7-phase workflow enforcer
-├── atlas_research.py      # Phase 1: Research guide
-├── atlas_story.py         # Phase 2: Story creation
-├── atlas_adversarial.py   # Phase 4: Quality review
-└── atlas_checkpoint.py    # Checkpoint management
+├── atlas_workflow.py      # Main 7-phase workflow enforcer (LEGACY)
+├── atlas_research.py      # Phase 1: Research guide (LEGACY)
+├── atlas_story.py         # Phase 2: Story creation (LEGACY)
+├── atlas_adversarial.py   # Phase 4: Quality review (LEGACY)
+└── atlas_checkpoint.py    # Checkpoint management (LEGACY)
+```
+**Note**: Python scripts are maintained for reference but superseded by agent-driven workflow.
+
+### Agent Definitions (The Intelligence) 🆕
+```
+agents/
+├── researcher.md              # Deep codebase exploration agent
+├── product_manager.md         # Story creation & validation agent
+├── developer.md               # Planning & implementation agent
+├── peer_reviewer.md           # Adversarial review agent
+├── qa_tester.md              # Testing & verification agent
+├── organizer.md              # Clean-up & documentation agent
+└── orchestration_examples.md # Coordination patterns & templates
 ```
 
 ### Templates (The Structure)
@@ -37,9 +50,10 @@ templates/
 ### Documentation (The Wisdom)
 ```
 docs/
-├── WORKFLOW_USAGE.md           # How to use the workflow
-├── ATLAS_SUCCESS_PATTERNS.md   # Proven patterns from production
-└── README.md                   # This file
+├── AGENT_WORKFLOW.md          # Complete agent orchestration guide 🆕
+├── WORKFLOW_USAGE.md          # How to use the workflow
+├── ATLAS_SUCCESS_PATTERNS.md  # Proven patterns from production
+└── README.md                  # This file
 ```
 
 ### Examples (The Implementation)
@@ -50,32 +64,39 @@ examples/
 
 ## Quick Start
 
-### For Any Task (Bug or Feature):
+### Agent-Driven Workflow (Recommended) 🆕
+```
+"I need to [TASK DESCRIPTION]. Please orchestrate the Atlas agent workflow,
+launching appropriate agents for each phase. Execute in parallel where possible."
+```
+
+This orchestrates:
+1. **Research** - Parallel agent exploration
+2. **Story creation** - Product manager agent defines requirements
+3. **Planning** - Developer agents design approach
+4. **Adversarial review** - Peer reviewer finds edge cases
+5. **Implementation** - Parallel developer agents code
+6. **Testing** - QA and review agents verify
+7. **Validation** - Product manager confirms criteria
+8. **Clean-up** - Organizer agent maintains hygiene 🆕
+
+### Legacy Script Workflow (Reference)
 ```bash
 python3 core/atlas_workflow.py feature "Your task description"
 ```
 
-This enforces:
-1. **Research** before coding
-2. **Story creation** with acceptance criteria
-3. **Planning** the implementation
-4. **Adversarial review** to catch issues
-5. **Implementation** (finally, code!)
-6. **Testing** verification
-7. **Validation** against criteria
-
 ## Key Success Patterns
 
-### 1. Parallel Execution
-Break work into independent chunks and run them simultaneously:
-```bash
-# Run multiple tasks in parallel
-for task in task1 task2 task3; do
-    $task &
-done
-wait
+### 1. Parallel Execution with Agents 🆕
+Launch multiple agents simultaneously for independent tasks:
 ```
-Result: 3-5x speed improvement
+PARALLEL:
+- Researcher Agent 1: Search UI components
+- Researcher Agent 2: Search backend logic
+- Developer Agent 1: Implement frontend
+- Developer Agent 2: Implement backend
+```
+Result: 3-5x speed improvement through intelligent parallelization
 
 ### 2. Evidence-Driven Development
 Create evidence throughout, not just at the end:
@@ -120,6 +141,30 @@ From 7 production waves:
 - **Zero rollbacks** across all waves
 - **100% acceptance criteria** met
 - **Decreasing bug discovery** with each wave
+
+## Agent Integration for Claude Code 🆕
+
+### Keeping It Simple
+The agent workflow is powerful but must be practical within Claude Code's context limits:
+
+**DO**:
+- Use 2-3 agents in parallel maximum per phase
+- Keep agent prompts concise and focused
+- Save key outputs between phases
+
+**DON'T**:
+- Launch 10+ agents simultaneously
+- Create massive context hand-offs
+- Over-orchestrate simple tasks
+
+### Practical Agent Usage
+For most tasks, this simple pattern works best:
+```
+Phase 1: One researcher agent (comprehensive search)
+Phase 2-4: Sequential single agents (story, plan, review)
+Phase 5: 2-3 parallel developer agents (split by component)
+Phase 6-8: Sequential single agents (test, validate, clean)
+```
 
 ## The Core Insight
 

@@ -150,3 +150,47 @@ node_modules/
 *.secret
 secrets/
 api-keys/android/.gradle/8.2/
+
+# iOS specific
+ios/DerivedData/
+ios/build/
+ios/*.xcuserstate
+ios/*.xcuserdatad/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcscmblueprint
+*.playground
+
+# Screenshots and test artifacts
+ios/*.png
+ios/test_*.sh
+ios/*_screenshot.png
+ios/*_test.png
+
+# Claude AI artifacts
+.claude/
+ios/.claude/
+
+# Temporary documentation
+ios/KIDS_MODE_*.md
+ios/*_REPORT.md
+ios/*_SUMMARY.md
+ios/*_GUIDE.md
+ios/*_REQUIREMENTS.md
+
+# Test scripts
+ios/EdgeToEdgeTest.swift
+
+# Backlog and planning documents
+backlog/

@@ -3,6 +3,65 @@ import Photos
 import PhotosUI
 import CoreData
 
+// Test view to verify edge-to-edge display
+struct EdgeToEdgeTestView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                // Red bars to show if there are any black bars
+                VStack(spacing: 0) {
+                    // Top indicator
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(height: 50)
+
+                    Spacer()
+
+                    // Bottom indicator
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(height: 50)
+                }
+                .ignoresSafeArea(.all)
+
+                // Show dimensions
+                VStack {
+                    Text("Edge-to-Edge Test")
+                        .font(.title)
+                        .padding()
+
+                    Text("Width: \(Int(geometry.size.width))")
+                    Text("Height: \(Int(geometry.size.height))")
+
+                    Text("\nUIScreen Bounds:")
+                    Text("Width: \(Int(UIScreen.main.bounds.width))")
+                    Text("Height: \(Int(UIScreen.main.bounds.height))")
+
+                    Text("\nSafe Area:")
+                    Text("Top: \(Int(geometry.safeAreaInsets.top))")
+                    Text("Bottom: \(Int(geometry.safeAreaInsets.bottom))")
+                    Text("Leading: \(Int(geometry.safeAreaInsets.leading))")
+                    Text("Trailing: \(Int(geometry.safeAreaInsets.trailing))")
+
+                    if let window = UIApplication.shared.connectedScenes
+                        .compactMap({ $0 as? UIWindowScene })
+                        .first?.windows.first {
+                        Text("\nWindow Safe Area:")
+                        Text("Top: \(Int(window.safeAreaInsets.top))")
+                        Text("Bottom: \(Int(window.safeAreaInsets.bottom))")
+                    }
+                }
+                .foregroundColor(.white)
+                .background(Color.blue.opacity(0.7))
+                .cornerRadius(10)
+                .padding()
+            }
+            .background(Color.green)
+        }
+        .ignoresSafeArea(.all)
+    }
+}
+
 struct ContentView: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @State private var showPINEntry = false
@@ -11,6 +70,10 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+            // Background color to fill entire screen
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea()
+
             if kidsModeViewModel.isKidsMode {
                 // Kids Mode View
                 KidsModeView(viewModel: kidsModeViewModel)
@@ -28,10 +91,12 @@ struct ContentView: View {
             } else {
                 // Parent Mode View
                 ParentModeView()
-                    .ignoresSafeArea(edges: .top)
+                    .ignoresSafeArea()
             }
         }
         .ignoresSafeArea()
+        .environmentObject(kidsModeViewModel) // Share view model with child views
+        .toastOverlay() // Toast system now integrated
         .sheet(isPresented: $showPINEntry) {
             PINEntryView(
                 isPresented: $showPINEntry,
@@ -87,48 +152,78 @@ struct KidsModeView: View {
     @ObservedObject var viewModel: KidsModeViewModel
     @State private var selectedPhotoIndex: Int?
     @State private var showFullscreen = false
+    @State private var showPINEntry = false
 
     var body: some View {
-        ZStack {
-            Color(UIColor.systemBackground)
-                .ignoresSafeArea()
+        GeometryReader { geometry in
+            ZStack {
+                Color(UIColor.systemBackground)
+                    .ignoresSafeArea(.all)
 
-            VStack(spacing: 0) {
-                // AppHeader with category filter
-                AppHeaderComponent(
-                    onViewModeClick: {
-                        // Switch to grid view or other view mode
-                    },
-                    showViewModeButton: false // Hide in Kids Mode
-                ) {
+                VStack(spacing: 0) {
+                    // Respect top safe area for camera/notch
+                    Color.clear
+                        .frame(height: geometry.safeAreaInsets.top)
+
+                    // Kids Mode: No header, just category filter at top
                     if !viewModel.categories.isEmpty {
                         categoryFilterBar
+                            .background(Color(UIColor.systemBackground))
+                    }
+
+                    // Photo Gallery
+                    if viewModel.photos.isEmpty {
+                        EmptyGalleryView()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        photoGallery
                     }
                 }
-
-                // Photo Gallery
-                if viewModel.photos.isEmpty {
-                    EmptyGalleryView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    photoGallery
-                }
             }
         }
+        .ignoresSafeArea(.container, edges: .bottom) // Only ignore bottom safe area for tab bar area
         .fullScreenCover(isPresented: $showFullscreen) {
             if let index = selectedPhotoIndex {
-                PhotoViewerView(
-                    photos: filteredPhotos,
-                    initialIndex: index,
-                    viewModel: viewModel,
-                    isPresented: $showFullscreen
+                EnhancedPhotoViewer(
+                    isPresented: $showFullscreen,
+                    initialPhotoIndex: index
                 )
+                .environmentObject(viewModel)
             }
         }
+        .gesture(
+            LongPressGesture(minimumDuration: 3.0)
+                .onEnded { _ in
+                    // Check if PIN is enabled
+                    if PINManager.shared.isPINEnabled() {
+                        showPINEntry = true
+                    } else {
+                        // No PIN set, exit directly
+                        viewModel.exitKidsMode(authenticated: true)
+                    }
+                }
+        )
+        .sheet(isPresented: $showPINEntry) {
+            PINEntryView(
+                isPresented: $showPINEntry,
+                mode: .validate,
+                onSuccess: { _ in
+                    viewModel.exitKidsMode(authenticated: true)
+                },
+                onCancel: {
+                    // User cancelled PIN entry
+                }
+            )
+        }
         .onAppear {
-            // Select first category if none selected
-            if viewModel.selectedCategory == nil && !viewModel.categories.isEmpty {
-                viewModel.selectedCategory = viewModel.categories.first
+            // Always select first category in Kids Mode (never show "All Photos")
+            if !viewModel.categories.isEmpty {
+                let firstCategory = viewModel.categories.first!
+                viewModel.selectCategory(firstCategory)
+                // Show initial toast after a brief delay to ensure view is ready
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    ToastManager.shared.showCategoryToast(firstCategory)
+                }
             }
         }
     }
@@ -143,6 +238,7 @@ struct KidsModeView: View {
                         isSelected: viewModel.selectedCategory?.id == category.id,
                         onTap: {
                             viewModel.selectCategory(category)
+                            ToastManager.shared.showCategoryToast(category)
                         }
                     )
                 }
@@ -164,6 +260,19 @@ struct KidsModeView: View {
             }
             .padding()
         }
+        .gesture(
+            DragGesture()
+                .onEnded { value in
+                    // Horizontal swipe detection with 150px threshold
+                    if abs(value.translation.width) > viewModel.swipeThreshold && abs(value.translation.height) < 100 {
+                        if value.translation.width > 0 {
+                            viewModel.navigateToPreviousCategory()
+                        } else {
+                            viewModel.navigateToNextCategory()
+                        }
+                    }
+                }
+        )
     }
 
     private var filteredPhotos: [Photo] {
@@ -191,10 +300,12 @@ struct ParentModeView: View {
 
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Settings", systemImage: "gearshape")
                 }
                 .tag(2)
         }
+        .ignoresSafeArea()
+        .accentColor(Color(red: 76/255, green: 175/255, blue: 80/255))
     }
 }
 
@@ -275,14 +386,7 @@ struct PhotoCard: View {
     let onTap: () -> Void
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .fill(Color.gray.opacity(0.2))
-            .aspectRatio(4/3, contentMode: .fit)
-            .overlay(
-                Text("📷") // Placeholder for actual photo
-                    .font(.system(size: 48))
-            )
-            .onTapGesture(perform: onTap)
+        PhotoCardWithImage(photo: photo, onTap: onTap)
     }
 }
 
@@ -391,23 +495,60 @@ struct PhotoViewerView: View {
 
 struct PhotoViewerPage: View {
     let photo: Photo
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    @State private var offset: CGSize = .zero
+    @State private var lastOffset: CGSize = .zero
 
     var body: some View {
         ZStack {
             Color.black
 
-            // Placeholder for actual photo
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.gray.opacity(0.3))
-                .aspectRatio(4/3, contentMode: .fit)
-                .overlay(
-                    VStack {
-                        Text("📷")
-                            .font(.system(size: 72))
-                        Text(photo.path)
-                            .foregroundColor(.white.opacity(0.5))
-                    }
+            AsyncImageView(photo: photo, contentMode: .fit)
+                .scaleEffect(scale)
+                .offset(offset)
+                .gesture(
+                    SimultaneousGesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                let delta = value / lastScale
+                                lastScale = value
+                                scale = min(max(scale * delta, 1), 4)
+                            }
+                            .onEnded { _ in
+                                lastScale = 1.0
+                                withAnimation(.spring()) {
+                                    if scale < 1 {
+                                        scale = 1
+                                        offset = .zero
+                                    }
+                                }
+                            },
+                        DragGesture()
+                            .onChanged { value in
+                                if scale > 1 {
+                                    offset = CGSize(
+                                        width: lastOffset.width + value.translation.width,
+                                        height: lastOffset.height + value.translation.height
+                                    )
+                                }
+                            }
+                            .onEnded { _ in
+                                lastOffset = offset
+                            }
+                    )
                 )
+                .onTapGesture(count: 2) {
+                    withAnimation(.spring()) {
+                        if scale > 1 {
+                            scale = 1
+                            offset = .zero
+                            lastOffset = .zero
+                        } else {
+                            scale = 2
+                        }
+                    }
+                }
                 .padding()
         }
     }

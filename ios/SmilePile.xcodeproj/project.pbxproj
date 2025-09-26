@@ -56,6 +56,12 @@
 		F3FB694B7D056651C318B744 /* KidsModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26988984D6E7232093C77846 /* KidsModeViewModel.swift */; };
 		F602C690B34F6D408D16446E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3261460B1CFF53D90AC70411 /* KeychainManager.swift */; };
 		F699D40153546B61F457C101 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBCF0493DC32C504A9684400 /* Nunito-Bold.ttf */; };
+		EEE306A6497390E29B2152E2 /* EnhancedPhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE206A6497390E29B2152E2 /* EnhancedPhotoViewer.swift */; };
+		5BE3EA5F294A4450A75356BC /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116394DFD7CE431C8A6BB3C9 /* AsyncImageView.swift */; };
+		DBFDC3BE14174F249B6222F3 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F857FFF8F8B4082A10FAA1C /* FloatingActionButton.swift */; };
+		3F1136DED4F544418384CB39 /* MaterialTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90232AF150D34F4EBC81E319 /* MaterialTabBar.swift */; };
+		A1CAD3BA588E4F6480E39C22 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A68A7B2B17E4E58A40FA4FC /* ToastManager.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,7 +115,13 @@
 		EDDB65379400AF77EF5E5CD8 /* PhotoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewModel.swift; sourceTree = "<group>"; };
 		FBCF0493DC32C504A9684400 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		FE8206A6497390E29B2152E2 /* SmilePile.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SmilePile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEE206A6497390E29B2152E2 /* EnhancedPhotoViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedPhotoViewer.swift; sourceTree = "<group>"; };
 		FF0A78DE44A20DA8D396B70F /* SmilePileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileApp.swift; sourceTree = "<group>"; };
+		116394DFD7CE431C8A6BB3C9 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		3F857FFF8F8B4082A10FAA1C /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
+		90232AF150D34F4EBC81E319 /* MaterialTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTabBar.swift; sourceTree = "<group>"; };
+		1A68A7B2B17E4E58A40FA4FC /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -158,6 +170,7 @@
 				7B6BD9BE2E86442500E42F09 /* SmilePileLogo.swift */,
 				5FCBAE07E101E4DC17B94D0C /* CategoryManagementView.swift */,
 				166EDD4A9300E56C0FFB5869 /* ContentView.swift */,
+				EEE206A6497390E29B2152E2 /* EnhancedPhotoViewer.swift */,
 				CC375BDB8830F052461FD282 /* ParentalLockView.swift */,
 				B90F25BE11A6D37DBCAF5F5F /* PhotoEditView.swift */,
 				546C605038760638BF9091F8 /* PhotoGalleryView.swift */,
@@ -166,6 +179,7 @@
 				6F6FC827E8F8C7EA50162EF5 /* Security */,
 				2466D9355EC179B222DD540F /* Settings */,
 				8658853ADB2319312CC2704D /* Sheets */,
+				A2C7F9A872E84D8E91BAFFFF /* Toast */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -256,8 +270,19 @@
 				9F6E35A47CD8C9EB49C07E05 /* CategoryManagementCard.swift */,
 				D95E3EE5E93CD159941CC1CE /* ColorSelectionButton.swift */,
 				D51C551A500677BE0B0821D8 /* CropOverlayView.swift */,
+				116394DFD7CE431C8A6BB3C9 /* AsyncImageView.swift */,
+				3F857FFF8F8B4082A10FAA1C /* FloatingActionButton.swift */,
+				90232AF150D34F4EBC81E319 /* MaterialTabBar.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A2C7F9A872E84D8E91BAFFFF /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				1A68A7B2B17E4E58A40FA4FC /* ToastManager.swift */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		CC414BA2D32C6980334F7B38 /* SmilePile */ = {
@@ -397,8 +422,13 @@
 				8EE1A883F9DAD9FD5279C4BB /* SecuritySettingsViewModel.swift in Sources */,
 				19D2C7233B299FABACF4F884 /* SmilePile.xcdatamodeld in Sources */,
 				73EC80CD1D10F4F595C113C3 /* SmilePileApp.swift in Sources */,
+				EEE306A6497390E29B2152E2 /* EnhancedPhotoViewer.swift in Sources */,
 				C3ECB12F78D3963C3875212A /* StorageManager.swift in Sources */,
 				420287D7BCE5DC705B23194B /* StorageResult.swift in Sources */,
+				5BE3EA5F294A4450A75356BC /* AsyncImageView.swift in Sources */,
+				DBFDC3BE14174F249B6222F3 /* FloatingActionButton.swift in Sources */,
+				3F1136DED4F544418384CB39 /* MaterialTabBar.swift in Sources */,
+				A1CAD3BA588E4F6480E39C22 /* ToastManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

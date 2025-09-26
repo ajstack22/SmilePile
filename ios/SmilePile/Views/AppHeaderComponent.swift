@@ -51,7 +51,8 @@ struct AppHeaderComponent<Content: View>: View {
             // Additional content (like category filters)
             content()
         }
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color(UIColor.secondarySystemBackground).ignoresSafeArea(edges: .top))
+        .padding(.top) // Respect safe area for status bar
     }
 }
 

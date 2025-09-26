@@ -1,0 +1,163 @@
+# ============================================================================
+# SmilePile Deployment System - Git Ignore
+# ============================================================================
+
+# Secrets and Sensitive Data
+secrets/
+*.env.local
+*.env.secret
+*.env.private
+.env
+.env.*
+!.env.example
+!environments/*.env
+
+# Credentials and Keys
+*.pem
+*.key
+*.crt
+*.p12
+*.p8
+*.keystore
+*.jks
+*.mobileprovision
+*.cer
+AuthKey_*.p8
+GoogleService-Info.plist
+google-services.json
+
+# Deployment Artifacts
+artifacts/
+*.apk
+*.ipa
+*.aab
+*.dSYM
+*.dSYM.zip
+*.xcarchive
+build/
+dist/
+output/
+
+# Logs
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Reports
+reports/
+coverage/
+test-results/
+*.html
+!templates/*.html
+
+# Backups
+backups/
+*.backup
+*.bak
+*.old
+*.orig
+
+# Temporary Files
+temp/
+tmp/
+*.tmp
+*.temp
+.tmp/
+
+# History and State
+history/
+deployments.json
+deployment_state.json
+.deployment_cache
+.last_deployment
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node (if using Node tools)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python (if using Python tools)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv
+
+# Ruby (if using fastlane)
+.bundle/
+vendor/bundle
+.ruby-version
+.ruby-gemset
+
+# Terraform (if using for infrastructure)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Docker (if using containers)
+.dockerignore
+docker-compose.override.yml
+
+# CI/CD Specific
+.github/workflows/local-*
+.gitlab-ci-local/
+.jenkins/
+
+# Platform Specific
+## Android
+local.properties
+.gradle/
+.android/
+
+## iOS
+Pods/
+DerivedData/
+*.xcworkspace/
+!default.xcworkspace
+
+# Sensitive Configuration
+config.local.sh
+override.sh
+personal.sh
+
+# Deployment Locks
+.deploy.lock
+.rollback.lock
+
+# Cache
+.cache/
+.deploy_cache/
+
+# Monitoring and Metrics
+metrics/
+monitoring/data/
+
+# Documentation (generated)
+docs/generated/
+api-docs/
+
+# Test Data
+test_data/
+mock_data/
+fixtures/sensitive/
+
+# Custom Ignore Rules
+# Add project-specific rules below
+custom/
+private/

@@ -1,65 +1,100 @@
-# Atlas Workflow Scripts Usage Guide
+# Atlas Workflow Usage Guide
 
-## Complete Workflow System
+## Agent-Driven Workflow (Recommended) 🆕
 
-The new Atlas workflow system ensures proper process compliance through clear phases and mandatory checkpoints.
+The Atlas workflow now uses intelligent agents for each phase, enabling parallel execution and higher quality results.
 
-## 🎯 Primary Command - Full Workflow
+## 🎯 Primary Command - Agent Orchestration
 
-### For Any Task (Bug or Feature):
-```bash
-python3 atlas/atlas_workflow.py feature "Remove FAB, add 3-dot menu with Import/Cancel"
+### Simple Pattern for Any Task:
+```
+"I need to [TASK]. Use the Atlas agent workflow with practical parallelization."
 ```
 
-This single command provides:
-- All 7 phases with clear instructions
-- Checkpoint prompts after each phase
-- Prevents skipping ahead
-- Forces documentation before coding
+This triggers:
+- Smart agent selection per phase
+- Parallel execution where beneficial
+- Context-aware handoffs
+- Automatic documentation
 
-## 📋 Individual Phase Scripts
-
-If you need to run specific phases:
-
-### 1. Research Phase
-```bash
-python3 atlas/atlas_research.py feature "description"
+### Context-Aware Example:
 ```
-Guides thorough investigation before any implementation.
-
-### 2. Story Creation
-```bash
-python3 atlas/atlas_story.py feature "description"
+"Fix the login bug where users can't sign in with email.
+Use Atlas workflow: one researcher, then sequential agents,
+parallel implementation only if needed."
 ```
-Provides story template with all required sections.
 
-### 3. Adversarial Review
-```bash
-python3 atlas/atlas_adversarial.py atlas/09_STORIES/features/ATLAS-001.md
+## 📋 Agent Phases (Simple & Practical)
+
+### Phase-by-Phase Agent Usage:
+
+#### 1. Research Phase
 ```
-Forces finding edge cases and missed requirements.
-
-### 4. Checkpoint Guide
-```bash
-python3 atlas/atlas_checkpoint.py guide
+Launch researcher agent: "Find all files related to [feature/bug]"
 ```
-Shows how to ask for confirmation at each step.
 
-## 🚀 Recommended Usage
-
-### The Perfect Prompt for Categories Menu Task:
-
+#### 2. Story Creation
 ```
-I need to modify the categories screen: Remove FAB, add 3-dot menu with Import Mode and Cancel options.
+Launch product-manager agent: "Create story with acceptance criteria"
+```
 
-Run this command:
-python3 atlas/atlas_workflow.py feature "Replace FAB with 3-dot menu containing Import Mode and Cancel on categories screen"
+#### 3. Planning
+```
+Launch developer agent: "Plan implementation approach"
+```
 
-Follow all 7 phases IN ORDER.
-Ask me for confirmation after EACH phase.
-Do NOT write any code until Phase 5.
+#### 4. Adversarial Review
+```
+Launch peer-reviewer agent: "Find edge cases and risks"
+```
 
-Start with Phase 1 (Research) now.
+#### 5. Implementation
+```
+Launch 2-3 developer agents if needed:
+- Agent 1: Frontend changes
+- Agent 2: Backend changes
+```
+
+#### 6. Testing
+```
+Launch QA agent: "Test all acceptance criteria"
+```
+
+#### 7. Validation
+```
+Launch product-manager agent: "Validate requirements met"
+```
+
+#### 8. Clean-up 🆕
+```
+Launch organizer agent: "Clean up work artifacts"
+```
+
+## 🚀 Practical Examples for Claude Code
+
+### Simple Bug Fix (Sequential):
+```
+"Fix the null pointer error in login. Use Atlas workflow:
+1. Research agent finds the bug
+2. Sequential agents for story/plan/review
+3. Developer agent fixes it
+4. QA agent tests
+5. Clean up"
+```
+
+### Feature Addition (Limited Parallel):
+```
+"Add dark mode to settings. Use Atlas workflow with:
+- One researcher for all theme files
+- Sequential story/plan/review
+- Two parallel devs: UI and state management
+- Sequential test/validate/cleanup"
+```
+
+### Keep It Simple:
+```
+"Implement [feature]. Use standard Atlas workflow,
+only parallelize if you find 3+ independent components."
 ```
 
 ## ✅ What the LLM Should Do
@@ -139,32 +174,33 @@ You: "yes"
 "NO CODE until Phase 5. Complete the planning phase first."
 ```
 
-## 📊 Scripts Comparison
+## 📊 Evolution to Agent-Based System
 
-| Old Scripts (Archived) | New Scripts | Purpose |
-|---|---|---|
-| atlas_bug_workflow.py | atlas_workflow.py | Complete workflow with all phases |
-| fix_bug.py | - | (Replaced by workflow) |
-| create_feature.py | - | (Replaced by workflow) |
-| atlas_enforce.py | - | (Built into workflow) |
-| atlas_guided.py | atlas_checkpoint.py | Confirmation management |
-| - | atlas_research.py | Research phase guide |
-| - | atlas_story.py | Story creation guide |
-| - | atlas_adversarial.py | Quality review |
+| Phase | Legacy (Scripts) | New (Agents) | Benefit |
+|---|---|---|---|
+| Research | `atlas_research.py` | Researcher agent | Parallel searches |
+| Story | `atlas_story.py` | Product Manager agent | Better requirements |
+| Planning | Manual | Developer agent | Technical expertise |
+| Review | `atlas_adversarial.py` | Peer Reviewer agent | Finds more issues |
+| Implementation | Manual coding | Developer agents | Parallel coding |
+| Testing | Manual | QA agent | Systematic coverage |
+| Validation | Manual | Product Manager agent | Criteria verification |
+| Clean-up | None | Organizer agent 🆕 | No debt accumulation |
 
-## 🎯 Key Differences
+## 🎯 Key Improvements with Agents
 
-### Old System:
-- Multiple scripts for different tasks
-- Context injection focus
-- Less structured phases
+### Agent System Advantages:
+- **Speed**: 3-5x faster through parallelization
+- **Quality**: Specialized agents for each domain
+- **Consistency**: Agents follow patterns reliably
+- **Documentation**: Automatic and complete
+- **Clean-up**: New phase prevents technical debt
 
-### New System:
-- Single workflow command
-- Clear 7-phase process
-- Mandatory checkpoints
-- Adversarial review built-in
-- Prevents rushing to code
+### Practical Constraints:
+- Keep parallel agents to 2-3 maximum
+- Use sequential for simple tasks
+- Save context between phases
+- Don't over-orchestrate
 
 ## 💡 Best Practice
 

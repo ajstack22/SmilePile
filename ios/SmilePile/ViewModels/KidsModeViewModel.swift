@@ -12,6 +12,11 @@ class KidsModeViewModel: ObservableObject {
     @Published var toastMessage: String?
     @Published var toastColor: Color?
 
+    // Swipe navigation properties
+    @Published var lastCategorySwipeTime = Date.distantPast
+    private let swipeDebounceInterval: TimeInterval = 0.3 // 300ms
+    let swipeThreshold: CGFloat = 150 // 150px threshold
+
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -22,9 +27,11 @@ class KidsModeViewModel: ObservableObject {
         if isKidsMode {
             // Exiting Kids Mode requires PIN
             requiresPINAuth = true
+            print("DEBUG: Requesting PIN auth to exit Kids Mode")
         } else {
             // Entering Kids Mode doesn't require PIN
             isKidsMode = true
+            print("DEBUG: Entered Kids Mode - isKidsMode = \(isKidsMode)")
         }
     }
 
@@ -43,6 +50,32 @@ class KidsModeViewModel: ObservableObject {
     func selectCategory(_ category: Category) {
         selectedCategory = category
         showCategoryToast(category)
+    }
+
+    // MARK: - Swipe Navigation
+
+    func canSwipeCategory() -> Bool {
+        return Date().timeIntervalSince(lastCategorySwipeTime) >= swipeDebounceInterval
+    }
+
+    func navigateToPreviousCategory() {
+        guard canSwipeCategory(),
+              let currentCategory = selectedCategory,
+              let currentIndex = categories.firstIndex(where: { $0.id == currentCategory.id }) else { return }
+
+        let previousIndex = currentIndex > 0 ? currentIndex - 1 : categories.count - 1
+        lastCategorySwipeTime = Date()
+        selectCategory(categories[previousIndex])
+    }
+
+    func navigateToNextCategory() {
+        guard canSwipeCategory(),
+              let currentCategory = selectedCategory,
+              let currentIndex = categories.firstIndex(where: { $0.id == currentCategory.id }) else { return }
+
+        let nextIndex = (currentIndex + 1) % categories.count
+        lastCategorySwipeTime = Date()
+        selectCategory(categories[nextIndex])
     }
 
     func getPhotosForCategory(_ categoryId: Int64?) -> [Photo] {

@@ -2,13 +2,14 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct PhotoGalleryView: View {
+    @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
     @State private var selectedCategory: Category?
     @State private var categories: [Category] = []
-    @State private var isKidsMode = false
     @State private var selectedPhotos: [Photo] = []
     @State private var showingPhotoEditor = false
     @State private var showingImportPicker = false
     @State private var importedImageURLs: [URL] = []
+    @State private var allPhotos: [Photo] = []
 
     private let repository = CategoryRepositoryImpl()
     private let photoRepository = PhotoRepositoryImpl()
@@ -19,7 +20,10 @@ struct PhotoGalleryView: View {
                 // AppHeader with SmilePile logo and eye button
                 AppHeaderComponent(
                     onViewModeClick: {
-                        isKidsMode.toggle()
+                        print("DEBUG: Eye button tapped in PhotoGalleryView")
+                        print("DEBUG: Current isKidsMode = \(kidsModeViewModel.isKidsMode)")
+                        kidsModeViewModel.toggleKidsMode()
+                        print("DEBUG: After toggle isKidsMode = \(kidsModeViewModel.isKidsMode)")
                     },
                     showViewModeButton: true
                 ) {
@@ -30,46 +34,41 @@ struct PhotoGalleryView: View {
 
                 // Photo Grid
                 ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ], spacing: 2) {
-                        ForEach(mockPhotos) { photo in
-                            PhotoThumbnail(photo: photo)
-                                .onTapGesture {
-                                    selectedPhotos = [photo]
-                                    showingPhotoEditor = true
-                                }
+                    if filteredPhotos.isEmpty {
+                        EmptyGalleryPlaceholder()
+                            .frame(height: 400)
+                    } else {
+                        LazyVGrid(columns: [
+                            GridItem(.flexible()),
+                            GridItem(.flexible()),
+                            GridItem(.flexible())
+                        ], spacing: 2) {
+                            ForEach(filteredPhotos) { photo in
+                                PhotoThumbnail(photo: photo)
+                                    .onTapGesture {
+                                        selectedPhotos = [photo]
+                                        showingPhotoEditor = true
+                                    }
+                            }
                         }
+                        .padding(.bottom, 100) // Space for FAB and tab bar
                     }
-                    .padding(.bottom, 80) // Space for FAB
                 }
             }
-            .ignoresSafeArea(edges: .top)
+            .background(Color(UIColor.systemBackground))
 
-            // Floating Action Button
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        showingImportPicker = true
-                    }) {
-                        Image(systemName: "plus")
-                            .font(.title.weight(.semibold))
-                            .foregroundColor(.white)
-                            .frame(width: 56, height: 56)
-                            .background(Color(hex: "#E91E63") ?? .pink)
-                            .clipShape(Circle())
-                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-                    }
-                    .padding()
-                }
-            }
+            // Floating Action Button with pulse animation when gallery is empty
+            FloatingActionButtonContainer(
+                action: {
+                    showingImportPicker = true
+                },
+                isPulsing: allPhotos.isEmpty,
+                bottomPadding: 49 // Standard iOS tab bar height
+            )
         }
         .onAppear {
             loadCategories()
+            loadPhotos()
         }
         .sheet(isPresented: $showingPhotoEditor) {
             if !selectedPhotos.isEmpty {
@@ -130,13 +129,11 @@ struct PhotoGalleryView: View {
         }
     }
 
-    // Mock photos for testing
-    private var mockPhotos: [Photo] {
-        return (1...12).map { index in
-            Photo(
-                path: "photo_\(index)",
-                categoryId: selectedCategory?.id ?? 0
-            )
+    private var filteredPhotos: [Photo] {
+        if let selectedCategory = selectedCategory {
+            return allPhotos.filter { $0.categoryId == selectedCategory.id }
+        } else {
+            return allPhotos
         }
     }
 
@@ -149,20 +146,45 @@ struct PhotoGalleryView: View {
             }
         }
     }
+
+    private func loadPhotos() {
+        Task {
+            do {
+                allPhotos = try await photoRepository.getAllPhotos()
+            } catch {
+                print("Failed to load photos: \(error)")
+                allPhotos = []
+            }
+        }
+    }
+}
+
+struct EmptyGalleryPlaceholder: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "photo.on.rectangle.angled")
+                .font(.system(size: 64))
+                .foregroundColor(.gray)
+
+            Text("No photos yet")
+                .font(.title2)
+                .fontWeight(.semibold)
+
+            Text("Tap the + button to add photos")
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
 }
 
 struct PhotoThumbnail: View {
     let photo: Photo
 
     var body: some View {
-        Rectangle()
-            .fill(Color.gray.opacity(0.3))
-            .aspectRatio(1, contentMode: .fit)
-            .overlay(
-                Image(systemName: "photo")
-                    .font(.largeTitle)
-                    .foregroundColor(.gray.opacity(0.5))
-            )
+        AsyncImageView(photo: photo, contentMode: .fill)
+            .aspectRatio(1, contentMode: .fill)
+            .clipped()
+            .cornerRadius(8)
     }
 }
 
