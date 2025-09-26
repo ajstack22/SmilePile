@@ -18,6 +18,7 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material3.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Alignment
@@ -53,6 +55,7 @@ import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 import com.smilepile.ui.toast.CategoryToastUI
+import kotlinx.coroutines.delay
 
 /**
  * Simplified gallery screen for Kids Mode
@@ -373,21 +376,25 @@ private fun ZoomedPhotoOverlay(
     BackHandler {
         onDismiss()
     }
-    // Use ALL categories for consistent navigation (don't filter by photos)
-    val categoryIds = remember(categories) {
-        categories.map { it.id }
+
+    // Current category index
+    val currentCategoryIndex = remember(currentCategoryId, categories) {
+        categories.indexOfFirst { it.id == currentCategoryId }.coerceAtLeast(0)
     }
 
-    // Use the currentCategoryId directly instead of maintaining separate state
-    val currentCategoryIndex = remember(currentCategoryId, categoryIds) {
-        categoryIds.indexOf(currentCategoryId).coerceAtLeast(0)
+    // Horizontal pager state for category navigation
+    val categoryPagerState = rememberPagerState(
+        initialPage = currentCategoryIndex,
+        pageCount = { categories.size }
+    )
+
+    // Track current category from pager and update parent
+    LaunchedEffect(categoryPagerState.currentPage) {
+        val newCategoryId = categories[categoryPagerState.currentPage].id
+        if (newCategoryId != currentCategoryId) {
+            onCategoryChange(newCategoryId)
+        }
     }
-
-    // FIXED: Use the photos as passed - they're already filtered by the parent
-    val displayedPhotos = allPhotos
-
-    // Track if we've changed categories (to reset to first photo)
-    var hasChangedCategory by remember { mutableStateOf(false) }
 
     // Animate the appearance
     val animationProgress by animateFloatAsState(
@@ -396,77 +403,63 @@ private fun ZoomedPhotoOverlay(
         label = "zoom"
     )
 
-    // Use the passed index directly - it's already correct!
-    // The parent already calculated the right index in the filtered list
-    val initialFilteredIndex = initialPhotoIndex.coerceIn(0, (displayedPhotos.size - 1).coerceAtLeast(0))
-
-    // Pager state for vertical scrolling through photos
-    val pagerState = rememberPagerState(
-        initialPage = initialFilteredIndex,
-        pageCount = { displayedPhotos.size.coerceAtLeast(1) }
-    )
-
-    // Reset pager to first photo only when category actually changes (not on initial load)
-    LaunchedEffect(currentCategoryId) {
-        if (displayedPhotos.isNotEmpty() && hasChangedCategory) {
-            // Only go to first photo when category changes, not on initial load
-            pagerState.scrollToPage(0)
-        }
-        hasChangedCategory = true // Mark that we've loaded, so future changes will reset
-    }
-
-    // Handle horizontal swipe for categories with debouncing
-    val swipeThreshold = 100f
-    var horizontalDragOffset by remember { mutableStateOf(0f) }
-    var lastSwipeTime by remember { mutableStateOf(0L) }
-    val swipeDebounceMs = 300L
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
-            .pointerInput(categories, currentCategoryId) {
-                detectHorizontalDragGestures(
-                    onDragEnd = {
-                        val currentTime = System.currentTimeMillis()
-                        // Debounce rapid swipes
-                        if (currentTime - lastSwipeTime < swipeDebounceMs) {
-                            horizontalDragOffset = 0f
-                            return@detectHorizontalDragGestures
-                        }
-
-                        when {
-                            // Swipe left - next category (cycle through all)
-                            horizontalDragOffset < -swipeThreshold && categoryIds.isNotEmpty() -> {
-                                val nextIndex = (currentCategoryIndex + 1) % categoryIds.size
-                                onCategoryChange(categoryIds[nextIndex])
-                                lastSwipeTime = currentTime
-                            }
-                            // Swipe right - previous category (cycle through all)
-                            horizontalDragOffset > swipeThreshold && categoryIds.isNotEmpty() -> {
-                                val prevIndex = if (currentCategoryIndex == 0) {
-                                    categoryIds.size - 1
-                                } else {
-                                    currentCategoryIndex - 1
-                                }
-                                onCategoryChange(categoryIds[prevIndex])
-                                lastSwipeTime = currentTime
-                            }
-                        }
-                        horizontalDragOffset = 0f
-                    },
-                    onHorizontalDrag = { _, dragAmount ->
-                        horizontalDragOffset += dragAmount
-                    }
-                )
-            }
     ) {
-        if (displayedPhotos.isNotEmpty()) {
-            // Vertical pager for scrolling through photos (up/down)
-            VerticalPager(
-                state = pagerState,
-                modifier = Modifier.fillMaxSize()
-            ) { page ->
+        // Horizontal pager for categories
+        HorizontalPager(
+            state = categoryPagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { categoryPage ->
+            val category = categories[categoryPage]
+            val categoryPhotos = allPhotos // This will be updated when category changes
+
+            // Vertical pager for photos within the category
+            if (categoryPhotos.isNotEmpty()) {
+                val photoPagerState = rememberPagerState(
+                    initialPage = if (categoryPage == currentCategoryIndex) initialPhotoIndex else 0,
+                    pageCount = { categoryPhotos.size }
+                )
+
+                VerticalPager(
+                    state = photoPagerState,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer {
+                            alpha = animationProgress
+                        }
+                ) { photoPage ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .pointerInput(Unit) {
+                                detectTapGestures(
+                                    onTap = { onDismiss() }
+                                )
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(categoryPhotos[photoPage].path)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = null,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    scaleX = animationProgress
+                                    scaleY = animationProgress
+                                    alpha = animationProgress
+                                }
+                        )
+                    }
+                }
+            } else {
+                // Empty state for this category
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -477,62 +470,12 @@ private fun ZoomedPhotoOverlay(
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(displayedPhotos[page].path)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .graphicsLayer {
-                                scaleX = animationProgress
-                                scaleY = animationProgress
-                                alpha = animationProgress
-                            }
+                    Text(
+                        text = "No photos in ${category.displayName}",
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
-            }
-
-            // Page indicator (vertical dots on the right)
-            if (displayedPhotos.size > 1) {
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    repeat(minOf(displayedPhotos.size, 10)) { index ->
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .clip(CircleShape)
-                                .background(
-                                    when {
-                                        index == pagerState.currentPage -> Color.White
-                                        index < 10 -> Color.White.copy(alpha = 0.3f)
-                                        else -> Color.Transparent
-                                    }
-                                )
-                        )
-                    }
-                }
-            }
-
-            // Removed permanent category indicator - toast provides sufficient feedback
-        } else {
-            // Loading or transitioning - show loading indicator
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator(
-                    color = Color.White,
-                    modifier = Modifier.size(48.dp)
-                )
             }
         }
     }

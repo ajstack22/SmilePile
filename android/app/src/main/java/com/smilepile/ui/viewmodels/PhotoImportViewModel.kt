@@ -34,6 +34,8 @@ class PhotoImportViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(PhotoImportUiState())
     val uiState: StateFlow<PhotoImportUiState> = _uiState.asStateFlow()
 
+    private var pendingCategoryId: Long = 1L // Default category for editor
+
     /**
      * Import a single photo from the device gallery
      */
@@ -198,6 +200,18 @@ class PhotoImportViewModel @Inject constructor(
             successMessage = null
         )
     }
+
+    /**
+     * Set the category ID for photos being imported through the editor
+     */
+    fun setPendingCategoryId(categoryId: Long) {
+        pendingCategoryId = categoryId
+    }
+
+    /**
+     * Get the pending category ID for the editor
+     */
+    fun getPendingCategoryId(): Long = pendingCategoryId
 
     /**
      * Reset import state

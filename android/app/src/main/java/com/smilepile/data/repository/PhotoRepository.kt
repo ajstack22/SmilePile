@@ -10,6 +10,7 @@ interface PhotoRepository {
     suspend fun deletePhoto(photo: Photo)
     suspend fun deletePhotoById(photoId: Long)
     suspend fun getPhotoById(photoId: Long): Photo?
+    suspend fun getPhotoByPath(path: String): Photo?
     suspend fun getPhotosByCategory(categoryId: Long): List<Photo>
     fun getPhotosByCategoryFlow(categoryId: Long): Flow<List<Photo>>
     suspend fun getAllPhotos(): List<Photo>

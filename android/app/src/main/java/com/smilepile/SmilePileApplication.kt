@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.lifecycleScope
 import com.smilepile.data.database.SmilePileDatabase
 import com.smilepile.data.repository.CategoryRepository
-import com.smilepile.ui.theme.ThemeManager
+import com.smilepile.theme.ThemeManager
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +15,8 @@ import javax.inject.Inject
 @HiltAndroidApp
 class SmilePileApplication : Application() {
 
+    @Inject
     lateinit var themeManager: ThemeManager
-        private set
 
     @Inject
     lateinit var database: SmilePileDatabase
@@ -30,9 +30,6 @@ class SmilePileApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
-        // Initialize theme manager
-        themeManager = ThemeManager(this)
 
         // Initialize database and default categories
         initializeDatabase()

@@ -1,6 +1,7 @@
 package com.smilepile.ui.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +18,10 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.RemoveCircleOutline
 import androidx.compose.material.icons.filled.DriveFileMove
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Share
@@ -26,6 +29,14 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
@@ -56,6 +67,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smilepile.R
@@ -67,8 +79,9 @@ import com.smilepile.ui.components.SearchResultsHeader
 import com.smilepile.ui.components.EmptySearchState
 import com.smilepile.ui.components.DateRangePickerDialog
 import com.smilepile.ui.components.SmilePileLogo
+import com.smilepile.ui.components.AppHeaderComponent
 import com.smilepile.ui.components.gallery.CategoryFilterComponent
-import com.smilepile.ui.components.gallery.PhotoGridComponent
+import com.smilepile.ui.components.gallery.PhotoStackComponent
 import com.smilepile.ui.components.gallery.SelectionToolbarComponent
 import com.smilepile.ui.components.dialogs.UniversalCrudDialog
 import com.smilepile.ui.components.dialogs.DialogBuilder
@@ -79,6 +92,8 @@ import com.smilepile.utils.PermissionRationale
 @Composable
 fun PhotoGalleryScreen(
     onPhotoClick: (Photo, List<Photo>) -> Unit,
+    onNavigateToPhotoEditor: (List<String>) -> Unit = {},
+    onNavigateToPhotoEditorWithUris: (List<android.net.Uri>) -> Unit = {},
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -86,6 +101,8 @@ fun PhotoGalleryScreen(
 
     PhotoGalleryOrchestrator(
         onPhotoClick = onPhotoClick,
+        onNavigateToPhotoEditor = onNavigateToPhotoEditor,
+        onNavigateToPhotoEditorWithUris = onNavigateToPhotoEditorWithUris,
         snackbarHostState = snackbarHostState
     ) { orchestratorState ->
 
@@ -105,11 +122,36 @@ fun PhotoGalleryScreen(
                 }
             },
             floatingActionButton = {
-                ParentModeFABs(
-                    onAddPhotoClick = orchestratorState.onAddPhotoClick,
-                    onSwitchToKidsMode = orchestratorState.onSwitchToKidsMode,
-                    modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding())
+                // Animate FAB when gallery is empty to draw attention
+                val isGalleryEmpty = orchestratorState.galleryState.photos.isEmpty()
+                val targetScale = if (isGalleryEmpty) 1.1f else 1f
+                val scale by animateFloatAsState(
+                    targetValue = targetScale,
+                    animationSpec = if (isGalleryEmpty) {
+                        infiniteRepeatable(
+                            animation = tween(durationMillis = 1000),
+                            repeatMode = RepeatMode.Reverse
+                        )
+                    } else {
+                        tween(durationMillis = 300)
+                    },
+                    label = "FAB pulse"
                 )
+
+                // Single FAB for adding photos with pulse animation when empty
+                FloatingActionButton(
+                    onClick = orchestratorState.onAddPhotoClick,
+                    containerColor = Color(0xFFE91E63), // SmilePile pink
+                    contentColor = Color.White,
+                    modifier = Modifier
+                        .padding(bottom = paddingValues.calculateBottomPadding())
+                        .scale(scale)
+                ) {
+                    Icon(
+                        Icons.Default.Add,
+                        contentDescription = "Add Photos"
+                    )
+                }
             },
             bottomBar = {
                 if (orchestratorState.canPerformBatchOperations) {
@@ -119,6 +161,10 @@ fun PhotoGalleryScreen(
                         onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
                         onShareClick = {
                             // TODO: Implement batch share functionality
+                        },
+                        onEditClick = {
+                            // Navigate to edit screen with selected photos
+                            orchestratorState.onEditSelectedPhotos()
                         }
                     )
                 }
@@ -166,32 +212,85 @@ fun PhotoGalleryScreen(
                     )
                 }
 
-                // Photos grid
-                when {
-                    orchestratorState.galleryState.isLoading -> {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                // Photos grid with swipe gesture support
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .pointerInput(
+                            orchestratorState.galleryState.categories,
+                            orchestratorState.galleryState.selectedCategoryId
                         ) {
-                            CircularProgressIndicator()
+                            val swipeThreshold = 150f // Minimum swipe distance
+                            var totalDrag = 0f
+
+                            detectHorizontalDragGestures(
+                                onDragStart = {
+                                    totalDrag = 0f // Reset on each new swipe
+                                },
+                                onDragEnd = {
+                                    val categories = orchestratorState.galleryState.categories
+                                    if (categories.isEmpty()) return@detectHorizontalDragGestures
+
+                                    val currentId = orchestratorState.galleryState.selectedCategoryId
+                                    val currentIndex = if (currentId != null) {
+                                        categories.indexOfFirst { it.id == currentId }
+                                    } else {
+                                        0 // Default to first category if none selected
+                                    }
+
+                                    // Only process if we have a valid current index
+                                    if (currentIndex >= 0) {
+                                        when {
+                                            totalDrag < -swipeThreshold && currentIndex < categories.size - 1 -> {
+                                                // Swipe left - next category
+                                                orchestratorState.onCategorySelected(categories[currentIndex + 1].id)
+                                            }
+                                            totalDrag > swipeThreshold && currentIndex > 0 -> {
+                                                // Swipe right - previous category
+                                                orchestratorState.onCategorySelected(categories[currentIndex - 1].id)
+                                            }
+                                        }
+                                    }
+                                    totalDrag = 0f // Reset after processing
+                                },
+                                onDragCancel = {
+                                    totalDrag = 0f // Reset on cancel
+                                },
+                                onHorizontalDrag = { _, dragAmount ->
+                                    totalDrag += dragAmount
+                                }
+                            )
                         }
-                    }
-                    orchestratorState.galleryState.photos.isEmpty() -> {
-                        EmptyState(
-                            onImportClick = orchestratorState.onAddPhotoClick,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-                    else -> {
-                        PhotoGridComponent(
-                            photos = orchestratorState.galleryState.photos,
-                            selectedPhotos = orchestratorState.galleryState.selectedPhotos,
-                            isSelectionMode = orchestratorState.galleryState.isSelectionMode,
-                            onPhotoClick = orchestratorState.onPhotoClick,
-                            onPhotoLongClick = orchestratorState.onPhotoLongClick,
-                            onFavoriteToggle = null, // Removed favorite functionality
-                            modifier = Modifier.fillMaxSize()
-                        )
+                ) {
+                    when {
+                        orchestratorState.galleryState.isLoading -> {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
+                        }
+                        orchestratorState.galleryState.photos.isEmpty() -> {
+                            EmptyState(
+                                onImportClick = orchestratorState.onAddPhotoClick,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                        else -> {
+                            println("DEBUG: PhotoGrid displaying ${orchestratorState.galleryState.photos.size} photos")
+                            println("DEBUG: Selected Category: ${orchestratorState.galleryState.selectedCategoryId}")
+                            println("DEBUG: First 3 in grid: ${orchestratorState.galleryState.photos.take(3).map { "${it.id}:${it.displayName}" }}")
+                            PhotoStackComponent(
+                                photos = orchestratorState.galleryState.photos,
+                                selectedPhotos = orchestratorState.galleryState.selectedPhotos,
+                                isSelectionMode = orchestratorState.galleryState.isSelectionMode,
+                                showEditActions = false, // No overlay buttons for cleaner UI
+                                onPhotoClick = orchestratorState.onPhotoClick,
+                                onPhotoLongClick = orchestratorState.onPhotoLongClick,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
                     }
                 }
                 }
@@ -199,37 +298,19 @@ fun PhotoGalleryScreen(
 
             // Custom header overlay that extends into status bar
             if (!orchestratorState.galleryState.isSelectionMode) {
-                Surface(
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.TopCenter)
+                AppHeaderComponent(
+                    onViewModeClick = orchestratorState.onSwitchToKidsMode,
+                    showViewModeButton = true,
+                    modifier = Modifier.align(Alignment.TopCenter)
                 ) {
-                    Column(
-                        modifier = Modifier.statusBarsPadding()
-                    ) {
-                        // SmilePile branding in top left
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp, vertical = 8.dp),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            SmilePileLogo(
-                                iconSize = 48.dp,
-                                fontSize = 28.sp
-                            )
-                        }
-
-                        // Category filter chips
-                        CategoryFilterComponent(
-                            categories = orchestratorState.galleryState.categories,
-                            selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
-                            onCategorySelected = orchestratorState.onCategorySelected,
-                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                            modifier = Modifier.padding(bottom = 4.dp)
-                        )
-                    }
+                    // Category filter chips
+                    CategoryFilterComponent(
+                        categories = orchestratorState.galleryState.categories,
+                        selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
+                        onCategorySelected = orchestratorState.onCategorySelected,
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                        modifier = Modifier.padding(bottom = 4.dp)
+                    )
                 }
             }
         } // End of Box
@@ -322,38 +403,26 @@ private fun EmptyState(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.padding(horizontal = 32.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.PhotoLibrary,
                 contentDescription = null,
-                modifier = Modifier.size(64.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                modifier = Modifier.size(72.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
             )
             Text(
-                text = "No photos yet",
+                text = "Your photo collection awaits",
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = "Import photos from your gallery to get started",
+                text = "Start building your SmilePile by adding photos",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center
             )
-
-            TextButton(
-                onClick = onImportClick
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null,
-                    modifier = Modifier.size(18.dp)
-                )
-                Text(
-                    text = "Import Photos",
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
         }
     }
 }
@@ -421,7 +490,8 @@ private fun BatchOperationsBottomBar(
     selectedCount: Int,
     onDeleteClick: () -> Unit,
     onMoveClick: () -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    onEditClick: () -> Unit = {}
 ) {
     BottomAppBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -433,6 +503,16 @@ private fun BatchOperationsBottomBar(
                 .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
+            // Edit button (only show for 1-5 selected photos)
+            if (selectedCount in 1..5) {
+                IconButton(onClick = onEditClick) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit selected"
+                    )
+                }
+            }
+
             IconButton(onClick = onShareClick) {
                 Icon(
                     imageVector = Icons.Default.Share,
@@ -505,47 +585,7 @@ private fun BatchMoveToCategoryDialog(
     )
 }
 
-/**
- * Dual FAB system for Parent Mode
- * Primary: Switch to SmilePile (Kids Mode)
- * Secondary: Add Photos
- */
-@Composable
-private fun ParentModeFABs(
-    onAddPhotoClick: () -> Unit,
-    onSwitchToKidsMode: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        // Secondary FAB - Add Photos
-        SmallFloatingActionButton(
-            onClick = onAddPhotoClick,
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add Photos"
-            )
-        }
-
-        // Primary FAB - Switch to View Mode (Kids Mode)
-        FloatingActionButton(
-            onClick = onSwitchToKidsMode,
-            containerColor = Color(0xFFFF6B6B), // SmilePile pink
-            contentColor = Color.White
-        ) {
-            Icon(
-                imageVector = Icons.Default.Visibility,
-                contentDescription = "Switch to View Mode"
-            )
-        }
-    }
-}
+// ParentModeFABs removed - now using single FAB for Add Photos and header eye icon for View Mode
 
 @Composable
 private fun CategorySelectionDialog(

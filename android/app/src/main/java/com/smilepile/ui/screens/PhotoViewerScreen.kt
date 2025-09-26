@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.RemoveCircleOutline
 import androidx.compose.material.icons.filled.DriveFileMove
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -85,16 +86,23 @@ import java.util.Locale
 fun PhotoViewerScreen(
     photo: Photo,
     photos: List<Photo>,
+    initialIndex: Int = 0,
     onNavigateBack: () -> Unit,
     onSharePhoto: (Photo) -> Unit,
     onDeletePhoto: (Photo) -> Unit,
+    onEditPhoto: (Photo) -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: PhotoGalleryViewModel = hiltViewModel(),
     modeViewModel: AppModeViewModel = hiltViewModel()
 ) {
-    val initialIndex = photos.indexOf(photo).takeIf { it >= 0 } ?: 0
+    // Debug logging
+    android.util.Log.e("SmilePile", "PhotoViewerScreen - initialIndex: $initialIndex, photos.size: ${photos.size}")
+    android.util.Log.e("SmilePile", "PhotoViewerScreen - photo.id: ${photo.id}, photo.name: ${photo.displayName}")
+    android.util.Log.e("SmilePile", "PhotoViewerScreen - First 3 photos: ${photos.take(3).map { "${it.id}:${it.displayName}" }}")
+
+    // Always use the passed initialIndex - it should be correct
     val pagerState = rememberPagerState(
-        initialPage = initialIndex,
+        initialPage = initialIndex.coerceIn(0, (photos.size - 1).coerceAtLeast(0)),
         pageCount = { photos.size }
     )
 
@@ -185,6 +193,7 @@ fun PhotoViewerScreen(
                     }
                     context.startActivity(Intent.createChooser(shareIntent, "Share Photo"))
                 },
+                onEditPhoto = onEditPhoto,
                 onDeletePhoto = { showDeleteDialog = true },
                 onMovePhoto = { showMoveDialog = true },
                 modifier = Modifier
@@ -283,10 +292,12 @@ private fun PhotoControlsBar(
     isParentMode: Boolean,
     onFavoriteToggle: (Photo) -> Unit,
     onSharePhoto: (Photo) -> Unit,
+    onEditPhoto: (Photo) -> Unit,
     onDeletePhoto: (Photo) -> Unit,
     onMovePhoto: (Photo) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    android.util.Log.e("SmilePile", "PhotoControlsBar rendered for photo: ${photo.displayName}, isParentMode: $isParentMode")
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(
@@ -353,6 +364,27 @@ private fun PhotoControlsBar(
                     Icon(
                         imageVector = Icons.Default.Share,
                         contentDescription = stringResource(R.string.share_photo),
+                        tint = Color.White,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                // Edit button - available in both modes
+                IconButton(
+                    onClick = {
+                        android.util.Log.e("SmilePile", "Edit button CLICKED in PhotoControlsBar for photo: ${photo.displayName}")
+                        onEditPhoto(photo)
+                    },
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(
+                            color = Color.White.copy(alpha = 0.1f),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Edit photo",
                         tint = Color.White,
                         modifier = Modifier.size(24.dp)
                     )

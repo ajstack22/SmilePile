@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iOS App Icon Generator - SmilePile</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>SmilePile iOS App Icon Generator</h1>
+    <p>This generates a 1024x1024 app icon matching the Android design</p>
+
+    <canvas id="canvas" width="1024" height="1024"></canvas>
+
+    <button onclick="downloadIcon()">Download Icon (1024x1024)</button>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const size = 1024;
+
+        // Scale factor (Android uses 256 viewport, we're drawing at 1024)
+        const scale = size / 256;
+
+        // Clear canvas with white background
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, size, size);
+
+        // Function to draw a circle
+        function drawCircle(x, y, radius, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x * scale, y * scale, radius * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw the 5 overlapping circles
+
+        // Bottom-left green circle at (80, 176)
+        drawCircle(80, 176, 64, '#4CAF50');
+
+        // Bottom-right blue circle at (176, 176)
+        drawCircle(176, 176, 64, '#2196F3');
+
+        // Top-right orange circle at (176, 80)
+        drawCircle(176, 80, 64, '#FF9800');
+
+        // Top-left pink circle at (80, 80)
+        drawCircle(80, 80, 64, '#E91E63');
+
+        // Center yellow smiley at (128, 128)
+        drawCircle(128, 128, 64, '#FFEB3B');
+
+        // Draw eyes on center smiley
+        ctx.fillStyle = '#212121';
+        // Left eye at (112, 116)
+        ctx.beginPath();
+        ctx.arc(112 * scale, 116 * scale, 6 * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Right eye at (144, 116)
+        ctx.beginPath();
+        ctx.arc(144 * scale, 116 * scale, 6 * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Draw smile
+        ctx.strokeStyle = '#212121';
+        ctx.lineWidth = 6 * scale;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(112 * scale, 136 * scale);
+        ctx.quadraticCurveTo(128 * scale, 152 * scale, 144 * scale, 136 * scale);
+        ctx.stroke();
+
+        // Function to download the canvas as PNG
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'icon-1024.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

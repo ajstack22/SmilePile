@@ -18,14 +18,14 @@ package com.smilepile.ui.components
  * import com.smilepile.ui.components.dialogs.*
  *
  * // Import specific components
- * import com.smilepile.ui.components.gallery.PhotoGridComponent
+ * import com.smilepile.ui.components.gallery.PhotoStackComponent
  * import com.smilepile.ui.components.shared.LoadingIndicator
  *
  * Component Architecture:
  *
  * /components/
  * ├── gallery/                 # Photo gallery specific components
- * │   ├── PhotoGridComponent           # Main photo grid with selection support
+ * │   ├── PhotoStackComponent          # Main photo stack with selection support
  * │   ├── CategoryFilterComponent      # Category filtering chips
  * │   └── SelectionToolbarComponent    # Multi-selection toolbar
  * │

@@ -11,6 +11,9 @@ import com.smilepile.data.backup.ImportStrategy
 import com.smilepile.data.backup.ImportProgress
 import com.smilepile.data.backup.BackupFormat
 import com.smilepile.theme.ThemeManager
+import com.smilepile.theme.ThemeMode
+import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.BiometricManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,11 +28,15 @@ import javax.inject.Inject
  */
 data class SettingsUiState(
     val isDarkMode: Boolean = false,
+    val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val isLoading: Boolean = false,
     val error: String? = null,
     val backupStats: BackupStats? = null,
     val exportProgress: ImportProgress? = null,
-    val importProgress: ImportProgress? = null
+    val importProgress: ImportProgress? = null,
+    val hasPIN: Boolean = false,
+    val biometricEnabled: Boolean = false,
+    val kidSafeModeEnabled: Boolean = true
 )
 
 /**
@@ -39,7 +46,9 @@ data class SettingsUiState(
 class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val themeManager: ThemeManager,
-    private val backupManager: BackupManager
+    private val backupManager: BackupManager,
+    private val securePreferencesManager: SecurePreferencesManager,
+    private val biometricManager: BiometricManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
@@ -51,6 +60,7 @@ class SettingsViewModel @Inject constructor(
     init {
         loadSettings()
         observeThemeChanges()
+        observeSecuritySettings()
         loadBackupStats()
     }
 
@@ -58,8 +68,13 @@ class SettingsViewModel @Inject constructor(
      * Load current settings from preferences
      */
     private fun loadSettings() {
-        // Initial load - set loading state briefly
-        _uiState.value = _uiState.value.copy(isLoading = false)
+        // Load PIN and security settings
+        _uiState.value = _uiState.value.copy(
+            isLoading = false,
+            hasPIN = securePreferencesManager.isPINEnabled(),
+            biometricEnabled = securePreferencesManager.getBiometricEnabled(),
+            kidSafeModeEnabled = securePreferencesManager.getKidSafeModeEnabled()
+        )
     }
 
     /**
@@ -71,10 +86,22 @@ class SettingsViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(isDarkMode = isDarkMode)
             }
         }
+        viewModelScope.launch {
+            themeManager.themeMode.collect { themeMode ->
+                _uiState.value = _uiState.value.copy(themeMode = themeMode)
+            }
+        }
     }
 
     /**
-     * Toggle dark mode setting
+     * Set theme mode (System, Light, or Dark)
+     */
+    fun setThemeMode(mode: ThemeMode) {
+        themeManager.setThemeMode(mode)
+    }
+
+    /**
+     * Toggle dark mode setting (cycles through modes)
      */
     fun toggleDarkMode() {
         // Use ThemeManager to toggle theme
@@ -86,6 +113,64 @@ class SettingsViewModel @Inject constructor(
      */
     fun refreshSettings() {
         loadSettings()
+    }
+
+    /**
+     * Observe security settings changes
+     */
+    private fun observeSecuritySettings() {
+        viewModelScope.launch {
+            securePreferencesManager.kidSafeModeEnabled.collect { enabled ->
+                _uiState.value = _uiState.value.copy(kidSafeModeEnabled = enabled)
+            }
+        }
+    }
+
+    /**
+     * Set PIN for parental controls
+     */
+    fun setPIN(pin: String) {
+        securePreferencesManager.setPIN(pin)
+        _uiState.value = _uiState.value.copy(hasPIN = true)
+    }
+
+    /**
+     * Remove PIN and disable biometric auth
+     */
+    fun removePIN() {
+        securePreferencesManager.clearPIN()
+        securePreferencesManager.setBiometricEnabled(false)
+        _uiState.value = _uiState.value.copy(
+            hasPIN = false,
+            biometricEnabled = false
+        )
+    }
+
+    /**
+     * Change existing PIN
+     */
+    fun changePIN(oldPin: String, newPin: String): Boolean {
+        return if (securePreferencesManager.validatePIN(oldPin)) {
+            securePreferencesManager.setPIN(newPin)
+            true
+        } else {
+            false
+        }
+    }
+
+    /**
+     * Toggle biometric authentication
+     */
+    fun setBiometricEnabled(enabled: Boolean) {
+        securePreferencesManager.setBiometricEnabled(enabled)
+        _uiState.value = _uiState.value.copy(biometricEnabled = enabled)
+    }
+
+    /**
+     * Check if biometric auth is available
+     */
+    fun isBiometricAvailable(): Boolean {
+        return biometricManager.isBiometricAvailable() == com.smilepile.security.BiometricAvailability.AVAILABLE
     }
 
     /**

@@ -95,12 +95,28 @@ class ParentalControlsViewModel @Inject constructor(
 
                 // Determine default authentication mode
                 val biometricAvailable = biometricManager.isBiometricAvailable()
+                android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: biometricAvailable=$biometricAvailable")
+                val shouldOfferBiometricFirst = biometricManager.shouldOfferBiometricFirst()
+                android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: shouldOfferBiometricFirst=$shouldOfferBiometricFirst")
                 val authMode = when {
-                    biometricManager.shouldOfferBiometricFirst() -> AuthenticationMode.BIOMETRIC
-                    securitySummary.hasPIN -> AuthenticationMode.PIN
-                    securitySummary.hasPattern -> AuthenticationMode.PATTERN
-                    else -> AuthenticationMode.PIN // Default for setup
+                    shouldOfferBiometricFirst -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Using BIOMETRIC mode")
+                        AuthenticationMode.BIOMETRIC
+                    }
+                    securitySummary.hasPIN -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Using PIN mode")
+                        AuthenticationMode.PIN
+                    }
+                    securitySummary.hasPattern -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Using PATTERN mode")
+                        AuthenticationMode.PATTERN
+                    }
+                    else -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Using default PIN mode")
+                        AuthenticationMode.PIN // Default for setup
+                    }
                 }
+                android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Final authMode=$authMode")
 
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
@@ -315,26 +331,37 @@ class ParentalControlsViewModel @Inject constructor(
      * Biometric Authentication
      */
     fun authenticateWithBiometrics(activity: FragmentActivity) {
+        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: authenticateWithBiometrics CALLED with activity=$activity")
         viewModelScope.launch {
+            android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Starting biometric authentication coroutine")
             _lockUiState.value = _lockUiState.value.copy(
                 isLoading = true,
-                error = null,
-                showBiometricPrompt = false
+                error = null
+                // Keep showBiometricPrompt = true while authenticating
             )
 
             try {
+                android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: About to call biometricManager.authenticateWithBiometrics")
                 val result = biometricManager.authenticateWithBiometrics(
                     activity = activity,
-                    title = "Parental Authentication",
-                    subtitle = "Use your fingerprint or face to unlock parental settings",
+                    title = "Edit Mode Authentication",
+                    subtitle = "Use your fingerprint or face to unlock edit mode",
                     description = "This protects your child safety settings"
                 )
+                android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: biometricManager returned result=$result")
 
                 when (result) {
                     BiometricResult.SUCCESS -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication SUCCESS")
+                        _lockUiState.value = _lockUiState.value.copy(
+                            isLoading = false,
+                            error = null,
+                            showBiometricPrompt = false
+                        )
                         handleSuccessfulAuthentication()
                     }
                     BiometricResult.USER_CANCELED -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication USER_CANCELED")
                         _lockUiState.value = _lockUiState.value.copy(
                             isLoading = false,
                             error = null,
@@ -344,39 +371,44 @@ class ParentalControlsViewModel @Inject constructor(
                         switchToFallbackAuthentication()
                     }
                     BiometricResult.LOCKED_OUT -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication LOCKED_OUT")
                         _lockUiState.value = _lockUiState.value.copy(
                             isLoading = false,
-                            error = "Biometric authentication locked out. Use PIN instead.",
+                            error = null, // Don't show error - user is already in PIN mode
                             showBiometricPrompt = false
                         )
                         switchToFallbackAuthentication()
                     }
                     BiometricResult.NO_BIOMETRICS_ENROLLED -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication NO_BIOMETRICS_ENROLLED")
                         _lockUiState.value = _lockUiState.value.copy(
                             isLoading = false,
-                            error = "No biometric authentication set up. Use PIN instead.",
+                            error = null, // Don't show error - user is already in PIN mode
                             showBiometricPrompt = false
                         )
                         switchToFallbackAuthentication()
                     }
                     BiometricResult.HARDWARE_UNAVAILABLE -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication HARDWARE_UNAVAILABLE")
                         _lockUiState.value = _lockUiState.value.copy(
                             isLoading = false,
-                            error = "Biometric authentication unavailable. Use PIN instead.",
+                            error = null, // Don't show error - user is already in PIN mode
                             showBiometricPrompt = false
                         )
                         switchToFallbackAuthentication()
                     }
                     BiometricResult.ERROR -> {
+                        android.util.Log.d("SmilePile_Biometric", "ParentalControlsViewModel: Biometric authentication ERROR")
                         _lockUiState.value = _lockUiState.value.copy(
                             isLoading = false,
-                            error = "Biometric authentication failed. Use PIN instead.",
+                            error = null, // Don't show error - user is already in PIN mode
                             showBiometricPrompt = false
                         )
                         switchToFallbackAuthentication()
                     }
                 }
             } catch (e: Exception) {
+                android.util.Log.e("SmilePile_Biometric", "ParentalControlsViewModel: Exception in authenticateWithBiometrics: ${e.message}", e)
                 _lockUiState.value = _lockUiState.value.copy(
                     isLoading = false,
                     error = "Authentication error. Use PIN instead.",
@@ -409,10 +441,19 @@ class ParentalControlsViewModel @Inject constructor(
     }
 
     fun dismissBiometricPrompt() {
+        android.util.Log.d("SmilePile_Biometric", "dismissBiometricPrompt: Resetting to clean PIN state")
+        // Reset to completely clean PIN state - clear cooldown, errors, etc.
         _lockUiState.value = _lockUiState.value.copy(
-            showBiometricPrompt = false
+            authenticationMode = AuthenticationMode.PIN,
+            showBiometricPrompt = false,
+            isLoading = false,
+            error = null,
+            isInCooldown = false,
+            cooldownTimeRemaining = 0,
+            failedAttempts = 0,
+            pinInput = ""
         )
-        switchToFallbackAuthentication()
+        android.util.Log.d("SmilePile_Biometric", "dismissBiometricPrompt: State reset complete")
     }
 
     /**

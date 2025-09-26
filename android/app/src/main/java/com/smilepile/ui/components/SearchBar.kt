@@ -412,16 +412,6 @@ fun SearchFiltersRow(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                                 verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
-                                // All categories chip
-                                FilterChip(
-                                    onClick = { onCategorySelect(null) },
-                                    label = { Text("All") },
-                                    selected = selectedCategoryId == null,
-                                    colors = FilterChipDefaults.filterChipColors(
-                                        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer
-                                    )
-                                )
-
                                 // Individual category chips
                                 categories.forEach { category ->
                                     FilterChip(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -193,7 +194,7 @@ private fun SmilePileBottomNavigation(
     modifier: Modifier = Modifier
 ) {
     NavigationBar(
-        modifier = modifier,
+        modifier = modifier.height(80.dp), // Increase height for more space
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.onSurface,
         tonalElevation = 0.dp
@@ -204,6 +205,7 @@ private fun SmilePileBottomNavigation(
             } == true
 
             NavigationBarItem(
+                modifier = Modifier.padding(top = 12.dp), // Push entire item down
                 icon = {
                     Icon(
                         imageVector = if (isSelected) {
@@ -217,17 +219,19 @@ private fun SmilePileBottomNavigation(
                 label = {
                     Text(
                         text = stringResource(item.iconTextId),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontWeight = if (isSelected) androidx.compose.ui.text.font.FontWeight.Bold else androidx.compose.ui.text.font.FontWeight.Normal
+                        )
                     )
                 },
                 selected = isSelected,
                 onClick = { onNavigateToDestination(item.route) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color(0xFF2196F3), // SmilePile blue from logo
-                    selectedTextColor = Color(0xFF2196F3), // SmilePile blue from logo
+                    selectedIconColor = Color(0xFF4CAF50), // SmilePile green from logo
+                    selectedTextColor = Color(0xFF4CAF50), // SmilePile green from logo
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = Color(0xFF2196F3).copy(alpha = 0.12f) // Light blue background
+                    indicatorColor = Color(0xFF4CAF50).copy(alpha = 0.12f) // Light green background
                 )
             )
         }

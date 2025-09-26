@@ -30,11 +30,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
 
-// SmilePile brand colors
-private val smileYellow = Color(0xFFFFEB3B)
+// SmilePile brand colors - UPDATED
+private val smileGolden = Color(0xFFFFBF00)  // Golden/Orange
 private val pileGreen = Color(0xFF4CAF50)
 private val pileBlue = Color(0xFF2196F3)
-private val pileOrange = Color(0xFFFF9800)
+private val pileBoldOrange = Color(0xFFFF6600)  // Bold orange #FF6600
 private val pilePink = Color(0xFFE91E63)
 private val darkText = Color(0xFF212121)
 
@@ -86,7 +86,7 @@ fun SmilePileLogo(
                 // "Smile" in yellow with black shadow for outline effect
                 withStyle(
                     style = SpanStyle(
-                        color = smileYellow,
+                        color = smileGolden,
                         fontFamily = nunitoFontFamily,
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = fontSize,
@@ -137,7 +137,7 @@ fun SmilePileLogo(
                 // "l" in orange
                 withStyle(
                     style = SpanStyle(
-                        color = pileOrange,
+                        color = pileBoldOrange,
                         fontFamily = nunitoFontFamily,
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = fontSize,

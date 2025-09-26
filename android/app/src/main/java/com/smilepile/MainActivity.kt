@@ -1,5 +1,6 @@
 package com.smilepile
 
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
@@ -29,12 +30,16 @@ import com.smilepile.ui.screens.MainScreen
 import com.smilepile.ui.theme.SmilePileTheme
 import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.ThemeViewModel
+import com.smilepile.theme.ThemeManager
 
 @AndroidEntryPoint
 class MainActivity : SecureActivity() {
 
     @Inject
     lateinit var securePreferencesManager: SecurePreferencesManager
+
+    @Inject
+    lateinit var themeManager: ThemeManager
 
     private val themeViewModel: ThemeViewModel by viewModels()
     private val modeViewModel: AppModeViewModel by viewModels()
@@ -132,4 +137,9 @@ class MainActivity : SecureActivity() {
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // Update theme when system dark mode changes
+        themeManager.onConfigurationChanged(newConfig)
+    }
 }

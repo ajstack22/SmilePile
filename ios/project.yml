@@ -1,0 +1,31 @@
+name: SmilePile
+options:
+  bundleIdPrefix: com.smilepile
+  deploymentTarget:
+    iOS: 16.0
+  xcodeVersion: "15.0"
+
+targets:
+  SmilePile:
+    type: application
+    platform: iOS
+    sources:
+      - path: SmilePile
+        excludes:
+          - "Fonts/Nunito-Black.ttf"
+          - "Fonts/Nunito-Bold.ttf"
+          - "Fonts/Nunito-ExtraBold.ttf"
+          - "Fonts/Nunito-Variable.ttf"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.smilepile.SmilePile
+        INFOPLIST_FILE: SmilePile/Info.plist
+        DEVELOPMENT_TEAM: 84W9WSYQQB
+        IPHONEOS_DEPLOYMENT_TARGET: 16.0
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-O"

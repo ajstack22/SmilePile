@@ -1,201 +1,192 @@
-# Atlas Framework 2.2
+# Atlas Lite - The Pragmatic Edition
 
-The unified development workflow framework delivering 3-5x faster feature development through intelligent automation, parallel execution, and graduated review processes.
+## What This Is
 
-## What's New in Atlas 2.2
+Atlas Lite is a **streamlined, battle-tested version** of the Atlas Framework, distilled from 7+ successful production waves. It contains only the essential components that actually get used - about 20% of the original codebase that delivers 100% of the value.
 
-Atlas 2.2 consolidates and enhances all framework capabilities with improved organization and comprehensive tooling:
+## The Philosophy
 
-- **Restructured Organization**: Clean, logical directory structure for better maintainability
-- **Enhanced Automation**: Complete suite of workflow automation tools
-- **Comprehensive Metrics**: Quality tracking and velocity measurement
-- **Specialized Agents**: Purpose-built agent prompts for different roles
-- **Evidence Templates**: Standardized evidence collection and validation
-- **Review Checklists**: Systematic quality assurance processes
+After extensive real-world usage, we discovered that success comes not from complex automation, but from:
+- **Simple, enforceable workflows**
+- **Pragmatic bash orchestration**
+- **Evidence-driven development**
+- **Parallel execution patterns**
+- **Choosing practical over perfect**
+
+## What's Included
+
+### Core Workflow Scripts (The Foundation)
+```
+core/
+├── atlas_workflow.py      # Main 7-phase workflow enforcer
+├── atlas_research.py      # Phase 1: Research guide
+├── atlas_story.py         # Phase 2: Story creation
+├── atlas_adversarial.py   # Phase 4: Quality review
+└── atlas_checkpoint.py    # Checkpoint management
+```
+
+### Templates (The Structure)
+```
+templates/
+├── STORY_TEMPLATE.md           # User story format
+├── BUG_REPORT_TEMPLATE.md      # Bug tracking
+├── PULL_REQUEST_TEMPLATE.md    # PR standards
+└── 01_EVIDENCE_TEMPLATES.md    # Evidence patterns
+```
+
+### Documentation (The Wisdom)
+```
+docs/
+├── WORKFLOW_USAGE.md           # How to use the workflow
+├── ATLAS_SUCCESS_PATTERNS.md   # Proven patterns from production
+└── README.md                   # This file
+```
+
+### Examples (The Implementation)
+```
+examples/
+└── wave-orchestration-example.sh  # Real production orchestration script
+```
 
 ## Quick Start
 
-1. **Initialize a workflow**: `python atlas.py workflow start F001`
-2. **Submit for review**: `python atlas.py review submit F001`
-3. **Check status**: `python atlas.py workflow status`
-4. **Run validation**: `python atlas.py validate`
-5. **View metrics**: `python atlas.py metrics`
-
-## Directory Structure
-
-```
-atlas/
-├── 01_CORE/                  # Core framework standards and roles
-├── 02_WORKFLOWS/             # Workflow definitions and processes
-├── 03_AGENTS/                # Specialized agent prompts and capabilities
-├── 04_METRICS/               # Quality metrics and velocity tracking
-├── 05_TEMPLATES/             # Evidence templates and documentation formats
-├── 06_CHECKLISTS/            # Review checklists by feature type
-├── 07_AUTOMATION/            # Complete automation suite
-├── 08_INTEGRATIONS/          # External tool integrations
-├── 09_DOCUMENTATION/         # Framework documentation and guides
-└── 10_EXAMPLES/              # Usage examples and patterns
-```
-
-## Core Capabilities
-
-### Parallel Execution (3-5x Speed Improvement)
-- **Dependency Graph Analysis**: Automatic task dependency detection
-- **Wave-Based Execution**: Intelligent parallel task orchestration
-- **Resource Conflict Resolution**: Automated file and resource management
-- **Visual Workflow Planning**: Dependency graphs and execution visualization
-
-### Graduated Review System (50% Less Rework)
-- **7 Review Verdict Levels**: From PASS to BLOCKED with nuanced decisions
-- **Technical Debt Tracking**: Explicit debt documentation and management
-- **Conditional Approvals**: Time-bound approvals with automated verification
-- **Smart Re-Review**: Differential analysis for faster iterations
-
-### Specialized Agents (60% Faster Reviews)
-- **Backend Developer**: API, database, and server-side development
-- **UI Developer**: Frontend, user experience, and interface design
-- **Performance Reviewer**: Optimization, scalability, and efficiency
-- **Security Reviewer**: Security, compliance, and vulnerability assessment
-
-### Quality Metrics & Tracking
-- **Quality Rubric**: Comprehensive quality measurement framework
-- **Velocity Tracking**: Development speed and efficiency metrics
-- **Performance Dashboards**: Real-time project health visualization
-- **Evidence Collection**: Automated build, test, and performance evidence
-
-## Installation & Setup
-
-1. **Clone the Framework**:
-   ```bash
-   git clone [atlas-repo] /path/to/atlas
-   cd /path/to/atlas
-   ```
-
-2. **Install Dependencies**:
-   ```bash
-   cd 07_AUTOMATION
-   pip install -r requirements.txt
-   ```
-
-3. **Validate Installation**:
-   ```bash
-   python atlas.py validate
-   python atlas_validation_tests.py
-   ```
-
-4. **Run Performance Tests**:
-   ```bash
-   python atlas_performance_benchmarks.py
-   ```
-
-## Key Features
-
-### Workflow Automation
-- **Intelligent Orchestration**: Automated task coordination and execution
-- **State Management**: Comprehensive workflow state tracking
-- **Process Validation**: Built-in compliance and quality checks
-- **Integration Support**: Seamless external tool integration
-
-### Quality Assurance
-- **Multi-Level Reviews**: From quick checks to comprehensive audits
-- **Automated Pre-Checks**: Catch common issues before human review
-- **Evidence-Based Validation**: Systematic proof collection and verification
-- **Trust-Based Scoping**: Adaptive review depth based on developer performance
-
-### Performance Monitoring
-- **Real-Time Metrics**: Live tracking of development velocity and quality
-- **Predictive Analytics**: Early identification of bottlenecks and issues
-- **Benchmark Tracking**: Performance comparison and optimization guidance
-- **Resource Optimization**: Intelligent agent allocation and task distribution
-
-## Usage Examples
-
-### Basic Workflow
+### For Any Task (Bug or Feature):
 ```bash
-# Start a new feature
-python atlas.py workflow start F001 --type feature --priority high
-
-# Check dependencies
-python dependency_graph.py analyze F001
-
-# Execute with parallel processing
-python parallel_orchestrator.py execute F001 --max-agents 5
-
-# Submit for review
-python atlas.py review submit F001 --type full
-
-# Track progress
-python atlas.py status
+python3 core/atlas_workflow.py feature "Your task description"
 ```
 
-### Advanced Features
+This enforces:
+1. **Research** before coding
+2. **Story creation** with acceptance criteria
+3. **Planning** the implementation
+4. **Adversarial review** to catch issues
+5. **Implementation** (finally, code!)
+6. **Testing** verification
+7. **Validation** against criteria
+
+## Key Success Patterns
+
+### 1. Parallel Execution
+Break work into independent chunks and run them simultaneously:
 ```bash
-# Differential review for trusted developer
-python differential_reviewer.py analyze --trust-score 0.85
+# Run multiple tasks in parallel
+for task in task1 task2 task3; do
+    $task &
+done
+wait
+```
+Result: 3-5x speed improvement
 
-# Generate quality metrics
-python atlas.py metrics --type quality --period 30days
-
-# Run automated pre-checks
-python pre_check_runner.py validate --scope security,performance
-
-# Calculate developer trust scores
-python trust_scorer.py calculate --developer-id dev123
+### 2. Evidence-Driven Development
+Create evidence throughout, not just at the end:
+```
+wave-evidence/
+├── research-phase.md      # What you discovered
+├── implementation-log.md  # What you changed
+├── validation-report.md   # What you verified
+└── final-report.md       # Metrics & lessons
 ```
 
-## Performance Guarantees
+### 3. Pragmatic Over Perfect
+- **30% test coverage** (not 80%) - covers critical paths
+- **3 smoke tests** (not 50 edge cases) - real user flows
+- **Simple bash scripts** (not complex orchestrators)
+- **Skip options** for emergencies
 
-Atlas 2.2 delivers measurable improvements:
+### 4. Component Size Limits
+- **No file > 250 lines** (hard limit)
+- **Target: 150-200 lines** (sweet spot)
+- **Extract at 60% duplication** (not 100%)
 
-- **3-5x faster** feature delivery through parallel execution
-- **50% reduction** in unnecessary rework cycles
-- **60% improvement** in review efficiency for trusted developers
-- **80% of issues** caught by automated pre-checks
-- **90%+ success rate** for conditional approvals
+## What We Removed (And Why)
 
-## Migration & Compatibility
+### ❌ 44+ Python Automation Scripts
+- Complex state machines → Simple bash works better
+- Web dashboards → Markdown reports are sufficient
+- Trust scoring systems → Unnecessary complexity
+- Dependency graphs → Manual planning is faster
 
-Atlas 2.2 is fully backward compatible with previous versions:
+### ❌ Unused Directories
+- 03_AGENTS, 04_METRICS, 08_INTEGRATIONS → Never referenced
+- 07_AUTOMATION → 44 scripts that weren't being used
 
-- **Atlas 2.0/2.1**: Seamless upgrade path with enhanced features
-- **Legacy Workflows**: All existing processes continue to function
-- **Gradual Adoption**: New features can be enabled incrementally
-- **Data Migration**: Automatic migration of existing configurations
+### Why Removal Improved Things
+The original Atlas had sophisticated automation that looked impressive but added friction. The streamlined version focuses on what actually gets used daily.
 
-## Support & Documentation
+## Real-World Results
 
-- **Complete Guides**: Comprehensive documentation in `09_DOCUMENTATION/`
-- **Working Examples**: Reference implementations in `10_EXAMPLES/`
-- **Validation Suite**: Complete test coverage in `07_AUTOMATION/`
-- **Performance Benchmarks**: Detailed performance validation tools
+From 7 production waves:
+- **Wave 1**: 8 hours (vs 24 hours traditional)
+- **Zero rollbacks** across all waves
+- **100% acceptance criteria** met
+- **Decreasing bug discovery** with each wave
 
-## Architecture Principles
+## The Core Insight
 
-### The Atlas Way
-Atlas provides **one clear path** for each task:
+> "The Atlas system succeeds not because of rigid process, but because it combines structure with pragmatism, documentation with action, and sequential phases with parallel execution."
 
-- **Single Source of Truth**: One definitive workflow for each process
-- **Intelligent Automation**: Smart defaults with manual override capability
-- **Evidence-Based Decisions**: Every decision backed by measurable evidence
-- **Continuous Improvement**: Built-in learning and optimization loops
+## Migration Guide
 
-### Design Philosophy
-- **Simplicity**: Complex problems solved with simple, elegant solutions
-- **Consistency**: Uniform patterns and interfaces across all components
-- **Extensibility**: Plugin architecture for custom integrations
-- **Reliability**: Robust error handling and graceful degradation
+### From Original Atlas:
+1. Archive your `07_AUTOMATION/` directory
+2. Replace with these streamlined scripts
+3. Keep your existing stories and evidence
+4. Continue using simple bash orchestration
+
+### From Scratch:
+1. Start with `atlas_workflow.py`
+2. Follow the 7 phases religiously
+3. Create evidence as you go
+4. Use bash for orchestration
+
+## Best Practices
+
+### DO ✅
+- Use `atlas_workflow.py` for everything
+- Create evidence throughout the process
+- Run parallel tasks when possible
+- Keep components under 250 lines
+- Choose pragmatic solutions
+
+### DON'T ❌
+- Skip phases to save time
+- Batch evidence at the end
+- Over-engineer the automation
+- Create monolithic components
+- Pursue perfection over progress
+
+## FAQ
+
+**Q: Why remove so much automation?**
+A: It wasn't being used. Simple bash scripts achieved better results.
+
+**Q: Is this production-ready?**
+A: Yes. This exact setup has been used for 7+ successful production waves.
+
+**Q: Can I add back complexity?**
+A: You can, but ask yourself: is it solving a real problem you're having?
+
+**Q: How do I handle [complex scenario]?**
+A: Start simple. Use the workflow. Add complexity only when simple doesn't work.
 
 ## Contributing
 
-Atlas 2.2 welcomes contributions following these principles:
+The best contributions:
+- Simplify existing patterns
+- Document what works
+- Remove what doesn't
+- Share evidence of success
 
-1. **Evidence-Based Changes**: All improvements must demonstrate measurable value
-2. **Backward Compatibility**: Changes must not break existing workflows
-3. **Comprehensive Testing**: Minimum 90% test coverage for new features
-4. **Documentation**: Complete documentation for all user-facing changes
+## License
+
+MIT - Use it, modify it, share what works.
+
+## The Atlas Lite Promise
+
+**20% of the code. 100% of the value. 0% of the bloat.**
 
 ---
 
-**Atlas Framework 2.2** - Delivering the future of intelligent development workflows.
+*"Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."*
 
-*Transform your development velocity. Maintain uncompromising quality. Scale with confidence.*
+*Atlas Lite: Accidentally proving that less is more.*

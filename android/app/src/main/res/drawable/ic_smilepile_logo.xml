@@ -40,10 +40,10 @@
         android:fillColor="#212121"/>
   </group>
 
-  <!-- Top-right orange circle with rotated eyes -->
+  <!-- Top-right bold orange circle with rotated eyes -->
   <path
       android:pathData="M176,80 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
-      android:fillColor="#FF9800"/>
+      android:fillColor="#FF6600"/>
 
   <!-- Top-right eyes (rotated 45 degrees) -->
   <group
@@ -76,10 +76,10 @@
         android:fillColor="#212121"/>
   </group>
 
-  <!-- Center yellow smiley -->
+  <!-- Center golden smiley -->
   <path
       android:pathData="M128,128 m-64,0 a64,64 0 1,0 128,0 a64,64 0 1,0 -128,0"
-      android:fillColor="#FFEB3B"/>
+      android:fillColor="#FFBF00"/>
 
   <!-- Center eyes -->
   <path

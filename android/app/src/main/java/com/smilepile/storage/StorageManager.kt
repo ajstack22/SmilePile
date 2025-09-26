@@ -95,6 +95,28 @@ class StorageManager @Inject constructor(
     }
 
     /**
+     * Save a bitmap directly to internal storage
+     * @param bitmap The bitmap to save
+     * @param filename The filename to save as
+     * @return The saved file or null if failed
+     */
+    suspend fun savePhotoToInternalStorage(bitmap: Bitmap, filename: String): File? = withContext(Dispatchers.IO) {
+        try {
+            val photoFile = File(photosDir, filename)
+
+            FileOutputStream(photoFile).use { out ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, PHOTO_QUALITY, out)
+            }
+
+            Log.d(TAG, "Successfully saved bitmap to: $filename")
+            photoFile
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving bitmap: $filename", e)
+            null
+        }
+    }
+
+    /**
      * Import multiple photos in batch
      * @param sourceUris List of photo URIs to import
      * @return List of successful import results

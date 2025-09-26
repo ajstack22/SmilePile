@@ -255,6 +255,16 @@ class PhotoRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getPhotoByPath(path: String): Photo? = withContext(ioDispatcher) {
+        try {
+            // Find photo entity by URI/path
+            val photoEntity = photoDao.getByUri(path)
+            photoEntity?.toPhoto()
+        } catch (e: Exception) {
+            throw PhotoRepositoryException("Failed to get photo by path: ${e.message}", e)
+        }
+    }
+
     // Search and filter methods implementation
     override fun searchPhotos(searchQuery: String): Flow<List<Photo>> {
         return photoDao.searchPhotos(searchQuery).map { photoEntities ->

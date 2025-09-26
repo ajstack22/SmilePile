@@ -20,12 +20,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Backspace
 import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -82,6 +85,7 @@ fun ParentalLockScreen(
     val context = LocalContext.current
     val activity = context as? FragmentActivity
 
+
     // If no PIN/Pattern is set up, go directly to settings
     LaunchedEffect(uiState) {
         val securitySummary = viewModel.uiState.value.securitySummary
@@ -90,10 +94,23 @@ fun ParentalLockScreen(
         }
     }
 
-    // Handle biometric authentication prompt
-    LaunchedEffect(uiState.showBiometricPrompt) {
+    // Handle biometric authentication prompt - use both showBiometricPrompt AND activity as keys
+    LaunchedEffect(uiState.showBiometricPrompt, activity) {
         if (uiState.showBiometricPrompt && activity != null) {
-            viewModel.authenticateWithBiometrics(activity)
+            try {
+                viewModel.authenticateWithBiometrics(activity)
+            } catch (e: Exception) {
+            }
+        } else if (uiState.showBiometricPrompt && activity == null) {
+        } else {
+        }
+    }
+
+    // Handle successful authentication - observe isAuthenticated from UiState
+    val mainUiState by viewModel.uiState.collectAsState()
+    LaunchedEffect(mainUiState.isAuthenticated) {
+        if (mainUiState.isAuthenticated) {
+            onUnlocked()
         }
     }
 
@@ -107,46 +124,46 @@ fun ParentalLockScreen(
         }
     }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.parental_lock_title),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface
-                )
-            )
-        }
-    ) { paddingValues ->
-        Box(
+    // Main content with back button
+    Box(
+        modifier = modifier.fillMaxSize()
+    ) {
+        val paddingValues = androidx.compose.foundation.layout.PaddingValues(0.dp)
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(MaterialTheme.colorScheme.background),
-            contentAlignment = Alignment.Center
+                .background(MaterialTheme.colorScheme.background)
+                .padding(24.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(24.dp)
+            // Back button at top left
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
             ) {
-                // Lock Icon and Title
+                IconButton(
+                    onClick = onBackClick,
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(R.string.back),
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp)) // Small spacing after back button
+                // Lock Icon and Title - Made smaller
                 Card(
-                    modifier = Modifier.size(120.dp),
+                    modifier = Modifier.size(64.dp), // Reduced from 120.dp
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer
                     ),
                     shape = CircleShape,
-                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -155,30 +172,32 @@ fun ParentalLockScreen(
                         Icon(
                             imageVector = Icons.Default.Lock,
                             contentDescription = stringResource(R.string.cd_parental_lock),
-                            modifier = Modifier.size(48.dp),
+                            modifier = Modifier.size(32.dp), // Reduced from 48.dp
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }
 
-                // Title and Subtitle
+                // Title and Subtitle - Reduced spacing
+                Spacer(modifier = Modifier.height(12.dp))
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = stringResource(R.string.parental_lock_title),
-                        style = MaterialTheme.typography.headlineMedium,
+                        text = "Edit Mode Lock",
+                        style = MaterialTheme.typography.headlineSmall, // Reduced from headlineMedium
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onBackground
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(4.dp)) // Reduced from 8.dp
                     Text(
                         text = stringResource(R.string.parental_lock_subtitle),
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.bodyMedium, // Reduced from bodyLarge
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
                 }
+                Spacer(modifier = Modifier.height(16.dp))
 
                 // Kid-friendly message or cooldown
                 AnimatedVisibility(
@@ -266,46 +285,38 @@ fun ParentalLockScreen(
                         }
                     }
 
-                    // Mode Switch Button
-                    TextButton(
-                        onClick = { viewModel.switchAuthenticationMode() },
-                        modifier = Modifier.padding(top = 16.dp)
-                    ) {
-                        val switchText = when (uiState.authenticationMode) {
-                            AuthenticationMode.BIOMETRIC -> if (viewModel.uiState.value.securitySummary?.hasPIN == true) {
-                                "Use PIN Instead"
-                            } else {
-                                "Use Pattern Instead"
+                    // Mode Switch Button - only show if biometric mode is NOT active
+                    if (uiState.authenticationMode != AuthenticationMode.BIOMETRIC) {
+                        TextButton(
+                            onClick = { viewModel.switchAuthenticationMode() },
+                            modifier = Modifier.padding(top = 16.dp)
+                        ) {
+                            val switchText = when (uiState.authenticationMode) {
+                                AuthenticationMode.PIN -> if (viewModel.uiState.value.securitySummary?.hasPattern == true) {
+                                    stringResource(R.string.switch_to_pattern)
+                                } else if (uiState.biometricEnabled) {
+                                    "Use Biometric"
+                                } else {
+                                    stringResource(R.string.switch_to_pattern)
+                                }
+                                AuthenticationMode.PATTERN -> if (uiState.biometricEnabled) {
+                                    "Use Biometric"
+                                } else {
+                                    stringResource(R.string.switch_to_pin)
+                                }
+                                AuthenticationMode.BIOMETRIC -> "" // Should never reach here due to if condition
                             }
-                            AuthenticationMode.PIN -> if (viewModel.uiState.value.securitySummary?.hasPattern == true) {
-                                stringResource(R.string.switch_to_pattern)
-                            } else if (uiState.biometricEnabled) {
-                                "Use Biometric"
-                            } else {
-                                stringResource(R.string.switch_to_pattern)
-                            }
-                            AuthenticationMode.PATTERN -> if (uiState.biometricEnabled) {
-                                "Use Biometric"
-                            } else {
-                                stringResource(R.string.switch_to_pin)
-                            }
+                            Text(
+                                text = switchText,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         }
-                        Text(
-                            text = switchText,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
                     }
+                } else {
                 }
 
-                // Back Button
-                Spacer(modifier = Modifier.height(24.dp))
-                OutlinedButton(
-                    onClick = onBackClick,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(stringResource(R.string.back))
-                }
-            }
+                // Removed bottom back button to fit on one screen
+                Spacer(modifier = Modifier.height(16.dp)) // Reduced spacing at bottom
         }
     }
 }
@@ -323,6 +334,7 @@ private fun PINEntryInterface(
     maxAttempts: Int,
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -471,24 +483,40 @@ private fun PINDisplay(
     maxLength: Int,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(40.dp), // Fixed height to prevent layout shifts
+        contentAlignment = Alignment.Center
     ) {
-        // Only show dots for entered digits, not empty placeholders
-        repeat(pin.length) { index ->
-            val scale by animateFloatAsState(
-                targetValue = 1.2f,
-                label = "pin_scale"
-            )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Show dots only for entered digits, maintaining stable layout with fixed container
+            repeat(pin.length) { index ->
+                val scale by animateFloatAsState(
+                    targetValue = 1.0f,
+                    label = "pin_scale_$index"
+                )
 
-            Box(
-                modifier = Modifier
-                    .size(20.dp)
-                    .scale(scale)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primary)
-            )
+                Box(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .scale(scale)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary)
+                )
+            }
+
+            // Show text indicator for PIN length if needed
+            if (pin.isEmpty()) {
+                Text(
+                    text = "Enter PIN",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
     }
 }
@@ -550,11 +578,16 @@ private fun NumericKeypad(
 
         // Submit Button
         Button(
-            onClick = onSubmitClick,
+            onClick = {
+                onSubmitClick()
+            },
             enabled = enabled,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp), // Explicit height to ensure visibility
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+                contentColor = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
             )
         ) {
             Text(

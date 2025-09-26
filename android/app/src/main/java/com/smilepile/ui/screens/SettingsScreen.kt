@@ -22,6 +22,8 @@ import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Fingerprint
+import androidx.compose.material.icons.filled.ChildCare
 import androidx.compose.material.icons.filled.Archive
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
@@ -31,6 +33,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -46,13 +52,16 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -62,8 +71,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilepile.BuildConfig
 import com.smilepile.R
 import com.smilepile.ui.viewmodels.SettingsViewModel
-import com.smilepile.security.SecurePreferencesManager
-import com.smilepile.security.SecureStorageManager
+import com.smilepile.ui.components.AppHeaderComponent
+import com.smilepile.theme.ThemeMode
 
 /**
  * Settings screen providing app configuration and management options
@@ -72,13 +81,13 @@ import com.smilepile.security.SecureStorageManager
 @Composable
 fun SettingsScreen(
     onNavigateUp: () -> Unit,
+    onNavigateToKidsMode: () -> Unit = {},
+    onNavigateToParentalControls: () -> Unit = {},
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(0.dp),
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val secureStorageManager = remember { SecureStorageManager(context) }
-    val securePreferencesManager = remember { SecurePreferencesManager(context, secureStorageManager) }
     val uiState by viewModel.uiState.collectAsState()
     var showAboutDialog by remember { mutableStateOf(false) }
     var showPinDialog by remember { mutableStateOf(false) }
@@ -105,18 +114,9 @@ fun SettingsScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.nav_settings),
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface
-                )
+            AppHeaderComponent(
+                onViewModeClick = onNavigateToKidsMode,
+                showViewModeButton = true
             )
         }
     ) { scaffoldPaddingValues ->
@@ -129,42 +129,156 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                // Theme Section
+                // Theme Section - Orange accent
                 SettingsSection(
                     title = stringResource(R.string.settings_appearance),
+                    titleColor = Color(0xFFFF9800), // Orange
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
-                    SettingsToggleItem(
-                        title = stringResource(R.string.settings_dark_mode),
-                        subtitle = if (uiState.isDarkMode) {
-                            stringResource(R.string.settings_dark_mode_on)
-                        } else {
-                            stringResource(R.string.settings_dark_mode_off)
-                        },
-                        icon = if (uiState.isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
-                        checked = uiState.isDarkMode,
-                        onCheckedChange = { viewModel.toggleDarkMode() }
-                    )
+                    // Theme mode selector
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp)
+                    ) {
+                        Text(
+                            text = "Theme Mode",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = Color(0xFFFF9800),
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                        )
+
+                        // System theme option
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { viewModel.setThemeMode(ThemeMode.SYSTEM) }
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = uiState.themeMode == ThemeMode.SYSTEM,
+                                onClick = { viewModel.setThemeMode(ThemeMode.SYSTEM) },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Color(0xFFFF9800),
+                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Icon(
+                                imageVector = Icons.Default.Security,
+                                contentDescription = null,
+                                tint = if (uiState.themeMode == ThemeMode.SYSTEM) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text(
+                                    text = "Follow System",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Text(
+                                    text = "Automatically match device theme",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        // Light theme option
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { viewModel.setThemeMode(ThemeMode.LIGHT) }
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = uiState.themeMode == ThemeMode.LIGHT,
+                                onClick = { viewModel.setThemeMode(ThemeMode.LIGHT) },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Color(0xFFFF9800),
+                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Icon(
+                                imageVector = Icons.Default.LightMode,
+                                contentDescription = null,
+                                tint = if (uiState.themeMode == ThemeMode.LIGHT) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text(
+                                    text = "Light",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Text(
+                                    text = "Always use light theme",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        // Dark theme option
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { viewModel.setThemeMode(ThemeMode.DARK) }
+                                .padding(horizontal = 16.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = uiState.themeMode == ThemeMode.DARK,
+                                onClick = { viewModel.setThemeMode(ThemeMode.DARK) },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Color(0xFFFF9800),
+                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Icon(
+                                imageVector = Icons.Default.DarkMode,
+                                contentDescription = null,
+                                tint = if (uiState.themeMode == ThemeMode.DARK) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text(
+                                    text = "Dark",
+                                    style = MaterialTheme.typography.bodyLarge
+                                )
+                                Text(
+                                    text = "Always use dark theme",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
             item {
-                // Security Section
+                // Security Section - Green accent
                 SettingsSection(
-                    title = "Security"
+                    title = "Security",
+                    titleColor = Color(0xFF4CAF50) // Green
                 ) {
-                    val hasPIN = securePreferencesManager.isPINEnabled()
-
                     SettingsActionItem(
-                        title = if (hasPIN) "Change PIN" else "Set PIN",
-                        subtitle = if (hasPIN) {
+                        title = if (uiState.hasPIN) "Change PIN" else "Set PIN",
+                        subtitle = if (uiState.hasPIN) {
                             "PIN protection is enabled for Parent Mode"
                         } else {
                             "Set a PIN to protect Parent Mode access"
                         },
                         icon = Icons.Default.Lock,
+                        iconColor = Color(0xFF4CAF50), // Green
                         onClick = {
-                            if (hasPIN) {
+                            if (uiState.hasPIN) {
                                 showChangePinDialog = true
                             } else {
                                 showPinDialog = true
@@ -172,14 +286,40 @@ fun SettingsScreen(
                         }
                     )
 
-                    if (hasPIN) {
+                    // Biometric Authentication Toggle
+                    if (uiState.hasPIN && viewModel.isBiometricAvailable()) {
+                        SettingsSwitchItem(
+                            title = "Biometric Authentication",
+                            subtitle = "Use fingerprint or face unlock for parental controls",
+                            icon = Icons.Default.Fingerprint,
+                            iconColor = Color(0xFF4CAF50), // Green
+                            checked = uiState.biometricEnabled,
+                            enabled = true,
+                            onCheckedChange = { enabled ->
+                                viewModel.setBiometricEnabled(enabled)
+                            }
+                        )
+                    }
+
+                    // Parental Controls Access
+                    if (uiState.hasPIN) {
+                        SettingsActionItem(
+                            title = "Parental Controls",
+                            subtitle = "Access child safety settings and preferences",
+                            icon = Icons.Default.ChildCare,
+                            iconColor = Color(0xFF4CAF50), // Green
+                            onClick = onNavigateToParentalControls
+                        )
+                    }
+
+                    if (uiState.hasPIN) {
                         SettingsActionItem(
                             title = "Remove PIN",
                             subtitle = "Remove PIN protection from Parent Mode",
                             icon = Icons.Default.LockOpen,
+                            iconColor = Color(0xFF4CAF50), // Green
                             onClick = {
-                                securePreferencesManager.clearPIN()
-                                viewModel.refreshSettings()
+                                viewModel.removePIN()
                             }
                         )
                     }
@@ -188,15 +328,17 @@ fun SettingsScreen(
             }
 
             item {
-                // Backup & Restore Section
+                // Backup & Restore Section - Blue accent
                 SettingsSection(
-                    title = "Backup & Restore"
+                    title = "Backup & Restore",
+                    titleColor = Color(0xFF2196F3) // Blue
                 ) {
                     // Backup statistics
                     uiState.backupStats?.let { stats ->
                         BackupStatsCard(
                             photoCount = stats.photoCount,
                             categoryCount = stats.categoryCount,
+                            statsColor = Color(0xFF2196F3), // Blue
                             modifier = Modifier.padding(16.dp)
                         )
                     }
@@ -205,6 +347,7 @@ fun SettingsScreen(
                         title = "Export Data",
                         subtitle = "Create a complete backup file (includes photos)",
                         icon = Icons.Default.Archive,
+                        iconColor = Color(0xFF2196F3), // Blue
                         onClick = {
                             val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
                             exportLauncher.launch("smilepile_backup_$timestamp.zip")
@@ -215,6 +358,7 @@ fun SettingsScreen(
                         title = "Import Data",
                         subtitle = "Restore from a backup file",
                         icon = Icons.Default.CloudDownload,
+                        iconColor = Color(0xFF2196F3), // Blue
                         onClick = {
                             importLauncher.launch(arrayOf("application/zip", "*/*"))
                         }
@@ -225,14 +369,16 @@ fun SettingsScreen(
             // Data Management section removed - clear cache button no longer needed
 
             item {
-                // About Section
+                // About Section - Pink accent
                 SettingsSection(
-                    title = stringResource(R.string.settings_about)
+                    title = stringResource(R.string.settings_about),
+                    titleColor = Color(0xFFFF6B6B) // Pink
                 ) {
                     SettingsActionItem(
                         title = stringResource(R.string.settings_about_app),
                         subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
                         icon = Icons.Default.Info,
+                        iconColor = Color(0xFFFF6B6B), // Pink
                         onClick = { showAboutDialog = true }
                     )
                 }
@@ -252,24 +398,30 @@ fun SettingsScreen(
         PinSetupDialog(
             onDismiss = { showPinDialog = false },
             onConfirm = { pin ->
-                securePreferencesManager.setPIN(pin)
+                viewModel.setPIN(pin)
                 showPinDialog = false
-                viewModel.refreshSettings()
             }
         )
     }
 
     // Change PIN Dialog
     if (showChangePinDialog) {
+        var changePinError by remember { mutableStateOf<String?>(null) }
+
         ChangePinDialog(
-            onDismiss = { showChangePinDialog = false },
+            onDismiss = {
+                showChangePinDialog = false
+                changePinError = null
+            },
             onConfirm = { oldPin, newPin ->
-                if (securePreferencesManager.validatePIN(oldPin)) {
-                    securePreferencesManager.setPIN(newPin)
+                if (viewModel.changePIN(oldPin, newPin)) {
                     showChangePinDialog = false
-                    viewModel.refreshSettings()
+                    changePinError = null
+                } else {
+                    changePinError = "Current PIN is incorrect"
                 }
-            }
+            },
+            error = changePinError
         )
     }
 
@@ -297,6 +449,7 @@ fun SettingsScreen(
 @Composable
 private fun SettingsSection(
     title: String,
+    titleColor: Color = MaterialTheme.colorScheme.primary,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
@@ -304,7 +457,7 @@ private fun SettingsSection(
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.primary,
+            color = titleColor,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
         Card(
@@ -327,6 +480,7 @@ private fun SettingsToggleItem(
     title: String,
     subtitle: String,
     icon: ImageVector,
+    iconColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
@@ -346,7 +500,7 @@ private fun SettingsToggleItem(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = iconColor
             )
             Column {
                 Text(
@@ -365,8 +519,8 @@ private fun SettingsToggleItem(
             checked = checked,
             onCheckedChange = onCheckedChange,
             colors = SwitchDefaults.colors(
-                checkedThumbColor = MaterialTheme.colorScheme.primary,
-                checkedTrackColor = MaterialTheme.colorScheme.primaryContainer
+                checkedThumbColor = iconColor,
+                checkedTrackColor = iconColor.copy(alpha = 0.3f)
             )
         )
     }
@@ -380,6 +534,7 @@ private fun SettingsActionItem(
     title: String,
     subtitle: String,
     icon: ImageVector,
+    iconColor: Color = MaterialTheme.colorScheme.primary,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -388,7 +543,8 @@ private fun SettingsActionItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(1.dp, iconColor.copy(alpha = 0.5f))
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -398,7 +554,7 @@ private fun SettingsActionItem(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+                tint = iconColor
             )
             Column(
                 modifier = Modifier.weight(1f),
@@ -415,6 +571,73 @@ private fun SettingsActionItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+        }
+    }
+}
+
+/**
+ * Settings item with switch toggle
+ */
+@Composable
+private fun SettingsSwitchItem(
+    title: String,
+    subtitle: String,
+    icon: ImageVector,
+    iconColor: Color = MaterialTheme.colorScheme.primary,
+    checked: Boolean,
+    enabled: Boolean = true,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (enabled) MaterialTheme.colorScheme.surface
+                           else MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
+        ),
+        border = BorderStroke(1.dp, iconColor.copy(alpha = 0.5f))
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (enabled) iconColor else iconColor.copy(alpha = 0.6f)
+            )
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = if (enabled) MaterialTheme.colorScheme.onSurface
+                           else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant
+                           else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                )
+            }
+            Switch(
+                checked = checked,
+                enabled = enabled,
+                onCheckedChange = onCheckedChange,
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = iconColor,
+                    checkedTrackColor = iconColor.copy(alpha = 0.5f)
+                )
+            )
         }
     }
 }
@@ -548,14 +771,16 @@ private fun PinSetupDialog(
 private fun BackupStatsCard(
     photoCount: Int,
     categoryCount: Int,
+    statsColor: Color = MaterialTheme.colorScheme.primary,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = statsColor.copy(alpha = 0.1f)
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(1.dp, statsColor.copy(alpha = 0.3f))
     ) {
         Row(
             modifier = Modifier
@@ -567,7 +792,7 @@ private fun BackupStatsCard(
             Icon(
                 imageVector = Icons.Default.Storage,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+                tint = statsColor
             )
 
             Column(modifier = Modifier.weight(1f)) {
@@ -589,12 +814,16 @@ private fun BackupStatsCard(
 @Composable
 private fun ChangePinDialog(
     onDismiss: () -> Unit,
-    onConfirm: (String, String) -> Unit
+    onConfirm: (String, String) -> Unit,
+    error: String? = null
 ) {
     var oldPin by remember { mutableStateOf("") }
     var newPin by remember { mutableStateOf("") }
     var confirmNewPin by remember { mutableStateOf("") }
-    var error by remember { mutableStateOf<String?>(null) }
+    var localError by remember { mutableStateOf<String?>(null) }
+
+    // Display external error (wrong current PIN) or local validation error
+    val displayError = error ?: localError
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -608,13 +837,13 @@ private fun ChangePinDialog(
                     onValueChange = {
                         if (it.length <= 6 && it.all { char -> char.isDigit() }) {
                             oldPin = it
-                            error = null
+                            localError = null
                         }
                     },
                     label = { Text("Current PIN") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                     visualTransformation = PasswordVisualTransformation(),
-                    isError = error != null,
+                    isError = displayError != null,
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -624,13 +853,13 @@ private fun ChangePinDialog(
                     onValueChange = {
                         if (it.length <= 6 && it.all { char -> char.isDigit() }) {
                             newPin = it
-                            error = null
+                            localError = null
                         }
                     },
                     label = { Text("New PIN") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                     visualTransformation = PasswordVisualTransformation(),
-                    isError = error != null,
+                    isError = displayError != null,
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -640,18 +869,18 @@ private fun ChangePinDialog(
                     onValueChange = {
                         if (it.length <= 6 && it.all { char -> char.isDigit() }) {
                             confirmNewPin = it
-                            error = null
+                            localError = null
                         }
                     },
                     label = { Text("Confirm New PIN") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                     visualTransformation = PasswordVisualTransformation(),
-                    isError = error != null,
+                    isError = displayError != null,
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                error?.let {
+                displayError?.let {
                     Text(
                         text = it,
                         color = MaterialTheme.colorScheme.error,
@@ -664,9 +893,9 @@ private fun ChangePinDialog(
             TextButton(
                 onClick = {
                     when {
-                        oldPin.isEmpty() -> error = "Enter current PIN"
-                        newPin.length < 4 -> error = "New PIN must be at least 4 digits"
-                        newPin != confirmNewPin -> error = "New PINs do not match"
+                        oldPin.isEmpty() -> localError = "Enter current PIN"
+                        newPin.length < 4 -> localError = "New PIN must be at least 4 digits"
+                        newPin != confirmNewPin -> localError = "New PINs do not match"
                         else -> onConfirm(oldPin, newPin)
                     }
                 }

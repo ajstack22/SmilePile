@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmilePile Logo Test</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h2 {
+            margin: 20px 0;
+            color: #333;
+        }
+        .logo-display {
+            padding: 40px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>SmilePile Logo - Exact Specification</h2>
+        <div class="logo-display">
+            <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                <!-- Define colors -->
+                <defs>
+                    <style>
+                        .golden { fill: #FFBF00; }
+                        .green { fill: #4CAF50; }
+                        .blue { fill: #2196F3; }
+                        .boldorange { fill: #FF6600; }
+                        .pink { fill: #E91E63; }
+                        .eye { fill: #212121; }
+                        .mouth {
+                            fill: none;
+                            stroke: #212121;
+                            stroke-width: 12;
+                            stroke-linecap: round;
+                        }
+                    </style>
+                </defs>
+
+                <!-- Bottom-left GREEN circle at (80, 176) -->
+                <circle class="green" cx="80" cy="176" r="64"/>
+                <g transform="translate(80,176) rotate(-135)">
+                    <circle class="eye" cx="-16" cy="-12" r="8"/>
+                    <circle class="eye" cx="16" cy="-12" r="8"/>
+                </g>
+
+                <!-- Bottom-right BLUE circle at (176, 176) -->
+                <circle class="blue" cx="176" cy="176" r="64"/>
+                <g transform="translate(176,176) rotate(135)">
+                    <circle class="eye" cx="-16" cy="-12" r="8"/>
+                    <circle class="eye" cx="16" cy="-12" r="8"/>
+                </g>
+
+                <!-- Top-right BOLD ORANGE circle at (176, 80) -->
+                <circle class="boldorange" cx="176" cy="80" r="64"/>
+                <g transform="translate(176,80) rotate(45)">
+                    <circle class="eye" cx="-16" cy="-12" r="8"/>
+                    <circle class="eye" cx="16" cy="-12" r="8"/>
+                </g>
+
+                <!-- Top-left PINK circle at (80, 80) -->
+                <circle class="pink" cx="80" cy="80" r="64"/>
+                <g transform="translate(80,80) rotate(-45)">
+                    <circle class="eye" cx="-16" cy="-12" r="8"/>
+                    <circle class="eye" cx="16" cy="-12" r="8"/>
+                </g>
+
+                <!-- Center GOLDEN circle at (128, 128) -->
+                <circle class="golden" cx="128" cy="128" r="64"/>
+                <!-- Eyes at (112, 116) and (144, 116) -->
+                <circle class="eye" cx="112" cy="116" r="8"/>
+                <circle class="eye" cx="144" cy="116" r="8"/>
+                <!-- Smile path -->
+                <path class="mouth" d="M112,136 Q128,152 144,136"/>
+            </svg>
+        </div>
+
+        <h3>Key Specifications:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>SVG viewBox: 0 0 256 256</li>
+            <li>Circle radius: 64px (diameter: 128px)</li>
+            <li>Center circle: Golden at (128, 128)</li>
+            <li>Top-right: Bold Orange at (176, 80)</li>
+            <li>Bottom circles overlap creating depth</li>
+            <li>Eyes rotate with their parent circles</li>
+            <li>Smile is centered on golden circle</li>
+        </ul>
+    </div>
+</body>
+</html>

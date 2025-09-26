@@ -46,6 +46,8 @@ import com.smilepile.utils.PermissionHandler
 @Composable
 fun PhotoGalleryOrchestrator(
     onPhotoClick: (Photo, List<Photo>) -> Unit,
+    onNavigateToPhotoEditor: (List<String>) -> Unit = {},
+    onNavigateToPhotoEditorWithUris: (List<Uri>) -> Unit = {},
     snackbarHostState: SnackbarHostState,
     galleryViewModel: PhotoGalleryViewModel = hiltViewModel(),
     importViewModel: PhotoImportViewModel = hiltViewModel(),
@@ -87,6 +89,7 @@ fun PhotoGalleryOrchestrator(
         contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 10)
     ) { uris: List<Uri> ->
         if (uris.isNotEmpty()) {
+            // Store URIs for category selection first
             pendingImportUris = uris
             showCategorySelection = true
         }
@@ -144,10 +147,31 @@ fun PhotoGalleryOrchestrator(
 
         // Photo operations
         onPhotoClick = { photo ->
-            val photoList = if (searchState.isSearchActive) searchState.searchResults else galleryState.photos
+            // IMPORTANT: Use the exact same photo list that's being displayed in the grid
+            val displayedPhotos = galleryState.photos
+            val photoList = if (searchState.isSearchActive) searchState.searchResults else displayedPhotos
+
+            // NUCLEAR OPTION: Find the index here where we have the actual displayed list
+            val actualIndex = photoList.indexOfFirst { it.id == photo.id }
+
+            android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo clicked - ID: ${photo.id}, Name: ${photo.displayName}")
+            android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo list size: ${photoList.size}, Category: ${galleryState.selectedCategoryId}")
+            android.util.Log.e("SmilePile", "ORCHESTRATOR: First 3 in list: ${photoList.take(3).map { "${it.id}:${it.displayName}" }}")
+            android.util.Log.e("SmilePile", "ORCHESTRATOR: ACTUAL INDEX CALCULATED HERE: $actualIndex")
+
+            // Also use println for Samsung compatibility
+            println("SmilePile ORCHESTRATOR: Clicked ${photo.displayName} - Calculated index: $actualIndex of ${photoList.size} photos")
+
             if (galleryState.isSelectionMode) {
                 galleryViewModel.togglePhotoSelection(photo.id)
             } else {
+                // NUCLEAR OPTION: Store the state directly in companion object
+                PhotoGalleryOrchestratorState.navigationPhotoList = photoList
+                PhotoGalleryOrchestratorState.navigationPhotoIndex = actualIndex
+
+                android.util.Log.e("SmilePile", "ORCHESTRATOR: STORED INDEX IN COMPANION: $actualIndex")
+
+                // Pass the exact list being displayed
                 onPhotoClick(photo, photoList)
             }
         },
@@ -213,6 +237,17 @@ fun PhotoGalleryOrchestrator(
                 storagePermission.launchPermissionRequest()
             }
         },
+        onEditSelectedPhotos = {
+            // Get selected photos and navigate to editor
+            val selectedPhotos = galleryState.photos.filter { photo ->
+                galleryState.selectedPhotos.contains(photo.id)
+            }
+            if (selectedPhotos.isNotEmpty() && selectedPhotos.size <= 5) {
+                val photoPaths = selectedPhotos.map { it.path }
+                onNavigateToPhotoEditor(photoPaths)
+                galleryViewModel.exitSelectionMode()
+            }
+        },
 
         // Mode operations
         onSwitchToKidsMode = modeViewModel::requestModeToggle,
@@ -229,11 +264,10 @@ fun PhotoGalleryOrchestrator(
         onShowCategorySelection = { showCategorySelection = it },
         onCategorySelectedForImport = { categoryId ->
             pendingImportUris?.let { uris ->
-                if (uris.size == 1) {
-                    importViewModel.importPhoto(uris.first(), categoryId)
-                } else {
-                    importViewModel.importPhotos(uris, categoryId)
-                }
+                // Navigate to photo editor with URIs and category
+                onNavigateToPhotoEditorWithUris(uris)
+                // Store category for editor to use
+                importViewModel.setPendingCategoryId(categoryId)
                 pendingImportUris = null
                 showCategorySelection = false
             }
@@ -303,6 +337,7 @@ data class PhotoGalleryOrchestratorState(
     val onImportSinglePhoto: () -> Unit,
     val onImportMultiplePhotos: () -> Unit,
     val onAddPhotoClick: () -> Unit,
+    val onEditSelectedPhotos: () -> Unit,
 
     // Mode operations
     val onSwitchToKidsMode: () -> Unit,
@@ -337,4 +372,10 @@ data class PhotoGalleryOrchestratorState(
 
     // Batch operation availability
     val canPerformBatchOperations: Boolean get() = galleryState.isSelectionMode && galleryState.hasSelectedPhotos
+
+    companion object {
+        // Nuclear option: Store navigation state directly to bypass all navigation complexity
+        var navigationPhotoList: List<Photo>? = null
+        var navigationPhotoIndex: Int = -1
+    }
 }

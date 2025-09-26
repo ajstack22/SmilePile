@@ -8,6 +8,6 @@ package com.smilepile.ui.components.gallery
  */
 
 // Re-export all gallery components
-// PhotoGridComponent exports
+// PhotoStackComponent exports
 // CategoryFilterComponent exports
 // SelectionToolbarComponent exports
