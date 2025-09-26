@@ -61,10 +61,11 @@ and document patterns. Search extensively and in parallel.
 Launch a product-manager agent to create a story for [TASK DESCRIPTION].
 Use research findings: [RESEARCH SUMMARY].
 Create comprehensive acceptance criteria and success metrics.
+CRITICAL: Output story to /backlog/sprint-X/STORY-X.Y-name.md
 ```
 
 **Key Outputs:**
-- User story document
+- User story document (MUST be in `/backlog/sprint-X/`)
 - Acceptance criteria
 - Success metrics
 - Requirements documentation
@@ -143,6 +144,7 @@ Verify all acceptance criteria are met and provide sign-off.
 ```
 Launch general-purpose agent as organizer to clean up after [STORY ID].
 Remove temp files, update documentation, close story, and organize evidence.
+CRITICAL: Ensure all documentation is in /backlog/ per DOCUMENTATION_STANDARDS.md
 ```
 
 ## Orchestration Patterns

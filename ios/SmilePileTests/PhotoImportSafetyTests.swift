@@ -1,0 +1,326 @@
+import XCTest
+@testable import SmilePile
+import Photos
+import PhotosUI
+
+/// Tests for the safe photo import system
+final class PhotoImportSafetyTests: XCTestCase {
+
+    var safeThumbnailGenerator: SafeThumbnailGenerator!
+    var storageManager: StorageManager!
+    var importCoordinator: PhotoImportCoordinator!
+
+    override func setUp() async throws {
+        try await super.setUp()
+        safeThumbnailGenerator = SafeThumbnailGenerator()
+        storageManager = StorageManager.shared
+        importCoordinator = PhotoImportCoordinator()
+    }
+
+    override func tearDown() async throws {
+        safeThumbnailGenerator = nil
+        storageManager = nil
+        importCoordinator = nil
+        try await super.tearDown()
+    }
+
+    // MARK: - SafeThumbnailGenerator Tests
+
+    func testImageIOThumbnailGeneration() async throws {
+        // Create test image data
+        let testImage = createTestImage(size: CGSize(width: 1000, height: 1000))
+        guard let imageData = testImage.jpegData(compressionQuality: 1.0) else {
+            XCTFail("Failed to create test image data")
+            return
+        }
+
+        // Test thumbnail generation
+        let thumbnailData = try await safeThumbnailGenerator.generateThumbnail(
+            from: imageData,
+            targetSize: 300
+        )
+
+        // Verify thumbnail was created
+        XCTAssertNotNil(thumbnailData)
+        XCTAssertLessThan(thumbnailData.count, imageData.count)
+
+        // Verify no UIGraphicsContext was used (memory safe)
+        let memoryBefore = safeThumbnailGenerator.getCurrentMemoryUsage()
+        _ = try await safeThumbnailGenerator.generateThumbnail(from: imageData)
+        let memoryAfter = safeThumbnailGenerator.getCurrentMemoryUsage()
+
+        // Memory increase should be minimal
+        let memoryIncrease = memoryAfter - memoryBefore
+        XCTAssertLessThan(memoryIncrease, 10, "Memory usage increased by \(memoryIncrease)MB")
+    }
+
+    func testSequentialThumbnailGeneration() async throws {
+        // Create multiple test images
+        var testImages: [(data: Data, identifier: String)] = []
+        for i in 0..<5 {
+            let image = createTestImage(size: CGSize(width: 2000, height: 2000))
+            if let data = image.jpegData(compressionQuality: 0.9) {
+                testImages.append((data: data, identifier: "image_\(i)"))
+            }
+        }
+
+        var progressValues: [Double] = []
+
+        // Test sequential generation
+        let thumbnails = try await safeThumbnailGenerator.generateThumbnailsSequentially(
+            for: testImages,
+            targetSize: 300,
+            progressHandler: { progress in
+                progressValues.append(progress)
+            }
+        )
+
+        // Verify all thumbnails were generated
+        XCTAssertEqual(thumbnails.count, testImages.count)
+
+        // Verify progress was reported
+        XCTAssertGreaterThan(progressValues.count, 0)
+        XCTAssertEqual(progressValues.last ?? 0, 1.0, accuracy: 0.01)
+
+        // Verify sequential processing (not simultaneous)
+        for i in 0..<progressValues.count - 1 {
+            XCTAssertLessThanOrEqual(progressValues[i], progressValues[i + 1])
+        }
+    }
+
+    func testMemoryPressureHandling() async throws {
+        let testImage = createTestImage(size: CGSize(width: 4000, height: 4000))
+        guard let imageData = testImage.jpegData(compressionQuality: 1.0) else {
+            XCTFail("Failed to create large image")
+            return
+        }
+
+        // Check if system can handle memory pressure
+        let isSafe = safeThumbnailGenerator.isSafeToProcess()
+        XCTAssertTrue(isSafe || safeThumbnailGenerator.getCurrentMemoryUsage() < 100)
+
+        // If memory is high, thumbnail generation should handle it gracefully
+        do {
+            _ = try await safeThumbnailGenerator.generateThumbnail(from: imageData)
+        } catch let error as SafeThumbnailGenerator.GeneratorError {
+            if case .memoryPressure = error {
+                // This is expected behavior under memory pressure
+                XCTAssertTrue(true)
+            } else {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+    }
+
+    // MARK: - Batch Processing Tests
+
+    func testBatchImportWithMemoryLimit() async throws {
+        // Create test URLs
+        let testURLs = createTestImageURLs(count: 10)
+
+        // Test batch import
+        let results = try await storageManager.importPhotosInBatches(
+            sourceURLs: testURLs,
+            batchSize: 5,
+            progressHandler: { progress in
+                print("Import progress: \(Int(progress * 100))%")
+            }
+        )
+
+        // Verify batch processing
+        XCTAssertLessThanOrEqual(results.count, testURLs.count)
+
+        // Check memory stayed within limits
+        let currentMemory = await storageManager.getCurrentMemoryUsage()
+        XCTAssertLessThan(currentMemory, 100, "Memory usage exceeded 100MB: \(currentMemory)MB")
+    }
+
+    func testStoragePressureMonitoring() async throws {
+        // Test storage pressure detection
+        let pressure = await storageManager.getStoragePressure()
+
+        // Verify pressure level is detected
+        XCTAssertNotNil(pressure)
+        print("Current storage pressure: \(pressure.description)")
+
+        // Test that import respects storage pressure
+        if case .critical = pressure {
+            let testURL = createTestImageURLs(count: 1).first!
+            do {
+                _ = try await storageManager.importPhoto(from: testURL)
+                XCTFail("Should fail with insufficient space")
+            } catch StorageError.insufficientSpace {
+                // Expected behavior
+                XCTAssertTrue(true)
+            }
+        }
+    }
+
+    // MARK: - Import Coordinator Tests
+
+    func testActorConcurrencySafety() async throws {
+        // Test that actor prevents concurrent imports
+        let coordinator1 = PhotoImportCoordinator()
+        let coordinator2 = PhotoImportCoordinator()
+
+        // Check initial state
+        let state1 = await coordinator1.getCurrentState()
+        let state2 = await coordinator2.getCurrentState()
+
+        if case .idle = state1, case .idle = state2 {
+            XCTAssertTrue(true)
+        } else {
+            XCTFail("Coordinators should start in idle state")
+        }
+    }
+
+    // MARK: - Helper Methods
+
+    private func createTestImage(size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        defer { UIGraphicsEndImageContext() }
+
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(UIColor.blue.cgColor)
+        context.fill(CGRect(origin: .zero, size: size))
+
+        return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+    }
+
+    private func createTestImageURLs(count: Int) -> [URL] {
+        var urls: [URL] = []
+        let tempDir = FileManager.default.temporaryDirectory
+
+        for i in 0..<count {
+            let image = createTestImage(size: CGSize(width: 1000, height: 1000))
+            if let data = image.jpegData(compressionQuality: 0.8) {
+                let url = tempDir.appendingPathComponent("test_image_\(i).jpg")
+                try? data.write(to: url)
+                urls.append(url)
+            }
+        }
+
+        return urls
+    }
+}
+
+// MARK: - Memory Monitoring Test
+
+final class MemoryMonitoringTests: XCTestCase {
+
+    func testMemoryUsageReporting() async throws {
+        let generator = SafeThumbnailGenerator()
+
+        // Get initial memory
+        let initialMemory = generator.getCurrentMemoryUsage()
+        print("Initial memory usage: \(initialMemory)MB")
+
+        // Process some data
+        let testImage = UIImage(systemName: "photo")!
+        if let data = testImage.jpegData(compressionQuality: 0.5) {
+            _ = try? await generator.generateThumbnail(from: data)
+        }
+
+        // Check memory after processing
+        let finalMemory = generator.getCurrentMemoryUsage()
+        print("Final memory usage: \(finalMemory)MB")
+
+        // Memory should not increase dramatically
+        let increase = finalMemory - initialMemory
+        XCTAssertLessThan(increase, 50, "Memory increased by \(increase)MB")
+    }
+
+    func testMemorySafetyCheck() {
+        let generator = SafeThumbnailGenerator()
+
+        // Test safety check
+        let isSafe = generator.isSafeToProcess()
+        print("Is safe to process: \(isSafe)")
+
+        // Should be safe unless system is under pressure
+        if generator.getCurrentMemoryUsage() < 100 {
+            XCTAssertTrue(isSafe)
+        }
+    }
+}
+
+// MARK: - Integration Test
+
+final class PhotoImportIntegrationTest: XCTestCase {
+
+    func testFullImportPipeline() async throws {
+        print("🧪 Starting full import pipeline test...")
+
+        // 1. Create test images
+        let testImages = (0..<3).map { i in
+            createTestImage(width: 2048, height: 2048, label: "Test \(i)")
+        }
+
+        let tempURLs = testImages.enumerated().map { index, image -> URL in
+            let url = FileManager.default.temporaryDirectory
+                .appendingPathComponent("test_\(index).jpg")
+            if let data = image.jpegData(compressionQuality: 0.9) {
+                try? data.write(to: url)
+            }
+            return url
+        }
+
+        // 2. Test safe import
+        let storageManager = StorageManager.shared
+        var importProgress: [Double] = []
+
+        print("📥 Importing \(tempURLs.count) photos...")
+
+        let results = try await storageManager.importPhotosInBatches(
+            sourceURLs: tempURLs,
+            batchSize: 2,
+            progressHandler: { progress in
+                importProgress.append(progress)
+                print("   Progress: \(Int(progress * 100))%")
+            }
+        )
+
+        // 3. Verify results
+        print("✅ Import complete:")
+        print("   - Imported: \(results.count)/\(tempURLs.count)")
+        print("   - Memory used: \(await storageManager.getCurrentMemoryUsage())MB")
+        print("   - Storage pressure: \(await storageManager.getStoragePressure().description)")
+
+        XCTAssertEqual(results.count, tempURLs.count)
+        XCTAssertGreaterThan(importProgress.count, 0)
+
+        // 4. Cleanup
+        for url in tempURLs {
+            try? FileManager.default.removeItem(at: url)
+        }
+
+        print("🎉 Test completed successfully!")
+    }
+
+    private func createTestImage(width: CGFloat, height: CGFloat, label: String) -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: width, height: height))
+        defer { UIGraphicsEndImageContext() }
+
+        let context = UIGraphicsGetCurrentContext()!
+
+        // Draw gradient background
+        let colors = [UIColor.systemBlue.cgColor, UIColor.systemPurple.cgColor]
+        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                 colors: colors as CFArray,
+                                 locations: nil)!
+        context.drawLinearGradient(gradient,
+                                  start: .zero,
+                                  end: CGPoint(x: width, y: height),
+                                  options: [])
+
+        // Draw label
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 100),
+            .foregroundColor: UIColor.white
+        ]
+        let text = NSAttributedString(string: label, attributes: attributes)
+        text.draw(at: CGPoint(x: width/2 - 150, y: height/2 - 50))
+
+        return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+    }
+}

@@ -62,5 +62,9 @@
 		<key>UIImageRespectsSafeAreaInsets</key>
 		<false/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>SmilePile needs access to your photo library to let you select and organize photos for your child.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>SmilePile needs permission to save edited photos to your photo library.</string>
 </dict>
 </plist>

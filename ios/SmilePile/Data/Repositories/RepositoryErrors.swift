@@ -64,6 +64,7 @@ enum StorageError: LocalizedError {
     case invalidImageData(String)
     case permissionDenied(String)
     case directoryCreationFailed(String)
+    case memoryPressure(String)
 
     var errorDescription: String? {
         switch self {
@@ -75,7 +76,8 @@ enum StorageError: LocalizedError {
              .thumbnailGenerationFailed(let message),
              .invalidImageData(let message),
              .permissionDenied(let message),
-             .directoryCreationFailed(let message):
+             .directoryCreationFailed(let message),
+             .memoryPressure(let message):
             return message
         }
     }

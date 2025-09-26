@@ -283,14 +283,25 @@ struct KidsModeView: View {
 // MARK: - Parent Mode View
 struct ParentModeView: View {
     @State private var selectedTab = 0
+    @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            PhotoGalleryView()
-                .tabItem {
-                    Label("Gallery", systemImage: "photo.on.rectangle")
+            Group {
+                if useOptimizedGallery {
+                    OptimizedPhotoGalleryView()
+                        .tabItem {
+                            Label("Gallery", systemImage: "photo.on.rectangle")
+                        }
+                        .tag(0)
+                } else {
+                    PhotoGalleryView()
+                        .tabItem {
+                            Label("Gallery", systemImage: "photo.on.rectangle")
+                        }
+                        .tag(0)
                 }
-                .tag(0)
+            }
 
             CategoryManagementView()
                 .tabItem {
@@ -314,6 +325,8 @@ struct SettingsView: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @State private var showPINSetup = false
     @State private var showPINChange = false
+    @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
+    @AppStorage("showPerformanceOverlay") private var showPerformanceOverlay = false
 
     var body: some View {
         NavigationStack {
@@ -327,6 +340,25 @@ struct SettingsView: View {
                                 kidsModeViewModel.exitKidsMode(authenticated: true)
                             }
                         }
+                }
+
+                Section("Performance") {
+                    Toggle("Use Optimized Gallery", isOn: $useOptimizedGallery)
+                    Toggle("Show Performance Overlay", isOn: $showPerformanceOverlay)
+
+                    HStack {
+                        Text("Memory Usage")
+                        Spacer()
+                        Text("\(MemoryMonitor.shared.currentMemoryUsageMB)MB")
+                            .foregroundColor(.secondary)
+                    }
+
+                    Button("Clear Image Cache") {
+                        Task {
+                            await OptimizedImageCache.shared.clearCache()
+                        }
+                    }
+                    .foregroundColor(.red)
                 }
 
                 Section("Security") {

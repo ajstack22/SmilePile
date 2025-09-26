@@ -15,6 +15,43 @@ final class StorageManager: ObservableObject {
 
     private let logger = Logger(subsystem: "com.smilepile", category: "StorageManager")
     private let imageProcessor = ImageProcessor()
+    private let safeThumbnailGenerator = SafeThumbnailGenerator()
+    private let importCoordinator = PhotoImportCoordinator()
+
+    // Test compatibility method
+    func saveImage(_ image: UIImage, filename: String? = nil) async throws -> StorageResult {
+        let photoURL = try await savePhotoToInternalStorage(image, filename: filename)
+
+        // Generate thumbnail
+        let thumbnailData = imageProcessor.generateThumbnail(from: image)
+        var thumbnailPath: String? = nil
+
+        if let thumbnailData = thumbnailData {
+            let thumbnailFilename = filename?.replacingOccurrences(of: ".jpg", with: "_thumb.jpg") ?? UUID().uuidString + "_thumb.jpg"
+            let thumbnailURL = thumbnailsDirectory.appendingPathComponent(thumbnailFilename)
+            try thumbnailData.write(to: thumbnailURL)
+            thumbnailPath = thumbnailURL.path
+        }
+
+        // Get file size
+        let attributes = try FileManager.default.attributesOfItem(atPath: photoURL.path)
+        let fileSize = attributes[.size] as? Int64 ?? 0
+
+        return StorageResult(
+            photoPath: photoURL.path,
+            thumbnailPath: thumbnailPath,
+            fileName: photoURL.lastPathComponent,
+            fileSize: fileSize
+        )
+    }
+
+    // MARK: - Memory Management Configuration
+    private struct MemoryConfiguration {
+        static let maxBatchSize: Int = 5
+        static let maxMemoryUsageMB: Int = 100
+        static let memoryCheckInterval: TimeInterval = 0.5
+        static let processingDelayMs: UInt64 = 100_000_000 // 100ms
+    }
 
     private let photosDirectory: URL
     private let thumbnailsDirectory: URL
@@ -45,12 +82,17 @@ final class StorageManager: ObservableObject {
         }
     }
 
-    // MARK: - Photo Import
+    // MARK: - Photo Import with Batch Processing
 
     func importPhoto(from sourceURL: URL) async throws -> StorageResult {
         // Check available space
         guard hasEnoughSpace(estimatedSize: minimumFreeSpace) else {
             throw StorageError.insufficientSpace("Not enough storage space available")
+        }
+
+        // Check memory pressure
+        guard await isMemorySafeToProcess() else {
+            throw StorageError.memoryPressure("System memory pressure detected")
         }
 
         // Read source image data
@@ -61,25 +103,63 @@ final class StorageManager: ObservableObject {
             throw StorageError.importFailed("Failed to read image from \(sourceURL.lastPathComponent): \(error.localizedDescription)")
         }
 
-        // Validate image
-        guard let sourceImage = UIImage(data: imageData) else {
-            throw StorageError.invalidImageData("Invalid image data at \(sourceURL.lastPathComponent)")
-        }
-
-        // Process and save photo
-        return try await processAndSavePhoto(sourceImage, originalFileName: sourceURL.lastPathComponent)
+        // Process using safe thumbnail generator
+        return try await processPhotoWithSafeGenerator(imageData: imageData, originalFileName: sourceURL.lastPathComponent)
     }
 
     func importPhotos(from sourceURLs: [URL]) async throws -> [StorageResult] {
-        var results: [StorageResult] = []
+        return try await importPhotosInBatches(sourceURLs: sourceURLs, batchSize: MemoryConfiguration.maxBatchSize)
+    }
 
-        for sourceURL in sourceURLs {
-            do {
-                let result = try await importPhoto(from: sourceURL)
-                results.append(result)
-            } catch {
-                logger.error("Failed to import photo from \(sourceURL.lastPathComponent): \(error.localizedDescription)")
-                // Continue with other photos
+    /// Import photos in controlled batches to prevent memory issues
+    func importPhotosInBatches(
+        sourceURLs: [URL],
+        batchSize: Int = MemoryConfiguration.maxBatchSize,
+        progressHandler: ((Double) -> Void)? = nil
+    ) async throws -> [StorageResult] {
+        var results: [StorageResult] = []
+        let totalCount = sourceURLs.count
+
+        for batchStart in stride(from: 0, to: sourceURLs.count, by: batchSize) {
+            // Check memory before each batch
+            if !(await isMemorySafeToProcess()) {
+                logger.warning("Memory pressure detected - pausing import")
+                try await Task.sleep(nanoseconds: 500_000_000) // 500ms
+
+                // Recheck memory
+                guard await isMemorySafeToProcess() else {
+                    throw StorageError.memoryPressure("Persistent memory pressure")
+                }
+            }
+
+            let batchEnd = min(batchStart + batchSize, sourceURLs.count)
+            let batch = Array(sourceURLs[batchStart..<batchEnd])
+
+            logger.debug("Processing batch \(batchStart/batchSize + 1): \(batch.count) photos")
+
+            // Process batch sequentially
+            for (index, sourceURL) in batch.enumerated() {
+                do {
+                    let result = try await importPhoto(from: sourceURL)
+                    results.append(result)
+
+                    // Report progress
+                    if let progressHandler = progressHandler {
+                        let overallIndex = batchStart + index + 1
+                        let progress = Double(overallIndex) / Double(totalCount)
+                        await MainActor.run {
+                            progressHandler(progress)
+                        }
+                    }
+                } catch {
+                    logger.error("Failed to import photo from \(sourceURL.lastPathComponent): \(error.localizedDescription)")
+                    // Continue with other photos
+                }
+            }
+
+            // Delay between batches to prevent CPU overload
+            if batchEnd < sourceURLs.count {
+                try await Task.sleep(nanoseconds: MemoryConfiguration.processingDelayMs)
             }
         }
 
@@ -109,6 +189,54 @@ final class StorageManager: ObservableObject {
     }
 
     private func processAndSavePhoto(_ image: UIImage, originalFileName: String? = nil) async throws -> StorageResult {
+        // Use safe thumbnail generator for new imports when possible
+        if let imageData = image.jpegData(compressionQuality: 0.9) {
+            return try await processPhotoWithSafeGenerator(imageData: imageData, originalFileName: originalFileName)
+        }
+
+        // Fallback to existing processor
+        return try await processPhotoWithLegacyProcessor(image, originalFileName: originalFileName)
+    }
+
+    /// Process photo using the safe ImageIO-based generator
+    private func processPhotoWithSafeGenerator(imageData: Data, originalFileName: String? = nil) async throws -> StorageResult {
+        // Generate unique filename
+        let fileName = generateFileName(basedOn: originalFileName)
+
+        // Process image for storage
+        let processedData = try await safeThumbnailGenerator.processImageForStorage(
+            imageData: imageData,
+            maxDimension: SafeThumbnailGenerator.Configuration.maxImageSize
+        )
+
+        // Generate thumbnail sequentially
+        let thumbnailData = try await safeThumbnailGenerator.generateThumbnail(
+            from: processedData,
+            targetSize: SafeThumbnailGenerator.Configuration.thumbnailSize
+        )
+
+        // Save photo
+        let photoPath = photosDirectory.appendingPathComponent(fileName)
+        try processedData.write(to: photoPath)
+
+        // Save thumbnail
+        let thumbnailFileName = "thumb_\(fileName)"
+        let thumbnailURL = thumbnailsDirectory.appendingPathComponent(thumbnailFileName)
+        try thumbnailData.write(to: thumbnailURL)
+
+        // Get metadata
+        let metadata = safeThumbnailGenerator.getImageMetadata(from: processedData)
+
+        return StorageResult(
+            photoPath: photoPath.path,
+            thumbnailPath: thumbnailURL.path,
+            fileName: fileName,
+            fileSize: Int64(processedData.count)
+        )
+    }
+
+    /// Legacy processor for compatibility
+    private func processPhotoWithLegacyProcessor(_ image: UIImage, originalFileName: String? = nil) async throws -> StorageResult {
         // Generate unique filename
         let fileName = generateFileName(basedOn: originalFileName)
 
@@ -322,18 +450,56 @@ final class StorageManager: ObservableObject {
     }
 
     func migrateExternalPhotosToInternal(externalPhotoPaths: [String]) async throws -> [StorageResult] {
-        var results: [StorageResult] = []
+        // Use batch processing for migration
+        let urls = externalPhotoPaths.map { URL(fileURLWithPath: $0) }
+        return try await importPhotosInBatches(sourceURLs: urls, batchSize: MemoryConfiguration.maxBatchSize)
+    }
 
-        for photoPath in externalPhotoPaths {
-            let photoURL = URL(fileURLWithPath: photoPath)
-            do {
-                let result = try await copyPhotoToInternalStorage(sourceFile: photoURL)
-                results.append(result)
-            } catch {
-                logger.error("Failed to migrate photo \(photoURL.lastPathComponent): \(error.localizedDescription)")
+    // MARK: - Memory Management
+
+    /// Check if it's safe to process based on memory usage
+    private func isMemorySafeToProcess() async -> Bool {
+        return safeThumbnailGenerator.isSafeToProcess()
+    }
+
+    /// Get current memory usage in MB
+    func getCurrentMemoryUsage() -> Int {
+        return safeThumbnailGenerator.getCurrentMemoryUsage()
+    }
+
+    /// Monitor storage pressure
+    func getStoragePressure() -> StoragePressure {
+        let availableSpace = getAvailableSpace()
+        let availableGB = Double(availableSpace) / (1024 * 1024 * 1024)
+
+        if availableGB < 0.5 {
+            return .critical
+        } else if availableGB < 1.0 {
+            return .high
+        } else if availableGB < 2.0 {
+            return .medium
+        } else {
+            return .low
+        }
+    }
+
+    enum StoragePressure {
+        case low
+        case medium
+        case high
+        case critical
+
+        var description: String {
+            switch self {
+            case .low:
+                return "Storage space is adequate"
+            case .medium:
+                return "Storage space is running low"
+            case .high:
+                return "Storage space is very low"
+            case .critical:
+                return "Storage space is critically low"
             }
         }
-
-        return results
     }
 }

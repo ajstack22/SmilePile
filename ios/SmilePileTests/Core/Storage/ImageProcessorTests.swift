@@ -49,12 +49,15 @@ class ImageProcessorTests: XCTestCase {
 
     // MARK: - Thumbnail Tests
 
-    func testThumbnailGeneration() async throws {
+    func testThumbnailGeneration() {
         // Given
         let imageData = testImage.jpegData(compressionQuality: 1.0)!
 
         // When
-        let thumbnailData = try await sut.generateThumbnail(from: imageData)
+        guard let thumbnailData = sut.generateThumbnail(from: imageData) else {
+            XCTFail("Failed to generate thumbnail")
+            return
+        }
         let thumbnail = UIImage(data: thumbnailData)!
 
         // Then
@@ -62,13 +65,16 @@ class ImageProcessorTests: XCTestCase {
         XCTAssertEqual(thumbnail.size.height, 300, accuracy: 1)
     }
 
-    func testThumbnailCenterCrop() async throws {
+    func testThumbnailCenterCrop() {
         // Given - rectangular image
         let rectImage = createTestImage(width: 400, height: 200)
         let imageData = rectImage.jpegData(compressionQuality: 1.0)!
 
         // When
-        let thumbnailData = try await sut.generateThumbnail(from: imageData)
+        guard let thumbnailData = sut.generateThumbnail(from: imageData) else {
+            XCTFail("Failed to generate thumbnail")
+            return
+        }
         let thumbnail = UIImage(data: thumbnailData)!
 
         // Then - should be square
@@ -98,17 +104,15 @@ class ImageProcessorTests: XCTestCase {
 
     // MARK: - Error Handling Tests
 
-    func testInvalidImageDataThrows() async {
+    func testInvalidImageDataReturnsNil() {
         // Given
         let invalidData = Data("not an image".utf8)
 
-        // When/Then
-        do {
-            _ = try await sut.generateThumbnail(from: invalidData)
-            XCTFail("Should have thrown error")
-        } catch {
-            XCTAssertTrue(error is StorageError)
-        }
+        // When
+        let result = sut.generateThumbnail(from: invalidData)
+
+        // Then
+        XCTAssertNil(result)
     }
 
     // MARK: - Performance Tests
@@ -132,7 +136,7 @@ class ImageProcessorTests: XCTestCase {
         measure {
             let expectation = XCTestExpectation()
             Task {
-                _ = try? await sut.generateThumbnail(from: imageData)
+                _ = sut.generateThumbnail(from: imageData)
                 expectation.fulfill()
             }
             wait(for: [expectation], timeout: 1.0)

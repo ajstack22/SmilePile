@@ -1,0 +1,355 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -scheme SmilePile -destination "platform=iOS Simulator,name=iPhone 16 Pro" "-only-testing:SmilePileTests"
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:EE3F2A09-2BA9-463D-8C07-323B0688FAE5, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:EE3F2A09-2BA9-463D-8C07-323B0688FAE5, OS:18.5, name:iPhone 16 Pro }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (2 targets)
+    Target 'SmilePileTests' in project 'SmilePile'
+        ➜ Explicit dependency on target 'SmilePile' in project 'SmilePile'
+    Target 'SmilePile' in project 'SmilePile' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache
+    cd /Users/adamstack/SmilePile/ios/SmilePile.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -o /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache
+
+SwiftDriver SmilePile normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SmilePile -Onone -enforce-exclusivity\=checked @/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios16.0-simulator -g -module-cache-path /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Index.noindex/DataStore -swift-version 5 -I /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -F /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache -output-file-map /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile_const_extract_protocols.json -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-generated-files.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-own-target-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-all-target-headers.hmap -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-project-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources-normal/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile-Swift.h -working-directory /Users/adamstack/SmilePile/ios -experimental-emit-module-separately -disable-cmo
+
+SwiftCompile normal arm64 Compiling\ ContentView.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ EnhancedPhotoViewer.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ PhotoEditView.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/PhotoEditView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/PhotoEditView.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift:69:43: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        storageManager: StorageManager = .shared
+                                          ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+
+SwiftCompile normal arm64 Compiling\ PhotoGalleryView.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/PhotoGalleryView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/PhotoGalleryView.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift:51:44: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+    init(storageManager: StorageManager = .shared,
+                                           ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+
+SwiftCompile normal arm64 Compiling\ StorageManager.swift /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift:51:44: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+    init(storageManager: StorageManager = .shared,
+                                           ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:228:13: warning: initialization of immutable value 'metadata' was never used; consider replacing with assignment to '_' or removing it
+        let metadata = safeThumbnailGenerator.getImageMetadata(from: processedData)
+        ~~~~^~~~~~~~
+        _
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ SmilePile (in target 'SmilePile' from project 'SmilePile')
+
+EmitSwiftModule normal arm64 (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift:69:43: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        storageManager: StorageManager = .shared
+                                          ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift:51:44: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+    init(storageManager: StorageManager = .shared,
+                                           ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift:45:9: warning: actor-isolated instance method 'setupCache()' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        setupCache()
+        ^
+/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift:49:18: note: calls to instance method 'setupCache()' from outside of its actor context are implicitly asynchronous
+    private func setupCache() {
+                 ^
+/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift:46:9: warning: actor-isolated instance method 'observeMemoryWarnings()' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        observeMemoryWarnings()
+        ^
+/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift:62:18: note: calls to instance method 'observeMemoryWarnings()' from outside of its actor context are implicitly asynchronous
+    private func observeMemoryWarnings() {
+                 ^
+/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoGalleryViewModel.swift:76:44: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+         storageManager: StorageManager = .shared) {
+                                           ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift:25:47: warning: main actor-isolated static property 'shared' can not be referenced on a nonisolated actor instance; this is an error in the Swift 6 language mode
+    private let memoryMonitor = MemoryMonitor.shared
+                                              ^
+/Users/adamstack/SmilePile/ios/SmilePile/Utils/MemoryMonitor.swift:9:16: note: static property declared here
+    static let shared = MemoryMonitor()
+               ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift:45:44: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+    init(storageManager: StorageManager = .shared,
+                                           ^
+/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift:8:16: note: static property declared here
+    static let shared: StorageManager = {
+               ^
+
+SwiftDriverJobDiscovery normal arm64 Compiling EnhancedPhotoViewer.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PhotoGalleryView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PhotoEditView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftDriverJobDiscovery normal arm64 Compiling StorageManager.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 Compiling\ EnhancedPhotoImportCoordinator.swift /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ PhotoImportCoordinator.swift /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift (in target 'SmilePile' from project 'SmilePile')
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ MaterialTabBar.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/Components/MaterialTabBar.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/Components/MaterialTabBar.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ AsyncImageView.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/Components/AsyncImageView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/Components/AsyncImageView.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ PhotoGalleryViewModel.swift /Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoGalleryViewModel.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoGalleryViewModel.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ PhotoEditViewModel.swift /Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftCompile normal arm64 Compiling\ OptimizedPhotoGalleryView.swift /Users/adamstack/SmilePile/ios/SmilePile/Views/OptimizedPhotoGalleryView.swift (in target 'SmilePile' from project 'SmilePile')
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePile/Views/OptimizedPhotoGalleryView.swift (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for SmilePile (in target 'SmilePile' from project 'SmilePile')
+
+SwiftDriver\ Compilation\ Requirements SmilePile normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SmilePile -Onone -enforce-exclusivity\=checked @/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios16.0-simulator -g -module-cache-path /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Index.noindex/DataStore -swift-version 5 -I /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -F /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache -output-file-map /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile_const_extract_protocols.json -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-generated-files.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-own-target-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-all-target-headers.hmap -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/SmilePile-project-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources-normal/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile-Swift.h -working-directory /Users/adamstack/SmilePile/ios -experimental-emit-module-separately -disable-cmo
+
+Copy /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftmodule (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftmodule /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.abi.json (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.abi.json /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftsourceinfo (in target 'SmilePile' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePile.build/Objects-normal/arm64/SmilePile.swiftsourceinfo /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/SmilePile.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftDriver SmilePileTests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'SmilePileTests' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name SmilePileTests -Onone -enforce-exclusivity\=checked @/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests.SwiftFileList -DDEBUG -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -target arm64-apple-ios16.0-simulator -g -module-cache-path /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Index.noindex/DataStore -swift-version 5 -I /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache -output-file-map /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests_const_extract_protocols.json -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-generated-files.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-own-target-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-all-target-headers.hmap -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-project-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources-normal/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests-Swift.h -working-directory /Users/adamstack/SmilePile/ios -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ SmilePileTests (in target 'SmilePileTests' from project 'SmilePile')
+
+EmitSwiftModule normal arm64 (in target 'SmilePileTests' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/DI/DIContainerTests.swift:79:13: warning: variable 'consumer' was never mutated; consider changing to 'let' constant
+        var consumer = Consumer()
+        ~~~ ^
+        let
+
+SwiftCompile normal arm64 Compiling\ CoreDataStackTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift (in target 'SmilePileTests' from project 'SmilePile')
+Failed frontend command:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -c /Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/Core/DI/DIContainerTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/ImageProcessorTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift -primary-file /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/PINManagerTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift -emit-dependencies-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.d -emit-const-values-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.swiftconstvalues -emit-reference-dependencies-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.swiftdeps -serialize-diagnostics-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.dia -target arm64-apple-ios16.0-simulator -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk -I /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -I /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator18.5.sdk/Developer/Library/Frameworks -no-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=4 -module-cache-path /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -swift-version 5 -enforce-exclusivity\=checked -Onone -D DEBUG -serialize-debugging-options -const-gather-protocols-file /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/SmilePileTests_const_extract_protocols.json -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -empty-abi-descriptor -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -validate-clang-modules-once -clang-build-session-file /Users/adamstack/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/adamstack/SmilePile/ios -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift -enable-anonymous-context-mangled-names -file-compilation-dir /Users/adamstack/SmilePile/ios -Xcc -ivfsstatcache -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator18.5-22F76-d5fc8ad4295d2ef488fb7d0f804ce0c4.sdkstatcache -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-generated-files.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-own-target-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-all-target-headers.hmap -Xcc -iquote -Xcc /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/SmilePileTests-project-headers.hmap -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources-normal/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources/arm64 -Xcc -I/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/DerivedSources -Xcc -DDEBUG\=1 -module-name SmilePileTests -frontend-parseable-output -disable-clang-spi -target-sdk-version 18.5 -target-sdk-name iphonesimulator18.5 -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/local/lib/swift/host/plugins\#/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/lib/swift/host/plugins -o /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Build/Intermediates.noindex/SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.o -index-unit-output-path /SmilePile.build/Debug-iphonesimulator/SmilePileTests.build/Objects-normal/arm64/CoreDataStackTests.o -index-store-path /Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Index.noindex/DataStore -index-system-modules
+
+SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift (in target 'SmilePileTests' from project 'SmilePile')
+    cd /Users/adamstack/SmilePile/ios
+    
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:18:72: error: type 'Photo' has no member 'fetchRequest'
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Photo.fetchRequest()
+                                                                 ~~~~~ ^~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:20:9: warning: result of 'try?' is unused
+        try? testContext.execute(deleteRequest)
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:22:83: error: reference to member 'fetchRequest' cannot be resolved without a contextual type
+        let categoryFetchRequest: NSFetchRequest<NSFetchRequestResult> = Category.fetchRequest()
+                                                                                  ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:24:9: warning: result of 'try?' is unused
+        try? testContext.execute(categoryDeleteRequest)
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:32:29: error: value of type 'CoreDataStack' has no member 'mainContext'
+        XCTAssertNotNil(sut.mainContext)
+                        ~~~ ^~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:33:28: error: value of type 'CoreDataStack' has no member 'mainContext'
+        XCTAssertEqual(sut.mainContext.concurrencyType, .mainQueueConcurrencyType)
+                       ~~~ ^~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:33:58: error: type 'Equatable' has no member 'mainQueueConcurrencyType'
+        XCTAssertEqual(sut.mainContext.concurrencyType, .mainQueueConcurrencyType)
+                                                        ~^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:50:31: error: type 'Photo' has no member 'create'
+        let photo = try Photo.create(
+                        ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:69:23: error: type 'Photo' has no member 'create'
+        _ = try Photo.create(in: testContext, uri: uri, categoryId: 1)
+                ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:74:23: error: type 'Photo' has no member 'create'
+            try Photo.create(in: testContext, uri: uri, categoryId: 1)
+                ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:84:27: error: type 'Photo' has no member 'create'
+            _ = try Photo.create(
+                    ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:90:23: error: type 'Photo' has no member 'create'
+        _ = try Photo.create(
+                ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:98:29: error: type 'Photo' has no member 'fetchRequest'
+        let request = Photo.fetchRequest(forCategory: categoryId)
+                      ~~~~~ ^~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:110:22: error: reference to member 'createDefaults' cannot be resolved without a contextual type
+        try Category.createDefaults(in: testContext)
+                     ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:113:32: error: reference to member 'fetchRequest' cannot be resolved without a contextual type
+        let request = Category.fetchRequest()
+                               ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:127:37: error: reference to member 'create' cannot be resolved without a contextual type
+        let category = try Category.create(
+                                    ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:144:26: error: reference to member 'create' cannot be resolved without a contextual type
+        _ = try Category.create(in: testContext, name: name, colorHex: "#FF0000")
+                         ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:149:26: error: type 'Category' has no member 'create'
+            try Category.create(in: testContext, name: name, colorHex: "#00FF00")
+                ~~~~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:173:17: error: value of type 'CoreDataStack' has no member 'batchInsert'
+            sut.batchInsert(Photo.self, data: photoData) { result in
+            ~~~ ^~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:184:27: error: type 'Photo' has no member 'create'
+            _ = try Photo.create(
+                    ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:194:33: error: type 'Photo' has no member 'fetchRequest'
+            let request = Photo.fetchRequest(offset: 0, limit: 20)
+                          ~~~~~ ^~~~~~~~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:213:35: error: type 'Photo' has no member 'create'
+                    _ = try Photo.create(
+                            ~~~~~ ^~~~~~
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:234:26: error: incorrect argument label in call (have 'context:', expected 'from:')
+        let photo = Photo(context: testContext)
+                         ^~~~~~~~
+                          from
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:234:36: error: argument type 'NSManagedObjectContext?' does not conform to expected type 'Decoder'
+        let photo = Photo(context: testContext)
+                                   ^
+                                               as! Decoder
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:247:24: error: no exact matches in call to initializer 
+        let category = Category(context: testContext)
+                       ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:247:24: note: candidate expects value of type 'UnsafeMutableRawPointer' for parameter #1 (got '@lvalue NSManagedObjectContext?')
+        let category = Category(context: testContext)
+                       ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:247:24: note: candidate expects value of type 'UnsafeMutableRawPointer?' for parameter #1 (got '@lvalue NSManagedObjectContext?')
+        let category = Category(context: testContext)
+                       ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:247:24: note: candidate expects value of type 'UnsafeRawPointer' for parameter #1 (got '@lvalue NSManagedObjectContext?')
+        let category = Category(context: testContext)
+                       ^
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:247:24: note: candidate expects value of type 'UnsafeRawPointer?' for parameter #1 (got '@lvalue NSManagedObjectContext?')
+        let category = Category(context: testContext)
+                       ^
+
+SwiftCompile normal arm64 Compiling\ PhotoRepositoryTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift (in target 'SmilePileTests' from project 'SmilePile')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for SmilePileTests (in target 'SmilePileTests' from project 'SmilePile')
+
+
+Test session results, code coverage, and logs:
+	/Users/adamstack/Library/Developer/Xcode/DerivedData/SmilePile-dtvgacsqmvagzngmwsefdwhgdqxf/Logs/Test/Test-SmilePile-2025.09.26_15-54-10--0500.xcresult
+
+Testing failed:
+	Type 'Photo' has no member 'fetchRequest'
+	Reference to member 'fetchRequest' cannot be resolved without a contextual type
+	Value of type 'CoreDataStack' has no member 'mainContext'
+	Value of type 'CoreDataStack' has no member 'mainContext'
+	Type 'Equatable' has no member 'mainQueueConcurrencyType'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'fetchRequest'
+	Reference to member 'createDefaults' cannot be resolved without a contextual type
+	Reference to member 'fetchRequest' cannot be resolved without a contextual type
+	Reference to member 'create' cannot be resolved without a contextual type
+	Reference to member 'create' cannot be resolved without a contextual type
+	Type 'Category' has no member 'create'
+	Value of type 'CoreDataStack' has no member 'batchInsert'
+	Type 'Photo' has no member 'create'
+	Type 'Photo' has no member 'fetchRequest'
+	Type 'Photo' has no member 'create'
+	Incorrect argument label in call (have 'context:', expected 'from:')
+	Argument type 'NSManagedObjectContext?' does not conform to expected type 'Decoder'
+	No exact matches in call to initializer 
+	Testing cancelled because the build failed.
+
+** TEST FAILED **
+
+
+The following build commands failed:
+	SwiftCompile normal arm64 Compiling\ CoreDataStackTests.swift /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift (in target 'SmilePileTests' from project 'SmilePile')
+	SwiftCompile normal arm64 /Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift (in target 'SmilePileTests' from project 'SmilePile')
+	Testing project SmilePile with scheme SmilePile
+(3 failures)

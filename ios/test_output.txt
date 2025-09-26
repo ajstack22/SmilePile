@@ -1,0 +1,6 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -scheme SmilePile -destination "platform=iOS Simulator,name=iPhone 16 Pro"
+
+2025-09-26 15:37:47.081 xcodebuild[96108:13574471] Writing error result bundle to /var/folders/1t/s35yk6nn3vxdvn2rk76jjbpr0000gn/T/ResultBundle_2025-26-09_15-37-0047.xcresult
+xcodebuild: error: Scheme SmilePile is not currently configured for the test action.
+

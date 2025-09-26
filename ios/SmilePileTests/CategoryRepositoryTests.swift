@@ -73,7 +73,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testInsertCategory() async throws {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 5,
             name: "test_category",
             displayName: "Test Category",
@@ -95,7 +95,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testInsertCategoryWithDuplicateName() async throws {
         // Given
-        let category1 = Category(
+        let category1 = SmilePile.Category(
             id: 5,
             name: "duplicate",
             displayName: "Duplicate",
@@ -103,7 +103,7 @@ final class CategoryRepositoryTests: XCTestCase {
         )
         _ = try await repository.insertCategory(category1)
 
-        let category2 = Category(
+        let category2 = SmilePile.Category(
             id: 6,
             name: "duplicate",
             displayName: "Duplicate", // Same display name
@@ -128,9 +128,9 @@ final class CategoryRepositoryTests: XCTestCase {
     func testInsertMultipleCategories() async throws {
         // Given
         let categories = [
-            Category(id: 5, name: "pets", displayName: "Pets", position: 4),
-            Category(id: 6, name: "food", displayName: "Food", position: 5),
-            Category(id: 7, name: "travel", displayName: "Travel", position: 6)
+            SmilePile.Category(id: 5, name: "pets", displayName: "Pets", position: 4),
+            SmilePile.Category(id: 6, name: "food", displayName: "Food", position: 5),
+            SmilePile.Category(id: 7, name: "travel", displayName: "Travel", position: 6)
         ]
 
         // When
@@ -143,7 +143,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testUpdateCategory() async throws {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 5,
             name: "test",
             displayName: "Original",
@@ -153,7 +153,7 @@ final class CategoryRepositoryTests: XCTestCase {
         _ = try await repository.insertCategory(category)
 
         // When
-        let updatedCategory = Category(
+        let updatedCategory = SmilePile.Category(
             id: 5,
             name: "test_updated",
             displayName: "Updated",
@@ -171,7 +171,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testDeleteCategory() async throws {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 5,
             name: "test",
             displayName: "To Delete",
@@ -212,7 +212,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testGetCategoryByName() async throws {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 5,
             name: "unique",
             displayName: "Unique Category",
@@ -232,14 +232,14 @@ final class CategoryRepositoryTests: XCTestCase {
     func testGetAllCategoriesFlow() async throws {
         // Given
         let categories = [
-            Category(id: 5, name: "pets", displayName: "Pets", position: 4),
-            Category(id: 6, name: "food", displayName: "Food", position: 5)
+            SmilePile.Category(id: 5, name: "pets", displayName: "Pets", position: 4),
+            SmilePile.Category(id: 6, name: "food", displayName: "Food", position: 5)
         ]
         try await repository.insertCategories(categories)
 
         // When
         let expectation = expectation(description: "Categories flow")
-        var receivedCategories: [Category] = []
+        var receivedCategories: [SmilePile.Category] = []
 
         repository.getAllCategoriesFlow()
             .sink(
@@ -261,9 +261,9 @@ final class CategoryRepositoryTests: XCTestCase {
     func testGetCategoryCount() async throws {
         // Given
         let categories = [
-            Category(id: 5, name: "pets", displayName: "Pets", position: 4),
-            Category(id: 6, name: "food", displayName: "Food", position: 5),
-            Category(id: 7, name: "travel", displayName: "Travel", position: 6)
+            SmilePile.Category(id: 5, name: "pets", displayName: "Pets", position: 4),
+            SmilePile.Category(id: 6, name: "food", displayName: "Food", position: 5),
+            SmilePile.Category(id: 7, name: "travel", displayName: "Travel", position: 6)
         ]
         try await repository.insertCategories(categories)
 
@@ -278,7 +278,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testInsertCategoryWithEmptyName() async {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 5,
             name: "",
             displayName: "", // Empty display name
@@ -302,7 +302,7 @@ final class CategoryRepositoryTests: XCTestCase {
 
     func testUpdateNonExistentCategory() async {
         // Given
-        let category = Category(
+        let category = SmilePile.Category(
             id: 999,
             name: "nonexistent",
             displayName: "Non Existent",

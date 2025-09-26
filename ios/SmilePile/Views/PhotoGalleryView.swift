@@ -1,5 +1,6 @@
 import SwiftUI
-import UniformTypeIdentifiers
+import PhotosUI
+import Photos
 
 struct PhotoGalleryView: View {
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
@@ -7,12 +8,21 @@ struct PhotoGalleryView: View {
     @State private var categories: [Category] = []
     @State private var selectedPhotos: [Photo] = []
     @State private var showingPhotoEditor = false
-    @State private var showingImportPicker = false
-    @State private var importedImageURLs: [URL] = []
+    @State private var showingPhotoPicker = false
+    @State private var showingPermissionError = false
+    @State private var permissionErrorMessage = ""
     @State private var allPhotos: [Photo] = []
+    @State private var isLoadingPhotos = false
+    @State private var importProgress: Double = 0
+    @State private var importMessage: String = ""
+    @State private var showImportError = false
+    @State private var importErrorMessage = ""
 
     private let repository = CategoryRepositoryImpl()
     private let photoRepository = PhotoRepositoryImpl()
+    @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
+    @State private var photoImportCoordinator: PhotoImportCoordinator?
+    @State private var storageManager: StorageManager?
 
     var body: some View {
         ZStack {
@@ -60,13 +70,28 @@ struct PhotoGalleryView: View {
             // Floating Action Button with pulse animation when gallery is empty
             FloatingActionButtonContainer(
                 action: {
-                    showingImportPicker = true
+                    handleAddPhotosButtonTap()
                 },
                 isPulsing: allPhotos.isEmpty,
                 bottomPadding: 49 // Standard iOS tab bar height
             )
+
+            // Loading overlay with import progress
+            if isLoadingPhotos {
+                LoadingOverlay(
+                    message: importMessage.isEmpty ? "Loading photos..." : importMessage,
+                    progress: importProgress > 0 ? importProgress : nil
+                )
+            }
         }
         .onAppear {
+            // Initialize lazy properties to avoid circular dependency
+            if photoImportCoordinator == nil {
+                photoImportCoordinator = PhotoImportCoordinator()
+            }
+            if storageManager == nil {
+                storageManager = StorageManager.shared
+            }
             loadCategories()
             loadPhotos()
         }
@@ -74,28 +99,30 @@ struct PhotoGalleryView: View {
             if !selectedPhotos.isEmpty {
                 PhotoEditorView(photos: selectedPhotos) { editedPhotos in
                     // Handle edited photos
+                    handleEditedPhotos(editedPhotos)
                     showingPhotoEditor = false
                 }
             }
         }
-        .fileImporter(
-            isPresented: $showingImportPicker,
-            allowedContentTypes: [.image],
-            allowsMultipleSelection: true
-        ) { result in
-            switch result {
-            case .success(let urls):
-                importedImageURLs = urls
-                selectedPhotos = urls.map { url in
-                    Photo(
-                        path: url.absoluteString,
-                        categoryId: selectedCategory?.id ?? 0
-                    )
+        .fullScreenCover(isPresented: $showingPhotoPicker) {
+            EnhancedPhotoPickerView(
+                isPresented: $showingPhotoPicker,
+                categoryId: selectedCategory?.id ?? categories.first?.id ?? 1,
+                onPhotosSelected: { photos in
+                    handleSelectedPhotos(photos)
+                },
+                onCancel: {
+                    // Handle cancellation if needed
                 }
-                showingPhotoEditor = true
-            case .failure(let error):
-                print("Import error: \(error)")
+            )
+        }
+        .alert("Permission Required", isPresented: $showingPermissionError) {
+            Button("Open Settings") {
+                permissionManager.openAppSettings()
             }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text(permissionErrorMessage)
         }
     }
 
@@ -150,12 +177,135 @@ struct PhotoGalleryView: View {
     private func loadPhotos() {
         Task {
             do {
+                isLoadingPhotos = true
                 allPhotos = try await photoRepository.getAllPhotos()
+                isLoadingPhotos = false
             } catch {
                 print("Failed to load photos: \(error)")
                 allPhotos = []
+                isLoadingPhotos = false
             }
         }
+    }
+
+    // MARK: - Photo Handling Methods
+
+    private func handleAddPhotosButtonTap() {
+        // Check permission status first
+        permissionManager.checkCurrentAuthorizationStatus()
+
+        switch permissionManager.authorizationStatus {
+        case .notDetermined:
+            // Will be handled by the photo picker view
+            showingPhotoPicker = true
+        case .authorized, .limited:
+            showingPhotoPicker = true
+        case .denied:
+            permissionErrorMessage = "Photo library access is required to add photos. Please enable it in Settings."
+            showingPermissionError = true
+        case .restricted:
+            permissionErrorMessage = "Photo library access is restricted on this device."
+            showingPermissionError = true
+        @unknown default:
+            showingPhotoPicker = true
+        }
+    }
+
+    private func handleSelectedPhotos(_ photos: [Photo]) {
+        Task {
+            isLoadingPhotos = true
+            do {
+                // Save photos to repository
+                for photo in photos {
+                    _ = try await photoRepository.insertPhoto(photo)
+                }
+                // Reload all photos
+                allPhotos = try await photoRepository.getAllPhotos()
+            } catch {
+                print("Error saving photos: \(error)")
+            }
+            isLoadingPhotos = false
+
+            // If we have photos, open editor
+            if !photos.isEmpty {
+                selectedPhotos = photos
+                showingPhotoEditor = true
+            }
+        }
+    }
+
+    private func handleEditedPhotos(_ photos: [Photo]) {
+        Task {
+            // Refresh the gallery after editing
+            do {
+                allPhotos = try await photoRepository.getAllPhotos()
+            } catch {
+                print("Error reloading photos: \(error)")
+            }
+        }
+    }
+}
+
+// MARK: - Loading Overlay
+
+struct LoadingOverlay: View {
+    let message: String
+    let progress: Double?
+
+    init(message: String = "Loading photos...", progress: Double? = nil) {
+        self.message = message
+        self.progress = progress
+    }
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                if let progress = progress {
+                    // Show determinate progress
+                    VStack(spacing: 12) {
+                        ProgressView(value: progress)
+                            .progressViewStyle(LinearProgressViewStyle(tint: .white))
+                            .frame(width: 200)
+                            .scaleEffect(1.5, anchor: .center)
+
+                        Text("\(Int(progress * 100))%")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                } else {
+                    // Show indeterminate progress
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .scaleEffect(1.2)
+                }
+
+                Text(message)
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 250)
+
+                // Memory usage indicator
+                if progress != nil {
+                    Text("Memory: \(getMemoryUsageText())")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.8))
+                }
+            }
+            .padding(24)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.black.opacity(0.7))
+            )
+        }
+    }
+
+    private func getMemoryUsageText() -> String {
+        let memoryMB = StorageManager.shared.getCurrentMemoryUsage()
+        return "\(memoryMB) MB"
     }
 }
 

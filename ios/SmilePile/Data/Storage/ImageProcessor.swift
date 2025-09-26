@@ -2,6 +2,12 @@ import UIKit
 import CoreImage
 import os.log
 
+enum ImageProcessingError: Error {
+    case resizeFailed
+    case compressionFailed
+    case invalidImage
+}
+
 final class ImageProcessor {
     private let logger = Logger(subsystem: "com.smilepile", category: "ImageProcessor")
 
@@ -24,6 +30,20 @@ final class ImageProcessor {
         }
 
         return (resizedImage, imageData)
+    }
+
+    func processUIImage(_ image: UIImage, maxSize: CGFloat? = nil) async throws -> Data {
+        let targetSize = maxSize ?? maxPhotoSize
+
+        guard let resizedImage = resizeImage(image, maxDimension: targetSize) else {
+            throw ImageProcessingError.resizeFailed
+        }
+
+        guard let imageData = resizedImage.jpegData(compressionQuality: photoQuality) else {
+            throw ImageProcessingError.compressionFailed
+        }
+
+        return imageData
     }
 
     // MARK: - Thumbnail Generation

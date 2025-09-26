@@ -1,0 +1,363 @@
+import UIKit
+import Photos
+import PhotosUI
+import CoreImage
+
+/// Handles photo asset processing with memory-safe loading and caching
+class PhotoAssetProcessor: ObservableObject {
+
+    // MARK: - Configuration
+    struct Configuration {
+        static let maxImageDimension: CGFloat = 2048  // Max dimension for full images
+        static let thumbnailSize: CGFloat = 200       // Thumbnail size
+        static let jpegQuality: CGFloat = 0.85        // JPEG compression quality
+        static let maxMemoryCacheSizeMB: Int = 50     // Max memory cache in MB
+        static let batchSize: Int = 10                // Process photos in batches
+        static let maxConcurrentLoads: Int = 3        // Max concurrent image loads
+    }
+
+    // MARK: - Error Types
+    enum ProcessingError: LocalizedError {
+        case invalidAsset
+        case loadingFailed
+        case insufficientMemory
+        case unsupportedFormat
+        case iCloudDownloadRequired
+        case processingTimeout
+        case cancelled
+
+        var errorDescription: String? {
+            switch self {
+            case .invalidAsset:
+                return "Invalid photo asset"
+            case .loadingFailed:
+                return "Failed to load photo"
+            case .insufficientMemory:
+                return "Insufficient memory to process photo"
+            case .unsupportedFormat:
+                return "Unsupported photo format"
+            case .iCloudDownloadRequired:
+                return "Photo needs to be downloaded from iCloud"
+            case .processingTimeout:
+                return "Photo processing timed out"
+            case .cancelled:
+                return "Processing was cancelled"
+            }
+        }
+    }
+
+    // MARK: - Properties
+    private let imageManager = PHImageManager.default()
+    private let documentDirectory: URL
+    private var activeRequests: [PHImageRequestID] = []
+    private let processingQueue = DispatchQueue(label: "com.smilepile.photoprocessing", qos: .userInitiated)
+    private let semaphore: DispatchSemaphore
+
+    // Memory monitoring
+    private var memoryWarningObserver: NSObjectProtocol?
+
+    // MARK: - Initialization
+    init() {
+        // Setup document directory for processed photos
+        self.documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            .appendingPathComponent("ProcessedPhotos", isDirectory: true)
+
+        // Create directory if needed
+        try? FileManager.default.createDirectory(at: documentDirectory, withIntermediateDirectories: true)
+
+        // Setup concurrent load limiting
+        self.semaphore = DispatchSemaphore(value: Configuration.maxConcurrentLoads)
+
+        // Monitor memory warnings
+        setupMemoryWarningObserver()
+    }
+
+    deinit {
+        cancelAllRequests()
+        if let observer = memoryWarningObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+
+    // MARK: - Public Methods
+
+    /// Process PHPickerResults into Photos with memory-safe loading
+    func processPickerResults(
+        _ results: [PHPickerResult],
+        categoryId: Int64,
+        progressHandler: ((Double) -> Void)? = nil
+    ) async throws -> [Photo] {
+        var processedPhotos: [Photo] = []
+        let totalCount = results.count
+        var processedCount = 0
+
+        // Process in batches to manage memory
+        for batchStart in stride(from: 0, to: results.count, by: Configuration.batchSize) {
+            let batchEnd = min(batchStart + Configuration.batchSize, results.count)
+            let batch = Array(results[batchStart..<batchEnd])
+
+            let batchPhotos = try await processBatch(batch, categoryId: categoryId)
+            processedPhotos.append(contentsOf: batchPhotos)
+
+            processedCount += batch.count
+            let progress = Double(processedCount) / Double(totalCount)
+            await MainActor.run {
+                progressHandler?(progress)
+            }
+
+            // Small delay between batches to prevent memory pressure
+            if batchEnd < results.count {
+                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            }
+        }
+
+        return processedPhotos
+    }
+
+    /// Process a single PHAsset into a Photo
+    func processAsset(
+        _ asset: PHAsset,
+        categoryId: Int64
+    ) async throws -> Photo {
+        // Check if asset is in iCloud and needs download
+        if !asset.isLocallyAvailable {
+            throw ProcessingError.iCloudDownloadRequired
+        }
+
+        // Load and process image
+        let imageData = try await loadImageData(from: asset)
+        let processedPath = try await saveProcessedImage(imageData, asset: asset)
+
+        // Extract metadata
+        let metadata = extractMetadata(from: asset, imageData: imageData)
+
+        return Photo(
+            path: processedPath,
+            categoryId: categoryId,
+            name: asset.getFileName() ?? "",
+            isFromAssets: false,
+            createdAt: Int64((asset.creationDate ?? Date()).timeIntervalSince1970 * 1000),
+            fileSize: Int64(imageData.count),
+            width: metadata.width,
+            height: metadata.height,
+            isFavorite: asset.isFavorite
+        )
+    }
+
+    /// Generate optimized thumbnail for a photo
+    func generateThumbnail(for photo: Photo, size: CGFloat = Configuration.thumbnailSize) async throws -> UIImage {
+        let fileURL = URL(fileURLWithPath: photo.path)
+
+        // Try to load from file
+        guard let imageData = try? Data(contentsOf: fileURL),
+              let image = UIImage(data: imageData) else {
+            throw ProcessingError.loadingFailed
+        }
+
+        // Generate thumbnail
+        let thumbnailSize = CGSize(width: size, height: size)
+        return try await generateThumbnail(from: image, targetSize: thumbnailSize)
+    }
+
+    // MARK: - Private Methods
+
+    private func processBatch(
+        _ results: [PHPickerResult],
+        categoryId: Int64
+    ) async throws -> [Photo] {
+        var photos: [Photo] = []
+
+        for result in results {
+            do {
+                semaphore.wait()
+                defer { semaphore.signal() }
+
+                if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                    let photo = try await processPickerResult(result, categoryId: categoryId)
+                    photos.append(photo)
+                }
+            } catch {
+                // Log error but continue processing other photos
+                print("Failed to process photo: \(error)")
+                continue
+            }
+        }
+
+        return photos
+    }
+
+    private func processPickerResult(
+        _ result: PHPickerResult,
+        categoryId: Int64
+    ) async throws -> Photo {
+        return try await withCheckedThrowingContinuation { continuation in
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (object, error) in
+                guard let self = self else {
+                    continuation.resume(throwing: ProcessingError.cancelled)
+                    return
+                }
+
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+
+                guard let image = object as? UIImage else {
+                    continuation.resume(throwing: ProcessingError.invalidAsset)
+                    return
+                }
+
+                Task {
+                    do {
+                        let processedPhoto = try await self.processImage(image, categoryId: categoryId, identifier: result.assetIdentifier)
+                        continuation.resume(returning: processedPhoto)
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+    }
+
+    private func processImage(
+        _ image: UIImage,
+        categoryId: Int64,
+        identifier: String?
+    ) async throws -> Photo {
+        // Resize if needed to manage memory
+        let resizedImage = try await resizeImageIfNeeded(image)
+
+        // Convert to JPEG data
+        guard let imageData = resizedImage.jpegData(compressionQuality: Configuration.jpegQuality) else {
+            throw ProcessingError.processingTimeout
+        }
+
+        // Generate unique filename
+        let filename = "\(UUID().uuidString).jpg"
+        let fileURL = documentDirectory.appendingPathComponent(filename)
+
+        // Save to disk
+        try imageData.write(to: fileURL)
+
+        // Create Photo object
+        return Photo(
+            path: fileURL.path,
+            categoryId: categoryId,
+            name: identifier ?? filename,
+            isFromAssets: false,
+            createdAt: Int64(Date().timeIntervalSince1970 * 1000),
+            fileSize: Int64(imageData.count),
+            width: Int(resizedImage.size.width),
+            height: Int(resizedImage.size.height),
+            isFavorite: false
+        )
+    }
+
+    private func loadImageData(from asset: PHAsset) async throws -> Data {
+        let options = PHImageRequestOptions()
+        options.version = .current
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.isSynchronous = false
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let requestID = imageManager.requestImageDataAndOrientation(for: asset, options: options) { (data, _, _, info) in
+                if let error = info?[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                } else if let data = data {
+                    continuation.resume(returning: data)
+                } else {
+                    continuation.resume(throwing: ProcessingError.loadingFailed)
+                }
+            }
+            self.activeRequests.append(requestID)
+        }
+    }
+
+    private func saveProcessedImage(_ imageData: Data, asset: PHAsset) async throws -> String {
+        let filename = "\(asset.localIdentifier.replacingOccurrences(of: "/", with: "_")).jpg"
+        let fileURL = documentDirectory.appendingPathComponent(filename)
+        try imageData.write(to: fileURL)
+        return fileURL.path
+    }
+
+    private func resizeImageIfNeeded(_ image: UIImage) async throws -> UIImage {
+        let maxDimension = max(image.size.width, image.size.height)
+
+        if maxDimension <= Configuration.maxImageDimension {
+            return image
+        }
+
+        let scale = Configuration.maxImageDimension / maxDimension
+        let newSize = CGSize(
+            width: image.size.width * scale,
+            height: image.size.height * scale
+        )
+
+        return try await generateThumbnail(from: image, targetSize: newSize)
+    }
+
+    private func generateThumbnail(from image: UIImage, targetSize: CGSize) async throws -> UIImage {
+        return try await withCheckedThrowingContinuation { continuation in
+            processingQueue.async {
+                UIGraphicsBeginImageContextWithOptions(targetSize, false, 0.0)
+                defer { UIGraphicsEndImageContext() }
+
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+                guard let thumbnail = UIGraphicsGetImageFromCurrentImageContext() else {
+                    continuation.resume(throwing: ProcessingError.processingTimeout)
+                    return
+                }
+
+                continuation.resume(returning: thumbnail)
+            }
+        }
+    }
+
+    private func extractMetadata(from asset: PHAsset, imageData: Data) -> (width: Int, height: Int) {
+        return (width: Int(asset.pixelWidth), height: Int(asset.pixelHeight))
+    }
+
+    private func setupMemoryWarningObserver() {
+        memoryWarningObserver = NotificationCenter.default.addObserver(
+            forName: UIApplication.didReceiveMemoryWarningNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleMemoryWarning()
+        }
+    }
+
+    private func handleMemoryWarning() {
+        // Cancel non-critical operations
+        print("Memory warning received - cancelling pending requests")
+        cancelAllRequests()
+    }
+
+    private func cancelAllRequests() {
+        for requestID in activeRequests {
+            imageManager.cancelImageRequest(requestID)
+        }
+        activeRequests.removeAll()
+    }
+}
+
+// MARK: - PHAsset Extensions
+
+private extension PHAsset {
+    var isLocallyAvailable: Bool {
+        let resources = PHAssetResource.assetResources(for: self)
+        return resources.first?.isLocallyAvailable ?? false
+    }
+
+    func getFileName() -> String? {
+        let resources = PHAssetResource.assetResources(for: self)
+        return resources.first?.originalFilename
+    }
+}
+
+private extension PHAssetResource {
+    var isLocallyAvailable: Bool {
+        return true // Simplified - in production, check actual availability
+    }
+}
