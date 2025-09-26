@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,6 +31,8 @@
 		69D13F17E6B32EBF5A4B4329 /* ParentalLockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783661A45C6F93B87579E53 /* ParentalLockViewModel.swift */; };
 		73EC80CD1D10F4F595C113C3 /* SmilePileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A78DE44A20DA8D396B70F /* SmilePileApp.swift */; };
 		7B1A8A11BDB0A47A77E78B2C /* Nunito-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A26BA7ED19AABAFD4FF58997 /* Nunito-Variable.ttf */; };
+		7B6BD9BF2E86442500E42F09 /* AppHeaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BD9BD2E86442500E42F09 /* AppHeaderComponent.swift */; };
+		7B6BD9C02E86442500E42F09 /* SmilePileLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BD9BE2E86442500E42F09 /* SmilePileLogo.swift */; };
 		7DCCDDAEA8D4592986694968 /* PINManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5803597A1303D9E5A0FCD7C6 /* PINManager.swift */; };
 		7FF4355783D8B771086B776A /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17E1EEFB745A80D9DFBC6DA1 /* Nunito-ExtraBold.ttf */; };
 		842A2D29D57E47C366E77C8D /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C605038760638BF9091F8 /* PhotoGalleryView.swift */; };
@@ -64,7 +66,7 @@
 		07B54FAD23370C51854A39DD /* StorageResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageResult.swift; sourceTree = "<group>"; };
 		166EDD4A9300E56C0FFB5869 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		16877539C3998DB11CD3E933 /* PatternLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternLockView.swift; sourceTree = "<group>"; };
-		17E1EEFB745A80D9DFBC6DA1 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		17E1EEFB745A80D9DFBC6DA1 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		1899FB538E71833D534C4F75 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		21F77AADCC84C1780C58F131 /* AddCategorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategorySheet.swift; sourceTree = "<group>"; };
 		26988984D6E7232093C77846 /* KidsModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsModeViewModel.swift; sourceTree = "<group>"; };
@@ -81,11 +83,13 @@
 		5803597A1303D9E5A0FCD7C6 /* PINManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINManager.swift; sourceTree = "<group>"; };
 		58803E3EB913924D6DAF7271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5FCBAE07E101E4DC17B94D0C /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
+		7B6BD9BD2E86442500E42F09 /* AppHeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderComponent.swift; sourceTree = "<group>"; };
+		7B6BD9BE2E86442500E42F09 /* SmilePileLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileLogo.swift; sourceTree = "<group>"; };
 		9B03B88614350FD775947032 /* PINEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINEntryViewModel.swift; sourceTree = "<group>"; };
 		9B55CC1548499D6099A42899 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		9F6E35A47CD8C9EB49C07E05 /* CategoryManagementCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementCard.swift; sourceTree = "<group>"; };
 		A26BA7ED19AABAFD4FF58997 /* Nunito-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Variable.ttf"; sourceTree = "<group>"; };
-		A3B3937B68BE902660E7C314 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		A3B3937B68BE902660E7C314 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		A44807AB142D720569372B92 /* FontDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDebug.swift; sourceTree = "<group>"; };
 		AE3D2EEF20BCF298FCA33E1C /* SmilePile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmilePile.xcdatamodel; sourceTree = "<group>"; };
 		AF1D36A705623A877CDADCE7 /* CategoryChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChip.swift; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 		E3AC4449FA1E70729D6392F4 /* ParentalControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControlsView.swift; sourceTree = "<group>"; };
 		E4B570F571122E5D7A85C70D /* RepositoryErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryErrors.swift; sourceTree = "<group>"; };
 		EDDB65379400AF77EF5E5CD8 /* PhotoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewModel.swift; sourceTree = "<group>"; };
-		FBCF0493DC32C504A9684400 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		FBCF0493DC32C504A9684400 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		FE8206A6497390E29B2152E2 /* SmilePile.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SmilePile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A78DE44A20DA8D396B70F /* SmilePileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,8 @@
 		3E36693659E7B635FE3A3EEA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7B6BD9BD2E86442500E42F09 /* AppHeaderComponent.swift */,
+				7B6BD9BE2E86442500E42F09 /* SmilePileLogo.swift */,
 				5FCBAE07E101E4DC17B94D0C /* CategoryManagementView.swift */,
 				166EDD4A9300E56C0FFB5869 /* ContentView.swift */,
 				CC375BDB8830F052461FD282 /* ParentalLockView.swift */,
@@ -321,7 +327,6 @@
 			);
 			mainGroup = 5488C8A0945F8CCD46132EDC;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -352,6 +357,8 @@
 			files = (
 				30A084339C86838D6F2F8C1B /* AddCategorySheet.swift in Sources */,
 				48BBADCBA44D96B152EF39F7 /* CategoryChip.swift in Sources */,
+				7B6BD9BF2E86442500E42F09 /* AppHeaderComponent.swift in Sources */,
+				7B6BD9C02E86442500E42F09 /* SmilePileLogo.swift in Sources */,
 				503506FC646AE53B2D1ED7FD /* CategoryEntity+Extensions.swift in Sources */,
 				C7AAF3CF7F7056C23779E48D /* CategoryManagementCard.swift in Sources */,
 				DC89738AEFE41DF08E7264B1 /* CategoryManagementView.swift in Sources */,

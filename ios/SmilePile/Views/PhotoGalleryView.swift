@@ -14,12 +14,21 @@ struct PhotoGalleryView: View {
     private let photoRepository = PhotoRepositoryImpl()
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if !isKidsMode {
-                    categoryFilterBar
+        ZStack {
+            VStack(spacing: 0) {
+                // AppHeader with SmilePile logo and eye button
+                AppHeaderComponent(
+                    onViewModeClick: {
+                        isKidsMode.toggle()
+                    },
+                    showViewModeButton: true
+                ) {
+                    if !categories.isEmpty {
+                        categoryFilterBar
+                    }
                 }
 
+                // Photo Grid
                 ScrollView {
                     LazyVGrid(columns: [
                         GridItem(.flexible()),
@@ -34,49 +43,40 @@ struct PhotoGalleryView: View {
                                 }
                         }
                     }
+                    .padding(.bottom, 80) // Space for FAB
                 }
-
-                Spacer()
             }
-            .navigationTitle("SmilePile")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+            .ignoresSafeArea(edges: .top)
+
+            // Floating Action Button
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
                     Button(action: {
                         showingImportPicker = true
                     }) {
-                        Image(systemName: "plus.circle")
-                            .font(.title2)
+                        Image(systemName: "plus")
+                            .font(.title.weight(.semibold))
+                            .foregroundColor(.white)
+                            .frame(width: 56, height: 56)
+                            .background(Color(hex: "#E91E63") ?? .pink)
+                            .clipShape(Circle())
+                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                     }
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        isKidsMode.toggle()
-                    }) {
-                        HStack {
-                            Image(systemName: isKidsMode ? "face.smiling" : "person.fill")
-                            Text(isKidsMode ? "Kids" : "Parent")
-                                .font(.caption)
-                        }
-                    }
+                    .padding()
                 }
             }
         }
         .onAppear {
             loadCategories()
         }
-        .fullScreenCover(isPresented: $showingPhotoEditor) {
-            PhotoEditView(
-                photos: selectedPhotos.isEmpty ? nil : selectedPhotos,
-                imageURLs: importedImageURLs.isEmpty ? nil : importedImageURLs,
-                initialCategoryId: selectedCategory?.id ?? 1
-            )
-            .onDisappear {
-                selectedPhotos = []
-                importedImageURLs = []
-                // Reload photos after editing
-                loadCategories()
+        .sheet(isPresented: $showingPhotoEditor) {
+            if !selectedPhotos.isEmpty {
+                PhotoEditorView(photos: selectedPhotos) { editedPhotos in
+                    // Handle edited photos
+                    showingPhotoEditor = false
+                }
             }
         }
         .fileImporter(
@@ -87,27 +87,34 @@ struct PhotoGalleryView: View {
             switch result {
             case .success(let urls):
                 importedImageURLs = urls
+                selectedPhotos = urls.map { url in
+                    Photo(
+                        path: url.absoluteString,
+                        categoryId: selectedCategory?.id ?? 0
+                    )
+                }
                 showingPhotoEditor = true
             case .failure(let error):
-                print("Import failed: \(error)")
+                print("Import error: \(error)")
             }
         }
     }
 
-    @ViewBuilder
     private var categoryFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
+                // All Photos chip
                 CategoryChip(
-                    displayName: "All",
-                    colorHex: "#808080",
+                    displayName: "All Photos",
+                    colorHex: "#9E9E9E",
                     isSelected: selectedCategory == nil,
                     onTap: {
                         selectedCategory = nil
                     }
                 )
 
-                ForEach(categories, id: \.id) { category in
+                // Category chips
+                ForEach(categories) { category in
                     CategoryChip(
                         displayName: category.displayName,
                         colorHex: category.colorHex ?? "#4CAF50",
@@ -118,8 +125,18 @@ struct PhotoGalleryView: View {
                     )
                 }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 16)
             .padding(.vertical, 8)
+        }
+    }
+
+    // Mock photos for testing
+    private var mockPhotos: [Photo] {
+        return (1...12).map { index in
+            Photo(
+                path: "photo_\(index)",
+                categoryId: selectedCategory?.id ?? 0
+            )
         }
     }
 
@@ -132,18 +149,6 @@ struct PhotoGalleryView: View {
             }
         }
     }
-
-    // Temporary mock data for testing
-    private var mockPhotos: [Photo] {
-        (1...12).map { index in
-            Photo(
-                id: Int64(index),
-                path: "/mock/photo\(index).jpg",
-                categoryId: Int64((index % 4) + 1),
-                name: "Photo \(index)"
-            )
-        }
-    }
 }
 
 struct PhotoThumbnail: View {
@@ -151,18 +156,41 @@ struct PhotoThumbnail: View {
 
     var body: some View {
         Rectangle()
-            .fill(Color.gray.opacity(0.2))
+            .fill(Color.gray.opacity(0.3))
             .aspectRatio(1, contentMode: .fit)
             .overlay(
-                VStack {
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .foregroundColor(.gray.opacity(0.5))
-                    Text(photo.displayName)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
+                Image(systemName: "photo")
+                    .font(.largeTitle)
+                    .foregroundColor(.gray.opacity(0.5))
             )
+    }
+}
+
+struct PhotoEditorView: View {
+    let photos: [Photo]
+    let onComplete: ([Photo]) -> Void
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Photo Editor")
+                    .font(.largeTitle)
+                    .padding()
+
+                Text("\(photos.count) photo(s) selected")
+                    .foregroundColor(.secondary)
+
+                Spacer()
+
+                Button("Done") {
+                    onComplete(photos)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+            }
+            .navigationTitle("Edit Photos")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

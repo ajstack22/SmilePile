@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- Bottom-left green circle with rotated eyes -->
+  <circle cx="80" cy="176" r="64" fill="#4CAF50"/>
+
+  <!-- Bottom-left eyes (rotated -135 degrees) -->
+  <g transform="rotate(-135 80 176)">
+    <circle cx="64" cy="164" r="8" fill="#212121"/>
+    <circle cx="96" cy="164" r="8" fill="#212121"/>
+  </g>
+
+  <!-- Bottom-right blue circle with rotated eyes -->
+  <circle cx="176" cy="176" r="64" fill="#2196F3"/>
+
+  <!-- Bottom-right eyes (rotated 135 degrees) -->
+  <g transform="rotate(135 176 176)">
+    <circle cx="160" cy="164" r="8" fill="#212121"/>
+    <circle cx="192" cy="164" r="8" fill="#212121"/>
+  </g>
+
+  <!-- Top-right bold orange circle with rotated eyes -->
+  <circle cx="176" cy="80" r="64" fill="#FF6600"/>
+
+  <!-- Top-right eyes (rotated 45 degrees) -->
+  <g transform="rotate(45 176 80)">
+    <circle cx="160" cy="68" r="8" fill="#212121"/>
+    <circle cx="192" cy="68" r="8" fill="#212121"/>
+  </g>
+
+  <!-- Top-left pink circle with rotated eyes -->
+  <circle cx="80" cy="80" r="64" fill="#E91E63"/>
+
+  <!-- Top-left eyes (rotated -45 degrees) -->
+  <g transform="rotate(-45 80 80)">
+    <circle cx="64" cy="68" r="8" fill="#212121"/>
+    <circle cx="96" cy="68" r="8" fill="#212121"/>
+  </g>
+
+  <!-- Center golden smiley -->
+  <circle cx="128" cy="128" r="64" fill="#FFBF00"/>
+
+  <!-- Center eyes -->
+  <circle cx="112" cy="116" r="8" fill="#212121"/>
+  <circle cx="144" cy="116" r="8" fill="#212121"/>
+
+  <!-- Center smile -->
+  <path d="M 112 136 Q 128 152 144 136" stroke="#212121" stroke-width="12" stroke-linecap="round" fill="none"/>
+</svg>

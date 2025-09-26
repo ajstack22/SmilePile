@@ -23,6 +23,7 @@ struct ContentView: View {
                             .onTapGesture {
                                 handleTripleTap()
                             }
+                            .padding(.top, 50) // Account for status bar
                     }
             } else {
                 // Parent Mode View
@@ -88,23 +89,32 @@ struct KidsModeView: View {
     @State private var showFullscreen = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Category Filter Bar
-            if !viewModel.categories.isEmpty {
-                categoryFilterBar
-            }
+        ZStack {
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea()
 
-            // Photo Gallery
-            if viewModel.photos.isEmpty {
-                EmptyGalleryView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                photoGallery
+            VStack(spacing: 0) {
+                // AppHeader with category filter
+                AppHeaderComponent(
+                    onViewModeClick: {
+                        // Switch to grid view or other view mode
+                    },
+                    showViewModeButton: false // Hide in Kids Mode
+                ) {
+                    if !viewModel.categories.isEmpty {
+                        categoryFilterBar
+                    }
+                }
+
+                // Photo Gallery
+                if viewModel.photos.isEmpty {
+                    EmptyGalleryView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    photoGallery
+                }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor.systemBackground))
-        .ignoresSafeArea()
         .fullScreenCover(isPresented: $showFullscreen) {
             if let index = selectedPhotoIndex {
                 PhotoViewerView(
@@ -137,10 +147,9 @@ struct KidsModeView: View {
                     )
                 }
             }
-            .padding()
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
         }
-        .background(Color(UIColor.systemBackground))
-        .shadow(radius: 2)
     }
 
     private var photoGallery: some View {
@@ -403,8 +412,6 @@ struct PhotoViewerPage: View {
         }
     }
 }
-
-
 
 #Preview {
     ContentView()
