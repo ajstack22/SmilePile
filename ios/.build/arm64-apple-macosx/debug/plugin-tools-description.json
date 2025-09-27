@@ -32,6 +32,30 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupScheduler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ExportManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/RestoreManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ZipUtils.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CategoryEntity+Extensions.swift"
         },
         {
@@ -49,6 +73,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataStack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Managers/CategoryManager.swift"
         },
         {
           "kind" : "file",
@@ -84,6 +112,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportSession.swift"
         },
         {
@@ -108,6 +140,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ShareManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ThemeManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Models/Photo.swift"
         },
         {
@@ -128,7 +168,19 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Settings/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/SmilePileApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Tests/EnhancedPhotoViewerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/DuplicateDetector.swift"
         },
         {
           "kind" : "file",
@@ -152,11 +204,27 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoMetadataExtractor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoOptimizer.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ThumbnailSizeManager.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/BackupViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryManagementViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryViewModel.swift"
         },
         {
           "kind" : "file",
@@ -188,11 +256,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ThemeViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/AppHeaderComponent.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/BatchCategorizationView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementViewEnhanced.swift"
         },
         {
           "kind" : "file",
@@ -201,6 +281,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryChip.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryFilterView.swift"
         },
         {
           "kind" : "file",
@@ -228,11 +312,35 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailWithCategory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ShareSheetView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoImportView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/CategoryFilterView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsModeGalleryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsPhotoViewer.swift"
         },
         {
           "kind" : "file",
@@ -280,6 +388,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/CategorySelectionView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/SmilePileLogo.swift"
         },
         {
@@ -300,11 +412,18 @@
       "moduleOutputPath" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/Modules/SmilePile.swiftmodule",
       "objects" : [
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/DIContainer.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupModels.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupScheduler.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ExportManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/RestoreManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ZipUtils.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryEntity+Extensions.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CoreDataExtensions.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CoreDataMigrationManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CoreDataPublisher.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CoreDataStack.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryRepository.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryRepositoryImpl.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoRepository.swift.o",
@@ -313,25 +432,35 @@
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoImportCoordinator.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ImageProcessor.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportCoordinator.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportSession.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SafeThumbnailGenerator.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/StorageManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/StorageResult.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/FontDebug.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/FontManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/Photo.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KeychainManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PINManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PatternManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoLibraryPermissionManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SettingsManager.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SmilePileApp.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoViewerTests.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/DuplicateDetector.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ErrorHandling.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/FileManagerExtensions.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/MemoryMonitor.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/OptimizedImageCache.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoAssetProcessor.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoMetadataExtractor.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoOptimizer.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThumbnailSizeManager.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewModel.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsModeViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PINEntryViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ParentalLockViewModel.swift.o",
@@ -339,18 +468,28 @@
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoEditViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoGalleryViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SecuritySettingsViewModel.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeViewModel.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/AppHeaderComponent.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BatchCategorizationView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementView.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewEnhanced.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/AsyncImageView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryChip.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementCard.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ColorSelectionButton.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CropOverlayView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/FloatingActionButton.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/MaterialTabBar.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoThumbnailView.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoThumbnailWithCategory.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareSheetView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ContentView.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoImportView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoViewer.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsModeGalleryView.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsPhotoViewer.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/OptimizedPhotoGalleryView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PINEntryView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ParentalLockView.swift.o",
@@ -362,6 +501,7 @@
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ParentalControlsView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SecuritySettingsView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/AddCategorySheet.swift.o",
+        "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategorySelectionView.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SmilePileLogo.swift.o",
         "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ToastManager.swift.o"
       ],
@@ -423,6 +563,30 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupScheduler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ExportManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/RestoreManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ZipUtils.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryEntity+Extensions.swift.o"
         },
         {
@@ -440,6 +604,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CoreDataStack.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManager.swift.o"
         },
         {
           "kind" : "file",
@@ -475,6 +643,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportManager.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportSession.swift.o"
         },
         {
@@ -499,6 +671,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeManager.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/Photo.swift.o"
         },
         {
@@ -519,7 +699,19 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SmilePileApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoViewerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/DuplicateDetector.swift.o"
         },
         {
           "kind" : "file",
@@ -543,11 +735,27 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoMetadataExtractor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoOptimizer.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThumbnailSizeManager.swift.o"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryViewModel.swift.o"
         },
         {
           "kind" : "file",
@@ -579,11 +787,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/AppHeaderComponent.swift.o"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BatchCategorizationView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewEnhanced.swift.o"
         },
         {
           "kind" : "file",
@@ -592,6 +812,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryChip.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o"
         },
         {
           "kind" : "file",
@@ -619,11 +843,35 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoThumbnailWithCategory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareSheetView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ContentView.swift.o"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoImportView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoViewer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsModeGalleryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsPhotoViewer.swift.o"
         },
         {
           "kind" : "file",
@@ -671,6 +919,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategorySelectionView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SmilePileLogo.swift.o"
         },
         {
@@ -685,11 +937,18 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/adamstack/SmilePile/ios/SmilePile/Core/DI/DIContainer.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupModels.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupScheduler.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ExportManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/RestoreManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ZipUtils.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CategoryEntity+Extensions.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataExtensions.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataMigrationManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataPublisher.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataStack.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Managers/CategoryManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/CategoryRepository.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/CategoryRepositoryImpl.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/PhotoRepository.swift",
@@ -698,25 +957,35 @@
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/ImageProcessor.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportSession.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/SafeThumbnailGenerator.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageResult.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/FontDebug.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/FontManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ShareManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ThemeManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Models/Photo.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Security/KeychainManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Security/PINManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Security/PatternManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Security/PhotoLibraryPermissionManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Settings/SettingsManager.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/SmilePileApp.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Tests/EnhancedPhotoViewerTests.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Utils/DuplicateDetector.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ErrorHandling.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/FileManagerExtensions.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/MemoryMonitor.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoAssetProcessor.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoMetadataExtractor.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoOptimizer.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ThumbnailSizeManager.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/BackupViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryManagementViewModel.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/KidsModeViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PINEntryViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ParentalLockViewModel.swift",
@@ -724,18 +993,28 @@
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoGalleryViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/SecuritySettingsViewModel.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ThemeViewModel.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/AppHeaderComponent.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/BatchCategorizationView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementView.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementViewEnhanced.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/AsyncImageView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryChip.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryFilterView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryManagementCard.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ColorSelectionButton.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CropOverlayView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/FloatingActionButton.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/MaterialTabBar.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailView.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailWithCategory.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ShareSheetView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoImportView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/CategoryFilterView.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsModeGalleryView.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsPhotoViewer.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/OptimizedPhotoGalleryView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/PINEntryView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/ParentalLockView.swift",
@@ -747,6 +1026,7 @@
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Settings/ParentalControlsView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Settings/SecuritySettingsView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/AddCategorySheet.swift",
+        "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/CategorySelectionView.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/SmilePileLogo.swift",
         "/Users/adamstack/SmilePile/ios/SmilePile/Views/Toast/ToastManager.swift"
       ],
@@ -1028,11 +1308,18 @@
       "-incremental",
       "-c",
       "/Users/adamstack/SmilePile/ios/SmilePile/Core/DI/DIContainer.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupModels.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupScheduler.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ExportManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/RestoreManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ZipUtils.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CategoryEntity+Extensions.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataExtensions.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataMigrationManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataPublisher.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataStack.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Managers/CategoryManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/CategoryRepository.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/CategoryRepositoryImpl.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Repositories/PhotoRepository.swift",
@@ -1041,25 +1328,35 @@
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/EnhancedPhotoImportCoordinator.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/ImageProcessor.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportCoordinator.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportSession.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/SafeThumbnailGenerator.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/StorageResult.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/FontDebug.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/FontManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ShareManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ThemeManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Models/Photo.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Security/KeychainManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Security/PINManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Security/PatternManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Security/PhotoLibraryPermissionManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Settings/SettingsManager.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/SmilePileApp.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Tests/EnhancedPhotoViewerTests.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Utils/DuplicateDetector.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ErrorHandling.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/FileManagerExtensions.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/MemoryMonitor.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/OptimizedImageCache.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoAssetProcessor.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoMetadataExtractor.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoOptimizer.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ThumbnailSizeManager.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/BackupViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryManagementViewModel.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/KidsModeViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PINEntryViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ParentalLockViewModel.swift",
@@ -1067,18 +1364,28 @@
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoEditViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/PhotoGalleryViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/SecuritySettingsViewModel.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ThemeViewModel.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/AppHeaderComponent.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/BatchCategorizationView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementView.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementViewEnhanced.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/AsyncImageView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryChip.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryFilterView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryManagementCard.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ColorSelectionButton.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CropOverlayView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/FloatingActionButton.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/MaterialTabBar.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailView.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailWithCategory.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ShareSheetView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoImportView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/CategoryFilterView.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsModeGalleryView.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsPhotoViewer.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/OptimizedPhotoGalleryView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/PINEntryView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/ParentalLockView.swift",
@@ -1090,6 +1397,7 @@
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Settings/ParentalControlsView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Settings/SecuritySettingsView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/AddCategorySheet.swift",
+      "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/CategorySelectionView.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/SmilePileLogo.swift",
       "/Users/adamstack/SmilePile/ios/SmilePile/Views/Toast/ToastManager.swift",
       "-I",
@@ -1321,6 +1629,30 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/BackupScheduler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ExportManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/RestoreManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Backup/ZipUtils.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CategoryEntity+Extensions.swift"
         },
         {
@@ -1338,6 +1670,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/CoreData/CoreDataStack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Managers/CategoryManager.swift"
         },
         {
           "kind" : "file",
@@ -1373,6 +1709,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Data/Storage/PhotoImportSession.swift"
         },
         {
@@ -1397,6 +1737,14 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ShareManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Managers/ThemeManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Models/Photo.swift"
         },
         {
@@ -1417,7 +1765,19 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Settings/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/SmilePileApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Tests/EnhancedPhotoViewerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/DuplicateDetector.swift"
         },
         {
           "kind" : "file",
@@ -1441,11 +1801,27 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoMetadataExtractor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/PhotoOptimizer.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Utils/ThumbnailSizeManager.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/BackupViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryManagementViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/CategoryViewModel.swift"
         },
         {
           "kind" : "file",
@@ -1477,11 +1853,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/ViewModels/ThemeViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/AppHeaderComponent.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/BatchCategorizationView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/CategoryManagementViewEnhanced.swift"
         },
         {
           "kind" : "file",
@@ -1490,6 +1878,10 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryChip.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/CategoryFilterView.swift"
         },
         {
           "kind" : "file",
@@ -1517,11 +1909,35 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/PhotoThumbnailWithCategory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Components/ShareSheetView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/ContentView.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoImportView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/EnhancedPhotoViewer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/CategoryFilterView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsModeGalleryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/KidsMode/KidsPhotoViewer.swift"
         },
         {
           "kind" : "file",
@@ -1569,6 +1985,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/Sheets/CategorySelectionView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/SmilePile/Views/SmilePileLogo.swift"
         },
         {
@@ -1613,11 +2033,39 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupScheduler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BackupViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/BatchCategorizationView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryChip.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryEntity+Extensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryFilterView.swift.o"
         },
         {
           "kind" : "file",
@@ -1629,7 +2077,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewEnhanced.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManagementViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryManager.swift.o"
         },
         {
           "kind" : "file",
@@ -1638,6 +2094,14 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryRepositoryImpl.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategorySelectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/CategoryViewModel.swift.o"
         },
         {
           "kind" : "file",
@@ -1673,7 +2137,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/DuplicateDetector.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoImportCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoImportView.swift.o"
         },
         {
           "kind" : "file",
@@ -1681,7 +2153,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/EnhancedPhotoViewerTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ErrorHandling.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ExportManager.swift.o"
         },
         {
           "kind" : "file",
@@ -1709,7 +2189,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsModeGalleryView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsModeViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/KidsPhotoViewer.swift.o"
         },
         {
           "kind" : "file",
@@ -1797,11 +2285,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportManager.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoImportSession.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoLibraryPermissionManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoMetadataExtractor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoOptimizer.swift.o"
         },
         {
           "kind" : "file",
@@ -1821,7 +2321,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/PhotoThumbnailWithCategory.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/RepositoryErrors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/RestoreManager.swift.o"
         },
         {
           "kind" : "file",
@@ -1834,6 +2342,18 @@
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SecuritySettingsViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ShareSheetView.swift.o"
         },
         {
           "kind" : "file",
@@ -1853,11 +2373,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThemeViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ThumbnailSizeManager.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ToastManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adamstack/SmilePile/ios/.build/arm64-apple-macosx/debug/SmilePile.build/ZipUtils.swift.o"
         },
         {
           "kind" : "file",

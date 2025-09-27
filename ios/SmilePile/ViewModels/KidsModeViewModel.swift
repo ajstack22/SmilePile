@@ -9,8 +9,7 @@ class KidsModeViewModel: ObservableObject {
     @Published var photos: [Photo] = []
     @Published var categories: [Category] = []
     @Published var requiresPINAuth = false
-    @Published var toastMessage: String?
-    @Published var toastColor: Color?
+    // Toast properties removed - now using centralized ToastManager
 
     // Swipe navigation properties
     @Published var lastCategorySwipeTime = Date.distantPast
@@ -90,18 +89,8 @@ class KidsModeViewModel: ObservableObject {
     }
 
     func showCategoryToast(_ category: Category) {
-        withAnimation {
-            toastMessage = category.displayName
-            toastColor = category.color
-        }
-
-        // Auto-hide after 2 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation {
-                self.toastMessage = nil
-                self.toastColor = nil
-            }
-        }
+        // Use centralized ToastManager for category toasts
+        ToastManager.shared.showCategoryToast(category)
     }
 
     // Mock data for testing

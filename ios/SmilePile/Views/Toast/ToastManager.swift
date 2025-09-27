@@ -107,6 +107,12 @@ class ToastManager: ObservableObject {
     @Published var currentToast: ToastItem?
     private var toastQueue: [ToastItem] = []
     private var cancellable: AnyCancellable?
+    private var isAnimating = false
+
+    // Toast duration constants matching Android
+    static let TOAST_DURATION_SHORT: TimeInterval = 2.0  // 2000ms in Android
+    static let TOAST_DURATION_DEFAULT: TimeInterval = 3.0  // 3000ms in Android
+    static let TOAST_DURATION_LONG: TimeInterval = 5.0  // 5000ms in Android
 
     private init() {}
 
@@ -114,7 +120,7 @@ class ToastManager: ObservableObject {
         _ message: String,
         type: ToastType = .info,
         position: ToastPosition? = nil,
-        duration: TimeInterval = 3.0,
+        duration: TimeInterval = ToastManager.TOAST_DURATION_DEFAULT,
         showIcon: Bool = true
     ) {
         let toast = ToastItem(
@@ -125,11 +131,11 @@ class ToastManager: ObservableObject {
             showIcon: showIcon
         )
 
-        // If no toast is showing, show immediately
-        if currentToast == nil {
+        // FIFO queue management - if no toast is showing, show immediately
+        if currentToast == nil && !isAnimating {
             showToast(toast)
         } else {
-            // Queue the toast
+            // Queue the toast (FIFO)
             toastQueue.append(toast)
         }
     }
@@ -140,11 +146,12 @@ class ToastManager: ObservableObject {
             category.displayName,
             type: .category(name: category.displayName, color: color),
             position: .categoryTop,
-            duration: 2.0
+            duration: ToastManager.TOAST_DURATION_SHORT  // 2-second for category toasts matching Android
         )
     }
 
     private func showToast(_ toast: ToastItem) {
+        isAnimating = true
         withAnimation(.easeInOut(duration: 0.3)) {
             currentToast = toast
         }
@@ -160,19 +167,45 @@ class ToastManager: ObservableObject {
     }
 
     func dismiss() {
+        isAnimating = true
         withAnimation(.easeInOut(duration: 0.3)) {
             currentToast = nil
         }
 
-        // Show next toast in queue after a small delay
+        // Show next toast in queue after animation completes (300ms animation + small buffer)
         if !toastQueue.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                self.isAnimating = false
                 if let nextToast = self.toastQueue.first {
                     self.toastQueue.removeFirst()
                     self.showToast(nextToast)
                 }
             }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                self.isAnimating = false
+            }
         }
+    }
+
+    // Quick methods for common toasts matching Android
+    func showSuccess(_ message: String) {
+        show(message, type: .success, duration: ToastManager.TOAST_DURATION_DEFAULT)
+    }
+
+    func showError(_ message: String) {
+        show(message, type: .error, duration: ToastManager.TOAST_DURATION_LONG)
+    }
+
+    func showInfo(_ message: String) {
+        show(message, type: .info, duration: ToastManager.TOAST_DURATION_DEFAULT)
+    }
+
+    func clearQueue() {
+        toastQueue.removeAll()
+        cancellable?.cancel()
+        isAnimating = false
+        currentToast = nil
     }
 }
 
@@ -196,7 +229,7 @@ struct ToastView: View {
 
             Text(toast.message)
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(Color(UIColor.label))
+                .foregroundColor(textColor)
                 .lineLimit(2)
 
             Spacer()
@@ -210,10 +243,18 @@ struct ToastView: View {
         .offset(y: dragOffset.height)
         .opacity(isShowing ? 1 : 0)
         .scaleEffect(isShowing ? 1 : 0.8)
+        // Accessibility support
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint("Swipe to dismiss")
+        .accessibilityAddTraits(.isStaticText)
+        .accessibilityRemoveTraits(.isButton)
         .onAppear {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                 isShowing = true
             }
+            // Announce toast to VoiceOver users
+            UIAccessibility.post(notification: .announcement, argument: toast.message)
         }
         .onDisappear {
             isShowing = false
@@ -245,15 +286,48 @@ struct ToastView: View {
     @ViewBuilder
     private var backgroundView: some View {
         if case .category(_, let color) = toast.type {
-            // Category toast with colored background
-            ZStack {
-                color.opacity(0.15)
-                Color(UIColor.systemBackground).opacity(0.85)
-            }
+            // Category toast with colored background matching Android's CategoryToastUI
+            color.opacity(0.95)
         } else {
             // Standard toast background
             Color(UIColor.systemBackground)
                 .opacity(0.95)
+        }
+    }
+
+    // Calculate text color based on background luminance (matching Android)
+    private var textColor: Color {
+        if case .category(_, let color) = toast.type {
+            // Calculate luminance using the same formula as Android
+            // luminance = 0.299*R + 0.587*G + 0.114*B
+            let uiColor = UIColor(color)
+            var red: CGFloat = 0
+            var green: CGFloat = 0
+            var blue: CGFloat = 0
+            var alpha: CGFloat = 0
+
+            uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+            let luminance = 0.299 * red + 0.587 * green + 0.114 * blue
+
+            // Use white text on dark backgrounds, black on light
+            return luminance > 0.5 ? Color.black : Color.white
+        } else {
+            return Color(UIColor.label)
+        }
+    }
+
+    // Accessibility label for VoiceOver
+    private var accessibilityLabel: String {
+        switch toast.type {
+        case .success:
+            return "Success: \(toast.message)"
+        case .error:
+            return "Error: \(toast.message)"
+        case .info:
+            return "Information: \(toast.message)"
+        case .category:
+            return "Category selected: \(toast.message)"
         }
     }
 }

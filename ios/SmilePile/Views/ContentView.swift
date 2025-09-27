@@ -75,10 +75,11 @@ struct ContentView: View {
                 .ignoresSafeArea()
 
             if kidsModeViewModel.isKidsMode {
-                // Kids Mode View
-                KidsModeView(viewModel: kidsModeViewModel)
+                // Kids Mode View - Simplified implementation for toast testing
+                // KidsModeGalleryView(viewModel: kidsModeViewModel) // TODO: Add to Xcode project
+                KidsModePlaceholderView(viewModel: kidsModeViewModel)
                     .ignoresSafeArea()
-                    .persistentSystemOverlays(.hidden) // Hide home indicator in Kids Mode only
+                    // .persistentSystemOverlays(.hidden) // Hide home indicator in Kids Mode only (iOS 16+)
                     .overlay(alignment: .topTrailing) {
                         // Invisible 3-tap area in top-right corner for exiting Kids Mode
                         Color.clear
@@ -93,7 +94,7 @@ struct ContentView: View {
                 // Parent Mode View
                 ParentModeView()
                     .ignoresSafeArea()
-                    .persistentSystemOverlays(.visible) // Keep home indicator visible in Parent Mode
+                    // .persistentSystemOverlays(.visible) // Keep home indicator visible in Parent Mode (iOS 16+)
             }
         }
         .ignoresSafeArea()
@@ -325,6 +326,7 @@ struct ParentModeView: View {
 // MARK: - Settings View (temporary placeholder)
 struct SettingsView: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
+    @EnvironmentObject private var settingsManager: SettingsManager
     @State private var showPINSetup = false
     @State private var showPINChange = false
     @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
@@ -333,6 +335,36 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                // Theme Section - Priority 3 implementation
+                Section("Appearance") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Theme")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+
+                        Picker("Theme", selection: $settingsManager.themeMode) {
+                            Text("System").tag(SettingsManager.ThemeMode.system)
+                            Text("Light").tag(SettingsManager.ThemeMode.light)
+                            Text("Dark").tag(SettingsManager.ThemeMode.dark)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+
+                        HStack {
+                            Image(systemName: settingsManager.themeMode == .dark ||
+                                           (settingsManager.themeMode == .system && UITraitCollection.current.userInterfaceStyle == .dark) ?
+                                           "moon.fill" : "sun.max.fill")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            Text(settingsManager.themeMode == .dark ||
+                                (settingsManager.themeMode == .system && UITraitCollection.current.userInterfaceStyle == .dark) ?
+                                "Dark mode is active" : "Light mode is active")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+
                 Section("Kids Mode") {
                     Toggle("Kids Mode", isOn: $kidsModeViewModel.isKidsMode)
                         .onChange(of: kidsModeViewModel.isKidsMode) { newValue in
@@ -620,6 +652,65 @@ struct PhotoViewerPage: View {
                     }
                 }
                 .padding()
+        }
+    }
+}
+
+// MARK: - Kids Mode Placeholder
+private struct KidsModePlaceholderView: View {
+    @ObservedObject var viewModel: KidsModeViewModel
+
+    var body: some View {
+        ZStack {
+            Color.orange.opacity(0.1)
+
+            VStack(spacing: 20) {
+                Text("Kids Mode")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+
+                // Category buttons for testing toast
+                if !viewModel.categories.isEmpty {
+                    ForEach(viewModel.categories) { category in
+                        Button(action: {
+                            viewModel.selectCategory(category)
+                            viewModel.showCategoryToast(category)
+                        }) {
+                            Text(category.displayName)
+                                .padding()
+                                .background(category.color)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                } else {
+                    Text("Loading categories...")
+                        .foregroundColor(.secondary)
+                }
+
+                // Test toast buttons
+                VStack(spacing: 10) {
+                    Button("Test Success Toast") {
+                        ToastManager.shared.showSuccess("Photo saved successfully!")
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Button("Test Error Toast") {
+                        ToastManager.shared.showError("Failed to load photo")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+
+                    Button("Test Info Toast") {
+                        ToastManager.shared.showInfo("3 photos selected")
+                    }
+                    .buttonStyle(.bordered)
+                }
+                .padding(.top, 40)
+            }
+        }
+        .onAppear {
+            // Categories will be loaded by the view model automatically
         }
     }
 }
