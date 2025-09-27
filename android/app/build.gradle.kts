@@ -69,6 +69,29 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+
+            all {
+                // Configure JVM arguments for tests
+                it.jvmArgs("-XX:MaxMetaspaceSize=512m")
+
+                // Set system properties for Robolectric
+                it.systemProperty("robolectric.logging", "stdout")
+                it.systemProperty("robolectric.logging.enabled", "true")
+
+                // Configure test execution
+                it.maxParallelForks = 1
+                it.forkEvery = 100
+            }
+        }
+
+        // Configure test report generation
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -160,6 +183,11 @@ dependencies {
     testImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("org.mockito:mockito-core:5.5.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+
+    // Robolectric for Android system class testing
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:runner:1.5.2")
 
     // Compose Testing
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.00"))
