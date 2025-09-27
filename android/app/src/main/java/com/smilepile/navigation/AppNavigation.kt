@@ -164,13 +164,9 @@ fun AppNavHost(
         // Categories Screen - Category management interface
         composable(NavigationRoutes.CATEGORIES) {
             CategoryManagementScreen(
-                onNavigateToKidsMode = {
-                    modeViewModel.forceKidsMode()
-                    navController.navigate(NavigationRoutes.GALLERY) {
-                        popUpTo(NavigationRoutes.CATEGORIES) { inclusive = true }
-                    }
-                },
-                paddingValues = paddingValues
+                onNavigateBack = {
+                    navController.navigateUp()
+                }
             )
         }
 

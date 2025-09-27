@@ -254,6 +254,8 @@ fun CategoryFilterChip(
         ),
         border = if (isSelected) {
             FilterChipDefaults.filterChipBorder(
+                enabled = true,
+                selected = true,
                 borderColor = categoryColor,
                 selectedBorderColor = categoryColor,
                 borderWidth = 2.dp,
@@ -261,6 +263,8 @@ fun CategoryFilterChip(
             )
         } else {
             FilterChipDefaults.filterChipBorder(
+                enabled = true,
+                selected = false,
                 borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
             )
         }
