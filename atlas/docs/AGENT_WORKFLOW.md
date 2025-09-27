@@ -17,6 +17,7 @@ The Atlas workflow has evolved from manual script execution to an intelligent ag
 | Peer Reviewer | `peer-reviewer` | Quality & edge cases | Phases 4, 6 |
 | QA Tester | `general-purpose` | Testing & verification | Phase 6 |
 | Organizer | `general-purpose` | Clean-up & documentation | Phase 8 |
+| DevOps | `devops` | Deployment, CI/CD, quality gates | Phase 9 |
 
 ## Complete Workflow
 
@@ -30,7 +31,8 @@ graph TD
     F --> G[Phase 6: Testing]
     G --> H[Phase 7: Validation]
     H --> I[Phase 8: Clean-up]
-    I --> J[Complete]
+    I --> J[Phase 9: Deployment]
+    J --> K[Complete]
 
     B -.->|parallel search| B
     F -.->|parallel coding| F
@@ -333,8 +335,172 @@ Streamlined flow with parallel execution:
 - Organizer (clean up and document)
 ```
 
+## 🚨 CRITICAL: Deployment Methodology
+
+### MANDATORY: Use deploy_qual.sh for ALL Deployments
+
+After completing ANY feature implementation, bug fix, or change, you MUST use the quality deployment script. This is NOT optional.
+
+**Deployment Command:**
+```bash
+# Standard deployment (both platforms)
+./deploy/deploy_qual.sh both
+
+# Android only
+./deploy/deploy_qual.sh android
+
+# iOS only
+./deploy/deploy_qual.sh ios
+```
+
+### ⛔ NEVER Skip Tests Without Explicit Approval
+
+**ABSOLUTE RULE**: Tests must NEVER be skipped without explicit user approval. This includes:
+- NO skipping for convenience
+- NO skipping for "emergencies"
+- NO skipping for "quick fixes"
+- NO skipping for "minor changes"
+
+The user MUST explicitly approve test skipping with clear, unambiguous language.
+
+### Test Enforcement Protocol
+
+1. **DEFAULT BEHAVIOR**: Tests always run
+   ```bash
+   ./deploy/deploy_qual.sh both
+   # Tests run automatically - this is mandatory
+   ```
+
+2. **IF TESTS FAIL**:
+   - FIX the failing tests
+   - Do NOT proceed with deployment
+   - Do NOT look for workarounds
+   - Do NOT skip tests
+
+3. **REQUESTING PERMISSION TO SKIP**:
+   If you believe tests must be skipped:
+   - STOP the deployment
+   - EXPLAIN to the user:
+     - Which tests are failing
+     - Why they are failing
+     - Risks of skipping
+     - Recommended fixes
+   - WAIT for explicit written approval
+   - User must say: "Skip tests for this deployment" or equivalent
+   - Vague approvals are NOT sufficient
+
+4. **WITH EXPLICIT PERMISSION ONLY**:
+   ```bash
+   # ONLY after user explicitly approves in writing
+   SKIP_TESTS=true ./deploy/deploy_qual.sh both
+   ```
+
+### Quality Gates Enforced by deploy_qual.sh
+
+The deployment script automatically enforces:
+1. **Test Coverage**: ALL tests must pass (unless explicitly overridden)
+2. **Code Quality**: SonarCloud analysis must pass
+3. **Build Success**: Both platforms must build successfully
+4. **Clean Git State**: No uncommitted changes
+5. **Local Deployment**: Must deploy successfully to devices/emulators
+
+### Phase 9: Deployment (DevOps Agent)
+
+**Trigger Command:**
+```
+Launch a devops agent to deploy [STORY ID] using deploy_qual.sh.
+Ensure all tests pass, quality gates are met, and deployment is successful.
+Do NOT skip tests without explicit user approval.
+```
+
+**Agent Responsibilities:**
+- Run `deploy_qual.sh` with appropriate parameters
+- Monitor test execution (NEVER skip without permission)
+- Handle build processes for both platforms
+- Verify quality gates (SonarCloud, tests, etc.)
+- Create proper commit messages
+- Tag versions when appropriate
+- Report deployment status
+
+**Deployment Workflow:**
+
+```markdown
+## Phase 9: Quality Deployment (DevOps Agent)
+
+*Launch DevOps agent:*
+"Deploy the completed feature using deploy_qual.sh. Ensure all tests pass.
+If any tests fail, fix them before proceeding. Do not skip tests."
+
+*DevOps agent executes:*
+./deploy/deploy_qual.sh both
+
+*If tests fail:*
+- Agent reports specific failures
+- Agent attempts fixes or requests developer assistance
+- Agent does NOT skip tests without explicit permission
+
+*On success:*
+- Changes are committed to Git
+- Version is tagged if appropriate
+- Local deployment is verified
+- Quality metrics are recorded
+```
+
+### Emergency Override Protocol
+
+In EXTREMELY RARE cases where deployment must proceed despite failures:
+
+1. **EXPLAIN** the emergency situation in detail
+2. **GET** explicit written approval from user
+3. **DOCUMENT** everything:
+   ```bash
+   SKIP_TESTS=true \
+   SKIP_SONAR=true \
+   COMMIT_MESSAGE="emergency: [Detailed reason] - User explicitly approved bypassing checks" \
+   ./deploy/deploy_qual.sh both
+   ```
+4. **CREATE** immediate follow-up tasks to fix issues
+5. **NEVER** make this a habit or standard practice
+
+### Deployment Best Practices
+
+**DO**:
+- ✅ Always use deploy_qual.sh for deployments
+- ✅ Fix test failures before deploying
+- ✅ Include descriptive commit messages
+- ✅ Verify deployment success
+- ✅ Document any issues encountered
+
+**DON'T**:
+- ❌ Skip tests without explicit permission
+- ❌ Use manual git commits for feature code
+- ❌ Deploy with known failures
+- ❌ Bypass quality gates
+- ❌ Assume "small changes" don't need testing
+
+### Example Deployment Scenarios
+
+**Standard Feature Deployment:**
+```bash
+COMMIT_MESSAGE="feat: Add dark mode toggle" ./deploy/deploy_qual.sh both
+```
+
+**Bug Fix Deployment:**
+```bash
+COMMIT_MESSAGE="fix: Resolve photo import crash" ./deploy/deploy_qual.sh both
+```
+
+**Sprint Completion:**
+```bash
+COMMIT_MESSAGE="feat: Sprint 5 - Complete backup and sharing features" \
+TAG_VERSION=true \
+./deploy/deploy_qual.sh both
+```
+
 ## Conclusion
 
 The agent-driven Atlas workflow represents a paradigm shift from manual, sequential processes to intelligent, parallel execution. By leveraging specialized agents for each phase and enabling parallel operations, we achieve faster delivery with higher quality and better documentation.
 
-The key is not just using agents, but orchestrating them effectively - knowing when to parallelize, how to hand off context, and where human checkpoints add value. This approach scales from simple bug fixes to complex feature development, always maintaining the Atlas principles of quality and thoroughness.
+The deployment phase using `deploy_qual.sh` is MANDATORY and ensures that all code meets quality standards before being committed. Tests are NEVER skipped without explicit user approval - this is an absolute rule with no exceptions for convenience or emergencies.
+
+The key is not just using agents, but orchestrating them effectively - knowing when to parallelize, how to hand off context, and where human checkpoints add value. This approach scales from simple bug fixes to complex feature development, always maintaining the Atlas principles of quality and thoroughness, with deployment quality guaranteed by the mandatory use of deploy_qual.sh.

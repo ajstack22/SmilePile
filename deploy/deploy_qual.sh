@@ -18,6 +18,7 @@ export PROJECT_ROOT="$(dirname "$DEPLOY_ROOT")"
 # Source libraries
 source "${DEPLOY_ROOT}/lib/common.sh"
 source "${DEPLOY_ROOT}/lib/env_manager.sh"
+source "${DEPLOY_ROOT}/lib/build_number.sh"
 
 # ============================================================================
 # Configuration
@@ -274,11 +275,11 @@ deploy_android_local() {
         log SUCCESS "Deployed to device: $device"
     done
 
-    # Copy APK to artifacts
+    # Copy APK to artifacts with version number
     mkdir -p "$DEPLOY_ROOT/artifacts/qual"
     if [[ "$DRY_RUN" != "true" ]]; then
-        cp "$apk_path" "$DEPLOY_ROOT/artifacts/qual/SmilePile-qual-${DEPLOYMENT_ID}.apk"
-        log INFO "APK saved to artifacts"
+        cp "$apk_path" "$DEPLOY_ROOT/artifacts/qual/SmilePile-v${VERSION_NAME}-qual.apk"
+        log INFO "APK saved to artifacts as SmilePile-v${VERSION_NAME}-qual.apk"
     fi
 
     log SUCCESS "Android local deployment completed"
@@ -376,18 +377,15 @@ commit_to_github() {
         return 0
     fi
 
-    # Generate commit message
-    local commit_msg="${COMMIT_MESSAGE:-"qual: Deploy ${PLATFORM} - ${DEPLOYMENT_ID}"}"
+    # Generate commit message with version
+    local commit_msg="${COMMIT_MESSAGE:-"qual: Deploy ${PLATFORM} - v${VERSION_NAME}"}"
 
-    # Get version info
-    local version="unknown"
-    if [[ -f "$PROJECT_ROOT/android/app/build.gradle" ]]; then
-        version=$(grep "versionName" "$PROJECT_ROOT/android/app/build.gradle" | head -n1 | cut -d'"' -f2 || echo "unknown")
-    fi
+    # Version is already set by build_number.sh
+    local version="${VERSION_NAME}"
 
     if [[ "$DRY_RUN" == "true" ]]; then
         log INFO "DRY RUN: Would commit with message: $commit_msg"
-        log INFO "DRY RUN: Would tag as: qual-v${version}-${DEPLOYMENT_ID}"
+        log INFO "DRY RUN: Would tag as: v${version}"
         return 0
     fi
 
@@ -405,9 +403,9 @@ commit_to_github() {
 
     # Tag if requested
     if [[ "$TAG_VERSION" == "true" ]]; then
-        local tag_name="qual-v${version}-$(date +%Y%m%d-%H%M%S)"
+        local tag_name="v${version}"
         log INFO "Creating tag: $tag_name"
-        git tag -a "$tag_name" -m "Quality deployment: $DEPLOYMENT_ID"
+        git tag -a "$tag_name" -m "Release version ${version} - Quality deployment"
     fi
 
     # Push
@@ -432,6 +430,7 @@ QUALITY DEPLOYMENT COMPLETED
 ================================================================================
 
 Deployment ID:     $DEPLOYMENT_ID
+Version:           v$VERSION_NAME (Build $VERSION_CODE)
 Platform:          $PLATFORM
 Timestamp:         $(date)
 
@@ -501,6 +500,13 @@ main() {
 
     # Load quality environment
     load_environment "quality"
+
+    # Update version numbers using StackMap/Manylla methodology
+    log INFO "Updating build version..."
+    update_version_all_platforms "$PLATFORM" || {
+        log ERROR "Failed to update version numbers"
+        exit 1
+    }
 
     # Run tests
     if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
