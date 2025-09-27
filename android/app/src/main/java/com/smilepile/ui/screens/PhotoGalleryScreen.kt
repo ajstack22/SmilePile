@@ -438,7 +438,8 @@ private fun ImportProgressIndicator(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -451,34 +452,62 @@ private fun ImportProgressIndicator(
                 if (isBatchImport) {
                     CircularProgressIndicator(
                         progress = progress,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(24.dp),
+                        strokeWidth = 3.dp
                     )
                 } else {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(24.dp),
+                        strokeWidth = 3.dp
                     )
                 }
 
-                Column {
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
                     Text(
                         text = if (isBatchImport) "Importing Photos" else "Importing Photo",
-                        style = MaterialTheme.typography.titleSmall,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     if (isBatchImport) {
                         Text(
                             text = progressText,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                        )
+                        Text(
+                            text = "Processing: EXIF extraction, duplicate check, optimization",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f)
+                        )
+                    } else {
+                        Text(
+                            text = "Extracting metadata and optimizing...",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f)
                         )
                     }
+                }
+
+                // Show percentage
+                if (isBatchImport) {
+                    Text(
+                        text = "${(progress * 100).toInt()}%",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 }
             }
 
             if (isBatchImport) {
                 LinearProgressIndicator(
                     progress = progress,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    trackColor = MaterialTheme.colorScheme.primaryContainer,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }

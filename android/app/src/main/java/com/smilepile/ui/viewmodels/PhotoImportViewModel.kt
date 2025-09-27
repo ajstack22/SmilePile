@@ -8,6 +8,10 @@ import com.smilepile.data.models.Photo
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.storage.StorageManager
 import com.smilepile.storage.StorageResult
+import com.smilepile.storage.PhotoImportManager
+import com.smilepile.storage.ImportResult
+import com.smilepile.storage.PhotoMetadata
+import kotlinx.coroutines.flow.collect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,11 +24,13 @@ import javax.inject.Inject
  * ViewModel for handling photo import operations from device gallery.
  * Manages the import process including storage operations and database saves.
  * All imported photos are stored in internal storage only for privacy and security.
+ * Enhanced with PhotoImportManager for advanced features.
  */
 @HiltViewModel
 class PhotoImportViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
-    private val storageManager: StorageManager
+    private val storageManager: StorageManager,
+    private val photoImportManager: PhotoImportManager
 ) : ViewModel() {
 
     companion object {
@@ -37,7 +43,7 @@ class PhotoImportViewModel @Inject constructor(
     private var pendingCategoryId: Long = 1L // Default category for editor
 
     /**
-     * Import a single photo from the device gallery
+     * Import a single photo from the device gallery using enhanced PhotoImportManager
      */
     fun importPhoto(uri: Uri, categoryId: Long) {
         viewModelScope.launch {
@@ -57,37 +63,48 @@ class PhotoImportViewModel @Inject constructor(
                     return@launch
                 }
 
-                // Import photo to app's internal storage (all photos stored internally for security)
-                val storageResult = storageManager.importPhoto(uri)
-                if (storageResult == null) {
-                    _uiState.value = _uiState.value.copy(
-                        isImporting = false,
-                        error = "Failed to import photo. Please try again."
-                    )
-                    return@launch
-                }
+                // Import photo using PhotoImportManager
+                val result = photoImportManager.importPhoto(uri)
 
-                _uiState.value = _uiState.value.copy(importProgress = 0.5f)
+                when (result) {
+                    is ImportResult.Success -> {
+                        _uiState.value = _uiState.value.copy(importProgress = 0.5f)
 
-                // Create photo entity and save to database
-                val photo = createPhotoFromStorageResult(storageResult, categoryId)
-                val photoId = photoRepository.insertPhoto(photo)
+                        // Create photo entity with metadata and save to database
+                        val photo = createPhotoFromImportResult(result, categoryId)
+                        val photoId = photoRepository.insertPhoto(photo)
 
-                if (photoId > 0) {
-                    _uiState.value = _uiState.value.copy(
-                        isImporting = false,
-                        importProgress = 1f,
-                        lastImportedPhoto = photo.copy(id = photoId),
-                        successMessage = "Photo imported successfully"
-                    )
-                    Log.d(TAG, "Successfully imported photo with ID: $photoId")
-                } else {
-                    // Import failed, clean up storage
-                    storageManager.deletePhoto(storageResult.photoPath)
-                    _uiState.value = _uiState.value.copy(
-                        isImporting = false,
-                        error = "Failed to save photo to database"
-                    )
+                        if (photoId > 0) {
+                            _uiState.value = _uiState.value.copy(
+                                isImporting = false,
+                                importProgress = 1f,
+                                lastImportedPhoto = photo.copy(id = photoId),
+                                successMessage = "Photo imported successfully"
+                            )
+                            Log.d(TAG, "Successfully imported photo with ID: $photoId")
+                        } else {
+                            // Import failed, clean up storage
+                            storageManager.deletePhoto(result.photoPath)
+                            _uiState.value = _uiState.value.copy(
+                                isImporting = false,
+                                error = "Failed to save photo to database"
+                            )
+                        }
+                    }
+                    is ImportResult.Duplicate -> {
+                        _uiState.value = _uiState.value.copy(
+                            isImporting = false,
+                            error = "This photo has already been imported"
+                        )
+                        Log.d(TAG, "Duplicate photo detected: ${result.hash}")
+                    }
+                    is ImportResult.Error -> {
+                        _uiState.value = _uiState.value.copy(
+                            isImporting = false,
+                            error = result.message
+                        )
+                        Log.e(TAG, "Import error: ${result.message}")
+                    }
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Error importing photo", e)
@@ -100,10 +117,18 @@ class PhotoImportViewModel @Inject constructor(
     }
 
     /**
-     * Import multiple photos from the device gallery
+     * Import multiple photos from the device gallery using enhanced PhotoImportManager
      */
     fun importPhotos(uris: List<Uri>, categoryId: Long) {
         if (uris.isEmpty()) return
+
+        // Validate batch size
+        if (uris.size > PhotoImportManager.MAX_BATCH_SIZE) {
+            _uiState.value = _uiState.value.copy(
+                error = "Cannot import more than ${PhotoImportManager.MAX_BATCH_SIZE} photos at once"
+            )
+            return
+        }
 
         viewModelScope.launch {
             try {
@@ -127,52 +152,66 @@ class PhotoImportViewModel @Inject constructor(
 
                 val importedPhotos = mutableListOf<Photo>()
                 val failedImports = mutableListOf<String>()
+                val duplicateCount = mutableListOf<String>()
+                var processedCount = 0
 
-                uris.forEachIndexed { index, uri ->
-                    try {
-                        // Update progress
-                        val progress = index.toFloat() / uris.size
+                // Use PhotoImportManager with progress tracking
+                photoImportManager.importPhotosWithProgress(
+                    uris = uris,
+                    onProgress = { progress ->
                         _uiState.value = _uiState.value.copy(
-                            importProgress = progress,
-                            batchImportCompleted = index
+                            importProgress = progress
                         )
+                    }
+                ).collect { result ->
+                    processedCount++
+                    _uiState.value = _uiState.value.copy(
+                        batchImportCompleted = processedCount
+                    )
 
-                        // Import individual photo to internal storage
-                        val storageResult = storageManager.importPhoto(uri)
-                        if (storageResult != null) {
-                            val photo = createPhotoFromStorageResult(storageResult, categoryId)
+                    when (result) {
+                        is ImportResult.Success -> {
+                            // Create photo entity with metadata
+                            val photo = createPhotoFromImportResult(result, categoryId)
                             val photoId = photoRepository.insertPhoto(photo)
-
                             if (photoId > 0) {
                                 importedPhotos.add(photo.copy(id = photoId))
-                                Log.d(TAG, "Successfully imported photo ${index + 1}/${uris.size}")
+                                Log.d(TAG, "Successfully imported photo ${processedCount}/${uris.size}")
                             } else {
-                                // Clean up failed import
-                                storageManager.deletePhoto(storageResult.photoPath)
-                                failedImports.add("Photo ${index + 1}")
+                                failedImports.add("Photo ${processedCount}: Database save failed")
                             }
-                        } else {
-                            failedImports.add("Photo ${index + 1}")
                         }
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error importing photo ${index + 1}", e)
-                        failedImports.add("Photo ${index + 1}: ${e.message}")
+                        is ImportResult.Duplicate -> {
+                            duplicateCount.add(result.hash)
+                            Log.d(TAG, "Duplicate photo detected: ${result.hash}")
+                        }
+                        is ImportResult.Error -> {
+                            failedImports.add("Photo ${processedCount}: ${result.message}")
+                            Log.e(TAG, "Import error: ${result.message}")
+                        }
                     }
                 }
 
-                // Update final state
+                // Update final state with enhanced statistics
                 val successCount = importedPhotos.size
                 val failureCount = failedImports.size
+                val duplicatesFound = duplicateCount.size
+
+                val successMessage = buildString {
+                    if (successCount > 0) {
+                        append("$successCount photos imported successfully")
+                    }
+                    if (duplicatesFound > 0) {
+                        if (successCount > 0) append(". ")
+                        append("$duplicatesFound duplicates skipped")
+                    }
+                }
 
                 _uiState.value = _uiState.value.copy(
                     isImporting = false,
                     importProgress = 1f,
                     batchImportCompleted = uris.size,
-                    successMessage = when {
-                        successCount == uris.size -> "All $successCount photos imported successfully"
-                        successCount > 0 -> "$successCount photos imported successfully"
-                        else -> null
-                    },
+                    successMessage = if (successMessage.isNotEmpty()) successMessage else null,
                     error = when {
                         failureCount == uris.size -> "Failed to import all photos"
                         failureCount > 0 -> "Failed to import $failureCount photos"
@@ -254,6 +293,31 @@ class PhotoImportViewModel @Inject constructor(
             fileSize = storageResult.fileSize,
             width = 0, // Will be updated later if needed
             height = 0, // Will be updated later if needed
+            isFavorite = false
+        )
+    }
+
+    private fun createPhotoFromImportResult(
+        importResult: ImportResult.Success,
+        categoryId: Long
+    ): Photo {
+        return Photo(
+            id = 0, // Will be set by database
+            path = importResult.photoPath, // Path is always internal storage
+            name = importResult.fileName,
+            categoryId = categoryId, // Category is now required
+            isFromAssets = false,
+            createdAt = importResult.metadata?.dateTaken?.let {
+                // Try to parse the date from metadata
+                try {
+                    java.text.SimpleDateFormat("yyyy:MM:dd HH:mm:ss", java.util.Locale.getDefault()).parse(it)?.time
+                } catch (e: Exception) {
+                    null
+                }
+            } ?: System.currentTimeMillis(),
+            fileSize = importResult.fileSize,
+            width = importResult.metadata?.width ?: 0,
+            height = importResult.metadata?.height ?: 0,
             isFavorite = false
         )
     }

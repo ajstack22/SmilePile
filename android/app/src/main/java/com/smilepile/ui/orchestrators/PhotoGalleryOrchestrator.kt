@@ -86,7 +86,7 @@ fun PhotoGalleryOrchestrator(
     }
 
     val multiplePhotoLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 10)
+        contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 50) // Updated to support 50 photos
     ) { uris: List<Uri> ->
         if (uris.isNotEmpty()) {
             // Store URIs for category selection first

@@ -145,6 +145,9 @@ dependencies {
     implementation("io.coil-kt:coil:2.5.0")
     implementation("io.coil-kt:coil-compose:2.5.0")
 
+    // EXIF Interface for metadata extraction
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
+
     // CameraX
     implementation("androidx.camera:camera-core:1.3.1")
     implementation("androidx.camera:camera-camera2:1.3.1")

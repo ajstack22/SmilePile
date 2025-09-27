@@ -17,12 +17,14 @@ struct PhotoGalleryView: View {
     @State private var importMessage: String = ""
     @State private var showImportError = false
     @State private var importErrorMessage = ""
+    @State private var showImportSuccess = false
+    @State private var importSuccessMessage = ""
 
     private let repository = CategoryRepositoryImpl()
     private let photoRepository = PhotoRepositoryImpl()
     @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
+    // Temporarily using PhotoImportCoordinator until we can add files to Xcode project
     @State private var photoImportCoordinator: PhotoImportCoordinator?
-    @State private var storageManager: StorageManager?
 
     var body: some View {
         ZStack {
@@ -85,12 +87,9 @@ struct PhotoGalleryView: View {
             }
         }
         .onAppear {
-            // Initialize lazy properties to avoid circular dependency
+            // Initialize coordinator if needed
             if photoImportCoordinator == nil {
                 photoImportCoordinator = PhotoImportCoordinator()
-            }
-            if storageManager == nil {
-                storageManager = StorageManager.shared
             }
             loadCategories()
             loadPhotos()
@@ -123,6 +122,16 @@ struct PhotoGalleryView: View {
             Button("Cancel", role: .cancel) {}
         } message: {
             Text(permissionErrorMessage)
+        }
+        .alert("Import Error", isPresented: $showImportError) {
+            Button("OK") {}
+        } message: {
+            Text(importErrorMessage)
+        }
+        .alert("Success", isPresented: $showImportSuccess) {
+            Button("OK") {}
+        } message: {
+            Text(importSuccessMessage)
         }
     }
 
@@ -214,6 +223,7 @@ struct PhotoGalleryView: View {
     private func handleSelectedPhotos(_ photos: [Photo]) {
         Task {
             isLoadingPhotos = true
+            importMessage = "Saving photos..."
             do {
                 // Save photos to repository
                 for photo in photos {
@@ -221,8 +231,13 @@ struct PhotoGalleryView: View {
                 }
                 // Reload all photos
                 allPhotos = try await photoRepository.getAllPhotos()
+
+                // Show success message
+                importSuccessMessage = "Successfully imported \(photos.count) photo\(photos.count == 1 ? "" : "s")"
+                showImportSuccess = true
             } catch {
-                print("Error saving photos: \(error)")
+                importErrorMessage = "Error saving photos: \(error.localizedDescription)"
+                showImportError = true
             }
             isLoadingPhotos = false
 

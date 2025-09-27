@@ -2,18 +2,23 @@ import UIKit
 import Photos
 import PhotosUI
 import CoreImage
+import CryptoKit
+import ImageIO
+import CoreLocation
 
 /// Handles photo asset processing with memory-safe loading and caching
 class PhotoAssetProcessor: ObservableObject {
 
     // MARK: - Configuration
     struct Configuration {
-        static let maxImageDimension: CGFloat = 2048  // Max dimension for full images
-        static let thumbnailSize: CGFloat = 200       // Thumbnail size
-        static let jpegQuality: CGFloat = 0.85        // JPEG compression quality
+        static let maxImageDimension: CGFloat = 2048  // Max dimension for full images - matches Android
+        static let thumbnailSize: CGFloat = 300       // Thumbnail size - matches Android (300px)
+        static let jpegQuality: CGFloat = 0.90        // JPEG compression quality - matches Android (90%)
+        static let thumbnailQuality: CGFloat = 0.85   // Thumbnail quality - matches Android (85%)
         static let maxMemoryCacheSizeMB: Int = 50     // Max memory cache in MB
         static let batchSize: Int = 10                // Process photos in batches
         static let maxConcurrentLoads: Int = 3        // Max concurrent image loads
+        static let maxPhotosPerBatch: Int = 50        // Maximum photos per import batch
     }
 
     // MARK: - Error Types
@@ -52,6 +57,7 @@ class PhotoAssetProcessor: ObservableObject {
     private var activeRequests: [PHImageRequestID] = []
     private let processingQueue = DispatchQueue(label: "com.smilepile.photoprocessing", qos: .userInitiated)
     private let semaphore: DispatchSemaphore
+    private var importedHashes = Set<String>()
 
     // Memory monitoring
     private var memoryWarningObserver: NSObjectProtocol?
@@ -224,33 +230,89 @@ class PhotoAssetProcessor: ObservableObject {
         categoryId: Int64,
         identifier: String?
     ) async throws -> Photo {
+        // Check for duplicates first
+        guard let originalData = image.jpegData(compressionQuality: 1.0) else {
+            throw ProcessingError.invalidAsset
+        }
+
+        let hash = calculateHash(for: originalData)
+        if importedHashes.contains(hash) {
+            throw ProcessingError.cancelled // Skip duplicates
+        }
+
         // Resize if needed to manage memory
         let resizedImage = try await resizeImageIfNeeded(image)
 
-        // Convert to JPEG data
+        // Optimize image with higher quality for main photo
         guard let imageData = resizedImage.jpegData(compressionQuality: Configuration.jpegQuality) else {
             throw ProcessingError.processingTimeout
         }
 
-        // Generate unique filename
-        let filename = "\(UUID().uuidString).jpg"
+        // Generate unique filename with timestamp
+        let filename = generateFilename(identifier: identifier)
         let fileURL = documentDirectory.appendingPathComponent(filename)
 
         // Save to disk
         try imageData.write(to: fileURL)
 
-        // Create Photo object
+        // Mark as imported
+        importedHashes.insert(hash)
+
+        // Extract metadata
+        let metadata = extractMetadata(from: image, identifier: identifier)
+
+        // Create Photo object with enhanced metadata
         return Photo(
             path: fileURL.path,
             categoryId: categoryId,
             name: identifier ?? filename,
             isFromAssets: false,
-            createdAt: Int64(Date().timeIntervalSince1970 * 1000),
+            createdAt: Int64((metadata.creationDate ?? Date()).timeIntervalSince1970 * 1000),
             fileSize: Int64(imageData.count),
-            width: Int(resizedImage.size.width),
-            height: Int(resizedImage.size.height),
-            isFavorite: false
+            width: metadata.width,
+            height: metadata.height,
+            isFavorite: metadata.isFavorite
         )
+    }
+
+    // MARK: - Helper Methods
+
+    private func calculateHash(for data: Data) -> String {
+        let hash = SHA256.hash(data: data)
+        return hash.compactMap { String(format: "%02x", $0) }.joined()
+    }
+
+    private func generateFilename(identifier: String?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
+        let timestamp = dateFormatter.string(from: Date())
+        let uuid = UUID().uuidString.prefix(8)
+
+        if let identifier = identifier,
+           let ext = identifier.split(separator: ".").last {
+            return "IMG_\(timestamp)_\(uuid).\(ext)"
+        }
+        return "IMG_\(timestamp)_\(uuid).jpg"
+    }
+
+    private func extractMetadata(from image: UIImage, identifier: String?) -> (creationDate: Date?, width: Int, height: Int, isFavorite: Bool) {
+        let width = Int(image.size.width * image.scale)
+        let height = Int(image.size.height * image.scale)
+
+        // Try to get PHAsset for more metadata
+        if let identifier = identifier {
+            let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
+            if let asset = fetchResult.firstObject {
+                return (
+                    creationDate: asset.creationDate,
+                    width: asset.pixelWidth,
+                    height: asset.pixelHeight,
+                    isFavorite: asset.isFavorite
+                )
+            }
+        }
+
+        return (creationDate: Date(), width: width, height: height, isFavorite: false)
     }
 
     private func loadImageData(from asset: PHAsset) async throws -> Data {

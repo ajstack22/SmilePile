@@ -4,6 +4,10 @@ import Photos
 import PhotosUI
 import CoreData
 import UniformTypeIdentifiers
+import CryptoKit
+import CoreLocation
+import ImageIO
+import CoreImage
 import os.log
 
 /// Thread-safe coordinator for photo imports using Swift actors

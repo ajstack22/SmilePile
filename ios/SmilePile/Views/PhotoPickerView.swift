@@ -93,12 +93,14 @@ struct EnhancedPhotoPickerView: View {
     @State private var errorMessage = ""
     @State private var isProcessing = false
     @State private var processingProgress: Double = 0
+    @State private var showingBatchLimitWarning = false
 
     let categoryId: Int64
     let onPhotosSelected: ([Photo]) -> Void
     let onCancel: (() -> Void)?
 
     private let processor = PhotoAssetProcessor()
+    private let maxPhotosPerBatch = PhotoAssetProcessor.Configuration.maxPhotosPerBatch
 
     var body: some View {
         ZStack {
@@ -120,7 +122,13 @@ struct EnhancedPhotoPickerView: View {
         .sheet(isPresented: $showingPicker) {
             PhotoPickerView(
                 isPresented: $showingPicker,
-                configuration: .default,
+                configuration: PhotoPickerView.Configuration(
+                    selectionLimit: maxPhotosPerBatch,
+                    filter: .images,
+                    preferredAssetRepresentationMode: .automatic,
+                    allowsMultipleSelection: true,
+                    isOrdered: true
+                ),
                 onSelection: { results in
                     handleSelection(results)
                 },
@@ -137,9 +145,20 @@ struct EnhancedPhotoPickerView: View {
         } message: {
             Text(errorMessage)
         }
+        .alert("Batch Limit", isPresented: $showingBatchLimitWarning) {
+            Button("OK") {}
+        } message: {
+            Text("You can select up to \(maxPhotosPerBatch) photos at a time for optimal performance.")
+        }
     }
 
     private func handleSelection(_ results: [PHPickerResult]) {
+        // Check batch limit
+        if results.count > maxPhotosPerBatch {
+            showingBatchLimitWarning = true
+            return
+        }
+
         Task {
             isProcessing = true
             processingProgress = 0
@@ -149,18 +168,24 @@ struct EnhancedPhotoPickerView: View {
                     results,
                     categoryId: categoryId
                 ) { progress in
-                    processingProgress = progress
+                    Task { @MainActor in
+                        processingProgress = progress
+                    }
                 }
 
                 await MainActor.run {
                     isProcessing = false
                     isPresented = false
-                    onPhotosSelected(photos)
+
+                    // Show success message if photos were processed
+                    if !photos.isEmpty {
+                        onPhotosSelected(photos)
+                    }
                 }
             } catch {
                 await MainActor.run {
                     isProcessing = false
-                    errorMessage = error.localizedDescription
+                    errorMessage = "Failed to import photos: \(error.localizedDescription)"
                     showingError = true
                 }
             }
@@ -182,9 +207,21 @@ private struct ProcessingOverlay: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     .scaleEffect(1.5)
 
-                Text("Processing Photos...")
-                    .font(.headline)
-                    .foregroundColor(.white)
+                VStack(spacing: 8) {
+                    Text("Importing Photos")
+                        .font(.headline)
+                        .foregroundColor(.white)
+
+                    if progress > 0 {
+                        Text("Optimizing and saving...")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    } else {
+                        Text("Preparing...")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                }
 
                 if progress > 0 {
                     ProgressView(value: progress)
@@ -192,8 +229,9 @@ private struct ProcessingOverlay: View {
                         .frame(width: 200)
 
                     Text("\(Int(progress * 100))%")
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.8))
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
                 }
             }
             .padding(40)
