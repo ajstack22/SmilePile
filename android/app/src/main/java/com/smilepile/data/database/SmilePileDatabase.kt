@@ -13,6 +13,11 @@ import com.smilepile.data.dao.PhotoCategoryDao
 import com.smilepile.data.entities.CategoryEntity
 import com.smilepile.data.entities.PhotoEntity
 import com.smilepile.data.entities.PhotoCategoryJoin
+import com.smilepile.data.backup.DeletionRecord
+import com.smilepile.data.backup.CompressedArchive
+import com.smilepile.data.backup.DeletionDao
+import com.smilepile.data.backup.ArchiveDao
+import com.smilepile.data.backup.EntityType
 
 /**
  * Main Room database for SmilePile application
@@ -22,9 +27,11 @@ import com.smilepile.data.entities.PhotoCategoryJoin
     entities = [
         PhotoEntity::class,
         CategoryEntity::class,
-        PhotoCategoryJoin::class
+        PhotoCategoryJoin::class,
+        DeletionRecord::class,
+        CompressedArchive::class
     ],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -45,10 +52,52 @@ abstract class SmilePileDatabase : RoomDatabase() {
      */
     abstract fun photoCategoryDao(): PhotoCategoryDao
 
+    /**
+     * Provides access to DeletionDao for deletion tracking operations
+     */
+    abstract fun deletionDao(): DeletionDao
+
+    /**
+     * Provides access to ArchiveDao for compressed archive operations
+     */
+    abstract fun archiveDao(): ArchiveDao
+
     companion object {
         // Singleton prevents multiple instances of database opening at the same time
         @Volatile
         private var INSTANCE: SmilePileDatabase? = null
+
+        // Migration from version 7 to 8: Add deletion tracking tables
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Create deletion_tracking table
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS deletion_tracking (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        entity_type TEXT NOT NULL,
+                        entity_id TEXT NOT NULL,
+                        metadata BLOB NOT NULL,
+                        deleted_at INTEGER NOT NULL
+                    )
+                """.trimIndent())
+
+                // Create indices for deletion_tracking
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_deletion_tracking_entity_type ON deletion_tracking(entity_type)")
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_deletion_tracking_deleted_at ON deletion_tracking(deleted_at)")
+
+                // Create deletion_archives table for compressed old records
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS deletion_archives (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        data BLOB NOT NULL,
+                        created_at INTEGER NOT NULL
+                    )
+                """.trimIndent())
+
+                // Create index for deletion_archives
+                database.execSQL("CREATE INDEX IF NOT EXISTS index_deletion_archives_created_at ON deletion_archives(created_at)")
+            }
+        }
 
         // Migration from version 6 to 7: Remove is_favorite column
         private val MIGRATION_6_7 = object : Migration(6, 7) {
@@ -193,7 +242,7 @@ abstract class SmilePileDatabase : RoomDatabase() {
                     SmilePileDatabase::class.java,
                     "smilepile_database"
                 )
-                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
+                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
                     .fallbackToDestructiveMigration() // Fallback for other version jumps
                     .build()
                 INSTANCE = instance

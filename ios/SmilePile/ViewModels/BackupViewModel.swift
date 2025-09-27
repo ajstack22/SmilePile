@@ -356,22 +356,67 @@ class BackupViewModel: ObservableObject {
     private func getFilteredPhotos() async throws -> [Photo] {
         let allPhotos = try await PhotoRepository.shared.getAllPhotos()
 
-        return allPhotos.filter { photo in
+        // Build category lookup map to avoid circular dependencies and repeated lookups
+        var categoryLookup: [Int64: Category] = [:]
+        if !selectedCategories.isEmpty {
+            do {
+                let allCategories = try await CategoryRepository.shared.getAllCategories()
+                for category in allCategories {
+                    categoryLookup[category.id] = category
+                }
+
+                // Log category mapping for debugging
+                print("[BackupViewModel] Loaded \(categoryLookup.count) categories for filtering")
+            } catch {
+                print("[BackupViewModel] Error loading categories for filtering: \(error)")
+                // Continue without category filtering if there's an error
+                return allPhotos
+            }
+        }
+
+        var filteredPhotos: [Photo] = []
+        var excludedByCategory = 0
+        var excludedByDate = 0
+
+        for photo in allPhotos {
+            var shouldInclude = true
+
             // Filter by category if selected
             if !selectedCategories.isEmpty {
-                // TODO: Get category name for photo.categoryId
-                // For now, include all if categories are selected
+                // Look up category by ID to get its name
+                guard let category = categoryLookup[photo.categoryId] else {
+                    // Category not found - exclude photo
+                    excludedByCategory += 1
+                    shouldInclude = false
+                    continue
+                }
+
+                // Check if category name is in selected categories
+                if !selectedCategories.contains(category.name) {
+                    excludedByCategory += 1
+                    shouldInclude = false
+                    continue
+                }
             }
 
             // Filter by date range
             if shouldFilterByDate() {
                 if photo.createdAt < dateRangeStart || photo.createdAt > dateRangeEnd {
-                    return false
+                    excludedByDate += 1
+                    shouldInclude = false
+                    continue
                 }
             }
 
-            return true
+            if shouldInclude {
+                filteredPhotos.append(photo)
+            }
         }
+
+        // Log filtering results for debugging
+        print("[BackupViewModel] Filtered photos: \(filteredPhotos.count) included, \(excludedByCategory) excluded by category, \(excludedByDate) excluded by date")
+
+        return filteredPhotos
     }
 
     // MARK: - Formatting

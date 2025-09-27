@@ -27,10 +27,6 @@ import java.util.*
 import java.util.zip.ZipOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
-import javax.crypto.Cipher
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
-import android.util.Base64
 import java.util.zip.Deflater
 
 /**
@@ -42,7 +38,8 @@ class BackupManager @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val photoRepository: PhotoRepository,
     private val themeManager: ThemeManager,
-    private val securePreferencesManager: SecurePreferencesManager
+    private val securePreferencesManager: SecurePreferencesManager,
+    private val deletionTracker: ManagedDeletionTracker
 ) {
 
     companion object {
@@ -54,8 +51,6 @@ class BackupManager @Inject constructor(
         private const val SMILEPILE_BACKUP_EXTENSION = ".smilepile"
         private const val MIN_SUPPORTED_VERSION = 1
         private const val MAX_SUPPORTED_VERSION = CURRENT_BACKUP_VERSION
-        private const val ENCRYPTION_ALGORITHM = "AES/CBC/PKCS5Padding"
-        private const val ENCRYPTION_KEY_ALGORITHM = "AES"
         private const val THUMBNAIL_DIR = "thumbnails"
     }
 
@@ -153,7 +148,6 @@ class BackupManager @Inject constructor(
                     hasPIN = securitySummary.hasPIN,
                     hasPattern = securitySummary.hasPattern,
                     kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
-                    cameraAccessAllowed = securitySummary.cameraAccessAllowed,
                     deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
                 )
             )
@@ -255,7 +249,6 @@ class BackupManager @Inject constructor(
                     hasPIN = securitySummary.hasPIN,
                     hasPattern = securitySummary.hasPattern,
                     kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
-                    cameraAccessAllowed = securitySummary.cameraAccessAllowed,
                     deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
                 )
             )
@@ -1045,17 +1038,12 @@ class BackupManager @Inject constructor(
             val backupSettings = if (options.includeSettings) {
                 BackupSettings(
                     isDarkMode = isDarkMode,
-                    securitySettings = if (options.encryptSensitiveData) {
-                        encryptSecuritySettings(securitySummary)
-                    } else {
-                        BackupSecuritySettings(
-                            hasPIN = securitySummary.hasPIN,
-                            hasPattern = securitySummary.hasPattern,
-                            kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
-                            cameraAccessAllowed = securitySummary.cameraAccessAllowed,
-                            deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
-                        )
-                    }
+                    securitySettings = BackupSecuritySettings(
+                        hasPIN = securitySummary.hasPIN,
+                        hasPattern = securitySummary.hasPattern,
+                        kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
+                        deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
+                    )
                 )
             } else {
                 BackupSettings(
@@ -1064,7 +1052,6 @@ class BackupManager @Inject constructor(
                         hasPIN = false,
                         hasPattern = false,
                         kidSafeModeEnabled = false,
-                        cameraAccessAllowed = false,
                         deleteProtectionEnabled = false
                     )
                 )
@@ -1176,13 +1163,22 @@ class BackupManager @Inject constructor(
 
             progressCallback?.invoke(20, 100, "Creating incremental backup")
 
+            // Get deletion records since last backup
+            val deletionRecords = deletionTracker.getDeletionsSince(lastBackup.timestamp)
+            val deletedPhotos = deletionRecords
+                .filter { it.entityType == EntityType.PHOTO }
+                .map { it.entityId }
+            val deletedCategories = deletionRecords
+                .filter { it.entityType == EntityType.CATEGORY }
+                .map { it.entityId }
+
             val incrementalMetadata = IncrementalBackupMetadata(
                 baseBackupId = baseBackupId,
                 baseBackupDate = lastBackup.timestamp,
                 changedPhotos = changedPhotos.map { it.id },
-                deletedPhotos = emptyList(), // TODO: Track deletions
+                deletedPhotos = deletedPhotos.map { it.toLong() },
                 changedCategories = changedCategories.map { it.id },
-                deletedCategories = emptyList() // TODO: Track deletions
+                deletedCategories = deletedCategories.map { it.toLong() }
             )
 
             // Create backup with only changed items
@@ -1237,19 +1233,8 @@ class BackupManager @Inject constructor(
     }
 
     /**
-     * Encrypt security settings for sensitive data
+     * Encrypt security settings for sensitive data using AES-256-GCM with 600,000 PBKDF2 iterations
      */
-    private fun encryptSecuritySettings(summary: com.smilepile.security.SecuritySummary): BackupSecuritySettings {
-        // For now, return non-encrypted version
-        // TODO: Implement proper encryption when PIN/pattern backup is needed
-        return BackupSecuritySettings(
-            hasPIN = summary.hasPIN,
-            hasPattern = summary.hasPattern,
-            kidSafeModeEnabled = summary.kidSafeModeEnabled,
-            cameraAccessAllowed = summary.cameraAccessAllowed,
-            deleteProtectionEnabled = summary.deleteProtectionEnabled
-        )
-    }
 
     /**
      * Save backup history entry

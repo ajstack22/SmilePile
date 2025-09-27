@@ -153,9 +153,8 @@ class ParentalControlsViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 securePreferencesManager.kidSafeModeEnabled,
-                securePreferencesManager.cameraAccessAllowed,
                 securePreferencesManager.deleteProtectionEnabled
-            ) { kidSafe, camera, delete ->
+            ) { kidSafe, delete ->
                 // Update states when preferences change
                 loadInitialState()
             }
@@ -467,13 +466,7 @@ class ParentalControlsViewModel @Inject constructor(
         }
     }
 
-    fun toggleCameraAccess() {
-        viewModelScope.launch {
-            val current = securePreferencesManager.getCameraAccessAllowed()
-            securePreferencesManager.setCameraAccessAllowed(!current)
-            loadInitialState()
-        }
-    }
+    // Camera access removed - function no longer needed
 
     fun toggleDeleteProtection() {
         viewModelScope.launch {

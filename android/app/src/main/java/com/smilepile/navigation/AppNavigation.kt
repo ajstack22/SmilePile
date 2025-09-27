@@ -66,7 +66,6 @@ object NavigationRoutes {
     const val SETTINGS = "settings"
     const val PHOTO_VIEWER = "photo_viewer"
     const val PHOTO_EDITOR = "photo_editor"
-    const val CAMERA = "camera"
     const val PARENTAL_LOCK = "parental_lock"
     const val PARENTAL_LOCK_EXIT_KIDS = "parental_lock_exit_kids"
     const val PARENTAL_SETTINGS = "parental_settings"
@@ -74,14 +73,9 @@ object NavigationRoutes {
     // Route with arguments
     const val PHOTO_VIEWER_WITH_ARGS = "photo_viewer/{photoId}/{photoIndex}"
     const val PHOTO_EDITOR_WITH_MODE = "photo_editor/{mode}"
-    const val CAMERA_WITH_CATEGORY = "camera/{categoryId}"
 
     fun photoViewerRoute(photoId: Long, photoIndex: Int): String {
         return "photo_viewer/$photoId/$photoIndex"
-    }
-
-    fun cameraRoute(categoryId: Long = 1L): String {
-        return "camera/$categoryId"
     }
 
     fun photoEditorRoute(mode: String): String {
@@ -98,7 +92,6 @@ sealed class NavigationDestination(val route: String, val title: String) {
     object Settings : NavigationDestination(NavigationRoutes.SETTINGS, "Settings")
     object PhotoViewer : NavigationDestination(NavigationRoutes.PHOTO_VIEWER, "Photo Viewer")
     object PhotoEditor : NavigationDestination(NavigationRoutes.PHOTO_EDITOR, "Photo Editor")
-    object Camera : NavigationDestination(NavigationRoutes.CAMERA, "Camera")
     object ParentalLock : NavigationDestination(NavigationRoutes.PARENTAL_LOCK, "Parental Lock")
     object ParentalSettings : NavigationDestination(NavigationRoutes.PARENTAL_SETTINGS, "Parental Settings")
 }
@@ -439,15 +432,6 @@ object NavigationHelper {
      */
     fun navigateToSettings(navController: NavHostController) {
         navController.navigate(NavigationRoutes.SETTINGS) {
-            launchSingleTop = true
-        }
-    }
-
-    /**
-     * Navigate to camera
-     */
-    fun navigateToCamera(navController: NavHostController, categoryId: Long = 1L) {
-        navController.navigate(NavigationRoutes.cameraRoute(categoryId)) {
             launchSingleTop = true
         }
     }

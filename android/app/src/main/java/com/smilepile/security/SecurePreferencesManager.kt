@@ -29,7 +29,6 @@ class SecurePreferencesManager @Inject constructor(
         private const val KEY_PIN_ENABLED = "pin_enabled"
         private const val KEY_PATTERN_ENABLED = "pattern_enabled"
         private const val KEY_KID_SAFE_MODE = "kid_safe_mode"
-        private const val KEY_CAMERA_ACCESS_ALLOWED = "camera_access_allowed"
         private const val KEY_DELETE_PROTECTION_ENABLED = "delete_protection_enabled"
         private const val KEY_BIOMETRIC_ENABLED = "biometric_enabled"
         private const val KEY_FAILED_ATTEMPTS = "failed_attempts"
@@ -54,9 +53,6 @@ class SecurePreferencesManager @Inject constructor(
     // State flows for reactive updates
     private val _kidSafeModeEnabled = MutableStateFlow(getKidSafeModeEnabled())
     val kidSafeModeEnabled: Flow<Boolean> = _kidSafeModeEnabled.asStateFlow()
-
-    private val _cameraAccessAllowed = MutableStateFlow(getCameraAccessAllowed())
-    val cameraAccessAllowed: Flow<Boolean> = _cameraAccessAllowed.asStateFlow()
 
     private val _deleteProtectionEnabled = MutableStateFlow(getDeleteProtectionEnabled())
     val deleteProtectionEnabled: Flow<Boolean> = _deleteProtectionEnabled.asStateFlow()
@@ -179,16 +175,6 @@ class SecurePreferencesManager @Inject constructor(
         return encryptedPrefs.getBoolean(KEY_KID_SAFE_MODE, true) // Default to true for safety
     }
 
-    fun setCameraAccessAllowed(allowed: Boolean) {
-        encryptedPrefs.edit()
-            .putBoolean(KEY_CAMERA_ACCESS_ALLOWED, allowed)
-            .apply()
-        _cameraAccessAllowed.value = allowed
-    }
-
-    fun getCameraAccessAllowed(): Boolean {
-        return encryptedPrefs.getBoolean(KEY_CAMERA_ACCESS_ALLOWED, true) // Default to true
-    }
 
     fun setDeleteProtectionEnabled(enabled: Boolean) {
         encryptedPrefs.edit()
@@ -224,7 +210,6 @@ class SecurePreferencesManager @Inject constructor(
 
         // Reset state flows to default values
         _kidSafeModeEnabled.value = true
-        _cameraAccessAllowed.value = true
         _deleteProtectionEnabled.value = true
     }
 
@@ -237,7 +222,6 @@ class SecurePreferencesManager @Inject constructor(
             hasPattern = isPatternEnabled(),
             biometricEnabled = getBiometricEnabled(),
             kidSafeModeEnabled = getKidSafeModeEnabled(),
-            cameraAccessAllowed = getCameraAccessAllowed(),
             deleteProtectionEnabled = getDeleteProtectionEnabled(),
             failedAttempts = getFailedAttempts(),
             isInCooldown = isInCooldown()
@@ -253,7 +237,6 @@ data class SecuritySummary(
     val hasPattern: Boolean,
     val biometricEnabled: Boolean,
     val kidSafeModeEnabled: Boolean,
-    val cameraAccessAllowed: Boolean,
     val deleteProtectionEnabled: Boolean,
     val failedAttempts: Int,
     val isInCooldown: Boolean

@@ -134,16 +134,15 @@ data class BackupSettings(
 
 /**
  * Security and parental control settings for backup
- * Note: PINs and patterns are excluded for security reasons
  */
 @Serializable
 data class BackupSecuritySettings(
     val hasPIN: Boolean,
     val hasPattern: Boolean,
     val kidSafeModeEnabled: Boolean,
-    val cameraAccessAllowed: Boolean,
     val deleteProtectionEnabled: Boolean
 )
+
 
 /**
  * Import progress data
@@ -197,7 +196,6 @@ data class BackupOptions(
     val dateRangeStart: Long? = null,
     val dateRangeEnd: Long? = null,
     val compressionLevel: CompressionLevel = CompressionLevel.MEDIUM,
-    val encryptSensitiveData: Boolean = true,
     val includeMetadata: Boolean = true
 )
 

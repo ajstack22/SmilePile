@@ -17,21 +17,21 @@ class KidsModeViewModel: ObservableObject {
     private let swipeDebounceInterval: TimeInterval = 0.3 // 300ms
     let swipeThreshold: CGFloat = 150 // 150px threshold
 
+
     private var cancellables = Set<AnyCancellable>()
 
     init() {
         loadMockData()
     }
 
+
     func toggleKidsMode() {
         if isKidsMode {
             // Exiting Kids Mode requires PIN
             requiresPINAuth = true
-            print("DEBUG: Requesting PIN auth to exit Kids Mode")
         } else {
             // Entering Kids Mode doesn't require PIN
             isKidsMode = true
-            print("DEBUG: Entered Kids Mode - isKidsMode = \(isKidsMode)")
         }
     }
 
@@ -41,6 +41,10 @@ class KidsModeViewModel: ObservableObject {
             isFullscreen = false
             requiresPINAuth = false
         }
+    }
+
+    func onPhotoViewed(_ photo: Photo) {
+        // Photo viewed - currently no tracking needed
     }
 
     func setFullscreen(_ fullscreen: Bool) {
