@@ -145,8 +145,7 @@ class PhotoAssetProcessor: ObservableObject {
             createdAt: Int64((asset.creationDate ?? Date()).timeIntervalSince1970 * 1000),
             fileSize: Int64(imageData.count),
             width: metadata.width,
-            height: metadata.height,
-            isFavorite: asset.isFavorite
+            height: metadata.height
         )
     }
 
@@ -270,8 +269,7 @@ class PhotoAssetProcessor: ObservableObject {
             createdAt: Int64((metadata.creationDate ?? Date()).timeIntervalSince1970 * 1000),
             fileSize: Int64(imageData.count),
             width: metadata.width,
-            height: metadata.height,
-            isFavorite: metadata.isFavorite
+            height: metadata.height
         )
     }
 
@@ -295,7 +293,7 @@ class PhotoAssetProcessor: ObservableObject {
         return "IMG_\(timestamp)_\(uuid).jpg"
     }
 
-    private func extractMetadata(from image: UIImage, identifier: String?) -> (creationDate: Date?, width: Int, height: Int, isFavorite: Bool) {
+    private func extractMetadata(from image: UIImage, identifier: String?) -> (creationDate: Date?, width: Int, height: Int) {
         let width = Int(image.size.width * image.scale)
         let height = Int(image.size.height * image.scale)
 
@@ -306,13 +304,12 @@ class PhotoAssetProcessor: ObservableObject {
                 return (
                     creationDate: asset.creationDate,
                     width: asset.pixelWidth,
-                    height: asset.pixelHeight,
-                    isFavorite: asset.isFavorite
+                    height: asset.pixelHeight
                 )
             }
         }
 
-        return (creationDate: Date(), width: width, height: height, isFavorite: false)
+        return (creationDate: Date(), width: width, height: height)
     }
 
     private func loadImageData(from asset: PHAsset) async throws -> Data {

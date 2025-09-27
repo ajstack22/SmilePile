@@ -213,8 +213,7 @@ final class PhotoImportManager: ObservableObject {
                     createdAt: Int64((metadata.creationDate ?? Date()).timeIntervalSince1970 * 1000),
                     fileSize: Int64(storageResult.fileSize),
                     width: metadata.pixelWidth,
-                    height: metadata.pixelHeight,
-                    isFavorite: false
+                    height: metadata.pixelHeight
                 )
 
                 // Save to repository

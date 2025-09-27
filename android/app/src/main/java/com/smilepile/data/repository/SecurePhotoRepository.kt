@@ -175,14 +175,6 @@ class SecurePhotoRepository @Inject constructor(
         updateSecurePhoto(updatedMetadata)
     }
 
-    /**
-     * Updates favorite status (unencrypted field)
-     * @param photoId Photo ID
-     * @param isFavorite Favorite status
-     */
-    suspend fun updateFavoriteStatus(photoId: String, isFavorite: Boolean) = withContext(Dispatchers.IO) {
-        photoDao.updateFavoriteStatus(photoId, isFavorite)
-    }
 
     /**
      * Gets photos that have encrypted child data

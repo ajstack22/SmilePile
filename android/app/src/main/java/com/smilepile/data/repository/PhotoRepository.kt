@@ -24,17 +24,4 @@ interface PhotoRepository {
     // Remove from library (app only, not device)
     suspend fun removeFromLibrary(photo: Photo)
     suspend fun removeFromLibraryById(photoId: Long)
-
-    // Search and filter methods
-    fun searchPhotos(searchQuery: String): Flow<List<Photo>>
-    fun searchPhotosInCategory(searchQuery: String, categoryId: Long): Flow<List<Photo>>
-    fun getPhotosByDateRange(startDate: Long, endDate: Long): Flow<List<Photo>>
-    fun getPhotosByDateRangeAndCategory(startDate: Long, endDate: Long, categoryId: Long): Flow<List<Photo>>
-    fun searchPhotosWithFilters(
-        searchQuery: String,
-        startDate: Long,
-        endDate: Long,
-        favoritesOnly: Boolean?,
-        categoryId: Long?
-    ): Flow<List<Photo>>
 }

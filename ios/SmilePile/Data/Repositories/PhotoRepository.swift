@@ -27,10 +27,4 @@ protocol PhotoRepository {
     func removeFromLibrary(_ photo: Photo) async throws
     func removeFromLibraryById(_ photoId: Int64) async throws
 
-    // Search and Filtering
-    func searchPhotos(_ searchQuery: String) -> AnyPublisher<[Photo], Error>
-    func searchPhotosInCategory(_ searchQuery: String, categoryId: Int64) -> AnyPublisher<[Photo], Error>
-    func getPhotosByDateRange(startDate: Int64, endDate: Int64) -> AnyPublisher<[Photo], Error>
-    func getPhotosByDateRangeAndCategory(startDate: Int64, endDate: Int64, categoryId: Int64) -> AnyPublisher<[Photo], Error>
-    func searchPhotosWithFilters(searchQuery: String, startDate: Int64, endDate: Int64, favoritesOnly: Bool?, categoryId: Int64?) -> AnyPublisher<[Photo], Error>
 }

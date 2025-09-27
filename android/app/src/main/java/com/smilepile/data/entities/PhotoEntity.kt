@@ -29,9 +29,6 @@ data class PhotoEntity(
     @ColumnInfo(name = "timestamp")
     val timestamp: Long = System.currentTimeMillis(),
 
-    @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = false,
-
     // ENCRYPTED: Child's name (sensitive data)
     @ColumnInfo(name = "encrypted_child_name")
     val encryptedChildName: String? = null,

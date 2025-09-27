@@ -15,16 +15,15 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>25.09.27.004</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>250927004</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>SmilePile needs permission to save edited photos to your photo library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>SmilePile needs access to your photo library to let you select and organize photos for your child.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Black.ttf</string>
@@ -32,10 +31,26 @@
 		<string>Nunito-ExtraBold.ttf</string>
 		<string>Nunito-Variable.ttf</string>
 	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchScreenBackground</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -51,20 +66,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
-	<key>UIRequiresFullScreen</key>
-	<true/>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>LaunchScreenBackground</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<false/>
-	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>SmilePile needs access to your photo library to let you select and organize photos for your child.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>SmilePile needs permission to save edited photos to your photo library.</string>
 </dict>
 </plist>

@@ -147,9 +147,6 @@ extension NSPredicate {
         NSPredicate(format: "timestamp BETWEEN %@", [start, end] as NSArray)
     }
 
-    static func photoFavorites() -> NSPredicate {
-        NSPredicate(format: "isFavorite == TRUE")
-    }
 
     static func photosWithEncryptedData() -> NSPredicate {
         NSPredicate(format: "encryptedChildName != nil OR encryptedChildAge != nil OR encryptedNotes != nil OR encryptedTags != nil OR encryptedMilestone != nil OR encryptedLocation != nil OR encryptedMetadata != nil")

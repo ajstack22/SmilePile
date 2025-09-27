@@ -45,10 +45,7 @@ data class Photo(
     val width: Int = 0,
 
     @ColumnInfo(name = "height")
-    val height: Int = 0,
-
-    @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = false
+    val height: Int = 0
 ) : Parcelable {
 
     val displayName: String

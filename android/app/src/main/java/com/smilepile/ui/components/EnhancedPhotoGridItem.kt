@@ -133,44 +133,6 @@ fun EnhancedPhotoGridItem(
                                 .padding(2.dp)
                         )
                     }
-                } else {
-                    // Favorite button with smooth animation
-                    SmoothVisibilityAnimation(
-                        visible = !isSelectionMode,
-                        modifier = Modifier.align(Alignment.TopEnd)
-                    ) {
-                        BounceAnimation(triggered = photo.isFavorite) {
-                            IconButton(
-                                onClick = onFavoriteToggle,
-                                modifier = Modifier
-                                    .padding(4.dp)
-                                    .size(32.dp)
-                                    .background(
-                                        color = Color.Black.copy(alpha = 0.4f),
-                                        shape = CircleShape
-                                    )
-                            ) {
-                                Icon(
-                                    imageVector = if (photo.isFavorite) {
-                                        Icons.Filled.Favorite
-                                    } else {
-                                        Icons.Outlined.FavoriteBorder
-                                    },
-                                    contentDescription = if (photo.isFavorite) {
-                                        "Remove from favorites"
-                                    } else {
-                                        "Add to favorites"
-                                    },
-                                    tint = if (photo.isFavorite) {
-                                        Color.Red
-                                    } else {
-                                        Color.White
-                                    },
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                        }
-                    }
                 }
 
                 // Selection overlay with smooth animation

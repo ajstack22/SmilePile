@@ -73,11 +73,6 @@ import androidx.compose.ui.unit.sp
 import com.smilepile.R
 import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
-import com.smilepile.ui.components.SearchBar
-import com.smilepile.ui.components.SearchFiltersRow
-import com.smilepile.ui.components.SearchResultsHeader
-import com.smilepile.ui.components.EmptySearchState
-import com.smilepile.ui.components.DateRangePickerDialog
 import com.smilepile.ui.components.SmilePileLogo
 import com.smilepile.ui.components.AppHeaderComponent
 import com.smilepile.ui.components.gallery.CategoryFilterComponent
@@ -373,17 +368,6 @@ fun PhotoGalleryScreen(
                 )
             }
 
-            // Date range picker dialog
-            if (orchestratorState.showDateRangePicker) {
-                DateRangePickerDialog(
-                    currentDateRange = orchestratorState.searchState.selectedDateRange,
-                    onDateRangeSelected = { dateRange ->
-                        orchestratorState.onSetDateRange(dateRange)
-                        orchestratorState.onShowDateRangePicker(false)
-                    },
-                    onDismiss = { orchestratorState.onShowDateRangePicker(false) }
-                )
-            }
         }
     }
 }

@@ -119,7 +119,7 @@ struct PhotoGalleryView: View {
         .onAppear {
             // Initialize coordinator if needed
             if photoImportCoordinator == nil {
-                photoImportCoordinator = PhotoImportCoordinator()
+                photoImportCoordinator = PhotoImportCoordinator.createDefault()
             }
             loadCategories()
             loadPhotos()

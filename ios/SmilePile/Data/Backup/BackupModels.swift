@@ -96,7 +96,6 @@ struct BackupPhoto: Codable {
     let fileSize: Int64
     let width: Int
     let height: Int
-    let isFavorite: Bool
 
     func toPhoto() -> Photo {
         Photo(
@@ -109,7 +108,6 @@ struct BackupPhoto: Codable {
             fileSize: fileSize,
             width: Int32(width),
             height: Int32(height),
-            isFavorite: isFavorite
         )
     }
 
@@ -124,7 +122,6 @@ struct BackupPhoto: Codable {
             fileSize: photo.fileSize,
             width: Int(photo.width),
             height: Int(photo.height),
-            isFavorite: photo.isFavorite
         )
     }
 }

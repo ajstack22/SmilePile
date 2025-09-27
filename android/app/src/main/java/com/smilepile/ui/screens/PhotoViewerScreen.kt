@@ -175,7 +175,7 @@ fun PhotoViewerScreen(
             PhotoControlsBar(
                 photo = photos[pagerState.currentPage],
                 isParentMode = isParentMode,
-                onFavoriteToggle = { viewModel.toggleFavorite(it) },
+                onFavoriteToggle = { /* Favorites no longer supported */ },
                 onSharePhoto = { photo ->
                     // Create share intent for photo
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
@@ -320,36 +320,7 @@ private fun PhotoControlsBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Favorite button - available in both modes
-                if (isParentMode) {
-                    IconButton(
-                        onClick = { onFavoriteToggle(photo) },
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(
-                                color = if (photo.isFavorite) {
-                                    Color.Red.copy(alpha = 0.2f)
-                                } else {
-                                    Color.White.copy(alpha = 0.1f)
-                                },
-                                shape = CircleShape
-                            )
-                    ) {
-                        Icon(
-                            imageVector = if (photo.isFavorite) {
-                                Icons.Filled.Favorite
-                            } else {
-                                Icons.Outlined.FavoriteBorder
-                            },
-                            contentDescription = if (photo.isFavorite) {
-                                stringResource(R.string.remove_from_favorites)
-                            } else {
-                                stringResource(R.string.add_to_favorites)
-                            },
-                            tint = if (photo.isFavorite) Color.Red else Color.White,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
+                // Favorites button removed - no longer supported
 
                 // Share button - available in both modes
                 IconButton(

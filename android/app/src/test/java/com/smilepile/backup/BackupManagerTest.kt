@@ -1,6 +1,8 @@
 package com.smilepile.backup
 
 import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import com.smilepile.data.backup.*
 import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
@@ -8,11 +10,14 @@ import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.security.SecurePreferencesManager
 import com.smilepile.security.SecuritySummary
+import com.smilepile.storage.ZipUtils
 import com.smilepile.theme.ThemeManager
 import io.mockk.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
+import org.junit.After
 import org.junit.Test
 import org.junit.Assert.*
 import java.io.File
@@ -37,6 +42,9 @@ class BackupManagerTest {
         themeManager = mockk()
         securePreferencesManager = mockk()
 
+        // Mock ZipUtils object
+        mockkObject(ZipUtils)
+
         backupManager = BackupManager(
             context,
             categoryRepository,
@@ -48,14 +56,32 @@ class BackupManagerTest {
         // Setup default mocks
         every { context.cacheDir } returns File("/test/cache")
         every { context.filesDir } returns File("/test/files")
-        coEvery { themeManager.isDarkMode } returns flowOf(false)
+
+        // Mock package manager for version info
+        val packageManager = mockk<android.content.pm.PackageManager>()
+        val packageInfo = mockk<android.content.pm.PackageInfo>()
+        packageInfo.versionName = "1.0.0"
+        every { context.packageManager } returns packageManager
+        every { packageManager.getPackageInfo(any<String>(), any<Int>()) } returns packageInfo
+        every { context.packageName } returns "com.smilepile"
+
+        coEvery { themeManager.isDarkMode } returns MutableStateFlow(false)
         coEvery { securePreferencesManager.getSecuritySummary() } returns SecuritySummary(
             hasPIN = false,
             hasPattern = false,
+            biometricEnabled = false,
             kidSafeModeEnabled = false,
             cameraAccessAllowed = true,
-            deleteProtectionEnabled = false
+            deleteProtectionEnabled = false,
+            failedAttempts = 0,
+            isInCooldown = false
         )
+    }
+
+    @After
+    fun tearDown() {
+        // Unmock the ZipUtils object to prevent affecting other tests
+        unmockkObject(ZipUtils)
     }
 
     @Test
@@ -72,6 +98,11 @@ class BackupManagerTest {
 
         coEvery { categoryRepository.getAllCategories() } returns categories
         coEvery { photoRepository.getAllPhotos() } returns photos
+
+        // Mock ZipUtils.createZipFromDirectory to return success
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), any())
+        } returns Result.success(Unit)
 
         val options = BackupOptions(
             includePhotos = true,
@@ -109,6 +140,11 @@ class BackupManagerTest {
         coEvery { categoryRepository.getAllCategories() } returns categories
         coEvery { photoRepository.getAllPhotos() } returns photos
 
+        // Mock ZipUtils.createZipFromDirectory to return success
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), any())
+        } returns Result.success(Unit)
+
         val options = BackupOptions(
             selectedCategories = listOf(1L, 2L), // Only family and friends
             dateRangeStart = 1500L, // After photo1
@@ -122,7 +158,7 @@ class BackupManagerTest {
         // Then
         assertTrue(result.isSuccess)
         // Verify that only photo2 would be included based on filters
-        verify {
+        coVerify {
             photoRepository.getAllPhotos()
         }
     }
@@ -211,6 +247,16 @@ class BackupManagerTest {
 
         coEvery { categoryRepository.getAllCategories() } returns categories
         coEvery { photoRepository.getAllPhotos() } returns photos
+
+        // Mock ZipUtils with progress callback capture
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            // Call the progress callback
+            val progressCallback = arg<((Int, Int) -> Unit)?>(3)
+            progressCallback?.invoke(50, 100)
+            Result.success(Unit)
+        }
 
         // When
         val result = backupManager.exportToZip(

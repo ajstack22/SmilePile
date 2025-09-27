@@ -40,8 +40,7 @@ class PhotoRepositoryImpl @Inject constructor(
             createdAt = this.timestamp,
             fileSize = 0L, // PhotoEntity doesn't store file size
             width = 0, // PhotoEntity doesn't store dimensions
-            height = 0, // PhotoEntity doesn't store dimensions
-            isFavorite = this.isFavorite
+            height = 0 // PhotoEntity doesn't store dimensions
         )
     }
 
@@ -70,8 +69,7 @@ class PhotoRepositoryImpl @Inject constructor(
                 id = java.util.UUID.randomUUID().toString(),
                 uri = this.path,
                 categoryId = this.categoryId,
-                timestamp = this.createdAt,
-                isFavorite = this.isFavorite
+                timestamp = this.createdAt
             )
         } else {
             // Existing photo - find by URI to get the actual UUID
@@ -80,8 +78,7 @@ class PhotoRepositoryImpl @Inject constructor(
                 // Update existing entity
                 existingEntity.copy(
                     categoryId = this.categoryId,
-                    timestamp = this.createdAt,
-                    isFavorite = this.isFavorite
+                    timestamp = this.createdAt
                 )
             } else {
                 // Photo not found by URI, create new one with deterministic UUID
@@ -89,8 +86,7 @@ class PhotoRepositoryImpl @Inject constructor(
                     id = generateDeterministicUuidFromUri(this.path),
                     uri = this.path,
                     categoryId = this.categoryId,
-                    timestamp = this.createdAt,
-                    isFavorite = this.isFavorite
+                    timestamp = this.createdAt
                 )
             }
         }
@@ -300,48 +296,6 @@ class PhotoRepositoryImpl @Inject constructor(
         }
     }
 
-    // Search and filter methods implementation
-    override fun searchPhotos(searchQuery: String): Flow<List<Photo>> {
-        return photoDao.searchPhotos(searchQuery).map { photoEntities ->
-            photoEntities.map { it.toPhoto() }
-        }
-    }
-
-    override fun searchPhotosInCategory(searchQuery: String, categoryId: Long): Flow<List<Photo>> {
-        return photoDao.searchPhotosInCategory(searchQuery, categoryId).map { photoEntities ->
-            photoEntities.map { it.toPhoto() }
-        }
-    }
-
-    override fun getPhotosByDateRange(startDate: Long, endDate: Long): Flow<List<Photo>> {
-        return photoDao.getPhotosByDateRange(startDate, endDate).map { photoEntities ->
-            photoEntities.map { it.toPhoto() }
-        }
-    }
-
-    override fun getPhotosByDateRangeAndCategory(startDate: Long, endDate: Long, categoryId: Long): Flow<List<Photo>> {
-        return photoDao.getPhotosByDateRangeAndCategory(startDate, endDate, categoryId).map { photoEntities ->
-            photoEntities.map { it.toPhoto() }
-        }
-    }
-
-    override fun searchPhotosWithFilters(
-        searchQuery: String,
-        startDate: Long,
-        endDate: Long,
-        favoritesOnly: Boolean?,
-        categoryId: Long?
-    ): Flow<List<Photo>> {
-        return photoDao.searchPhotosWithFilters(
-            searchQuery = searchQuery,
-            startDate = startDate,
-            endDate = endDate,
-            favoritesOnly = favoritesOnly,
-            categoryId = categoryId ?: 0L
-        ).map { photoEntities ->
-            photoEntities.map { it.toPhoto() }
-        }
-    }
 
     // Remove from library methods - only delete from app database, NOT device storage
     override suspend fun removeFromLibrary(photo: Photo): Unit = withContext(ioDispatcher) {

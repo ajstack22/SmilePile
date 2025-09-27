@@ -287,8 +287,7 @@ public class CategoryManager: ObservableObject {
                         createdAt: photo.createdAt,
                         fileSize: photo.fileSize,
                         width: photo.width,
-                        height: photo.height,
-                        isFavorite: photo.isFavorite
+                        height: photo.height
                     )
 
                     try await photoRepository.updatePhoto(updatedPhoto)

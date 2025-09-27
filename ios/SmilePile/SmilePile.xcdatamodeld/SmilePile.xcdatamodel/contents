@@ -21,7 +21,6 @@
         <attribute name="encryptedNotes" optional="YES" attributeType="String"/>
         <attribute name="encryptedTags" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
-        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="timestamp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uri" attributeType="String"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="photos" inverseEntity="CategoryEntity"/>

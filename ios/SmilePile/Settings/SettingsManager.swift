@@ -550,8 +550,6 @@ class SettingsManager: ObservableObject {
     // MARK: - Sync with iCloud
 
     func syncWithiCloud() {
-        guard let suiteName = suiteName else { return }
-
         // Create a shared UserDefaults for app group
         guard let sharedDefaults = UserDefaults(suiteName: suiteName) else { return }
 
@@ -565,8 +563,6 @@ class SettingsManager: ObservableObject {
     }
 
     func loadFromiCloud() {
-        guard let suiteName = suiteName else { return }
-
         // Load from shared UserDefaults
         guard let sharedDefaults = UserDefaults(suiteName: suiteName) else { return }
 

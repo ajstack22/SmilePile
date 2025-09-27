@@ -1,17 +1,22 @@
 package com.smilepile.backup
 
 import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import com.smilepile.data.backup.*
 import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.storage.ZipUtils
 import com.smilepile.theme.ThemeManager
 import io.mockk.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
@@ -37,6 +42,9 @@ class RestoreManagerTest {
         themeManager = mockk(relaxed = true)
         securePreferencesManager = mockk(relaxed = true)
 
+        // Mock ZipUtils object
+        mockkObject(ZipUtils)
+
         restoreManager = RestoreManager(
             context,
             categoryRepository,
@@ -47,6 +55,20 @@ class RestoreManagerTest {
 
         every { context.cacheDir } returns File("/test/cache")
         every { context.filesDir } returns File("/test/files")
+
+        // Mock package manager for version info
+        val packageManager = mockk<PackageManager>()
+        val packageInfo = mockk<PackageInfo>()
+        packageInfo.versionName = "1.0.0"
+        every { context.packageManager } returns packageManager
+        every { packageManager.getPackageInfo(any<String>(), any<Int>()) } returns packageInfo
+        every { context.packageName } returns "com.smilepile"
+    }
+
+    @After
+    fun tearDown() {
+        // Unmock the ZipUtils object to prevent affecting other tests
+        unmockkObject(ZipUtils)
     }
 
     @Test
@@ -89,6 +111,8 @@ class RestoreManagerTest {
         coEvery { categoryRepository.getAllCategories() } returns existingCategories
         coEvery { photoRepository.getAllPhotos() } returns existingPhotos
         coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
 
         val options = RestoreOptions(
             strategy = ImportStrategy.MERGE,
@@ -123,6 +147,9 @@ class RestoreManagerTest {
 
         coEvery { categoryRepository.getAllCategories() } returns existingCategories
         coEvery { photoRepository.getAllPhotos() } returns existingPhotos
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
 
         val options = RestoreOptions(
             strategy = ImportStrategy.REPLACE,
@@ -146,6 +173,10 @@ class RestoreManagerTest {
     fun `restoreFromBackup dry run does not modify data`() = runBlocking {
         // Given
         val backupFile = createMockBackupFile()
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
 
         val options = RestoreOptions(
             strategy = ImportStrategy.MERGE,
@@ -176,6 +207,8 @@ class RestoreManagerTest {
 
         coEvery { photoRepository.getAllPhotos() } returns listOf(duplicatePhoto)
         coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
 
         val options = RestoreOptions(
             strategy = ImportStrategy.MERGE,
@@ -199,6 +232,9 @@ class RestoreManagerTest {
 
         coEvery { photoRepository.getAllPhotos() } returns listOf(existingPhoto)
         coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
 
         val options = RestoreOptions(
             strategy = ImportStrategy.MERGE,
@@ -241,7 +277,12 @@ class RestoreManagerTest {
             restoreSettings = true // Enable settings restore
         )
 
-        coEvery { themeManager.isDarkMode } returns flowOf(false)
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+        coEvery { themeManager.isDarkMode } returns MutableStateFlow(false)
 
         // When
         val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
@@ -249,7 +290,7 @@ class RestoreManagerTest {
         // Then
         // Theme settings should be updated
         coVerify(atLeast = 0) {
-            themeManager.setDarkMode(any())
+            themeManager.setThemeMode(any())
         }
     }
 

@@ -11,7 +11,6 @@ struct Photo: Identifiable, Codable, Equatable {
     let fileSize: Int64
     let width: Int
     let height: Int
-    let isFavorite: Bool
 
     // Computed properties matching Android
     var displayName: String {
@@ -35,8 +34,7 @@ struct Photo: Identifiable, Codable, Equatable {
         createdAt: Int64 = Int64(Date().timeIntervalSince1970 * 1000),
         fileSize: Int64 = 0,
         width: Int = 0,
-        height: Int = 0,
-        isFavorite: Bool = false
+        height: Int = 0
     ) {
         self.id = id
         self.path = path
@@ -47,7 +45,6 @@ struct Photo: Identifiable, Codable, Equatable {
         self.fileSize = fileSize
         self.width = width
         self.height = height
-        self.isFavorite = isFavorite
     }
 
     // Helper methods

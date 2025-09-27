@@ -90,8 +90,7 @@ data class BackupPhoto(
     val createdAt: Long,
     val fileSize: Long = 0,
     val width: Int = 0,
-    val height: Int = 0,
-    val isFavorite: Boolean = false
+    val height: Int = 0
 ) {
     fun toPhoto(): Photo {
         return Photo(
@@ -103,8 +102,7 @@ data class BackupPhoto(
             createdAt = createdAt,
             fileSize = fileSize,
             width = width,
-            height = height,
-            isFavorite = isFavorite
+            height = height
         )
     }
 
@@ -119,8 +117,7 @@ data class BackupPhoto(
                 createdAt = photo.createdAt,
                 fileSize = photo.fileSize,
                 width = photo.width,
-                height = photo.height,
-                isFavorite = photo.isFavorite
+                height = photo.height
             )
         }
     }

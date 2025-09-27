@@ -78,6 +78,7 @@ struct ContentView: View {
                 // Kids Mode View
                 KidsModeView(viewModel: kidsModeViewModel)
                     .ignoresSafeArea()
+                    .persistentSystemOverlays(.hidden) // Hide home indicator in Kids Mode only
                     .overlay(alignment: .topTrailing) {
                         // Invisible 3-tap area in top-right corner for exiting Kids Mode
                         Color.clear
@@ -92,6 +93,7 @@ struct ContentView: View {
                 // Parent Mode View
                 ParentModeView()
                     .ignoresSafeArea()
+                    .persistentSystemOverlays(.visible) // Keep home indicator visible in Parent Mode
             }
         }
         .ignoresSafeArea()

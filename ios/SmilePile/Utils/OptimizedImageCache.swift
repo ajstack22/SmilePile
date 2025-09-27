@@ -42,8 +42,11 @@ actor OptimizedImageCache {
 
     // MARK: - Initialization
     init() {
-        setupCache()
-        observeMemoryWarnings()
+        // Setup will be done in a task to respect actor isolation
+        Task {
+            await setupCache()
+            await observeMemoryWarnings()
+        }
     }
 
     private func setupCache() {

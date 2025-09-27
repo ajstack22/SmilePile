@@ -230,16 +230,6 @@ class PhotoGalleryViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavorite(photo: Photo) {
-        viewModelScope.launch {
-            try {
-                val updatedPhoto = photo.copy(isFavorite = !photo.isFavorite)
-                photoRepository.updatePhoto(updatedPhoto)
-            } catch (e: Exception) {
-                _error.value = "Failed to update favorite: ${e.message}"
-            }
-        }
-    }
 
     fun removePhotoFromLibrary(photo: Photo) {
         viewModelScope.launch {
@@ -376,31 +366,6 @@ class PhotoGalleryViewModel @Inject constructor(
         }
     }
 
-    fun setSelectedPhotosFavorite(isFavorite: Boolean) {
-        viewModelScope.launch {
-            try {
-                _isBatchOperationInProgress.value = true
-                val photosToUpdate = uiState.value.photos.filter {
-                    _selectedPhotos.value.contains(it.id)
-                }
-
-                val result = photoOperationsManager.updateFavoriteStatus(photosToUpdate, isFavorite)
-
-                val action = if (isFavorite) "added to" else "removed from"
-                if (result.isCompleteSuccess) {
-                    _error.value = "Successfully $action favorites: ${result.successCount} photos"
-                } else {
-                    _error.value = "$action favorites: ${result.successCount} photos, failed: ${result.failureCount} photos"
-                }
-
-                exitSelectionMode()
-            } catch (e: Exception) {
-                _error.value = "Failed to update favorites: ${e.message}"
-            } finally {
-                _isBatchOperationInProgress.value = false
-            }
-        }
-    }
 
     fun clearError() {
         _error.value = null

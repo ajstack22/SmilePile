@@ -279,8 +279,7 @@ class ExportManager @Inject constructor(
                                 imagePath = "images/$imageName",
                                 thumbPath = "thumbnails/$thumbName",
                                 category = category?.displayName ?: "Uncategorized",
-                                date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(photo.createdAt)),
-                                isFavorite = photo.isFavorite
+                                date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(photo.createdAt))
                             )
                         )
 
@@ -377,8 +376,8 @@ class ExportManager @Inject constructor(
             // Filter by date range
             (options.dateRangeStart == null || photo.createdAt >= options.dateRangeStart) &&
             (options.dateRangeEnd == null || photo.createdAt <= options.dateRangeEnd) &&
-            // Filter by favorites
-            (!options.favoritesOnly || photo.isFavorite)
+            // Filter by favorites (removed - no longer supported)
+            true
         }
 
         return Pair(categories, photos)
@@ -437,7 +436,7 @@ class ExportManager @Inject constructor(
             totalCategories = categories.size,
             totalPhotos = photos.size,
             totalFileSize = photos.sumOf { it.fileSize },
-            favoriteCount = photos.count { it.isFavorite },
+            favoriteCount = 0, // Favorites no longer supported
             dateRange = DateRange(
                 start = photos.minByOrNull { it.createdAt }?.createdAt,
                 end = photos.maxByOrNull { it.createdAt }?.createdAt
@@ -558,7 +557,6 @@ class ExportManager @Inject constructor(
                     <h3>${item.title}</h3>
                     <p>${item.category}</p>
                     <p>${item.date}</p>
-                    ${if (item.isFavorite) """<span class="favorite">⭐</span>""" else ""}
                 </div>
                 <a href="${item.imagePath}" class="view-full">View Full Size</a>
             </div>
@@ -859,7 +857,6 @@ data class PhotoExport(
     val name: String,
     val categoryId: Long,
     val createdAt: Long,
-    val isFavorite: Boolean,
     val metadata: PhotoMetadata? = null
 ) {
     companion object {
@@ -869,7 +866,6 @@ data class PhotoExport(
                 name = photo.name,
                 categoryId = photo.categoryId,
                 createdAt = photo.createdAt,
-                isFavorite = photo.isFavorite,
                 metadata = if (includeMetadata) {
                     PhotoMetadata(
                         fileSize = photo.fileSize,
@@ -939,6 +935,5 @@ data class GalleryItem(
     val imagePath: String,
     val thumbPath: String,
     val category: String,
-    val date: String,
-    val isFavorite: Boolean
+    val date: String
 )

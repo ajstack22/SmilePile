@@ -36,10 +36,6 @@ struct PhotoThumbnailWithCategory: View {
                 selectionOverlay
             }
 
-            // Favorite indicator
-            if photo.isFavorite {
-                favoriteIndicator
-            }
         }
         .frame(width: thumbnailSize, height: thumbnailSize)
         .cornerRadius(8)
@@ -138,26 +134,6 @@ struct PhotoThumbnailWithCategory: View {
         }
     }
 
-    // MARK: - Favorite Indicator
-
-    @ViewBuilder
-    private var favoriteIndicator: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                Image(systemName: "heart.fill")
-                    .font(.caption)
-                    .foregroundColor(.white)
-                    .padding(4)
-                    .background(
-                        Circle()
-                            .fill(Color.red.opacity(0.9))
-                    )
-                    .padding(4)
-            }
-        }
-    }
 
     // MARK: - Load Thumbnail
 
@@ -259,16 +235,6 @@ struct PhotoGridWithCategories: View {
                 }
                 .disabled(selectedPhotoIds.isEmpty)
 
-                // Favorite button
-                Button(action: {
-                    Task {
-                        await toggleFavoriteForSelected()
-                    }
-                }) {
-                    Label("Favorite", systemImage: "heart")
-                        .font(.caption)
-                }
-                .disabled(selectedPhotoIds.isEmpty)
 
                 // Clear selection
                 Button(action: {
@@ -315,14 +281,6 @@ struct PhotoGridWithCategories: View {
         }
     }
 
-    private func toggleFavoriteForSelected() async {
-        // Implementation for toggling favorites
-        for photoId in selectedPhotoIds {
-            // Update favorite status in repository
-        }
-        selectedPhotoIds.removeAll()
-        editMode = .inactive
-    }
 }
 
 // MARK: - Batch Category Assignment View

@@ -22,10 +22,15 @@ actor EnhancedPhotoImportCoordinator {
     private let logger = Logger(subsystem: "com.smilepile", category: "EnhancedPhotoImportCoordinator")
     private let thumbnailGenerator = SafeThumbnailGenerator()
     private let thumbnailSizeManager = ThumbnailSizeManager.shared
-    private let memoryMonitor = MemoryMonitor.shared
     private let sessionManager = PhotoImportSessionManager()
     private let storageManager: StorageManager
     private let photoRepository: PhotoRepositoryImpl
+    // Memory monitor will be accessed via MainActor context
+    private nonisolated var memoryMonitor: MemoryMonitor {
+        get async {
+            await MainActor.run { MemoryMonitor.shared }
+        }
+    }
 
     private var currentState: ImportState = .idle
     private var activeTask: Task<Void, Error>?
@@ -42,10 +47,19 @@ actor EnhancedPhotoImportCoordinator {
     }
 
     // MARK: - Initialization
-    init(storageManager: StorageManager = .shared,
+    init(storageManager: StorageManager,
          photoRepository: PhotoRepositoryImpl = PhotoRepositoryImpl()) {
         self.storageManager = storageManager
         self.photoRepository = photoRepository
+    }
+
+    // Convenience initializer that can be called from MainActor context
+    @MainActor
+    static func createDefault() -> EnhancedPhotoImportCoordinator {
+        return EnhancedPhotoImportCoordinator(
+            storageManager: StorageManager.shared,
+            photoRepository: PhotoRepositoryImpl()
+        )
     }
 
     // MARK: - Public Methods
@@ -162,8 +176,9 @@ actor EnhancedPhotoImportCoordinator {
 
                     // Update progress
                     let overallIndex = batchStart + index + 1
+                    let monitor = await memoryMonitor
                     let memUsage = await MainActor.run {
-                        memoryMonitor.currentMemoryUsageMB
+                        monitor.currentMemoryUsageMB
                     }
                     let progress = ImportProgress(
                         currentPhoto: overallIndex,
@@ -269,8 +284,7 @@ actor EnhancedPhotoImportCoordinator {
             createdAt: Int64(Date().timeIntervalSince1970 * 1000),
             fileSize: Int64(processedData.count),
             width: metadata?.width ?? 0,
-            height: metadata?.height ?? 0,
-            isFavorite: false
+            height: metadata?.height ?? 0
         )
 
         // Save to repository
@@ -282,8 +296,9 @@ actor EnhancedPhotoImportCoordinator {
     // MARK: - Adaptive Memory Management
 
     private func checkMemoryPressureWithAdaptation() async throws {
+        let monitor = await memoryMonitor
         let memoryInfo = await MainActor.run {
-            memoryMonitor.getCurrentMemoryInfo()
+            monitor.getCurrentMemoryInfo()
         }
 
         switch memoryInfo.pressureLevel {
@@ -298,7 +313,7 @@ actor EnhancedPhotoImportCoordinator {
             // Longer delay and request cleanup
             logger.warning("Critical memory: \(memoryInfo.currentMB)MB")
             await MainActor.run {
-                memoryMonitor.requestMemoryCleanup()
+                monitor.requestMemoryCleanup()
             }
             try await Task.sleep(nanoseconds: 500_000_000) // 500ms
         case .danger:
@@ -308,8 +323,9 @@ actor EnhancedPhotoImportCoordinator {
     }
 
     private func adaptThumbnailSize(requested: ThumbnailSize) async -> ThumbnailSize {
+        let monitor = await memoryMonitor
         let memoryUsage = await MainActor.run {
-            memoryMonitor.currentMemoryUsageMB
+            monitor.currentMemoryUsageMB
         }
         return thumbnailSizeManager.adjustSizeForMemoryPressure(
             requested: requested,
@@ -318,8 +334,9 @@ actor EnhancedPhotoImportCoordinator {
     }
 
     private func adaptiveDelay() async -> UInt64 {
+        let monitor = await memoryMonitor
         let memoryInfo = await MainActor.run {
-            memoryMonitor.getCurrentMemoryInfo()
+            monitor.getCurrentMemoryInfo()
         }
 
         switch memoryInfo.pressureLevel {

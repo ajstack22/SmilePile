@@ -121,8 +121,7 @@ class CameraViewModel @Inject constructor(
                     createdAt = System.currentTimeMillis(),
                     fileSize = fileSize,
                     width = width,
-                    height = height,
-                    isFavorite = false
+                    height = height
                 )
 
                 // Save to database

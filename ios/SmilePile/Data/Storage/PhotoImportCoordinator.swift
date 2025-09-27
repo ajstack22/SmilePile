@@ -52,10 +52,19 @@ actor PhotoImportCoordinator {
 
     // MARK: - Initialization
 
-    init(storageManager: StorageManager? = nil,
+    init(storageManager: StorageManager,
          photoRepository: PhotoRepositoryImpl? = nil) {
-        self.storageManager = storageManager ?? StorageManager.shared
+        self.storageManager = storageManager
         self.photoRepository = photoRepository ?? PhotoRepositoryImpl()
+    }
+
+    // Convenience initializer that can be called from MainActor context
+    @MainActor
+    static func createDefault() -> PhotoImportCoordinator {
+        return PhotoImportCoordinator(
+            storageManager: StorageManager.shared,
+            photoRepository: PhotoRepositoryImpl()
+        )
     }
 
     // MARK: - Public Methods
@@ -294,8 +303,7 @@ actor PhotoImportCoordinator {
             createdAt: Int64(Date().timeIntervalSince1970 * 1000),
             fileSize: Int64(processedData.count),
             width: metadata?.width ?? 0,
-            height: metadata?.height ?? 0,
-            isFavorite: false
+            height: metadata?.height ?? 0
         )
 
         // Save to repository

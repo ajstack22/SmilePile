@@ -56,7 +56,7 @@ struct SmilePileApp: App {
                 .environment(\.managedObjectContext, coreDataStack.viewContext)
                 .environmentObject(settingsManager)
                 .ignoresSafeArea()
-                .persistentSystemOverlays(.hidden) // Hide home indicator for true fullscreen
+                // Home indicator is now controlled in ContentView based on Kids Mode
                 .statusBar(hidden: false) // Keep status bar visible but allow content underneath
                 .preferredColorScheme(settingsManager.themeMode == .dark ? .dark :
                                     settingsManager.themeMode == .light ? .light : nil)

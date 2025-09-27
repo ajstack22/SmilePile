@@ -207,34 +207,6 @@ class PhotoOperationsManager @Inject constructor(
         }
     }
 
-    /**
-     * Updates favorite status for multiple photos
-     */
-    suspend fun updateFavoriteStatus(photos: List<Photo>, isFavorite: Boolean): BatchOperationResult {
-        return withContext(Dispatchers.IO) {
-            var successCount = 0
-            var failureCount = 0
-            val failedPhotos = mutableListOf<Photo>()
-
-            photos.forEach { photo ->
-                try {
-                    val updatedPhoto = photo.copy(isFavorite = isFavorite)
-                    photoRepository.updatePhoto(updatedPhoto)
-                    successCount++
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    failureCount++
-                    failedPhotos.add(photo)
-                }
-            }
-
-            BatchOperationResult(
-                successCount = successCount,
-                failureCount = failureCount,
-                failedItems = failedPhotos
-            )
-        }
-    }
 
     /**
      * Removes a photo from the app library only (NOT from device storage)

@@ -245,8 +245,7 @@ class BackupManager @Inject constructor(
                     createdAt = photo.createdAt,
                     fileSize = photo.fileSize,
                     width = photo.width,
-                    height = photo.height,
-                    isFavorite = photo.isFavorite
+                    height = photo.height
                 )
             }
 

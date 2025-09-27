@@ -24,7 +24,7 @@ import com.smilepile.data.entities.PhotoCategoryJoin
         CategoryEntity::class,
         PhotoCategoryJoin::class
     ],
-    version = 6,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -49,6 +49,50 @@ abstract class SmilePileDatabase : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the same time
         @Volatile
         private var INSTANCE: SmilePileDatabase? = null
+
+        // Migration from version 6 to 7: Remove is_favorite column
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Create new photo_entities table without is_favorite column
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS photo_entities_new (
+                        id TEXT PRIMARY KEY NOT NULL,
+                        uri TEXT NOT NULL,
+                        category_id INTEGER NOT NULL,
+                        timestamp INTEGER NOT NULL,
+                        encrypted_child_name TEXT,
+                        encrypted_child_age TEXT,
+                        encrypted_notes TEXT,
+                        encrypted_tags TEXT,
+                        encrypted_milestone TEXT,
+                        encrypted_location TEXT,
+                        encrypted_metadata TEXT
+                    )
+                """.trimIndent())
+
+                // Copy data from old table to new table (excluding is_favorite column)
+                database.execSQL("""
+                    INSERT INTO photo_entities_new (
+                        id, uri, category_id, timestamp,
+                        encrypted_child_name, encrypted_child_age, encrypted_notes,
+                        encrypted_tags, encrypted_milestone, encrypted_location,
+                        encrypted_metadata
+                    )
+                    SELECT
+                        id, uri, category_id, timestamp,
+                        encrypted_child_name, encrypted_child_age, encrypted_notes,
+                        encrypted_tags, encrypted_milestone, encrypted_location,
+                        encrypted_metadata
+                    FROM photo_entities
+                """.trimIndent())
+
+                // Drop old table
+                database.execSQL("DROP TABLE photo_entities")
+
+                // Rename new table to original name
+                database.execSQL("ALTER TABLE photo_entities_new RENAME TO photo_entities")
+            }
+        }
 
         // Migration from version 5 to 6: Add PhotoCategoryJoin table and icon_name column
         private val MIGRATION_5_6 = object : Migration(5, 6) {
@@ -149,7 +193,7 @@ abstract class SmilePileDatabase : RoomDatabase() {
                     SmilePileDatabase::class.java,
                     "smilepile_database"
                 )
-                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6)
+                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                     .fallbackToDestructiveMigration() // Fallback for other version jumps
                     .build()
                 INSTANCE = instance

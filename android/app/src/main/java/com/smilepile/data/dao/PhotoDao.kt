@@ -122,21 +122,6 @@ interface PhotoDao {
     @Query("SELECT * FROM photo_entities WHERE category_id = :categoryId ORDER BY timestamp DESC")
     fun getByCategory(categoryId: Long): Flow<List<PhotoEntity>>
 
-    /**
-     * Get all favorite photos as a reactive Flow
-     * @return Flow of list of favorite photos, ordered by timestamp descending
-     */
-    @Query("SELECT * FROM photo_entities WHERE is_favorite = 1 ORDER BY timestamp DESC")
-    fun getFavorites(): Flow<List<PhotoEntity>>
-
-    /**
-     * Update the favorite status of a photo
-     * @param photoId The ID of the photo to update
-     * @param isFavorite The new favorite status
-     * @return Number of rows affected
-     */
-    @Query("UPDATE photo_entities SET is_favorite = :isFavorite WHERE id = :photoId")
-    suspend fun updateFavoriteStatus(photoId: String, isFavorite: Boolean): Int
 
     /**
      * Get the count of photos in a specific category
@@ -162,66 +147,8 @@ interface PhotoDao {
     @Query("DELETE FROM photo_entities WHERE category_id = :categoryId")
     suspend fun deleteByCategory(categoryId: Long): Int
 
-    /**
-     * Search photos by name/path with LIKE pattern
-     * @param searchQuery The search query to match against photo names/paths
-     * @return Flow of list of photos matching the search query
-     */
-    @Query("SELECT * FROM photo_entities WHERE uri LIKE '%' || :searchQuery || '%' ORDER BY timestamp DESC")
-    fun searchPhotos(searchQuery: String): Flow<List<PhotoEntity>>
 
-    /**
-     * Search photos by name/path within a specific category
-     * @param searchQuery The search query to match against photo names/paths
-     * @param categoryId The ID of the category to search within
-     * @return Flow of list of photos matching the search query in the category
-     */
-    @Query("SELECT * FROM photo_entities WHERE uri LIKE '%' || :searchQuery || '%' AND category_id = :categoryId ORDER BY timestamp DESC")
-    fun searchPhotosInCategory(searchQuery: String, categoryId: Long): Flow<List<PhotoEntity>>
 
-    /**
-     * Get photos within a date range
-     * @param startDate Start of the date range (timestamp)
-     * @param endDate End of the date range (timestamp)
-     * @return Flow of list of photos within the date range
-     */
-    @Query("SELECT * FROM photo_entities WHERE timestamp BETWEEN :startDate AND :endDate ORDER BY timestamp DESC")
-    fun getPhotosByDateRange(startDate: Long, endDate: Long): Flow<List<PhotoEntity>>
-
-    /**
-     * Get photos within a date range and category
-     * @param startDate Start of the date range (timestamp)
-     * @param endDate End of the date range (timestamp)
-     * @param categoryId The ID of the category
-     * @return Flow of list of photos within the date range and category
-     */
-    @Query("SELECT * FROM photo_entities WHERE timestamp BETWEEN :startDate AND :endDate AND category_id = :categoryId ORDER BY timestamp DESC")
-    fun getPhotosByDateRangeAndCategory(startDate: Long, endDate: Long, categoryId: Long): Flow<List<PhotoEntity>>
-
-    /**
-     * Search photos with multiple filters: text search, date range, favorites, and category
-     * @param searchQuery The search query (empty string means no text filter)
-     * @param startDate Start of the date range (0 means no start limit)
-     * @param endDate End of the date range (Long.MAX_VALUE means no end limit)
-     * @param favoritesOnly Whether to filter only favorites (null means all photos)
-     * @param categoryId The category ID (empty string means all categories)
-     * @return Flow of list of filtered photos
-     */
-    @Query("""
-        SELECT * FROM photo_entities
-        WHERE (:searchQuery = '' OR uri LIKE '%' || :searchQuery || '%')
-        AND timestamp BETWEEN :startDate AND :endDate
-        AND (:favoritesOnly IS NULL OR is_favorite = :favoritesOnly)
-        AND (:categoryId = 0 OR category_id = :categoryId)
-        ORDER BY timestamp DESC
-    """)
-    fun searchPhotosWithFilters(
-        searchQuery: String,
-        startDate: Long,
-        endDate: Long,
-        favoritesOnly: Boolean?,
-        categoryId: Long
-    ): Flow<List<PhotoEntity>>
 
     // Additional methods for SecurePhotoRepository
 

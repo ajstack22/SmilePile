@@ -46,7 +46,6 @@ final class PhotoMetadataExtractor {
         let isHDR: Bool
         let isBurst: Bool
         let isLivePhoto: Bool
-        let isFavorite: Bool
         let isEdited: Bool
     }
 
@@ -88,7 +87,6 @@ final class PhotoMetadataExtractor {
                 isHDR: metadata.isHDR,
                 isBurst: metadata.isBurst,
                 isLivePhoto: metadata.isLivePhoto,
-                isFavorite: metadata.isFavorite,
                 isEdited: metadata.isEdited
             )
         }
@@ -123,7 +121,6 @@ final class PhotoMetadataExtractor {
             isHDR: asset.mediaSubtypes.contains(.photoHDR),
             isBurst: asset.representsBurst,
             isLivePhoto: asset.mediaSubtypes.contains(.photoLive),
-            isFavorite: asset.isFavorite,
             isEdited: asset.hasAdjustments
         )
     }
@@ -198,7 +195,6 @@ final class PhotoMetadataExtractor {
             isHDR: false,
             isBurst: false,
             isLivePhoto: false,
-            isFavorite: false,
             isEdited: false
         )
     }
@@ -234,7 +230,6 @@ final class PhotoMetadataExtractor {
             isHDR: false,
             isBurst: false,
             isLivePhoto: false,
-            isFavorite: false,
             isEdited: false
         )
     }
@@ -272,7 +267,6 @@ final class PhotoMetadataExtractor {
             isHDR: asset.mediaSubtypes.contains(.photoHDR),
             isBurst: asset.representsBurst,
             isLivePhoto: asset.mediaSubtypes.contains(.photoLive),
-            isFavorite: asset.isFavorite,
             isEdited: asset.hasAdjustments
         )
     }

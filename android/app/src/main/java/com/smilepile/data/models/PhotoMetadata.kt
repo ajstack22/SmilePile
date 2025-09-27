@@ -14,7 +14,6 @@ data class PhotoMetadata(
     val uri: String,
     val categoryId: Long,
     val timestamp: Long,
-    val isFavorite: Boolean,
 
     // Decrypted child data (sensitive)
     val childName: String? = null,
@@ -66,7 +65,6 @@ data class PhotoMetadata(
                 uri = entity.uri,
                 categoryId = entity.categoryId,
                 timestamp = entity.timestamp,
-                isFavorite = entity.isFavorite,
                 childName = childName ?: fullMetadata?.childName,
                 childAge = childAge ?: fullMetadata?.childAge,
                 notes = notes ?: fullMetadata?.notes,
@@ -86,8 +84,7 @@ data class PhotoMetadata(
                 id = entity.id,
                 uri = entity.uri,
                 categoryId = entity.categoryId,
-                timestamp = entity.timestamp,
-                isFavorite = entity.isFavorite
+                timestamp = entity.timestamp
             )
         }
     }
@@ -130,7 +127,6 @@ data class PhotoMetadata(
             uri = uri,
             categoryId = categoryId,
             timestamp = timestamp,
-            isFavorite = isFavorite,
             encryptedChildName = encryptedChildName,
             encryptedChildAge = encryptedChildAge,
             encryptedNotes = encryptedNotes,
@@ -149,8 +145,7 @@ data class PhotoMetadata(
             id = id,
             uri = uri,
             categoryId = categoryId,
-            timestamp = timestamp,
-            isFavorite = isFavorite
+            timestamp = timestamp
         )
     }
 

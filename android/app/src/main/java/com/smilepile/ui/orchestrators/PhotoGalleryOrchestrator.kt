@@ -20,7 +20,6 @@ import com.smilepile.data.models.Photo
 import com.smilepile.mode.AppMode
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.viewmodels.PhotoImportViewModel
-import com.smilepile.ui.viewmodels.SearchViewModel
 import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.sharing.ShareManager
 import com.smilepile.utils.PermissionHandler
@@ -29,7 +28,7 @@ import com.smilepile.utils.PermissionHandler
  * PhotoGalleryOrchestrator - Centralized coordination component for photo gallery functionality.
  *
  * This orchestrator implements the StackMap team's orchestration pattern by:
- * - Coordinating between 4 ViewModels (PhotoGallery, Import, Search, AppMode)
+ * - Coordinating between 3 ViewModels (PhotoGallery, Import, AppMode)
  * - Managing shared state and cross-cutting concerns
  * - Handling mode switching (Kids/Parent) with appropriate UI adaptations
  * - Centralizing event handling to reduce prop drilling
@@ -38,7 +37,6 @@ import com.smilepile.utils.PermissionHandler
  * Key Responsibilities:
  * - Photo selection and batch operations coordination
  * - Permission management for photo imports
- * - Search state synchronization with gallery display
  * - Mode-aware rendering decisions
  * - Dialog state management and orchestration
  * - Event routing between components and ViewModels
@@ -52,7 +50,6 @@ fun PhotoGalleryOrchestrator(
     snackbarHostState: SnackbarHostState,
     galleryViewModel: PhotoGalleryViewModel = hiltViewModel(),
     importViewModel: PhotoImportViewModel = hiltViewModel(),
-    searchViewModel: SearchViewModel = hiltViewModel(),
     modeViewModel: AppModeViewModel = hiltViewModel(),
     content: @Composable (PhotoGalleryOrchestratorState) -> Unit
 ) {
@@ -61,7 +58,6 @@ fun PhotoGalleryOrchestrator(
     // Collect UI states from all ViewModels
     val galleryState by galleryViewModel.uiState.collectAsState()
     val importState by importViewModel.uiState.collectAsState()
-    val searchState by searchViewModel.uiState.collectAsState()
     val modeState by modeViewModel.uiState.collectAsState()
 
     // Create ShareManager instance
@@ -72,8 +68,6 @@ fun PhotoGalleryOrchestrator(
     var showPermissionDialog by remember { mutableStateOf(false) }
     var showBatchDeleteDialog by remember { mutableStateOf(false) }
     var showBatchMoveDialog by remember { mutableStateOf(false) }
-    var showDateRangePicker by remember { mutableStateOf(false) }
-    var searchBarActive by remember { mutableStateOf(false) }
 
     // New state for category selection dialog
     var pendingImportUris by remember { mutableStateOf<List<Uri>?>(null) }
@@ -137,7 +131,6 @@ fun PhotoGalleryOrchestrator(
         // Gallery state
         galleryState = galleryState,
         importState = importState,
-        searchState = searchState,
         modeState = modeState,
 
         // Dialog states
@@ -145,15 +138,12 @@ fun PhotoGalleryOrchestrator(
         showPermissionDialog = showPermissionDialog,
         showBatchDeleteDialog = showBatchDeleteDialog,
         showBatchMoveDialog = showBatchMoveDialog,
-        showDateRangePicker = showDateRangePicker,
-        searchBarActive = searchBarActive,
         showCategorySelection = showCategorySelection,
 
         // Photo operations
         onPhotoClick = { photo ->
             // IMPORTANT: Use the exact same photo list that's being displayed in the grid
-            val displayedPhotos = galleryState.photos
-            val photoList = if (searchState.isSearchActive) searchState.searchResults else displayedPhotos
+            val photoList = galleryState.photos
 
             // NUCLEAR OPTION: Find the index here where we have the actual displayed list
             val actualIndex = photoList.indexOfFirst { it.id == photo.id }
@@ -185,7 +175,6 @@ fun PhotoGalleryOrchestrator(
                 galleryViewModel.togglePhotoSelection(photo.id)
             }
         },
-        onFavoriteToggle = galleryViewModel::toggleFavorite,
 
         // Selection operations
         onEnterSelectionMode = galleryViewModel::enterSelectionMode,
@@ -203,7 +192,6 @@ fun PhotoGalleryOrchestrator(
             galleryViewModel.moveSelectedPhotosToCategory(categoryId)
             showBatchMoveDialog = false
         },
-        onSetSelectedPhotosFavorite = galleryViewModel::setSelectedPhotosFavorite,
         onShareSelectedPhotos = {
             // Get selected photos and share them
             val selectedPhotos = galleryState.photos.filter { photo ->
@@ -218,16 +206,6 @@ fun PhotoGalleryOrchestrator(
         // Category operations
         onCategorySelected = galleryViewModel::selectCategory,
 
-        // Search operations
-        onSearchQueryChange = searchViewModel::updateSearchQuery,
-        onSearchHistoryItemClick = searchViewModel::selectSearchHistoryItem,
-        onRemoveFromHistory = searchViewModel::removeFromSearchHistory,
-        onClearHistory = searchViewModel::clearSearchHistory,
-        onToggleFilters = searchViewModel::toggleFilters,
-        onClearAllFilters = searchViewModel::clearAllFilters,
-        onSetDateRange = searchViewModel::setDateRange,
-        onSetFavoritesOnly = searchViewModel::setFavoritesOnly,
-        onSetCategoryFilter = searchViewModel::setCategoryFilter,
 
         // Import operations
         onImportSinglePhoto = {
@@ -273,8 +251,6 @@ fun PhotoGalleryOrchestrator(
         onShowPermissionDialog = { showPermissionDialog = it },
         onShowBatchDeleteDialog = { showBatchDeleteDialog = it },
         onShowBatchMoveDialog = { showBatchMoveDialog = it },
-        onShowDateRangePicker = { showDateRangePicker = it },
-        onSetSearchBarActive = { searchBarActive = it },
         onShowCategorySelection = { showCategorySelection = it },
         onCategorySelectedForImport = { categoryId ->
             pendingImportUris?.let { uris ->
@@ -304,7 +280,6 @@ data class PhotoGalleryOrchestratorState(
     // ViewModel states
     val galleryState: com.smilepile.ui.viewmodels.PhotoGalleryUiState,
     val importState: com.smilepile.ui.viewmodels.PhotoImportUiState,
-    val searchState: com.smilepile.ui.viewmodels.SearchUiState,
     val modeState: com.smilepile.ui.viewmodels.AppModeUiState,
 
     // Dialog states
@@ -312,14 +287,11 @@ data class PhotoGalleryOrchestratorState(
     val showPermissionDialog: Boolean,
     val showBatchDeleteDialog: Boolean,
     val showBatchMoveDialog: Boolean,
-    val showDateRangePicker: Boolean,
-    val searchBarActive: Boolean,
     val showCategorySelection: Boolean,
 
     // Photo operations
     val onPhotoClick: (Photo) -> Unit,
     val onPhotoLongClick: (Photo) -> Unit,
-    val onFavoriteToggle: (Photo) -> Unit,
 
     // Selection operations
     val onEnterSelectionMode: () -> Unit,
@@ -331,22 +303,11 @@ data class PhotoGalleryOrchestratorState(
     // Batch operations
     val onDeleteSelectedPhotos: () -> Unit,
     val onMoveSelectedPhotos: (Long) -> Unit,
-    val onSetSelectedPhotosFavorite: (Boolean) -> Unit,
     val onShareSelectedPhotos: () -> Unit,
 
     // Category operations
     val onCategorySelected: (Long?) -> Unit,
 
-    // Search operations
-    val onSearchQueryChange: (String) -> Unit,
-    val onSearchHistoryItemClick: (String) -> Unit,
-    val onRemoveFromHistory: (String) -> Unit,
-    val onClearHistory: () -> Unit,
-    val onToggleFilters: () -> Unit,
-    val onClearAllFilters: () -> Unit,
-    val onSetDateRange: (com.smilepile.ui.viewmodels.DateRange?) -> Unit,
-    val onSetFavoritesOnly: (Boolean) -> Unit,
-    val onSetCategoryFilter: (Long?) -> Unit,
 
     // Import operations
     val onImportSinglePhoto: () -> Unit,
@@ -364,8 +325,6 @@ data class PhotoGalleryOrchestratorState(
     val onShowPermissionDialog: (Boolean) -> Unit,
     val onShowBatchDeleteDialog: (Boolean) -> Unit,
     val onShowBatchMoveDialog: (Boolean) -> Unit,
-    val onShowDateRangePicker: (Boolean) -> Unit,
-    val onSetSearchBarActive: (Boolean) -> Unit,
     val onShowCategorySelection: (Boolean) -> Unit,
     val onCategorySelectedForImport: (Long) -> Unit,
 
@@ -378,12 +337,9 @@ data class PhotoGalleryOrchestratorState(
     val isParentMode: Boolean get() = modeState.currentMode == AppMode.PARENT
 
     // Computed properties for state coordination
-    val displayPhotos: List<Photo> get() = if (searchState.isSearchActive) searchState.searchResults else galleryState.photos
-    val showEmptyState: Boolean get() = !searchState.isSearchActive && galleryState.photos.isEmpty() && !galleryState.isLoading
-    val showSearchEmptyState: Boolean get() = searchState.showEmptyState
-    val showSearchResults: Boolean get() = searchState.showSearchResults
-    val isSearching: Boolean get() = searchState.isSearching
-    val isLoading: Boolean get() = galleryState.isLoading && !searchState.isSearchActive
+    val displayPhotos: List<Photo> get() = galleryState.photos
+    val showEmptyState: Boolean get() = galleryState.photos.isEmpty() && !galleryState.isLoading
+    val isLoading: Boolean get() = galleryState.isLoading
 
     // Batch operation availability
     val canPerformBatchOperations: Boolean get() = galleryState.isSelectionMode && galleryState.hasSelectedPhotos

@@ -33,6 +33,7 @@
 		49532994CAD5685FCBACF266 /* PhotoImportSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5625674F9786DB4FA761EAD /* PhotoImportSession.swift */; };
 		4C9C9FCA0559B9CA0DE9499D /* PatternLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16877539C3998DB11CD3E933 /* PatternLockView.swift */; };
 		4E0167BCBEAE815833518DA8 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E3EE5E93CD159941CC1CE /* ColorSelectionButton.swift */; };
+		4E7FD7C17E4AB19FA773B209 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2046D5EDEEE70ECF8A7D342 /* SettingsManager.swift */; };
 		4F62F2C87379C8DB379BB44A /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295870949C825ACF5B65124D /* CategoryRepository.swift */; };
 		503506FC646AE53B2D1ED7FD /* CategoryEntity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE696319326A215DB76D47C /* CategoryEntity+Extensions.swift */; };
 		57A48415C98330C8D12695DA /* PhotoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90F25BE11A6D37DBCAF5F5F /* PhotoEditView.swift */; };
@@ -51,6 +52,7 @@
 		7FF4355783D8B771086B776A /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17E1EEFB745A80D9DFBC6DA1 /* Nunito-ExtraBold.ttf */; };
 		842A2D29D57E47C366E77C8D /* PhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C605038760638BF9091F8 /* PhotoGalleryView.swift */; };
 		883E809783BAF7FF078B54A4 /* EnhancedPhotoImportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2DDDF50FE2130666098AB /* EnhancedPhotoImportCoordinator.swift */; };
+		8ABD38A20172998991CCC390 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565C53D1066DECBD824C8BC /* ShareSheetView.swift */; };
 		8D330593FD59C5C559E56B6B /* OptimizedPhotoGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F127DA0F1082501D44F304 /* OptimizedPhotoGalleryView.swift */; };
 		8EE1A883F9DAD9FD5279C4BB /* SecuritySettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2C2486B2706A0AA1AAA7DA /* SecuritySettingsViewModel.swift */; };
 		8F0E9A9F8FE3E281DBFACC72 /* PhotoGalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D159A0BDDA4CEBEF7FB67 /* PhotoGalleryViewModel.swift */; };
@@ -153,6 +155,7 @@
 		A3B3937B68BE902660E7C314 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		A44807AB142D720569372B92 /* FontDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDebug.swift; sourceTree = "<group>"; };
 		A5625674F9786DB4FA761EAD /* PhotoImportSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoImportSession.swift; sourceTree = "<group>"; };
+		A565C53D1066DECBD824C8BC /* ShareSheetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShareSheetView.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		A96295C760B2EAFDEDCF0DB0 /* PhotoRepositoryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhotoRepositoryTests.swift; path = SmilePileTests/PhotoRepositoryTests.swift; sourceTree = "<group>"; };
 		AE3D2EEF20BCF298FCA33E1C /* SmilePile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmilePile.xcdatamodel; sourceTree = "<group>"; };
 		AF1D36A705623A877CDADCE7 /* CategoryChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChip.swift; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		D77905EA8BA5981D2F66FC66 /* MemoryMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryMonitor.swift; path = MemoryMonitor.swift; sourceTree = "<group>"; };
 		D95E3EE5E93CD159941CC1CE /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
 		DF1D295BEED2719A2D568A28 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		E2046D5EDEEE70ECF8A7D342 /* SettingsManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsManager.swift; path = Settings/SettingsManager.swift; sourceTree = "<group>"; };
 		E3AC4449FA1E70729D6392F4 /* ParentalControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControlsView.swift; sourceTree = "<group>"; };
 		E4B570F571122E5D7A85C70D /* RepositoryErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryErrors.swift; sourceTree = "<group>"; };
 		EA2D159A0BDDA4CEBEF7FB67 /* PhotoGalleryViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PhotoGalleryViewModel.swift; path = PhotoGalleryViewModel.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 				3F857FFF8F8B4082A10FAA1C /* FloatingActionButton.swift */,
 				90232AF150D34F4EBC81E319 /* MaterialTabBar.swift */,
 				4814398C6C56EDB2D1036E27 /* PhotoThumbnailView.swift */,
+				A565C53D1066DECBD824C8BC /* ShareSheetView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -437,6 +442,7 @@
 				3E36693659E7B635FE3A3EEA /* Views */,
 				F892D5AECF065A5642D875D0 /* Utils */,
 				FD05E7B6BDD62D7C9BA7290C /* Core */,
+				E5AF02D13B86368F482A84A7 /* Settings */,
 			);
 			path = SmilePile;
 			sourceTree = "<group>";
@@ -455,6 +461,14 @@
 				0AC416DBDC3547F1163630DB /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		E5AF02D13B86368F482A84A7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E2046D5EDEEE70ECF8A7D342 /* SettingsManager.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		F892D5AECF065A5642D875D0 /* Utils */ = {
@@ -665,6 +679,8 @@
 				883E809783BAF7FF078B54A4 /* EnhancedPhotoImportCoordinator.swift in Sources */,
 				C95CEA930BCD659CAA2A87F5 /* DIContainer.swift in Sources */,
 				1634A632B55A94A9DB4F030D /* FileManagerExtensions.swift in Sources */,
+				4E7FD7C17E4AB19FA773B209 /* SettingsManager.swift in Sources */,
+				8ABD38A20172998991CCC390 /* ShareSheetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,6 @@ final class PhotoRepositoryImpl: PhotoRepository {
             photoEntity.uri = photo.path
             photoEntity.categoryId = photo.categoryId
             photoEntity.timestamp = photo.createdAt
-            photoEntity.isFavorite = photo.isFavorite
 
             try self.coreDataStack.saveContext(context)
             self.logger.debug("Photo inserted successfully: \(photoEntity.id ?? "")")
@@ -46,8 +45,7 @@ final class PhotoRepositoryImpl: PhotoRepository {
                 photoEntity.uri = photo.path
                 photoEntity.categoryId = photo.categoryId
                 photoEntity.timestamp = photo.createdAt
-                photoEntity.isFavorite = photo.isFavorite
-            }
+                }
 
             try self.coreDataStack.saveContext(context)
             self.logger.debug("Inserted \(photos.count) photos successfully")
@@ -67,7 +65,6 @@ final class PhotoRepositoryImpl: PhotoRepository {
             photoEntity.uri = photo.path
             photoEntity.categoryId = photo.categoryId
             photoEntity.timestamp = photo.createdAt
-            photoEntity.isFavorite = photo.isFavorite
 
             try self.coreDataStack.saveContext(context)
             self.logger.debug("Photo updated successfully: \(photo.id)")
@@ -219,119 +216,6 @@ final class PhotoRepositoryImpl: PhotoRepository {
         try await deletePhotoById(photoId)
     }
 
-    // MARK: - Search and Filtering
-
-    func searchPhotos(_ searchQuery: String) -> AnyPublisher<[Photo], Error> {
-        let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
-        request.predicate = NSPredicate(format: "uri CONTAINS[cd] %@", searchQuery)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
-
-        return coreDataStack.viewContext.publisher(for: request)
-            .map { entities in
-                entities.compactMap { self.entityToPhoto($0) }
-            }
-            .mapError { error in
-                PhotoRepositoryError.fetchFailed("Failed to search photos: \(error.localizedDescription)")
-            }
-            .eraseToAnyPublisher()
-    }
-
-    func searchPhotosInCategory(_ searchQuery: String, categoryId: Int64) -> AnyPublisher<[Photo], Error> {
-        let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "uri CONTAINS[cd] %@", searchQuery),
-            NSPredicate(format: "categoryId == %ld", categoryId)
-        ])
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
-
-        return coreDataStack.viewContext.publisher(for: request)
-            .map { entities in
-                entities.compactMap { self.entityToPhoto($0) }
-            }
-            .mapError { error in
-                PhotoRepositoryError.fetchFailed("Failed to search photos in category: \(error.localizedDescription)")
-            }
-            .eraseToAnyPublisher()
-    }
-
-    func getPhotosByDateRange(startDate: Int64, endDate: Int64) -> AnyPublisher<[Photo], Error> {
-        let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
-        request.predicate = NSPredicate(format: "timestamp BETWEEN %@", [startDate, endDate] as NSArray)
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
-
-        return coreDataStack.viewContext.publisher(for: request)
-            .map { entities in
-                entities.compactMap { self.entityToPhoto($0) }
-            }
-            .mapError { error in
-                PhotoRepositoryError.fetchFailed("Failed to fetch photos by date range: \(error.localizedDescription)")
-            }
-            .eraseToAnyPublisher()
-    }
-
-    func getPhotosByDateRangeAndCategory(startDate: Int64, endDate: Int64, categoryId: Int64) -> AnyPublisher<[Photo], Error> {
-        let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "timestamp BETWEEN %@", [startDate, endDate] as NSArray),
-            NSPredicate(format: "categoryId == %ld", categoryId)
-        ])
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
-
-        return coreDataStack.viewContext.publisher(for: request)
-            .map { entities in
-                entities.compactMap { self.entityToPhoto($0) }
-            }
-            .mapError { error in
-                PhotoRepositoryError.fetchFailed("Failed to fetch photos by date range and category: \(error.localizedDescription)")
-            }
-            .eraseToAnyPublisher()
-    }
-
-    func searchPhotosWithFilters(
-        searchQuery: String,
-        startDate: Int64,
-        endDate: Int64,
-        favoritesOnly: Bool?,
-        categoryId: Int64?
-    ) -> AnyPublisher<[Photo], Error> {
-        let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
-        var predicates: [NSPredicate] = []
-
-        // Text search
-        if !searchQuery.isEmpty {
-            predicates.append(NSPredicate(format: "uri CONTAINS[cd] %@", searchQuery))
-        }
-
-        // Date range
-        if startDate > 0 || endDate < Int64.max {
-            predicates.append(NSPredicate(format: "timestamp BETWEEN %@", [startDate, endDate] as NSArray))
-        }
-
-        // Favorites
-        if let favoritesOnly = favoritesOnly, favoritesOnly {
-            predicates.append(NSPredicate(format: "isFavorite == TRUE"))
-        }
-
-        // Category
-        if let categoryId = categoryId, categoryId > 0 {
-            predicates.append(NSPredicate(format: "categoryId == %ld", categoryId))
-        }
-
-        if !predicates.isEmpty {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        }
-
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
-
-        return coreDataStack.viewContext.publisher(for: request)
-            .map { entities in
-                entities.compactMap { self.entityToPhoto($0) }
-            }
-            .mapError { error in
-                PhotoRepositoryError.fetchFailed("Failed to search photos with filters: \(error.localizedDescription)")
-            }
-            .eraseToAnyPublisher()
-    }
 
     // MARK: - Private Helpers
 
@@ -354,8 +238,7 @@ final class PhotoRepositoryImpl: PhotoRepository {
             createdAt: entity.timestamp,
             fileSize: 0, // Will be calculated when needed
             width: 0,    // Will be calculated when needed
-            height: 0,   // Will be calculated when needed
-            isFavorite: entity.isFavorite
+            height: 0    // Will be calculated when needed
         )
     }
 }

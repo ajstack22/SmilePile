@@ -23,6 +23,7 @@ struct PhotoEditResult {
 }
 
 /// View model for photo editing operations with batch support
+@MainActor
 class PhotoEditViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var currentPhoto: PhotoEditItem?
@@ -66,11 +67,11 @@ class PhotoEditViewModel: ObservableObject {
     init(
         photoRepository: PhotoRepository = PhotoRepositoryImpl(),
         categoryRepository: CategoryRepository = CategoryRepositoryImpl(),
-        storageManager: StorageManager = .shared
+        storageManager: StorageManager? = nil
     ) {
         self.photoRepository = photoRepository
         self.categoryRepository = categoryRepository
-        self.storageManager = storageManager
+        self.storageManager = storageManager ?? StorageManager.shared
 
         loadCategories()
     }
@@ -309,8 +310,7 @@ class PhotoEditViewModel: ObservableObject {
                     createdAt: photo.createdAt,
                     fileSize: photo.fileSize,
                     width: photo.width,
-                    height: photo.height,
-                    isFavorite: photo.isFavorite
+                    height: photo.height
                 )
                 savedPhotos.append(savedPhoto)
             } catch {

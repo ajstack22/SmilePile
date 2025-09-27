@@ -292,8 +292,7 @@ class PhotoImportViewModel @Inject constructor(
             createdAt = System.currentTimeMillis(),
             fileSize = storageResult.fileSize,
             width = 0, // Will be updated later if needed
-            height = 0, // Will be updated later if needed
-            isFavorite = false
+            height = 0 // Will be updated later if needed
         )
     }
 
@@ -317,8 +316,7 @@ class PhotoImportViewModel @Inject constructor(
             } ?: System.currentTimeMillis(),
             fileSize = importResult.fileSize,
             width = importResult.metadata?.width ?: 0,
-            height = importResult.metadata?.height ?: 0,
-            isFavorite = false
+            height = importResult.metadata?.height ?: 0
         )
     }
 }

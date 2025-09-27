@@ -16,7 +16,7 @@ final class StorageManager: ObservableObject {
     private let logger = Logger(subsystem: "com.smilepile", category: "StorageManager")
     private let imageProcessor = ImageProcessor()
     private let safeThumbnailGenerator = SafeThumbnailGenerator()
-    private lazy var importCoordinator = PhotoImportCoordinator(storageManager: self, photoRepository: nil)
+    // Removed importCoordinator to prevent circular dependency
 
     // Test compatibility method
     func saveImage(_ image: UIImage, filename: String? = nil) async throws -> StorageResult {

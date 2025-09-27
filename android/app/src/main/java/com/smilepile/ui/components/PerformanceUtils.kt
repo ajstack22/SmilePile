@@ -303,7 +303,7 @@ object RecompositionUtils {
      */
     @Composable
     fun rememberStablePhoto(photo: Photo): Photo {
-        return remember(photo.id, photo.createdAt, photo.isFavorite) { photo }
+        return remember(photo.id, photo.createdAt) { photo }
     }
 
     /**
