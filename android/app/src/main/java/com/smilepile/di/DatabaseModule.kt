@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.smilepile.data.dao.CategoryDao
 import com.smilepile.data.dao.PhotoDao
+import com.smilepile.data.dao.PhotoCategoryDao
 import com.smilepile.data.database.SmilePileDatabase
 import dagger.Module
 import dagger.Provides
@@ -62,5 +63,16 @@ object DatabaseModule {
     @Provides
     fun provideCategoryDao(database: SmilePileDatabase): CategoryDao {
         return database.categoryDao()
+    }
+
+    /**
+     * Provides PhotoCategoryDao from the database.
+     *
+     * @param database SmilePileDatabase instance
+     * @return PhotoCategoryDao instance
+     */
+    @Provides
+    fun providePhotoCategoryDao(database: SmilePileDatabase): PhotoCategoryDao {
+        return database.photoCategoryDao()
     }
 }

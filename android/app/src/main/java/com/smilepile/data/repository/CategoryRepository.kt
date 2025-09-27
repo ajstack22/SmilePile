@@ -14,4 +14,12 @@ interface CategoryRepository {
     suspend fun getCategoryByName(name: String): Category?
     suspend fun initializeDefaultCategories()
     suspend fun getCategoryCount(): Int
+
+    // Batch operations for photo-category associations
+    suspend fun assignPhotosToCategory(photoIds: List<String>, categoryId: Long)
+    suspend fun removePhotosFromCategory(photoIds: List<String>, categoryId: Long)
+    suspend fun assignPhotoToCategories(photoId: String, categoryIds: List<Long>)
+    suspend fun getCategoriesForPhoto(photoId: String): List<Category>
+    fun getCategoriesForPhotoFlow(photoId: String): Flow<List<Category>>
+    suspend fun getPhotoCountInCategory(categoryId: Long): Int
 }

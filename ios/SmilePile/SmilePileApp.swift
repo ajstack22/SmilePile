@@ -5,6 +5,7 @@ import UIKit
 @main
 struct SmilePileApp: App {
     let coreDataStack = CoreDataStack.shared
+    @StateObject private var settingsManager = SettingsManager.shared
 
     init() {
         // Initialize font manager to register custom fonts
@@ -12,6 +13,9 @@ struct SmilePileApp: App {
 
         // Initialize Core Data stack
         _ = coreDataStack
+
+        // Initialize settings manager and perform migration if needed
+        SettingsManager.shared.migrateIfNeeded()
 
         // Initialize default categories
         Task {
@@ -50,9 +54,12 @@ struct SmilePileApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, coreDataStack.viewContext)
+                .environmentObject(settingsManager)
                 .ignoresSafeArea()
                 .persistentSystemOverlays(.hidden) // Hide home indicator for true fullscreen
                 .statusBar(hidden: false) // Keep status bar visible but allow content underneath
+                .preferredColorScheme(settingsManager.themeMode == .dark ? .dark :
+                                    settingsManager.themeMode == .light ? .light : nil)
         }
     }
 }

@@ -215,6 +215,41 @@ class PhotoRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getPhotosInCategories(categoryIds: List<Long>): List<Photo> = withContext(ioDispatcher) {
+        try {
+            if (categoryIds.isEmpty()) {
+                return@withContext emptyList()
+            }
+
+            // Get photos from all specified categories (OR operation)
+            val allPhotos = mutableSetOf<PhotoEntity>()
+            categoryIds.forEach { categoryId ->
+                allPhotos.addAll(photoDao.getByCategory(categoryId).first())
+            }
+            allPhotos.map { it.toPhoto() }
+        } catch (e: Exception) {
+            throw PhotoRepositoryException("Failed to get photos in categories: ${e.message}", e)
+        }
+    }
+
+    override fun getPhotosInCategoriesFlow(categoryIds: List<Long>): Flow<List<Photo>> {
+        return if (categoryIds.isEmpty()) {
+            kotlinx.coroutines.flow.flowOf(emptyList())
+        } else {
+            // Combine flows from multiple categories
+            kotlinx.coroutines.flow.combine(
+                categoryIds.map { categoryId ->
+                    photoDao.getByCategory(categoryId)
+                }
+            ) { arrays ->
+                // Combine all photos and remove duplicates
+                arrays.flatMap { it.toList() }
+                    .distinctBy { it.id }
+                    .map { it.toPhoto() }
+            }
+        }
+    }
+
     override suspend fun getAllPhotos(): List<Photo> = withContext(ioDispatcher) {
         try {
             // Since PhotoDao.getAll returns Flow, we need to get the first emission

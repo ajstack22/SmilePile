@@ -1,7 +1,9 @@
 package com.smilepile.data.repository
 
 import com.smilepile.data.dao.CategoryDao
+import com.smilepile.data.dao.PhotoCategoryDao
 import com.smilepile.data.entities.CategoryEntity
+import com.smilepile.data.entities.PhotoCategoryJoin
 import com.smilepile.data.models.Category
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +21,7 @@ import com.smilepile.di.IoDispatcher
 @Singleton
 class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
+    private val photoCategoryDao: PhotoCategoryDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : CategoryRepository {
 
@@ -31,7 +34,7 @@ class CategoryRepositoryImpl @Inject constructor(
             name = this.displayName.lowercase().replace(" ", "_"), // Generate a normalized name from displayName
             displayName = this.displayName,
             position = this.position,
-            iconResource = null, // CategoryEntity doesn't store icon resource
+            iconResource = this.iconName, // Use iconName from entity
             colorHex = this.colorHex,
             isDefault = this.isDefault,
             createdAt = this.createdAt
@@ -148,6 +151,72 @@ class CategoryRepositoryImpl @Inject constructor(
             categoryDao.getCount()
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to get category count: ${e.message}", e)
+        }
+    }
+
+    // ===== Batch Operations =====
+
+    override suspend fun assignPhotosToCategory(
+        photoIds: List<String>,
+        categoryId: Long
+    ): Unit = withContext(ioDispatcher) {
+        try {
+            val joins = photoIds.map { photoId ->
+                PhotoCategoryJoin(
+                    photoId = photoId,
+                    categoryId = categoryId,
+                    assignedAt = System.currentTimeMillis()
+                )
+            }
+            photoCategoryDao.insertPhotoCategoryJoins(joins)
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to assign photos to category: ${e.message}", e)
+        }
+    }
+
+    override suspend fun removePhotosFromCategory(
+        photoIds: List<String>,
+        categoryId: Long
+    ): Unit = withContext(ioDispatcher) {
+        try {
+            photoIds.forEach { photoId ->
+                photoCategoryDao.removePhotoFromCategory(photoId, categoryId)
+            }
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to remove photos from category: ${e.message}", e)
+        }
+    }
+
+    override suspend fun assignPhotoToCategories(
+        photoId: String,
+        categoryIds: List<Long>
+    ): Unit = withContext(ioDispatcher) {
+        try {
+            photoCategoryDao.updatePhotoCategories(photoId, categoryIds)
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to assign photo to categories: ${e.message}", e)
+        }
+    }
+
+    override suspend fun getCategoriesForPhoto(photoId: String): List<Category> = withContext(ioDispatcher) {
+        try {
+            photoCategoryDao.getCategoriesForPhoto(photoId).map { it.toCategory() }
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to get categories for photo: ${e.message}", e)
+        }
+    }
+
+    override fun getCategoriesForPhotoFlow(photoId: String): Flow<List<Category>> {
+        return photoCategoryDao.getCategoriesForPhotoFlow(photoId).map { entities ->
+            entities.map { it.toCategory() }
+        }
+    }
+
+    override suspend fun getPhotoCountInCategory(categoryId: Long): Int = withContext(ioDispatcher) {
+        try {
+            photoCategoryDao.getPhotoCountInCategory(categoryId)
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to get photo count in category: ${e.message}", e)
         }
     }
 }

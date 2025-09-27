@@ -15,11 +15,13 @@ import com.smilepile.theme.ThemeManager
 import com.smilepile.theme.ThemeMode
 import com.smilepile.security.SecurePreferencesManager
 import com.smilepile.security.BiometricManager
+import com.smilepile.settings.SettingsManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -49,7 +51,8 @@ class SettingsViewModel @Inject constructor(
     private val themeManager: ThemeManager,
     private val backupManager: BackupManager,
     private val securePreferencesManager: SecurePreferencesManager,
-    private val biometricManager: BiometricManager
+    private val biometricManager: BiometricManager,
+    private val settingsManager: SettingsManager
 ) : ViewModel() {
 
     companion object {
@@ -66,6 +69,7 @@ class SettingsViewModel @Inject constructor(
         loadSettings()
         observeThemeChanges()
         observeSecuritySettings()
+        observeSettingsManager()
         loadBackupStats()
     }
 
@@ -127,6 +131,32 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             securePreferencesManager.kidSafeModeEnabled.collect { enabled ->
                 _uiState.value = _uiState.value.copy(kidSafeModeEnabled = enabled)
+            }
+        }
+    }
+
+    /**
+     * Observe settings from SettingsManager
+     */
+    private fun observeSettingsManager() {
+        // Observe gallery settings
+        viewModelScope.launch {
+            settingsManager.getGridSize().collect { gridSize ->
+                // Update UI state if needed or trigger refresh
+            }
+        }
+
+        // Observe auto-backup settings
+        viewModelScope.launch {
+            settingsManager.getAutoBackupEnabled().collect { enabled ->
+                // Update backup scheduler based on setting
+            }
+        }
+
+        // Observe notification settings
+        viewModelScope.launch {
+            settingsManager.getNotificationsEnabled().collect { enabled ->
+                // Update notification permissions
             }
         }
     }
@@ -478,5 +508,85 @@ class SettingsViewModel @Inject constructor(
      */
     fun clearImportProgress() {
         _uiState.value = _uiState.value.copy(importProgress = null)
+    }
+
+    /**
+     * Export all app settings for backup
+     */
+    suspend fun exportAllSettings(): Map<String, Any> {
+        return settingsManager.exportSettings()
+    }
+
+    /**
+     * Import settings from backup
+     */
+    suspend fun importAllSettings(settings: Map<String, Any>, overwrite: Boolean = false) {
+        settingsManager.importSettings(settings, overwrite)
+        loadSettings() // Reload UI state after import
+    }
+
+    /**
+     * Reset settings to defaults
+     */
+    fun resetSettingsToDefaults() {
+        viewModelScope.launch {
+            settingsManager.resetToDefaults()
+            loadSettings()
+        }
+    }
+
+    /**
+     * Update gallery view settings
+     */
+    fun updateGallerySettings(gridSize: Int? = null, sortOrder: SettingsManager.SortOrder? = null) {
+        viewModelScope.launch {
+            gridSize?.let { settingsManager.setGridSize(it) }
+            sortOrder?.let { settingsManager.setSortOrder(it) }
+        }
+    }
+
+    /**
+     * Update notification settings
+     */
+    fun updateNotificationSettings(
+        notificationsEnabled: Boolean? = null,
+        backupNotifications: Boolean? = null,
+        memoryNotifications: Boolean? = null
+    ) {
+        viewModelScope.launch {
+            notificationsEnabled?.let { settingsManager.setNotificationsEnabled(it) }
+            backupNotifications?.let { settingsManager.setBackupNotifications(it) }
+            memoryNotifications?.let { settingsManager.setMemoryNotifications(it) }
+        }
+    }
+
+    /**
+     * Update backup settings
+     */
+    fun updateBackupSettings(
+        autoBackupEnabled: Boolean? = null,
+        wifiOnly: Boolean? = null,
+        frequency: SettingsManager.BackupFrequency? = null
+    ) {
+        viewModelScope.launch {
+            autoBackupEnabled?.let { settingsManager.setAutoBackupEnabled(it) }
+            wifiOnly?.let { settingsManager.setBackupWifiOnly(it) }
+            frequency?.let { settingsManager.setBackupFrequency(it) }
+        }
+    }
+
+    /**
+     * Update photo quality settings
+     */
+    fun updatePhotoQualitySettings(
+        uploadQuality: SettingsManager.PhotoQuality? = null,
+        thumbnailQuality: SettingsManager.PhotoQuality? = null,
+        autoOptimize: Boolean? = null
+    ) {
+        viewModelScope.launch {
+            uploadQuality?.let { settingsManager.setUploadQuality(it) }
+            thumbnailQuality?.let { settingsManager.setThumbnailQuality(it) }
+            autoOptimize?.let { settingsManager.setAutoOptimizeStorage(it) }
+        }
     }
 }

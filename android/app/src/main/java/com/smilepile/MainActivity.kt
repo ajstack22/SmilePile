@@ -31,6 +31,9 @@ import com.smilepile.ui.theme.SmilePileTheme
 import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.viewmodels.ThemeViewModel
 import com.smilepile.theme.ThemeManager
+import com.smilepile.settings.SettingsManager
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : SecureActivity() {
@@ -40,6 +43,9 @@ class MainActivity : SecureActivity() {
 
     @Inject
     lateinit var themeManager: ThemeManager
+
+    @Inject
+    lateinit var settingsManager: SettingsManager
 
     private val themeViewModel: ThemeViewModel by viewModels()
     private val modeViewModel: AppModeViewModel by viewModels()
@@ -64,6 +70,9 @@ class MainActivity : SecureActivity() {
 
         // Enable edge-to-edge display
         enableEdgeToEdge()
+
+        // Initialize settings on first launch
+        initializeSettings()
 
         // Add callback for Kids Mode back press handling
         onBackPressedDispatcher.addCallback(this, kidsBackPressedCallback)
@@ -141,5 +150,29 @@ class MainActivity : SecureActivity() {
         super.onConfigurationChanged(newConfig)
         // Update theme when system dark mode changes
         themeManager.onConfigurationChanged(newConfig)
+    }
+
+    private fun initializeSettings() {
+        lifecycleScope.launch {
+            // Check if this is the first launch
+            settingsManager.isFirstLaunch().collect { isFirstLaunch ->
+                if (isFirstLaunch) {
+                    // Set up default settings for first launch
+                    settingsManager.setFirstLaunch(false)
+                    settingsManager.setKidsModeEnabled(true)
+                    settingsManager.setNotificationsEnabled(true)
+                    settingsManager.setPreserveMetadata(true)
+                    settingsManager.setShowPhotoDates(true)
+                }
+            }
+
+            // Migrate from SharedPreferences if needed
+            val sharedPrefs = getSharedPreferences("theme_prefs", MODE_PRIVATE)
+            if (sharedPrefs.contains("theme_mode")) {
+                settingsManager.migrateFromSharedPreferences(sharedPrefs)
+                // Clear old preferences after migration
+                sharedPrefs.edit().clear().apply()
+            }
+        }
     }
 }

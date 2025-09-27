@@ -28,16 +28,25 @@ class PhotoGalleryViewModel @Inject constructor(
     private val photoOperationsManager: PhotoOperationsManager
 ) : ViewModel() {
 
+    // Support multiple category filtering
+    private val _selectedCategoryIds = MutableStateFlow<Set<Long>>(emptySet())
+    val selectedCategoryIds: StateFlow<Set<Long>> = _selectedCategoryIds.asStateFlow()
+
+    // Legacy single category support (for backward compatibility)
     private val _selectedCategoryId = MutableStateFlow<Long?>(null)
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
 
     init {
-        // Default to first category instead of "All Photos"
+        // Initialize default categories if needed
         viewModelScope.launch {
+            categoryRepository.initializeDefaultCategories()
+
+            // Default to showing all photos (no category filter)
             categoryRepository.getAllCategoriesFlow().collect { categoriesList ->
-                if (_selectedCategoryId.value == null && categoriesList.isNotEmpty()) {
-                    _selectedCategoryId.value = categoriesList.first().id
-                    println("SmilePile Debug: Initialized with first category: ${categoriesList.first().id}")
+                if (_selectedCategoryIds.value.isEmpty() && categoriesList.isNotEmpty()) {
+                    // Start with no filter (show all photos)
+                    _selectedCategoryIds.value = emptySet()
+                    println("SmilePile Debug: Initialized with no category filter (showing all photos)")
                 }
             }
         }
@@ -79,14 +88,23 @@ class PhotoGalleryViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
-    // Get photos based on selected category filter with error handling
+    // Get photos based on selected category filters with error handling
     @OptIn(ExperimentalCoroutinesApi::class)
-    val photos: StateFlow<List<Photo>> = _selectedCategoryId
-        .flatMapLatest { categoryId ->
-            if (categoryId == null) {
-                photoRepository.getAllPhotosFlow()
-            } else {
-                photoRepository.getPhotosByCategoryFlow(categoryId)
+    val photos: StateFlow<List<Photo>> = _selectedCategoryIds
+        .flatMapLatest { categoryIds ->
+            when {
+                categoryIds.isEmpty() -> {
+                    // No filter - show all photos
+                    photoRepository.getAllPhotosFlow()
+                }
+                categoryIds.size == 1 -> {
+                    // Single category filter
+                    photoRepository.getPhotosByCategoryFlow(categoryIds.first())
+                }
+                else -> {
+                    // Multiple category filter - photos in ANY of the selected categories
+                    photoRepository.getPhotosInCategoriesFlow(categoryIds.toList())
+                }
             }
         }
         .catch { e ->
@@ -104,11 +122,11 @@ class PhotoGalleryViewModel @Inject constructor(
     private val baseUiState = combine(
         photos,
         categories,
-        selectedCategoryId,
+        selectedCategoryIds,
         isLoading,
         error
-    ) { photos, categories, selectedCategoryId, isLoading, error ->
-        BaseUiState(photos, categories, selectedCategoryId, isLoading, error)
+    ) { photos, categories, selectedCategoryIds, isLoading, error ->
+        BaseUiState(photos, categories, selectedCategoryIds, isLoading, error)
     }
 
     private val selectionState = combine(
@@ -126,7 +144,8 @@ class PhotoGalleryViewModel @Inject constructor(
         PhotoGalleryUiState(
             photos = base.photos,
             categories = base.categories,
-            selectedCategoryId = base.selectedCategoryId,
+            selectedCategoryIds = base.selectedCategoryIds,
+            selectedCategoryId = base.selectedCategoryIds.firstOrNull(), // For backward compatibility
             isLoading = base.isLoading,
             error = base.error,
             isSelectionMode = selection.isSelectionMode,
@@ -142,7 +161,7 @@ class PhotoGalleryViewModel @Inject constructor(
     private data class BaseUiState(
         val photos: List<Photo>,
         val categories: List<Category>,
-        val selectedCategoryId: Long?,
+        val selectedCategoryIds: Set<Long>,
         val isLoading: Boolean,
         val error: String?
     )
@@ -156,7 +175,15 @@ class PhotoGalleryViewModel @Inject constructor(
     fun selectCategory(categoryId: Long?) {
         viewModelScope.launch {
             try {
-                _selectedCategoryId.value = categoryId
+                if (categoryId == null) {
+                    // Clear all filters
+                    _selectedCategoryIds.value = emptySet()
+                    _selectedCategoryId.value = null
+                } else {
+                    // Single category selection
+                    _selectedCategoryIds.value = setOf(categoryId)
+                    _selectedCategoryId.value = categoryId
+                }
                 _error.value = null
 
                 // Log category change for debugging
@@ -165,6 +192,41 @@ class PhotoGalleryViewModel @Inject constructor(
                 _error.value = "Failed to select category: ${e.message}"
                 println("SmilePile Error: Failed to select category: ${e.message}")
             }
+        }
+    }
+
+    fun toggleCategoryFilter(categoryId: Long) {
+        viewModelScope.launch {
+            try {
+                val currentSelection = _selectedCategoryIds.value.toMutableSet()
+                if (currentSelection.contains(categoryId)) {
+                    currentSelection.remove(categoryId)
+                } else {
+                    currentSelection.add(categoryId)
+                }
+                _selectedCategoryIds.value = currentSelection
+
+                // Update single category for backward compatibility
+                _selectedCategoryId.value = currentSelection.firstOrNull()
+
+                _error.value = null
+                println("SmilePile Debug: Category filters updated to: $currentSelection")
+            } catch (e: Exception) {
+                _error.value = "Failed to toggle category filter: ${e.message}"
+            }
+        }
+    }
+
+    fun clearCategoryFilters() {
+        _selectedCategoryIds.value = emptySet()
+        _selectedCategoryId.value = null
+    }
+
+    fun selectAllCategories() {
+        viewModelScope.launch {
+            val allCategoryIds = categories.value.map { it.id }.toSet()
+            _selectedCategoryIds.value = allCategoryIds
+            _selectedCategoryId.value = allCategoryIds.firstOrNull()
         }
     }
 
@@ -292,6 +354,28 @@ class PhotoGalleryViewModel @Inject constructor(
         }
     }
 
+    fun assignSelectedPhotosToCategories(categoryIds: List<Long>) {
+        viewModelScope.launch {
+            try {
+                _isBatchOperationInProgress.value = true
+                val photosToAssign = uiState.value.photos.filter {
+                    _selectedPhotos.value.contains(it.id)
+                }
+
+                photosToAssign.forEach { photo ->
+                    categoryRepository.assignPhotoToCategories(photo.id.toString(), categoryIds)
+                }
+
+                _error.value = "Successfully assigned ${photosToAssign.size} photos to ${categoryIds.size} categories"
+                exitSelectionMode()
+            } catch (e: Exception) {
+                _error.value = "Failed to assign photos to categories: ${e.message}"
+            } finally {
+                _isBatchOperationInProgress.value = false
+            }
+        }
+    }
+
     fun setSelectedPhotosFavorite(isFavorite: Boolean) {
         viewModelScope.launch {
             try {
@@ -326,7 +410,8 @@ class PhotoGalleryViewModel @Inject constructor(
 data class PhotoGalleryUiState(
     val photos: List<Photo> = emptyList(),
     val categories: List<Category> = emptyList(),
-    val selectedCategoryId: Long? = null,
+    val selectedCategoryIds: Set<Long> = emptySet(),
+    val selectedCategoryId: Long? = null, // For backward compatibility
     val isLoading: Boolean = false,
     val error: String? = null,
     val isSelectionMode: Boolean = false,

@@ -20,6 +20,9 @@ data class CategoryEntity(
     @ColumnInfo(name = "color_hex")
     val colorHex: String,
 
+    @ColumnInfo(name = "icon_name")
+    val iconName: String? = null, // Material icon name (e.g., "family", "directions_car", "sports_soccer")
+
     @ColumnInfo(name = "position")
     val position: Int = 0,
 

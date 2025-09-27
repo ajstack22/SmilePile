@@ -13,6 +13,8 @@ interface PhotoRepository {
     suspend fun getPhotoByPath(path: String): Photo?
     suspend fun getPhotosByCategory(categoryId: Long): List<Photo>
     fun getPhotosByCategoryFlow(categoryId: Long): Flow<List<Photo>>
+    suspend fun getPhotosInCategories(categoryIds: List<Long>): List<Photo>
+    fun getPhotosInCategoriesFlow(categoryIds: List<Long>): Flow<List<Photo>>
     suspend fun getAllPhotos(): List<Photo>
     fun getAllPhotosFlow(): Flow<List<Photo>>
     suspend fun deletePhotosByCategory(categoryId: Long)
