@@ -1,0 +1,89 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ci-ios.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ci-ios.yml'
+
+jobs:
+  build-and-test:
+    name: Build and Test iOS
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Install dependencies
+        run: |
+          cd ios
+          if [ -f "Podfile" ]; then
+            pod install
+          fi
+
+      - name: Build iOS App
+        run: |
+          cd ios
+          xcodebuild build \
+            -workspace SmilePile.xcworkspace \
+            -scheme SmilePile \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            ONLY_ACTIVE_ARCH=NO
+
+      - name: Run iOS Tests
+        run: |
+          cd ios
+          xcodebuild test \
+            -workspace SmilePile.xcworkspace \
+            -scheme SmilePile \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            ONLY_ACTIVE_ARCH=NO \
+            -resultBundlePath TestResults.xcresult
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-test-results
+          path: ios/TestResults.xcresult
+
+  swiftlint:
+    name: SwiftLint
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        run: |
+          cd ios
+          swiftlint lint --reporter junit > swiftlint.xml
+
+      - name: Upload SwiftLint results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: swiftlint-results
+          path: ios/swiftlint.xml

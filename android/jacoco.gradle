@@ -1,0 +1,201 @@
+/**
+ * JaCoCo configuration for Kotlin/Compose Android project
+ * This configuration properly handles Kotlin classes and Compose generated code
+ */
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+/**
+ * Create JaCoCo Test Report task for each build variant
+ */
+android.applicationVariants.all { variant ->
+    def variantName = variant.name.capitalize()
+    def testTaskName = "test${variantName}UnitTest"
+    def coverageTaskName = "jacoco${variantName}TestReport"
+
+    tasks.create(name: "${coverageTaskName}", type: JacocoReport, dependsOn: testTaskName) {
+        group = "Reporting"
+        description = "Generate JaCoCo coverage report for ${variantName}"
+
+        reports {
+            xml.required = true
+            html.required = true
+            csv.required = false
+        }
+
+        def excludes = [
+            // Android generated files
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            '**/android/databinding/**/*.class',
+            '**/androidx/**/*.class',
+            '**/databinding/**/*.class',
+
+            // Dagger/Hilt generated files
+            '**/dagger/**/*.class',
+            '**/hilt/**/*.class',
+            '**/*_MembersInjector.class',
+            '**/*_Factory.class',
+            '**/*_Provide*Factory.class',
+            '**/*_GeneratedInjector.class',
+            '**/*Module_*Factory.class',
+            '**/*Dagger*Component*.class',
+            '**/*Hilt*Component*.class',
+
+            // Kotlin generated files
+            '**/*$Lambda$*.class',
+            '**/*$inlined$*.class',
+            '**/*Kt.class',
+            '**/*Kt$*.class',
+            '**/*Companion*.class',
+
+            // Compose generated files
+            '**/*Compose*.class',
+            '**/*ComposableSingletons*.class',
+            '**/*_Impl*.class',
+
+            // Navigation generated files
+            '**/NavigationArgs*.class',
+            '**/NavigationDirections*.class',
+
+            // Room generated files
+            '**/*Dao_Impl*.class',
+            '**/*Database_Impl*.class',
+
+            // Excluded packages
+            '**/di/**',
+            '**/utils/Constants.class'
+        ]
+
+        def javaClasses = fileTree(dir: "${buildDir}/intermediates/javac/${variant.name}/classes", excludes: excludes)
+        def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variant.name}", excludes: excludes)
+
+        classDirectories.setFrom(files([javaClasses, kotlinClasses]))
+
+        sourceDirectories.setFrom(files([
+            "${project.projectDir}/src/main/java",
+            "${project.projectDir}/src/main/kotlin"
+        ]))
+
+        executionData.setFrom(files([
+            "${buildDir}/outputs/unit_test_code_coverage/${variant.name}UnitTest/test${variantName}UnitTest.exec"
+        ]))
+
+        // Print summary after generation
+        doLast {
+            def report = file("${buildDir}/reports/jacoco/${coverageTaskName}/html/index.html")
+            if (report.exists()) {
+                println "Coverage report generated: ${report.absolutePath}"
+            }
+        }
+    }
+}
+
+/**
+ * Combined coverage report for all variants
+ */
+task jacocoCombinedTestReport(type: JacocoReport) {
+    group = "Reporting"
+    description = "Generate combined JaCoCo coverage report"
+
+    dependsOn {
+        def testTasks = []
+        android.applicationVariants.all { variant ->
+            testTasks.add("test${variant.name.capitalize()}UnitTest")
+        }
+        testTasks
+    }
+
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+
+    def excludes = [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*',
+        '**/*Test*.*',
+        '**/databinding/**',
+        '**/dagger/**',
+        '**/hilt/**',
+        '**/*_MembersInjector.class',
+        '**/*_Factory.class',
+        '**/*Module_*Factory.class',
+        '**/*Dagger*Component*.class',
+        '**/*$Lambda$*.class',
+        '**/*Companion*.class',
+        '**/di/**'
+    ]
+
+    def classDirs = []
+    def sourceDirs = []
+    def execFiles = []
+
+    android.applicationVariants.all { variant ->
+        def variantName = variant.name
+
+        classDirs.add(fileTree(
+            dir: "${buildDir}/intermediates/javac/${variantName}/classes",
+            excludes: excludes
+        ))
+        classDirs.add(fileTree(
+            dir: "${buildDir}/tmp/kotlin-classes/${variantName}",
+            excludes: excludes
+        ))
+
+        execFiles.add("${buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/test${variantName.capitalize()}UnitTest.exec")
+    }
+
+    classDirectories.setFrom(files(classDirs))
+    sourceDirectories.setFrom(files([
+        "${project.projectDir}/src/main/java",
+        "${project.projectDir}/src/main/kotlin"
+    ]))
+    executionData.setFrom(files(execFiles.findAll { file(it).exists() }))
+
+    doLast {
+        def report = file("${buildDir}/reports/jacoco/jacocoCombinedTestReport/html/index.html")
+        if (report.exists()) {
+            println "\n========================================="
+            println "Combined coverage report generated:"
+            println report.absolutePath
+            println "========================================="
+        }
+    }
+}
+
+/**
+ * Coverage verification task (for future use, not enforced in Sprint 3)
+ */
+task jacocoCoverageVerification(type: JacocoCoverageVerification) {
+    dependsOn 'jacocoCombinedTestReport'
+
+    violationRules {
+        rule {
+            enabled = false // Disabled for Sprint 3, measurement only
+
+            element = 'PACKAGE'
+            includes = ['com.smilepile.security.*', 'com.smilepile.storage.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.30 // 30% for security modules (future target)
+            }
+        }
+    }
+
+    doLast {
+        println "Coverage verification completed (currently in measurement-only mode)"
+    }
+}

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "🔧 Disabling SonarCloud Automatic Analysis"
+echo "=========================================="
+echo ""
+echo "SonarCloud has 'Automatic Analysis' enabled by default for GitHub projects."
+echo "To use manual analysis with sonar-scanner, you need to disable it."
+echo ""
+echo "📋 STEPS TO DISABLE:"
+echo ""
+echo "1. Go to your project settings:"
+echo "   https://sonarcloud.io/project/configuration?id=ajstack22_SmilePile"
+echo ""
+echo "2. Navigate to:"
+echo "   Administration → Analysis Method"
+echo ""
+echo "3. Turn OFF 'Automatic Analysis'"
+echo ""
+echo "4. Save the changes"
+echo ""
+echo "5. Run analysis again:"
+echo "   ./scripts/sonar-analysis.sh"
+echo ""
+echo "✅ After disabling, you'll have full control over when analysis runs."
+echo ""
+echo "Press Enter when you've disabled Automatic Analysis..."
+read
+
+echo ""
+echo "Great! Now running analysis..."
+./scripts/sonar-analysis.sh

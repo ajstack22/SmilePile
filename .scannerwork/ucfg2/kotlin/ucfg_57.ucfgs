@@ -1,0 +1,482 @@
+Ö
+=com.smilepile.security.BiometricManager#getContext()LContext;
+__unknown_file ("0*ı
+0 (Ü
+É
+ (
+fieldjava.lang.Object"__id*V
+ (J*H)
+'com.smilepile.security.BiometricManager"
+contextjava.lang.Objecti
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.ObjectI
+G
+ (
+fieldjava.lang.Object"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.ObjectB+)
+'com.smilepile.security.BiometricManagerH`•
+>com.smilepile.security.BiometricManager#setContext(LContext;)V
+__unknown_file ("0*Ì
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.ObjectI
+G
+ (
+valuejava.lang.Object"__annotation*
+ (
+
+%0Ü
+É
+ (H)
+'com.smilepile.security.BiometricManager"
+contextjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB+)
+'com.smilepile.security.BiometricManagerH`˜
+vcom.smilepile.security.BiometricManager#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;
+__unknown_file ("0*Æ
+0 (÷
+”
+ (8
+field/com.smilepile.security.SecurePreferencesManager"__id*Ü
+ (z*x)
+'com.smilepile.security.BiometricManager"K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManager"F
+ (:
+8
+field/com.smilepile.security.SecurePreferencesManagerB+)
+'com.smilepile.security.BiometricManagerH`ñ
+wcom.smilepile.security.BiometricManager#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V
+__unknown_file ("0*Ü
+0 (’
+“
+ (x)
+'com.smilepile.security.BiometricManager"K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__id*F
+ (:
+8
+value/com.smilepile.security.SecurePreferencesManager"
+ (
+implicit return:D
+ (8
+value/com.smilepile.security.SecurePreferencesManagerB+)
+'com.smilepile.security.BiometricManagerH`ö
+kcom.smilepile.security.BiometricManager#<init>(LContext;Lcom/smilepile/security/SecurePreferencesManager;)Vi
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt (*"0*ã
+0 (å
+â
+ (4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*9
+
+__unknown_file (
+
+contextjava.lang.Objectå
+â
+ (4
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*9
+
+__unknown_file (
+
+contextjava.lang.Object
+}
+ (4
+contextjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0*"
+
+__unknown_file (
+
+%1º
+π
+ (B
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*i
+
+__unknown_file (M
+K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManagerå
+â
+ (BK
+securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__annotation*"
+
+__unknown_file (
+
+%2È
+Ê
+ (4
+%3java.lang.Object">com.smilepile.security.BiometricManager#setContext(LContext;)V*G
+
+__unknown_file (+)
+'com.smilepile.security.BiometricManager*9
+
+__unknown_file (
+
+contextjava.lang.ObjectÒ
+Ó
+ (B5
+%4/com.smilepile.security.SecurePreferencesManager"wcom.smilepile.security.BiometricManager#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V*G
+
+__unknown_file (+)
+'com.smilepile.security.BiometricManager*i
+
+__unknown_file (M
+K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManager"/
+
+__unknown_file (
+implicit return:'
+ (4
+contextjava.lang.Object:W
+ (BK
+securePreferencesManager/com.smilepile.security.SecurePreferencesManagerB+)
+'com.smilepile.security.BiometricManagerHí
+^com.smilepile.security.BiometricManager$Companion#getKEY_BIOMETRIC_ENABLED()Ljava/lang/String;
+__unknown_file ("0*◊
+0 (û
+õ
+ (
+fieldjava.lang.Object"__id*n
+ (b*`3
+1com.smilepile.security.BiometricManager$Companion")
+KEY_BIOMETRIC_ENABLEDjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.security.BiometricManager$CompanionH`≤
+_com.smilepile.security.BiometricManager$Companion#setKEY_BIOMETRIC_ENABLED(Ljava/lang/String;)V
+__unknown_file ("0*œ
+0 (û
+õ
+ (`3
+1com.smilepile.security.BiometricManager$Companion")
+KEY_BIOMETRIC_ENABLEDjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.security.BiometricManager$CompanionH`©
+lcom.smilepile.security.BiometricManager#isBiometricAvailable()Lcom/smilepile/security/BiometricAvailability;i
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt ("11"13"15"16"3"5"7"9*à
+13&C &(ds
+q
+
+__unknown_file (
+%0"__id*I
+&Y &(d=
+;
+UNSUPPORTED,com.smilepile.security.BiometricAvailability*
+1*Ö
+3!9 !(Xq
+o
+
+__unknown_file (
+%0"__id*G
+!O !(X;
+9
+	AVAILABLE,com.smilepile.security.BiometricAvailability*
+1*Ñ
+15'@ '(]o
+m
+
+__unknown_file (
+%0"__id*E
+'V '(]9
+7
+UNKNOWN,com.smilepile.security.BiometricAvailability*
+1*Ñ
+16( ((1o
+m
+
+__unknown_file (
+%0"__id*E
+(* ((19
+7
+UNKNOWN,com.smilepile.security.BiometricAvailability*
+1*á
+5"C "(ds
+q
+
+__unknown_file (
+%0"__id*I
+"Y "(d=
+;
+NO_HARDWARE,com.smilepile.security.BiometricAvailability*
+1*ê
+7#F #(p|
+z
+
+__unknown_file (
+%0"__id*R
+#\ #(pF
+D
+HARDWARE_UNAVAILABLE,com.smilepile.security.BiometricAvailability*
+1*à
+9$E $(gt
+r
+
+__unknown_file (
+%0"__id*J
+$[ $(g>
+<
+NOT_ENROLLED,com.smilepile.security.BiometricAvailability*
+1*ñ
+11%P %(~Ä
+~
+
+__unknown_file (
+%0"__id*V
+%f %(~J
+H
+SECURITY_UPDATE_REQUIRED,com.smilepile.security.BiometricAvailability*
+1*!
+1) )(	"
+  )(	
+
+%0B+)
+'com.smilepile.security.BiometricManagerHÈ
+=com.smilepile.security.BiometricManager#isBiometricEnabled()Zi
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt/ /("0*ä
+0, .(ı
+Ú
+0 0('5
+%0/com.smilepile.security.SecurePreferencesManager"vcom.smilepile.security.BiometricManager#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*7
+0 0('+)
+'com.smilepile.security.BiometricManager©
+¶
+0( 0(=
+%1boolean"Fcom.smilepile.security.SecurePreferencesManager#getBiometricEnabled()Z*C
+0 0('7
+5
+%0/com.smilepile.security.SecurePreferencesManagerË
+Â
+0A 0(W2
+%2,com.smilepile.security.BiometricAvailability"lcom.smilepile.security.BiometricManager#isBiometricAvailable()Lcom/smilepile/security/BiometricAvailability;*7
+0A 0(W+)
+'com.smilepile.security.BiometricManager–
+Õ
+0A 0(z
+%3boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*@
+0A 0(W4
+2
+%2,com.smilepile.security.BiometricAvailability*G
+0q 0(z;
+9
+	AVAILABLE,com.smilepile.security.BiometricAvailability"
+0 0(z
+	<unknown>B+)
+'com.smilepile.security.BiometricManagerHä
+?com.smilepile.security.BiometricManager#setBiometricEnabled(Z)Vi
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt6 6("0*â
+03 5(ı
+Ú
+7 7( 5
+%0/com.smilepile.security.SecurePreferencesManager"vcom.smilepile.security.BiometricManager#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*7
+7 7( +)
+'com.smilepile.security.BiometricManager–
+Õ
+7! 7(=
+%1kotlin.Unit"Gcom.smilepile.security.SecurePreferencesManager#setBiometricEnabled(Z)V*C
+7 7( 7
+5
+%0/com.smilepile.security.SecurePreferencesManager* 
+75 7(<
+
+enabledboolean"/
+
+__unknown_file (
+implicit return:
+6 6(,
+enabledbooleanB+)
+'com.smilepile.security.BiometricManagerH¶
+¥com.smilepile.security.BiometricManager#authenticateWithBiometrics(LFragmentActivity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/security/BiometricResult;i
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt> >(*"0*(
+0: =("
+C C(4
+	<unknown>:(
+? ?("
+activityjava.lang.Object:%
+@ @(1
+titlejava.lang.String:(
+A A(U
+subtitlejava.lang.String:+
+B B(H
+descriptionjava.lang.StringB+)
+'com.smilepile.security.BiometricManagerH’
+Dcom.smilepile.security.BiometricManager#shouldOfferBiometricFirst()Zk
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.ktÄ Ä(!"0*Ì
+0| (ò
+ï
+
+Å Å(#
+%0boolean"=com.smilepile.security.BiometricManager#isBiometricEnabled()Z*9
+
+Å Å(#+)
+'com.smilepile.security.BiometricManager˘
+ˆ
+
+Å' Å(?5
+%1/com.smilepile.security.SecurePreferencesManager"vcom.smilepile.security.BiometricManager#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*9
+
+Å' Å(?+)
+'com.smilepile.security.BiometricManager©
+¶
+
+Å@ Å(Q
+%2boolean"Bcom.smilepile.security.SecurePreferencesManager#hasParentalLock()Z*E
+
+Å' Å(?7
+5
+%1/com.smilepile.security.SecurePreferencesManager"
+
+Å Å(Q
+	<unknown>B+)
+'com.smilepile.security.BiometricManagerH◊
+Ucom.smilepile.security.BiometricManager#getBiometricStatusMessage()Ljava/lang/String;k
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.ktá á(!"0*|
+13
+é1 é(\e
+c
+
+__unknown_file (
+%1"__id*;
+
+é2 é([-+
+)Biometric authentication is not supported*
+1*z
+14
+è- è(Vc
+a
+
+__unknown_file (
+%1"__id*9
+
+è. è(U+)
+'Biometric authentication status unknown*
+1*w
+3
+â/ â(Va
+_
+
+__unknown_file (
+%1"__id*7
+
+â0 â(U)'
+%Biometric authentication is available*
+1*Ü
+5
+ä1 ä(gp
+n
+
+__unknown_file (
+%1"__id*F
+
+ä2 ä(f86
+4This device doesn't support biometric authentication*
+1*Ö
+7
+ã: ã(oo
+m
+
+__unknown_file (
+%1"__id*E
+
+ã; ã(n75
+3Biometric authentication is temporarily unavailable*
+1*à
+9
+å2 å(jr
+p
+
+__unknown_file (
+%1"__id*H
+
+å3 å(i:8
+6No fingerprint or face unlock is set up on this device*
+1*ò
+0
+Ñ Ü(Ï
+È
+
+à à(+2
+%0,com.smilepile.security.BiometricAvailability"lcom.smilepile.security.BiometricManager#isBiometricAvailable()Lcom/smilepile/security/BiometricAvailability;*9
+
+à à(++)
+'com.smilepile.security.BiometricManager*
+13
+3
+14
+5
+7
+9
+11*ç
+11
+ç> ç(zv
+t
+
+__unknown_file (
+%1"__id*L
+
+ç? ç(y><
+:A security update is required for biometric authentication*
+1*%
+1
+ê ê(	"
+
+à ê(	
+
+%1B+)
+'com.smilepile.security.BiometricManagerHú
+6com.smilepile.security.BiometricAvailability#<init>()Vi
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.ktî ü("0*>
+0î ñ("/
+
+__unknown_file (
+implicit returnB0.
+,com.smilepile.security.BiometricAvailabilityH`ê
+0com.smilepile.security.BiometricResult#<init>()Vi
+_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/BiometricManager.kt° ´("0*>
+0° £("/
+
+__unknown_file (
+implicit returnB*(
+&com.smilepile.security.BiometricResultH`

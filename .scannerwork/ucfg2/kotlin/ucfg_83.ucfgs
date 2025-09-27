@@ -1,0 +1,1092 @@
+¯
+tcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
+__unknown_file ("0*®
+0 (“
+œ
+ (6
+field-com.smilepile.data.repository.PhotoRepository"__id*Ñ
+ (x*v2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"D
+ (8
+6
+field-com.smilepile.data.repository.PhotoRepositoryB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`ó
+ucom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
+__unknown_file ("0*Ç
+0 (—
+Œ
+ (v2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
+ (8
+6
+value-com.smilepile.data.repository.PhotoRepository"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.repository.PhotoRepositoryB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`—
+jcom.smilepile.ui.viewmodels.PhotoImportViewModel#getStorageManager()Lcom/smilepile/storage/StorageManager;
+__unknown_file ("0*ã
+0 (æ
+ª
+ (-
+field$com.smilepile.storage.StorageManager"__id*z
+ (n*l2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"6
+storageManager$com.smilepile.storage.StorageManager";
+ (/
+-
+field$com.smilepile.storage.StorageManagerB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ò
+kcom.smilepile.ui.viewmodels.PhotoImportViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V
+__unknown_file ("0*Ô
+0 (æ
+ª
+ (l2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"6
+storageManager$com.smilepile.storage.StorageManager"__id*;
+ (/
+-
+value$com.smilepile.storage.StorageManager"
+ (
+implicit return:9
+ (-
+value$com.smilepile.storage.StorageManagerB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`˜
+ècom.smilepile.ui.viewmodels.PhotoImportViewModel#<init>(Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/storage/StorageManager;)Vr
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt# (."0*°
+0 ("±
+Æ
+ (0
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepositoryÄ
+~
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
+
+__unknown_file (
+
+%0ß
+§
+ (.
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*T
+
+__unknown_file (8
+6
+storageManager$com.smilepile.storage.StorageManagerv
+t
+ (.6
+storageManager$com.smilepile.storage.StorageManager"__annotation*"
+
+__unknown_file (
+
+%1Î
+Ë
+ (03
+%2-com.smilepile.data.repository.PhotoRepository"ucom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*P
+
+__unknown_file (42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepositoryŒ
+À
+ (.*
+%3$com.smilepile.storage.StorageManager"kcom.smilepile.ui.viewmodels.PhotoImportViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V*P
+
+__unknown_file (42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*T
+
+__unknown_file (8
+6
+storageManager$com.smilepile.storage.StorageManagerÎ
+Ë
+" "(A
+%4java.lang.Object"Wcom.smilepile.ui.viewmodels.PhotoImportViewModel#set_uiState(Lerror/NonExistentClass;)V*@
+" "(A42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*)
+
+__unknown_file (
+	<unknown>ø
+º
+#1 #(9
+%5java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*@
+#1 #(942
+0com.smilepile.ui.viewmodels.PhotoImportViewModel›
+⁄
+# #(G
+%6java.lang.Object"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setUiState(LStateFlow;)V*@
+# #(G42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*)
+
+__unknown_file (
+	<unknown>∏
+µ
+% %(K
+
+%7long"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V*@
+% %(K42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*
+%* %(,2"/
+
+__unknown_file (
+implicit return:L
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepository:B
+ (.6
+storageManager$com.smilepile.storage.StorageManagerB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHâ
+Ucom.smilepile.ui.viewmodels.PhotoImportViewModel$Companion#getTAG()Ljava/lang/String;
+__unknown_file ("0*Œ
+0 (ï
+í
+ (
+fieldjava.lang.Object"__id*e
+ (Y*W<
+:com.smilepile.ui.viewmodels.PhotoImportViewModel$Companion"
+TAGjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB><
+:com.smilepile.ui.viewmodels.PhotoImportViewModel$CompanionH`©
+Vcom.smilepile.ui.viewmodels.PhotoImportViewModel$Companion#setTAG(Ljava/lang/String;)V
+__unknown_file ("0*∆
+0 (ï
+í
+ (W<
+:com.smilepile.ui.viewmodels.PhotoImportViewModel$Companion"
+TAGjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB><
+:com.smilepile.ui.viewmodels.PhotoImportViewModel$CompanionH`˚
+Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;
+__unknown_file ("0*…
+0 (ê
+ç
+ (
+fieldjava.lang.Object"__id*`
+ (T*R2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+_uiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`õ
+Wcom.smilepile.ui.viewmodels.PhotoImportViewModel#set_uiState(Lerror/NonExistentClass;)V
+__unknown_file ("0*¡
+0 (ê
+ç
+ (R2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+_uiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ï
+Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getUiState()LStateFlow;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+uiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`å
+Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setUiState(LStateFlow;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+uiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`—
+Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()J
+__unknown_file ("0*≠
+0 (Ä
+~
+ (
+fieldlong"__id*]
+ (Q*O2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+pendingCategoryIdlong"
+ (
+
+fieldlongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ò
+Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V
+__unknown_file ("0*±
+0 (Ä
+~
+ (O2
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+pendingCategoryIdlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH`˚
+Ecom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhoto(LUri;J)Vr
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt* *("0*>
+0' )("/
+
+__unknown_file (
+implicit return:#
+* *(
+urijava.lang.Object:
+* *(.
+
+categoryIdlongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH¿
+Qcom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhotos(Ljava/util/List;J)Vr
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kti i("0*.
+2j j(""
+j j("
+explicit return*á
+0f h(pn
+j j(
+%0boolean""kotlin.collections.List#isEmpty()Z*$
+j j(
+
+urisjava.util.List2	isEmpty()*
+2
+1*>
+1j" l("/
+
+__unknown_file (
+implicit return:"
+i i($
+urisjava.util.List:
+i& i(6
+
+categoryIdlongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHü
+Acom.smilepile.ui.viewmodels.PhotoImportViewModel#clearMessages()Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt≈ ≈("0*®
+0
+¬ ƒ(√
+¿
+
+∆ ∆(
+%0java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
+
+∆ ∆(42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel√
+¿
+
+∆ ∆(!
+%1java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
+
+∆ ∆(!42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelZ
+X
+
+∆ …(	
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH≤
+Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktœ œ("0*ë
+0
+Ã Œ(Œ
+À
+
+– –(&
+
+%0long"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V*B
+
+– –(&42
+0com.smilepile.ui.viewmodels.PhotoImportViewModel*"
+
+– –(&
+
+
+categoryIdlong"/
+
+__unknown_file (
+implicit return: 
+
+œ œ(-
+
+categoryIdlongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelH’
+Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()Jt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt÷ ÷("0*◊
+0
+” ’(©
+¶
+
+÷' ÷(8
+
+%0long"Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()J*B
+
+÷' ÷(842
+0com.smilepile.ui.viewmodels.PhotoImportViewModel"
+
+÷' ÷(8
+
+
+%0longB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHÿ	
+Dcom.smilepile.ui.viewmodels.PhotoImportViewModel#resetImportState()Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt€ €("0*ﬁ
+0
+ÿ ⁄(√
+¿
+
+‹ ‹(
+%0java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
+
+‹ ‹(42
+0com.smilepile.ui.viewmodels.PhotoImportViewModeltr
+
+‹ ‹(-4
+%1.com.smilepile.ui.viewmodels.PhotoImportUiState".com.smilepile.ui.viewmodels.PhotoImportUiStateË
+Â
+
+‹ ‹(-
+%2"Ñcom.smilepile.ui.viewmodels.PhotoImportUiState#<init>(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;DDI)V*D
+
+‹ ‹(-6
+4
+%1.com.smilepile.ui.viewmodels.PhotoImportUiState*
+
+ä ä($	
+false*)
+
+__unknown_file (
+	<unknown>*
+
+å  å(!2 *
+
+ç$ ç(%2 *
+
+é$ é(( *
+
+è è( *
+
+ê" ê(& *)
+
+__unknown_file (
+	<unknown>*)
+
+__unknown_file (
+	<unknown>*
+
+ì ì(2 u
+s
+
+‹ ‹(-
+valuejava.lang.Object"__id*D
+
+‹ ‹(-6
+4
+%1.com.smilepile.ui.viewmodels.PhotoImportUiState"/
+
+__unknown_file (
+implicit returnB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHª
+Fcom.smilepile.ui.viewmodels.PhotoImportViewModel#refreshStorageInfo()Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt‚ ‚("0*@
+0
+ﬂ ·("/
+
+__unknown_file (
+implicit returnB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHç
+ñcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)Lcom/smilepile/data/models/Photo;t
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktÛ Û(,"0*⁄	
+0
+Û Û(≥
+∞
+
+˘! ˘(*
+%0java.lang.String"Dcom.smilepile.storage.StorageResult#getPhotoPath()Ljava/lang/String;*D
+
+˘ ˘( 6
+4
+storageResult#com.smilepile.storage.StorageResult≤
+Ø
+
+˙! ˙()
+%1java.lang.String"Ccom.smilepile.storage.StorageResult#getFileName()Ljava/lang/String;*D
+
+˙ ˙( 6
+4
+storageResult#com.smilepile.storage.StorageResult}{
+
+˝ ˝(2
+
+%2long"%java.lang.System#currentTimeMillis()J*%
+
+˝ ˝(
+
+Systemkotlin.Unit2currentTimeMillis()ï
+í
+
+˛% ˛(-
+
+%3long"2com.smilepile.storage.StorageResult#getFileSize()J*D
+
+˛ ˛($6
+4
+storageResult#com.smilepile.storage.StorageResultVT
+
+˜ Ç(	%
+%4com.smilepile.data.models.Photo"com.smilepile.data.models.Photo∑
+¥
+
+˜ Ç(	
+%5"Ucom.smilepile.data.models.Photo#<init>(JLjava/lang/String;JLjava/lang/String;ZJJIIZ)V*5
+
+˜ Ç(	'
+%
+%4com.smilepile.data.models.Photo*
+
+¯ ¯(2 *&
+
+˘! ˘(*
+
+%0java.lang.String*"
+
+˚ ˚(#
+
+
+categoryIdlong*&
+
+˙! ˙()
+
+%1java.lang.String*
+
+¸ ¸( 	
+false*
+
+˝ ˝(2
+
+
+%2long*
+
+˛% ˛(-
+
+
+%3long*
+
+ˇ ˇ(2 *
+
+Ä Ä(2 *
+
+Å Å(	
+false"5
+
+˜ Ç(	'
+%
+%4com.smilepile.data.models.Photo:B
+
+Ù Ù($4
+storageResult#com.smilepile.storage.StorageResult: 
+
+ı ı(
+
+categoryIdlongB42
+0com.smilepile.ui.viewmodels.PhotoImportViewModelHƒ
+=com.smilepile.ui.viewmodels.PhotoImportUiState#isImporting()Z
+__unknown_file ("0*≠
+0 (~
+|
+ (
+fieldboolean"__id*X
+ (L*J0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+isImportingboolean"
+ (
+
+fieldbooleanB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Á
+Acom.smilepile.ui.viewmodels.PhotoImportUiState#setIsImporting(Z)V
+__unknown_file ("0*Æ
+0 (~
+|
+ (J0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+isImportingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`«
+Ccom.smilepile.ui.viewmodels.PhotoImportUiState#getImportProgress()F
+__unknown_file ("0*™
+0 (}
+{
+ (
+fieldfloat"__id*Y
+ (M*K0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+importProgressfloat"
+ (
+
+fieldfloatB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Á
+Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setImportProgress(F)V
+__unknown_file ("0*≠
+0 (}
+{
+ (K0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+importProgressfloat"__id*
+ (
+
+valuefloat"
+ (
+implicit return:
+ (
+valuefloatB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`≈
+Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I
+__unknown_file ("0*¶
+0 ({
+y
+ (
+fieldint"__id*Y
+ (M*K0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+batchImportTotalint"
+ (
+
+fieldintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Â
+Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportTotal(I)V
+__unknown_file ("0*´
+0 ({
+y
+ (K0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+batchImportTotalint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Õ
+Icom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportCompleted()I
+__unknown_file ("0*™
+0 (
+}
+ (
+fieldint"__id*]
+ (Q*O0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+batchImportCompletedint"
+ (
+
+fieldintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ì
+Jcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportCompleted(I)V
+__unknown_file ("0*Ø
+0 (
+}
+ (O0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+batchImportCompletedint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ω
+fcom.smilepile.ui.viewmodels.PhotoImportUiState#getLastImportedPhoto()Lcom/smilepile/data/models/Photo;
+__unknown_file ("0*˝
+0 (µ
+≤
+ ((
+fieldcom.smilepile.data.models.Photo"__id*v
+ (j*h0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"4
+lastImportedPhotocom.smilepile.data.models.Photo"6
+ (*
+(
+fieldcom.smilepile.data.models.PhotoB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`›
+gcom.smilepile.ui.viewmodels.PhotoImportUiState#setLastImportedPhoto(Lcom/smilepile/data/models/Photo;)V
+__unknown_file ("0*Ê
+0 (µ
+≤
+ (h0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"4
+lastImportedPhotocom.smilepile.data.models.Photo"__id*6
+ (*
+(
+valuecom.smilepile.data.models.Photo"
+ (
+implicit return:4
+ ((
+valuecom.smilepile.data.models.PhotoB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`È
+Kcom.smilepile.ui.viewmodels.PhotoImportUiState#getError()Ljava/lang/String;
+__unknown_file ("0*ƒ
+0 (ã
+à
+ (
+fieldjava.lang.String"__id*[
+ (O*M0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+errorjava.lang.String"'
+ (
+
+fieldjava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`â
+Lcom.smilepile.ui.viewmodels.PhotoImportUiState#setError(Ljava/lang/String;)V
+__unknown_file ("0*º
+0 (ã
+à
+ (M0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+errorjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`˚
+Tcom.smilepile.ui.viewmodels.PhotoImportUiState#getSuccessMessage()Ljava/lang/String;
+__unknown_file ("0*Õ
+0 (î
+ë
+ (
+fieldjava.lang.String"__id*d
+ (X*V0
+.com.smilepile.ui.viewmodels.PhotoImportUiState""
+successMessagejava.lang.String"'
+ (
+
+fieldjava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`õ
+Ucom.smilepile.ui.viewmodels.PhotoImportUiState#setSuccessMessage(Ljava/lang/String;)V
+__unknown_file ("0*≈
+0 (î
+ë
+ (V0
+.com.smilepile.ui.viewmodels.PhotoImportUiState""
+successMessagejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH` 
+Ccom.smilepile.ui.viewmodels.PhotoImportUiState#getStorageUsageMB()D
+__unknown_file ("0*≠
+0 (
+}
+ (
+fielddouble"__id*Z
+ (N*L0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+storageUsageMBdouble"
+ (
+
+fielddoubleB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Í
+Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setStorageUsageMB(D)V
+__unknown_file ("0*Ø
+0 (
+}
+ (L0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+storageUsageMBdouble"__id*
+ (
+
+valuedouble"
+ (
+implicit return:
+ (
+valuedoubleB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`œ
+Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getAvailableSpaceMB()D
+__unknown_file ("0*∞
+0 (Å
+
+ (
+fielddouble"__id*\
+ (P*N0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+availableSpaceMBdouble"
+ (
+
+fielddoubleB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ô
+Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setAvailableSpaceMB(D)V
+__unknown_file ("0*≤
+0 (Å
+
+ (N0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+availableSpaceMBdouble"__id*
+ (
+
+valuedouble"
+ (
+implicit return:
+ (
+valuedoubleB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`π
+?com.smilepile.ui.viewmodels.PhotoImportUiState#getPhotoCount()I
+__unknown_file ("0*†
+0 (u
+s
+ (
+fieldint"__id*S
+ (G*E0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+
+photoCountint"
+ (
+
+fieldintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ÿ
+@com.smilepile.ui.viewmodels.PhotoImportUiState#setPhotoCount(I)V
+__unknown_file ("0*•
+0 (u
+s
+ (E0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+
+photoCountint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`˙
+Ñcom.smilepile.ui.viewmodels.PhotoImportUiState#<init>(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;DDI)Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktâ â("0*ê
+0
+â î(Á
+‰
+
+ä ä($
+%0boolean"Acom.smilepile.ui.viewmodels.PhotoImportUiState#setIsImporting(Z)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*4
+
+__unknown_file (
+
+isImportingbooleanÈ
+Ê
+
+ã ã("
+%1float"Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setImportProgress(F)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*5
+
+__unknown_file (
+
+importProgressfloatÈ
+Ê
+
+å å(!	
+%2int"Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportTotal(I)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*5
+
+__unknown_file (
+
+batchImportTotalintÒ
+Ó
+
+ç ç(%	
+%3int"Jcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportCompleted(I)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*9
+
+__unknown_file (
+
+batchImportCompletedint√
+¿
+
+é é((%
+%4com.smilepile.data.models.Photo"gcom.smilepile.ui.viewmodels.PhotoImportUiState#setLastImportedPhoto(Lcom/smilepile/data/models/Photo;)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*R
+
+__unknown_file (6
+4
+lastImportedPhotocom.smilepile.data.models.Photo˛
+˚
+
+è è(
+%5java.lang.String"Lcom.smilepile.ui.viewmodels.PhotoImportUiState#setError(Ljava/lang/String;)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*7
+
+__unknown_file (
+
+errorjava.lang.Stringê
+ç
+
+ê ê(&
+%6java.lang.String"Ucom.smilepile.ui.viewmodels.PhotoImportUiState#setSuccessMessage(Ljava/lang/String;)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*@
+
+__unknown_file ($
+"
+successMessagejava.lang.StringÎ
+Ë
+
+ë ë($
+%7double"Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setStorageUsageMB(D)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*6
+
+__unknown_file (
+
+storageUsageMBdoubleÔ
+Ï
+
+í í(&
+%8double"Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setAvailableSpaceMB(D)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*8
+
+__unknown_file (
+
+availableSpaceMBdouble›
+⁄
+
+ì ì(	
+%9int"@com.smilepile.ui.viewmodels.PhotoImportUiState#setPhotoCount(I)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoImportUiState*/
+
+__unknown_file (
+
+
+photoCountint"/
+
+__unknown_file (
+implicit return:$
+
+ä ä($
+isImportingboolean:%
+
+ã ã("
+importProgressfloat:%
+
+å å(!
+batchImportTotalint:)
+
+ç ç(%
+batchImportCompletedint:B
+
+é é((4
+lastImportedPhotocom.smilepile.data.models.Photo:'
+
+è è(
+errorjava.lang.String:0
+
+ê ê(&"
+successMessagejava.lang.String:&
+
+ë ë($
+storageUsageMBdouble:(
+
+í í(&
+availableSpaceMBdouble:
+
+ì ì(
+
+photoCountintB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateHÈ
+Bcom.smilepile.ui.viewmodels.PhotoImportUiState#setIsInProgress(Z)V
+__unknown_file ("0*Ø
+0 (
+}
+ (K0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+isInProgressboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`¬
+>com.smilepile.ui.viewmodels.PhotoImportUiState#isInProgress()Zt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktï ï(1"0*–
+0
+ï! ï(#ü
+ú
+
+ï& ï(1
+%0boolean"=com.smilepile.ui.viewmodels.PhotoImportUiState#isImporting()Z*@
+
+ï& ï(120
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+
+ï& ï(1
+
+%0booleanB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateHÏ
+Ccom.smilepile.ui.viewmodels.PhotoImportUiState#setIsBatchImport(Z)V
+__unknown_file ("0*±
+0 (Ä
+~
+ (L0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"
+isBatchImportboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`±
+?com.smilepile.ui.viewmodels.PhotoImportUiState#isBatchImport()Zt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktñ ñ(;"0*æ
+0
+ñ" ñ($£
+†
+
+ñ' ñ(7	
+%0int"Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I*@
+
+ñ' ñ(720
+.com.smilepile.ui.viewmodels.PhotoImportUiStatec
+a
+
+ñ' ñ(;
+%1"	__compare*
+
+ñ8 ñ(9
+>*
+
+ñ' ñ(7
+	
+%0int*
+
+ñ: ñ(;2""
+
+__unknown_file (
+
+%1B20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH°
+Xcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchProgressText(Ljava/lang/String;)V
+__unknown_file ("0*»
+0 (ó
+î
+ (Y0
+.com.smilepile.ui.viewmodels.PhotoImportUiState"%
+batchProgressTextjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ì
+Wcom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchProgressText()Ljava/lang/String;t
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.któ" ó(U"0*‚
+0
+ó% ó('ß
+§
+
+ó, ó(@	
+%0int"Icom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportCompleted()I*@
+
+ó, ó(@20
+.com.smilepile.ui.viewmodels.PhotoImportUiState£
+†
+
+óD ó(T	
+%1int"Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I*@
+
+óD ó(T20
+.com.smilepile.ui.viewmodels.PhotoImportUiStatek
+i
+
+ó* ó(U
+%2"__concat*
+
+ó, ó(@
+	
+%0int*
+
+ó@ ó(C
+ / *
+
+óD ó(T
+	
+%1int"
+
+ó* ó(U
+
+%2B20
+.com.smilepile.ui.viewmodels.PhotoImportUiStateH

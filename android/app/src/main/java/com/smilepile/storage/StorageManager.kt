@@ -5,6 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
+import com.smilepile.security.CircuitBreaker
+import com.smilepile.security.CircuitBreakerException
+import com.smilepile.security.CircuitBreakerOpenException
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,6 +26,7 @@ import javax.inject.Singleton
  * Manages photo storage operations for the SmilePile app.
  * Handles copying imported photos to app's private storage,
  * generating thumbnails, and managing storage directories.
+ * Includes circuit breaker pattern for resilient file operations.
  */
 @Singleton
 class StorageManager @Inject constructor(
@@ -37,6 +41,13 @@ class StorageManager @Inject constructor(
         private const val MAX_PHOTO_SIZE = 2048 // px for width/height
         private const val PHOTO_QUALITY = 90 // JPEG quality
     }
+
+    // Circuit breaker for file operations - prevents cascading failures
+    private val fileOperationCircuitBreaker = CircuitBreaker(
+        failureThreshold = 3,
+        resetTimeoutMs = 30_000L, // 30 seconds
+        halfOpenMaxAttempts = 1
+    )
 
     // Directory for storing original photos
     private val photosDir: File by lazy {
@@ -55,39 +66,48 @@ class StorageManager @Inject constructor(
     /**
      * Import a photo from any source (gallery, camera, etc.) to app's private internal storage
      * All photos are stored in internal storage only for security and privacy
+     * Uses circuit breaker pattern to prevent cascading failures
      * @param sourceUri The URI of the source photo
      * @return StorageResult with photo path, thumbnail path, etc. or null if failed
      */
     suspend fun importPhoto(sourceUri: Uri): StorageResult? = withContext(Dispatchers.IO) {
         try {
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-            val uniqueId = UUID.randomUUID().toString().take(8)
-            val fileName = "IMG_${timestamp}_${uniqueId}.jpg"
+            fileOperationCircuitBreaker.execute("importPhoto") {
+                val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+                val uniqueId = UUID.randomUUID().toString().take(8)
+                val fileName = "IMG_${timestamp}_${uniqueId}.jpg"
 
-            val photoFile = File(photosDir, fileName)
-            val thumbnailFile = File(thumbnailsDir, "thumb_$fileName")
+                val photoFile = File(photosDir, fileName)
+                val thumbnailFile = File(thumbnailsDir, "thumb_$fileName")
 
-            // Copy and resize the original photo
-            val photoSuccess = copyAndResizePhoto(sourceUri, photoFile)
-            if (!photoSuccess) {
-                Log.e(TAG, "Failed to copy photo from $sourceUri")
-                return@withContext null
+                // Copy and resize the original photo
+                val photoSuccess = copyAndResizePhoto(sourceUri, photoFile)
+                if (!photoSuccess) {
+                    Log.e(TAG, "Failed to copy photo from $sourceUri")
+                    return@execute null
+                }
+
+                // Generate thumbnail
+                val thumbnailSuccess = generateThumbnail(photoFile, thumbnailFile)
+                if (!thumbnailSuccess) {
+                    Log.w(TAG, "Failed to generate thumbnail for $fileName")
+                    // Don't fail the import if thumbnail generation fails
+                }
+
+                Log.d(TAG, "Successfully imported photo: $fileName")
+                StorageResult(
+                    photoPath = photoFile.absolutePath,
+                    thumbnailPath = if (thumbnailSuccess) thumbnailFile.absolutePath else null,
+                    fileName = fileName,
+                    fileSize = photoFile.length()
+                )
             }
-
-            // Generate thumbnail
-            val thumbnailSuccess = generateThumbnail(photoFile, thumbnailFile)
-            if (!thumbnailSuccess) {
-                Log.w(TAG, "Failed to generate thumbnail for $fileName")
-                // Don't fail the import if thumbnail generation fails
-            }
-
-            Log.d(TAG, "Successfully imported photo: $fileName")
-            StorageResult(
-                photoPath = photoFile.absolutePath,
-                thumbnailPath = if (thumbnailSuccess) thumbnailFile.absolutePath else null,
-                fileName = fileName,
-                fileSize = photoFile.length()
-            )
+        } catch (e: CircuitBreakerOpenException) {
+            Log.e(TAG, "Circuit breaker is open - file operations temporarily disabled: ${e.message}")
+            null
+        } catch (e: CircuitBreakerException) {
+            Log.e(TAG, "File operation failed and recorded by circuit breaker: ${e.message}", e.cause)
+            null
         } catch (e: Exception) {
             Log.e(TAG, "Error importing photo from $sourceUri", e)
             null

@@ -71,12 +71,12 @@ class PhotoGalleryViewModel: ObservableObject {
     }
 
     // MARK: - Initialization
-    init(repository: PhotoRepository = PhotoRepositoryImpl(),
-         imageCache: OptimizedImageCache = .shared,
-         storageManager: StorageManager = .shared) {
-        self.repository = repository
-        self.imageCache = imageCache
-        self.storageManager = storageManager
+    init(repository: PhotoRepository? = nil,
+         imageCache: OptimizedImageCache? = nil,
+         storageManager: StorageManager? = nil) {
+        self.repository = repository ?? PhotoRepositoryImpl()
+        self.imageCache = imageCache ?? .shared
+        self.storageManager = storageManager ?? StorageManager.shared
 
         setupMemoryMonitoring()
     }

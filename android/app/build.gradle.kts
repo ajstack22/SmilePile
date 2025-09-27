@@ -5,7 +5,11 @@ plugins {
     id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
+    id("jacoco")
 }
+
+// Apply JaCoCo configuration
+apply(from = "../jacoco.gradle")
 
 android {
     namespace = "com.smilepile"
@@ -36,6 +40,8 @@ android {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
         }
     }
 
@@ -148,6 +154,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    // Mocking frameworks
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-android:1.13.8")
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
 
     // Compose Testing
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.00"))

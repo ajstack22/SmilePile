@@ -1,0 +1,1183 @@
+¸
+bcom.smilepile.ui.viewmodels.CameraViewModel#getCameraManager()Lcom/smilepile/camera/CameraManager;
+__unknown_file ("0*ÿ
+0 (´
+±
+ (+
+field"com.smilepile.camera.CameraManager"__id*r
+ (f*d-
++com.smilepile.ui.viewmodels.CameraViewModel"3
+cameraManager"com.smilepile.camera.CameraManager"9
+ (-
++
+field"com.smilepile.camera.CameraManagerB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`Ø
+ccom.smilepile.ui.viewmodels.CameraViewModel#setCameraManager(Lcom/smilepile/camera/CameraManager;)V
+__unknown_file ("0*å
+0 (´
+±
+ (d-
++com.smilepile.ui.viewmodels.CameraViewModel"3
+cameraManager"com.smilepile.camera.CameraManager"__id*9
+ (-
++
+value"com.smilepile.camera.CameraManager"
+ (
+implicit return:7
+ (+
+value"com.smilepile.camera.CameraManagerB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`è
+ocom.smilepile.ui.viewmodels.CameraViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
+__unknown_file ("0*¢
+0 (Ì
+É
+ (6
+field-com.smilepile.data.repository.PhotoRepository"__id*
+ (s*q-
++com.smilepile.ui.viewmodels.CameraViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"D
+ (8
+6
+field-com.smilepile.data.repository.PhotoRepositoryB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ˆ
+pcom.smilepile.ui.viewmodels.CameraViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
+__unknown_file ("0*ý
+0 (Ì
+É
+ (q-
++com.smilepile.ui.viewmodels.CameraViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
+ (8
+6
+value-com.smilepile.data.repository.PhotoRepository"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.repository.PhotoRepositoryB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`™'
+ˆcom.smilepile.ui.viewmodels.CameraViewModel#<init>(Lcom/smilepile/camera/CameraManager;Lcom/smilepile/data/repository/PhotoRepository;)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt ()"0*×#
+0 (¤
+¡
+ (,
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*Q
+
+__unknown_file (5
+3
+cameraManager"com.smilepile.camera.CameraManagers
+q
+ (,3
+cameraManager"com.smilepile.camera.CameraManager"__annotation*"
+
+__unknown_file (
+
+%0±
+®
+ (0
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepository€
+~
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
+
+__unknown_file (
+
+%1¼
+¹
+ (,(
+%2"com.smilepile.camera.CameraManager"ccom.smilepile.ui.viewmodels.CameraViewModel#setCameraManager(Lcom/smilepile/camera/CameraManager;)V*K
+
+__unknown_file (/-
++com.smilepile.ui.viewmodels.CameraViewModel*Q
+
+__unknown_file (5
+3
+cameraManager"com.smilepile.camera.CameraManagerá
+Þ
+ (03
+%3-com.smilepile.data.repository.PhotoRepository"pcom.smilepile.ui.viewmodels.CameraViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*K
+
+__unknown_file (/-
++com.smilepile.ui.viewmodels.CameraViewModel*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepositoryá
+Þ
+" #(<
+%4java.lang.Object"Rcom.smilepile.ui.viewmodels.CameraViewModel#set_uiState(Lerror/NonExistentClass;)V*;
+" #(</-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>µ
+²
+$, $(4
+%5java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*;
+$, $(4/-
++com.smilepile.ui.viewmodels.CameraViewModelÓ
+Ð
+$ $(B
+%6java.lang.Object"Dcom.smilepile.ui.viewmodels.CameraViewModel#setUiState(LStateFlow;)V*;
+$ $(B/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>í
+ê
+& '(>
+%7java.lang.Object"^com.smilepile.ui.viewmodels.CameraViewModel#set_isCameraInitialized(Lerror/NonExistentClass;)V*;
+& '(>/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>Á
+¾
+(2 ((F
+%8java.lang.Object"]com.smilepile.ui.viewmodels.CameraViewModel#get_isCameraInitialized()Lerror/NonExistentClass;*;
+(2 ((F/-
++com.smilepile.ui.viewmodels.CameraViewModelß
+Ü
+( ((T
+%9java.lang.Object"Pcom.smilepile.ui.viewmodels.CameraViewModel#setIsCameraInitialized(LStateFlow;)V*;
+( ((T/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>ä
+á
+* +(=
+%10java.lang.Object"Tcom.smilepile.ui.viewmodels.CameraViewModel#set_flashMode(Lerror/NonExistentClass;)V*;
+* +(=/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>¸
+µ
+,* ,(4
+%11java.lang.Object"Scom.smilepile.ui.viewmodels.CameraViewModel#get_flashMode()Lerror/NonExistentClass;*;
+,* ,(4/-
++com.smilepile.ui.viewmodels.CameraViewModelÖ
+Ó
+, ,(B
+%12java.lang.Object"Fcom.smilepile.ui.viewmodels.CameraViewModel#setFlashMode(LStateFlow;)V*;
+, ,(B/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>é
+æ
+. /(9
+%13java.lang.Object"Ycom.smilepile.ui.viewmodels.CameraViewModel#set_hasFrontCamera(Lerror/NonExistentClass;)V*;
+. /(9/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>½
+º
+0- 0(<
+%14java.lang.Object"Xcom.smilepile.ui.viewmodels.CameraViewModel#get_hasFrontCamera()Lerror/NonExistentClass;*;
+0- 0(</-
++com.smilepile.ui.viewmodels.CameraViewModelÛ
+Ø
+0 0(J
+%15java.lang.Object"Kcom.smilepile.ui.viewmodels.CameraViewModel#setHasFrontCamera(LStateFlow;)V*;
+0 0(J/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>í
+ê
+2 3(=
+%16java.lang.Object"]com.smilepile.ui.viewmodels.CameraViewModel#set_isUsingFrontCamera(Lerror/NonExistentClass;)V*;
+2 3(=/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>Á
+¾
+41 4(D
+%17java.lang.Object"\com.smilepile.ui.viewmodels.CameraViewModel#get_isUsingFrontCamera()Lerror/NonExistentClass;*;
+41 4(D/-
++com.smilepile.ui.viewmodels.CameraViewModelß
+Ü
+4 4(R
+%18java.lang.Object"Ocom.smilepile.ui.viewmodels.CameraViewModel#setIsUsingFrontCamera(LStateFlow;)V*;
+4 4(R/-
++com.smilepile.ui.viewmodels.CameraViewModel*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:?
+ (,3
+cameraManager"com.smilepile.camera.CameraManager:L
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepositoryB/-
++com.smilepile.ui.viewmodels.CameraViewModelHì
+Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;
+__unknown_file ("0*Ä
+0 (‹
+ˆ
+ (
+fieldjava.lang.Object"__id*[
+ (O*M-
++com.smilepile.ui.viewmodels.CameraViewModel"
+_uiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`Œ
+Rcom.smilepile.ui.viewmodels.CameraViewModel#set_uiState(Lerror/NonExistentClass;)V
+__unknown_file ("0*¼
+0 (‹
+ˆ
+ (M-
++com.smilepile.ui.viewmodels.CameraViewModel"
+_uiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`Ý
+Ccom.smilepile.ui.viewmodels.CameraViewModel#getUiState()LStateFlow;
+__unknown_file ("0*Ã
+0 (Š
+‡
+ (
+fieldjava.lang.Object"__id*Z
+ (N*L-
++com.smilepile.ui.viewmodels.CameraViewModel"
+uiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ý
+Dcom.smilepile.ui.viewmodels.CameraViewModel#setUiState(LStateFlow;)V
+__unknown_file ("0*»
+0 (Š
+‡
+ (L-
++com.smilepile.ui.viewmodels.CameraViewModel"
+uiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`„
+]com.smilepile.ui.viewmodels.CameraViewModel#get_isCameraInitialized()Lerror/NonExistentClass;
+__unknown_file ("0*Ð
+0 (—
+”
+ (
+fieldjava.lang.Object"__id*g
+ ([*Y-
++com.smilepile.ui.viewmodels.CameraViewModel"(
+_isCameraInitializedjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`¤
+^com.smilepile.ui.viewmodels.CameraViewModel#set_isCameraInitialized(Lerror/NonExistentClass;)V
+__unknown_file ("0*È
+0 (—
+”
+ (Y-
++com.smilepile.ui.viewmodels.CameraViewModel"(
+_isCameraInitializedjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ò
+Lcom.smilepile.ui.viewmodels.CameraViewModel#isCameraInitialized()LStateFlow;
+__unknown_file ("0*Ï
+0 (–
+“
+ (
+fieldjava.lang.Object"__id*f
+ (Z*X-
++com.smilepile.ui.viewmodels.CameraViewModel"'
+isCameraInitializedjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`•
+Pcom.smilepile.ui.viewmodels.CameraViewModel#setIsCameraInitialized(LStateFlow;)V
+__unknown_file ("0*Ç
+0 (–
+“
+ (X-
++com.smilepile.ui.viewmodels.CameraViewModel"'
+isCameraInitializedjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ð
+Scom.smilepile.ui.viewmodels.CameraViewModel#get_flashMode()Lerror/NonExistentClass;
+__unknown_file ("0*Æ
+0 (
+Š
+ (
+fieldjava.lang.Object"__id*]
+ (Q*O-
++com.smilepile.ui.viewmodels.CameraViewModel"
+
+_flashModejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`
+Tcom.smilepile.ui.viewmodels.CameraViewModel#set_flashMode(Lerror/NonExistentClass;)V
+__unknown_file ("0*¾
+0 (
+Š
+ (O-
++com.smilepile.ui.viewmodels.CameraViewModel"
+
+_flashModejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`á
+Ecom.smilepile.ui.viewmodels.CameraViewModel#getFlashMode()LStateFlow;
+__unknown_file ("0*Å
+0 (Œ
+‰
+ (
+fieldjava.lang.Object"__id*\
+ (P*N-
++com.smilepile.ui.viewmodels.CameraViewModel"
+	flashModejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`
+Fcom.smilepile.ui.viewmodels.CameraViewModel#setFlashMode(LStateFlow;)V
+__unknown_file ("0*½
+0 (Œ
+‰
+ (N-
++com.smilepile.ui.viewmodels.CameraViewModel"
+	flashModejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ú
+Xcom.smilepile.ui.viewmodels.CameraViewModel#get_hasFrontCamera()Lerror/NonExistentClass;
+__unknown_file ("0*Ë
+0 (’
+
+ (
+fieldjava.lang.Object"__id*b
+ (V*T-
++com.smilepile.ui.viewmodels.CameraViewModel"#
+_hasFrontCamerajava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`š
+Ycom.smilepile.ui.viewmodels.CameraViewModel#set_hasFrontCamera(Lerror/NonExistentClass;)V
+__unknown_file ("0*Ã
+0 (’
+
+ (T-
++com.smilepile.ui.viewmodels.CameraViewModel"#
+_hasFrontCamerajava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ë
+Jcom.smilepile.ui.viewmodels.CameraViewModel#getHasFrontCamera()LStateFlow;
+__unknown_file ("0*Ê
+0 (‘
+Ž
+ (
+fieldjava.lang.Object"__id*a
+ (U*S-
++com.smilepile.ui.viewmodels.CameraViewModel""
+hasFrontCamerajava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`‹
+Kcom.smilepile.ui.viewmodels.CameraViewModel#setHasFrontCamera(LStateFlow;)V
+__unknown_file ("0*Â
+0 (‘
+Ž
+ (S-
++com.smilepile.ui.viewmodels.CameraViewModel""
+hasFrontCamerajava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`‚
+\com.smilepile.ui.viewmodels.CameraViewModel#get_isUsingFrontCamera()Lerror/NonExistentClass;
+__unknown_file ("0*Ï
+0 (–
+“
+ (
+fieldjava.lang.Object"__id*f
+ (Z*X-
++com.smilepile.ui.viewmodels.CameraViewModel"'
+_isUsingFrontCamerajava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`¢
+]com.smilepile.ui.viewmodels.CameraViewModel#set_isUsingFrontCamera(Lerror/NonExistentClass;)V
+__unknown_file ("0*Ç
+0 (–
+“
+ (X-
++com.smilepile.ui.viewmodels.CameraViewModel"'
+_isUsingFrontCamerajava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`ð
+Kcom.smilepile.ui.viewmodels.CameraViewModel#isUsingFrontCamera()LStateFlow;
+__unknown_file ("0*Î
+0 (•
+’
+ (
+fieldjava.lang.Object"__id*e
+ (Y*W-
++com.smilepile.ui.viewmodels.CameraViewModel"&
+isUsingFrontCamerajava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`“
+Ocom.smilepile.ui.viewmodels.CameraViewModel#setIsUsingFrontCamera(LStateFlow;)V
+__unknown_file ("0*Æ
+0 (•
+’
+ (W-
++com.smilepile.ui.viewmodels.CameraViewModel"&
+isUsingFrontCamerajava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH`Ò
+ecom.smilepile.ui.viewmodels.CameraViewModel#initializeCamera(LContext;LLifecycleOwner;LPreviewView;)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt9 9("0*>
+06 8("/
+
+__unknown_file (
+implicit return:'
+: :(
+contextjava.lang.Object:.
+; ;(&"
+lifecycleOwnerjava.lang.Object:+
+< <( 
+previewViewjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelHÌ
+Ecom.smilepile.ui.viewmodels.CameraViewModel#capturePhoto(LContext;J)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.ktX X("0*ø
+2Y) \(	µ
+²
+Z Z(
+%2java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*;
+Z Z(/-
++com.smilepile.ui.viewmodels.CameraViewModelµ
+²
+Z Z(%
+%3java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*;
+Z Z(%/-
++com.smilepile.ui.viewmodels.CameraViewModelX
+V
+Z Z(R
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"
+[ [(
+explicit return*Ù
+0U W(Á
+¾
+Y Y(!
+%0java.lang.Object"]com.smilepile.ui.viewmodels.CameraViewModel#get_isCameraInitialized()Lerror/NonExistentClass;*;
+Y Y(!/-
++com.smilepile.ui.viewmodels.CameraViewModel*
+2
+1*>
+1\	 ^("/
+
+__unknown_file (
+implicit return:'
+X X(%
+contextjava.lang.Object:
+X' X(7
+
+categoryIdlongB/-
++com.smilepile.ui.viewmodels.CameraViewModelHÁ
+Kcom.smilepile.ui.viewmodels.CameraViewModel#switchCamera(LLifecycleOwner;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt™ ™("0*2
+2
+šC š(I"!
+
+šC š(I
+explicit return*¢
+0
+– ˜(Å
+Â
+
+š š(!
+%0java.lang.Object"]com.smilepile.ui.viewmodels.CameraViewModel#get_isCameraInitialized()Lerror/NonExistentClass;*=
+
+š š(!/-
++com.smilepile.ui.viewmodels.CameraViewModelÀ
+½
+
+š, š(;
+%1java.lang.Object"Xcom.smilepile.ui.viewmodels.CameraViewModel#get_hasFrontCamera()Lerror/NonExistentClass;*=
+
+š, š(;/-
++com.smilepile.ui.viewmodels.CameraViewModel*
+2
+1*@
+1
+šI œ("/
+
+__unknown_file (
+implicit return:0
+
+™ ™(3"
+lifecycleOwnerjava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.CameraViewModelH’
+>com.smilepile.ui.viewmodels.CameraViewModel#toggleFlashMode()Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt± ±("0*2
+2
+²) ²(/"!
+
+²) ²(/
+explicit return*ß
+0
+® °(Å
+Â
+
+² ²(!
+%0java.lang.Object"]com.smilepile.ui.viewmodels.CameraViewModel#get_isCameraInitialized()Lerror/NonExistentClass;*=
+
+² ²(!/-
++com.smilepile.ui.viewmodels.CameraViewModel*
+2
+1*’
+1
+²/ ´(Ü
+Ù
+
+´ ´(((
+%2"com.smilepile.camera.CameraManager"bcom.smilepile.ui.viewmodels.CameraViewModel#getCameraManager()Lcom/smilepile/camera/CameraManager;*=
+
+´ ´((/-
++com.smilepile.ui.viewmodels.CameraViewModelÅ
+Â
+
+´) ´(:$
+%3com.smilepile.camera.FlashMode"Tcom.smilepile.camera.CameraManager#toggleFlashMode()Lcom/smilepile/camera/FlashMode;*8
+
+´ ´((*
+(
+%2"com.smilepile.camera.CameraManagerz
+x
+
+´ ´(:.
+newFlashModecom.smilepile.camera.FlashMode"__id*4
+
+´) ´(:&
+$
+%3com.smilepile.camera.FlashMode»
+¸
+
+µ µ(
+%4java.lang.Object"Scom.smilepile.ui.viewmodels.CameraViewModel#get_flashMode()Lerror/NonExistentClass;*=
+
+µ µ(/-
++com.smilepile.ui.viewmodels.CameraViewModelo
+m
+
+µ µ('
+valuejava.lang.Object"__id*>
+
+µ µ('0
+.
+newFlashModecom.smilepile.camera.FlashMode"/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.ui.viewmodels.CameraViewModelHù
+9com.smilepile.ui.viewmodels.CameraViewModel#clearError()Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt» »("0*”
+0
+¸ º(¹
+¶
+
+¼ ¼(
+%0java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+¼ ¼(/-
++com.smilepile.ui.viewmodels.CameraViewModel¹
+¶
+
+¼ ¼(!
+%1java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+¼ ¼(!/-
++com.smilepile.ui.viewmodels.CameraViewModelZ
+X
+
+¼ ¼(:
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.ui.viewmodels.CameraViewModelH‚
+Bcom.smilepile.ui.viewmodels.CameraViewModel#clearCaptureSuccess()Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.ktÂ Â("0*”
+0
+¿ Á(¹
+¶
+
+Ã Ã(
+%0java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+Ã Ã(/-
++com.smilepile.ui.viewmodels.CameraViewModel¹
+¶
+
+Ã Ã(!
+%1java.lang.Object"Qcom.smilepile.ui.viewmodels.CameraViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+Ã Ã(!/-
++com.smilepile.ui.viewmodels.CameraViewModelZ
+X
+
+Ã Ã(H
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.ui.viewmodels.CameraViewModelHÎ
+pcom.smilepile.ui.viewmodels.CameraViewModel#generateThumbnail(LContext;LBitmap;Ljava/lang/String;)Ljava/io/File;o
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.ktÉ É()"0*!
+2
+Î$ Î(/"
+
+Î$ Î(/ *€
+3
+Ð ø(	g
+e
+
+Ò Ò(C&
+thumbnailDirerror.NonExistentClass"__id*)
+
+__unknown_file (
+	<unknown>*
+4
+5*¾
+4
+Õ ×(?
+=
+
+Ø Ø(#
+thumbnailSizeint"__id*
+
+Ø  Ø(#2È
+Š
+
+Ù Ù(^
+%4"__calculate*
+
+Ù= Ù(>
+/*)
+
+__unknown_file (
+	<unknown>*)
+
+__unknown_file (
+	<unknown>Y
+W
+
+Ù Ù(^
+aspectRatiojava.lang.Object"__id*"
+
+__unknown_file (
+
+%4y
+w
+
+Ý Ý(
+%5"	__compare*
+
+Ý Ý(
+>*/
+
+Ý Ý(!
+
+aspectRatiojava.lang.Object*
+
+Ý Ý(2*
+7
+8*i
+5
+Ó( Õ(S
+Q
+
+__unknown_file (
+%3"__id*)
+
+__unknown_file (
+	<unknown>*
+4*Ë
+6
+ã å(d
+b
+
+æ ë(#
+thumbnailBitmapjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>h
+f
+
+î î(L'
+thumbnailFileerror.NonExistentClass"__id*)
+
+__unknown_file (
+	<unknown>a
+_
+
+__unknown_file (
+%2"__id*7
+
+ö ö()
+'
+thumbnailFileerror.NonExistentClass*
+9
+10*£
+7
+Ý! à(Q
+O
+
+Þ Þ(.
+thumbnailWidthint"__id*$
+
+Þ! Þ(.
+
+thumbnailSizeintŽ
+‹
+
+ß# ß(>
+%7"__calculate*
+
+ß1 ß(2
+/*$
+
+ß# ß(0
+
+thumbnailSizeint*/
+
+ß3 ß(>!
+
+aspectRatiojava.lang.ObjectW
+U
+
+ß ß(G
+thumbnailHeightint"__id*)
+
+__unknown_file (
+	<unknown>P
+N
+
+__unknown_file (
+%6"__id*&
+
+ß ß(
+
+thumbnailHeightint*
+6*£
+8
+à ã(Ž
+‹
+
+á" á(=
+%8"__calculate*
+
+á0 á(1
+**$
+
+á" á(/
+
+thumbnailSizeint*/
+
+á2 á(=!
+
+aspectRatiojava.lang.ObjectV
+T
+
+á á(F
+thumbnailWidthint"__id*)
+
+__unknown_file (
+	<unknown>R
+P
+
+â â(/
+thumbnailHeightint"__id*$
+
+â" â(/
+
+thumbnailSizeintP
+N
+
+__unknown_file (
+%6"__id*&
+
+â â(
+
+thumbnailHeightint*
+6*%
+9
+ø
+ ú(	"
+
+Ð ú(	
+
+%2*Q
+10
+ø' ú(	:
+8
+
+__unknown_file (
+%2"__id*
+
+ù ù( *
+9*Â
+0
+Æ È(¨¥
+
+Î Î("
+%0boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*2
+
+Î Î($
+"
+originalBitmapjava.lang.Object*
+
+Î Î(" 2equals(Ljava/lang/Object;)*
+2
+3:)
+
+Ê Ê(
+contextjava.lang.Object:0
+
+Ë Ë("
+originalBitmapjava.lang.Object:+
+
+Ì Ì(
+	photoNamejava.lang.StringB/-
++com.smilepile.ui.viewmodels.CameraViewModelHã
+8com.smilepile.ui.viewmodels.CameraViewModel#onCleared()Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.ktý ý("0*ÿ
+0
+ý ý(P
+N
+
+þ þ(
+%0java.lang.Object"__id*"
+
+þ þ(
+java.lang.ObjectÜ
+Ù
+
+ÿ ÿ((
+%1"com.smilepile.camera.CameraManager"bcom.smilepile.ui.viewmodels.CameraViewModel#getCameraManager()Lcom/smilepile/camera/CameraManager;*=
+
+ÿ ÿ(/-
++com.smilepile.ui.viewmodels.CameraViewModel‹
+ˆ
+
+ÿ ÿ(
+%2kotlin.Unit"-com.smilepile.camera.CameraManager#release()V*8
+
+ÿ ÿ(*
+(
+%1"com.smilepile.camera.CameraManager"/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.ui.viewmodels.CameraViewModelH±
+6com.smilepile.ui.viewmodels.CameraUiState#isLoading()Z
+__unknown_file ("0*¦
+0 (w
+u
+ (
+fieldboolean"__id*Q
+ (E*C+
+)com.smilepile.ui.viewmodels.CameraUiState"
+	isLoadingboolean"
+ (
+
+fieldbooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Ô
+:com.smilepile.ui.viewmodels.CameraUiState#setIsLoading(Z)V
+__unknown_file ("0*§
+0 (w
+u
+ (C+
+)com.smilepile.ui.viewmodels.CameraUiState"
+	isLoadingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`µ
+8com.smilepile.ui.viewmodels.CameraUiState#isCapturing()Z
+__unknown_file ("0*¨
+0 (y
+w
+ (
+fieldboolean"__id*S
+ (G*E+
+)com.smilepile.ui.viewmodels.CameraUiState"
+isCapturingboolean"
+ (
+
+fieldbooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Ø
+<com.smilepile.ui.viewmodels.CameraUiState#setIsCapturing(Z)V
+__unknown_file ("0*©
+0 (y
+w
+ (E+
+)com.smilepile.ui.viewmodels.CameraUiState"
+isCapturingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Ú
+Fcom.smilepile.ui.viewmodels.CameraUiState#getError()Ljava/lang/String;
+__unknown_file ("0*¿
+0 (†
+ƒ
+ (
+fieldjava.lang.String"__id*V
+ (J*H+
+)com.smilepile.ui.viewmodels.CameraUiState"
+errorjava.lang.String"'
+ (
+
+fieldjava.lang.StringB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`ú
+Gcom.smilepile.ui.viewmodels.CameraUiState#setError(Ljava/lang/String;)V
+__unknown_file ("0*·
+0 (†
+ƒ
+ (H+
+)com.smilepile.ui.viewmodels.CameraUiState"
+errorjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`î
+Rcom.smilepile.ui.viewmodels.CameraUiState#getLastCapturedPhotoId()Ljava/lang/Long;
+__unknown_file ("0*Ç
+0 (
+
+ (
+fieldjava.lang.Long"__id*b
+ (V*T+
+)com.smilepile.ui.viewmodels.CameraUiState"%
+lastCapturedPhotoIdjava.lang.Long"%
+ (
+
+fieldjava.lang.LongB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Ž
+Scom.smilepile.ui.viewmodels.CameraUiState#setLastCapturedPhotoId(Ljava/lang/Long;)V
+__unknown_file ("0*Á
+0 (
+
+ (T+
+)com.smilepile.ui.viewmodels.CameraUiState"%
+lastCapturedPhotoIdjava.lang.Long"__id*%
+ (
+
+valuejava.lang.Long"
+ (
+implicit return:#
+ (
+valuejava.lang.LongB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Ç
+Bcom.smilepile.ui.viewmodels.CameraUiState#getShowCaptureSuccess()Z
+__unknown_file ("0*°
+0 (€
+~
+ (
+fieldboolean"__id*Z
+ (N*L+
+)com.smilepile.ui.viewmodels.CameraUiState"
+showCaptureSuccessboolean"
+ (
+
+fieldbooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`ç
+Ccom.smilepile.ui.viewmodels.CameraUiState#setShowCaptureSuccess(Z)V
+__unknown_file ("0*±
+0 (€
+~
+ (L+
+)com.smilepile.ui.viewmodels.CameraUiState"
+showCaptureSuccessboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH`Å
+Xcom.smilepile.ui.viewmodels.CameraUiState#<init>(ZZLjava/lang/String;Ljava/lang/Long;Z)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CameraViewModel.kt† †("0*î	
+0
+† Œ(Ù
+Ö
+
+‡ ‡("
+%0boolean":com.smilepile.ui.viewmodels.CameraUiState#setIsLoading(Z)V*I
+
+__unknown_file (-+
+)com.smilepile.ui.viewmodels.CameraUiState*2
+
+__unknown_file (
+
+	isLoadingbooleanÝ
+Ú
+
+ˆ ˆ($
+%1boolean"<com.smilepile.ui.viewmodels.CameraUiState#setIsCapturing(Z)V*I
+
+__unknown_file (-+
+)com.smilepile.ui.viewmodels.CameraUiState*4
+
+__unknown_file (
+
+isCapturingbooleanô
+ñ
+
+‰ ‰(
+%2java.lang.String"Gcom.smilepile.ui.viewmodels.CameraUiState#setError(Ljava/lang/String;)V*I
+
+__unknown_file (-+
+)com.smilepile.ui.viewmodels.CameraUiState*7
+
+__unknown_file (
+
+errorjava.lang.StringŠ
+‡
+
+Š Š()
+%3java.lang.Long"Scom.smilepile.ui.viewmodels.CameraUiState#setLastCapturedPhotoId(Ljava/lang/Long;)V*I
+
+__unknown_file (-+
+)com.smilepile.ui.viewmodels.CameraUiState*C
+
+__unknown_file ('
+%
+lastCapturedPhotoIdjava.lang.Longë
+è
+
+‹ ‹(+
+%4boolean"Ccom.smilepile.ui.viewmodels.CameraUiState#setShowCaptureSuccess(Z)V*I
+
+__unknown_file (-+
+)com.smilepile.ui.viewmodels.CameraUiState*;
+
+__unknown_file (
+
+showCaptureSuccessboolean"/
+
+__unknown_file (
+implicit return:"
+
+‡ ‡("
+	isLoadingboolean:$
+
+ˆ ˆ($
+isCapturingboolean:'
+
+‰ ‰(
+errorjava.lang.String:3
+
+Š Š()%
+lastCapturedPhotoIdjava.lang.Long:+
+
+‹ ‹(+
+showCaptureSuccessbooleanB-+
+)com.smilepile.ui.viewmodels.CameraUiStateH

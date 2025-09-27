@@ -1,0 +1,594 @@
+«
+$com.smilepile.MainActivity#<init>()V[
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt# ë("0*ö
+0# #(
+}
+$ $(%
+%0"/com.smilepile.security.SecureActivity#<init>()V*:
+
+__unknown_file (
+com.smilepile.MainActivitylj
+1* <(1
+%1+com.smilepile.MainActivity#<init>()V$class0"+com.smilepile.MainActivity#<init>()V$class0ã
+à
+1* <(
+%2"5com.smilepile.MainActivity#<init>()V$class0#<init>()V*?
+1* <(3
+1
+%1+com.smilepile.MainActivity#<init>()V$class0ﬁ
+€
+1 <(
+%3java.lang.Object"Jcom.smilepile.MainActivity#setKidsBackPressedCallback(Ljava/lang/Object;)V**
+1 <(
+com.smilepile.MainActivity*?
+1* <(3
+1
+%1+com.smilepile.MainActivity#<init>()V$class0"/
+
+__unknown_file (
+implicit returnB
+com.smilepile.MainActivityH`ç
+5com.smilepile.MainActivity#<init>()V$class0#<init>()V\
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt1* <("0*>
+013 1(O"/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.MainActivity#<init>()V$class0H`¶
+Bcom.smilepile.MainActivity#<init>()V$class0#handleOnBackPressed()V\
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt2 2(("0*ù
+249 7(∏
+µ
+6 6(-
+%3java.lang.Object"Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V**
+6 6(-
+com.smilepile.MainActivity*
+6) 6(-
+trueN
+L
+
+__unknown_file (
+%2"__id*$
+6 6(-
+
+%3java.lang.Object*
+1*–
+37 :( 
+«
+9 9(2
+%4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;**
+9 9(
+com.smilepile.MainActivity£
+†
+9 9(/
+%5kotlin.Unit"?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()V*@
+9 9(4
+2
+%4,com.smilepile.ui.viewmodels.AppModeViewModelI
+G
+
+__unknown_file (
+%2"__id*
+9 9(/
+
+%5kotlin.Unit*
+1*ò
+02 2(€
+ÿ
+4 4((5
+%0/com.smilepile.security.SecurePreferencesManager"icom.smilepile.MainActivity#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;**
+4 4((
+com.smilepile.MainActivity¢
+ü
+4) 4(7
+%1boolean"?com.smilepile.security.SecurePreferencesManager#isPINEnabled()Z*C
+4 4((7
+5
+%0/com.smilepile.security.SecurePreferencesManager*
+2
+3*>
+1: ;("/
+
+__unknown_file (
+implicit returnB/-
++com.smilepile.MainActivity#<init>()V$class0H≈
+icom.smilepile.MainActivity#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;
+__unknown_file ("0*ñ
+0 (»
+≈
+ (8
+field/com.smilepile.security.SecurePreferencesManager"__id*y
+ (m*k
+com.smilepile.MainActivity"K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManagerâ
+Ü
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*F
+ (:
+8
+field/com.smilepile.security.SecurePreferencesManagerh
+f
+ (8
+field/com.smilepile.security.SecurePreferencesManager"__annotation*
+ (
+
+%0"F
+ (:
+8
+field/com.smilepile.security.SecurePreferencesManagerB
+com.smilepile.MainActivityH`Â
+jcom.smilepile.MainActivity#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V
+__unknown_file ("0*Ô
+0 (â
+Ü
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*F
+ (:
+8
+value/com.smilepile.security.SecurePreferencesManagerh
+f
+ (8
+value/com.smilepile.security.SecurePreferencesManager"__annotation*
+ (
+
+%0»
+≈
+ (k
+com.smilepile.MainActivity"K
+securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__id*F
+ (:
+8
+value/com.smilepile.security.SecurePreferencesManager"
+ (
+implicit return:D
+ (8
+value/com.smilepile.security.SecurePreferencesManagerB
+com.smilepile.MainActivityH`—
+Ncom.smilepile.MainActivity#getThemeManager()Lcom/smilepile/theme/ThemeManager;
+__unknown_file ("0*Ω
+0 (û
+õ
+ ()
+field com.smilepile.theme.ThemeManager"__id*^
+ (R*P
+com.smilepile.MainActivity"0
+themeManager com.smilepile.theme.ThemeManagery
+w
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*7
+ (+
+)
+field com.smilepile.theme.ThemeManagerY
+W
+ ()
+field com.smilepile.theme.ThemeManager"__annotation*
+ (
+
+%0"7
+ (+
+)
+field com.smilepile.theme.ThemeManagerB
+com.smilepile.MainActivityH`Ò
+Ocom.smilepile.MainActivity#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
+__unknown_file ("0*•
+0 (y
+w
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*7
+ (+
+)
+value com.smilepile.theme.ThemeManagerY
+W
+ ()
+value com.smilepile.theme.ThemeManager"__annotation*
+ (
+
+%0û
+õ
+ (P
+com.smilepile.MainActivity"0
+themeManager com.smilepile.theme.ThemeManager"__id*7
+ (+
+)
+value com.smilepile.theme.ThemeManager"
+ (
+implicit return:5
+ ()
+value com.smilepile.theme.ThemeManagerB
+com.smilepile.MainActivityH`ß
+Zcom.smilepile.MainActivity#getThemeViewModel()Lcom/smilepile/ui/viewmodels/ThemeViewModel;
+__unknown_file ("0*á
+0 (¥
+±
+ (3
+field*com.smilepile.ui.viewmodels.ThemeViewModel"__id*j
+ (^*\
+com.smilepile.MainActivity"<
+themeViewModel*com.smilepile.ui.viewmodels.ThemeViewModel"A
+ (5
+3
+field*com.smilepile.ui.viewmodels.ThemeViewModelB
+com.smilepile.MainActivityH`«
+[com.smilepile.MainActivity#setThemeViewModel(Lcom/smilepile/ui/viewmodels/ThemeViewModel;)V
+__unknown_file ("0*Â
+0 (¥
+±
+ (\
+com.smilepile.MainActivity"<
+themeViewModel*com.smilepile.ui.viewmodels.ThemeViewModel"__id*A
+ (5
+3
+value*com.smilepile.ui.viewmodels.ThemeViewModel"
+ (
+implicit return:?
+ (3
+value*com.smilepile.ui.viewmodels.ThemeViewModelB
+com.smilepile.MainActivityH`≠
+[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;
+__unknown_file ("0*å
+0 (∑
+¥
+ (5
+field,com.smilepile.ui.viewmodels.AppModeViewModel"__id*k
+ (_*]
+com.smilepile.MainActivity"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"C
+ (7
+5
+field,com.smilepile.ui.viewmodels.AppModeViewModelB
+com.smilepile.MainActivityH`Õ
+\com.smilepile.MainActivity#setModeViewModel(Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V
+__unknown_file ("0*Ë
+0 (∑
+¥
+ (]
+com.smilepile.MainActivity"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*C
+ (7
+5
+value,com.smilepile.ui.viewmodels.AppModeViewModel"
+ (
+implicit return:A
+ (5
+value,com.smilepile.ui.viewmodels.AppModeViewModelB
+com.smilepile.MainActivityH`’
+Ncom.smilepile.MainActivity#getShowKidsModeExitDialog()Lerror/NonExistentClass;
+__unknown_file ("0*¡
+0 (à
+Ö
+ (
+fieldjava.lang.Object"__id*X
+ (L*J
+com.smilepile.MainActivity"*
+showKidsModeExitDialogjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB
+com.smilepile.MainActivityH`ı
+Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V
+__unknown_file ("0*π
+0 (à
+Ö
+ (J
+com.smilepile.MainActivity"*
+showKidsModeExitDialogjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB
+com.smilepile.MainActivityH`—
+Icom.smilepile.MainActivity#getKidsBackPressedCallback()Ljava/lang/Object;
+__unknown_file ("0*¬
+0 (â
+Ü
+ (
+fieldjava.lang.Object"__id*Y
+ (M*K
+com.smilepile.MainActivity"+
+kidsBackPressedCallbackjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB
+com.smilepile.MainActivityH`Ò
+Jcom.smilepile.MainActivity#setKidsBackPressedCallback(Ljava/lang/Object;)V
+__unknown_file ("0*∫
+0 (â
+Ü
+ (K
+com.smilepile.MainActivity"+
+kidsBackPressedCallbackjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB
+com.smilepile.MainActivityH`ì
+.com.smilepile.MainActivity#onCreate(LBundle;)V\
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt> >("0*©
+0> >(v
+t
+? ?(+
+%0%com.smilepile.security.SecureActivity"__id*5
+? ?()'
+%com.smilepile.security.SecureActivityÌ
+? ?(*
+%1kotlin.Unit"9com.smilepile.security.SecureActivity#onCreate(LBundle;)V*I
+
+__unknown_file (-
++
+%0%com.smilepile.security.SecureActivity*4
+? ?()(
+&
+savedInstanceStatejava.lang.Object2onCreate(LBundle;)"/
+
+__unknown_file (
+implicit return:2
+> >(5&
+savedInstanceStatejava.lang.ObjectB
+com.smilepile.MainActivityHŸ
+Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V\
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktd d("0*©
+2i] o(	a
+_
+j j(>"
+statusBarColorjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>i
+g
+m m(_*
+windowInsetsControllerjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>|
+z
+nA n(L
+%3boolean"kotlin.Boolean#not()Z*#
+nB n(L
+
+
+isDarkModeboolean*#
+nB n(L
+
+
+isDarkModeboolean`
+^
+n n(L/
+isAppearanceLightStatusBarsjava.lang.Object"__id*
+nA n(L
+
+%3booleang
+e
+
+__unknown_file (
+%2"__id*=
+n# n(>1
+/
+isAppearanceLightStatusBarsjava.lang.Object*
+1*>
+3~	 ("/
+
+__unknown_file (
+implicit return*“
+4r) z(	i
+g
+s s(_*
+windowInsetsControllerjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>S
+Q
+
+__unknown_file (
+%5"__id*)
+
+__unknown_file (
+	<unknown>*
+3*“
+5z ~(	i
+g
+| |(_*
+windowInsetsControllerjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>S
+Q
+
+__unknown_file (
+%5"__id*)
+
+__unknown_file (
+	<unknown>*
+3*Œ
+0d d(≤
+Ø
+i i()
+%0boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*7
+i i(+
+)
+currentModecom.smilepile.mode.AppMode*2
+i# i()&
+$
+PARENTcom.smilepile.mode.AppModeÅ
+
+i- i([
+%1"	__compare*
+iC i(E
+>=*)
+i; i(B
+
+SDK_INTjava.lang.Object*#
+iZ i([
+
+Mjava.lang.Object*
+2
+1*»
+1o	 q(∞
+≠
+r r('
+%4boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*7
+r r(+
+)
+currentModecom.smilepile.mode.AppMode*0
+r# r('$
+"
+KIDScom.smilepile.mode.AppMode*
+4
+5:!
+d d(1
+
+isDarkModeboolean:5
+d3 d(G)
+currentModecom.smilepile.mode.AppModeB
+com.smilepile.MainActivityH„
+3com.smilepile.MainActivity#onWindowFocusChanged(Z)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktÇ Ç(%"0*´
+
+2
+Ñ â(	À
+»
+
+Ü Ü(+0
+%2*com.smilepile.ui.viewmodels.ThemeViewModel"Zcom.smilepile.MainActivity#getThemeViewModel()Lcom/smilepile/ui/viewmodels/ThemeViewModel;*,
+
+Ü Ü(+
+com.smilepile.MainActivity≠
+™
+
+Ü, Ü(6
+%3java.lang.Object"Bcom.smilepile.ui.viewmodels.ThemeViewModel#isDarkMode()LStateFlow;*@
+
+Ü Ü(+2
+0
+%2*com.smilepile.ui.viewmodels.ThemeViewModel_
+]
+
+Ü Ü(<
+
+isDarkModejava.lang.Object"__id*)
+
+Ü7 Ü(<
+
+valuejava.lang.ObjectŒ
+À
+
+á á(+2
+%4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;*,
+
+á á(+
+com.smilepile.MainActivity±
+Æ
+
+á, á(3
+%5java.lang.Object"Dcom.smilepile.ui.viewmodels.AppModeViewModel#getUiState()LStateFlow;*B
+
+á á(+4
+2
+%4,com.smilepile.ui.viewmodels.AppModeViewModelf
+d
+
+á á(E
+currentModejava.lang.Object"__id*/
+
+á: á(E!
+
+currentModejava.lang.Object˚
+¯
+
+à à(2
+%6kotlin.Unit"Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V*,
+
+à à(2
+com.smilepile.MainActivity*.
+
+à à($ 
+
+
+isDarkModejava.lang.Object*/
+
+à& à(1!
+
+currentModejava.lang.ObjectK
+I
+
+__unknown_file (
+%1"__id*!
+
+à à(2
+
+%6kotlin.Unit*
+1*ì
+0
+Ç Ç(z
+x
+
+É É(+
+%0%com.smilepile.security.SecureActivity"__id*7
+
+É É()'
+%com.smilepile.security.SecureActivity*
+2
+1*@
+1
+â	 ä("/
+
+__unknown_file (
+implicit return:!
+
+Ç& Ç(7
+hasFocusbooleanB
+com.smilepile.MainActivityH≈
+Ccom.smilepile.MainActivity#onConfigurationChanged(LConfiguration;)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktå å('"0*À
+0
+å å(z
+x
+
+ç ç(+
+%0%com.smilepile.security.SecureActivity"__id*7
+
+ç ç()'
+%com.smilepile.security.SecureActivityµ
+≤
+
+è è(&
+%1 com.smilepile.theme.ThemeManager"Ncom.smilepile.MainActivity#getThemeManager()Lcom/smilepile/theme/ThemeManager;*,
+
+è è(
+com.smilepile.MainActivity‘
+—
+
+è è(6
+%2kotlin.Unit"Icom.smilepile.theme.ThemeManager#onConfigurationChanged(LConfiguration;)V*6
+
+è è((
+&
+%1 com.smilepile.theme.ThemeManager*-
+
+è, è(5
+
+	newConfigjava.lang.Object"/
+
+__unknown_file (
+implicit return:+
+
+å( å(@
+	newConfigjava.lang.ObjectB
+com.smilepile.MainActivityH

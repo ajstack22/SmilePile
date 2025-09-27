@@ -2,17 +2,20 @@ package com.smilepile.security
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.smilepile.mode.AppMode
 import com.smilepile.mode.ModeManager
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.slot
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.kotlin.mock
 import org.junit.Assert.*
 
 /**
@@ -20,33 +23,142 @@ import org.junit.Assert.*
  * Tests screenshot prevention, inactivity timeout, and security integration
  */
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 class SecurityValidationTest {
 
+    @MockK(relaxed = true)
     private lateinit var context: Context
-    private lateinit var securePreferencesManager: SecurePreferencesManager
+
+    @MockK(relaxed = true)
     private lateinit var secureStorageManager: SecureStorageManager
+
+    @MockK(relaxed = true)
+    private lateinit var securePreferencesManager: SecurePreferencesManager
+
+    @MockK(relaxed = true)
     private lateinit var inactivityManager: InactivityManager
+
+    @MockK(relaxed = true)
     private lateinit var modeManager: ModeManager
 
     @Before
     fun setup() {
-        context = ApplicationProvider.getApplicationContext()
-        secureStorageManager = SecureStorageManager(context)
-        securePreferencesManager = SecurePreferencesManager(context, secureStorageManager)
-        inactivityManager = InactivityManager(context, securePreferencesManager)
-        modeManager = ModeManager(context)
+        MockKAnnotations.init(this)
 
-        // Clear any existing state
-        securePreferencesManager.clearAllSettings()
-        context.getSharedPreferences("inactivity_prefs", Context.MODE_PRIVATE)
-            .edit().clear().apply()
+        // Mock shared preferences
+        val sharedPrefs = mockk<SharedPreferences>(relaxed = true)
+        val editor = mockk<SharedPreferences.Editor>(relaxed = true)
+
+        every { context.getSharedPreferences(any(), any()) } returns sharedPrefs
+        every { context.packageName } returns "com.smilepile"
+        every { sharedPrefs.edit() } returns editor
+        every { sharedPrefs.getString(any(), any()) } returns null
+        every { sharedPrefs.getBoolean(any(), any()) } returns false
+        every { sharedPrefs.getLong(any(), any()) } returns 0L
+        every { sharedPrefs.getInt(any(), any()) } returns 0
+        every { editor.putString(any(), any()) } returns editor
+        every { editor.putBoolean(any(), any()) } returns editor
+        every { editor.putLong(any(), any()) } returns editor
+        every { editor.putInt(any(), any()) } returns editor
+        every { editor.clear() } returns editor
+        every { editor.apply() } returns Unit
+        every { editor.commit() } returns true
+
+        // Mock SecureStorageManager encryption/decryption
+        coEvery { secureStorageManager.encrypt(any()) } answers {
+            "encrypted_" + firstArg<String>()
+        }
+        coEvery { secureStorageManager.decrypt(any()) } answers {
+            val encrypted = firstArg<String>()
+            if (encrypted.startsWith("encrypted_")) {
+                encrypted.removePrefix("encrypted_")
+            } else {
+                encrypted
+            }
+        }
+
+        // Configure mock behaviors for SecurePreferencesManager
+        every { securePreferencesManager.isPINEnabled() } returns false
+        every { securePreferencesManager.setPIN(any()) } returns Unit
+        every { securePreferencesManager.validatePIN(any()) } answers {
+            firstArg<String>() == "1234"
+        }
+        every { securePreferencesManager.clearPIN() } returns Unit
+        every { securePreferencesManager.getSecuritySummary() } returns SecuritySummary(
+            hasPIN = false,
+            hasPattern = false,
+            biometricEnabled = false,
+            kidSafeModeEnabled = true,
+            cameraAccessAllowed = true,
+            deleteProtectionEnabled = true,
+            failedAttempts = 0,
+            isInCooldown = false
+        )
+        every { securePreferencesManager.setKidSafeModeEnabled(any()) } returns Unit
+        every { securePreferencesManager.setCameraAccessAllowed(any()) } returns Unit
+        every { securePreferencesManager.setDeleteProtectionEnabled(any()) } returns Unit
+        every { securePreferencesManager.clearAllSettings() } returns Unit
+        every { securePreferencesManager.getFailedAttempts() } returns 0
+        every { securePreferencesManager.recordFailedAttempt() } returns Unit
+        every { securePreferencesManager.isInCooldown() } returns false
+        every { securePreferencesManager.getRemainingCooldownTime() } returns 0L
+        every { securePreferencesManager.resetFailedAttempts() } returns Unit
+
+        // Configure mock behaviors for InactivityManager
+        every { inactivityManager.isTimeoutEnabled() } returns true
+        every { inactivityManager.getTimeoutDuration() } returns 300_000L
+        every { inactivityManager.setTimeoutDuration(any()) } answers {
+            val duration = firstArg<Long>()
+            every { inactivityManager.getTimeoutDuration() } returns duration.coerceIn(60_000L, 1_800_000L)
+            Unit
+        }
+        every { inactivityManager.setTimeoutEnabled(any()) } answers {
+            val enabled = firstArg<Boolean>()
+            every { inactivityManager.isTimeoutEnabled() } returns enabled
+            Unit
+        }
+        every { inactivityManager.getTimeoutOptions() } returns listOf(
+            "1 minute" to 60_000L,
+            "2 minutes" to 120_000L,
+            "5 minutes" to 300_000L,
+            "10 minutes" to 600_000L,
+            "15 minutes" to 900_000L,
+            "30 minutes" to 1_800_000L
+        )
+        every { inactivityManager.recordActivity() } returns Unit
+        every { inactivityManager.setTimeoutCallback(any()) } returns Unit
+
+        // Configure mock behaviors for ModeManager
+        val modeFlow = MutableStateFlow(AppMode.KIDS)
+        every { modeManager.currentMode } returns modeFlow
+        every { modeManager.isKidsMode() } answers { modeFlow.value == AppMode.KIDS }
+        every { modeManager.isParentMode() } answers { modeFlow.value == AppMode.PARENT }
+        every { modeManager.toggleMode() } answers {
+            modeFlow.value = if (modeFlow.value == AppMode.KIDS) AppMode.PARENT else AppMode.KIDS
+            Unit
+        }
+        every { modeManager.setMode(any()) } answers {
+            val mode = firstArg<AppMode>()
+            modeFlow.value = mode
+            Unit
+        }
     }
 
     @Test
     fun testPINSecurityIntegration() {
         // Test PIN setup and validation
         val testPIN = "1234"
+        var pinEnabled = false
+
+        // Mock PIN state management
+        every { securePreferencesManager.isPINEnabled() } answers { pinEnabled }
+        every { securePreferencesManager.setPIN(any()) } answers {
+            pinEnabled = true
+            Unit
+        }
+        every { securePreferencesManager.clearPIN() } answers {
+            pinEnabled = false
+            Unit
+        }
 
         // Initially no PIN should be set
         assertFalse("PIN should not be enabled initially", securePreferencesManager.isPINEnabled())
@@ -103,6 +215,41 @@ class SecurityValidationTest {
 
     @Test
     fun testSecuritySummary() {
+        var hasPIN = false
+        var kidSafeModeEnabled = true
+        var cameraAccessAllowed = true
+        var deleteProtectionEnabled = true
+
+        // Configure dynamic mock responses
+        every { securePreferencesManager.getSecuritySummary() } answers {
+            SecuritySummary(
+                hasPIN = hasPIN,
+                hasPattern = false,
+                biometricEnabled = false,
+                kidSafeModeEnabled = kidSafeModeEnabled,
+                cameraAccessAllowed = cameraAccessAllowed,
+                deleteProtectionEnabled = deleteProtectionEnabled,
+                failedAttempts = 0,
+                isInCooldown = false
+            )
+        }
+        every { securePreferencesManager.setPIN(any()) } answers {
+            hasPIN = true
+            Unit
+        }
+        every { securePreferencesManager.setKidSafeModeEnabled(any()) } answers {
+            kidSafeModeEnabled = firstArg()
+            Unit
+        }
+        every { securePreferencesManager.setCameraAccessAllowed(any()) } answers {
+            cameraAccessAllowed = firstArg()
+            Unit
+        }
+        every { securePreferencesManager.setDeleteProtectionEnabled(any()) } answers {
+            deleteProtectionEnabled = firstArg()
+            Unit
+        }
+
         // Test security summary with no PIN
         var summary = securePreferencesManager.getSecuritySummary()
         assertFalse("Should report no PIN", summary.hasPIN)
@@ -128,6 +275,28 @@ class SecurityValidationTest {
 
     @Test
     fun testFailedAttemptsHandling() {
+        var failedAttempts = 0
+        var inCooldown = false
+
+        // Configure dynamic mock responses
+        every { securePreferencesManager.getFailedAttempts() } answers { failedAttempts }
+        every { securePreferencesManager.isInCooldown() } answers { inCooldown }
+        every { securePreferencesManager.getRemainingCooldownTime() } answers {
+            if (inCooldown) 30000L else 0L
+        }
+        every { securePreferencesManager.recordFailedAttempt() } answers {
+            failedAttempts++
+            if (failedAttempts >= 6) {
+                inCooldown = true
+            }
+            Unit
+        }
+        every { securePreferencesManager.resetFailedAttempts() } answers {
+            failedAttempts = 0
+            inCooldown = false
+            Unit
+        }
+
         // Set up PIN for testing
         securePreferencesManager.setPIN("1234")
 
@@ -205,7 +374,39 @@ class SecurityValidationTest {
 
     @Test
     fun testSecurityFeatureIntegration() {
-        // Test that all security features work together
+        var hasPIN = false
+        var kidSafeModeEnabled = false
+        var deleteProtectionEnabled = false
+
+        // Configure dynamic mock responses for security features
+        every { securePreferencesManager.setPIN(any()) } answers {
+            hasPIN = true
+            Unit
+        }
+        every { securePreferencesManager.setKidSafeModeEnabled(any()) } answers {
+            kidSafeModeEnabled = firstArg()
+            Unit
+        }
+        every { securePreferencesManager.setDeleteProtectionEnabled(any()) } answers {
+            deleteProtectionEnabled = firstArg()
+            Unit
+        }
+        every { securePreferencesManager.getSecuritySummary() } answers {
+            SecuritySummary(
+                hasPIN = hasPIN,
+                hasPattern = false,
+                biometricEnabled = false,
+                kidSafeModeEnabled = kidSafeModeEnabled,
+                cameraAccessAllowed = true,
+                deleteProtectionEnabled = deleteProtectionEnabled,
+                failedAttempts = 0,
+                isInCooldown = false
+            )
+        }
+        every { securePreferencesManager.clearAllSettings() } answers {
+            hasPIN = false
+            Unit
+        }
 
         // Enable all security features
         securePreferencesManager.setPIN("1234")

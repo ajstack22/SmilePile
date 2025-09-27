@@ -25,6 +25,7 @@ source "${DEPLOY_ROOT}/lib/env_manager.sh"
 
 PLATFORM="${1:-both}"
 SKIP_TESTS="${SKIP_TESTS:-false}"
+SKIP_SONAR="${SKIP_SONAR:-false}"
 SKIP_COMMIT="${SKIP_COMMIT:-false}"
 ALLOW_UNCOMMITTED="${ALLOW_UNCOMMITTED:-false}"
 AUTO_COMMIT="${AUTO_COMMIT:-true}"
@@ -57,6 +58,7 @@ Platforms:
 
 Environment Variables:
     SKIP_TESTS=true         Skip automated tests
+    SKIP_SONAR=true         Skip SonarCloud code analysis
     SKIP_COMMIT=true        Skip git commit/push
     ALLOW_UNCOMMITTED=true  Allow deployment with uncommitted changes
     AUTO_COMMIT=false       Don't auto-commit changes
@@ -115,6 +117,30 @@ check_prerequisites() {
     fi
 
     log SUCCESS "All prerequisites met"
+}
+
+# Run SonarCloud analysis
+run_sonarcloud_analysis() {
+    print_header "Running SonarCloud Analysis"
+
+    if [[ "$SKIP_SONAR" == "true" ]]; then
+        log WARN "SonarCloud analysis skipped by configuration"
+        return 0
+    fi
+
+    log INFO "Running code quality analysis with SonarCloud..."
+
+    if [[ -f "$PROJECT_ROOT/scripts/sonar-analysis.sh" ]]; then
+        if "$PROJECT_ROOT/scripts/sonar-analysis.sh" 2>&1 | tee -a "$LOG_FILE"; then
+            log SUCCESS "SonarCloud analysis completed successfully"
+            log INFO "View results at: https://sonarcloud.io/project/overview?id=ajstack22_SmilePile"
+        else
+            log WARN "SonarCloud analysis failed - continuing deployment"
+            # Don't fail deployment on SonarCloud issues
+        fi
+    else
+        log WARN "SonarCloud script not found - skipping analysis"
+    fi
 }
 
 # Run tests
@@ -484,6 +510,9 @@ main() {
     if [[ "$PLATFORM" == "ios" ]] || [[ "$PLATFORM" == "both" ]]; then
         run_tests "ios"
     fi
+
+    # Run SonarCloud analysis
+    run_sonarcloud_analysis
 
     # Deploy to local devices
     local deploy_success=true

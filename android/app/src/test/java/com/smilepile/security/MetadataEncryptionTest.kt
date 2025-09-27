@@ -1,12 +1,15 @@
 package com.smilepile.security
 
 import android.content.Context
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
 /**
  * Unit tests for MetadataEncryption class
@@ -14,18 +17,32 @@ import org.mockito.MockitoAnnotations
  */
 class MetadataEncryptionTest {
 
-    @Mock
+    @MockK(relaxed = true)
     private lateinit var context: Context
 
+    @MockK(relaxed = true)
     private lateinit var secureStorageManager: SecureStorageManager
+
     private lateinit var metadataEncryption: MetadataEncryption
 
     @Before
     fun setup() {
-        MockitoAnnotations.openMocks(this)
-        // Note: In real tests, you'd need to mock the Android Keystore properly
-        // For this example, we're showing the test structure
-        secureStorageManager = SecureStorageManager(context)
+        MockKAnnotations.init(this)
+
+        // Mock SecureStorageManager encryption/decryption
+        coEvery { secureStorageManager.encrypt(any()) } answers {
+            "encrypted_" + firstArg<String>()
+        }
+        coEvery { secureStorageManager.decrypt(any()) } answers {
+            val encrypted = firstArg<String>()
+            when {
+                encrypted.startsWith("encrypted_") -> encrypted.removePrefix("encrypted_")
+                encrypted == "invalid_encrypted_data" -> throw Exception("Invalid data")
+                else -> encrypted
+            }
+        }
+
+        // Initialize MetadataEncryption with mocked SecureStorageManager
         metadataEncryption = MetadataEncryption(secureStorageManager)
     }
 

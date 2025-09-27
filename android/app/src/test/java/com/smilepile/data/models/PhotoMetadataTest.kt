@@ -4,12 +4,15 @@ import android.content.Context
 import com.smilepile.data.entities.PhotoEntity
 import com.smilepile.security.MetadataEncryption
 import com.smilepile.security.SecureStorageManager
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
 /**
  * Unit tests for PhotoMetadata class
@@ -17,16 +20,32 @@ import org.mockito.MockitoAnnotations
  */
 class PhotoMetadataTest {
 
-    @Mock
+    @MockK(relaxed = true)
     private lateinit var context: Context
 
+    @MockK(relaxed = true)
     private lateinit var secureStorageManager: SecureStorageManager
+
     private lateinit var metadataEncryption: MetadataEncryption
 
     @Before
     fun setup() {
-        MockitoAnnotations.openMocks(this)
-        secureStorageManager = SecureStorageManager(context)
+        MockKAnnotations.init(this)
+
+        // Mock SecureStorageManager encryption/decryption for testing
+        coEvery { secureStorageManager.encrypt(any()) } answers {
+            "encrypted_" + firstArg<String>()
+        }
+        coEvery { secureStorageManager.decrypt(any()) } answers {
+            val encrypted = firstArg<String>()
+            if (encrypted.startsWith("encrypted_")) {
+                encrypted.removePrefix("encrypted_")
+            } else {
+                encrypted
+            }
+        }
+
+        // Initialize MetadataEncryption with mocked SecureStorageManager
         metadataEncryption = MetadataEncryption(secureStorageManager)
     }
 
@@ -36,7 +55,7 @@ class PhotoMetadataTest {
         val photoMetadata = PhotoMetadata(
             id = "test_photo_id",
             uri = "content://media/external/images/media/12345",
-            categoryId = "animals_category",
+            categoryId = 1L,
             timestamp = System.currentTimeMillis(),
             isFavorite = true,
             childName = "Sophie Williams",
@@ -74,7 +93,7 @@ class PhotoMetadataTest {
         val originalMetadata = PhotoMetadata(
             id = "test_photo_id_2",
             uri = "content://media/external/images/media/67890",
-            categoryId = "nature_category",
+            categoryId = 2L,
             timestamp = System.currentTimeMillis(),
             isFavorite = false,
             childName = "Marcus Chen",
@@ -110,7 +129,7 @@ class PhotoMetadataTest {
         val basicMetadata = PhotoMetadata(
             id = "basic_photo_id",
             uri = "content://media/external/images/media/11111",
-            categoryId = "general_category",
+            categoryId = 3L,
             timestamp = System.currentTimeMillis(),
             isFavorite = false
         )
@@ -143,7 +162,7 @@ class PhotoMetadataTest {
         val basicEntity = PhotoEntity(
             id = "basic_entity_id",
             uri = "content://media/external/images/media/22222",
-            categoryId = "basic_category",
+            categoryId = 4L,
             timestamp = System.currentTimeMillis(),
             isFavorite = true
         )
@@ -174,7 +193,7 @@ class PhotoMetadataTest {
         val noDataMetadata = PhotoMetadata(
             id = "test_id",
             uri = "test_uri",
-            categoryId = "test_category",
+            categoryId = 5L,
             timestamp = 123456789L,
             isFavorite = false
         )
@@ -215,7 +234,7 @@ class PhotoMetadataTest {
         val originalMetadata = PhotoMetadata(
             id = "update_test_id",
             uri = "test_uri",
-            categoryId = "test_category",
+            categoryId = 5L,
             timestamp = 123456789L,
             isFavorite = false,
             childName = "Original Name",
@@ -253,7 +272,7 @@ class PhotoMetadataTest {
         val complexMetadata = PhotoMetadata(
             id = "complex_test_id",
             uri = "content://media/external/images/media/99999",
-            categoryId = "complex_category",
+            categoryId = 6L,
             timestamp = System.currentTimeMillis(),
             isFavorite = true,
             childName = "Elena Rodriguez-Smith",

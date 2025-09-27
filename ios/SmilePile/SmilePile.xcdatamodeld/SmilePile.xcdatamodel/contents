@@ -24,4 +24,18 @@
         <attribute name="uri" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="photos" inverseEntity="CategoryEntity"/>
     </entity>
+    <entity name="PhotoImportSession" representedClassName="PhotoImportSession" syncable="YES">
+        <attribute name="categoryId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="errorMessage" optional="YES" attributeType="String"/>
+        <attribute name="failedPhotos" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="failedPhotoURLs" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdatedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="pendingPhotoURLs" optional="YES" attributeType="String"/>
+        <attribute name="processedPhotoIds" optional="YES" attributeType="String"/>
+        <attribute name="processedPhotos" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sessionId" attributeType="String"/>
+        <attribute name="startedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="status" attributeType="String" defaultValueString="pending"/>
+        <attribute name="totalPhotos" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
 </model>

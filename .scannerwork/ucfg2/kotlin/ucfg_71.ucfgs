@@ -1,0 +1,887 @@
+•H
+†com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)Vg
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.kt+ +("0*ÁC
+0& ((~
+|
+, ,(
+%0"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*0
+
+__unknown_file (
+
+
+categoryIdlongÉ
+Ä
+, ,(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+
+categoryIdlongv
+t
+, ,(
+
+categoryIdlong"__annotation*"
+
+__unknown_file (
+
+%0*"
+
+__unknown_file (
+
+%1ù
+ö
+- -(
+%2"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*N
+
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0°
+û
+- -(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0ï
+í
+- -(0
+onNavigateBackkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3ù
+ö
+. .("
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*N
+
+__unknown_file (2
+0
+onPhotoCapturekotlin.jvm.functions.Function1°
+û
+. .("
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onPhotoCapturekotlin.jvm.functions.Function1ï
+í
+. .("0
+onPhotoCapturekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5â
+Ü
+/ /(!
+%6"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*:
+
+__unknown_file (
+
+modifierjava.lang.Objectç
+ä
+/ /(!
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.ObjectÄ
+~
+/ /(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6*"
+
+__unknown_file (
+
+%7•
+¢
+0 0(0
+%8"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*V
+
+__unknown_file (:
+8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel©
+¶
+0 0(0
+%9"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*V
+
+__unknown_file (:
+8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModelù
+ö
+0 0(08
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel"__annotation*"
+
+__unknown_file (
+
+%8*"
+
+__unknown_file (
+
+%9Z
+X
+2 2(&
+contextjava.lang.Object"__id*)
+2 2(&
+
+currentjava.lang.Objecta
+_
+3 3(4"
+lifecycleOwnerjava.lang.Object"__id*)
+3- 3(4
+
+currentjava.lang.Objecte
+c
+? C(&
+permissionLauncherjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>^
+\
+F F(7
+previewViewjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>Ö
+Ç
+
+__unknown_file (
+%10"__declareFunction*À
+
+__unknown_file (Æ´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0€ÿ
+
+__unknown_file (´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"__ScopeWrapper¨
+©
+
+__unknown_file (À
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+contextjava.lang.Object"__id*9
+
+__unknown_file (
+
+contextjava.lang.Object∫
+∑
+
+__unknown_file (“
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0""
+lifecycleOwnerjava.lang.Object"__id*@
+
+__unknown_file ($
+"
+lifecycleOwnerjava.lang.Object¨
+©
+
+__unknown_file (À
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+uiStatejava.lang.Object"__id*9
+
+__unknown_file (
+
+uiStatejava.lang.Objectƒ
+¡
+
+__unknown_file (◊
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"'
+isCameraInitializedjava.lang.Object"__id*E
+
+__unknown_file ()
+'
+isCameraInitializedjava.lang.Object∞
+≠
+
+__unknown_file (Õ
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+	flashModejava.lang.Object"__id*;
+
+__unknown_file (
+
+	flashModejava.lang.Object∫
+∑
+
+__unknown_file (“
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0""
+hasFrontCamerajava.lang.Object"__id*@
+
+__unknown_file ($
+"
+hasFrontCamerajava.lang.Object¬
+ø
+
+__unknown_file (÷
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"&
+isUsingFrontCamerajava.lang.Object"__id*D
+
+__unknown_file ((
+&
+isUsingFrontCamerajava.lang.Objectƒ
+¡
+
+__unknown_file (◊
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"'
+hasCameraPermissionjava.lang.Object"__id*E
+
+__unknown_file ()
+'
+hasCameraPermissionjava.lang.Object¬
+ø
+
+__unknown_file (÷
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"&
+permissionLauncherjava.lang.Object"__id*D
+
+__unknown_file ((
+&
+permissionLauncherjava.lang.Object¥
+±
+
+__unknown_file (œ
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+previewViewjava.lang.Object"__id*=
+
+__unknown_file (!
+
+previewViewjava.lang.Objectö
+ó
+
+__unknown_file (¬
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+
+categoryIdlong"__id*0
+
+__unknown_file (
+
+
+categoryIdlong÷
+”
+
+__unknown_file (‡
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"0
+onNavigateBackkotlin.jvm.functions.Function0"__id*N
+
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0÷
+”
+
+__unknown_file (‡
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"0
+onPhotoCapturekotlin.jvm.functions.Function1"__id*N
+
+__unknown_file (2
+0
+onPhotoCapturekotlin.jvm.functions.Function1Æ
+´
+
+__unknown_file (Ã
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"
+modifierjava.lang.Object"__id*:
+
+__unknown_file (
+
+modifierjava.lang.ObjectÊ
+„
+
+__unknown_file (Ë
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel"__id*V
+
+__unknown_file (:
+8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel©
+¶
+
+__unknown_file (µ
+
+%10"´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0"__id*À
+
+__unknown_file (Æ
+´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0Ñ
+Å
+[ [(
+%11kotlin.Unit"Jcom.smilepile.ui.theme#SmilePileTheme(ZZLkotlin/jvm/functions/Function0;)V*
+
+__unknown_file ( *)
+
+__unknown_file (
+	<unknown>*%
+
+__unknown_file (	
+false*#
+
+__unknown_file (
+
+%10"/
+
+__unknown_file (
+implicit return:
+, ,(
+
+categoryIdlong:<
+- -(0
+onNavigateBackkotlin.jvm.functions.Function0:<
+. .("0
+onPhotoCapturekotlin.jvm.functions.Function1:(
+/ /(!
+modifierjava.lang.Object:D
+0 0(08
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModelB"
+com.smilepile.ui.screensHÁ
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0h
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.kt[ ∫("0*¨
+0	[ ∫(ñ
+ì
+
+__unknown_file (
+%0"__id*Í
+
+__unknown_file (Õ* 
+com.smilepile.ui.screens"´
+®com.smilepile.ui.screens#CameraScreen(JLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/CameraViewModel;)V$lambda0É
+Ä
+
+__unknown_file (
+contextjava.lang.Object"__id*A
+
+__unknown_file (%*#
+
+%0"
+contextjava.lang.Objectë
+é
+
+__unknown_file ("
+lifecycleOwnerjava.lang.Object"__id*H
+
+__unknown_file (,**
+
+%0""
+lifecycleOwnerjava.lang.ObjectÉ
+Ä
+
+__unknown_file (
+uiStatejava.lang.Object"__id*A
+
+__unknown_file (%*#
+
+%0"
+uiStatejava.lang.Objectõ
+ò
+
+__unknown_file ('
+isCameraInitializedjava.lang.Object"__id*M
+
+__unknown_file (1*/
+
+%0"'
+isCameraInitializedjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	flashModejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	flashModejava.lang.Objectë
+é
+
+__unknown_file ("
+hasFrontCamerajava.lang.Object"__id*H
+
+__unknown_file (,**
+
+%0""
+hasFrontCamerajava.lang.Objectô
+ñ
+
+__unknown_file (&
+isUsingFrontCamerajava.lang.Object"__id*L
+
+__unknown_file (0*.
+
+%0"&
+isUsingFrontCamerajava.lang.Objectõ
+ò
+
+__unknown_file ('
+hasCameraPermissionjava.lang.Object"__id*M
+
+__unknown_file (1*/
+
+%0"'
+hasCameraPermissionjava.lang.Objectô
+ñ
+
+__unknown_file (&
+permissionLauncherjava.lang.Object"__id*L
+
+__unknown_file (0*.
+
+%0"&
+permissionLauncherjava.lang.Objectã
+à
+
+__unknown_file (
+previewViewjava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+previewViewjava.lang.Objectp
+n
+
+__unknown_file (
+
+categoryIdlong"__id*8
+
+__unknown_file (*
+
+%0"
+
+categoryIdlong≠
+™
+
+__unknown_file (0
+onNavigateBackkotlin.jvm.functions.Function0"__id*V
+
+__unknown_file (:*8
+
+%0"0
+onNavigateBackkotlin.jvm.functions.Function0≠
+™
+
+__unknown_file (0
+onPhotoCapturekotlin.jvm.functions.Function1"__id*V
+
+__unknown_file (:*8
+
+%0"0
+onPhotoCapturekotlin.jvm.functions.Function1Ö
+Ç
+
+__unknown_file (
+modifierjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+modifierjava.lang.ObjectΩ
+∫
+
+__unknown_file (8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel"__id*^
+
+__unknown_file (B*@
+
+%0"8
+	viewModel+com.smilepile.ui.viewmodels.CameraViewModel")
+
+__unknown_file (
+	<unknown>B
+com.smilepile.ui.screensHƒ
+Ÿcom.smilepile.ui.screens#CameraContent(LPreviewView;Lcom/smilepile/camera/FlashMode;ZZZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vi
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.ktæ æ("0*Ú
+0Ω æ(í
+è
+
+ø ø(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+previewViewjava.lang.Objecta
+_
+
+ø ø(
+previewViewjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0û
+õ
+
+¿ ¿(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	flashModecom.smilepile.camera.FlashModem
+k
+
+¿ ¿(+
+	flashModecom.smilepile.camera.FlashMode"__annotation*"
+
+__unknown_file (
+
+%1å
+â
+
+¡ ¡(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+hasFrontCameraboolean[
+Y
+
+¡ ¡(
+hasFrontCameraboolean"__annotation*"
+
+__unknown_file (
+
+%2ê
+ç
+
+¬ ¬(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*;
+
+__unknown_file (
+
+isUsingFrontCameraboolean_
+]
+
+¬ ¬(
+isUsingFrontCameraboolean"__annotation*"
+
+__unknown_file (
+
+%3â
+Ü
+
+√ √(
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*4
+
+__unknown_file (
+
+isCapturingbooleanX
+V
+
+√ √(
+isCapturingboolean"__annotation*"
+
+__unknown_file (
+
+%4£
+†
+
+ƒ ƒ(
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onCapturePhotokotlin.jvm.functions.Function0r
+p
+
+ƒ ƒ(0
+onCapturePhotokotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%5¢
+ü
+
+≈ ≈(
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*M
+
+__unknown_file (1
+/
+onToggleFlashkotlin.jvm.functions.Function0q
+o
+
+≈ ≈(/
+onToggleFlashkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%6£
+†
+
+∆ ∆(
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onSwitchCamerakotlin.jvm.functions.Function0r
+p
+
+∆ ∆(0
+onSwitchCamerakotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%7£
+†
+
+« «(
+%8"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0r
+p
+
+« «(0
+onNavigateBackkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%8"/
+
+__unknown_file (
+implicit return:-
+
+ø ø(
+previewViewjava.lang.Object:9
+
+¿ ¿(+
+	flashModecom.smilepile.camera.FlashMode:'
+
+¡ ¡(
+hasFrontCameraboolean:+
+
+¬ ¬(
+isUsingFrontCameraboolean:$
+
+√ √(
+isCapturingboolean:>
+
+ƒ ƒ(0
+onCapturePhotokotlin.jvm.functions.Function0:=
+
+≈ ≈(/
+onToggleFlashkotlin.jvm.functions.Function0:>
+
+∆ ∆(0
+onSwitchCamerakotlin.jvm.functions.Function0:>
+
+« «(0
+onNavigateBackkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHÚ
+Jcom.smilepile.ui.screens#CaptureButton(ZLkotlin/jvm/functions/Function0;)Vi
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.kt∞ ∞("0*¥
+0Ø ∞(â
+Ü
+
+± ±(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*4
+
+__unknown_file (
+
+isCapturingbooleanX
+V
+
+± ±(
+isCapturingboolean"__annotation*"
+
+__unknown_file (
+
+%0û
+õ
+
+≤ ≤(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onCapturekotlin.jvm.functions.Function0m
+k
+
+≤ ≤(+
+	onCapturekotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:$
+
+± ±(
+isCapturingboolean:9
+
+≤ ≤(+
+	onCapturekotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHµ
+8com.smilepile.ui.screens#drawCaptureButton(LDrawScope;)Vi
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.kt› ›("0*>
+0› ›("/
+
+__unknown_file (
+implicit return:+
+
+› ›(2
+	drawScopejava.lang.ObjectB"
+com.smilepile.ui.screensHÜ
+rcom.smilepile.ui.screens#CameraPermissionScreen(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vi
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.ktÓ Ó(""0*¸
+0Ì Ó(®
+•
+
+Ô Ô(#
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*S
+
+__unknown_file (7
+5
+onRequestPermissionkotlin.jvm.functions.Function0w
+u
+
+Ô Ô(#5
+onRequestPermissionkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0£
+†
+
+ (
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0r
+p
+
+ (0
+onNavigateBackkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:C
+
+Ô Ô(#5
+onRequestPermissionkotlin.jvm.functions.Function0:>
+
+ (0
+onNavigateBackkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHˇ
+/com.smilepile.ui.screens#CameraLoadingScreen()Vi
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CameraScreen.kt¥ ¥("0*>
+0≥ ¥("/
+
+__unknown_file (
+implicit returnB"
+com.smilepile.ui.screensH

@@ -274,7 +274,9 @@ object ZipUtils {
                         }
 
                         // Set last modified time
-                        outputFile.setLastModified(currentEntry.time)
+                        if (!outputFile.setLastModified(currentEntry.time)) {
+                            Log.w(TAG, "Failed to set last modified time for: ${outputFile.name}")
+                        }
                         extractedFiles.add(outputFile)
                     }
 

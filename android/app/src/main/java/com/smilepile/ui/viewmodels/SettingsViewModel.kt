@@ -3,6 +3,7 @@ package com.smilepile.ui.viewmodels
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smilepile.data.backup.BackupManager
@@ -50,6 +51,10 @@ class SettingsViewModel @Inject constructor(
     private val securePreferencesManager: SecurePreferencesManager,
     private val biometricManager: BiometricManager
 ) : ViewModel() {
+
+    companion object {
+        private const val TAG = "SettingsViewModel"
+    }
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
@@ -254,7 +259,11 @@ class SettingsViewModel @Inject constructor(
                         exportProgress = null
                     )
                     // Clean up temp file
-                    pendingExportZipFile?.delete()
+                    pendingExportZipFile?.let { file ->
+                        if (!file.delete()) {
+                            Log.w(TAG, "Failed to delete temporary export file: ${file.name}")
+                        }
+                    }
                     pendingExportZipFile = null
                 } else {
                     _uiState.value = _uiState.value.copy(
@@ -381,7 +390,9 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 // Clean up temp file
-                tempFile.delete()
+                if (!tempFile.delete()) {
+                    Log.w(TAG, "Failed to delete temporary import file: ${tempFile.name}")
+                }
 
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
@@ -454,7 +465,11 @@ class SettingsViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(
             exportProgress = null
         )
-        pendingExportZipFile?.delete()
+        pendingExportZipFile?.let { file ->
+            if (!file.delete()) {
+                Log.w(TAG, "Failed to delete pending export file: ${file.name}")
+            }
+        }
         pendingExportZipFile = null
     }
 
