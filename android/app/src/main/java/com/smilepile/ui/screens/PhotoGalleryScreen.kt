@@ -159,9 +159,7 @@ fun PhotoGalleryScreen(
                         selectedCount = orchestratorState.galleryState.selectedPhotosCount,
                         onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
                         onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
-                        onShareClick = {
-                            // TODO: Implement batch share functionality
-                        },
+                        onShareClick = orchestratorState.onShareSelectedPhotos,
                         onEditClick = {
                             // Navigate to edit screen with selected photos
                             orchestratorState.onEditSelectedPhotos()

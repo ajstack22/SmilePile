@@ -187,3 +187,155 @@ data class ImportResult(
     val errors: List<String> = emptyList(),
     val warnings: List<String> = emptyList()
 )
+
+/**
+ * Backup options for selective backup
+ */
+@Serializable
+data class BackupOptions(
+    val includePhotos: Boolean = true,
+    val includeThumbnails: Boolean = true,
+    val includeSettings: Boolean = true,
+    val selectedCategories: List<Long>? = null, // null means all categories
+    val dateRangeStart: Long? = null,
+    val dateRangeEnd: Long? = null,
+    val compressionLevel: CompressionLevel = CompressionLevel.MEDIUM,
+    val encryptSensitiveData: Boolean = true,
+    val includeMetadata: Boolean = true
+)
+
+/**
+ * Compression levels for backup
+ */
+enum class CompressionLevel {
+    LOW,    // Fast compression, larger file size
+    MEDIUM, // Balanced compression
+    HIGH    // Best compression, slower
+}
+
+/**
+ * Export format options
+ */
+enum class ExportFormat {
+    ZIP,            // Standard ZIP with photos
+    JSON,           // JSON metadata only
+    HTML_GALLERY,   // HTML gallery with thumbnails
+    PDF_CATALOG     // PDF catalog format
+}
+
+/**
+ * Restore options for import process
+ */
+@Serializable
+data class RestoreOptions(
+    val strategy: ImportStrategy = ImportStrategy.MERGE,
+    val duplicateResolution: DuplicateResolution = DuplicateResolution.SKIP,
+    val validateIntegrity: Boolean = true,
+    val restoreThumbnails: Boolean = true,
+    val restoreSettings: Boolean = true,
+    val dryRun: Boolean = false // Preview without actually importing
+)
+
+/**
+ * Duplicate resolution strategy
+ */
+enum class DuplicateResolution {
+    SKIP,           // Skip duplicate photos
+    REPLACE,        // Replace with imported version
+    RENAME,         // Rename imported photo
+    ASK_USER        // Ask user for each duplicate
+}
+
+/**
+ * Backup schedule configuration
+ */
+@Serializable
+data class BackupSchedule(
+    val enabled: Boolean = false,
+    val frequency: BackupFrequency = BackupFrequency.WEEKLY,
+    val time: String = "02:00", // Time in HH:mm format
+    val dayOfWeek: Int = 1, // 1-7 for weekly
+    val dayOfMonth: Int = 1, // 1-31 for monthly
+    val wifiOnly: Boolean = true,
+    val chargeOnly: Boolean = true,
+    val lastBackupTime: Long? = null,
+    val nextScheduledTime: Long? = null
+)
+
+/**
+ * Backup frequency options
+ */
+enum class BackupFrequency {
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    MANUAL
+}
+
+/**
+ * Backup history entry
+ */
+@Serializable
+data class BackupHistoryEntry(
+    val id: String = java.util.UUID.randomUUID().toString(),
+    val timestamp: Long,
+    val fileName: String,
+    val filePath: String?,
+    val fileSize: Long,
+    val format: BackupFormat,
+    val photosCount: Int,
+    val categoriesCount: Int,
+    val compressionLevel: CompressionLevel,
+    val success: Boolean,
+    val errorMessage: String? = null,
+    val automatic: Boolean = false
+)
+
+/**
+ * Incremental backup metadata
+ */
+@Serializable
+data class IncrementalBackupMetadata(
+    val baseBackupId: String,
+    val baseBackupDate: Long,
+    val changedPhotos: List<Long>,
+    val deletedPhotos: List<Long>,
+    val changedCategories: List<Long>,
+    val deletedCategories: List<Long>,
+    val incrementalDate: Long = System.currentTimeMillis()
+)
+
+/**
+ * Backup validation result
+ */
+data class BackupValidationResult(
+    val isValid: Boolean,
+    val version: Int,
+    val format: BackupFormat,
+    val hasMetadata: Boolean,
+    val hasPhotos: Boolean,
+    val photosCount: Int,
+    val categoriesCount: Int,
+    val integrityCheckPassed: Boolean,
+    val errors: List<String> = emptyList(),
+    val warnings: List<String> = emptyList()
+)
+
+/**
+ * Export progress data
+ */
+data class ExportProgress(
+    val totalItems: Int,
+    val processedItems: Int,
+    val currentOperation: String,
+    val currentFile: String? = null,
+    val bytesProcessed: Long = 0,
+    val totalBytes: Long = 0,
+    val errors: List<String> = emptyList()
+) {
+    val percentage: Int
+        get() = if (totalItems > 0) (processedItems * 100) / totalItems else 0
+
+    val bytesPercentage: Int
+        get() = if (totalBytes > 0) ((bytesProcessed * 100) / totalBytes).toInt() else 0
+}

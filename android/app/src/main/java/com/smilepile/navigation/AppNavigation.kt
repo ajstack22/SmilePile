@@ -25,6 +25,7 @@ import com.smilepile.ui.screens.SettingsScreen
 import com.smilepile.ui.screens.ParentalLockScreen
 import com.smilepile.ui.screens.ParentalSettingsScreen
 import com.smilepile.ui.screens.PhotoEditScreen
+import com.smilepile.sharing.ShareManager
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -333,6 +334,11 @@ fun AppNavHost(
             val photoGalleryViewModel: com.smilepile.ui.viewmodels.PhotoGalleryViewModel = hiltViewModel()
             val galleryUiState by photoGalleryViewModel.uiState.collectAsState()
 
+            // Get ShareManager from Hilt
+            val shareManager: ShareManager = hiltViewModel<com.smilepile.ui.viewmodels.PhotoGalleryViewModel>().let {
+                ShareManager(navController.context)
+            }
+
             // NUCLEAR OPTION: Use companion object first, then fallbacks
             val photos = if (companionPhotos != null && companionPhotos.isNotEmpty()) {
                 android.util.Log.e("SmilePile", "USING COMPANION OBJECT PHOTO LIST!")
@@ -377,7 +383,8 @@ fun AppNavHost(
                         navController.navigateUp()
                     },
                     onSharePhoto = { photo ->
-                        // TODO: Implement share functionality using PhotoOperationsManager
+                        // Use ShareManager to share the photo
+                        shareManager.sharePhoto(navController.context, photo)
                     },
                     onDeletePhoto = { photo ->
                         // Use the new removeFromLibrary method for safe deletion

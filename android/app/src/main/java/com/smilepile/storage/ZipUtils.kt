@@ -29,12 +29,14 @@ object ZipUtils {
      * Create a ZIP file from a directory containing photos and metadata
      * @param sourceDir Directory containing the files to ZIP
      * @param outputFile Target ZIP file
+     * @param compressionLevel Compression level (Deflater.BEST_SPEED, DEFAULT_COMPRESSION, or BEST_COMPRESSION)
      * @param progressCallback Optional callback for progress updates (current, total)
      * @return Result indicating success or failure
      */
     suspend fun createZipFromDirectory(
         sourceDir: File,
         outputFile: File,
+        compressionLevel: Int = Deflater.DEFAULT_COMPRESSION,
         progressCallback: ((current: Int, total: Int) -> Unit)? = null
     ): Result<Unit> = withContext(Dispatchers.IO) {
         try {
@@ -68,8 +70,10 @@ object ZipUtils {
             val totalFiles = filesToZip.size
             var processedFiles = 0
 
-            // Create ZIP file
+            // Create ZIP file with specified compression level
             ZipOutputStream(BufferedOutputStream(FileOutputStream(outputFile))).use { zipOut ->
+                zipOut.setLevel(compressionLevel)
+
                 filesToZip.forEach { (file, entryName) ->
                     try {
                         // Create ZIP entry

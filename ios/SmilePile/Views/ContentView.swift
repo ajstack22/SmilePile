@@ -448,6 +448,7 @@ struct PhotoViewerView: View {
 
     @State private var currentIndex: Int
     @State private var dragOffset: CGSize = .zero
+    @State private var showingShareSheet = false
 
     init(photos: [Photo], initialIndex: Int, viewModel: KidsModeViewModel, isPresented: Binding<Bool>) {
         self.photos = photos
@@ -489,10 +490,26 @@ struct PhotoViewerView: View {
                     }
             )
 
-            // Close button
+            // Top controls
             VStack {
                 HStack {
+                    // Share button
+                    Button(action: {
+                        if !photos.isEmpty && currentIndex < photos.count {
+                            showingShareSheet = true
+                        }
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.title2)
+                            .foregroundColor(.white.opacity(0.9))
+                            .padding(10)
+                            .background(Circle().fill(Color.black.opacity(0.5)))
+                    }
+                    .padding()
+
                     Spacer()
+
+                    // Close button
                     Button(action: {
                         isPresented = false
                     }) {
@@ -506,6 +523,25 @@ struct PhotoViewerView: View {
                 Spacer()
             }
         }
+        .sheet(isPresented: $showingShareSheet) {
+            if currentIndex < photos.count {
+                ShareSheetView(items: [loadImageForSharing(photos[currentIndex])])
+            }
+        }
+    }
+
+    private func loadImageForSharing(_ photo: Photo) -> Any {
+        // Try to load the actual image for sharing
+        if photo.isFromAssets {
+            return UIImage(named: photo.path) ?? UIImage()
+        } else {
+            let fileURL = URL(fileURLWithPath: photo.path)
+            if let imageData = try? Data(contentsOf: fileURL),
+               let image = UIImage(data: imageData) {
+                return image
+            }
+        }
+        return UIImage()
     }
 
     private func navigateToPreviousCategory() {

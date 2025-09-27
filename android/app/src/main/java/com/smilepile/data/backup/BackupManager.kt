@@ -27,6 +27,11 @@ import java.util.*
 import java.util.zip.ZipOutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
+import android.util.Base64
+import java.util.zip.Deflater
 
 /**
  * Manager for handling app data backup and export functionality
@@ -49,6 +54,9 @@ class BackupManager @Inject constructor(
         private const val SMILEPILE_BACKUP_EXTENSION = ".smilepile"
         private const val MIN_SUPPORTED_VERSION = 1
         private const val MAX_SUPPORTED_VERSION = CURRENT_BACKUP_VERSION
+        private const val ENCRYPTION_ALGORITHM = "AES/CBC/PKCS5Padding"
+        private const val ENCRYPTION_KEY_ALGORITHM = "AES"
+        private const val THUMBNAIL_DIR = "thumbnails"
     }
 
     private val json = Json {
@@ -57,12 +65,24 @@ class BackupManager @Inject constructor(
     }
 
     /**
-     * Export all app data to ZIP format with photos included
+     * Export app data to ZIP format with comprehensive backup options
+     * @param options Backup options for selective backup
      * @param tempDir Temporary directory for staging files
      * @param progressCallback Optional callback for progress updates
      * @return Result containing the ZIP file path
      */
     suspend fun exportToZip(
+        options: BackupOptions = BackupOptions(),
+        tempDir: File? = null,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
+    ): Result<File> {
+        return exportToZipWithOptions(options, tempDir, progressCallback)
+    }
+
+    /**
+     * Legacy export method for backward compatibility
+     */
+    private suspend fun exportToZipLegacy(
         tempDir: File? = null,
         progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
     ): Result<File> {
@@ -162,13 +182,14 @@ class BackupManager @Inject constructor(
 
             progressCallback?.invoke(80, 100, "Creating ZIP archive")
 
-            // Create ZIP file
+            // Create ZIP file with compression level
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-            val zipFile = File(context.cacheDir, "smilepile_backup_$timestamp.zip")
+            val zipFile = File(context.cacheDir, "SmilePile_Backup_${timestamp}.zip")
 
             val zipResult = ZipUtils.createZipFromDirectory(
                 sourceDir = workDir,
-                outputFile = zipFile
+                outputFile = zipFile,
+                compressionLevel = Deflater.DEFAULT_COMPRESSION
             ) { current, total ->
                 val progress = 80 + (current * 20 / total)
                 progressCallback?.invoke(progress, 100, "Archiving files ($current/$total)")
@@ -926,6 +947,368 @@ class BackupManager @Inject constructor(
             }
         }
         return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
+    /**
+     * Export app data with comprehensive backup options
+     */
+    private suspend fun exportToZipWithOptions(
+        options: BackupOptions,
+        tempDir: File? = null,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
+    ): Result<File> {
+        return try {
+            val workDir = tempDir ?: File(context.cacheDir, "backup_temp_${System.currentTimeMillis()}")
+            workDir.mkdirs()
+
+            progressCallback?.invoke(0, 100, "Gathering app data")
+
+            // Filter data based on options
+            val categories = if (options.selectedCategories != null) {
+                categoryRepository.getAllCategories().filter { it.id in options.selectedCategories }
+            } else {
+                categoryRepository.getAllCategories()
+            }
+
+            var photos = photoRepository.getAllPhotos().filter { photo ->
+                // Filter by categories if specified
+                (options.selectedCategories == null || photo.categoryId in options.selectedCategories) &&
+                // Filter by date range if specified
+                (options.dateRangeStart == null || photo.createdAt >= options.dateRangeStart) &&
+                (options.dateRangeEnd == null || photo.createdAt <= options.dateRangeEnd)
+            }
+
+            val isDarkMode = themeManager.isDarkMode.first()
+            val securitySummary = securePreferencesManager.getSecuritySummary()
+
+            progressCallback?.invoke(20, 100, "Preparing metadata")
+
+            // Create directories
+            val photoManifest = mutableListOf<PhotoManifestEntry>()
+            val photosDir = if (options.includePhotos) File(workDir, "photos").apply { mkdirs() } else null
+            val thumbnailsDir = if (options.includeThumbnails) File(workDir, THUMBNAIL_DIR).apply { mkdirs() } else null
+
+            progressCallback?.invoke(30, 100, "Processing photos")
+
+            // Process photos with compression
+            if (options.includePhotos) {
+                var photosCopied = 0
+                photos.forEachIndexed { index, photo ->
+                    try {
+                        if (!photo.isFromAssets) {
+                            val sourceFile = File(photo.path)
+                            if (sourceFile.exists()) {
+                                val fileName = "${photo.id}_${sourceFile.name}"
+                                val destFile = File(photosDir!!, fileName)
+
+                                // Apply compression if needed
+                                when (options.compressionLevel) {
+                                    CompressionLevel.HIGH -> compressPhoto(sourceFile, destFile, 70)
+                                    CompressionLevel.MEDIUM -> compressPhoto(sourceFile, destFile, 85)
+                                    CompressionLevel.LOW -> sourceFile.copyTo(destFile, overwrite = true)
+                                }
+
+                                // Generate thumbnail if requested
+                                if (options.includeThumbnails) {
+                                    generateThumbnail(sourceFile, File(thumbnailsDir!!, "thumb_$fileName"))
+                                }
+
+                                val checksum = calculateMD5(destFile)
+
+                                photoManifest.add(
+                                    PhotoManifestEntry(
+                                        photoId = photo.id,
+                                        originalPath = photo.path,
+                                        zipEntryName = "photos/$fileName",
+                                        fileName = fileName,
+                                        fileSize = destFile.length(),
+                                        checksum = checksum
+                                    )
+                                )
+                                photosCopied++
+                            }
+                        }
+
+                        val progress = 30 + ((index + 1) * 40 / photos.size)
+                        progressCallback?.invoke(progress, 100, "Processing photos ($photosCopied/${photos.size})")
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Failed to process photo: ${photo.path}", e)
+                    }
+                }
+            }
+
+            progressCallback?.invoke(70, 100, "Creating backup metadata")
+
+            // Prepare backup data
+            val backupCategories = categories.map { BackupCategory.fromCategory(it) }
+            val backupPhotos = photos.map { BackupPhoto.fromPhoto(it) }
+
+            val backupSettings = if (options.includeSettings) {
+                BackupSettings(
+                    isDarkMode = isDarkMode,
+                    securitySettings = if (options.encryptSensitiveData) {
+                        encryptSecuritySettings(securitySummary)
+                    } else {
+                        BackupSecuritySettings(
+                            hasPIN = securitySummary.hasPIN,
+                            hasPattern = securitySummary.hasPattern,
+                            kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
+                            cameraAccessAllowed = securitySummary.cameraAccessAllowed,
+                            deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
+                        )
+                    }
+                )
+            } else {
+                BackupSettings(
+                    isDarkMode = false,
+                    securitySettings = BackupSecuritySettings(
+                        hasPIN = false,
+                        hasPattern = false,
+                        kidSafeModeEnabled = false,
+                        cameraAccessAllowed = false,
+                        deleteProtectionEnabled = false
+                    )
+                )
+            }
+
+            val appVersion = try {
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+            } catch (e: Exception) {
+                "unknown"
+            }
+
+            val appBackup = AppBackup(
+                version = CURRENT_BACKUP_VERSION,
+                exportDate = System.currentTimeMillis(),
+                appVersion = appVersion,
+                format = BackupFormat.ZIP.name,
+                categories = backupCategories,
+                photos = backupPhotos,
+                settings = backupSettings,
+                photoManifest = photoManifest
+            )
+
+            // Write metadata.json
+            val metadataFile = File(workDir, ZipUtils.METADATA_FILE)
+            val jsonString = json.encodeToString(appBackup)
+            metadataFile.writeText(jsonString)
+
+            // Write categories.json for easier access
+            val categoriesFile = File(workDir, "categories.json")
+            categoriesFile.writeText(json.encodeToString(backupCategories))
+
+            progressCallback?.invoke(80, 100, "Creating ZIP archive")
+
+            // Create ZIP file with appropriate compression
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val zipFile = File(context.cacheDir, "SmilePile_Backup_${timestamp}.zip")
+
+            val compressionLevel = when (options.compressionLevel) {
+                CompressionLevel.HIGH -> Deflater.BEST_COMPRESSION
+                CompressionLevel.MEDIUM -> Deflater.DEFAULT_COMPRESSION
+                CompressionLevel.LOW -> Deflater.BEST_SPEED
+            }
+
+            val zipResult = ZipUtils.createZipFromDirectory(
+                sourceDir = workDir,
+                outputFile = zipFile,
+                compressionLevel = compressionLevel
+            ) { current, total ->
+                val progress = 80 + (current * 20 / total)
+                progressCallback?.invoke(progress, 100, "Archiving files ($current/$total)")
+            }
+
+            // Clean up temp directory
+            workDir.deleteRecursively()
+
+            if (zipResult.isSuccess) {
+                progressCallback?.invoke(100, 100, "Export completed")
+
+                // Save to backup history
+                saveBackupHistory(
+                    BackupHistoryEntry(
+                        timestamp = System.currentTimeMillis(),
+                        fileName = zipFile.name,
+                        filePath = zipFile.absolutePath,
+                        fileSize = zipFile.length(),
+                        format = BackupFormat.ZIP,
+                        photosCount = photos.size,
+                        categoriesCount = categories.size,
+                        compressionLevel = options.compressionLevel,
+                        success = true
+                    )
+                )
+
+                Result.success(zipFile)
+            } else {
+                Result.failure(zipResult.exceptionOrNull() ?: Exception("ZIP creation failed"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Perform incremental backup
+     */
+    suspend fun performIncrementalBackup(
+        baseBackupId: String,
+        options: BackupOptions = BackupOptions(),
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
+    ): Result<File> {
+        return try {
+            val lastBackup = getBackupHistory().find { it.id == baseBackupId }
+                ?: return Result.failure(Exception("Base backup not found"))
+
+            progressCallback?.invoke(0, 100, "Analyzing changes since last backup")
+
+            // Get changes since last backup
+            // TODO: Implement getPhotosModifiedAfter in PhotoRepository
+            // val changedPhotos = photoRepository.getPhotosModifiedAfter(lastBackup.timestamp)
+            // val changedCategories = categoryRepository.getCategoriesModifiedAfter(lastBackup.timestamp)
+
+            // For now, get all photos/categories as a placeholder
+            val changedPhotos = photoRepository.getAllPhotos().filter { it.createdAt > lastBackup.timestamp }
+            val changedCategories = categoryRepository.getAllCategories().filter { it.createdAt > lastBackup.timestamp }
+
+            if (changedPhotos.isEmpty() && changedCategories.isEmpty()) {
+                return Result.failure(Exception("No changes since last backup"))
+            }
+
+            progressCallback?.invoke(20, 100, "Creating incremental backup")
+
+            val incrementalMetadata = IncrementalBackupMetadata(
+                baseBackupId = baseBackupId,
+                baseBackupDate = lastBackup.timestamp,
+                changedPhotos = changedPhotos.map { it.id },
+                deletedPhotos = emptyList(), // TODO: Track deletions
+                changedCategories = changedCategories.map { it.id },
+                deletedCategories = emptyList() // TODO: Track deletions
+            )
+
+            // Create backup with only changed items
+            val incrementalOptions = options.copy(
+                selectedCategories = changedCategories.map { it.id },
+                dateRangeStart = lastBackup.timestamp
+            )
+
+            exportToZipWithOptions(incrementalOptions, null, progressCallback)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    /**
+     * Compress photo with quality setting
+     */
+    private suspend fun compressPhoto(source: File, dest: File, quality: Int) = withContext(Dispatchers.IO) {
+        try {
+            val bitmap = android.graphics.BitmapFactory.decodeFile(source.absolutePath)
+            val outputStream = FileOutputStream(dest)
+            bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, quality, outputStream)
+            outputStream.close()
+            bitmap.recycle()
+        } catch (e: Exception) {
+            // If compression fails, fall back to copy
+            source.copyTo(dest, overwrite = true)
+        }
+    }
+
+    /**
+     * Generate thumbnail for photo
+     */
+    private suspend fun generateThumbnail(source: File, dest: File) = withContext(Dispatchers.IO) {
+        try {
+            val bitmap = android.graphics.BitmapFactory.decodeFile(source.absolutePath)
+            val thumbnailSize = 200 // pixels
+            val scaledBitmap = android.graphics.Bitmap.createScaledBitmap(
+                bitmap,
+                thumbnailSize,
+                thumbnailSize,
+                true
+            )
+            val outputStream = FileOutputStream(dest)
+            scaledBitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, outputStream)
+            outputStream.close()
+            bitmap.recycle()
+            scaledBitmap.recycle()
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to generate thumbnail for ${source.name}", e)
+        }
+    }
+
+    /**
+     * Encrypt security settings for sensitive data
+     */
+    private fun encryptSecuritySettings(summary: com.smilepile.security.SecuritySummary): BackupSecuritySettings {
+        // For now, return non-encrypted version
+        // TODO: Implement proper encryption when PIN/pattern backup is needed
+        return BackupSecuritySettings(
+            hasPIN = summary.hasPIN,
+            hasPattern = summary.hasPattern,
+            kidSafeModeEnabled = summary.kidSafeModeEnabled,
+            cameraAccessAllowed = summary.cameraAccessAllowed,
+            deleteProtectionEnabled = summary.deleteProtectionEnabled
+        )
+    }
+
+    /**
+     * Save backup history entry
+     */
+    private suspend fun saveBackupHistory(entry: BackupHistoryEntry) {
+        try {
+            val prefs = context.getSharedPreferences("backup_history", Context.MODE_PRIVATE)
+            val history = getBackupHistory().toMutableList()
+            history.add(0, entry) // Add at beginning
+
+            // Keep only last 20 backups
+            if (history.size > 20) {
+                history.subList(20, history.size).clear()
+            }
+
+            val jsonHistory = json.encodeToString(history)
+            prefs.edit().putString("history", jsonHistory).apply()
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to save backup history", e)
+        }
+    }
+
+    /**
+     * Get backup history
+     */
+    suspend fun getBackupHistory(): List<BackupHistoryEntry> {
+        return try {
+            val prefs = context.getSharedPreferences("backup_history", Context.MODE_PRIVATE)
+            val jsonHistory = prefs.getString("history", null) ?: return emptyList()
+            json.decodeFromString<List<BackupHistoryEntry>>(jsonHistory)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to load backup history", e)
+            emptyList()
+        }
+    }
+
+    /**
+     * Schedule automatic backup
+     */
+    suspend fun scheduleBackup(schedule: BackupSchedule) {
+        // This would integrate with WorkManager for scheduled backups
+        // Implementation would depend on the actual scheduling requirements
+        val prefs = context.getSharedPreferences("backup_settings", Context.MODE_PRIVATE)
+        val jsonSchedule = json.encodeToString(schedule)
+        prefs.edit().putString("schedule", jsonSchedule).apply()
+    }
+
+    /**
+     * Get backup schedule
+     */
+    suspend fun getBackupSchedule(): BackupSchedule? {
+        return try {
+            val prefs = context.getSharedPreferences("backup_settings", Context.MODE_PRIVATE)
+            val jsonSchedule = prefs.getString("schedule", null) ?: return null
+            json.decodeFromString<BackupSchedule>(jsonSchedule)
+        } catch (e: Exception) {
+            null
+        }
     }
 }
 

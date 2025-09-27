@@ -9,6 +9,9 @@ struct PhotoGalleryView: View {
     @State private var selectedPhotos: [Photo] = []
     @State private var showingPhotoEditor = false
     @State private var showingPhotoPicker = false
+    @State private var isSelectionMode = false
+    @State private var selectedForSharing: Set<Int64> = []
+    @State private var showingShareSheet = false
     @State private var showingPermissionError = false
     @State private var permissionErrorMessage = ""
     @State private var allPhotos: [Photo] = []
@@ -29,18 +32,25 @@ struct PhotoGalleryView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                // AppHeader with SmilePile logo and eye button
-                AppHeaderComponent(
+                // Selection toolbar when in selection mode
+                if isSelectionMode {
+                    selectionToolbar
+                }
+
+                // AppHeader with SmilePile logo and eye button (hide in selection mode)
+                if !isSelectionMode {
+                    AppHeaderComponent(
                     onViewModeClick: {
                         print("DEBUG: Eye button tapped in PhotoGalleryView")
                         print("DEBUG: Current isKidsMode = \(kidsModeViewModel.isKidsMode)")
                         kidsModeViewModel.toggleKidsMode()
                         print("DEBUG: After toggle isKidsMode = \(kidsModeViewModel.isKidsMode)")
                     },
-                    showViewModeButton: true
-                ) {
-                    if !categories.isEmpty {
-                        categoryFilterBar
+                        showViewModeButton: true
+                    ) {
+                        if !categories.isEmpty {
+                            categoryFilterBar
+                        }
                     }
                 }
 
@@ -56,11 +66,31 @@ struct PhotoGalleryView: View {
                             GridItem(.flexible())
                         ], spacing: 2) {
                             ForEach(filteredPhotos) { photo in
-                                PhotoThumbnail(photo: photo)
-                                    .onTapGesture {
-                                        selectedPhotos = [photo]
-                                        showingPhotoEditor = true
+                                ZStack(alignment: .topTrailing) {
+                                    PhotoThumbnail(photo: photo)
+                                        .onTapGesture {
+                                            if isSelectionMode {
+                                                toggleSelection(for: photo)
+                                            } else {
+                                                selectedPhotos = [photo]
+                                                showingPhotoEditor = true
+                                            }
+                                        }
+                                        .onLongPressGesture {
+                                            if !isSelectionMode {
+                                                enterSelectionMode(selecting: photo)
+                                            }
+                                        }
+
+                                    // Selection checkbox overlay
+                                    if isSelectionMode {
+                                        Image(systemName: selectedForSharing.contains(photo.id) ? "checkmark.circle.fill" : "circle")
+                                            .font(.title2)
+                                            .foregroundColor(selectedForSharing.contains(photo.id) ? .blue : .white)
+                                            .background(Circle().fill(Color.black.opacity(0.5)))
+                                            .padding(8)
                                     }
+                                }
                             }
                         }
                         .padding(.bottom, 100) // Space for FAB and tab bar
@@ -133,6 +163,73 @@ struct PhotoGalleryView: View {
         } message: {
             Text(importSuccessMessage)
         }
+        .sheet(isPresented: $showingShareSheet) {
+            if !selectedForSharing.isEmpty {
+                let photosToShare = allPhotos.filter { selectedForSharing.contains($0.id) }
+                ShareSheetView(items: photosToShare.compactMap { loadImageForSharing($0) })
+            }
+        }
+    }
+
+    // MARK: - Selection Mode
+
+    private var selectionToolbar: some View {
+        HStack {
+            Button("Cancel") {
+                exitSelectionMode()
+            }
+            .padding()
+
+            Spacer()
+
+            Text("\(selectedForSharing.count) selected")
+                .font(.headline)
+
+            Spacer()
+
+            Button(action: {
+                if !selectedForSharing.isEmpty {
+                    showingShareSheet = true
+                }
+            }) {
+                Image(systemName: "square.and.arrow.up")
+                    .font(.title2)
+            }
+            .padding()
+            .disabled(selectedForSharing.isEmpty)
+        }
+        .background(Color(UIColor.systemGray5))
+    }
+
+    private func toggleSelection(for photo: Photo) {
+        if selectedForSharing.contains(photo.id) {
+            selectedForSharing.remove(photo.id)
+        } else {
+            selectedForSharing.insert(photo.id)
+        }
+    }
+
+    private func enterSelectionMode(selecting photo: Photo) {
+        isSelectionMode = true
+        selectedForSharing.insert(photo.id)
+    }
+
+    private func exitSelectionMode() {
+        isSelectionMode = false
+        selectedForSharing.removeAll()
+    }
+
+    private func loadImageForSharing(_ photo: Photo) -> UIImage? {
+        if photo.isFromAssets {
+            return UIImage(named: photo.path)
+        } else {
+            let fileURL = URL(fileURLWithPath: photo.path)
+            if let imageData = try? Data(contentsOf: fileURL),
+               let image = UIImage(data: imageData) {
+                return image
+            }
+        }
+        return nil
     }
 
     private var categoryFilterBar: some View {

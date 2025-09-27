@@ -22,6 +22,7 @@ import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.viewmodels.PhotoImportViewModel
 import com.smilepile.ui.viewmodels.SearchViewModel
 import com.smilepile.ui.viewmodels.AppModeViewModel
+import com.smilepile.sharing.ShareManager
 import com.smilepile.utils.PermissionHandler
 
 /**
@@ -62,6 +63,9 @@ fun PhotoGalleryOrchestrator(
     val importState by importViewModel.uiState.collectAsState()
     val searchState by searchViewModel.uiState.collectAsState()
     val modeState by modeViewModel.uiState.collectAsState()
+
+    // Create ShareManager instance
+    val shareManager = remember { ShareManager(context) }
 
     // Local dialog states
     var showImportOptions by remember { mutableStateOf(false) }
@@ -200,6 +204,16 @@ fun PhotoGalleryOrchestrator(
             showBatchMoveDialog = false
         },
         onSetSelectedPhotosFavorite = galleryViewModel::setSelectedPhotosFavorite,
+        onShareSelectedPhotos = {
+            // Get selected photos and share them
+            val selectedPhotos = galleryState.photos.filter { photo ->
+                galleryState.selectedPhotos.contains(photo.id)
+            }
+            if (selectedPhotos.isNotEmpty()) {
+                shareManager.sharePhotos(context, selectedPhotos)
+                galleryViewModel.exitSelectionMode()
+            }
+        },
 
         // Category operations
         onCategorySelected = galleryViewModel::selectCategory,
@@ -318,6 +332,7 @@ data class PhotoGalleryOrchestratorState(
     val onDeleteSelectedPhotos: () -> Unit,
     val onMoveSelectedPhotos: (Long) -> Unit,
     val onSetSelectedPhotosFavorite: (Boolean) -> Unit,
+    val onShareSelectedPhotos: () -> Unit,
 
     // Category operations
     val onCategorySelected: (Long?) -> Unit,
