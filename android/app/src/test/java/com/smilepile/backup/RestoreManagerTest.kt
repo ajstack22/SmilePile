@@ -337,8 +337,7 @@ class RestoreManagerTest {
                     "createdAt": ${System.currentTimeMillis()},
                     "fileSize": 1000,
                     "width": 1920,
-                    "height": 1080,
-                    "isFavorite": false
+                    "height": 1080
                 }
             ],
             "settings": {
@@ -347,7 +346,6 @@ class RestoreManagerTest {
                     "hasPIN": false,
                     "hasPattern": false,
                     "kidSafeModeEnabled": false,
-                    "cameraAccessAllowed": true,
                     "deleteProtectionEnabled": false
                 }
             },
@@ -388,8 +386,7 @@ class RestoreManagerTest {
             createdAt = System.currentTimeMillis(),
             fileSize = 1000,
             width = 1920,
-            height = 1080,
-            isFavorite = false
+            height = 1080
         )
     }
 }

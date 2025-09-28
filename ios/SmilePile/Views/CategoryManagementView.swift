@@ -3,10 +3,21 @@ import SwiftUI
 struct CategoryManagementView: View {
     @StateObject private var viewModel = CategoryManagementViewModel()
     @State private var pulseAnimation = false
+    @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
 
     var body: some View {
-        NavigationView {
+        VStack(spacing: 0) {
+            // App Header with consistent design
+            AppHeaderComponent(
+                onViewModeClick: {
+                    kidsModeViewModel.toggleKidsMode()
+                },
+                showViewModeButton: true
+            )
+
+            // Main content
             ZStack {
+                // Category content
                 if viewModel.categoriesWithCounts.isEmpty && !viewModel.isLoading {
                     emptyState
                 } else {
@@ -16,12 +27,16 @@ struct CategoryManagementView: View {
                 if viewModel.isLoading {
                     loadingOverlay
                 }
-            }
-            .navigationTitle("Categories")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    addButton
+
+                // Floating add button
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        addButton
+                            .padding(.trailing, 16)
+                            .padding(.bottom, 16)
+                    }
                 }
             }
             .sheet(isPresented: $viewModel.showAddDialog) {
@@ -118,22 +133,26 @@ struct CategoryManagementView: View {
         Button(action: {
             viewModel.showAddCategoryDialog()
         }) {
-            if viewModel.hasPulseFAB {
-                Image(systemName: "plus.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(.accentColor)
-                    .scaleEffect(pulseAnimation ? 1.2 : 1.0)
-                    .animation(
-                        Animation.easeInOut(duration: 1.0)
-                            .repeatForever(autoreverses: true),
-                        value: pulseAnimation
-                    )
-                    .onAppear {
-                        pulseAnimation = true
-                    }
-            } else {
+            ZStack {
+                // Square FAB with rounded corners to match gallery
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(red: 233/255, green: 30/255, blue: 99/255)) // Pink color
+                    .frame(width: 56, height: 56)
+                    .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+
                 Image(systemName: "plus")
-                    .font(.title3)
+                    .font(.system(size: 24, weight: .medium))
+                    .foregroundColor(.white)
+            }
+        }
+        .scaleEffect(viewModel.hasPulseFAB && pulseAnimation ? 1.1 : 1.0)
+        .animation(
+            viewModel.hasPulseFAB ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default,
+            value: pulseAnimation
+        )
+        .onAppear {
+            if viewModel.hasPulseFAB {
+                pulseAnimation = true
             }
         }
     }

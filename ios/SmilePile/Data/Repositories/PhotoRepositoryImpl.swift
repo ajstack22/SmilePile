@@ -21,14 +21,16 @@ final class PhotoRepositoryImpl: PhotoRepository {
 
         return try await coreDataStack.performBackgroundTask { context in
             let photoEntity = PhotoEntity(context: context)
-            photoEntity.id = photo.id == 0 ? UUID().uuidString : String(photo.id)
+            // Use PhotoIDGenerator for consistent ID generation
+            let photoId = photo.id == 0 ? PhotoIDGenerator.generateUniqueID() : photo.id
+            photoEntity.id = String(photoId)
             photoEntity.uri = photo.path
             photoEntity.categoryId = photo.categoryId
             photoEntity.timestamp = photo.createdAt
 
             try self.coreDataStack.saveContext(context)
-            self.logger.debug("Photo inserted successfully: \(photoEntity.id ?? "")")
-            return photo.categoryId
+            self.logger.debug("Photo inserted successfully with ID: \(photoId)")
+            return photoId // Return the actual photo ID, not categoryId
         }
     }
 
@@ -41,11 +43,13 @@ final class PhotoRepositoryImpl: PhotoRepository {
         try await coreDataStack.performBackgroundTask { context in
             for photo in photos {
                 let photoEntity = PhotoEntity(context: context)
-                photoEntity.id = photo.id == 0 ? UUID().uuidString : String(photo.id)
+                // Use PhotoIDGenerator for consistent ID generation
+                let photoId = photo.id == 0 ? PhotoIDGenerator.generateUniqueID() : photo.id
+                photoEntity.id = String(photoId)
                 photoEntity.uri = photo.path
                 photoEntity.categoryId = photo.categoryId
                 photoEntity.timestamp = photo.createdAt
-                }
+            }
 
             try self.coreDataStack.saveContext(context)
             self.logger.debug("Inserted \(photos.count) photos successfully")
@@ -225,7 +229,16 @@ final class PhotoRepositoryImpl: PhotoRepository {
             return nil
         }
 
-        let photoId = Int64(id) ?? 0
+        // Convert string ID to Int64, handling both numeric strings and UUIDs
+        let photoId: Int64
+        if let numericId = Int64(id) {
+            photoId = numericId
+        } else {
+            // Fallback for existing UUID-based IDs
+            photoId = PhotoIDGenerator.idFromUUID(id)
+            logger.debug("Converted UUID \(id) to numeric ID \(photoId)")
+        }
+
         let url = URL(fileURLWithPath: uri)
         let name = url.deletingPathExtension().lastPathComponent
 

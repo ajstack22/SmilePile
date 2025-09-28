@@ -147,7 +147,7 @@ struct MaterialParentModeView: View {
                     }
                 case 2:
                     NavigationStack(path: $navigationPaths[2]) {
-                        SettingsView()
+                        SettingsViewNative()
                     }
                 default:
                     EmptyView()

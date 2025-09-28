@@ -17,10 +17,23 @@ struct SmilePileApp: App {
         // Initialize settings manager and perform migration if needed
         SettingsManager.shared.migrateIfNeeded()
 
-        // Initialize default categories
-        Task {
-            let repository = CategoryRepositoryImpl()
-            try? await repository.initializeDefaultCategories()
+        // Initialize default categories with proper error handling
+        Task { @MainActor in
+            // Run photo ID migration if needed
+            await PhotoIDMigration.runMigrationIfNeeded()
+
+            let repository = CategoryRepositoryImpl.shared
+            do {
+                print("SmilePileApp: Starting category initialization...")
+                try await repository.initializeDefaultCategories()
+                let categories = try await repository.getAllCategories()
+                print("SmilePileApp: Default categories initialized successfully. Count: \(categories.count)")
+                for cat in categories {
+                    print("SmilePileApp: Category - \(cat.displayName) (id: \(cat.id))")
+                }
+            } catch {
+                print("SmilePileApp: Failed to initialize default categories: \(error)")
+            }
         }
 
         // Configure appearance for true edge-to-edge

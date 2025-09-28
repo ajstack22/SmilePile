@@ -14,6 +14,7 @@ extension CategoryEntity {
     convenience init(category: Category, context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = category.id
+        self.name = category.name
         self.displayName = category.displayName
         self.colorHex = category.colorHex
         self.position = Int32(category.position)
@@ -44,6 +45,7 @@ extension CategoryEntity {
         return defaultCategories.map { category in
             let entity = CategoryEntity(context: context)
             entity.id = category.id
+            entity.name = category.name
             entity.displayName = category.displayName
             entity.colorHex = category.colorHex
             entity.position = Int32(category.position)

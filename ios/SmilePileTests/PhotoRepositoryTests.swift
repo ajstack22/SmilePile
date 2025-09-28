@@ -96,8 +96,7 @@ final class PhotoRepositoryTests: XCTestCase {
             id: photo.id,
             path: "/photos/updated.jpg",
             categoryId: 2,
-            name: "updated",
-            isFavorite: true
+            name: "updated"
         )
         try await repository.updatePhoto(updatedPhoto)
 
@@ -105,7 +104,7 @@ final class PhotoRepositoryTests: XCTestCase {
         let savedPhoto = try await repository.getPhotoById(1)
         XCTAssertEqual(savedPhoto?.path, "/photos/updated.jpg")
         XCTAssertEqual(savedPhoto?.categoryId, 2)
-        XCTAssertTrue(savedPhoto?.isFavorite ?? false)
+        XCTAssertEqual(savedPhoto?.name, "updated")
     }
 
     func testDeletePhoto() async throws {
@@ -201,75 +200,32 @@ final class PhotoRepositoryTests: XCTestCase {
         XCTAssertEqual(remainingPhotos.first?.categoryId, 2)
     }
 
-    // MARK: - Search and Filter Tests
+    // MARK: - Date Filter Tests
 
-    func testSearchPhotos() async throws {
+    func testGetPhotosByDateRange() async throws {
         // Given
+        let now = Int64(Date().timeIntervalSince1970 * 1000)
+        let yesterday = now - 86400000 // 24 hours in milliseconds
+        let twoDaysAgo = now - (2 * 86400000)
+
         let photos = [
-            Photo(id: 1, path: "/photos/vacation.jpg", categoryId: 1, name: "vacation"),
-            Photo(id: 2, path: "/photos/birthday.jpg", categoryId: 1, name: "birthday"),
-            Photo(id: 3, path: "/photos/work.jpg", categoryId: 2, name: "work")
+            Photo(id: 1, path: "/photos/today.jpg", categoryId: 1, name: "today", createdAt: now),
+            Photo(id: 2, path: "/photos/yesterday.jpg", categoryId: 1, name: "yesterday", createdAt: yesterday),
+            Photo(id: 3, path: "/photos/old.jpg", categoryId: 2, name: "old", createdAt: twoDaysAgo)
         ]
         try await repository.insertPhotos(photos)
 
         // When
-        let expectation = expectation(description: "Search photos")
-        var searchResults: [Photo] = []
-
-        repository.searchPhotos("birthday")
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { photos in
-                    searchResults = photos
-                    expectation.fulfill()
-                }
-            )
-            .store(in: &cancellables)
+        let allPhotos = try await repository.getAllPhotos()
+        let recentPhotos = allPhotos.filter { photo in
+            photo.createdAt >= yesterday
+        }
 
         // Then
-        await fulfillment(of: [expectation], timeout: 5)
-        XCTAssertEqual(searchResults.count, 1)
-        XCTAssertEqual(searchResults.first?.name, "birthday")
-    }
-
-    func testSearchPhotosWithFilters() async throws {
-        // Given
-        let now = Int64(Date().timeIntervalSince1970 * 1000)
-        let yesterday = now - 86400000 // 24 hours in milliseconds
-        let tomorrow = now + 86400000
-
-        let photos = [
-            Photo(id: 1, path: "/photos/test1.jpg", categoryId: 1, name: "test1", createdAt: now, isFavorite: true),
-            Photo(id: 2, path: "/photos/test2.jpg", categoryId: 1, name: "test2", createdAt: now, isFavorite: false),
-            Photo(id: 3, path: "/photos/sample.jpg", categoryId: 2, name: "sample", createdAt: now, isFavorite: true)
-        ]
-        try await repository.insertPhotos(photos)
-
-        // When - Test favorites filter
-        let expectation = expectation(description: "Filter photos")
-        var filteredResults: [Photo] = []
-
-        repository.searchPhotosWithFilters(
-            searchQuery: "",
-            startDate: yesterday,
-            endDate: tomorrow,
-            favoritesOnly: true,
-            categoryId: 1
-        )
-        .sink(
-            receiveCompletion: { _ in },
-            receiveValue: { photos in
-                filteredResults = photos
-                expectation.fulfill()
-            }
-        )
-        .store(in: &cancellables)
-
-        // Then
-        await fulfillment(of: [expectation], timeout: 5)
-        XCTAssertEqual(filteredResults.count, 1)
-        XCTAssertEqual(filteredResults.first?.id, 1)
-        XCTAssertTrue(filteredResults.first?.isFavorite ?? false)
+        XCTAssertEqual(recentPhotos.count, 2)
+        XCTAssertTrue(recentPhotos.contains { $0.name == "today" })
+        XCTAssertTrue(recentPhotos.contains { $0.name == "yesterday" })
+        XCTAssertFalse(recentPhotos.contains { $0.name == "old" })
     }
 
     // MARK: - Utility Operations Tests

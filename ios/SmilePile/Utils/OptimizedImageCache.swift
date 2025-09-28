@@ -107,8 +107,18 @@ actor OptimizedImageCache {
         let imageCost = cost ?? calculateImageCost(image)
 
         // Check if cache would exceed limits
-        if currentMemoryUsage + imageCost > Configuration.maxCacheSize {
+        while currentMemoryUsage + imageCost > Configuration.maxCacheSize && !cacheEntries.isEmpty {
             evictLeastRecentlyUsed()
+        }
+
+        // Check available system memory before caching
+        let memoryInfo = ProcessInfo.processInfo
+        let availableMemory = memoryInfo.physicalMemory - UInt64(max(0, Int64(memoryInfo.physicalMemory) / 4))
+
+        // Skip caching if system memory is low (less than 100MB available)
+        if availableMemory < 100 * 1024 * 1024 {
+            logger.warning("Skipping cache due to low system memory")
+            return
         }
 
         // Store in cache
@@ -124,7 +134,7 @@ actor OptimizedImageCache {
 
         currentMemoryUsage += imageCost
 
-        logger.debug("Cached image: \(key) (cost: \(imageCost) bytes)")
+        logger.debug("Cached image: \(key) (cost: \(imageCost / 1024)KB, total: \(self.currentMemoryUsage / 1024 / 1024)MB)")
     }
 
     /// Remove image from cache
@@ -138,13 +148,23 @@ actor OptimizedImageCache {
 
     /// Clear entire cache
     func clearCache() {
-        cache.removeAllObjects()
-        cacheEntries.removeAll()
-        loadingTasks.forEach { $0.value.cancel() }
-        loadingTasks.removeAll()
-        currentMemoryUsage = 0
+        // Use autoreleasepool to ensure immediate memory release
+        autoreleasepool {
+            // Cancel all loading tasks
+            loadingTasks.forEach { $0.value.cancel() }
+            loadingTasks.removeAll()
 
-        logger.info("Cache cleared")
+            // Clear cache entries
+            cacheEntries.removeAll(keepingCapacity: false)
+
+            // Clear NSCache
+            cache.removeAllObjects()
+
+            // Reset memory tracking
+            currentMemoryUsage = 0
+        }
+
+        logger.info("Cache cleared - all memory released")
     }
 
     // MARK: - Async Loading
@@ -204,11 +224,25 @@ actor OptimizedImageCache {
     // MARK: - Memory Management
 
     private func handleMemoryWarning() {
-        logger.warning("Memory warning received - reducing cache")
+        logger.warning("Memory warning received - aggressively reducing cache")
 
-        // Remove least recently used entries
-        let entriesToRemove = Int(Double(cacheEntries.count) * 0.5) // Remove 50%
-        evictLeastRecentlyUsed(count: entriesToRemove)
+        // Use autoreleasepool to ensure immediate memory release
+        autoreleasepool {
+            // Remove least recently used entries more aggressively (75%)
+            let entriesToRemove = Int(Double(cacheEntries.count) * 0.75)
+            evictLeastRecentlyUsed(count: entriesToRemove)
+
+            // Force NSCache to clear its internal cache
+            cache.removeAllObjects()
+
+            // Rebuild cache with remaining entries
+            for (key, entry) in cacheEntries {
+                cache.setObject(entry.image, forKey: key as NSString, cost: entry.cost)
+            }
+        }
+
+        // Log memory status
+        logger.info("Cache reduced to \(self.cacheEntries.count) items, \(self.currentMemoryUsage / 1024 / 1024)MB")
     }
 
     private func handleEviction(key: String) {
@@ -219,16 +253,19 @@ actor OptimizedImageCache {
     }
 
     private func evictLeastRecentlyUsed(count: Int = 1) {
-        let sortedEntries = cacheEntries.sorted { entry1, entry2 in
-            // Sort by access count and timestamp
-            if entry1.value.accessCount == entry2.value.accessCount {
-                return entry1.value.timestamp < entry2.value.timestamp
+        // Use autoreleasepool for batch eviction
+        autoreleasepool {
+            let sortedEntries = cacheEntries.sorted { entry1, entry2 in
+                // Sort by access count and timestamp
+                if entry1.value.accessCount == entry2.value.accessCount {
+                    return entry1.value.timestamp < entry2.value.timestamp
+                }
+                return entry1.value.accessCount < entry2.value.accessCount
             }
-            return entry1.value.accessCount < entry2.value.accessCount
-        }
 
-        for (key, _) in sortedEntries.prefix(count) {
-            removeImage(for: key)
+            for (key, _) in sortedEntries.prefix(count) {
+                removeImage(for: key)
+            }
         }
     }
 

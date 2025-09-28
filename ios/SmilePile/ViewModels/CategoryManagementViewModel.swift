@@ -19,16 +19,18 @@ class CategoryManagementViewModel: ObservableObject {
     private let logger = Logger(subsystem: "com.smilepile", category: "CategoryManagementViewModel")
 
     init(
-        repository: CategoryRepository = CategoryRepositoryImpl(),
+        repository: CategoryRepository? = nil,
         photoRepository: PhotoRepository = PhotoRepositoryImpl(),
         coreDataStack: CoreDataStack = CoreDataStack.shared
     ) {
-        self.repository = repository
+        self.repository = repository ?? CategoryRepositoryImpl.shared
         self.photoRepository = photoRepository
         self.coreDataStack = coreDataStack
 
-        loadCategoriesWithCounts()
-        setupDefaultCategoriesIfNeeded()
+        // Load categories with retry logic
+        Task { @MainActor in
+            await loadCategoriesWithRetry()
+        }
         setupCategoryObserver()
     }
 
@@ -53,6 +55,21 @@ class CategoryManagementViewModel: ObservableObject {
             isLoading = true
             do {
                 let categories = try await repository.getAllCategories()
+
+                // If no categories found, initialize defaults and retry
+                if categories.isEmpty {
+                    logger.warning("No categories found, initializing defaults...")
+                    try await repository.initializeDefaultCategories()
+                    let retryCategories = try await repository.getAllCategories()
+
+                    if retryCategories.isEmpty {
+                        logger.error("Failed to load categories after initialization")
+                        errorMessage = "Failed to load categories"
+                        isLoading = false
+                        return
+                    }
+                }
+
                 var categoriesWithCounts: [CategoryWithCount] = []
 
                 for category in categories {
@@ -66,21 +83,25 @@ class CategoryManagementViewModel: ObservableObject {
                 self.categoriesWithCounts = categoriesWithCounts.sorted { $0.category.position < $1.category.position }
                 isLoading = false
             } catch {
+                logger.error("Failed to load categories: \(error.localizedDescription)")
                 errorMessage = "Failed to load categories: \(error.localizedDescription)"
                 isLoading = false
             }
         }
     }
 
-    private func setupDefaultCategoriesIfNeeded() {
-        Task {
-            do {
-                try await repository.initializeDefaultCategories()
-            } catch {
-                logger.error("Failed to initialize default categories: \(error.localizedDescription)")
-            }
+    @MainActor
+    private func loadCategoriesWithRetry() async {
+        // Initial load
+        loadCategoriesWithCounts()
+
+        // Retry if no categories after short delay
+        if categoriesWithCounts.isEmpty {
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+            loadCategoriesWithCounts()
         }
     }
+
 
     func showAddCategoryDialog() {
         editingCategory = nil

@@ -21,16 +21,11 @@ struct FloatingActionButton: View {
             action()
         }) {
             ZStack {
-                // Shadow circle (for better shadow effect)
-                Circle()
-                    .fill(Color.black.opacity(0.01))
-                    .frame(width: buttonSize, height: buttonSize)
-                    .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-
-                // Main button circle
-                Circle()
+                // Square FAB with rounded corners to match categories
+                RoundedRectangle(cornerRadius: 12)
                     .fill(pinkColor)
                     .frame(width: buttonSize, height: buttonSize)
+                    .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
 
                 // Plus icon
                 Image(systemName: "plus")
@@ -63,7 +58,7 @@ struct FloatingActionButton: View {
 
     private func startPulseAnimation() {
         withAnimation(
-            .easeInOut(duration: 1.0)
+            Animation.easeInOut(duration: 1.0)
             .repeatForever(autoreverses: true)
         ) {
             pulseScale = 1.1

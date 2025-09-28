@@ -99,6 +99,7 @@ class SecuritySettingsViewModel: ObservableObject {
     func setBiometricEnabled(_ enabled: Bool) {
         isBiometricEnabled = enabled
         UserDefaults.standard.set(enabled, forKey: biometricEnabledKey)
+        SettingsManager.shared.biometricEnabled = enabled
 
         if enabled && !hasPIN && !hasPattern {
             // If enabling biometric without PIN/Pattern, we need at least one backup method
@@ -144,6 +145,11 @@ class SecuritySettingsViewModel: ObservableObject {
         case .biometric:
             return isBiometricAvailable && isBiometricEnabled
         }
+    }
+
+    func refreshSecurityStatus() {
+        checkSecurityStatus()
+        loadPreferences()
     }
 
     func getSecuritySummary() -> String {

@@ -54,6 +54,7 @@ class PhotoAssetProcessor: ObservableObject {
     // MARK: - Properties
     private let imageManager = PHImageManager.default()
     private let documentDirectory: URL
+    private let thumbnailDirectory: URL
     private var activeRequests: [PHImageRequestID] = []
     private let processingQueue = DispatchQueue(label: "com.smilepile.photoprocessing", qos: .userInitiated)
     private let semaphore: DispatchSemaphore
@@ -64,12 +65,15 @@ class PhotoAssetProcessor: ObservableObject {
 
     // MARK: - Initialization
     init() {
-        // Setup document directory for processed photos
-        self.documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("ProcessedPhotos", isDirectory: true)
+        // Setup document directory for photos - store in root Documents folder
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        self.documentDirectory = documentsURL
 
-        // Create directory if needed
-        try? FileManager.default.createDirectory(at: documentDirectory, withIntermediateDirectories: true)
+        // Setup thumbnail directory
+        self.thumbnailDirectory = documentsURL.appendingPathComponent("thumbnails", isDirectory: true)
+
+        // Create directories if needed
+        try? FileManager.default.createDirectory(at: thumbnailDirectory, withIntermediateDirectories: true)
 
         // Setup concurrent load limiting
         self.semaphore = DispatchSemaphore(value: Configuration.maxConcurrentLoads)
@@ -149,7 +153,7 @@ class PhotoAssetProcessor: ObservableObject {
         )
     }
 
-    /// Generate optimized thumbnail for a photo
+    /// Generate optimized thumbnail for a photo and save to thumbnails directory
     func generateThumbnail(for photo: Photo, size: CGFloat = Configuration.thumbnailSize) async throws -> UIImage {
         let fileURL = URL(fileURLWithPath: photo.path)
 
@@ -161,7 +165,16 @@ class PhotoAssetProcessor: ObservableObject {
 
         // Generate thumbnail
         let thumbnailSize = CGSize(width: size, height: size)
-        return try await generateThumbnail(from: image, targetSize: thumbnailSize)
+        let thumbnail = try await generateThumbnail(from: image, targetSize: thumbnailSize)
+
+        // Save thumbnail to thumbnails directory
+        let thumbnailFilename = "thumb_\(photo.id).jpg"
+        let thumbnailURL = thumbnailDirectory.appendingPathComponent(thumbnailFilename)
+        if let thumbnailData = thumbnail.jpegData(compressionQuality: Configuration.thumbnailQuality) {
+            try? thumbnailData.write(to: thumbnailURL)
+        }
+
+        return thumbnail
     }
 
     // MARK: - Private Methods
@@ -353,22 +366,27 @@ class PhotoAssetProcessor: ObservableObject {
             height: image.size.height * scale
         )
 
-        return try await generateThumbnail(from: image, targetSize: newSize)
+        // Properly resize image with correct context options to reduce memory
+        return try await resizeImage(from: image, targetSize: newSize)
     }
 
     private func generateThumbnail(from image: UIImage, targetSize: CGSize) async throws -> UIImage {
+        return try await resizeImage(from: image, targetSize: targetSize)
+    }
+
+    private func resizeImage(from image: UIImage, targetSize: CGSize) async throws -> UIImage {
         return try await withCheckedThrowingContinuation { continuation in
             processingQueue.async {
-                UIGraphicsBeginImageContextWithOptions(targetSize, false, 0.0)
-                defer { UIGraphicsEndImageContext() }
+                // Use lower scale factor to reduce memory usage
+                let format = UIGraphicsImageRendererFormat()
+                format.scale = 1.0  // Force scale to 1 to reduce memory
 
-                image.draw(in: CGRect(origin: .zero, size: targetSize))
-                guard let thumbnail = UIGraphicsGetImageFromCurrentImageContext() else {
-                    continuation.resume(throwing: ProcessingError.processingTimeout)
-                    return
+                let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+                let resized = renderer.image { context in
+                    image.draw(in: CGRect(origin: .zero, size: targetSize))
                 }
 
-                continuation.resume(returning: thumbnail)
+                continuation.resume(returning: resized)
             }
         }
     }
@@ -388,9 +406,13 @@ class PhotoAssetProcessor: ObservableObject {
     }
 
     private func handleMemoryWarning() {
-        // Cancel non-critical operations
+        // Cancel non-critical operations but don't clear caches during memory warnings
+        // Cache clearing can cause more memory pressure from rebuilding
         print("Memory warning received - cancelling pending requests")
         cancelAllRequests()
+
+        // Clear imported hashes to free some memory
+        importedHashes.removeAll(keepingCapacity: false)
     }
 
     private func cancelAllRequests() {

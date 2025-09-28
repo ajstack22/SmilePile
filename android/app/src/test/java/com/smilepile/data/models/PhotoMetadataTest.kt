@@ -57,7 +57,6 @@ class PhotoMetadataTest {
             uri = "content://media/external/images/media/12345",
             categoryId = 1L,
             timestamp = System.currentTimeMillis(),
-            isFavorite = true,
             childName = "Sophie Williams",
             childAge = 4,
             notes = "Playing with puppies at the park",
@@ -75,7 +74,6 @@ class PhotoMetadataTest {
         assertEquals(photoMetadata.uri, photoEntity.uri)
         assertEquals(photoMetadata.categoryId, photoEntity.categoryId)
         assertEquals(photoMetadata.timestamp, photoEntity.timestamp)
-        assertEquals(photoMetadata.isFavorite, photoEntity.isFavorite)
 
         // Encrypted fields should not be null
         assertNotNull(photoEntity.encryptedChildName)
@@ -95,7 +93,6 @@ class PhotoMetadataTest {
             uri = "content://media/external/images/media/67890",
             categoryId = 2L,
             timestamp = System.currentTimeMillis(),
-            isFavorite = false,
             childName = "Marcus Chen",
             childAge = 6,
             notes = "Collecting leaves for school project",
@@ -114,7 +111,6 @@ class PhotoMetadataTest {
         assertEquals(originalMetadata.uri, decryptedMetadata.uri)
         assertEquals(originalMetadata.categoryId, decryptedMetadata.categoryId)
         assertEquals(originalMetadata.timestamp, decryptedMetadata.timestamp)
-        assertEquals(originalMetadata.isFavorite, decryptedMetadata.isFavorite)
         assertEquals(originalMetadata.childName, decryptedMetadata.childName)
         assertEquals(originalMetadata.childAge, decryptedMetadata.childAge)
         assertEquals(originalMetadata.notes, decryptedMetadata.notes)
@@ -130,8 +126,7 @@ class PhotoMetadataTest {
             id = "basic_photo_id",
             uri = "content://media/external/images/media/11111",
             categoryId = 3L,
-            timestamp = System.currentTimeMillis(),
-            isFavorite = false
+            timestamp = System.currentTimeMillis()
         )
 
         // Act
@@ -144,7 +139,6 @@ class PhotoMetadataTest {
         assertEquals(basicMetadata.uri, basicEntity.uri)
         assertEquals(basicMetadata.categoryId, basicEntity.categoryId)
         assertEquals(basicMetadata.timestamp, basicEntity.timestamp)
-        assertEquals(basicMetadata.isFavorite, basicEntity.isFavorite)
 
         // All encrypted fields should be null
         assertNull(basicEntity.encryptedChildName)
@@ -163,8 +157,7 @@ class PhotoMetadataTest {
             id = "basic_entity_id",
             uri = "content://media/external/images/media/22222",
             categoryId = 4L,
-            timestamp = System.currentTimeMillis(),
-            isFavorite = true
+            timestamp = System.currentTimeMillis()
         )
 
         // Act
@@ -175,7 +168,6 @@ class PhotoMetadataTest {
         assertEquals(basicEntity.uri, basicMetadata.uri)
         assertEquals(basicEntity.categoryId, basicMetadata.categoryId)
         assertEquals(basicEntity.timestamp, basicMetadata.timestamp)
-        assertEquals(basicEntity.isFavorite, basicMetadata.isFavorite)
 
         // All sensitive fields should be empty/null
         assertNull(basicMetadata.childName)
@@ -194,8 +186,7 @@ class PhotoMetadataTest {
             id = "test_id",
             uri = "test_uri",
             categoryId = 5L,
-            timestamp = 123456789L,
-            isFavorite = false
+            timestamp = 123456789L
         )
         assertFalse(noDataMetadata.hasSensitiveData())
 
@@ -236,7 +227,6 @@ class PhotoMetadataTest {
             uri = "test_uri",
             categoryId = 5L,
             timestamp = 123456789L,
-            isFavorite = false,
             childName = "Original Name",
             childAge = 5,
             notes = "Original notes"
@@ -263,7 +253,6 @@ class PhotoMetadataTest {
         assertEquals(originalMetadata.uri, updatedMetadata.uri)
         assertEquals(originalMetadata.categoryId, updatedMetadata.categoryId)
         assertEquals(originalMetadata.timestamp, updatedMetadata.timestamp)
-        assertEquals(originalMetadata.isFavorite, updatedMetadata.isFavorite)
     }
 
     @Test
@@ -274,7 +263,6 @@ class PhotoMetadataTest {
             uri = "content://media/external/images/media/99999",
             categoryId = 6L,
             timestamp = System.currentTimeMillis(),
-            isFavorite = true,
             childName = "Elena Rodriguez-Smith",
             childAge = 8,
             notes = "Birthday party with friends and family. Had so much fun with the piñata and cake! 🎂🎉",
@@ -300,7 +288,6 @@ class PhotoMetadataTest {
         assertEquals(complexMetadata.uri, decryptedMetadata.uri)
         assertEquals(complexMetadata.categoryId, decryptedMetadata.categoryId)
         assertEquals(complexMetadata.timestamp, decryptedMetadata.timestamp)
-        assertEquals(complexMetadata.isFavorite, decryptedMetadata.isFavorite)
         assertEquals(complexMetadata.childName, decryptedMetadata.childName)
         assertEquals(complexMetadata.childAge, decryptedMetadata.childAge)
         assertEquals(complexMetadata.notes, decryptedMetadata.notes)

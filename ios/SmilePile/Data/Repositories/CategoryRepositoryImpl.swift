@@ -4,12 +4,34 @@ import Foundation
 import os.log
 
 final class CategoryRepositoryImpl: CategoryRepository {
+    static let shared = CategoryRepositoryImpl()
+
     private let coreDataStack: CoreDataStack
     private let logger = Logger(subsystem: "com.smilepile", category: "CategoryRepository")
     private var cancellables = Set<AnyCancellable>()
+    private var initializationTask: Task<Void, Error>?
+    private var isInitialized = false
 
     init(coreDataStack: CoreDataStack = CoreDataStack.shared) {
         self.coreDataStack = coreDataStack
+
+        // Start initialization immediately
+        self.initializationTask = Task {
+            do {
+                try await self.initializeDefaultCategories()
+                self.isInitialized = true
+            } catch {
+                self.logger.error("Failed to initialize default categories: \(error)")
+                throw error
+            }
+        }
+    }
+
+    // Ensure initialization is complete before operations
+    private func ensureInitialized() async throws {
+        if let task = initializationTask {
+            try await task.value
+        }
     }
 
     // MARK: - CRUD Operations
@@ -20,13 +42,14 @@ final class CategoryRepositoryImpl: CategoryRepository {
         }
 
         // Check for duplicate names
-        if let existing = try await getCategoryByName(category.displayName) {
+        if try await getCategoryByName(category.displayName) != nil {
             throw CategoryRepositoryError.duplicateName("Category with name '\(category.displayName)' already exists")
         }
 
         return try await coreDataStack.performBackgroundTask { context in
             let categoryEntity = CategoryEntity(context: context)
             categoryEntity.id = category.id == 0 ? Int64(Date().timeIntervalSince1970 * 1000) : category.id
+            categoryEntity.name = category.name
             categoryEntity.displayName = category.displayName
             categoryEntity.colorHex = category.colorHex ?? "#4CAF50"
             categoryEntity.position = Int32(category.position)
@@ -55,6 +78,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
             for category in categories {
                 let categoryEntity = CategoryEntity(context: context)
                 categoryEntity.id = category.id == 0 ? Int64(Date().timeIntervalSince1970 * 1000) + Int64.random(in: 0...1000) : category.id
+                categoryEntity.name = category.name
                 categoryEntity.displayName = category.displayName
                 categoryEntity.colorHex = category.colorHex ?? "#4CAF50"
                 categoryEntity.position = Int32(category.position)
@@ -93,6 +117,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
                 throw CategoryRepositoryError.duplicateName("Category with name '\(category.displayName)' already exists")
             }
 
+            categoryEntity.name = category.name
             categoryEntity.displayName = category.displayName
             categoryEntity.colorHex = category.colorHex ?? categoryEntity.colorHex ?? "#4CAF50"
             categoryEntity.position = Int32(category.position)
@@ -143,13 +168,25 @@ final class CategoryRepositoryImpl: CategoryRepository {
     }
 
     func getAllCategories() async throws -> [Category] {
-        try await coreDataStack.performBackgroundTask { context in
+        try await ensureInitialized()
+
+        let categories = try await coreDataStack.performBackgroundTask { context in
             let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
             request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.createdAt, ascending: true)]
 
             let entities = try context.fetch(request)
             return entities.compactMap { self.entityToCategory($0) }
         }
+
+        // If no categories exist after initialization, reinitialize
+        if categories.isEmpty && self.isInitialized {
+            self.logger.warning("No categories found after initialization, retrying...")
+            self.isInitialized = false
+            try await self.initializeDefaultCategories()
+            return try await self.getAllCategories()
+        }
+
+        return categories
     }
 
     func getAllCategoriesFlow() -> AnyPublisher<[Category], Error> {
@@ -196,6 +233,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
                 for category in defaultCategories {
                     let entity = CategoryEntity(context: context)
                     entity.id = category.id
+                    entity.name = category.name
                     entity.displayName = category.displayName
                     entity.colorHex = category.colorHex ?? "#4CAF50"
                     entity.position = Int32(category.position)
@@ -204,9 +242,11 @@ final class CategoryRepositoryImpl: CategoryRepository {
                 }
 
                 try self.coreDataStack.saveContext(context)
-                self.logger.info("Default categories initialized successfully")
+                self.logger.info("Default categories initialized successfully with \(defaultCategories.count) categories")
+                self.isInitialized = true
             } else {
                 self.logger.info("Categories already exist (\(existingCount)), skipping initialization")
+                self.isInitialized = true
             }
         }
     }

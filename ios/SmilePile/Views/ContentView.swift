@@ -287,162 +287,85 @@ struct KidsModeView: View {
 struct ParentModeView: View {
     @State private var selectedTab = 0
     @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
+    @StateObject private var settingsManager = SettingsManager.shared
+    @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            Group {
-                if useOptimizedGallery {
-                    OptimizedPhotoGalleryView()
-                        .tabItem {
-                            Label("Gallery", systemImage: "photo.on.rectangle")
+        ZStack(alignment: .bottom) {
+            // Main content area
+            VStack(spacing: 0) {
+                // Content based on selected tab
+                Group {
+                    switch selectedTab {
+                    case 0:
+                        if useOptimizedGallery {
+                            OptimizedPhotoGalleryView()
+                        } else {
+                            PhotoGalleryView()
                         }
-                        .tag(0)
-                } else {
-                    PhotoGalleryView()
-                        .tabItem {
-                            Label("Gallery", systemImage: "photo.on.rectangle")
-                        }
-                        .tag(0)
+                    case 1:
+                        CategoryManagementView()
+                    case 2:
+                        SettingsViewCustom()
+                            .environmentObject(kidsModeViewModel)
+                    default:
+                        EmptyView()
+                    }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+                // Spacer for bottom navigation
+                Color.clear
+                    .frame(height: 83)
             }
 
-            CategoryManagementView()
-                .tabItem {
-                    Label("Categories", systemImage: "folder")
-                }
-                .tag(1)
-
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
-                }
-                .tag(2)
+            // Material Design Tab Bar at bottom
+            VStack(spacing: 0) {
+                Divider()
+                MaterialTabBar(selection: $selectedTab)
+                    .background(Color(UIColor.systemBackground))
+            }
         }
-        .ignoresSafeArea()
-        .accentColor(Color(red: 76/255, green: 175/255, blue: 80/255))
+        .environmentObject(settingsManager)
+        .ignoresSafeArea(.keyboard)
     }
 }
 
-// MARK: - Settings View (temporary placeholder)
-struct SettingsView: View {
-    @StateObject private var kidsModeViewModel = KidsModeViewModel()
-    @EnvironmentObject private var settingsManager: SettingsManager
-    @State private var showPINSetup = false
-    @State private var showPINChange = false
-    @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
-    @AppStorage("showPerformanceOverlay") private var showPerformanceOverlay = false
+// MARK: - Backup Stats Card Component
+struct BackupStatsCard: View {
+    let photoCount: Int
+    let categoryCount: Int
+    let accentColor: Color
 
     var body: some View {
-        NavigationStack {
-            Form {
-                // Theme Section - Priority 3 implementation
-                Section("Appearance") {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Theme")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+        HStack(spacing: 16) {
+            Image(systemName: "externaldrive")
+                .font(.title2)
+                .foregroundColor(accentColor)
+                .frame(width: 30)
 
-                        Picker("Theme", selection: $settingsManager.themeMode) {
-                            Text("System").tag(SettingsManager.ThemeMode.system)
-                            Text("Light").tag(SettingsManager.ThemeMode.light)
-                            Text("Dark").tag(SettingsManager.ThemeMode.dark)
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Library Contents")
+                    .font(.subheadline)
+                    .fontWeight(.medium)
 
-                        HStack {
-                            Image(systemName: settingsManager.themeMode == .dark ||
-                                           (settingsManager.themeMode == .system && UITraitCollection.current.userInterfaceStyle == .dark) ?
-                                           "moon.fill" : "sun.max.fill")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Text(settingsManager.themeMode == .dark ||
-                                (settingsManager.themeMode == .system && UITraitCollection.current.userInterfaceStyle == .dark) ?
-                                "Dark mode is active" : "Light mode is active")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .padding(.vertical, 4)
-                }
-
-                Section("Kids Mode") {
-                    Toggle("Kids Mode", isOn: $kidsModeViewModel.isKidsMode)
-                        .onChange(of: kidsModeViewModel.isKidsMode) { newValue in
-                            if newValue {
-                                kidsModeViewModel.toggleKidsMode()
-                            } else {
-                                kidsModeViewModel.exitKidsMode(authenticated: true)
-                            }
-                        }
-                }
-
-                Section("Performance") {
-                    Toggle("Use Optimized Gallery", isOn: $useOptimizedGallery)
-                    Toggle("Show Performance Overlay", isOn: $showPerformanceOverlay)
-
-                    HStack {
-                        Text("Memory Usage")
-                        Spacer()
-                        Text("\(MemoryMonitor.shared.currentMemoryUsageMB)MB")
-                            .foregroundColor(.secondary)
-                    }
-
-                    Button("Clear Image Cache") {
-                        Task {
-                            await OptimizedImageCache.shared.clearCache()
-                        }
-                    }
-                    .foregroundColor(.red)
-                }
-
-                Section("Security") {
-                    if PINManager.shared.isPINEnabled() {
-                        Button("Change PIN") {
-                            showPINChange = true
-                        }
-
-                        Button("Remove PIN") {
-                            try? PINManager.shared.clearPIN()
-                        }
-                        .foregroundColor(.red)
-                    } else {
-                        Button("Set PIN") {
-                            showPINSetup = true
-                        }
-                    }
-                }
-
-                Section("About") {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("1.0.0")
-                            .foregroundColor(.secondary)
-                    }
-                }
+                Text("\(photoCount) photos in \(categoryCount) categories")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
-            .navigationTitle("Settings")
+
+            Spacer()
         }
-        .sheet(isPresented: $showPINSetup) {
-            PINEntryView(
-                isPresented: $showPINSetup,
-                mode: .setup,
-                onSuccess: { pin in
-                    try? PINManager.shared.setPIN(pin)
-                },
-                onCancel: {}
-            )
-        }
-        .sheet(isPresented: $showPINChange) {
-            PINEntryView(
-                isPresented: $showPINChange,
-                mode: .change,
-                onSuccess: { pin in
-                    try? PINManager.shared.setPIN(pin)
-                },
-                onCancel: {}
-            )
-        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(accentColor.opacity(0.1))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(accentColor.opacity(0.3), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal)
     }
 }
 
@@ -711,6 +634,90 @@ private struct KidsModePlaceholderView: View {
         }
         .onAppear {
             // Categories will be loaded by the view model automatically
+        }
+    }
+}
+
+// MARK: - About Dialog Component
+struct AboutDialog: View {
+    @Binding var isPresented: Bool
+    let appVersion: String
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                // Header with app icon
+                VStack(spacing: 16) {
+                    // SmilePile logo
+                    SmilePileLogo(iconSize: 80, fontSize: 32, showIcon: true)
+                        .padding(.top, 32)
+
+                    Text("SmilePile")
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+                .padding(.bottom, 24)
+
+                // App description
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("A safe and fun photo gallery designed for children to explore and organize their favorite pictures.")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.primary)
+                        .padding(.horizontal)
+
+                    // Version info
+                    HStack {
+                        Spacer()
+                        Text("Version \(appVersion)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .padding(.top, 8)
+
+                    // Child safety message
+                    HStack {
+                        Image(systemName: "shield.checkered")
+                            .font(.title2)
+                            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
+
+                        Text("Child-safe design with parental controls")
+                            .font(.subheadline)
+                            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 76/255, green: 175/255, blue: 80/255).opacity(0.1))
+                    )
+                    .padding(.horizontal)
+                    .padding(.top, 16)
+                }
+
+                Spacer()
+
+                // Dismiss button
+                Button(action: {
+                    isPresented = false
+                }) {
+                    Text("OK")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(red: 1.0, green: 0.42, blue: 0.42)) // Pink accent
+                        .cornerRadius(12)
+                }
+                .padding()
+            }
+            .navigationBarHidden(true)
+            .background(
+                Color(colorScheme == .dark ? UIColor.systemBackground : UIColor.secondarySystemBackground)
+                    .ignoresSafeArea()
+            )
         }
     }
 }

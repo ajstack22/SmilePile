@@ -3,6 +3,133 @@ import Combine
 import Photos
 
 /// Optimized photo gallery with virtual scrolling and memory-efficient loading
+// MARK: - Category Selection Sheet
+struct CategorySelectionSheet: View {
+    let categories: [Category]
+    let onSelectCategory: (Category) -> Void
+    let onCancel: () -> Void
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                Text("Select a Category")
+                    .font(.headline)
+                    .padding()
+
+                List(categories) { category in
+                    Button(action: {
+                        onSelectCategory(category)
+                    }) {
+                        HStack {
+                            Circle()
+                                .fill(Color(hex: category.colorHex ?? "#4CAF50") ?? Color.green)
+                                .frame(width: 24, height: 24)
+
+                            Text(category.displayName)
+                                .foregroundColor(.primary)
+
+                            Spacer()
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }
+            .navigationBarItems(
+                leading: Button("Cancel") {
+                    onCancel()
+                }
+            )
+        }
+    }
+}
+
+// MARK: - Photo Stack View
+struct PhotoStackView: View {
+    let photos: [Photo]
+    let onPhotoClick: (Photo) -> Void
+    let onEditClick: ((Photo) -> Void)?
+    let onDeleteClick: ((Photo) -> Void)?
+
+    var body: some View {
+        if photos.isEmpty {
+            EmptyPhotoStackState()
+        } else {
+            ScrollView {
+                LazyVStack(spacing: 12) {
+                    ForEach(photos) { photo in
+                        PhotoStackItem(
+                            photo: photo,
+                            onPhotoClick: { onPhotoClick(photo) },
+                            onEditClick: { onEditClick?(photo) },
+                            onDeleteClick: { onDeleteClick?(photo) }
+                        )
+                    }
+                }
+                .padding(16)
+            }
+        }
+    }
+}
+
+struct PhotoStackItem: View {
+    let photo: Photo
+    let onPhotoClick: () -> Void
+    let onEditClick: (() -> Void)?
+    let onDeleteClick: (() -> Void)?
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Photo card
+            AsyncImage(url: URL(fileURLWithPath: photo.path)) { phase in
+                switch phase {
+                case .empty:
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .overlay(ProgressView())
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxHeight: 300)
+                        .clipped()
+                case .failure(_):
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .overlay(
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundColor(.gray)
+                        )
+                @unknown default:
+                    EmptyView()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 300)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .onTapGesture { onPhotoClick() }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+struct EmptyPhotoStackState: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "photo.stack")
+                .font(.system(size: 64))
+                .foregroundColor(.gray)
+            Text("No photos in this category")
+                .font(.title2)
+                .fontWeight(.semibold)
+            Text("Add photos to get started")
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+    }
+}
+
 struct OptimizedPhotoGalleryView: View {
     @StateObject private var viewModel = PhotoGalleryViewModel()
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
@@ -12,6 +139,7 @@ struct OptimizedPhotoGalleryView: View {
     @State private var selectedPhotos: [Photo] = []
     @State private var showingPhotoEditor = false
     @State private var showingPhotoPicker = false
+    @State private var showingCategorySelection = false
     @State private var showingPermissionError = false
     @State private var permissionErrorMessage = ""
     @State private var showingDebugInfo = false
@@ -19,15 +147,12 @@ struct OptimizedPhotoGalleryView: View {
     // Performance tracking
     @State private var scrollOffset: CGFloat = 0
     @State private var containerHeight: CGFloat = 0
+    @State private var categories: [Category] = []
 
-    // Grid configuration
-    private var columns: [GridItem] {
-        let count = viewModel.itemsPerRow
-        return Array(repeating: GridItem(.flexible(), spacing: 2), count: count)
-    }
+    // Stack layout - no grid needed
 
     private let photoRepository = PhotoRepositoryImpl()
-    private let repository = CategoryRepositoryImpl()
+    private let repository = CategoryRepositoryImpl.shared
     @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
 
     var body: some View {
@@ -51,17 +176,24 @@ struct OptimizedPhotoGalleryView: View {
                 } else if viewModel.photos.isEmpty {
                     emptyStateView
                 } else {
-                    optimizedGalleryGrid
+                    photoStackView
                 }
             }
             .background(Color(UIColor.systemBackground))
 
-            // Floating Action Button
-            FloatingActionButtonContainer(
-                action: handleAddPhotosButtonTap,
-                isPulsing: viewModel.photos.isEmpty,
-                bottomPadding: 49
-            )
+            // Floating Action Button - positioned like Categories page
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    FloatingActionButton(
+                        action: handleAddPhotosButtonTap,
+                        isPulsing: viewModel.photos.isEmpty
+                    )
+                    .padding(.trailing, 16)
+                    .padding(.bottom, 16)
+                }
+            }
 
             // Debug overlay (development only)
             if showingDebugInfo {
@@ -69,6 +201,7 @@ struct OptimizedPhotoGalleryView: View {
             }
         }
         .task {
+            await loadCategories()
             await viewModel.loadPhotos()
         }
         .sheet(isPresented: $showingPhotoEditor) {
@@ -80,6 +213,22 @@ struct OptimizedPhotoGalleryView: View {
                         }
                     }
             }
+        }
+        .sheet(isPresented: $showingCategorySelection) {
+            CategorySelectionSheet(
+                categories: categories,
+                onSelectCategory: { category in
+                    viewModel.selectedCategory = category
+                    showingCategorySelection = false
+                    // After selecting category, open photo picker
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        showingPhotoPicker = true
+                    }
+                },
+                onCancel: {
+                    showingCategorySelection = false
+                }
+            )
         }
         .fullScreenCover(isPresented: $showingPhotoPicker) {
             EnhancedPhotoPickerView(
@@ -106,71 +255,40 @@ struct OptimizedPhotoGalleryView: View {
 
     // MARK: - Views
 
-    private var optimizedGalleryGrid: some View {
-        GeometryReader { geometry in
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 2) {
-                        ForEach(viewModel.filteredPhotos) { photo in
-                            PhotoThumbnailView(photo: photo)
-                                .id(photo.id)
-                                .frame(height: geometry.size.width / CGFloat(viewModel.itemsPerRow) - 2)
-                                .onTapGesture {
-                                    selectedPhotos = [photo]
-                                    showingPhotoEditor = true
-                                }
-                                .onAppear {
-                                    viewModel.loadThumbnailIfNeeded(for: photo)
-                                }
-                                .onDisappear {
-                                    viewModel.cancelThumbnailLoad(for: photo)
-                                }
-                        }
-                    }
-                    .padding(.horizontal, 2)
-                    .padding(.bottom, 100)
-                    .background(
-                        GeometryReader { scrollGeometry in
-                            Color.clear.preference(
-                                key: ScrollOffsetPreferenceKey.self,
-                                value: scrollGeometry.frame(in: .named("scroll")).minY
-                            )
-                        }
-                    )
-                }
-                .coordinateSpace(name: "scroll")
-                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                    scrollOffset = -value
-                    viewModel.handleScroll(
-                        offset: scrollOffset,
-                        containerHeight: geometry.size.height
-                    )
-                }
-                .refreshable {
-                    await viewModel.refreshPhotos()
-                }
-                .onAppear {
-                    containerHeight = geometry.size.height
+    private var photoStackView: some View {
+        PhotoStackView(
+            photos: viewModel.filteredPhotos,
+            onPhotoClick: { photo in
+                selectedPhotos = [photo]
+                showingPhotoEditor = true
+            },
+            onEditClick: { photo in
+                selectedPhotos = [photo]
+                showingPhotoEditor = true
+            },
+            onDeleteClick: { photo in
+                Task {
+                    await deletePhoto(photo)
                 }
             }
-        }
+        )
+        .padding(.bottom, 100) // Space for FAB
     }
 
     private var categoryFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                // All Photos chip
-                CategoryChip(
-                    displayName: "All Photos",
-                    colorHex: "#9E9E9E",
-                    isSelected: viewModel.selectedCategory == nil,
-                    onTap: {
-                        viewModel.selectedCategory = nil
-                    }
-                )
-
-                // Category chips (would need to be loaded)
-                // This is simplified - in real implementation, load categories
+                // Category chips - a category must always be selected
+                ForEach(categories) { category in
+                    CategoryChip(
+                        displayName: category.displayName,
+                        colorHex: category.colorHex ?? "#4CAF50",
+                        isSelected: viewModel.selectedCategory?.id == category.id,
+                        onTap: {
+                            viewModel.selectedCategory = category
+                        }
+                    )
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -248,20 +366,72 @@ struct OptimizedPhotoGalleryView: View {
 
     // MARK: - Actions
 
-    private func handleAddPhotosButtonTap() {
-        permissionManager.checkCurrentAuthorizationStatus()
+    private func loadCategories() async {
+        do {
+            categories = try await repository.getAllCategories()
 
-        switch permissionManager.authorizationStatus {
-        case .notDetermined, .authorized, .limited:
-            showingPhotoPicker = true
-        case .denied:
-            permissionErrorMessage = "Photo library access is required to add photos. Please enable it in Settings."
-            showingPermissionError = true
-        case .restricted:
-            permissionErrorMessage = "Photo library access is restricted on this device."
-            showingPermissionError = true
-        @unknown default:
-            showingPhotoPicker = true
+            // If no categories exist, initialize defaults
+            if categories.isEmpty {
+                print("OptimizedPhotoGalleryView: No categories found, initializing defaults...")
+                try await repository.initializeDefaultCategories()
+                categories = try await repository.getAllCategories()
+            }
+
+            if !categories.isEmpty && viewModel.selectedCategory == nil {
+                viewModel.selectedCategory = categories.first
+            }
+        } catch {
+            print("OptimizedPhotoGalleryView: Failed to load categories: \(error)")
+
+            // Use default categories as fallback and save them to CoreData
+            let defaultCategories = Category.getDefaultCategories()
+
+            // Try to save defaults to CoreData
+            do {
+                try await repository.initializeDefaultCategories()
+                categories = try await repository.getAllCategories()
+            } catch {
+                print("OptimizedPhotoGalleryView: Failed to save default categories: \(error)")
+                // Use in-memory defaults as last resort
+                categories = defaultCategories
+            }
+
+            if !categories.isEmpty && viewModel.selectedCategory == nil {
+                viewModel.selectedCategory = categories.first
+            }
+        }
+    }
+
+    private func deletePhoto(_ photo: Photo) async {
+        do {
+            try await photoRepository.deletePhoto(photo)
+            await viewModel.loadPhotos()
+        } catch {
+            print("Failed to delete photo: \(error)")
+        }
+    }
+
+    private func handleAddPhotosButtonTap() {
+        // First check if a category is selected
+        if viewModel.selectedCategory == nil {
+            // If no category selected, show category selection
+            showingCategorySelection = true
+        } else {
+            // If category is selected, proceed with photo picker
+            permissionManager.checkCurrentAuthorizationStatus()
+
+            switch permissionManager.authorizationStatus {
+            case .notDetermined, .authorized, .limited:
+                showingPhotoPicker = true
+            case .denied:
+                permissionErrorMessage = "Photo library access is required to add photos. Please enable it in Settings."
+                showingPermissionError = true
+            case .restricted:
+                permissionErrorMessage = "Photo library access is restricted on this device."
+                showingPermissionError = true
+            @unknown default:
+                showingPhotoPicker = true
+            }
         }
     }
 

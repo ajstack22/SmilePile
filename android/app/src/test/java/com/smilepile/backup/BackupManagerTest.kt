@@ -33,6 +33,7 @@ class BackupManagerTest {
     private lateinit var photoRepository: PhotoRepository
     private lateinit var themeManager: ThemeManager
     private lateinit var securePreferencesManager: SecurePreferencesManager
+    private lateinit var deletionTracker: ManagedDeletionTracker
 
     @Before
     fun setup() {
@@ -41,6 +42,7 @@ class BackupManagerTest {
         photoRepository = mockk()
         themeManager = mockk()
         securePreferencesManager = mockk()
+        deletionTracker = mockk(relaxed = true)
 
         // Mock ZipUtils object
         mockkObject(ZipUtils)
@@ -50,7 +52,8 @@ class BackupManagerTest {
             categoryRepository,
             photoRepository,
             themeManager,
-            securePreferencesManager
+            securePreferencesManager,
+            deletionTracker
         )
 
         // Setup default mocks
@@ -71,7 +74,6 @@ class BackupManagerTest {
             hasPattern = false,
             biometricEnabled = false,
             kidSafeModeEnabled = false,
-            cameraAccessAllowed = true,
             deleteProtectionEnabled = false,
             failedAttempts = 0,
             isInCooldown = false
@@ -108,8 +110,7 @@ class BackupManagerTest {
             includePhotos = true,
             includeThumbnails = true,
             includeSettings = true,
-            compressionLevel = CompressionLevel.MEDIUM,
-            encryptSensitiveData = false
+            compressionLevel = CompressionLevel.MEDIUM
         )
 
         // When
@@ -305,8 +306,7 @@ class BackupManagerTest {
             createdAt = createdAt,
             fileSize = 1000,
             width = 1920,
-            height = 1080,
-            isFavorite = false
+            height = 1080
         )
     }
 }

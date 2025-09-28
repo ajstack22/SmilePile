@@ -442,6 +442,7 @@ enum ImportError: LocalizedError {
     case cancelled
     case memoryPressure
     case invalidImageData
+    case invalidCategory(String)
     case failedToLoadPhoto
     case storageError(String)
 
@@ -459,6 +460,8 @@ enum ImportError: LocalizedError {
             return "System memory pressure - please try importing fewer photos"
         case .invalidImageData:
             return "Invalid or corrupted image data"
+        case .invalidCategory(let reason):
+            return "Invalid category: \(reason)"
         case .failedToLoadPhoto:
             return "Failed to load photo from picker"
         case .storageError(let message):

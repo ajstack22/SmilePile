@@ -386,6 +386,7 @@ enum ImportError: LocalizedError {
     case batchSizeLimitExceeded(limit: Int)
     case loadingFailed(String)
     case invalidImageData
+    case invalidCategory(String)
     case unsupportedFormat(String)
     case processingFailed(String)
     case storageFull
@@ -406,6 +407,8 @@ enum ImportError: LocalizedError {
             return "Failed to load photo: \(reason)"
         case .invalidImageData:
             return "Invalid or corrupted image data"
+        case .invalidCategory(let reason):
+            return "Invalid category: \(reason)"
         case .unsupportedFormat(let format):
             return "Unsupported image format: \(format)"
         case .processingFailed(let reason):

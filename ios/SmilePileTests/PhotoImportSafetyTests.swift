@@ -13,8 +13,8 @@ final class PhotoImportSafetyTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         safeThumbnailGenerator = SafeThumbnailGenerator()
-        storageManager = StorageManager.shared
-        importCoordinator = PhotoImportCoordinator()
+        storageManager = await StorageManager.shared
+        importCoordinator = PhotoImportCoordinator(storageManager: storageManager)
     }
 
     override func tearDown() async throws {
@@ -160,8 +160,8 @@ final class PhotoImportSafetyTests: XCTestCase {
 
     func testActorConcurrencySafety() async throws {
         // Test that actor prevents concurrent imports
-        let coordinator1 = PhotoImportCoordinator()
-        let coordinator2 = PhotoImportCoordinator()
+        let coordinator1 = PhotoImportCoordinator(storageManager: storageManager)
+        let coordinator2 = PhotoImportCoordinator(storageManager: storageManager)
 
         // Check initial state
         let state1 = await coordinator1.getCurrentState()
@@ -266,7 +266,7 @@ final class PhotoImportIntegrationTest: XCTestCase {
         }
 
         // 2. Test safe import
-        let storageManager = StorageManager.shared
+        let storageManager = await StorageManager.shared
         var importProgress: [Double] = []
 
         print("📥 Importing \(tempURLs.count) photos...")

@@ -37,9 +37,14 @@ final class StorageManager: ObservableObject {
         let attributes = try FileManager.default.attributesOfItem(atPath: photoURL.path)
         let fileSize = attributes[.size] as? Int64 ?? 0
 
+        // Store paths relative to Documents directory
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let relativePath = photoURL.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+        let relativeThumbnailPath = thumbnailPath?.replacingOccurrences(of: documentsURL.path + "/", with: "")
+
         return StorageResult(
-            photoPath: photoURL.path,
-            thumbnailPath: thumbnailPath,
+            photoPath: relativePath,
+            thumbnailPath: relativeThumbnailPath,
             fileName: photoURL.lastPathComponent,
             fileSize: fileSize
         )
@@ -227,9 +232,14 @@ final class StorageManager: ObservableObject {
         // Get metadata
         let metadata = safeThumbnailGenerator.getImageMetadata(from: processedData)
 
+        // Store paths relative to Documents directory
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let relativePath = photoPath.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+        let relativeThumbnailPath = thumbnailURL.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+
         return StorageResult(
-            photoPath: photoPath.path,
-            thumbnailPath: thumbnailURL.path,
+            photoPath: relativePath,
+            thumbnailPath: relativeThumbnailPath,
             fileName: fileName,
             fileSize: Int64(processedData.count)
         )
@@ -261,9 +271,14 @@ final class StorageManager: ObservableObject {
             thumbnailPath = thumbnailURL.path
         }
 
+        // Store paths relative to Documents directory
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let relativePath = photoPath.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+        let relativeThumbnailPath = thumbnailPath?.replacingOccurrences(of: documentsURL.path + "/", with: "")
+
         return StorageResult(
-            photoPath: photoPath.path,
-            thumbnailPath: thumbnailPath,
+            photoPath: relativePath,
+            thumbnailPath: relativeThumbnailPath,
             fileName: fileName,
             fileSize: Int64(photoData.count)
         )
@@ -379,11 +394,20 @@ final class StorageManager: ObservableObject {
     }
 
     func getThumbnailPath(for photoPath: String) -> String? {
-        let photoURL = URL(fileURLWithPath: photoPath)
+        // Handle both absolute and relative paths
+        let absolutePath: String
+        if photoPath.hasPrefix("/") {
+            absolutePath = photoPath
+        } else {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            absolutePath = documentsURL.appendingPathComponent(photoPath).path
+        }
+
+        let photoURL = URL(fileURLWithPath: absolutePath)
         let photoFileName = photoURL.lastPathComponent
 
         // Check if photo is in our internal storage
-        if !isInternalStoragePath(photoPath) {
+        if !isInternalStoragePath(absolutePath) {
             return nil
         }
 
@@ -392,7 +416,9 @@ final class StorageManager: ObservableObject {
 
         // Return path only if thumbnail exists
         if FileManager.default.fileExists(atPath: thumbnailPath) {
-            return thumbnailPath
+            // Return relative path
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            return thumbnailPath.replacingOccurrences(of: documentsURL.path + "/", with: "")
         }
 
         return nil

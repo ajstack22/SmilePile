@@ -53,14 +53,12 @@ class CoreDataStackTests: XCTestCase {
         photoEntity.uri = uri
         photoEntity.categoryId = categoryId
         photoEntity.timestamp = Int64(Date().timeIntervalSince1970 * 1000)
-        photoEntity.isFavorite = false
         try testContext.save()
 
         // Then
         XCTAssertNotNil(photoEntity.id)
         XCTAssertEqual(photoEntity.uri, uri)
         XCTAssertEqual(photoEntity.categoryId, categoryId)
-        XCTAssertFalse(photoEntity.isFavorite)
     }
 
     func testPreventDuplicatePhotos() throws {
@@ -196,8 +194,7 @@ class CoreDataStackTests: XCTestCase {
                 "id": UUID().uuidString,
                 "uri": "test://photo\(i).jpg",
                 "categoryId": Int64(i % 5),
-                "timestamp": Int64(Date().timeIntervalSince1970 * 1000),
-                "isFavorite": false
+                "timestamp": Int64(Date().timeIntervalSince1970 * 1000)
             ])
         }
 
@@ -335,8 +332,7 @@ class CoreDataStackTests: XCTestCase {
             createdAt: entity.timestamp,
             fileSize: 0,
             width: 0,
-            height: 0,
-            isFavorite: entity.isFavorite
+            height: 0
         )
     }
 

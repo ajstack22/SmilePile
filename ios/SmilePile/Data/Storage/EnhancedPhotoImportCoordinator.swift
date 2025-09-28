@@ -74,10 +74,16 @@ actor EnhancedPhotoImportCoordinator {
             throw ImportError.importInProgress
         }
 
+        // Validate category ID
+        guard categoryId > 0 else {
+            logger.error("Invalid category ID: \(categoryId)")
+            throw ImportError.invalidCategory("Category ID must be greater than 0")
+        }
+
         currentState = .preparing
         progressHandlers.append(progressHandler)
 
-        logger.info("Starting enhanced import of \(pickerResults.count) photos")
+        logger.info("Starting enhanced import of \(pickerResults.count) photos into category \(categoryId)")
 
         do {
             // Convert picker results to URLs
@@ -105,6 +111,9 @@ actor EnhancedPhotoImportCoordinator {
             )
 
             currentState = .importing(sessionId: session.sessionId)
+
+            // Log session creation with category
+            logger.info("Created import session \(session.sessionId) for category \(categoryId)")
 
             // Start import with enhanced processing
             let result = try await performEnhancedImport(
@@ -275,10 +284,10 @@ actor EnhancedPhotoImportCoordinator {
             }
         }
 
-        // Create Photo object with paths
+        // Create Photo object with paths - ensure categoryId is preserved
         let photo = Photo(
             path: photoPath,
-            categoryId: categoryId,
+            categoryId: categoryId,  // Explicitly set category ID
             name: url.lastPathComponent,
             isFromAssets: false,
             createdAt: Int64(Date().timeIntervalSince1970 * 1000),
@@ -287,8 +296,15 @@ actor EnhancedPhotoImportCoordinator {
             height: metadata?.height ?? 0
         )
 
-        // Save to repository
-        _ = try await photoRepository.insertPhoto(photo)
+        // Validate category before saving
+        guard photo.categoryId > 0 else {
+            logger.error("Photo has invalid category ID: \(photo.categoryId)")
+            throw ImportError.invalidCategory("Photo must have valid category ID")
+        }
+
+        // Save to repository and get the generated ID
+        let photoId = try await photoRepository.insertPhoto(photo)
+        logger.debug("Saved photo with ID \(photoId) to category \(categoryId)")
 
         return (photo, generatedSizes)
     }
@@ -401,7 +417,10 @@ actor EnhancedPhotoImportCoordinator {
         let photoURL = photosDirectory.appendingPathComponent(fileName)
         try data.write(to: photoURL)
 
-        return photoURL.path
+        // Return relative path from Documents directory
+        let relativePath = photoURL.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+        logger.debug("Saved photo to relative path: \(relativePath)")
+        return relativePath
     }
 
     private func saveThumbnail(data: Data, fileName: String, size: ThumbnailSize) async throws -> String {
@@ -415,7 +434,10 @@ actor EnhancedPhotoImportCoordinator {
         let thumbnailURL = sizeDir.appendingPathComponent(thumbnailFileName)
         try data.write(to: thumbnailURL)
 
-        return thumbnailURL.path
+        // Return relative path from Documents directory
+        let relativePath = thumbnailURL.path.replacingOccurrences(of: documentsURL.path + "/", with: "")
+        logger.debug("Saved thumbnail to relative path: \(relativePath)")
+        return relativePath
     }
 
     private func generateFileName(for url: URL) -> String {

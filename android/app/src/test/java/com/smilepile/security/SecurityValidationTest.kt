@@ -88,13 +88,11 @@ class SecurityValidationTest {
             hasPattern = false,
             biometricEnabled = false,
             kidSafeModeEnabled = true,
-            cameraAccessAllowed = true,
             deleteProtectionEnabled = true,
             failedAttempts = 0,
             isInCooldown = false
         )
         every { securePreferencesManager.setKidSafeModeEnabled(any()) } returns Unit
-        every { securePreferencesManager.setCameraAccessAllowed(any()) } returns Unit
         every { securePreferencesManager.setDeleteProtectionEnabled(any()) } returns Unit
         every { securePreferencesManager.clearAllSettings() } returns Unit
         every { securePreferencesManager.getFailedAttempts() } returns 0
@@ -217,7 +215,6 @@ class SecurityValidationTest {
     fun testSecuritySummary() {
         var hasPIN = false
         var kidSafeModeEnabled = true
-        var cameraAccessAllowed = true
         var deleteProtectionEnabled = true
 
         // Configure dynamic mock responses
@@ -227,7 +224,6 @@ class SecurityValidationTest {
                 hasPattern = false,
                 biometricEnabled = false,
                 kidSafeModeEnabled = kidSafeModeEnabled,
-                cameraAccessAllowed = cameraAccessAllowed,
                 deleteProtectionEnabled = deleteProtectionEnabled,
                 failedAttempts = 0,
                 isInCooldown = false
@@ -241,10 +237,6 @@ class SecurityValidationTest {
             kidSafeModeEnabled = firstArg()
             Unit
         }
-        every { securePreferencesManager.setCameraAccessAllowed(any()) } answers {
-            cameraAccessAllowed = firstArg()
-            Unit
-        }
         every { securePreferencesManager.setDeleteProtectionEnabled(any()) } answers {
             deleteProtectionEnabled = firstArg()
             Unit
@@ -254,7 +246,6 @@ class SecurityValidationTest {
         var summary = securePreferencesManager.getSecuritySummary()
         assertFalse("Should report no PIN", summary.hasPIN)
         assertTrue("Kid safe mode should be enabled by default", summary.kidSafeModeEnabled)
-        assertTrue("Camera access should be allowed by default", summary.cameraAccessAllowed)
         assertTrue("Delete protection should be enabled by default", summary.deleteProtectionEnabled)
 
         // Set a PIN and test summary update
@@ -264,12 +255,10 @@ class SecurityValidationTest {
 
         // Test with modified settings
         securePreferencesManager.setKidSafeModeEnabled(false)
-        securePreferencesManager.setCameraAccessAllowed(false)
         securePreferencesManager.setDeleteProtectionEnabled(false)
 
         summary = securePreferencesManager.getSecuritySummary()
         assertFalse("Kid safe mode should be disabled", summary.kidSafeModeEnabled)
-        assertFalse("Camera access should be disabled", summary.cameraAccessAllowed)
         assertFalse("Delete protection should be disabled", summary.deleteProtectionEnabled)
     }
 
@@ -397,7 +386,6 @@ class SecurityValidationTest {
                 hasPattern = false,
                 biometricEnabled = false,
                 kidSafeModeEnabled = kidSafeModeEnabled,
-                cameraAccessAllowed = true,
                 deleteProtectionEnabled = deleteProtectionEnabled,
                 failedAttempts = 0,
                 isInCooldown = false
