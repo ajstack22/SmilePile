@@ -62,7 +62,7 @@ draw_circle(176, 80, 64, '#FF6600')  # Using #FF6600 to match logo
 draw_rotated_eyes(176, 80, 45)
 
 # Top-left pink circle at (80, 80) with eyes rotated -45 degrees
-draw_circle(80, 80, 64, '#E91E63')
+draw_circle(80, 80, 64, '#E86082')
 draw_rotated_eyes(80, 80, -45)
 
 # Center golden smiley at (128, 128) - normal eyes (no rotation)

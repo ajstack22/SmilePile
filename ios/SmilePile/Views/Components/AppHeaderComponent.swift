@@ -58,7 +58,7 @@ struct AppHeaderComponent<Content: View>: View {
                                 .frame(width: 48, height: 48)
 
                             Image(systemName: "eye.fill")
-                                .font(.system(size: 28))
+                                .font(.system(size: 22))
                                 .foregroundColor(.white)
                         }
                     }

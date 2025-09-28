@@ -53,12 +53,25 @@ fun CategoryChip(
     // Check if we're in dark theme by checking background luminance
     val isDarkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
 
+    // Match iOS semantic colors: white in dark mode, black in light mode
+    val selectionColor = if (isDarkTheme) {
+        Color.White.copy(alpha = 0.1f) // White glow in dark mode
+    } else {
+        Color.Black.copy(alpha = 0.1f) // Gray shade in light mode
+    }
+
+    val borderColor = if (isDarkTheme) {
+        if (isSelected) Color.White else Color.White.copy(alpha = 0.3f)
+    } else {
+        if (isSelected) Color.Black else Color.Black.copy(alpha = 0.3f)
+    }
+
     Card(
         modifier = modifier
             .clickable { onClick() },
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) {
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) // Use primary color like iOS
+                selectionColor // Black/white based on theme
             } else {
                 Color.Transparent // Clear background for unselected
             }
@@ -68,11 +81,7 @@ fun CategoryChip(
         ),
         border = BorderStroke(
             width = 1.dp,
-            color = if (isSelected) {
-                MaterialTheme.colorScheme.primary // Use primary color like iOS
-            } else {
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.3f) // Use primary with opacity like iOS
-            }
+            color = borderColor // Black/white based on theme
         ),
         shape = RoundedCornerShape(16.dp) // Match iOS corner radius
     ) {
@@ -91,7 +100,11 @@ fun CategoryChip(
                     )
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), // Match iOS dot border
+                        color = if (isDarkTheme) {
+                            Color.White.copy(alpha = 0.3f) // Match iOS semantic color
+                        } else {
+                            Color.Black.copy(alpha = 0.3f) // Match iOS semantic color
+                        },
                         shape = CircleShape
                     )
             )

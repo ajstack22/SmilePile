@@ -14,14 +14,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Backup
-import androidx.compose.material.icons.filled.CloudDownload
-import androidx.compose.material.icons.filled.CloudUpload
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material.icons.filled.Storage
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.LockOpen
-import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.ChildCare
 import androidx.compose.material.icons.filled.Archive
@@ -39,6 +39,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -72,6 +73,10 @@ import com.smilepile.BuildConfig
 import com.smilepile.R
 import com.smilepile.ui.viewmodels.SettingsViewModel
 import com.smilepile.ui.components.AppHeaderComponent
+import com.smilepile.ui.components.settings.SettingsSection
+import com.smilepile.ui.components.settings.SettingsActionItem
+import com.smilepile.ui.components.settings.SettingsToggleItem
+import com.smilepile.ui.components.settings.RadioButtonRow
 import com.smilepile.theme.ThemeMode
 
 /**
@@ -129,145 +134,54 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                // Theme Section - Orange accent
+                // Appearance Section
                 SettingsSection(
                     title = stringResource(R.string.settings_appearance),
-                    titleColor = Color(0xFFFF9800), // Orange
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
-                    // Theme mode selector
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp)
-                    ) {
-                        Text(
-                            text = "Theme Mode",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = Color(0xFFFF9800),
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    Column {
+                        // System theme option
+                        RadioButtonRow(
+                            isSelected = uiState.themeMode == ThemeMode.SYSTEM,
+                            icon = Icons.Default.PhoneAndroid,
+                            title = "System",
+                            subtitle = "Automatic",
+                            onClick = { viewModel.setThemeMode(ThemeMode.SYSTEM) }
+                        )
+                        Divider(
+                            modifier = Modifier.padding(start = 48.dp),
+                            color = MaterialTheme.colorScheme.surfaceVariant
                         )
 
-                        // System theme option
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { viewModel.setThemeMode(ThemeMode.SYSTEM) }
-                                .padding(horizontal = 16.dp, vertical = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = uiState.themeMode == ThemeMode.SYSTEM,
-                                onClick = { viewModel.setThemeMode(ThemeMode.SYSTEM) },
-                                colors = RadioButtonDefaults.colors(
-                                    selectedColor = Color(0xFFFF9800),
-                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Icon(
-                                imageVector = Icons.Default.Security,
-                                contentDescription = null,
-                                tint = if (uiState.themeMode == ThemeMode.SYSTEM) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column {
-                                Text(
-                                    text = "Follow System",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                Text(
-                                    text = "Automatically match device theme",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-
                         // Light theme option
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { viewModel.setThemeMode(ThemeMode.LIGHT) }
-                                .padding(horizontal = 16.dp, vertical = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = uiState.themeMode == ThemeMode.LIGHT,
-                                onClick = { viewModel.setThemeMode(ThemeMode.LIGHT) },
-                                colors = RadioButtonDefaults.colors(
-                                    selectedColor = Color(0xFFFF9800),
-                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Icon(
-                                imageVector = Icons.Default.LightMode,
-                                contentDescription = null,
-                                tint = if (uiState.themeMode == ThemeMode.LIGHT) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column {
-                                Text(
-                                    text = "Light",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                Text(
-                                    text = "Always use light theme",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
+                        RadioButtonRow(
+                            isSelected = uiState.themeMode == ThemeMode.LIGHT,
+                            icon = Icons.Default.LightMode,
+                            title = "Light",
+                            onClick = { viewModel.setThemeMode(ThemeMode.LIGHT) }
+                        )
+                        Divider(
+                            modifier = Modifier.padding(start = 48.dp),
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        )
 
                         // Dark theme option
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { viewModel.setThemeMode(ThemeMode.DARK) }
-                                .padding(horizontal = 16.dp, vertical = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = uiState.themeMode == ThemeMode.DARK,
-                                onClick = { viewModel.setThemeMode(ThemeMode.DARK) },
-                                colors = RadioButtonDefaults.colors(
-                                    selectedColor = Color(0xFFFF9800),
-                                    unselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Icon(
-                                imageVector = Icons.Default.DarkMode,
-                                contentDescription = null,
-                                tint = if (uiState.themeMode == ThemeMode.DARK) Color(0xFFFF9800) else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Column {
-                                Text(
-                                    text = "Dark",
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                Text(
-                                    text = "Always use dark theme",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
+                        RadioButtonRow(
+                            isSelected = uiState.themeMode == ThemeMode.DARK,
+                            icon = Icons.Default.DarkMode,
+                            title = "Dark",
+                            onClick = { viewModel.setThemeMode(ThemeMode.DARK) }
+                        )
                     }
                 }
             }
 
             item {
-                // Security Section - Green accent
+                // Security Section
                 SettingsSection(
-                    title = "Security",
-                    titleColor = Color(0xFF4CAF50) // Green
+                    title = "Security"
                 ) {
+                    Column {
                     SettingsActionItem(
                         title = if (uiState.hasPIN) "Change PIN" else "Set PIN",
                         subtitle = if (uiState.hasPIN) {
@@ -276,7 +190,6 @@ fun SettingsScreen(
                             "Set a PIN to protect Parent Mode access"
                         },
                         icon = Icons.Default.Lock,
-                        iconColor = Color(0xFF4CAF50), // Green
                         onClick = {
                             if (uiState.hasPIN) {
                                 showChangePinDialog = true
@@ -286,99 +199,100 @@ fun SettingsScreen(
                         }
                     )
 
-                    // Biometric Authentication Toggle
-                    if (uiState.hasPIN && viewModel.isBiometricAvailable()) {
-                        SettingsSwitchItem(
-                            title = "Biometric Authentication",
-                            subtitle = "Use fingerprint or face unlock for parental controls",
-                            icon = Icons.Default.Fingerprint,
-                            iconColor = Color(0xFF4CAF50), // Green
-                            checked = uiState.biometricEnabled,
-                            enabled = true,
-                            onCheckedChange = { enabled ->
-                                viewModel.setBiometricEnabled(enabled)
-                            }
-                        )
-                    }
+                        // Biometric Authentication Toggle
+                        if (uiState.hasPIN && viewModel.isBiometricAvailable()) {
+                            Divider(
+                                modifier = Modifier.padding(start = 48.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant
+                            )
+                            SettingsToggleItem(
+                                title = "Use Biometrics",
+                                subtitle = "Quick access with fingerprint",
+                                icon = Icons.Default.Fingerprint,
+                                checked = uiState.biometricEnabled,
+                                onCheckedChange = { enabled ->
+                                    viewModel.setBiometricEnabled(enabled)
+                                }
+                            )
+                        }
 
-                    // Parental Controls Access
-                    if (uiState.hasPIN) {
-                        SettingsActionItem(
-                            title = "Parental Controls",
-                            subtitle = "Access child safety settings and preferences",
-                            icon = Icons.Default.ChildCare,
-                            iconColor = Color(0xFF4CAF50), // Green
-                            onClick = onNavigateToParentalControls
-                        )
-                    }
+                        // Parental Controls Access
+                        if (uiState.hasPIN) {
+                            Divider(
+                                modifier = Modifier.padding(start = 48.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant
+                            )
+                            SettingsActionItem(
+                                title = "Parental Controls",
+                                subtitle = "Manage child safety settings",
+                                icon = Icons.Default.ChildCare,
+                                onClick = onNavigateToParentalControls
+                            )
+                        }
 
-                    if (uiState.hasPIN) {
-                        SettingsActionItem(
-                            title = "Remove PIN",
-                            subtitle = "Remove PIN protection from Parent Mode",
-                            icon = Icons.Default.LockOpen,
-                            iconColor = Color(0xFF4CAF50), // Green
-                            onClick = {
-                                viewModel.removePIN()
-                            }
-                        )
+                        if (uiState.hasPIN) {
+                            Divider(
+                                modifier = Modifier.padding(start = 48.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant
+                            )
+                            SettingsActionItem(
+                                title = "Remove PIN",
+                                subtitle = "Disable PIN protection",
+                                icon = Icons.Default.LockOpen,
+                                onClick = {
+                                    viewModel.removePIN()
+                                }
+                            )
+                        }
                     }
 
                 }
             }
 
             item {
-                // Backup & Restore Section - Blue accent
+                // Backup & Restore Section
                 SettingsSection(
-                    title = "Backup & Restore",
-                    titleColor = Color(0xFF2196F3) // Blue
+                    title = "Backup & Restore"
                 ) {
-                    // Backup statistics
-                    uiState.backupStats?.let { stats ->
-                        BackupStatsCard(
-                            photoCount = stats.photoCount,
-                            categoryCount = stats.categoryCount,
-                            statsColor = Color(0xFF2196F3), // Blue
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
+                    Column {
 
-                    SettingsActionItem(
-                        title = "Export Data",
-                        subtitle = "Create a complete backup file (includes photos)",
-                        icon = Icons.Default.Archive,
-                        iconColor = Color(0xFF2196F3), // Blue
-                        onClick = {
+                        SettingsActionItem(
+                            title = "Export Data",
+                            subtitle = "Save your photos and categories",
+                            icon = Icons.Default.Upload,
+                            onClick = {
                             val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
                             exportLauncher.launch("smilepile_backup_$timestamp.zip")
                         }
                     )
 
-                    SettingsActionItem(
-                        title = "Import Data",
-                        subtitle = "Restore from a backup file",
-                        icon = Icons.Default.CloudDownload,
-                        iconColor = Color(0xFF2196F3), // Blue
-                        onClick = {
+                        Divider(
+                            modifier = Modifier.padding(start = 48.dp),
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                        SettingsActionItem(
+                            title = "Import Data",
+                            subtitle = "Restore from backup",
+                            icon = Icons.Default.Download,
+                            onClick = {
                             importLauncher.launch(arrayOf("application/zip", "*/*"))
                         }
-                    )
+                        )
+                    }
                 }
             }
 
             // Data Management section removed - clear cache button no longer needed
 
             item {
-                // About Section - Pink accent
+                // About Section
                 SettingsSection(
-                    title = stringResource(R.string.settings_about),
-                    titleColor = Color(0xFFFF6B6B) // Pink
+                    title = stringResource(R.string.settings_about)
                 ) {
                     SettingsActionItem(
-                        title = stringResource(R.string.settings_about_app),
+                        title = "SmilePile",
                         subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
                         icon = Icons.Default.Info,
-                        iconColor = Color(0xFFFF6B6B), // Pink
                         onClick = { showAboutDialog = true }
                     )
                 }
@@ -443,204 +357,9 @@ fun SettingsScreen(
 
 }
 
-/**
- * Settings section container with title
- */
-@Composable
-private fun SettingsSection(
-    title: String,
-    titleColor: Color = MaterialTheme.colorScheme.primary,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Column(modifier = modifier) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            color = titleColor,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            content()
-        }
-    }
-}
 
-/**
- * Settings item with toggle switch
- */
-@Composable
-private fun SettingsToggleItem(
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    iconColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Row(
-            modifier = Modifier.weight(1f),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = iconColor
-            )
-            Column {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-        Switch(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = iconColor,
-                checkedTrackColor = iconColor.copy(alpha = 0.3f)
-            )
-        )
-    }
-}
 
-/**
- * Settings item with action button
- */
-@Composable
-private fun SettingsActionItem(
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    iconColor: Color = MaterialTheme.colorScheme.primary,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    OutlinedButton(
-        onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, iconColor.copy(alpha = 0.5f))
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = iconColor
-            )
-            Column(
-                modifier = Modifier.weight(1f),
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-    }
-}
 
-/**
- * Settings item with switch toggle
- */
-@Composable
-private fun SettingsSwitchItem(
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    iconColor: Color = MaterialTheme.colorScheme.primary,
-    checked: Boolean,
-    enabled: Boolean = true,
-    onCheckedChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (enabled) MaterialTheme.colorScheme.surface
-                           else MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
-        ),
-        border = BorderStroke(1.dp, iconColor.copy(alpha = 0.5f))
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = if (enabled) iconColor else iconColor.copy(alpha = 0.6f)
-            )
-            Column(
-                modifier = Modifier.weight(1f),
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = if (enabled) MaterialTheme.colorScheme.onSurface
-                           else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (enabled) MaterialTheme.colorScheme.onSurfaceVariant
-                           else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                )
-            }
-            Switch(
-                checked = checked,
-                enabled = enabled,
-                onCheckedChange = onCheckedChange,
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = iconColor,
-                    checkedTrackColor = iconColor.copy(alpha = 0.5f)
-                )
-            )
-        }
-    }
-}
 
 /**
  * About app dialog
@@ -767,49 +486,6 @@ private fun PinSetupDialog(
     )
 }
 
-@Composable
-private fun BackupStatsCard(
-    photoCount: Int,
-    categoryCount: Int,
-    statsColor: Color = MaterialTheme.colorScheme.primary,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = statsColor.copy(alpha = 0.1f)
-        ),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, statsColor.copy(alpha = 0.3f))
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Storage,
-                contentDescription = null,
-                tint = statsColor
-            )
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "Library Contents",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = "$photoCount photos in $categoryCount categories",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        }
-    }
-}
 
 @Composable
 private fun ChangePinDialog(

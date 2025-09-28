@@ -28,9 +28,9 @@ struct CategoryManagementCard: View {
             // Action buttons with IconButton-style touch targets
             HStack(spacing: 8) {
                 Button(action: { onEdit(categoryWithCount.category) }) {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "pencil")
                         .font(.system(size: 22, weight: .medium))
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(Color(hex: "#FF6600"))
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                 }

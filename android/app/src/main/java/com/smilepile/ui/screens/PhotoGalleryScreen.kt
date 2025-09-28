@@ -136,7 +136,7 @@ fun PhotoGalleryScreen(
                 // Single FAB for adding photos with pulse animation when empty
                 FloatingActionButton(
                     onClick = orchestratorState.onAddPhotoClick,
-                    containerColor = Color(0xFFE91E63), // SmilePile pink
+                    containerColor = Color(0xFFFF6600), // SmilePile orange
                     contentColor = Color.White,
                     modifier = Modifier
                         .padding(bottom = paddingValues.calculateBottomPadding())

@@ -1,38 +1,35 @@
 import SwiftUI
 
-/// Custom radio button row component matching Android Material Design
+/// Clean radio button row component
 struct RadioButtonRow: View {
     let isSelected: Bool
     let icon: String
     let title: String
-    let subtitle: String
+    let subtitle: String?
     let action: () -> Void
 
-    private let orangeAccent = Color(red: 1.0, green: 0.596, blue: 0) // #FF9800
+    init(
+        isSelected: Bool,
+        icon: String,
+        title: String,
+        subtitle: String? = nil,
+        action: @escaping () -> Void
+    ) {
+        self.isSelected = isSelected
+        self.icon = icon
+        self.title = title
+        self.subtitle = subtitle
+        self.action = action
+    }
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 0) {
-                // Radio button circle
-                ZStack {
-                    Circle()
-                        .stroke(isSelected ? orangeAccent : Color.secondary.opacity(0.6), lineWidth: 2)
-                        .frame(width: 20, height: 20)
-
-                    if isSelected {
-                        Circle()
-                            .fill(orangeAccent)
-                            .frame(width: 12, height: 12)
-                    }
-                }
-                .padding(.leading, 16)
-
+            HStack(spacing: 12) {
                 // Icon
                 Image(systemName: icon)
-                    .font(.system(size: 24))
-                    .foregroundColor(isSelected ? orangeAccent : Color.secondary.opacity(0.6))
-                    .frame(width: 24, height: 24)
-                    .padding(.leading, 16)
+                    .font(.system(size: 20))
+                    .foregroundColor(.secondary)
+                    .frame(width: 28)
 
                 // Text content
                 VStack(alignment: .leading, spacing: 2) {
@@ -40,15 +37,25 @@ struct RadioButtonRow: View {
                         .font(.body)
                         .foregroundColor(.primary)
 
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    if let subtitle = subtitle {
+                        Text(subtitle)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
-                .padding(.leading, 12)
 
                 Spacer()
+
+                // Checkmark for selected state
+                if isSelected {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.accentColor)
+                }
             }
+            .padding(.horizontal, 16)
             .padding(.vertical, 12)
+            .background(Color(UIColor.systemBackground))
             .contentShape(Rectangle())
         }
         .buttonStyle(PlainButtonStyle())

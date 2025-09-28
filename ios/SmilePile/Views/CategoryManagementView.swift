@@ -145,7 +145,7 @@ struct CategoryManagementView: View {
             ZStack {
                 // Square FAB with rounded corners to match gallery
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(red: 233/255, green: 30/255, blue: 99/255)) // Pink color
+                    .fill(Color(red: 255/255, green: 102/255, blue: 0/255)) // SmilePile orange #FF6600
                     .frame(width: 56, height: 56)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
 

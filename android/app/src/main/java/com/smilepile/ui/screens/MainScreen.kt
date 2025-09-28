@@ -1,5 +1,6 @@
 package com.smilepile.ui.screens
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,12 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.draw.scale
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Category
+import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Category
+import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.AlertDialog
@@ -109,8 +113,8 @@ fun MainScreen(
         ),
         BottomNavigationItem(
             route = NavigationRoutes.CATEGORIES,
-            selectedIcon = Icons.Filled.Category,
-            unselectedIcon = Icons.Outlined.Category,
+            selectedIcon = Icons.Filled.Folder,
+            unselectedIcon = Icons.Outlined.Folder,
             iconTextId = R.string.nav_categories
         ),
         BottomNavigationItem(
@@ -194,7 +198,7 @@ private fun SmilePileBottomNavigation(
     modifier: Modifier = Modifier
 ) {
     NavigationBar(
-        modifier = modifier.height(80.dp), // Increase height for more space
+        modifier = modifier.height(86.dp), // Increased height for better aesthetics
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.onSurface,
         tonalElevation = 0.dp
@@ -204,8 +208,13 @@ private fun SmilePileBottomNavigation(
                 it.route == item.route
             } == true
 
+            val iconScale by animateFloatAsState(
+                targetValue = if (isSelected) 1.15f else 1.0f,
+                label = "icon_scale"
+            )
+
             NavigationBarItem(
-                modifier = Modifier.padding(top = 12.dp), // Push entire item down
+                modifier = Modifier.padding(top = 6.dp), // Reduced padding with increased bar height
                 icon = {
                     Icon(
                         imageVector = if (isSelected) {
@@ -213,25 +222,29 @@ private fun SmilePileBottomNavigation(
                         } else {
                             item.unselectedIcon
                         },
-                        contentDescription = stringResource(item.iconTextId)
+                        contentDescription = stringResource(item.iconTextId),
+                        modifier = Modifier
+                            .size(28.dp)
+                            .scale(iconScale)
                     )
                 },
                 label = {
                     Text(
                         text = stringResource(item.iconTextId),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = if (isSelected) androidx.compose.ui.text.font.FontWeight.Bold else androidx.compose.ui.text.font.FontWeight.Normal
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            fontSize = 14.sp,
+                            fontWeight = if (isSelected) androidx.compose.ui.text.font.FontWeight.SemiBold else androidx.compose.ui.text.font.FontWeight.Normal
                         )
                     )
                 },
                 selected = isSelected,
                 onClick = { onNavigateToDestination(item.route) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color(0xFF4CAF50), // SmilePile green from logo
-                    selectedTextColor = Color(0xFF4CAF50), // SmilePile green from logo
+                    selectedIconColor = Color(0xFFE86082), // SmilePile pink
+                    selectedTextColor = Color(0xFFE86082), // SmilePile pink
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = Color(0xFF4CAF50).copy(alpha = 0.12f) // Light green background
+                    indicatorColor = Color.Transparent // No background glow
                 )
             )
         }

@@ -3,7 +3,6 @@ import SwiftUI
 // MARK: - Settings Section Container
 struct SettingsSection<Content: View>: View {
     let title: String
-    let titleColor: Color
     @ViewBuilder let content: Content
 
     init(
@@ -12,39 +11,37 @@ struct SettingsSection<Content: View>: View {
         @ViewBuilder content: () -> Content
     ) {
         self.title = title
-        self.titleColor = titleColor
         self.content = content()
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.headline)
-                .foregroundColor(titleColor)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+                .padding(.horizontal, 4)
 
-            VStack(spacing: 0) {
+            VStack(spacing: 1) {
                 content
             }
             .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(12)
-            .padding(.horizontal, 16)
+            .cornerRadius(10)
         }
     }
 }
 
-// MARK: - Settings Action Item (Outlined Button)
+// MARK: - Settings Action Item
 struct SettingsActionItem: View {
     let title: String
-    let subtitle: String
+    let subtitle: String?
     let icon: String
-    let iconColor: Color
     let action: () -> Void
 
     init(
         title: String,
-        subtitle: String,
+        subtitle: String? = nil,
         icon: String,
         iconColor: Color = .accentColor,
         action: @escaping () -> Void
@@ -52,56 +49,53 @@ struct SettingsActionItem: View {
         self.title = title
         self.subtitle = subtitle
         self.icon = icon
-        self.iconColor = iconColor
         self.action = action
     }
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.system(size: 20))
-                    .foregroundColor(iconColor)
-                    .frame(width: 24)
+                    .foregroundColor(.secondary)
+                    .frame(width: 28)
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.body)
                         .foregroundColor(.primary)
 
-                    Text(subtitle)
-                        .font(.system(size: 12))
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
+                    if let subtitle = subtitle {
+                        Text(subtitle)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
 
                 Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
             }
-            .padding(16)
-            .frame(maxWidth: .infinity)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(iconColor.opacity(0.5), lineWidth: 1)
-            )
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(Color(UIColor.systemBackground))
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
     }
 }
 
 // MARK: - Settings Switch Item (Toggle)
 struct SettingsSwitchItem: View {
     let title: String
-    let subtitle: String
+    let subtitle: String?
     let icon: String
-    let iconColor: Color
     @Binding var isOn: Bool
     let isEnabled: Bool
 
     init(
         title: String,
-        subtitle: String,
+        subtitle: String? = nil,
         icon: String,
         iconColor: Color = .accentColor,
         isOn: Binding<Bool>,
@@ -110,50 +104,37 @@ struct SettingsSwitchItem: View {
         self.title = title
         self.subtitle = subtitle
         self.icon = icon
-        self.iconColor = iconColor
         self._isOn = isOn
         self.isEnabled = isEnabled
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 16) {
-                Image(systemName: icon)
-                    .font(.system(size: 20))
-                    .foregroundColor(iconColor.opacity(isEnabled ? 1 : 0.5))
-                    .frame(width: 24)
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+                .foregroundColor(.secondary.opacity(isEnabled ? 1 : 0.5))
+                .frame(width: 28)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.primary.opacity(isEnabled ? 1 : 0.5))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.body)
+                    .foregroundColor(.primary.opacity(isEnabled ? 1 : 0.5))
 
+                if let subtitle = subtitle {
                     Text(subtitle)
-                        .font(.system(size: 12))
+                        .font(.caption)
                         .foregroundColor(.secondary.opacity(isEnabled ? 1 : 0.5))
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
                 }
-
-                Spacer()
-
-                Toggle("", isOn: $isOn)
-                    .labelsHidden()
-                    .tint(iconColor)
-                    .disabled(!isEnabled)
             }
-            .padding(16)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(isEnabled ? Color(UIColor.systemBackground) : Color(UIColor.systemBackground).opacity(0.6))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(iconColor.opacity(0.5), lineWidth: 1)
-            )
+
+            Spacer()
+
+            Toggle("", isOn: $isOn)
+                .labelsHidden()
+                .disabled(!isEnabled)
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
+        .background(Color(UIColor.systemBackground))
     }
 }

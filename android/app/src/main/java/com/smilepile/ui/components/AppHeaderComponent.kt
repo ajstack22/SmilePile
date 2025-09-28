@@ -1,5 +1,6 @@
 package com.smilepile.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -25,58 +26,62 @@ fun AppHeaderComponent(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .statusBarsPadding()
-    ) {
-        // Header bar with logo and view mode button - with background
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceVariant,
-            modifier = Modifier.fillMaxWidth()
+    Column(modifier = modifier.fillMaxWidth()) {
+        // Box with background that extends into status bar
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surfaceVariant)
         ) {
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .statusBarsPadding() // Padding inside the background
             ) {
-                // SmilePile logo on the left
-                SmilePileLogo(
-                    iconSize = 48.dp,
-                    fontSize = 28.sp,
-                    modifier = Modifier.align(Alignment.CenterStart)
-                )
+                // Header bar with logo and view mode button
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                ) {
+                    // SmilePile logo on the left
+                    SmilePileLogo(
+                        iconSize = 48.dp,
+                        fontSize = 28.sp,
+                        modifier = Modifier.align(Alignment.CenterStart)
+                    )
 
-                // View Mode eye icon on the right
-                if (showViewModeButton) {
-                    Surface(
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .size(48.dp) // Same size as logo
-                            .clip(CircleShape)
-                            .clickable { onViewModeClick() },
-                        color = Color(0xFF4CAF50) // Solid green background
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.fillMaxSize()
+                    // View Mode eye icon on the right
+                    if (showViewModeButton) {
+                        Surface(
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .size(48.dp) // Same size as logo
+                                .clip(CircleShape)
+                                .clickable { onViewModeClick() },
+                            color = Color(0xFF4CAF50) // Solid green background
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.RemoveRedEye,
-                                contentDescription = "Switch to View Mode",
-                                modifier = Modifier.size(28.dp),
-                                tint = Color.White // White icon
-                            )
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.RemoveRedEye,
+                                    contentDescription = "Switch to View Mode",
+                                    modifier = Modifier.size(28.dp),
+                                    tint = Color.White // White icon
+                                )
+                            }
                         }
                     }
                 }
+
+                // Add minimal spacing between branding and categories
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
 
-        // Add minimal spacing between branding and categories
-        Spacer(modifier = Modifier.height(4.dp))
-
-        // Additional content (like category filters) - OUTSIDE the Surface background
+        // Additional content (like category filters) - floating freely outside background
         content()
     }
 }

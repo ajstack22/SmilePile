@@ -16,8 +16,6 @@ struct SettingsViewCustom: View {
     @State private var importProgress: Double = 0.0
     @State private var isExporting = false
     @State private var isImporting = false
-    @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
-    @AppStorage("showPerformanceOverlay") private var showPerformanceOverlay = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -32,85 +30,54 @@ struct SettingsViewCustom: View {
             // Settings content with cards matching Android
             ScrollView {
                 VStack(spacing: 16) {
-                    // Appearance Section - Orange accent
+                    // Appearance Section
                     SettingsSection(
-                        title: "Appearance",
-                        titleColor: Color(hex: "#FF9800") ?? .orange
+                        title: "Appearance"
                     ) {
                         ThemeSelector(themeMode: $settingsManager.themeMode)
                     }
                     .padding(.horizontal, 16)
 
-                    // Kids Mode Section
+                    // Security Section
                     SettingsSection(
-                        title: "Kids Mode",
-                        titleColor: Color(hex: "#4CAF50") ?? .green
+                        title: "Security"
                     ) {
-                        SettingsSwitchItem(
-                            title: "Kids Mode",
-                            subtitle: "Simplified interface for children",
-                            icon: "face.smiling.fill",
-                            iconColor: Color(hex: "#4CAF50") ?? .green,
-                            isOn: .init(
-                                get: { kidsModeViewModel.isKidsMode },
-                                set: { newValue in
-                                    if newValue {
-                                        kidsModeViewModel.toggleKidsMode()
-                                    } else {
-                                        kidsModeViewModel.exitKidsMode(authenticated: true)
-                                    }
-                                }
-                            )
-                        )
-                    }
-                    .padding(.horizontal, 16)
-
-                    // Security Section - Green accent
-                    SettingsSection(
-                        title: "Security",
-                        titleColor: Color(hex: "#4CAF50") ?? .green
-                    ) {
-                        VStack(spacing: 8) {
+                        VStack(spacing: 0) {
                             if securityViewModel.hasPIN {
                                 SettingsActionItem(
                                     title: "Change PIN",
-                                    subtitle: "PIN protection is enabled for Parent Mode",
+                                    subtitle: "Update your security PIN",
                                     icon: "lock.fill",
-                                    iconColor: Color(hex: "#4CAF50") ?? .green,
                                     action: { showPINChange = true }
                                 )
 
                                 if securityViewModel.isBiometricAvailable {
                                     SettingsSwitchItem(
                                         title: "Use \(securityViewModel.biometricName)",
-                                        subtitle: "Use biometric authentication for parental controls",
+                                        subtitle: "Quick access with biometrics",
                                         icon: securityViewModel.biometricIcon,
-                                        iconColor: Color(hex: "#4CAF50") ?? .green,
                                         isOn: $securityViewModel.isBiometricEnabled
                                     )
                                 }
 
                                 SettingsActionItem(
                                     title: "Parental Controls",
-                                    subtitle: "Access child safety settings and preferences",
+                                    subtitle: "Manage child safety settings",
                                     icon: "figure.and.child.holdinghands",
-                                    iconColor: Color(hex: "#4CAF50") ?? .green,
                                     action: { showingParentalControls = true }
                                 )
 
                                 SettingsActionItem(
                                     title: "Remove PIN",
-                                    subtitle: "Remove PIN protection from Parent Mode",
+                                    subtitle: "Disable PIN protection",
                                     icon: "lock.open.fill",
-                                    iconColor: Color(hex: "#4CAF50") ?? .green,
                                     action: { securityViewModel.removePIN() }
                                 )
                             } else {
                                 SettingsActionItem(
                                     title: "Set PIN",
-                                    subtitle: "Set a PIN to protect Parent Mode access",
+                                    subtitle: "Protect Parent Mode with PIN",
                                     icon: "lock.fill",
-                                    iconColor: Color(hex: "#4CAF50") ?? .green,
                                     action: { showPINSetup = true }
                                 )
                             }
@@ -118,103 +85,39 @@ struct SettingsViewCustom: View {
                     }
                     .padding(.horizontal, 16)
 
-                    // Backup & Restore Section - Blue accent
+                    // Backup & Restore Section
                     SettingsSection(
-                        title: "Backup & Restore",
-                        titleColor: Color(hex: "#2196F3") ?? .blue
+                        title: "Backup & Restore"
                     ) {
-                        VStack(spacing: 8) {
-                            if backupPhotoCount > 0 || backupCategoryCount > 0 {
-                                BackupStatsCard(
-                                    photoCount: backupPhotoCount,
-                                    categoryCount: backupCategoryCount,
-                                    accentColor: Color(hex: "#2196F3") ?? .blue
-                                )
-                            }
-
+                        VStack(spacing: 0) {
                             SettingsActionItem(
                                 title: "Export Data",
-                                subtitle: "Create a complete backup file (includes photos)",
-                                icon: "archivebox",
-                                iconColor: Color(hex: "#2196F3") ?? .blue,
+                                subtitle: "Save your photos and categories",
+                                icon: "square.and.arrow.up",
                                 action: { showingExportSheet = true }
                             )
 
+                            Divider()
+                                .padding(.leading, 56)
+
                             SettingsActionItem(
                                 title: "Import Data",
-                                subtitle: "Restore from a backup file",
-                                icon: "icloud.and.arrow.down",
-                                iconColor: Color(hex: "#2196F3") ?? .blue,
+                                subtitle: "Restore from backup",
+                                icon: "square.and.arrow.down",
                                 action: { showingImportPicker = true }
                             )
                         }
                     }
                     .padding(.horizontal, 16)
 
-                    // Performance Section
+                    // About Section
                     SettingsSection(
-                        title: "Performance",
-                        titleColor: Color(hex: "#9C27B0") ?? .purple
-                    ) {
-                        VStack(spacing: 8) {
-                            SettingsSwitchItem(
-                                title: "Use Optimized Gallery",
-                                subtitle: "Enable performance optimizations",
-                                icon: "speedometer",
-                                iconColor: Color(hex: "#9C27B0") ?? .purple,
-                                isOn: $useOptimizedGallery
-                            )
-
-                            SettingsSwitchItem(
-                                title: "Show Performance Overlay",
-                                subtitle: "Display performance metrics",
-                                icon: "chart.line.uptrend.xyaxis",
-                                iconColor: Color(hex: "#9C27B0") ?? .purple,
-                                isOn: $showPerformanceOverlay
-                            )
-
-                            HStack {
-                                Image(systemName: "memorychip")
-                                    .foregroundColor(Color(hex: "#9C27B0") ?? .purple)
-                                    .frame(width: 24)
-                                Text("Memory Usage")
-                                    .font(.subheadline)
-                                Spacer()
-                                Text("\(MemoryMonitor.shared.currentMemoryUsageMB)MB")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color(UIColor.secondarySystemBackground))
-                            )
-
-                            SettingsActionItem(
-                                title: "Clear Image Cache",
-                                subtitle: "Free up memory by clearing cached images",
-                                icon: "trash",
-                                iconColor: .red,
-                                action: {
-                                    Task {
-                                        await OptimizedImageCache.shared.clearCache()
-                                    }
-                                }
-                            )
-                        }
-                    }
-                    .padding(.horizontal, 16)
-
-                    // About Section - Pink accent
-                    SettingsSection(
-                        title: "About",
-                        titleColor: Color(hex: "#FF6B6B") ?? .pink
+                        title: "About"
                     ) {
                         SettingsActionItem(
-                            title: "About SmilePile",
+                            title: "SmilePile",
                             subtitle: "Version 25.09.27.006",
                             icon: "info.circle",
-                            iconColor: Color(hex: "#FF6B6B") ?? .pink,
                             action: { showingAboutDialog = true }
                         )
                     }
@@ -327,33 +230,36 @@ struct ThemeSelector: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // System theme option
             RadioButtonRow(
                 isSelected: themeMode == .system,
                 icon: "circle.lefthalf.filled",
-                title: "Follow System",
-                subtitle: "Automatically match device theme",
+                title: "System",
+                subtitle: "Automatic",
                 action: { themeMode = .system }
             )
 
             Divider()
-                .padding(.horizontal, 16)
+                .padding(.leading, 56)
 
+            // Light theme option
             RadioButtonRow(
                 isSelected: themeMode == .light,
-                icon: "sun.max.fill",
+                icon: "sun.max",
                 title: "Light",
-                subtitle: "Always use light theme",
+                subtitle: nil,
                 action: { themeMode = .light }
             )
 
             Divider()
-                .padding(.horizontal, 16)
+                .padding(.leading, 56)
 
+            // Dark theme option
             RadioButtonRow(
                 isSelected: themeMode == .dark,
-                icon: "moon.fill",
+                icon: "moon",
                 title: "Dark",
-                subtitle: "Always use dark theme",
+                subtitle: nil,
                 action: { themeMode = .dark }
             )
         }

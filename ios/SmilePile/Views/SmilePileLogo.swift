@@ -5,7 +5,7 @@ private let smileGolden = Color(hex: "#FFBF00") ?? Color.orange  // Golden/Orang
 private let pileGreen = Color(hex: "#4CAF50") ?? Color.green    // Green for "P"
 private let pileBlue = Color(hex: "#2196F3") ?? Color.blue     // Blue for "i"
 private let pileBoldOrange = Color(hex: "#FF6600") ?? Color.orange // Bold orange for "l"
-private let pilePink = Color(hex: "#E91E63") ?? Color.pink     // Pink for "e"
+private let pilePink = Color(hex: "#E86082") ?? Color.pink     // Updated pink for "e"
 
 /// SmilePile logo component with icon and multicolored text
 /// Displays the 5-smiley icon alongside "SmilePile" text where each letter has different colors

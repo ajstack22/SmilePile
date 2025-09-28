@@ -35,7 +35,7 @@ private val smileGolden = Color(0xFFFFBF00)  // Golden/Orange
 private val pileGreen = Color(0xFF4CAF50)
 private val pileBlue = Color(0xFF2196F3)
 private val pileBoldOrange = Color(0xFFFF6600)  // Bold orange #FF6600
-private val pilePink = Color(0xFFE91E63)
+private val pilePink = Color(0xFFE86082)  // Updated pink color
 private val darkText = Color(0xFF212121)
 
 // Google Fonts provider for Nunito

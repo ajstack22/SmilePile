@@ -21,7 +21,6 @@ fun ContentControlsSection(
 ) {
     SettingsSection(
         title = stringResource(R.string.child_safety_settings),
-        icon = Icons.Default.ChildFriendly,
         modifier = modifier
     ) {
         securitySummary?.let { summary ->

@@ -86,7 +86,7 @@ fun CategoryManagementScreen(
 
             FloatingActionButton(
                 onClick = { showAddDialog = true },
-                containerColor = Color(0xFFE91E63), // SmilePile pink
+                containerColor = Color(0xFFFF6600), // SmilePile orange
                 contentColor = Color.White,
                 modifier = Modifier
                     .padding(bottom = paddingValues.calculateBottomPadding())

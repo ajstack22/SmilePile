@@ -10,7 +10,7 @@ struct FloatingActionButton: View {
 
     private let buttonSize: CGFloat = 56
     private let iconSize: CGFloat = 24
-    private let pinkColor = Color(red: 233/255, green: 30/255, blue: 99/255) // #E91E63
+    private let orangeColor = Color(red: 255/255, green: 102/255, blue: 0/255) // #FF6600
 
     var body: some View {
         Button(action: {
@@ -23,7 +23,7 @@ struct FloatingActionButton: View {
             ZStack {
                 // Square FAB with rounded corners to match categories
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(pinkColor)
+                    .fill(orangeColor)
                     .frame(width: buttonSize, height: buttonSize)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
 

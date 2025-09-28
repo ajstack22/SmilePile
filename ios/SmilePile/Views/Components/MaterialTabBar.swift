@@ -50,19 +50,6 @@ struct MaterialTabBar: View {
             }
             .padding(.top, 12)
             .padding(.bottom, 8)
-
-            // Selection Indicator (behind items)
-            if let selectedFrame = tabPositions[selection] {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill((Color(hex: "#4CAF50") ?? Color.green).opacity(0.12))
-                    .frame(width: 64, height: 32)
-                    .position(
-                        x: selectedFrame.midX,
-                        y: selectedFrame.midY - 4
-                    )
-                    .animation(.spring(response: 0.3, dampingFraction: 0.8), value: selection)
-                    .allowsHitTesting(false)
-            }
         }
         .frame(height: 83)
         .coordinateSpace(name: "tabbar")
@@ -89,13 +76,14 @@ struct TabBarItem: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 24))
-                    .foregroundColor(isSelected ? Color(hex: "#4CAF50") : Color(UIColor.secondaryLabel))
-                    .scaleEffect(isPressed ? 0.92 : 1.0)
+                    .foregroundColor(isSelected ? Color(hex: "#E86082") : Color(UIColor.secondaryLabel))
+                    .scaleEffect(isPressed ? 0.92 : (isSelected ? 1.15 : 1.0))
+                    .animation(.easeOut(duration: 0.2), value: isSelected)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
 
                 Text(label)
                     .font(.system(size: 12, weight: isSelected ? .semibold : .regular))
-                    .foregroundColor(isSelected ? Color(hex: "#4CAF50") : Color(UIColor.secondaryLabel))
+                    .foregroundColor(isSelected ? Color(hex: "#E86082") : Color(UIColor.secondaryLabel))
                     .scaleEffect(isPressed ? 0.92 : 1.0)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
             }

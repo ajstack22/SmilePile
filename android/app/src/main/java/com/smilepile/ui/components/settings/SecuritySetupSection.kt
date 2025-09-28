@@ -33,7 +33,6 @@ fun SecuritySetupSection(
 ) {
     SettingsSection(
         title = stringResource(R.string.setup_security),
-        icon = Icons.Default.Security,
         modifier = modifier
     ) {
         securitySummary?.let { summary ->
@@ -50,16 +49,7 @@ fun SecuritySetupSection(
                     stringResource(R.string.setup_pin_subtitle)
                 },
                 icon = Icons.Default.Pin,
-                onClick = onPinSetupClick,
-                trailingContent = {
-                    if (summary.hasPIN) {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
+                onClick = onPinSetupClick
             )
 
             // Pattern Settings
@@ -75,16 +65,7 @@ fun SecuritySetupSection(
                     stringResource(R.string.setup_pattern_subtitle)
                 },
                 icon = Icons.Default.Pattern,
-                onClick = onPatternSetupClick,
-                trailingContent = {
-                    if (summary.hasPattern) {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
+                onClick = onPatternSetupClick
             )
 
             // Security Status Warning
