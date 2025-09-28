@@ -25,14 +25,16 @@ fun AppHeaderComponent(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier.fillMaxWidth()
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .statusBarsPadding()
     ) {
-        Column(
-            modifier = Modifier.statusBarsPadding()
+        // Header bar with logo and view mode button - with background
+        Surface(
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            // Header bar with logo and view mode button
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -44,7 +46,7 @@ fun AppHeaderComponent(
                     fontSize = 28.sp,
                     modifier = Modifier.align(Alignment.CenterStart)
                 )
-                
+
                 // View Mode eye icon on the right
                 if (showViewModeButton) {
                     Surface(
@@ -69,12 +71,12 @@ fun AppHeaderComponent(
                     }
                 }
             }
-
-            // Add minimal spacing between branding and categories
-            Spacer(modifier = Modifier.height(4.dp))
-
-            // Additional content (like category filters)
-            content()
         }
+
+        // Add minimal spacing between branding and categories
+        Spacer(modifier = Modifier.height(4.dp))
+
+        // Additional content (like category filters) - OUTSIDE the Surface background
+        content()
     }
 }

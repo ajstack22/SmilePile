@@ -108,9 +108,9 @@ fun CategoryChip(
                     }
                 ),
                 color = if (isSelected) {
-                    MaterialTheme.colorScheme.primary // Primary color when selected
+                    MaterialTheme.colorScheme.onSurface // Match iOS .primary (full contrast text)
                 } else {
-                    MaterialTheme.colorScheme.secondary // Secondary color when unselected
+                    MaterialTheme.colorScheme.onSurfaceVariant // Match iOS .secondary (muted text)
                 }
             )
         }
