@@ -45,17 +45,27 @@ class PhotoGalleryViewModel: ObservableObject {
 
     // Memory management
     private var memoryTimer: Timer?
-    private let thumbnailGenerator = SafeThumbnailGenerator()
+    private let storage = SimplePhotoStorage.shared
 
     // Cancellables
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Computed Properties
     var filteredPhotos: [Photo] {
+        let filtered: [Photo]
         if let selectedCategory = selectedCategory {
-            return photos.filter { $0.categoryId == selectedCategory.id }
+            filtered = photos.filter { $0.categoryId == selectedCategory.id }
+        } else {
+            filtered = photos
         }
-        return photos
+        logger.debug("Filtering photos: Total=\(self.photos.count), Category=\(self.selectedCategory?.displayName ?? "None"), Filtered=\(filtered.count)")
+
+        // Additional debug logging for first few photos
+        if !filtered.isEmpty {
+            logger.debug("First filtered photo: path=\(filtered[0].path), categoryId=\(filtered[0].categoryId)")
+        }
+
+        return filtered
     }
 
     var itemsPerRow: Int {
@@ -104,6 +114,11 @@ class PhotoGalleryViewModel: ObservableObject {
 
             let loadTime = Date().timeIntervalSince(startTime)
             logger.info("Loaded \(self.photos.count) photos in \(String(format: "%.2f", loadTime))s")
+
+            // Debug: log first few photos
+            for (index, photo) in self.photos.prefix(3).enumerated() {
+                logger.debug("Photo \(index + 1): path=\(photo.path), categoryId=\(photo.categoryId), exists=\(FileManager.default.fileExists(atPath: photo.path))")
+            }
 
             // Set initial visible range
             updateVisibleRange(scrollOffset: 0, containerHeight: UIScreen.main.bounds.height)
@@ -286,18 +301,8 @@ class PhotoGalleryViewModel: ObservableObject {
     }
 
     private func thumbnailURL(for photo: Photo, size: ThumbnailSize) async -> URL? {
-        // Get appropriate thumbnail path based on size
-        let thumbnailPath: String
-
-        // For now, use the single thumbnail path from the photo
-        // In a real implementation, you'd have different paths for different sizes
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let thumbnailsDir = documentsURL.appendingPathComponent("thumbnails")
-
-        let photoURL = URL(fileURLWithPath: photo.path)
-        let thumbnailFileName = "thumb_\(photoURL.lastPathComponent)"
-
-        return thumbnailsDir.appendingPathComponent(thumbnailFileName)
+        // Use SimplePhotoStorage to get the correct thumbnail URL
+        return storage.thumbnailURL(for: photo)
     }
 
     private func thumbnailCacheKey(for photo: Photo, size: ThumbnailSize) -> String {
@@ -325,7 +330,19 @@ class PhotoGalleryViewModel: ObservableObject {
     }
 
     private func updateMemoryUsage() async {
-        memoryUsageMB = thumbnailGenerator.getCurrentMemoryUsage()
+        // Get memory usage (simplified since we're not using thumbnailGenerator)
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size) / 4
+
+        let result = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+
+        if result == KERN_SUCCESS {
+            memoryUsageMB = Int(info.resident_size / 1024 / 1024)
+        }
 
         // Warn if memory usage is high
         if memoryUsageMB > Configuration.memoryWarningThreshold {
@@ -363,7 +380,7 @@ class PhotoGalleryViewModel: ObservableObject {
     }
 
     private func clearNonVisibleCache() async {
-        let visibleKeys = visiblePhotos.map { thumbnailCacheKey(for: $0, size: .small) }
+        _ = visiblePhotos.map { thumbnailCacheKey(for: $0, size: .small) }
 
         // This would require extending ImageCache to support selective clearing
         // For now, we'll rely on the cache's own eviction policy

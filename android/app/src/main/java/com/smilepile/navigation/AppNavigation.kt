@@ -155,10 +155,18 @@ fun AppNavHost(
 
         // Categories Screen - Category management interface
         composable(NavigationRoutes.CATEGORIES) {
+            val modeViewModel: AppModeViewModel = hiltViewModel()
             CategoryManagementScreen(
                 onNavigateBack = {
                     navController.navigateUp()
-                }
+                },
+                onNavigateToKidsMode = {
+                    modeViewModel.forceKidsMode()
+                    navController.navigate(NavigationRoutes.GALLERY) {
+                        popUpTo(NavigationRoutes.CATEGORIES) { inclusive = true }
+                    }
+                },
+                paddingValues = paddingValues
             )
         }
 

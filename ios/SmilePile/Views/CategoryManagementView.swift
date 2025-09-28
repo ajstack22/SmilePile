@@ -114,6 +114,15 @@ struct CategoryManagementView: View {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+
+            Button(action: {
+                viewModel.showAddCategoryDialog()
+            }) {
+                Text("Create First Category")
+                    .fontWeight(.medium)
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(.top, 8)
         }
     }
 

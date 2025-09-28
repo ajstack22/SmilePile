@@ -29,7 +29,7 @@ final class PhotoRepositoryImpl: PhotoRepository {
             photoEntity.timestamp = photo.createdAt
 
             try self.coreDataStack.saveContext(context)
-            self.logger.debug("Photo inserted successfully with ID: \(photoId)")
+            self.logger.info("Photo inserted successfully with ID: \(photoId), path: \(photo.path), categoryId: \(photo.categoryId)")
             return photoId // Return the actual photo ID, not categoryId
         }
     }
@@ -52,7 +52,7 @@ final class PhotoRepositoryImpl: PhotoRepository {
             }
 
             try self.coreDataStack.saveContext(context)
-            self.logger.debug("Inserted \(photos.count) photos successfully")
+            self.logger.info("Inserted \(photos.count) photos successfully")
         }
     }
 
@@ -130,7 +130,9 @@ final class PhotoRepositoryImpl: PhotoRepository {
             request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
 
             let entities = try context.fetch(request)
-            return entities.compactMap { self.entityToPhoto($0) }
+            let photos = entities.compactMap { self.entityToPhoto($0) }
+            self.logger.info("Retrieved \(photos.count) total photos from database")
+            return photos
         }
     }
 
@@ -157,7 +159,9 @@ final class PhotoRepositoryImpl: PhotoRepository {
             request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
 
             let entities = try context.fetch(request)
-            return entities.compactMap { self.entityToPhoto($0) }
+            let photos = entities.compactMap { self.entityToPhoto($0) }
+            self.logger.info("Retrieved \(photos.count) photos for category \(categoryId)")
+            return photos
         }
     }
 

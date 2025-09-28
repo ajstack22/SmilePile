@@ -75,6 +75,7 @@
 		C2DB33EAC05B97C42D61B0F7 /* PhotoRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02122F667B4717446A219364 /* PhotoRepositoryImpl.swift */; };
 		C2FF8BBAC9AFB24A90542C32 /* OptimizedImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA80582DD0A2B7A52E3A3524 /* OptimizedImageCache.swift */; };
 		C3ECB12F78D3963C3875212A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E624448C156BA4DB37DBB96 /* StorageManager.swift */; };
+		2DBBBBBBBBBBBBBBBBBBBBBB /* SimplePhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAAAAAAAAAAAAAAAAAAAAAA /* SimplePhotoStorage.swift */; };
 		C63D181FFE3FBB734D104C6F /* PhotoLibraryPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC32212B1C2400BDE45416B /* PhotoLibraryPermissionManager.swift */; };
 		C666573D6A080D19EC40129D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF0860B64572D6A6AD37362 /* Assets.xcassets */; };
 		C7AAF3CF7F7056C23779E48D /* CategoryManagementCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6E35A47CD8C9EB49C07E05 /* CategoryManagementCard.swift */; };
@@ -136,6 +137,7 @@
 		3651FDD16070555083172725 /* CoreDataPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPublisher.swift; sourceTree = "<group>"; };
 		38BEFB16C2F5D857BFCC1FB6 /* PatternLockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternLockViewModel.swift; sourceTree = "<group>"; };
 		3E624448C156BA4DB37DBB96 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		2DAAAAAAAAAAAAAAAAAAAAAA /* SimplePhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePhotoStorage.swift; sourceTree = "<group>"; };
 		3F857FFF8F8B4082A10FAA1C /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		40DD9D0842247FF5FA3F9BCD /* CoreDataStackTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStackTests.swift; path = SmilePileTests/Core/Data/CoreDataStackTests.swift; sourceTree = "<group>"; };
 		41CDB664F9E512804346FAA0 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				9B55CC1548499D6099A42899 /* ImageProcessor.swift */,
 				3E624448C156BA4DB37DBB96 /* StorageManager.swift */,
+				2DAAAAAAAAAAAAAAAAAAAAAA /* SimplePhotoStorage.swift */,
 				07B54FAD23370C51854A39DD /* StorageResult.swift */,
 				6C4FA96B20F0960E8CD1A414 /* SafeThumbnailGenerator.swift */,
 				A5625674F9786DB4FA761EAD /* PhotoImportSession.swift */,
@@ -685,6 +688,7 @@
 				73EC80CD1D10F4F595C113C3 /* SmilePileApp.swift in Sources */,
 				EEE306A6497390E29B2152E2 /* EnhancedPhotoViewer.swift in Sources */,
 				C3ECB12F78D3963C3875212A /* StorageManager.swift in Sources */,
+				2DBBBBBBBBBBBBBBBBBBBBBB /* SimplePhotoStorage.swift in Sources */,
 				420287D7BCE5DC705B23194B /* StorageResult.swift in Sources */,
 				5BE3EA5F294A4450A75356BC /* AsyncImageView.swift in Sources */,
 				DBFDC3BE14174F249B6222F3 /* FloatingActionButton.swift in Sources */,

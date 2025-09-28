@@ -5,9 +5,11 @@ import CoreImage
 import CryptoKit
 import ImageIO
 import CoreLocation
+import os.log
 
 /// Handles photo asset processing with memory-safe loading and caching
 class PhotoAssetProcessor: ObservableObject {
+    private let logger = Logger(subsystem: "com.smilepile", category: "PhotoAssetProcessor")
 
     // MARK: - Configuration
     struct Configuration {
@@ -65,15 +67,22 @@ class PhotoAssetProcessor: ObservableObject {
 
     // MARK: - Initialization
     init() {
-        // Setup document directory for photos - store in root Documents folder
+        // Setup document directory for photos - store in photos subdirectory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        self.documentDirectory = documentsURL
+        self.documentDirectory = documentsURL.appendingPathComponent("photos", isDirectory: true)
 
         // Setup thumbnail directory
         self.thumbnailDirectory = documentsURL.appendingPathComponent("thumbnails", isDirectory: true)
 
         // Create directories if needed
+        try? FileManager.default.createDirectory(at: documentDirectory, withIntermediateDirectories: true)
         try? FileManager.default.createDirectory(at: thumbnailDirectory, withIntermediateDirectories: true)
+
+        logger.info("PhotoAssetProcessor initialized")
+        logger.info("Photos directory: \(self.documentDirectory.path, privacy: .public)")
+        logger.info("Thumbnails directory: \(self.thumbnailDirectory.path, privacy: .public)")
+        logger.info("Photos dir exists: \(FileManager.default.fileExists(atPath: self.documentDirectory.path), privacy: .public)")
+        logger.info("Thumbnails dir exists: \(FileManager.default.fileExists(atPath: self.thumbnailDirectory.path), privacy: .public)")
 
         // Setup concurrent load limiting
         self.semaphore = DispatchSemaphore(value: Configuration.maxConcurrentLoads)
@@ -142,6 +151,7 @@ class PhotoAssetProcessor: ObservableObject {
         let metadata = extractMetadata(from: asset, imageData: imageData)
 
         return Photo(
+            id: PhotoIDGenerator.generateUniqueID(),
             path: processedPath,
             categoryId: categoryId,
             name: asset.getFileName() ?? "",
@@ -172,6 +182,9 @@ class PhotoAssetProcessor: ObservableObject {
         let thumbnailURL = thumbnailDirectory.appendingPathComponent(thumbnailFilename)
         if let thumbnailData = thumbnail.jpegData(compressionQuality: Configuration.thumbnailQuality) {
             try? thumbnailData.write(to: thumbnailURL)
+            logger.debug("Thumbnail saved as: \(thumbnailFilename, privacy: .public)")
+            logger.debug("Thumbnail path: \(thumbnailURL.path, privacy: .public)")
+            logger.debug("Thumbnail exists: \(FileManager.default.fileExists(atPath: thumbnailURL.path), privacy: .public)")
         }
 
         return thumbnail
@@ -196,7 +209,7 @@ class PhotoAssetProcessor: ObservableObject {
                 }
             } catch {
                 // Log error but continue processing other photos
-                print("Failed to process photo: \(error)")
+                logger.error("Failed to process photo: \(error.localizedDescription, privacy: .public)")
                 continue
             }
         }
@@ -242,12 +255,12 @@ class PhotoAssetProcessor: ObservableObject {
         categoryId: Int64,
         identifier: String?
     ) async throws -> Photo {
-        // Check for duplicates first
-        guard let originalData = image.jpegData(compressionQuality: 1.0) else {
+        // Check for duplicates first - use lower quality for hash to save memory
+        guard let hashData = image.jpegData(compressionQuality: 0.5) else {
             throw ProcessingError.invalidAsset
         }
 
-        let hash = calculateHash(for: originalData)
+        let hash = calculateHash(for: hashData)
         if importedHashes.contains(hash) {
             throw ProcessingError.cancelled // Skip duplicates
         }
@@ -255,8 +268,26 @@ class PhotoAssetProcessor: ObservableObject {
         // Resize if needed to manage memory
         let resizedImage = try await resizeImageIfNeeded(image)
 
-        // Optimize image with higher quality for main photo
-        guard let imageData = resizedImage.jpegData(compressionQuality: Configuration.jpegQuality) else {
+        // Try to convert to JPEG, handling HDR images
+        var imageData: Data?
+
+        // First try standard JPEG compression
+        imageData = resizedImage.jpegData(compressionQuality: Configuration.jpegQuality)
+
+        // If that fails, try with lower quality
+        if imageData == nil {
+            logger.warning("Failed to create JPEG at quality \(Configuration.jpegQuality), trying lower quality")
+            imageData = resizedImage.jpegData(compressionQuality: 0.7)
+        }
+
+        // If still failing, try PNG format
+        if imageData == nil {
+            logger.warning("Failed to create JPEG, trying PNG format")
+            imageData = resizedImage.pngData()
+        }
+
+        guard let finalImageData = imageData else {
+            logger.error("Failed to encode image in any format")
             throw ProcessingError.processingTimeout
         }
 
@@ -265,7 +296,13 @@ class PhotoAssetProcessor: ObservableObject {
         let fileURL = documentDirectory.appendingPathComponent(filename)
 
         // Save to disk
-        try imageData.write(to: fileURL)
+        try finalImageData.write(to: fileURL)
+
+        // Debug logging
+        logger.info("Photo saved to: \(fileURL.path, privacy: .public)")
+        logger.info("File exists: \(FileManager.default.fileExists(atPath: fileURL.path), privacy: .public)")
+        logger.info("File size: \(finalImageData.count, privacy: .public) bytes")
+        logger.info("Documents directory: \(self.documentDirectory.path, privacy: .public)")
 
         // Mark as imported
         importedHashes.insert(hash)
@@ -273,14 +310,15 @@ class PhotoAssetProcessor: ObservableObject {
         // Extract metadata
         let metadata = extractMetadata(from: image, identifier: identifier)
 
-        // Create Photo object with enhanced metadata
+        // Create Photo object with enhanced metadata and proper ID
         return Photo(
+            id: PhotoIDGenerator.generateUniqueID(),
             path: fileURL.path,
             categoryId: categoryId,
             name: identifier ?? filename,
             isFromAssets: false,
             createdAt: Int64((metadata.creationDate ?? Date()).timeIntervalSince1970 * 1000),
-            fileSize: Int64(imageData.count),
+            fileSize: Int64(finalImageData.count),
             width: metadata.width,
             height: metadata.height
         )
@@ -408,7 +446,7 @@ class PhotoAssetProcessor: ObservableObject {
     private func handleMemoryWarning() {
         // Cancel non-critical operations but don't clear caches during memory warnings
         // Cache clearing can cause more memory pressure from rebuilding
-        print("Memory warning received - cancelling pending requests")
+        logger.warning("Memory warning received - cancelling pending requests")
         cancelAllRequests()
 
         // Clear imported hashes to free some memory

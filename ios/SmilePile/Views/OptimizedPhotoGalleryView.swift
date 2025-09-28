@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 import Photos
+import os.log
 
 /// Optimized photo gallery with virtual scrolling and memory-efficient loading
 // MARK: - Category Selection Sheet
@@ -81,27 +82,59 @@ struct PhotoStackItem: View {
     var body: some View {
         VStack(spacing: 0) {
             // Photo card
-            AsyncImage(url: URL(fileURLWithPath: photo.path)) { phase in
-                switch phase {
-                case .empty:
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .overlay(ProgressView())
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxHeight: 300)
-                        .clipped()
-                case .failure(_):
+            Group {
+                // Check if photo exists before trying to display
+                if FileManager.default.fileExists(atPath: photo.path) {
+                    AsyncImage(url: URL(fileURLWithPath: photo.path)) { phase in
+                        switch phase {
+                        case .empty:
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.2))
+                                .overlay(ProgressView())
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(maxHeight: 300)
+                                .clipped()
+                        case .failure(let error):
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.2))
+                                .overlay(
+                                    VStack {
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .foregroundColor(.gray)
+                                        Text("Failed to load")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                )
+                                .onAppear {
+                                    let logger = Logger(subsystem: "com.smilepile", category: "PhotoStackItem")
+                                    logger.error("Failed to load photo at path: \(photo.path, privacy: .public)")
+                                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                                }
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                } else {
+                    // Photo file doesn't exist
                     Rectangle()
                         .fill(Color.gray.opacity(0.2))
                         .overlay(
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundColor(.gray)
+                            VStack {
+                                Image(systemName: "photo.slash")
+                                    .foregroundColor(.gray)
+                                Text("Photo not found")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
                         )
-                @unknown default:
-                    EmptyView()
+                        .onAppear {
+                            let logger = Logger(subsystem: "com.smilepile", category: "PhotoStackItem")
+                            logger.error("Photo file not found at path: \(photo.path, privacy: .public)")
+                        }
                 }
             }
             .frame(maxWidth: .infinity)
@@ -154,6 +187,8 @@ struct OptimizedPhotoGalleryView: View {
     private let photoRepository = PhotoRepositoryImpl()
     private let repository = CategoryRepositoryImpl.shared
     @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
+    private let storage = SimplePhotoStorage.shared
+    private let logger = Logger(subsystem: "com.smilepile", category: "OptimizedPhotoGalleryView")
 
     var body: some View {
         ZStack {
@@ -165,9 +200,8 @@ struct OptimizedPhotoGalleryView: View {
                     },
                     showViewModeButton: true
                 ) {
-                    if !viewModel.photos.isEmpty {
-                        categoryFilterBar
-                    }
+                    // Always show categories so users can select one
+                    categoryFilterBar
                 }
 
                 // Main content
@@ -201,6 +235,8 @@ struct OptimizedPhotoGalleryView: View {
             }
         }
         .task {
+            // Check storage health on startup
+            storage.checkStorageHealth()
             await loadCategories()
             await viewModel.loadPhotos()
         }
@@ -273,25 +309,75 @@ struct OptimizedPhotoGalleryView: View {
             }
         )
         .padding(.bottom, 100) // Space for FAB
+        .gesture(
+            DragGesture()
+                .onEnded { value in
+                    let swipeThreshold: CGFloat = 150 // Match Android's 150px threshold
+
+                    if categories.isEmpty { return }
+
+                    let currentIndex = viewModel.selectedCategory != nil ?
+                        categories.firstIndex(where: { $0.id == viewModel.selectedCategory?.id }) ?? -1 :
+                        -1
+
+                    if value.translation.width > swipeThreshold {
+                        // Swipe right - previous category
+                        if currentIndex > 0 {
+                            viewModel.selectedCategory = categories[currentIndex - 1]
+                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                        } else if currentIndex == -1 && !categories.isEmpty {
+                            // If no category selected, select the last one
+                            viewModel.selectedCategory = categories.last
+                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                        }
+                    } else if value.translation.width < -swipeThreshold {
+                        // Swipe left - next category
+                        if currentIndex >= 0 && currentIndex < categories.count - 1 {
+                            viewModel.selectedCategory = categories[currentIndex + 1]
+                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                        } else if currentIndex == -1 && !categories.isEmpty {
+                            // If no category selected, select the first one
+                            viewModel.selectedCategory = categories.first
+                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                        }
+                    }
+                }
+        )
     }
 
     private var categoryFilterBar: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                // Category chips - a category must always be selected
-                ForEach(categories) { category in
+        Group {
+            if categories.isEmpty {
+                // Show loading or placeholder when no categories
+                HStack {
+                    Text("Loading categories...")
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color(UIColor.secondarySystemBackground))
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        // Category chips - a category must always be selected
+                        ForEach(categories) { category in
                     CategoryChip(
                         displayName: category.displayName,
                         colorHex: category.colorHex ?? "#4CAF50",
                         isSelected: viewModel.selectedCategory?.id == category.id,
                         onTap: {
+                            logger.info("Category tapped: \(category.displayName, privacy: .public)")
                             viewModel.selectedCategory = category
+                            logger.info("Selected category is now: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
                         }
-                    )
+                        )
+                    }
+                }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
         }
     }
 
@@ -322,12 +408,21 @@ struct OptimizedPhotoGalleryView: View {
                 .font(.system(size: 64))
                 .foregroundColor(.gray)
 
-            Text("No photos yet")
-                .font(.title2)
-                .fontWeight(.semibold)
+            if viewModel.selectedCategory == nil {
+                Text("Select a category above")
+                    .font(.title2)
+                    .fontWeight(.semibold)
 
-            Text("Tap the + button to add photos")
-                .foregroundColor(.secondary)
+                Text("Then tap + to add photos")
+                    .foregroundColor(.secondary)
+            } else {
+                Text("No photos in \(viewModel.selectedCategory?.displayName ?? "this category")")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+
+                Text("Tap the + button to add photos")
+                    .foregroundColor(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -367,21 +462,28 @@ struct OptimizedPhotoGalleryView: View {
     // MARK: - Actions
 
     private func loadCategories() async {
+        logger.info("Starting to load categories...")
         do {
             categories = try await repository.getAllCategories()
+            logger.info("Loaded \(categories.count, privacy: .public) categories")
 
             // If no categories exist, initialize defaults
             if categories.isEmpty {
-                print("OptimizedPhotoGalleryView: No categories found, initializing defaults...")
+                logger.info("No categories found, initializing defaults...")
                 try await repository.initializeDefaultCategories()
                 categories = try await repository.getAllCategories()
+                logger.info("After initialization: \(categories.count, privacy: .public) categories")
             }
 
-            if !categories.isEmpty && viewModel.selectedCategory == nil {
-                viewModel.selectedCategory = categories.first
+            // Debug: log all category names
+            for category in categories {
+                logger.debug("Category: \(category.displayName, privacy: .public) (id: \(category.id, privacy: .public))")
             }
+
+            // Don't auto-select a category - let user choose when adding photos
+            logger.info("Categories loaded, no auto-selection to ensure user picks category")
         } catch {
-            print("OptimizedPhotoGalleryView: Failed to load categories: \(error)")
+            logger.error("Failed to load categories: \(error.localizedDescription, privacy: .public)")
 
             // Use default categories as fallback and save them to CoreData
             let defaultCategories = Category.getDefaultCategories()
@@ -391,14 +493,13 @@ struct OptimizedPhotoGalleryView: View {
                 try await repository.initializeDefaultCategories()
                 categories = try await repository.getAllCategories()
             } catch {
-                print("OptimizedPhotoGalleryView: Failed to save default categories: \(error)")
+                logger.error("Failed to save default categories: \(error.localizedDescription, privacy: .public)")
                 // Use in-memory defaults as last resort
                 categories = defaultCategories
+                logger.info("Using in-memory defaults: \(categories.count, privacy: .public) categories")
             }
 
-            if !categories.isEmpty && viewModel.selectedCategory == nil {
-                viewModel.selectedCategory = categories.first
-            }
+            // Don't auto-select - let user choose
         }
     }
 
@@ -407,17 +508,23 @@ struct OptimizedPhotoGalleryView: View {
             try await photoRepository.deletePhoto(photo)
             await viewModel.loadPhotos()
         } catch {
-            print("Failed to delete photo: \(error)")
+            logger.error("Failed to delete photo: \(error.localizedDescription, privacy: .public)")
         }
     }
 
     private func handleAddPhotosButtonTap() {
+        logger.info("Add photos button tapped")
+        logger.info("Selected category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+        logger.info("Categories available: \(categories.count, privacy: .public)")
+
         // First check if a category is selected
         if viewModel.selectedCategory == nil {
             // If no category selected, show category selection
+            logger.info("No category selected, showing selection sheet")
             showingCategorySelection = true
         } else {
             // If category is selected, proceed with photo picker
+            logger.info("Category selected: \(viewModel.selectedCategory!.displayName, privacy: .public), opening photo picker")
             permissionManager.checkCurrentAuthorizationStatus()
 
             switch permissionManager.authorizationStatus {
@@ -439,19 +546,54 @@ struct OptimizedPhotoGalleryView: View {
         Task {
             viewModel.isLoading = true
             do {
-                for photo in photos {
-                    _ = try await photoRepository.insertPhoto(photo)
+                logger.info("Saving \(photos.count, privacy: .public) photos to database")
+
+                // Log photo details before saving
+                for (index, photo) in photos.enumerated() {
+                    logger.debug("Photo \(index + 1, privacy: .public): path=\(photo.path, privacy: .public), categoryId=\(photo.categoryId, privacy: .public)")
+
+                    // Verify file exists before saving
+                    if FileManager.default.fileExists(atPath: photo.path) {
+                        logger.debug("✓ Photo file exists at path: \(photo.path, privacy: .public)")
+                    } else {
+                        logger.error("✗ Photo file NOT found at path: \(photo.path, privacy: .public)")
+                    }
+
+                    let savedPhotoId = try await photoRepository.insertPhoto(photo)
+                    logger.info("Saved photo with ID: \(savedPhotoId, privacy: .public), Category: \(photo.categoryId, privacy: .public)")
+
+                    // Thumbnail was already generated by SimplePhotoStorage during import
+                    logger.debug("Photo saved with thumbnail for ID: \(photo.id, privacy: .public)")
                 }
+
+                // Reload photos to show the new ones
+                logger.info("Reloading photos after save")
                 await viewModel.loadPhotos()
+
+                // Ensure we're viewing the category where photos were just added
+                if let firstPhoto = photos.first,
+                   let category = categories.first(where: { $0.id == firstPhoto.categoryId }) {
+                    viewModel.selectedCategory = category
+                    logger.info("Set selected category to: \(category.displayName, privacy: .public)")
+                }
+
+                logger.info("Gallery now has \(viewModel.photos.count, privacy: .public) total photos")
+                logger.info("Filtered photos for current category: \(viewModel.filteredPhotos.count, privacy: .public)")
+
+                // Log the filtered photos
+                for (index, photo) in viewModel.filteredPhotos.prefix(5).enumerated() {
+                    logger.debug("Filtered photo \(index + 1, privacy: .public): path=\(photo.path, privacy: .public)")
+                }
             } catch {
-                print("Error saving photos: \(error)")
+                logger.error("Error saving photos: \(error.localizedDescription, privacy: .public)")
             }
             viewModel.isLoading = false
 
-            if !photos.isEmpty {
-                selectedPhotos = photos
-                showingPhotoEditor = true
-            }
+            // Don't automatically open editor - let user see photos in gallery first
+            // if !photos.isEmpty {
+            //     selectedPhotos = photos
+            //     showingPhotoEditor = true
+            // }
         }
     }
 

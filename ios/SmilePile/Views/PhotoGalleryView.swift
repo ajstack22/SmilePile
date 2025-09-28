@@ -54,7 +54,7 @@ struct PhotoGalleryView: View {
                     }
                 }
 
-                // Photo Grid
+                // Photo Grid with swipe gesture support
                 ScrollView {
                     if filteredPhotos.isEmpty {
                         EmptyGalleryPlaceholder()
@@ -96,6 +96,36 @@ struct PhotoGalleryView: View {
                         .padding(.bottom, 100) // Space for FAB and tab bar
                     }
                 }
+                .gesture(
+                    DragGesture()
+                        .onEnded { value in
+                            let swipeThreshold: CGFloat = 150 // Match Android's 150px threshold
+
+                            if categories.isEmpty { return }
+
+                            let currentIndex = selectedCategory != nil ?
+                                categories.firstIndex(where: { $0.id == selectedCategory?.id }) ?? -1 :
+                                -1
+
+                            if value.translation.width > swipeThreshold {
+                                // Swipe right - previous category
+                                if currentIndex > 0 {
+                                    selectedCategory = categories[currentIndex - 1]
+                                } else if currentIndex == -1 && !categories.isEmpty {
+                                    // If no category selected, select the last one
+                                    selectedCategory = categories.last
+                                }
+                            } else if value.translation.width < -swipeThreshold {
+                                // Swipe left - next category
+                                if currentIndex >= 0 && currentIndex < categories.count - 1 {
+                                    selectedCategory = categories[currentIndex + 1]
+                                } else if currentIndex == -1 && !categories.isEmpty {
+                                    // If no category selected, select the first one
+                                    selectedCategory = categories.first
+                                }
+                            }
+                        }
+                )
             }
             .background(Color(UIColor.systemBackground))
 
@@ -235,17 +265,7 @@ struct PhotoGalleryView: View {
     private var categoryFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                // All Photos chip
-                CategoryChip(
-                    displayName: "All Photos",
-                    colorHex: "#9E9E9E",
-                    isSelected: selectedCategory == nil,
-                    onTap: {
-                        selectedCategory = nil
-                    }
-                )
-
-                // Category chips
+                // Category chips only - no "All Photos"
                 ForEach(categories) { category in
                     CategoryChip(
                         displayName: category.displayName,

@@ -99,8 +99,8 @@ struct EnhancedPhotoPickerView: View {
     let onPhotosSelected: ([Photo]) -> Void
     let onCancel: (() -> Void)?
 
-    private let processor = PhotoAssetProcessor()
-    private let maxPhotosPerBatch = PhotoAssetProcessor.Configuration.maxPhotosPerBatch
+    private let storage = SimplePhotoStorage.shared
+    private let maxPhotosPerBatch = 50 // Match Android batch size
 
     var body: some View {
         ZStack {
@@ -159,35 +159,25 @@ struct EnhancedPhotoPickerView: View {
             return
         }
 
-        Task {
+        Task { @MainActor in
             isProcessing = true
             processingProgress = 0
 
-            do {
-                let photos = try await processor.processPickerResults(
-                    results,
-                    categoryId: categoryId
-                ) { progress in
-                    Task { @MainActor in
-                        processingProgress = progress
-                    }
-                }
+            // Use SimplePhotoStorage to process photos
+            let photos = await storage.processPickerResults(results, categoryId: categoryId)
 
-                await MainActor.run {
-                    isProcessing = false
-                    isPresented = false
+            // Update progress
+            processingProgress = 1.0
 
-                    // Show success message if photos were processed
-                    if !photos.isEmpty {
-                        onPhotosSelected(photos)
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    isProcessing = false
-                    errorMessage = "Failed to import photos: \(error.localizedDescription)"
-                    showingError = true
-                }
+            isProcessing = false
+            isPresented = false
+
+            // Pass the processed photos back
+            if !photos.isEmpty {
+                onPhotosSelected(photos)
+            } else {
+                errorMessage = "No photos could be imported"
+                showingError = true
             }
         }
     }

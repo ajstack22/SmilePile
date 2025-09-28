@@ -40,18 +40,7 @@ fun CategorySelectionDialog(
     multiSelectMode: Boolean = true,
     title: String = if (multiSelectMode) "Select Categories" else "Select Category"
 ) {
-    var searchQuery by remember { mutableStateOf("") }
     var currentSelection by remember { mutableStateOf(selectedCategoryIds) }
-
-    val filteredCategories = remember(categories, searchQuery) {
-        if (searchQuery.isBlank()) {
-            categories
-        } else {
-            categories.filter {
-                it.displayName.contains(searchQuery, ignoreCase = true)
-            }
-        }
-    }
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -92,37 +81,6 @@ fun CategorySelectionDialog(
                         )
                     }
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Search bar
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { searchQuery = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Search categories...") },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Search"
-                        )
-                    },
-                    trailingIcon = {
-                        if (searchQuery.isNotEmpty()) {
-                            IconButton(onClick = { searchQuery = "" }) {
-                                Icon(
-                                    imageVector = Icons.Default.Clear,
-                                    contentDescription = "Clear search"
-                                )
-                            }
-                        }
-                    },
-                    singleLine = true,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-                    )
-                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -188,7 +146,7 @@ fun CategorySelectionDialog(
                     }
 
                     // Categories
-                    items(filteredCategories) { category ->
+                    items(categories) { category ->
                         CategorySelectionItem(
                             category = category,
                             isSelected = currentSelection.contains(category.id),
@@ -288,17 +246,8 @@ fun CategorySelectionItem(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(categoryColor),
-                contentAlignment = Alignment.Center
-            ) {
-                // Icon placeholder
-                Icon(
-                    imageVector = getCategoryIcon(category.iconResource),
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
+                    .background(categoryColor)
+            )
 
             Spacer(modifier = Modifier.width(12.dp))
 
@@ -336,26 +285,3 @@ fun CategorySelectionItem(
     }
 }
 
-/**
- * Maps icon names to Material Icons
- */
-@Composable
-fun getCategoryIcon(iconName: String?): androidx.compose.ui.graphics.vector.ImageVector {
-    return when (iconName) {
-        "family_restroom" -> Icons.Default.FamilyRestroom
-        "group" -> Icons.Default.Group
-        "forest", "park" -> Icons.Default.Forest
-        "flight_takeoff" -> Icons.Default.FlightTakeoff
-        "restaurant" -> Icons.Default.Restaurant
-        "celebration", "event" -> Icons.Default.Celebration
-        "pets" -> Icons.Default.Pets
-        "work", "business" -> Icons.Default.Work
-        "sports_soccer" -> Icons.Default.SportsSoccer
-        "palette" -> Icons.Default.Palette
-        "directions_car" -> Icons.Default.DirectionsCar
-        "school" -> Icons.Default.School
-        "favorite" -> Icons.Default.Favorite
-        "star" -> Icons.Default.Star
-        else -> Icons.Default.Category
-    }
-}

@@ -6,66 +6,50 @@ struct CategoryManagementCard: View {
     let onDelete: (Category) -> Void
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 12) {
-                    CategoryColorIndicator(
-                        colorHex: categoryWithCount.category.colorHex ?? "#4CAF50",
-                        size: 20
-                    )
+        HStack(spacing: 12) {
+            // Large plain color circle
+            Circle()
+                .fill(Color(hex: categoryWithCount.category.colorHex ?? "#4CAF50") ?? Color.gray)
+                .frame(width: 48, height: 48)
 
-                    Text(categoryWithCount.category.displayName)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+            // Category info
+            VStack(alignment: .leading, spacing: 4) {
+                Text(categoryWithCount.category.displayName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
 
-                    if categoryWithCount.category.isDefault {
-                        Text("DEFAULT")
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.orange)
-                            .clipShape(Capsule())
-                    }
-
-                    Spacer()
-                }
-
-                HStack {
-                    Label("\(categoryWithCount.photoCount) photo\(categoryWithCount.photoCount == 1 ? "" : "s")",
-                          systemImage: "photo")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    Spacer()
-
-                    HStack(spacing: 16) {
-                        Button(action: { onEdit(categoryWithCount.category) }) {
-                            Image(systemName: "pencil")
-                                .font(.system(size: 16))
-                                .foregroundColor(.blue)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-
-                        Button(action: { onDelete(categoryWithCount.category) }) {
-                            Image(systemName: "trash")
-                                .font(.system(size: 16))
-                                .foregroundColor(.red)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                }
+                Text("\(categoryWithCount.photoCount) photo\(categoryWithCount.photoCount == 1 ? "" : "s")")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
-            .padding()
+
+            Spacer()
+
+            // Action buttons with IconButton-style touch targets
+            HStack(spacing: 8) {
+                Button(action: { onEdit(categoryWithCount.category) }) {
+                    Image(systemName: "square.and.pencil")
+                        .font(.system(size: 22, weight: .medium))
+                        .foregroundColor(.accentColor)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(PlainButtonStyle())
+
+                Button(action: { onDelete(categoryWithCount.category) }) {
+                    Image(systemName: "trash.fill")
+                        .font(.system(size: 22, weight: .medium))
+                        .foregroundColor(Color(UIColor.systemRed))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
         }
-        .background(Color(UIColor.systemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-        )
+        .padding(12)
+        .background(Color(UIColor.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 2)
+        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 }
 

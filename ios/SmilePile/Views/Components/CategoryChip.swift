@@ -6,6 +6,7 @@ struct CategoryChip: View {
     let isSelected: Bool
     let photoCount: Int?
     let onTap: (() -> Void)?
+    @Environment(\.colorScheme) var colorScheme
 
     init(
         displayName: String,
@@ -21,6 +22,16 @@ struct CategoryChip: View {
         self.onTap = onTap
     }
 
+    private var textWeight: Font.Weight {
+        if colorScheme == .dark {
+            return .bold // Bold in dark mode
+        } else if isSelected {
+            return .medium // Medium when selected in light mode
+        } else {
+            return .regular // Regular otherwise
+        }
+    }
+
     var body: some View {
         Button(action: { onTap?() }) {
             HStack(spacing: 8) {
@@ -33,7 +44,7 @@ struct CategoryChip: View {
                     )
 
                 Text(displayName)
-                    .font(.system(size: 14, weight: isSelected ? .medium : .regular))
+                    .font(.system(size: 14, weight: textWeight))
                     .foregroundColor(isSelected ? .primary : .secondary)
 
                 if let count = photoCount, count > 0 {

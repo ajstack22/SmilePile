@@ -13,10 +13,10 @@ The Atlas workflow has evolved from manual script execution to an intelligent ag
 | Researcher | `general-purpose` | Deep codebase exploration | Phase 1 |
 | Product Manager | `product-manager` | Requirements & validation | Phases 2, 7 |
 | Developer | `developer` | Technical planning & coding | Phases 3, 5 |
-| Platform Expert | `ios-expert`, `android-expert` | Platform-specific implementation | Phases 3, 5 |
+| Debugger | `debugger` | Diagnosis without code changes | As needed |
+| Security | `security` | Vulnerability auditing | Phase 4 |
 | Peer Reviewer | `peer-reviewer` | Quality & edge cases | Phases 4, 6 |
-| QA Tester | `general-purpose` | Testing & verification | Phase 6 |
-| Organizer | `general-purpose` | Clean-up & documentation | Phase 8 |
+| UX Analyst | `ux-analyst` | UI/UX review | Phase 6 |
 | DevOps | `devops` | Deployment, CI/CD, quality gates | Phase 9 |
 
 ## Complete Workflow
@@ -80,23 +80,18 @@ Launch a developer agent to create implementation plan for [STORY ID].
 Detail all file changes, technical approach, and implementation order.
 ```
 
-**Platform-Specific Alternative:**
-```
-Launch an ios-expert/android-expert agent for platform-specific planning.
-```
-
-### Phase 4: Adversarial Review (Peer Reviewer Agent)
+### Phase 4: Adversarial Review (Security & Peer Reviewer Agents)
 
 **Trigger Command:**
 ```
-Launch a peer-reviewer agent to adversarially review the plan for [STORY ID].
-Find edge cases, potential failures, and missing requirements.
-Be harsh but constructive.
+Launch agents in parallel:
+1. Security agent to audit for vulnerabilities in [STORY ID] plan
+2. Peer-reviewer agent to find edge cases and missing requirements
 ```
 
 **Review Focus:**
+- Security vulnerabilities
 - Edge cases
-- Security issues
 - Performance implications
 - Missing requirements
 
@@ -117,20 +112,20 @@ Launch multiple developer agents in parallel:
 - Agent 4: Documentation updates
 ```
 
-### Phase 6: Testing (QA Tester + Peer Reviewer)
+### Phase 6: Testing (UX Analyst + Peer Reviewer)
 
 **Trigger Command:**
 ```
 Launch agents in parallel:
-1. General-purpose agent for QA testing of [STORY ID]
+1. UX-analyst agent to verify UI/UX implementation of [STORY ID]
 2. Peer-reviewer agent for code quality review
 ```
 
 **Test Coverage:**
+- UI/UX compliance
 - Functional testing
 - Edge case validation
-- Performance testing
-- Cross-platform verification
+- Cross-platform consistency
 
 ### Phase 7: Validation (Product Manager Agent)
 
@@ -140,11 +135,11 @@ Launch product-manager agent to validate [STORY ID] implementation.
 Verify all acceptance criteria are met and provide sign-off.
 ```
 
-### Phase 8: Clean-up (Organizer Agent)
+### Phase 8: Clean-up (General-Purpose Agent)
 
 **Trigger Command:**
 ```
-Launch general-purpose agent as organizer to clean up after [STORY ID].
+Launch general-purpose agent to clean up after [STORY ID].
 Remove temp files, update documentation, close story, and organize evidence.
 CRITICAL: Ensure all documentation is in /backlog/ per DOCUMENTATION_STANDARDS.md
 ```
@@ -194,9 +189,9 @@ criteria for theme switching, persistence, and UI updates."
 service, settings UI, and component updates."
 
 ## Phase 4: Adversarial Review
-*Launch peer-reviewer agent*
-"Review dark mode plan for edge cases: system theme conflicts, persistence
-issues, component visibility, accessibility."
+*Launch parallel agents*
+- Security: "Audit dark mode plan for security vulnerabilities"
+- Peer Reviewer: "Review for edge cases and missing requirements"
 
 ## Phase 5: Implementation
 *Launch multiple developer agents in parallel*
@@ -206,15 +201,15 @@ issues, component visibility, accessibility."
 
 ## Phase 6: Testing
 *Launch parallel testing agents*
-- QA Agent: "Test dark mode across all screens and features"
-- Reviewer: "Review code quality and patterns"
+- UX Analyst: "Verify dark mode UI/UX across all screens"
+- Peer Reviewer: "Review code quality and patterns"
 
 ## Phase 7: Validation
 *Launch product-manager agent*
 "Validate dark mode implementation meets all acceptance criteria"
 
 ## Phase 8: Clean-up
-*Launch organizer agent*
+*Launch general-purpose agent*
 "Clean up dark mode implementation artifacts and update documentation"
 ```
 
@@ -314,9 +309,9 @@ launching appropriate agents for each phase. Execute in parallel where possible.
 
 ### Multi-Platform Development
 ```
-Launch platform experts in parallel:
-- ios-expert: "Implement iOS-specific features"
-- android-expert: "Implement Android-specific features"
+Launch developers in parallel:
+- developer: "Implement iOS-specific features"
+- developer: "Implement Android-specific features"
 - developer: "Implement shared logic"
 ```
 
