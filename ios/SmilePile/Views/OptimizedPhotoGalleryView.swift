@@ -94,8 +94,7 @@ struct PhotoStackItem: View {
                         case .success(let image):
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(maxHeight: 300)
+                                .aspectRatio(4/3, contentMode: .fill)
                                 .clipped()
                         case .failure(let error):
                             Rectangle()
@@ -138,7 +137,7 @@ struct PhotoStackItem: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 300)
+            .aspectRatio(4/3, contentMode: .fit)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .onTapGesture { onPhotoClick() }
         }
@@ -176,6 +175,7 @@ struct OptimizedPhotoGalleryView: View {
     @State private var showingPermissionError = false
     @State private var permissionErrorMessage = ""
     @State private var showingDebugInfo = false
+    @State private var pendingEditPhotos: [Photo] = []
 
     // Performance tracking
     @State private var scrollOffset: CGFloat = 0
@@ -215,19 +215,16 @@ struct OptimizedPhotoGalleryView: View {
             }
             .background(Color(UIColor.systemBackground))
 
-            // Floating Action Button - positioned like Categories page
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    FloatingActionButton(
-                        action: handleAddPhotosButtonTap,
-                        isPulsing: viewModel.photos.isEmpty
-                    )
-                    .padding(.trailing, 16)
-                    .padding(.bottom, 16)
-                }
-            }
+            // Floating Action Button - truly floating over content
+            FloatingActionButton(
+                action: handleAddPhotosButtonTap,
+                isPulsing: viewModel.photos.isEmpty,
+                backgroundColor: Color(red: 74/255, green: 144/255, blue: 226/255), // SP Blue #4A90E2
+                iconName: "photo.badge.plus"
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            .padding(.trailing, 16)
+            .padding(.bottom, 16) // Position at bottom right corner
 
             // Debug overlay (development only)
             if showingDebugInfo {
@@ -243,11 +240,18 @@ struct OptimizedPhotoGalleryView: View {
         .sheet(isPresented: $showingPhotoEditor) {
             if !selectedPhotos.isEmpty {
                 PhotoEditView(photos: selectedPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
-                    .onDisappear {
-                        Task {
-                            await viewModel.refreshPhotos()
-                        }
-                    }
+            } else if !pendingEditPhotos.isEmpty {
+                PhotoEditView(photos: pendingEditPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
+            }
+        }
+        .onChange(of: showingPhotoEditor) { newValue in
+            if !newValue {
+                // Clean up after sheet dismisses
+                selectedPhotos = []
+                pendingEditPhotos = []
+                Task {
+                    await viewModel.refreshPhotos()
+                }
             }
         }
         .sheet(isPresented: $showingCategorySelection) {
@@ -308,7 +312,6 @@ struct OptimizedPhotoGalleryView: View {
                 }
             }
         )
-        .padding(.bottom, 100) // Space for FAB
         .gesture(
             DragGesture()
                 .onEnded { value in
@@ -543,58 +546,12 @@ struct OptimizedPhotoGalleryView: View {
     }
 
     private func handleSelectedPhotos(_ photos: [Photo]) {
-        Task {
-            viewModel.isLoading = true
-            do {
-                logger.info("Saving \(photos.count, privacy: .public) photos to database")
+        // Navigate to photo editor with selected photos (matching Android behavior)
+        logger.info("Opening photo editor with \(photos.count, privacy: .public) photos")
 
-                // Log photo details before saving
-                for (index, photo) in photos.enumerated() {
-                    logger.debug("Photo \(index + 1, privacy: .public): path=\(photo.path, privacy: .public), categoryId=\(photo.categoryId, privacy: .public)")
-
-                    // Verify file exists before saving
-                    if FileManager.default.fileExists(atPath: photo.path) {
-                        logger.debug("✓ Photo file exists at path: \(photo.path, privacy: .public)")
-                    } else {
-                        logger.error("✗ Photo file NOT found at path: \(photo.path, privacy: .public)")
-                    }
-
-                    let savedPhotoId = try await photoRepository.insertPhoto(photo)
-                    logger.info("Saved photo with ID: \(savedPhotoId, privacy: .public), Category: \(photo.categoryId, privacy: .public)")
-
-                    // Thumbnail was already generated by SimplePhotoStorage during import
-                    logger.debug("Photo saved with thumbnail for ID: \(photo.id, privacy: .public)")
-                }
-
-                // Reload photos to show the new ones
-                logger.info("Reloading photos after save")
-                await viewModel.loadPhotos()
-
-                // Ensure we're viewing the category where photos were just added
-                if let firstPhoto = photos.first,
-                   let category = categories.first(where: { $0.id == firstPhoto.categoryId }) {
-                    viewModel.selectedCategory = category
-                    logger.info("Set selected category to: \(category.displayName, privacy: .public)")
-                }
-
-                logger.info("Gallery now has \(viewModel.photos.count, privacy: .public) total photos")
-                logger.info("Filtered photos for current category: \(viewModel.filteredPhotos.count, privacy: .public)")
-
-                // Log the filtered photos
-                for (index, photo) in viewModel.filteredPhotos.prefix(5).enumerated() {
-                    logger.debug("Filtered photo \(index + 1, privacy: .public): path=\(photo.path, privacy: .public)")
-                }
-            } catch {
-                logger.error("Error saving photos: \(error.localizedDescription, privacy: .public)")
-            }
-            viewModel.isLoading = false
-
-            // Don't automatically open editor - let user see photos in gallery first
-            // if !photos.isEmpty {
-            //     selectedPhotos = photos
-            //     showingPhotoEditor = true
-            // }
-        }
+        // Store photos directly to preserve their IDs for proper category updates
+        pendingEditPhotos = photos
+        showingPhotoEditor = true
     }
 
     private func handleEditedPhotos(_ photos: [Photo]) {

@@ -6,18 +6,17 @@ struct CategoryManagementView: View {
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
 
     var body: some View {
-        VStack(spacing: 0) {
-            // App Header with consistent design
-            AppHeaderComponent(
-                onViewModeClick: {
-                    kidsModeViewModel.toggleKidsMode()
-                },
-                showViewModeButton: true
-            )
+        ZStack {
+            VStack(spacing: 0) {
+                // App Header with consistent design
+                AppHeaderComponent(
+                    onViewModeClick: {
+                        kidsModeViewModel.toggleKidsMode()
+                    },
+                    showViewModeButton: true
+                )
 
-            // Main content
-            ZStack {
-                // Category content
+                // Main content
                 if viewModel.categoriesWithCounts.isEmpty && !viewModel.isLoading {
                     emptyState
                 } else {
@@ -27,18 +26,22 @@ struct CategoryManagementView: View {
                 if viewModel.isLoading {
                     loadingOverlay
                 }
-
-                // Floating add button
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        addButton
-                            .padding(.trailing, 16)
-                            .padding(.bottom, 16)
-                    }
-                }
             }
+
+            // Floating Action Button - positioned over content
+            FloatingActionButton(
+                action: {
+                    viewModel.showAddCategoryDialog()
+                },
+                isPulsing: viewModel.hasPulseFAB,
+                backgroundColor: Color(red: 255/255, green: 102/255, blue: 0/255), // Keep orange for categories
+                iconName: "folder.badge.plus"
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            .padding(.trailing, 16)
+            .padding(.bottom, 16) // Position at bottom right corner
+            .zIndex(9999) // Maximum z-index to ensure FAB appears above all other views
+        }
             .sheet(isPresented: $viewModel.showAddDialog) {
                 AddCategorySheet(
                     category: viewModel.editingCategory,
@@ -75,7 +78,6 @@ struct CategoryManagementView: View {
                     Text(error)
                 }
             }
-        }
     }
 
     @ViewBuilder
@@ -137,34 +139,6 @@ struct CategoryManagementView: View {
             )
     }
 
-    @ViewBuilder
-    private var addButton: some View {
-        Button(action: {
-            viewModel.showAddCategoryDialog()
-        }) {
-            ZStack {
-                // Square FAB with rounded corners to match gallery
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(red: 255/255, green: 102/255, blue: 0/255)) // SmilePile orange #FF6600
-                    .frame(width: 56, height: 56)
-                    .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
-
-                Image(systemName: "plus")
-                    .font(.system(size: 24, weight: .medium))
-                    .foregroundColor(.white)
-            }
-        }
-        .scaleEffect(viewModel.hasPulseFAB && pulseAnimation ? 1.1 : 1.0)
-        .animation(
-            viewModel.hasPulseFAB ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true) : .default,
-            value: pulseAnimation
-        )
-        .onAppear {
-            if viewModel.hasPulseFAB {
-                pulseAnimation = true
-            }
-        }
-    }
 
     @ViewBuilder
     private var deleteAlert: some View {

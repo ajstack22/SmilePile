@@ -33,11 +33,11 @@ struct AppHeaderComponent<Content: View>: View {
         self.content = content
     }
 
-    // Surface variant color matching Android's Material Design
-    private var surfaceVariantColor: Color {
+    // Background color with proper contrast for status bar
+    private var headerBackgroundColor: Color {
         colorScheme == .dark
             ? Color(hex: "#49454F") ?? Color(UIColor.secondarySystemBackground)
-            : Color(hex: "#E0E0E0") ?? Color(UIColor.secondarySystemBackground)
+            : Color(hex: "#FAFAFA") ?? Color.white
     }
 
     var body: some View {
@@ -70,11 +70,17 @@ struct AppHeaderComponent<Content: View>: View {
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
             .background(
-                ZStack {
-                    VisualEffectBlur(blurStyle: .systemMaterial)
-                    surfaceVariantColor.opacity(0.7)
-                }
-                .ignoresSafeArea(edges: .top)
+                headerBackgroundColor
+                    .ignoresSafeArea(edges: .top)
+            )
+            .overlay(
+                // Add subtle bottom border for visual separation
+                Rectangle()
+                    .fill(colorScheme == .dark
+                        ? Color.white.opacity(0.1)
+                        : Color.black.opacity(0.08))
+                    .frame(height: 1),
+                alignment: .bottom
             )
 
             // Additional content (like category filters)

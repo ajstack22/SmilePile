@@ -11,9 +11,9 @@ struct CropOverlayView: View {
     @State private var initialCropRect: CGRect
     @State private var dragOffset = CGSize.zero
 
-    private let handleSize: CGFloat = 44
+    private let handleSize: CGFloat = 24  // Match Android's 24pt radius
     private let borderWidth: CGFloat = 2
-    private let gridLineWidth: CGFloat = 0.5
+    private let gridLineWidth: CGFloat = 1  // Match Android's 1dp
 
     init(cropRect: Binding<CGRect>, imageSize: CGSize, onComplete: @escaping (CGRect) -> Void, onCancel: @escaping () -> Void) {
         self._cropRect = cropRect
@@ -26,9 +26,9 @@ struct CropOverlayView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Dark overlay outside crop area
+                // Dark overlay outside crop area - Match Android's 0.6 opacity
                 Rectangle()
-                    .fill(Color.black.opacity(0.5))
+                    .fill(Color.black.opacity(0.6))
                     .mask(
                         Rectangle()
                             .fill(Color.black)
@@ -68,29 +68,8 @@ struct CropOverlayView: View {
                     cropHandle(for: handle, in: geometry)
                 }
 
-                // Bottom toolbar
-                VStack {
-                    Spacer()
-                    HStack(spacing: 30) {
-                        Button(action: onCancel) {
-                            Image(systemName: "xmark")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .frame(width: 44, height: 44)
-                        }
-
-                        Button(action: { onComplete(cropRect) }) {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .frame(width: 44, height: 44)
-                        }
-                    }
-                    .padding()
-                    .background(Color.black.opacity(0.7))
-                    .cornerRadius(25)
-                    .padding(.bottom, 50)
-                }
+                // Note: Crop controls are handled by PhotoEditView's bottom toolbar
+                // This matches Android where crop overlay doesn't have its own controls
             }
         }
     }
@@ -112,20 +91,17 @@ struct CropOverlayView: View {
                     path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                 }
             }
-            .stroke(Color.white.opacity(0.3), lineWidth: gridLineWidth)
+            .stroke(Color.white.opacity(0.5), lineWidth: gridLineWidth)  // Match Android's 0.5 opacity
         }
     }
 
     private func cropHandle(for handle: CropHandle, in geometry: GeometryProxy) -> some View {
         let position = handlePosition(for: handle, in: geometry)
 
+        // Match Android's white circle handles
         return Circle()
             .fill(Color.white)
-            .frame(width: handleSize, height: handleSize)
-            .overlay(
-                Circle()
-                    .stroke(Color.black, lineWidth: 1)
-            )
+            .frame(width: handleSize * 2, height: handleSize * 2)  // Diameter = 2 * radius
             .position(position)
             .gesture(
                 DragGesture()
@@ -193,6 +169,8 @@ struct CropOverlayView: View {
         newRect.size.height = min(newRect.height, imageSize.height - newRect.origin.y)
 
         cropRect = newRect
+        // Call the completion handler to update the view model
+        onComplete(newRect)
     }
 
     private func scaleFactor(in geometry: GeometryProxy) -> CGFloat {

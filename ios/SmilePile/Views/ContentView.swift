@@ -76,11 +76,10 @@ struct ContentView: View {
 
             if kidsModeViewModel.isKidsMode {
                 // Kids Mode View - Simplified implementation for toast testing
-                // KidsModeGalleryView(viewModel: kidsModeViewModel) // TODO: Add to Xcode project
-                KidsModePlaceholderView(viewModel: kidsModeViewModel)
+                KidsModeGalleryView(viewModel: kidsModeViewModel)
                     .ignoresSafeArea()
                     // .persistentSystemOverlays(.hidden) // Hide home indicator in Kids Mode only (iOS 16+)
-                    .overlay(alignment: .topTrailing) {
+                    .overlay(
                         // Invisible 3-tap area in top-right corner for exiting Kids Mode
                         Color.clear
                             .frame(width: 100, height: 100)
@@ -88,8 +87,9 @@ struct ContentView: View {
                             .onTapGesture {
                                 handleTripleTap()
                             }
-                            .padding(.top, 50) // Account for status bar
-                    }
+                            .padding(.top, 50),
+                        alignment: .topTrailing
+                    )
             } else {
                 // Parent Mode View
                 ParentModeView()
@@ -291,40 +291,31 @@ struct ParentModeView: View {
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: 0) {
             // Main content area
-            VStack(spacing: 0) {
-                // Content based on selected tab
-                Group {
-                    switch selectedTab {
-                    case 0:
-                        if useOptimizedGallery {
-                            OptimizedPhotoGalleryView()
-                        } else {
-                            PhotoGalleryView()
-                        }
-                    case 1:
-                        CategoryManagementView()
-                    case 2:
-                        SettingsViewCustom()
-                            .environmentObject(kidsModeViewModel)
-                    default:
-                        EmptyView()
+            Group {
+                switch selectedTab {
+                case 0:
+                    if useOptimizedGallery {
+                        OptimizedPhotoGalleryView()
+                    } else {
+                        PhotoGalleryView()
                     }
+                case 1:
+                    CategoryManagementView()
+                case 2:
+                    SettingsViewCustom()
+                        .environmentObject(kidsModeViewModel)
+                default:
+                    EmptyView()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                // Spacer for bottom navigation
-                Color.clear
-                    .frame(height: 83)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             // Material Design Tab Bar at bottom
-            VStack(spacing: 0) {
-                Divider()
-                MaterialTabBar(selection: $selectedTab)
-                    .background(Color(UIColor.systemBackground))
-            }
+            Divider()
+            MaterialTabBar(selection: $selectedTab)
+                .background(Color(UIColor.systemBackground))
         }
         .environmentObject(settingsManager)
         .ignoresSafeArea(.keyboard)

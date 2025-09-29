@@ -12,8 +12,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.launch
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.smilepile.data.models.Photo
@@ -54,6 +56,7 @@ fun PhotoGalleryOrchestrator(
     content: @Composable (PhotoGalleryOrchestratorState) -> Unit
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     // Collect UI states from all ViewModels
     val galleryState by galleryViewModel.uiState.collectAsState()
@@ -72,6 +75,8 @@ fun PhotoGalleryOrchestrator(
     // New state for category selection dialog
     var pendingImportUris by remember { mutableStateOf<List<Uri>?>(null) }
     var showCategorySelection by remember { mutableStateOf(false) }
+    var isAddingPhotos by remember { mutableStateOf(false) }
+    var selectedImportCategoryId by remember { mutableStateOf<Long?>(null) }
 
     // Photo picker launchers
     val singlePhotoLauncher = rememberLauncherForActivityResult(
@@ -79,7 +84,15 @@ fun PhotoGalleryOrchestrator(
     ) { uri: Uri? ->
         uri?.let {
             pendingImportUris = listOf(it)
-            showCategorySelection = true
+            // Navigate directly to editor with the pre-selected category
+            selectedImportCategoryId?.let { categoryId ->
+                onNavigateToPhotoEditorWithUris(listOf(uri))
+                importViewModel.setPendingCategoryId(categoryId)
+                // Reset states
+                pendingImportUris = null
+                selectedImportCategoryId = null
+                isAddingPhotos = false
+            }
         }
     }
 
@@ -87,18 +100,28 @@ fun PhotoGalleryOrchestrator(
         contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 50) // Updated to support 50 photos
     ) { uris: List<Uri> ->
         if (uris.isNotEmpty()) {
-            // Store URIs for category selection first
             pendingImportUris = uris
-            showCategorySelection = true
+            // Navigate directly to editor with the pre-selected category
+            selectedImportCategoryId?.let { categoryId ->
+                onNavigateToPhotoEditorWithUris(uris)
+                importViewModel.setPendingCategoryId(categoryId)
+                // Reset states
+                pendingImportUris = null
+                selectedImportCategoryId = null
+                isAddingPhotos = false
+            }
         }
     }
 
     // Permission handling
     val storagePermission = rememberPermissionState(PermissionHandler.storagePermission) { isGranted ->
         if (isGranted) {
-            multiplePhotoLauncher.launch(
-                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-            )
+            // Only launch picker if we have a selected category (meaning we're in the add flow)
+            if (selectedImportCategoryId != null) {
+                multiplePhotoLauncher.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
+            }
         } else {
             showPermissionDialog = true
         }
@@ -139,6 +162,7 @@ fun PhotoGalleryOrchestrator(
         showBatchDeleteDialog = showBatchDeleteDialog,
         showBatchMoveDialog = showBatchMoveDialog,
         showCategorySelection = showCategorySelection,
+        isAddingPhotos = isAddingPhotos,
 
         // Photo operations
         onPhotoClick = { photo ->
@@ -221,13 +245,22 @@ fun PhotoGalleryOrchestrator(
             )
         },
         onAddPhotoClick = {
-            if (PermissionHandler.isStoragePermissionGranted(context)) {
-                multiplePhotoLauncher.launch(
-                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                )
-            } else {
-                storagePermission.launchPermissionRequest()
+            // Prevent rapid taps by checking if flow is already in progress
+            if (isAddingPhotos || showCategorySelection) {
+                return@PhotoGalleryOrchestratorState
             }
+
+            // Check for empty categories first
+            if (galleryState.categories.isEmpty()) {
+                coroutineScope.launch {
+                    snackbarHostState.showSnackbar("Please create a category first")
+                }
+                return@PhotoGalleryOrchestratorState
+            }
+
+            // Show category selection first, then photo picker
+            isAddingPhotos = true
+            showCategorySelection = true
         },
         onEditSelectedPhotos = {
             // Get selected photos and navigate to editor
@@ -251,15 +284,36 @@ fun PhotoGalleryOrchestrator(
         onShowPermissionDialog = { showPermissionDialog = it },
         onShowBatchDeleteDialog = { showBatchDeleteDialog = it },
         onShowBatchMoveDialog = { showBatchMoveDialog = it },
-        onShowCategorySelection = { showCategorySelection = it },
+        onShowCategorySelection = { show ->
+            showCategorySelection = show
+            // Reset add photos flow state when dialog is dismissed
+            if (!show) {
+                isAddingPhotos = false
+                selectedImportCategoryId = null
+            }
+        },
         onCategorySelectedForImport = { categoryId ->
-            pendingImportUris?.let { uris ->
-                // Navigate to photo editor with URIs and category
-                onNavigateToPhotoEditorWithUris(uris)
-                // Store category for editor to use
-                importViewModel.setPendingCategoryId(categoryId)
-                pendingImportUris = null
+            if (isAddingPhotos) {
+                // Store the selected category for when photos are picked
+                selectedImportCategoryId = categoryId
                 showCategorySelection = false
+
+                // Now check permissions and launch photo picker
+                if (PermissionHandler.isStoragePermissionGranted(context)) {
+                    multiplePhotoLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                } else {
+                    storagePermission.launchPermissionRequest()
+                }
+            } else if (pendingImportUris != null) {
+                // Legacy path for backward compatibility
+                pendingImportUris?.let { uris ->
+                    onNavigateToPhotoEditorWithUris(uris)
+                    importViewModel.setPendingCategoryId(categoryId)
+                    pendingImportUris = null
+                    showCategorySelection = false
+                }
             }
         },
 
@@ -288,6 +342,7 @@ data class PhotoGalleryOrchestratorState(
     val showBatchDeleteDialog: Boolean,
     val showBatchMoveDialog: Boolean,
     val showCategorySelection: Boolean,
+    val isAddingPhotos: Boolean,
 
     // Photo operations
     val onPhotoClick: (Photo) -> Unit,

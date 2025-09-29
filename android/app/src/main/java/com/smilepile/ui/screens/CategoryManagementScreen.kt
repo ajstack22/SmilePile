@@ -18,13 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -38,6 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.smilepile.data.models.Category
 import com.smilepile.managers.CategoryManager
 import com.smilepile.ui.components.AppHeaderComponent
+import com.smilepile.ui.components.CustomFloatingActionButton
 import com.smilepile.ui.viewmodels.CategoryViewModel
 
 /**
@@ -60,6 +56,7 @@ fun CategoryManagementScreen(
     var editingCategory by remember { mutableStateOf<Category?>(null) }
     var showDeleteDialog by remember { mutableStateOf<Category?>(null) }
 
+
     Box(modifier = Modifier.fillMaxSize()) {
         // Main scaffold
         Scaffold(
@@ -68,37 +65,17 @@ fun CategoryManagementScreen(
             // Empty bottom bar to match PhotoGalleryScreen structure
         },
         floatingActionButton = {
-            // Animate FAB when categories are empty to draw attention
-            val isCategoriesEmpty = categories.isEmpty()
-            val targetScale = if (isCategoriesEmpty) 1.1f else 1f
-            val scale by animateFloatAsState(
-                targetValue = targetScale,
-                animationSpec = if (isCategoriesEmpty) {
-                    infiniteRepeatable(
-                        animation = tween(durationMillis = 1000),
-                        repeatMode = RepeatMode.Reverse
-                    )
-                } else {
-                    tween(durationMillis = 300)
-                },
-                label = "FAB pulse"
-            )
-
-            FloatingActionButton(
+            CustomFloatingActionButton(
                 onClick = { showAddDialog = true },
-                containerColor = Color(0xFFFF6600), // SmilePile orange
-                contentColor = Color.White,
+                icon = Icons.Filled.CreateNewFolder,
+                contentDescription = "Add Category",
+                backgroundColor = Color(0xFFFF6600), // SmilePile orange
+                isPulsing = true, // Always animate to draw attention
                 modifier = Modifier
-                    .padding(bottom = paddingValues.calculateBottomPadding())
-                    .scale(scale)
-            ) {
-                Icon(
-                    Icons.Default.Add,
-                    contentDescription = "Add Category"
-                )
-            }
+                    .padding(end = 16.dp, bottom = 102.dp) // 86dp nav bar + 16dp padding - EXACT same as Gallery
+            )
         },
-        contentWindowInsets = WindowInsets(top = 0.dp) // Remove top inset when we have custom header
+        contentWindowInsets = WindowInsets(0.dp) // Same as PhotoGalleryScreen
     ) { scaffoldPaddingValues ->
         Column(
             modifier = Modifier

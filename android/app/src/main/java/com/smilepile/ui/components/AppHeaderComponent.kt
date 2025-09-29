@@ -14,6 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.DrawScope
 
 /**
  * Unified header component for all parent mode screens
@@ -26,62 +30,85 @@ fun AppHeaderComponent(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
-        // Box with background that extends into status bar
+    // Check if we're in dark theme by comparing the background color
+    // In dark theme, background is #1C1B1F (very dark), in light theme it's #FFFBFE (almost white)
+    val isDarkTheme = MaterialTheme.colorScheme.background == Color(0xFF1C1B1F)
+
+    // Use appropriate background color based on theme
+    val headerBackgroundColor = if (isDarkTheme) {
+        MaterialTheme.colorScheme.surfaceVariant
+    } else {
+        Color(0xFFFAFAFA) // Very light gray, softer than pure white
+    }
+
+    // Wrap everything in a column
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
+        // Header section with background that extends to safe area
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .background(headerBackgroundColor) // Background extends to top edge
         ) {
-            Column(
+            // Inner box with padding for content
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .statusBarsPadding() // Padding inside the background
+                    .statusBarsPadding() // Only content is pushed down, not background
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
-                // Header bar with logo and view mode button
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                ) {
-                    // SmilePile logo on the left
-                    SmilePileLogo(
-                        iconSize = 48.dp,
-                        fontSize = 28.sp,
-                        modifier = Modifier.align(Alignment.CenterStart)
-                    )
+                // SmilePile logo on the left
+                SmilePileLogo(
+                    iconSize = 48.dp,
+                    fontSize = 28.sp,
+                    modifier = Modifier.align(Alignment.CenterStart)
+                )
 
-                    // View Mode eye icon on the right
-                    if (showViewModeButton) {
-                        Surface(
-                            modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .size(48.dp) // Same size as logo
-                                .clip(CircleShape)
-                                .clickable { onViewModeClick() },
-                            color = Color(0xFF4CAF50) // Solid green background
+                // View Mode eye icon on the right
+                if (showViewModeButton) {
+                    Surface(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .size(48.dp) // Same size as logo
+                            .clip(CircleShape)
+                            .clickable { onViewModeClick() },
+                        color = Color(0xFF4CAF50) // Solid green background
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize()
                         ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.RemoveRedEye,
-                                    contentDescription = "Switch to View Mode",
-                                    modifier = Modifier.size(28.dp),
-                                    tint = Color.White // White icon
-                                )
-                            }
+                            Icon(
+                                imageVector = Icons.Default.RemoveRedEye,
+                                contentDescription = "Switch to View Mode",
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.White // White icon
+                            )
                         }
                     }
                 }
-
-                // Add minimal spacing between branding and categories
-                Spacer(modifier = Modifier.height(4.dp))
             }
         }
 
-        // Additional content (like category filters) - floating freely outside background
+
+        // Add subtle bottom border for header separation
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(
+                    if (isDarkTheme) {
+                        Color.White.copy(alpha = 0.1f)
+                    } else {
+                        Color.Black.copy(alpha = 0.08f)
+                    }
+                )
+        )
+
+        // Additional content (like category filters) - outside header background
+        // This will have the scroll area background color
         content()
     }
 }

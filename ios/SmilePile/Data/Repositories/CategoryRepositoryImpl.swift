@@ -172,7 +172,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
 
         let categories = try await coreDataStack.performBackgroundTask { context in
             let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.createdAt, ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.position, ascending: true)]
 
             let entities = try context.fetch(request)
             return entities.compactMap { self.entityToCategory($0) }

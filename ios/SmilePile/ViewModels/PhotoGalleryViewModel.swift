@@ -106,6 +106,12 @@ class PhotoGalleryViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
+            // Clean up orphaned photos first
+            let deletedCount = try await repository.cleanupOrphanedPhotos()
+            if deletedCount > 0 {
+                logger.info("Cleaned up \(deletedCount) orphaned photo records")
+            }
+
             // Start loading
             logger.info("Loading photos from repository")
             let startTime = Date()

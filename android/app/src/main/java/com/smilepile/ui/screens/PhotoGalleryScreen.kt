@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AddPhotoAlternate
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.RemoveCircleOutline
 import androidx.compose.material.icons.filled.DriveFileMove
@@ -30,12 +31,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.repeatable
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BottomAppBar
@@ -44,7 +39,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -52,7 +46,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -75,6 +68,7 @@ import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.ui.components.SmilePileLogo
 import com.smilepile.ui.components.AppHeaderComponent
+import com.smilepile.ui.components.CustomFloatingActionButton
 import com.smilepile.ui.components.gallery.CategoryFilterComponent
 import com.smilepile.ui.components.gallery.PhotoStackComponent
 import com.smilepile.ui.components.gallery.SelectionToolbarComponent
@@ -101,10 +95,9 @@ fun PhotoGalleryScreen(
         snackbarHostState = snackbarHostState
     ) { orchestratorState ->
 
-        Box(modifier = modifier.fillMaxSize()) {
-            // Main scaffold
-            Scaffold(
+        Scaffold(
             modifier = modifier,
+            contentWindowInsets = WindowInsets(0.dp),
             topBar = {
                 if (orchestratorState.galleryState.isSelectionMode) {
                     SelectionToolbarComponent(
@@ -117,36 +110,21 @@ fun PhotoGalleryScreen(
                 }
             },
             floatingActionButton = {
-                // Animate FAB when gallery is empty to draw attention
-                val isGalleryEmpty = orchestratorState.galleryState.photos.isEmpty()
-                val targetScale = if (isGalleryEmpty) 1.1f else 1f
-                val scale by animateFloatAsState(
-                    targetValue = targetScale,
-                    animationSpec = if (isGalleryEmpty) {
-                        infiniteRepeatable(
-                            animation = tween(durationMillis = 1000),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    } else {
-                        tween(durationMillis = 300)
+                // Custom FAB matching iOS implementation exactly
+                CustomFloatingActionButton(
+                    onClick = {
+                        if (!orchestratorState.isAddingPhotos) {
+                            orchestratorState.onAddPhotoClick()
+                        }
                     },
-                    label = "FAB pulse"
-                )
-
-                // Single FAB for adding photos with pulse animation when empty
-                FloatingActionButton(
-                    onClick = orchestratorState.onAddPhotoClick,
-                    containerColor = Color(0xFFFF6600), // SmilePile orange
-                    contentColor = Color.White,
+                    icon = Icons.Filled.AddPhotoAlternate,
+                    contentDescription = "Add Photos",
+                    backgroundColor = Color(0xFF4A90E2), // SmilePile blue
+                    isPulsing = true, // Always animate to draw attention
+                    enabled = !orchestratorState.isAddingPhotos,
                     modifier = Modifier
-                        .padding(bottom = paddingValues.calculateBottomPadding())
-                        .scale(scale)
-                ) {
-                    Icon(
-                        Icons.Default.Add,
-                        contentDescription = "Add Photos"
-                    )
-                }
+                        .padding(end = 16.dp, bottom = 102.dp) // 86dp nav bar + 16dp padding
+                )
             },
             bottomBar = {
                 if (orchestratorState.canPerformBatchOperations) {
@@ -162,34 +140,33 @@ fun PhotoGalleryScreen(
                     )
                 }
             },
-            snackbarHost = { SnackbarHost(snackbarHostState) },
-            contentWindowInsets = if (!orchestratorState.galleryState.isSelectionMode) {
-                WindowInsets(top = 0.dp) // Remove top inset when we have custom header
-            } else {
-                ScaffoldDefaults.contentWindowInsets
-            }
+            snackbarHost = { SnackbarHost(snackbarHostState) }
         ) { paddingValues ->
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-                // Add spacing for header when not in selection mode
+                // Add header when not in selection mode (outside padding to extend to top)
                 if (!orchestratorState.galleryState.isSelectionMode) {
-                    Spacer(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .statusBarsPadding()
-                            .height(104.dp) // Height for logo + category chips
-                    )
+                    AppHeaderComponent(
+                        onViewModeClick = orchestratorState.onSwitchToKidsMode,
+                        showViewModeButton = true
+                    ) {
+                        // Category filter chips
+                        CategoryFilterComponent(
+                            categories = orchestratorState.galleryState.categories,
+                            selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
+                            onCategorySelected = orchestratorState.onCategorySelected,
+                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                        )
+                    }
                 }
 
-                // Main content with proper padding
+                // Content with padding applied (only bottom padding since header is outside)
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(
-                            top = if (orchestratorState.galleryState.isSelectionMode) paddingValues.calculateTopPadding() else 0.dp,
-                            bottom = paddingValues.calculateBottomPadding()
-                        )
+                        .padding(bottom = paddingValues.calculateBottomPadding())
                 ) {
                 // Import progress indicator
                 if (orchestratorState.importState.isImporting) {
@@ -286,40 +263,22 @@ fun PhotoGalleryScreen(
                         }
                     }
                 }
-                }
+                } // Close the inner Column with padding
             }
+        }
 
-            // Custom header overlay that extends into status bar
-            if (!orchestratorState.galleryState.isSelectionMode) {
-                AppHeaderComponent(
-                    onViewModeClick = orchestratorState.onSwitchToKidsMode,
-                    showViewModeButton = true,
-                    modifier = Modifier.align(Alignment.TopCenter)
-                ) {
-                    // Category filter chips
-                    CategoryFilterComponent(
-                        categories = orchestratorState.galleryState.categories,
-                        selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
-                        onCategorySelected = orchestratorState.onCategorySelected,
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
-                }
-            }
-        } // End of Box
+        // Category selection dialog for import
+        if (orchestratorState.showCategorySelection) {
+            CategorySelectionDialog(
+                categories = orchestratorState.galleryState.categories,
+                onCategorySelected = orchestratorState.onCategorySelectedForImport,
+                onDismiss = { orchestratorState.onShowCategorySelection(false) }
+            )
+        }
 
-            // Category selection dialog for import
-            if (orchestratorState.showCategorySelection) {
-                CategorySelectionDialog(
-                    categories = orchestratorState.galleryState.categories,
-                    onCategorySelected = orchestratorState.onCategorySelectedForImport,
-                    onDismiss = { orchestratorState.onShowCategorySelection(false) }
-                )
-            }
-
-            // Permission rationale dialog
-            if (orchestratorState.showPermissionDialog) {
-                UniversalCrudDialog(
+        // Permission rationale dialog
+        if (orchestratorState.showPermissionDialog) {
+            UniversalCrudDialog(
                     config = DialogBuilder.custom(
                         title = PermissionRationale.STORAGE_PERMISSION_TITLE,
                         message = PermissionRationale.STORAGE_PERMISSION_MESSAGE,
@@ -336,14 +295,14 @@ fun PhotoGalleryScreen(
                             orchestratorState.onOpenAppSettings()
                         },
                         onCancel = { orchestratorState.onShowPermissionDialog(false) }
-                    ),
-                    onDismiss = { orchestratorState.onShowPermissionDialog(false) }
-                )
-            }
+                ),
+                onDismiss = { orchestratorState.onShowPermissionDialog(false) }
+            )
+        }
 
-            // Batch delete confirmation dialog
-            if (orchestratorState.showBatchDeleteDialog) {
-                UniversalCrudDialog(
+        // Batch delete confirmation dialog
+        if (orchestratorState.showBatchDeleteDialog) {
+            UniversalCrudDialog(
                     config = DialogBuilder.confirmation(
                         title = "Remove Photos from Library",
                         message = "Are you sure you want to remove ${orchestratorState.galleryState.selectedPhotosCount} selected photos from your SmilePile library? The photos will remain on your device but won't appear in the app.",
@@ -353,21 +312,19 @@ fun PhotoGalleryScreen(
                         icon = Icons.Default.RemoveCircleOutline,
                         onConfirm = orchestratorState.onDeleteSelectedPhotos,
                         onCancel = { orchestratorState.onShowBatchDeleteDialog(false) }
-                    ),
-                    onDismiss = { orchestratorState.onShowBatchDeleteDialog(false) }
-                )
-            }
+                ),
+                onDismiss = { orchestratorState.onShowBatchDeleteDialog(false) }
+            )
+        }
 
-            // Batch move dialog
-            if (orchestratorState.showBatchMoveDialog) {
-                BatchMoveToCategoryDialog(
+        // Batch move dialog
+        if (orchestratorState.showBatchMoveDialog) {
+            BatchMoveToCategoryDialog(
                     categories = orchestratorState.galleryState.categories,
                     selectedCount = orchestratorState.galleryState.selectedPhotosCount,
                     onCategorySelected = orchestratorState.onMoveSelectedPhotos,
-                    onDismiss = { orchestratorState.onShowBatchMoveDialog(false) }
-                )
-            }
-
+                onDismiss = { orchestratorState.onShowBatchMoveDialog(false) }
+            )
         }
     }
 }

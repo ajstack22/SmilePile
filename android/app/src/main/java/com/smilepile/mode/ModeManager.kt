@@ -23,8 +23,8 @@ class ModeManager @Inject constructor(
     val currentMode: StateFlow<AppMode> = _currentMode.asStateFlow()
 
     private fun loadMode(): AppMode {
-        val modeString = prefs.getString("current_mode", AppMode.KIDS.name)
-        return AppMode.valueOf(modeString ?: AppMode.KIDS.name)
+        val modeString = prefs.getString("current_mode", AppMode.PARENT.name)
+        return AppMode.valueOf(modeString ?: AppMode.PARENT.name)
     }
 
     fun setMode(mode: AppMode) {

@@ -26,5 +26,6 @@ protocol PhotoRepository {
     func getPhotoCount() async throws -> Int
     func removeFromLibrary(_ photo: Photo) async throws
     func removeFromLibraryById(_ photoId: Int64) async throws
+    func cleanupOrphanedPhotos() async throws -> Int
 
 }

@@ -4,13 +4,27 @@ import SwiftUI
 struct FloatingActionButton: View {
     let action: () -> Void
     let isPulsing: Bool
+    let backgroundColor: Color
+    let iconName: String
 
     @State private var pulseScale: CGFloat = 1.0
     @State private var isPressed = false
 
     private let buttonSize: CGFloat = 56
     private let iconSize: CGFloat = 24
-    private let orangeColor = Color(red: 255/255, green: 102/255, blue: 0/255) // #FF6600
+
+    // Default initializer for backward compatibility
+    init(
+        action: @escaping () -> Void,
+        isPulsing: Bool = false,
+        backgroundColor: Color = Color(red: 255/255, green: 102/255, blue: 0/255), // Default orange
+        iconName: String = "plus"
+    ) {
+        self.action = action
+        self.isPulsing = isPulsing
+        self.backgroundColor = backgroundColor
+        self.iconName = iconName
+    }
 
     var body: some View {
         Button(action: {
@@ -23,12 +37,12 @@ struct FloatingActionButton: View {
             ZStack {
                 // Square FAB with rounded corners to match categories
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(orangeColor)
+                    .fill(backgroundColor)
                     .frame(width: buttonSize, height: buttonSize)
                     .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
 
-                // Plus icon
-                Image(systemName: "plus")
+                // Icon
+                Image(systemName: iconName)
                     .font(.system(size: iconSize, weight: .medium))
                     .foregroundColor(.white)
             }
@@ -77,15 +91,21 @@ struct FloatingActionButtonContainer: View {
     let action: () -> Void
     let isPulsing: Bool
     let bottomPadding: CGFloat
+    let backgroundColor: Color
+    let iconName: String
 
     init(
         action: @escaping () -> Void,
         isPulsing: Bool = false,
-        bottomPadding: CGFloat = 83 // Default tab bar height
+        bottomPadding: CGFloat = 83, // Default tab bar height
+        backgroundColor: Color = Color(red: 255/255, green: 102/255, blue: 0/255), // Default orange
+        iconName: String = "plus"
     ) {
         self.action = action
         self.isPulsing = isPulsing
         self.bottomPadding = bottomPadding
+        self.backgroundColor = backgroundColor
+        self.iconName = iconName
     }
 
     var body: some View {
@@ -95,7 +115,9 @@ struct FloatingActionButtonContainer: View {
                 Spacer()
                 FloatingActionButton(
                     action: action,
-                    isPulsing: isPulsing
+                    isPulsing: isPulsing,
+                    backgroundColor: backgroundColor,
+                    iconName: iconName
                 )
                 .padding(.trailing, 16)
                 .padding(.bottom, bottomPadding + 16) // Tab bar height + padding

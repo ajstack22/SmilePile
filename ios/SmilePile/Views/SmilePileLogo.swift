@@ -40,31 +40,41 @@ struct SmilePileLogo: View {
                 Text("Smile")
                     .font(.custom("Nunito-ExtraBold", size: fontSize))
                     .foregroundColor(smileGolden)
-                    .shadow(color: Color.black.opacity(0.9), radius: 3, x: 2, y: 2)
+                    // Subtle crisp shadow effect
+                    .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
 
                 // "P" in green
                 Text("P")
                     .font(.custom("Nunito-ExtraBold", size: fontSize))
                     .foregroundColor(pileGreen)
-                    .shadow(color: Color.black.opacity(0.9), radius: 3, x: 2, y: 2)
+                    // Subtle crisp shadow effect
+                    .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
 
                 // "i" in blue
                 Text("i")
                     .font(.custom("Nunito-ExtraBold", size: fontSize))
                     .foregroundColor(pileBlue)
-                    .shadow(color: Color.black.opacity(0.9), radius: 3, x: 2, y: 2)
+                    // Subtle crisp shadow effect
+                    .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
 
                 // "l" in orange
                 Text("l")
                     .font(.custom("Nunito-ExtraBold", size: fontSize))
                     .foregroundColor(pileBoldOrange)
-                    .shadow(color: Color.black.opacity(0.9), radius: 3, x: 2, y: 2)
+                    // Subtle crisp shadow effect
+                    .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
 
                 // "e" in pink
                 Text("e")
                     .font(.custom("Nunito-ExtraBold", size: fontSize))
                     .foregroundColor(pilePink)
-                    .shadow(color: Color.black.opacity(0.9), radius: 3, x: 2, y: 2)
+                    // Subtle crisp shadow effect
+                    .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                    .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
             }
         }
     }

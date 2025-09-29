@@ -57,20 +57,24 @@ final class PhotoRepositoryImpl: PhotoRepository {
     }
 
     func updatePhoto(_ photo: Photo) async throws {
+        print("📝 PhotoRepository: updatePhoto called with id: \(photo.id), categoryId: \(photo.categoryId), path: \(photo.path)")
         try await coreDataStack.performBackgroundTask { context in
             let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
             request.predicate = NSPredicate(format: "id == %@", String(photo.id))
             request.fetchLimit = 1
 
             guard let photoEntity = try context.fetch(request).first else {
+                print("❌ PhotoRepository: Photo not found with id: \(photo.id)")
                 throw PhotoRepositoryError.notFound("Photo not found with id: \(photo.id)")
             }
 
+            let oldCategoryId = photoEntity.categoryId
             photoEntity.uri = photo.path
             photoEntity.categoryId = photo.categoryId
             photoEntity.timestamp = photo.createdAt
 
             try self.coreDataStack.saveContext(context)
+            print("✅ PhotoRepository: Photo updated successfully - id: \(photo.id), categoryId changed from \(oldCategoryId) to \(photo.categoryId)")
             self.logger.debug("Photo updated successfully: \(photo.id)")
         }
     }
@@ -224,6 +228,52 @@ final class PhotoRepositoryImpl: PhotoRepository {
         try await deletePhotoById(photoId)
     }
 
+    // MARK: - Cleanup Operations
+
+    func cleanupOrphanedPhotos() async throws -> Int {
+        var deletedCount = 0
+
+        try await coreDataStack.performBackgroundTask { context in
+            let request = NSFetchRequest<PhotoEntity>(entityName: "PhotoEntity")
+            let entities = try context.fetch(request)
+
+            for entity in entities {
+                if let uri = entity.uri {
+                    // Fix the path first
+                    let fixedPath: String
+                    if uri.contains("/Containers/Data/Application/") {
+                        if let documentsRange = uri.range(of: "/Documents/") {
+                            let relativePath = String(uri[documentsRange.upperBound...])
+                            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                            fixedPath = documentsURL.appendingPathComponent(relativePath).path
+                        } else {
+                            fixedPath = uri
+                        }
+                    } else {
+                        fixedPath = uri
+                    }
+
+                    // Check if the file exists
+                    if !FileManager.default.fileExists(atPath: fixedPath) {
+                        context.delete(entity)
+                        deletedCount += 1
+                        self.logger.info("Deleting orphaned photo record: \(uri)")
+                    }
+                } else {
+                    // Delete entities with no URI
+                    context.delete(entity)
+                    deletedCount += 1
+                }
+            }
+
+            if deletedCount > 0 {
+                try self.coreDataStack.saveContext(context)
+                self.logger.info("Cleaned up \(deletedCount) orphaned photo records")
+            }
+        }
+
+        return deletedCount
+    }
 
     // MARK: - Private Helpers
 
@@ -243,12 +293,30 @@ final class PhotoRepositoryImpl: PhotoRepository {
             logger.debug("Converted UUID \(id) to numeric ID \(photoId)")
         }
 
-        let url = URL(fileURLWithPath: uri)
+        // Fix path if it points to an old app container
+        let fixedPath: String
+        if uri.contains("/Containers/Data/Application/") {
+            // Extract the relative path after Documents/
+            if let documentsRange = uri.range(of: "/Documents/") {
+                let relativePath = String(uri[documentsRange.upperBound...])
+                // Get current documents directory
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                fixedPath = documentsURL.appendingPathComponent(relativePath).path
+                logger.debug("Fixed old container path: \(uri) -> \(fixedPath)")
+            } else {
+                // If we can't extract a relative path, use the original
+                fixedPath = uri
+            }
+        } else {
+            fixedPath = uri
+        }
+
+        let url = URL(fileURLWithPath: fixedPath)
         let name = url.deletingPathExtension().lastPathComponent
 
         return Photo(
             id: photoId,
-            path: uri,
+            path: fixedPath,
             categoryId: entity.categoryId,
             name: name,
             isFromAssets: false,
