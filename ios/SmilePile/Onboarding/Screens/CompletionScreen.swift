@@ -10,113 +10,97 @@ struct CompletionScreen: View {
             Spacer()
 
             // Success animation
-            ZStack {
-                Circle()
-                    .fill(Color(red: 1.0, green: 0.42, blue: 0.42).opacity(0.1))
-                    .frame(width: 120, height: 120)
-                    .scaleEffect(showCheckmark ? 1.0 : 0.5)
+            if showCheckmark {
+                ZStack {
+                    Circle()
+                        .fill(Color.smilePileGreen.opacity(0.1))
+                        .frame(width: 120, height: 120)
 
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 80))
-                    .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
-                    .scaleEffect(showCheckmark ? 1.0 : 0.3)
-                    .opacity(showCheckmark ? 1.0 : 0)
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 80))
+                        .foregroundColor(.smilePileGreen)
+                }
+                .scaleEffect(showCheckmark ? 1 : 0.5)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6), value: showCheckmark)
             }
 
-            // Success message
-            VStack(spacing: 16) {
-                Text("All Set!")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .opacity(showContent ? 1.0 : 0)
-
-                Text("SmilePile is ready to use")
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-                    .opacity(showContent ? 1.0 : 0)
-            }
-
-            // Summary
+            // Text content
             if showContent {
-                VStack(alignment: .leading, spacing: 12) {
-                    // Categories created
+                VStack(spacing: 12) {
+                    Text("All Set!")
+                        .font(.nunito(32, weight: .bold))
+
+                    Text("SmilePile is ready to use")
+                        .font(.nunito(18, weight: .regular))
+                        .foregroundColor(.secondary)
+                }
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
+
+            // Summary card
+            if showContent {
+                VStack(alignment: .leading, spacing: 16) {
+                    // Piles created
                     if !coordinator.onboardingData.categories.isEmpty {
-                        HStack {
+                        HStack(spacing: 12) {
                             Image(systemName: "square.stack")
-                                .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
-                                .frame(width: 24)
+                                .foregroundColor(.smilePileOrange)
 
-                            Text("\(coordinator.onboardingData.categories.count) categories created")
-                                .font(.subheadline)
+                            Text("\(coordinator.onboardingData.categories.count) piles created")
+                                .font(.nunito(16, weight: .regular))
                         }
                     }
 
-                    // Photos imported
-                    if !coordinator.onboardingData.importedPhotos.isEmpty {
-                        HStack {
-                            Image(systemName: "photo.fill")
-                                .foregroundColor(Color(red: 0.3, green: 0.7, blue: 1.0))
-                                .frame(width: 24)
-
-                            Text("\(coordinator.onboardingData.importedPhotos.count) photos imported")
-                                .font(.subheadline)
-                        }
-                    }
-
-                    // PIN set
+                    // PIN enabled
                     if !coordinator.onboardingData.skipPIN && coordinator.onboardingData.pinCode != nil {
-                        HStack {
+                        HStack(spacing: 12) {
                             Image(systemName: "lock.fill")
-                                .foregroundColor(Color(red: 0.4, green: 0.8, blue: 0.4))
-                                .frame(width: 24)
+                                .foregroundColor(.smilePileBlue)
 
                             Text("PIN protection enabled")
-                                .font(.subheadline)
+                                .font(.nunito(16, weight: .regular))
                         }
                     }
                 }
-                .padding()
+                .padding(20)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.gray.opacity(0.1))
                 )
                 .padding(.horizontal, 40)
-                .transition(.opacity)
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
             }
 
             Spacer()
 
-            // Get Started button
+            // Start button
             if showContent {
                 Button(action: {
                     // This will trigger the dismissal via notification
                     coordinator.isComplete = true
                 }) {
                     Text("Start Using SmilePile")
-                        .font(.headline)
+                        .font(.nunito(18, weight: .medium))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(red: 1.0, green: 0.42, blue: 0.42))
+                        .frame(height: 56)
+                        .background(Color.smilePileBlue)
                         .cornerRadius(12)
                 }
                 .padding(.horizontal, 40)
-                .transition(.move(edge: .bottom))
+                .padding(.bottom, 50)
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
             }
-
-            Spacer()
         }
         .onAppear {
-            // Animate the success checkmark
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.6)) {
+            // Animate in sequence
+            withAnimation(.default.delay(0.1)) {
                 showCheckmark = true
             }
 
-            // Show content after checkmark animation
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    showContent = true
-                }
+            withAnimation(.default.delay(0.6)) {
+                showContent = true
             }
         }
     }
