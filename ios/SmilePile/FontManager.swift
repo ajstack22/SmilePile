@@ -9,7 +9,8 @@ class FontManager {
     }
 
     func registerFonts() {
-        let fontNames = ["Nunito-Black", "Nunito-Bold", "Nunito-ExtraBold", "Nunito-Variable"]
+        // Only register Nunito-Variable as the other files are corrupted
+        let fontNames = ["Nunito-Variable"]
 
         for fontName in fontNames {
             guard let fontURL = Bundle.main.url(forResource: fontName, withExtension: "ttf") else {
@@ -65,19 +66,17 @@ class FontManager {
 
 // SwiftUI Font extension for easy usage
 extension Font {
-    static func nunito(_ weight: Font.Weight = .regular, size: CGFloat) -> Font {
-        let fontName: String
-        switch weight {
-        case .black, .heavy:
-            fontName = "Nunito-Black"
-        case .bold, .semibold:
-            fontName = "Nunito-Bold"
-        case .medium, .regular:
-            fontName = "Nunito-ExtraBold"
-        default:
-            fontName = "Nunito-ExtraBold"
-        }
-
-        return Font.custom(fontName, size: size)
+    // Main nunito function with weight and size parameters
+    static func nunito(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        // Use the Variable font with appropriate weight modifier
+        return Font.custom("Nunito-Variable", size: size)
+            .weight(weight)
     }
+
+    // Convenience methods matching Android and design specs
+    static let nunitoTitle = Font.custom("Nunito-Variable", size: 36).weight(.heavy)
+    static let nunitoHeadline = Font.custom("Nunito-Variable", size: 22).weight(.bold)
+    static let nunitoBody = Font.custom("Nunito-Variable", size: 16).weight(.medium)
+    static let nunitoCaption = Font.custom("Nunito-Variable", size: 14).weight(.regular)
+    static let nunitoButton = Font.custom("Nunito-Variable", size: 18).weight(.bold)
 }
