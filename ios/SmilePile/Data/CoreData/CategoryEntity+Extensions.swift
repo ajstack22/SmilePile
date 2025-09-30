@@ -96,7 +96,7 @@ extension CategoryEntity {
     }
 }
 
-struct CategoryWithCount: Identifiable {
+struct CoreDataCategoryWithCount: Identifiable {
     let id = UUID()
     let category: Category
     let photoCount: Int

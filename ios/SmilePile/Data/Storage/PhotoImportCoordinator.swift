@@ -74,7 +74,7 @@ actor PhotoImportCoordinator {
         from pickerResults: [PHPickerResult],
         categoryId: Int64,
         progressHandler: @escaping (Double) -> Void
-    ) async throws -> ImportResult {
+    ) async throws -> PhotoImportResult {
         guard case .idle = currentState else {
             throw ImportError.importInProgress
         }
@@ -190,7 +190,7 @@ actor PhotoImportCoordinator {
         session: PhotoImportSession,
         photoURLs: [URL],
         categoryId: Int64
-    ) async throws -> ImportResult {
+    ) async throws -> PhotoImportResult {
         var processedPhotos: [Photo] = []
         var failedURLs: [URL] = []
         var processedIds: [String] = []
@@ -252,7 +252,7 @@ actor PhotoImportCoordinator {
         // Complete session
         try await sessionManager.completeSession(session.sessionId)
 
-        let result = ImportResult(
+        let result = PhotoImportResult(
             sessionId: session.sessionId,
             totalPhotos: totalCount,
             successCount: processedPhotos.count,
@@ -419,7 +419,7 @@ actor PhotoImportCoordinator {
 
 // MARK: - Import Result
 
-struct ImportResult {
+struct PhotoImportResult {
     let sessionId: String
     let totalPhotos: Int
     let successCount: Int
@@ -435,7 +435,7 @@ struct ImportResult {
 
 // MARK: - Import Error
 
-enum ImportError: LocalizedError {
+enum CoordinatorImportError: LocalizedError {
     case importInProgress
     case sessionNotFound
     case noActiveImport

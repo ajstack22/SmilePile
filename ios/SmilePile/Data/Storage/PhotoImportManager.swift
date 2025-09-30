@@ -104,7 +104,7 @@ final class PhotoImportManager: ObservableObject {
     func processSelectedPhotos(
         _ results: [PHPickerResult],
         categoryId: Int64
-    ) async throws -> ImportResult {
+    ) async throws -> PhotoManagerImportResult {
         // Validate batch size
         guard results.count <= Configuration.maxPhotosPerBatch else {
             throw ImportError.batchSizeLimitExceeded(limit: Configuration.maxPhotosPerBatch)
@@ -136,7 +136,7 @@ final class PhotoImportManager: ObservableObject {
             }
         }
 
-        return try await currentImportTask!.value as! ImportResult
+        return try await currentImportTask!.value as! PhotoManagerImportResult
     }
 
     /// Cancel current import operation
@@ -153,7 +153,7 @@ final class PhotoImportManager: ObservableObject {
     private func performImport(
         results: [PHPickerResult],
         categoryId: Int64
-    ) async throws -> ImportResult {
+    ) async throws -> PhotoManagerImportResult {
         var successfulImports: [Photo] = []
         var failedItems: [(index: Int, error: Error)] = []
         var skippedDuplicates: [String] = []
@@ -238,7 +238,7 @@ final class PhotoImportManager: ObservableObject {
         // Final progress update
         await updateProgress(1.0, message: "Import complete")
 
-        let result = ImportResult(
+        let result = PhotoManagerImportResult(
             totalCount: results.count,
             successCount: successfulImports.count,
             failedCount: failedItems.count,
@@ -252,7 +252,7 @@ final class PhotoImportManager: ObservableObject {
         return result
     }
 
-    private func loadImage(from result: PHPickerResult) async throws -> (UIImage, PhotoMetadata) {
+    private func loadImage(from result: PHPickerResult) async throws -> (UIImage, PhotoMetadataExtractor.PhotoMetadata) {
         return try await withCheckedThrowingContinuation { continuation in
             result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
                 guard let self = self else {
@@ -310,7 +310,7 @@ final class PhotoImportManager: ObservableObject {
         )
     }
 
-    private func generateFileName(from metadata: PhotoMetadata) -> String {
+    private func generateFileName(from metadata: PhotoMetadataExtractor.PhotoMetadata) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
         let timestamp = dateFormatter.string(from: metadata.creationDate ?? Date())
@@ -345,7 +345,7 @@ final class PhotoImportManager: ObservableObject {
 
 // MARK: - Import Result
 
-struct ImportResult {
+struct PhotoManagerImportResult {
     let totalCount: Int
     let successCount: Int
     let failedCount: Int

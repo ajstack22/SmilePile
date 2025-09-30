@@ -34,6 +34,10 @@ import com.smilepile.theme.ThemeManager
 import com.smilepile.settings.SettingsManager
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import android.content.Intent
+import com.smilepile.onboarding.OnboardingActivity
+import com.smilepile.data.repository.CategoryRepository
+import kotlinx.coroutines.flow.first
 
 @AndroidEntryPoint
 class MainActivity : SecureActivity() {
@@ -46,6 +50,9 @@ class MainActivity : SecureActivity() {
 
     @Inject
     lateinit var settingsManager: SettingsManager
+
+    @Inject
+    lateinit var categoryRepository: CategoryRepository
 
     private val themeViewModel: ThemeViewModel by viewModels()
     private val modeViewModel: AppModeViewModel by viewModels()
@@ -70,6 +77,15 @@ class MainActivity : SecureActivity() {
 
         // Enable edge-to-edge display
         enableEdgeToEdge()
+
+        // Check for first launch and show onboarding if needed
+        lifecycleScope.launch {
+            if (shouldShowOnboarding()) {
+                startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
+                finish() // Close main activity until onboarding is complete
+                return@launch
+            }
+        }
 
         // Initialize settings on first launch
         initializeSettings()
@@ -174,5 +190,24 @@ class MainActivity : SecureActivity() {
                 sharedPrefs.edit().clear().apply()
             }
         }
+    }
+
+    private suspend fun shouldShowOnboarding(): Boolean {
+        // Check if onboarding has been completed
+        val hasCompletedOnboarding = settingsManager.hasCompletedOnboarding().first()
+
+        if (!hasCompletedOnboarding) {
+            // Check if we have existing data (migrating user)
+            val categories = categoryRepository.getAllCategories()
+            if (categories.isEmpty()) {
+                // First time launch, show onboarding
+                return true
+            } else {
+                // Has data but no onboarding flag - mark as complete (migrating user)
+                settingsManager.setOnboardingCompleted(true)
+            }
+        }
+
+        return false
     }
 }

@@ -75,7 +75,7 @@ struct PINEntryView: View {
                         HStack(spacing: 30) {
                             ForEach(1...3, id: \.self) { col in
                                 let number = row * 3 + col
-                                NumberButton(number: "\(number)") {
+                                PINNumberButton(number: "\(number)") {
                                     if cooldownRemaining == 0 {
                                         addDigit("\(number)")
                                     }
@@ -89,7 +89,7 @@ struct PINEntryView: View {
                         Color.clear
                             .frame(width: 70, height: 70)
 
-                        NumberButton(number: "0") {
+                        PINNumberButton(number: "0") {
                             if cooldownRemaining == 0 {
                                 addDigit("0")
                             }
@@ -244,7 +244,7 @@ struct PINEntryView: View {
     }
 }
 
-struct NumberButton: View {
+private struct PINNumberButton: View {
     let number: String
     let action: () -> Void
 

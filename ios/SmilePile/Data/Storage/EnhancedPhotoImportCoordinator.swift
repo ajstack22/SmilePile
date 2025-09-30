@@ -34,7 +34,7 @@ actor EnhancedPhotoImportCoordinator {
 
     private var currentState: ImportState = .idle
     private var activeTask: Task<Void, Error>?
-    private var progressHandlers: [(ImportProgress) -> Void] = []
+    private var progressHandlers: [(EnhancedImportProgress) -> Void] = []
 
     // MARK: - State
     enum ImportState {
@@ -68,7 +68,7 @@ actor EnhancedPhotoImportCoordinator {
     func startEnhancedImport(
         from pickerResults: [PHPickerResult],
         categoryId: Int64,
-        progressHandler: @escaping (ImportProgress) -> Void
+        progressHandler: @escaping (EnhancedImportProgress) -> Void
     ) async throws -> EnhancedImportResult {
         guard case .idle = currentState else {
             throw ImportError.importInProgress
@@ -189,7 +189,7 @@ actor EnhancedPhotoImportCoordinator {
                     let memUsage = await MainActor.run {
                         monitor.currentMemoryUsageMB
                     }
-                    let progress = ImportProgress(
+                    let progress = EnhancedImportProgress(
                         currentPhoto: overallIndex,
                         totalPhotos: totalCount,
                         currentStage: .generatingThumbnails,
@@ -462,7 +462,7 @@ actor EnhancedPhotoImportCoordinator {
         return false
     }
 
-    private func notifyProgress(_ progress: ImportProgress) async {
+    private func notifyProgress(_ progress: EnhancedImportProgress) async {
         let handlers = progressHandlers
         await MainActor.run {
             for handler in handlers {
@@ -473,7 +473,7 @@ actor EnhancedPhotoImportCoordinator {
 }
 
 // MARK: - Import Progress
-struct ImportProgress {
+struct EnhancedImportProgress {
     let currentPhoto: Int
     let totalPhotos: Int
     let currentStage: ImportStage

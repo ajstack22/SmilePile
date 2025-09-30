@@ -669,7 +669,7 @@ struct QuickActionButton: View {
     }
 }
 
-struct CircularProgressView: View {
+private struct BatchCircularProgressView: View {
     let progress: Double
     let color: Color
 

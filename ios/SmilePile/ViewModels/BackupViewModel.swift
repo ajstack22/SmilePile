@@ -498,7 +498,7 @@ struct DocumentPicker: UIViewControllerRepresentable {
 }
 
 // MARK: - Share Sheet
-struct ShareSheet: UIViewControllerRepresentable {
+private struct BackupShareSheet: UIViewControllerRepresentable {
     let items: [Any]
     let onDismiss: (() -> Void)?
 

@@ -74,6 +74,7 @@ class SettingsManager @Inject constructor(
         private val KEY_FIRST_LAUNCH = booleanPreferencesKey("first_launch")
         private val KEY_APP_VERSION = intPreferencesKey("app_version")
         private val KEY_MIGRATION_VERSION = intPreferencesKey("migration_version")
+        private val KEY_ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
 
         // Default Values
         const val DEFAULT_GRID_SIZE = 3
@@ -502,6 +503,18 @@ class SettingsManager @Inject constructor(
     fun isFirstLaunch(): Flow<Boolean> = context.dataStore.data
         .map { preferences ->
             preferences[KEY_FIRST_LAUNCH] ?: true
+        }
+
+    // Onboarding Settings
+    suspend fun setOnboardingCompleted(completed: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_ONBOARDING_COMPLETED] = completed
+        }
+    }
+
+    fun hasCompletedOnboarding(): Flow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[KEY_ONBOARDING_COMPLETED] ?: false
         }
 
     suspend fun setAppVersion(version: Int) {

@@ -153,7 +153,7 @@ struct PhotoGridWithCategories: View {
     @ObservedObject var photoGalleryViewModel: PhotoGalleryViewModel
     @ObservedObject var categoryManager: CategoryManager
     @State private var selectedPhotoIds: Set<Int64> = []
-    @State private var editMode: EditMode = .inactive
+    @State private var editMode = EditMode.inactive
     @State private var showCategorySelection = false
     @State private var showPhotoDetail: Photo?
 

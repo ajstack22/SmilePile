@@ -67,6 +67,8 @@ struct ContentView: View {
     @State private var showPINEntry = false
     @State private var tapCount = 0
     @State private var lastTapTime = Date()
+    @State private var showOnboarding = false
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some View {
         ZStack {
@@ -123,6 +125,38 @@ struct ContentView: View {
                     kidsModeViewModel.requiresPINAuth = false
                 }
             )
+        }
+        .onAppear {
+            checkFirstLaunch()
+        }
+        .fullScreenCover(isPresented: $showOnboarding) {
+            OnboardingView()
+        }
+    }
+
+    private func checkFirstLaunch() {
+        // Check if this is the first launch and we don't have any categories
+        if !hasCompletedOnboarding {
+            // Check if we have existing data
+            Task {
+                do {
+                    let categoryRepo = CategoryRepositoryImpl.shared
+                    let categories = try await categoryRepo.getAllCategories()
+                    if categories.isEmpty {
+                        // First time launch, show onboarding
+                        await MainActor.run {
+                            showOnboarding = true
+                        }
+                    } else {
+                        // Has data but no onboarding flag - mark as complete (migrating user)
+                        await MainActor.run {
+                            hasCompletedOnboarding = true
+                        }
+                    }
+                } catch {
+                    print("Error checking categories: \(error)")
+                }
+            }
         }
     }
 

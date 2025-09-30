@@ -5,7 +5,7 @@ import UniformTypeIdentifiers
 struct CategoryManagementViewEnhanced: View {
     @StateObject private var viewModel = CategoryViewModel()
     @State private var pulseAnimation = false
-    @State private var editMode: EditMode = .inactive
+    @State private var editMode = EditMode.inactive
     @State private var showBatchActions = false
     @State private var draggedPhoto: Photo?
 

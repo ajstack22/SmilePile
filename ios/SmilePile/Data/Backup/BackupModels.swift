@@ -174,6 +174,17 @@ struct ImportResult {
     let warnings: [String]
 }
 
+// MARK: - Backup Validation Result
+struct BackupValidationResult {
+    let isValid: Bool
+    let version: String?
+    let format: BackupFormat
+    let categoriesFound: Int
+    let photosFound: Int
+    let errors: [String]
+    let warnings: [String]
+}
+
 // MARK: - Backup Preview
 struct BackupPreview {
     let version: Int

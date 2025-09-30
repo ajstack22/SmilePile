@@ -165,67 +165,6 @@ final class ZipUtils {
         }
     }
 
-    // MARK: - Validate ZIP Structure
-    static func validateZipStructure(_ zipFile: URL) async -> Result<BackupValidationResult, Error> {
-        do {
-            guard FileManager.default.fileExists(atPath: zipFile.path) else {
-                return .failure(BackupError.fileNotFound(zipFile.path))
-            }
-
-            guard let archive = Archive(url: zipFile, accessMode: .read) else {
-                return .failure(BackupError.invalidFormat)
-            }
-
-            var hasMetadata = false
-            var photosCount = 0
-            var errors: [String] = []
-            var totalUncompressedSize: Int64 = 0
-
-            for entry in archive {
-                // Check for metadata.json
-                if entry.path == METADATA_FILE {
-                    hasMetadata = true
-                }
-
-                // Count photos
-                if entry.path.hasPrefix(PHOTOS_DIR) {
-                    photosCount += 1
-                }
-
-                // Check for security limits
-                totalUncompressedSize += entry.uncompressedSize
-
-                if totalUncompressedSize > MAX_UNCOMPRESSED_SIZE {
-                    errors.append("Archive exceeds maximum size limit")
-                    break
-                }
-
-                if archive.count > MAX_ENTRIES {
-                    errors.append("Archive contains too many entries")
-                    break
-                }
-            }
-
-            let result = BackupValidationResult(
-                isValid: hasMetadata && errors.isEmpty,
-                version: 0, // Will be determined from metadata
-                format: .zip,
-                hasMetadata: hasMetadata,
-                hasPhotos: photosCount > 0,
-                photosCount: photosCount,
-                categoriesCount: 0, // Will be determined from metadata
-                integrityCheckPassed: errors.isEmpty,
-                errors: errors,
-                warnings: []
-            )
-
-            return .success(result)
-
-        } catch {
-            return .failure(error)
-        }
-    }
-
     // MARK: - Calculate Checksum
     static func calculateMD5(_ url: URL) throws -> String {
         let data = try Data(contentsOf: url)
@@ -426,7 +365,7 @@ class Archive {
     }
 }
 
-// Archive Entry
+// Archive Entry placeholder
 class ArchiveEntry: Sequence {
     let path: String
     let type: EntryType

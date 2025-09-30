@@ -46,7 +46,7 @@ struct CategorySelectionSheet: View {
 }
 
 // MARK: - Photo Stack View
-struct PhotoStackView: View {
+private struct OptimizedPhotoStackView: View {
     let photos: [Photo]
     let onPhotoClick: (Photo) -> Void
     let onEditClick: ((Photo) -> Void)?
@@ -54,12 +54,12 @@ struct PhotoStackView: View {
 
     var body: some View {
         if photos.isEmpty {
-            EmptyPhotoStackState()
+            OptimizedEmptyPhotoStackState()
         } else {
             ScrollView {
                 LazyVStack(spacing: 12) {
                     ForEach(photos) { photo in
-                        PhotoStackItem(
+                        OptimizedPhotoStackItem(
                             photo: photo,
                             onPhotoClick: { onPhotoClick(photo) },
                             onEditClick: { onEditClick?(photo) },
@@ -73,7 +73,7 @@ struct PhotoStackView: View {
     }
 }
 
-struct PhotoStackItem: View {
+private struct OptimizedPhotoStackItem: View {
     let photo: Photo
     let onPhotoClick: () -> Void
     let onEditClick: (() -> Void)?
@@ -145,7 +145,7 @@ struct PhotoStackItem: View {
     }
 }
 
-struct EmptyPhotoStackState: View {
+private struct OptimizedEmptyPhotoStackState: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "photo.stack")
@@ -296,7 +296,7 @@ struct OptimizedPhotoGalleryView: View {
     // MARK: - Views
 
     private var photoStackView: some View {
-        PhotoStackView(
+        OptimizedPhotoStackView(
             photos: viewModel.filteredPhotos,
             onPhotoClick: { photo in
                 selectedPhotos = [photo]

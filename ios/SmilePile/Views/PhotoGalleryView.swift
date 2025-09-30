@@ -67,7 +67,7 @@ struct PhotoGalleryView: View {
                         ], spacing: 2) {
                             ForEach(filteredPhotos) { photo in
                                 ZStack(alignment: .topTrailing) {
-                                    PhotoThumbnail(photo: photo)
+                                    GalleryPhotoThumbnail(photo: photo)
                                         .onTapGesture {
                                             if isSelectionMode {
                                                 toggleSelection(for: photo)
@@ -459,7 +459,7 @@ struct EmptyGalleryPlaceholder: View {
     }
 }
 
-struct PhotoThumbnail: View {
+private struct GalleryPhotoThumbnail: View {
     let photo: Photo
 
     var body: some View {

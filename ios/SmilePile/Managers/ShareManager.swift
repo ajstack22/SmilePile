@@ -181,8 +181,8 @@ extension View {
     }
 }
 
-/// SwiftUI wrapper view for ShareSheet
-struct ShareSheetView: View {
+/// SwiftUI wrapper view for ShareSheet - renamed to avoid conflict
+struct ShareSheetViewInternal: View {
     let items: [Any]
 
     var body: some View {

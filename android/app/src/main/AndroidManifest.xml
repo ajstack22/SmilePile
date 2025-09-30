@@ -45,6 +45,13 @@
             </intent-filter>
         </activity>
 
+        <!-- Onboarding Activity -->
+        <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:theme="@style/Theme.SmilePile.Light" />
+
         <!-- File Provider for image sharing/viewing -->
         <provider
             android:name="androidx.core.content.FileProvider"

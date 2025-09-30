@@ -62,7 +62,7 @@ struct ParentalControlsView: View {
                 }
 
                 if contentFilteringEnabled {
-                    NavigationLink(destination: CategorySelectionView(selectedCategories: $selectedCategories)) {
+                    NavigationLink(destination: ParentalCategorySelectionView(selectedCategories: $selectedCategories)) {
                         HStack {
                             Text("Allowed Categories")
                             Spacer()
@@ -203,7 +203,7 @@ struct KidsModeSettingsView: View {
     }
 }
 
-struct CategorySelectionView: View {
+private struct ParentalCategorySelectionView: View {
     @Binding var selectedCategories: Set<String>
     let allCategories = ["Family", "Nature", "Animals", "Fun", "Educational", "Art", "Sports"]
 
