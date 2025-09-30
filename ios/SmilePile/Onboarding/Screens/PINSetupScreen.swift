@@ -109,43 +109,53 @@ struct PINSetupScreen: View {
 
             Spacer()
 
-            // Action buttons
-            VStack(spacing: 12) {
+            // Action buttons - horizontal layout at bottom
+            HStack(spacing: 16) {
+                // Skip button (only on first entry, not confirmation)
                 if !isConfirming {
-                    // Skip option
                     Button(action: {
                         coordinator.onboardingData.skipPIN = true
                         coordinator.navigateToNext()
                     }) {
-                        Text("Skip for Now")
-                            .font(.subheadline)
+                        Text("Skip")
+                            .font(.nunito(18, weight: .medium))
                             .foregroundColor(.secondary)
-                    }
-                    .padding(.bottom, 8)
-                }
-
-                // Continue button (only shown when PIN is entered)
-                if (isConfirming && confirmPinCode.count == pinLength) ||
-                   (!isConfirming && pinCode.count == pinLength) {
-                    Button(action: {
-                        if isConfirming {
-                            confirmPin()
-                        } else {
-                            proceedToConfirm()
-                        }
-                    }) {
-                        Text(isConfirming ? "Confirm PIN" : "Continue")
-                            .font(.headline)
-                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(red: 1.0, green: 0.42, blue: 0.42))
+                            .frame(height: 56)
+                            .background(Color.gray.opacity(0.1))
                             .cornerRadius(12)
                     }
-                    .transition(.opacity)
                 }
+
+                // Continue/Confirm button (always visible)
+                Button(action: {
+                    if isConfirming {
+                        confirmPin()
+                    } else {
+                        if pinCode.count == pinLength {
+                            proceedToConfirm()
+                        }
+                    }
+                }) {
+                    Text(isConfirming ? "Confirm PIN" : "Continue")
+                        .font(.nunito(18, weight: .medium))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 56)
+                        .background(
+                            (isConfirming && confirmPinCode.count == pinLength) ||
+                            (!isConfirming && pinCode.count == pinLength) ?
+                            Color.smilePileBlue : Color.gray.opacity(0.3)
+                        )
+                        .cornerRadius(12)
+                }
+                .disabled(
+                    (isConfirming && confirmPinCode.count != pinLength) ||
+                    (!isConfirming && pinCode.count != pinLength)
+                )
             }
-            .padding()
+            .padding(.horizontal, 40)
+            .padding(.bottom, 50)
         }
         .onAppear {
             pinFieldFocused = true
