@@ -121,6 +121,7 @@
 		F9F56554C19D7C4622205822 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3076FD869E044C65FB65B2A7 /* ShareSheetView.swift */; };
 		FB5C570D9D4A460F134A3221 /* EnhancedPhotoImportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18291FB06CA7992A26310C1 /* EnhancedPhotoImportCoordinator.swift */; };
 		C473B22D597D4E6684C78D15 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413D3F3C27549EEA5AFCD67 /* ColorConstants.swift */; };
+		4275696C644D756C7469636F /* MulticolorSmilePileLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D756C7469636F6C6F72536D /* MulticolorSmilePileLogo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -240,6 +241,7 @@
 		FF0A78DE44A20DA8D396B70F /* SmilePileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileApp.swift; sourceTree = "<group>"; };
 		FF3A90BBE5D1A1B5CF73FCA5 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		1413D3F3C27549EEA5AFCD67 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		4D756C7469636F6C6F72536D /* MulticolorSmilePileLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticolorSmilePileLogo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -501,6 +503,7 @@
 				B18BC96CC66BCAACB0DA2747 /* RadioButtonRow.swift */,
 				8A362ECE31525051DD47E9DD /* SettingsComponents.swift */,
 				3076FD869E044C65FB65B2A7 /* ShareSheetView.swift */,
+				4D756C7469636F6C6F72536D /* MulticolorSmilePileLogo.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				19D2C7233B299FABACF4F884 /* SmilePile.xcdatamodeld in Sources */,
 				73EC80CD1D10F4F595C113C3 /* SmilePileApp.swift in Sources */,
 				D6F1912733AC7DE8D2C9A4CA /* SmilePileLogo.swift in Sources */,
+				4275696C644D756C7469636F /* MulticolorSmilePileLogo.swift in Sources */,
 				C3ECB12F78D3963C3875212A /* StorageManager.swift in Sources */,
 				420287D7BCE5DC705B23194B /* StorageResult.swift in Sources */,
 				30272FE9ED0D7D177A5D8765 /* ThemeManager.swift in Sources */,

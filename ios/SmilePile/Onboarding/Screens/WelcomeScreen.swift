@@ -13,9 +13,7 @@ struct WelcomeScreen: View {
                     .font(.system(size: 80))
                     .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
 
-                Text("SmilePile")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                MulticolorSmilePileLogo(fontSize: 36)
 
                 Text("A safe and fun photo gallery for kids")
                     .font(.title3)
