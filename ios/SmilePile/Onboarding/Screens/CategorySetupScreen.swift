@@ -103,8 +103,15 @@ struct CategorySetupScreen: View {
                                             .fill(Color(hex: color))
                                             .frame(width: 44, height: 44)
                                             .overlay(
-                                                Circle()
-                                                    .stroke(selectedColor == color ? Color.smilePileBlue : Color.clear, lineWidth: 3)
+                                                ZStack {
+                                                    if selectedColor == color {
+                                                        Circle()
+                                                            .stroke(Color.smilePileBlue, lineWidth: 3)
+                                                        Image(systemName: "checkmark")
+                                                            .font(.system(size: 20))
+                                                            .foregroundColor(.white)
+                                                    }
+                                                }
                                             )
                                             .onTapGesture {
                                                 selectedColor = color
