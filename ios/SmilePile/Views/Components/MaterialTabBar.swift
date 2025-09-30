@@ -8,7 +8,7 @@ struct MaterialTabBar: View {
 
     private let tabs: [(icon: String, selectedIcon: String, label: String)] = [
         ("photo.on.rectangle", "photo.on.rectangle.fill", "Gallery"),
-        ("square.stack", "square.stack", "Categories"),
+        ("square.stack", "square.stack", "Piles"),
         ("gearshape", "gearshape.fill", "Settings")
     ]
 

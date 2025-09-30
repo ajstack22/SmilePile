@@ -189,7 +189,7 @@ struct PhotoEditView: View {
                     VStack(spacing: 4) {
                         Image(systemName: "square.stack")
                             .font(.system(size: 24))
-                        Text("Category")
+                        Text("Pile")
                             .font(.caption2)
                     }
                     .foregroundColor(Color(red: 0.29, green: 0.565, blue: 0.886)) // #4A90E2
