@@ -169,8 +169,10 @@ class OnboardingCoordinator: ObservableObject {
                     try PINManager.shared.setPIN(pin)
                 }
 
-                // Mark onboarding as complete
-                UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+                // Mark onboarding as complete using SettingsManager
+                let settings = SettingsManager.shared
+                settings.onboardingCompleted = true
+                settings.firstLaunch = false
 
                 // Navigate to complete screen
                 currentStep = .complete

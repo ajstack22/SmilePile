@@ -68,6 +68,7 @@ class SettingsManager: ObservableObject {
 
         // App State
         static let firstLaunch = "first_launch"
+        static let onboardingCompleted = "onboarding_completed"  // Match Android key
         static let appVersion = "app_version"
         static let migrationVersion = "migration_version"
         static let lastReviewPrompt = "last_review_prompt"
@@ -175,6 +176,7 @@ class SettingsManager: ObservableObject {
     @AppStorage(Keys.animationSpeed) var animationSpeed: Double = 1.0
     @AppStorage(Keys.lowPowerModeOptimization) var lowPowerModeOptimization: Bool = true
     @AppStorage(Keys.firstLaunch) var firstLaunch: Bool = true
+    @AppStorage(Keys.onboardingCompleted) var onboardingCompleted: Bool = false  // Match Android
     @AppStorage(Keys.appVersion) var appVersion: Int = 0
     @AppStorage(Keys.migrationVersion) var migrationVersion: Int = 0
     @AppStorage(Keys.hapticFeedbackEnabled) var hapticFeedbackEnabled: Bool = true
@@ -341,6 +343,7 @@ class SettingsManager: ObservableObject {
             Keys.animationSpeed: 1.0,
             Keys.lowPowerModeOptimization: true,
             Keys.firstLaunch: true,
+            Keys.onboardingCompleted: false,
             Keys.appVersion: 0,
             Keys.migrationVersion: 0,
             Keys.hapticFeedbackEnabled: true,
@@ -375,6 +378,8 @@ class SettingsManager: ObservableObject {
         // Export all non-secure settings
         let keys = [
             Keys.kidsModeEnabled,
+            Keys.onboardingCompleted,
+            Keys.firstLaunch,
             Keys.gridSize,
             Keys.sortOrder,
             Keys.showHiddenPhotos,
@@ -449,6 +454,13 @@ class SettingsManager: ObservableObject {
 
     // MARK: - Reset
 
+    func resetOnboarding() {
+        // Reset onboarding-related flags to trigger onboarding again
+        onboardingCompleted = false
+        firstLaunch = true
+        objectWillChange.send()
+    }
+
     func resetToDefaults() {
         // Get the registered defaults
         registerDefaults()
@@ -518,7 +530,7 @@ class SettingsManager: ObservableObject {
         }
 
         if firstLaunch {
-            firstLaunch = false
+            // firstLaunch will be set to false when onboarding completes
             setupFirstLaunch()
         }
     }

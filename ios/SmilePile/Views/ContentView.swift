@@ -68,7 +68,7 @@ struct ContentView: View {
     @State private var tapCount = 0
     @State private var lastTapTime = Date()
     @State private var showOnboarding = false
-    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @StateObject private var settingsManager = SettingsManager.shared
 
     var body: some View {
         ZStack {
@@ -96,6 +96,7 @@ struct ContentView: View {
                 // Parent Mode View
                 ParentModeView()
                     .ignoresSafeArea()
+                    .environmentObject(settingsManager)
                     // .persistentSystemOverlays(.visible) // Keep home indicator visible in Parent Mode (iOS 16+)
             }
         }
@@ -135,8 +136,8 @@ struct ContentView: View {
     }
 
     private func checkFirstLaunch() {
-        // Check if this is the first launch and we don't have any categories
-        if !hasCompletedOnboarding {
+        // Check if this is the first launch and we don't have completed onboarding
+        if !settingsManager.onboardingCompleted {
             // Check if we have existing data
             Task {
                 do {
@@ -150,7 +151,8 @@ struct ContentView: View {
                     } else {
                         // Has data but no onboarding flag - mark as complete (migrating user)
                         await MainActor.run {
-                            hasCompletedOnboarding = true
+                            settingsManager.onboardingCompleted = true
+                            settingsManager.firstLaunch = false
                         }
                     }
                 } catch {
@@ -321,8 +323,8 @@ struct KidsModeView: View {
 struct ParentModeView: View {
     @State private var selectedTab = 0
     @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
-    @StateObject private var settingsManager = SettingsManager.shared
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
+    @EnvironmentObject var settingsManager: SettingsManager
 
     var body: some View {
         VStack(spacing: 0) {
@@ -351,7 +353,6 @@ struct ParentModeView: View {
             MaterialTabBar(selection: $selectedTab)
                 .background(Color(UIColor.systemBackground))
         }
-        .environmentObject(settingsManager)
         .ignoresSafeArea(.keyboard)
     }
 }
