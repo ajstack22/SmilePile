@@ -379,7 +379,7 @@ public class CategoryManager: ObservableObject {
             name: uncategorizedName,
             displayName: "Uncategorized",
             position: Int.max, // Always last
-            iconResource: "folder",
+            iconResource: "square.stack",
             colorHex: "#9E9E9E", // Grey
             isDefault: true
         )

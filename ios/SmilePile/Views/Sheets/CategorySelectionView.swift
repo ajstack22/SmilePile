@@ -155,7 +155,7 @@ struct CategorySelectionView: View {
 
     private var emptyStateView: some View {
         VStack(spacing: 24) {
-            Image(systemName: "folder.badge.plus")
+            Image(systemName: "square.stack.badge.plus")
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
 

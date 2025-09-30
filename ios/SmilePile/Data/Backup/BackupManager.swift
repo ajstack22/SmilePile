@@ -37,8 +37,8 @@ final class BackupManager: ObservableObject {
 
     // MARK: - Initialization
     private init() {
-        self.categoryRepository = CategoryRepository.shared
-        self.photoRepository = PhotoRepository.shared
+        self.categoryRepository = CategoryRepositoryImpl()
+        self.photoRepository = PhotoRepositoryImpl()
         self.settingsManager = SettingsManager.shared
         self.storageManager = StorageManager.shared
 
@@ -252,8 +252,9 @@ final class BackupManager: ObservableObject {
 
         // Get changes since last backup
         let baseDate = Date(timeIntervalSince1970: TimeInterval(baseBackup.timestamp / 1000))
-        let changedPhotos = try await photoRepository.getPhotosModifiedAfter(baseDate)
-        let changedCategories = try await categoryRepository.getCategoriesModifiedAfter(baseDate)
+        // These methods don't exist in the repository - using all photos/categories for now
+        let changedPhotos = try await photoRepository.getAllPhotos()
+        let changedCategories = try await categoryRepository.getAllCategories()
 
         if changedPhotos.isEmpty && changedCategories.isEmpty {
             throw BackupError.exportFailed("No changes since last backup")
@@ -261,12 +262,17 @@ final class BackupManager: ObservableObject {
 
         progressCallback?(20, 100, "Creating incremental backup")
 
-        // Create incremental options
-        var incrementalOptions = options
-        incrementalOptions.categoryFilter = changedCategories.map { $0.name }
-        incrementalOptions.dateRange = BackupOptions.DateRange(
-            start: baseDate,
-            end: Date()
+        // Create incremental options with changed items only
+        let incrementalOptions = BackupOptions(
+            includePhotos: options.includePhotos,
+            includeSettings: options.includeSettings,
+            includeCategories: options.includeCategories,
+            compressionLevel: options.compressionLevel,
+            dateRange: BackupOptions.DateRange(
+                start: baseDate,
+                end: Date()
+            ),
+            categoryFilter: changedCategories.map { $0.name }
         )
 
         // Perform backup with incremental options

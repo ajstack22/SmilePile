@@ -35,7 +35,7 @@ struct CategoryManagementView: View {
                 },
                 isPulsing: viewModel.hasPulseFAB,
                 backgroundColor: Color(red: 255/255, green: 102/255, blue: 0/255), // Keep orange for categories
-                iconName: "folder.badge.plus"
+                iconName: "square.stack.badge.plus"
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             .padding(.trailing, 16)
@@ -103,7 +103,7 @@ struct CategoryManagementView: View {
     @ViewBuilder
     private var emptyState: some View {
         VStack(spacing: 20) {
-            Image(systemName: "folder.badge.plus")
+            Image(systemName: "square.stack.badge.plus")
                 .font(.system(size: 64))
                 .foregroundColor(.gray)
 

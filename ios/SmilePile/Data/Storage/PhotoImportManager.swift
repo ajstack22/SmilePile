@@ -392,6 +392,9 @@ enum ImportError: LocalizedError {
     case storageFull
     case cancelled
     case managerDeallocated
+    case insufficientStorage
+    case memoryPressure
+    case failedToLoadPhoto
 
     var errorDescription: String? {
         switch self {
@@ -419,6 +422,12 @@ enum ImportError: LocalizedError {
             return "Import was cancelled"
         case .managerDeallocated:
             return "Import manager was deallocated"
+        case .insufficientStorage:
+            return "Insufficient storage space available for import"
+        case .memoryPressure:
+            return "Import paused due to memory pressure"
+        case .failedToLoadPhoto:
+            return "Failed to load photo from library"
         }
     }
 }

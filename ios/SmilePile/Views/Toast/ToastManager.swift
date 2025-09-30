@@ -17,7 +17,7 @@ enum ToastType {
         case .info:
             return "info.circle.fill"
         case .category:
-            return "folder.fill"
+            return "square.stack"
         }
     }
 

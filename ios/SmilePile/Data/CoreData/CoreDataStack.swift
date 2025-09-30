@@ -2,8 +2,8 @@ import CoreData
 import Combine
 import os.log
 
-final class CoreDataStack: ObservableObject {
-    static let shared = CoreDataStack()
+public final class CoreDataStack: ObservableObject {
+    public static let shared = CoreDataStack()
 
     private let logger = Logger(subsystem: "com.smilepile", category: "CoreData")
 

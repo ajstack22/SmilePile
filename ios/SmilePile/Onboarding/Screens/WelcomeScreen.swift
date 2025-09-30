@@ -29,7 +29,7 @@ struct WelcomeScreen: View {
             // Features list
             VStack(alignment: .leading, spacing: 20) {
                 FeatureRow(
-                    icon: "folder.fill",
+                    icon: "square.stack",
                     title: "Organize photos",
                     description: "Create colorful categories"
                 )

@@ -32,7 +32,7 @@ struct PhotoThumbnailWithCategory: View {
             }
 
             // Selection overlay
-            if editMode == .active {
+            if editMode == EditMode.active {
                 selectionOverlay
             }
 
@@ -116,7 +116,7 @@ struct PhotoThumbnailWithCategory: View {
     private var selectionOverlay: some View {
         ZStack(alignment: .topLeading) {
             // Semi-transparent overlay when in edit mode
-            if editMode == .active && !isSelected {
+            if editMode == EditMode.active && !isSelected {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.black.opacity(0.2))
             }
@@ -153,7 +153,7 @@ struct PhotoGridWithCategories: View {
     @ObservedObject var photoGalleryViewModel: PhotoGalleryViewModel
     @ObservedObject var categoryManager: CategoryManager
     @State private var selectedPhotoIds: Set<Int64> = []
-    @State private var editMode = EditMode.inactive
+    @State private var editMode: SwiftUI.EditMode = .inactive
     @State private var showCategorySelection = false
     @State private var showPhotoDetail: Photo?
 
@@ -166,8 +166,11 @@ struct PhotoGridWithCategories: View {
             // Category filter bar
             if !categoryManager.categories.isEmpty {
                 CategoryFilterView(
-                    categoryManager: categoryManager,
-                    selectedCategory: $photoGalleryViewModel.selectedCategory
+                    categories: categoryManager.categories,
+                    selectedCategory: photoGalleryViewModel.selectedCategory,
+                    onCategorySelected: { category in
+                        photoGalleryViewModel.selectedCategory = category
+                    }
                 )
             }
 
@@ -230,7 +233,7 @@ struct PhotoGridWithCategories: View {
                 Button(action: {
                     showCategorySelection = true
                 }) {
-                    Label("Categorize", systemImage: "folder.badge.plus")
+                    Label("Categorize", systemImage: "square.stack.badge.plus")
                         .font(.caption)
                 }
                 .disabled(selectedPhotoIds.isEmpty)

@@ -187,7 +187,7 @@ struct PhotoEditView: View {
                 // Category - Blue color #4A90E2
                 Button(action: { showCategoryPicker = true }) {
                     VStack(spacing: 4) {
-                        Image(systemName: "folder")
+                        Image(systemName: "square.stack")
                             .font(.system(size: 24))
                         Text("Category")
                             .font(.caption2)

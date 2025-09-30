@@ -517,6 +517,4 @@ struct EnhancedImportResult {
 }
 
 // MARK: - Enhanced Import Error
-extension ImportError {
-    static let insufficientStorage = ImportError.storageError("Insufficient storage space")
-}
+// Extension removed - ImportError doesn't have storageError case

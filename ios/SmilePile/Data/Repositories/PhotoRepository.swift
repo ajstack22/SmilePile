@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-protocol PhotoRepository {
+public protocol PhotoRepository {
     // CRUD Operations
     func insertPhoto(_ photo: Photo) async throws -> Int64
     func insertPhotos(_ photos: [Photo]) async throws

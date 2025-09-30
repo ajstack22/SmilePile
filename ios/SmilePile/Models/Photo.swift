@@ -1,19 +1,19 @@
 import Foundation
 import SwiftUI
 
-struct Photo: Identifiable, Codable, Equatable {
-    let id: Int64
-    let path: String
-    let categoryId: Int64
-    let name: String
-    let isFromAssets: Bool
-    let createdAt: Int64
-    let fileSize: Int64
-    let width: Int
-    let height: Int
+public struct Photo: Identifiable, Codable, Equatable {
+    public let id: Int64
+    public let path: String
+    public let categoryId: Int64
+    public let name: String
+    public let isFromAssets: Bool
+    public let createdAt: Int64
+    public let fileSize: Int64
+    public let width: Int
+    public let height: Int
 
     // Computed properties matching Android
-    var displayName: String {
+    public var displayName: String {
         if !name.isEmpty {
             return name
         }
@@ -21,11 +21,11 @@ struct Photo: Identifiable, Codable, Equatable {
         return url.deletingPathExtension().lastPathComponent
     }
 
-    var isValid: Bool {
+    public var isValid: Bool {
         !path.isEmpty && categoryId > 0
     }
 
-    init(
+    public init(
         id: Int64 = 0,
         path: String,
         categoryId: Int64,
@@ -48,28 +48,28 @@ struct Photo: Identifiable, Codable, Equatable {
     }
 
     // Helper methods
-    var createdDate: Date {
+    public var createdDate: Date {
         Date(timeIntervalSince1970: TimeInterval(createdAt) / 1000)
     }
 
-    var formattedFileSize: String {
+    public var formattedFileSize: String {
         let formatter = ByteCountFormatter()
         formatter.countStyle = .binary
         return formatter.string(fromByteCount: fileSize)
     }
 }
 
-struct Category: Identifiable, Codable, Equatable {
-    let id: Int64
-    let name: String
-    let displayName: String
-    let position: Int
-    let iconResource: String?
-    let colorHex: String?
-    let isDefault: Bool
-    let createdAt: Int64
+public struct Category: Identifiable, Codable, Equatable {
+    public let id: Int64
+    public let name: String
+    public let displayName: String
+    public let position: Int
+    public let iconResource: String?
+    public let colorHex: String?
+    public let isDefault: Bool
+    public let createdAt: Int64
 
-    init(
+    public init(
         id: Int64 = 0,
         name: String,
         displayName: String,
@@ -89,19 +89,19 @@ struct Category: Identifiable, Codable, Equatable {
         self.createdAt = createdAt
     }
 
-    var color: Color {
+    public var color: Color {
         if let hex = colorHex {
             return Color(hex: hex) ?? Color.orange
         }
         return Color.orange
     }
 
-    var createdDate: Date {
+    public var createdDate: Date {
         Date(timeIntervalSince1970: TimeInterval(createdAt) / 1000)
     }
 
     // Default categories matching Android exactly
-    static func getDefaultCategories() -> [Category] {
+    public static func getDefaultCategories() -> [Category] {
         return [
             Category(
                 id: 1,

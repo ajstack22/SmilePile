@@ -122,7 +122,7 @@ struct BatchCategorizationView: View {
 
                 QuickActionButton(
                     title: "Uncategorized",
-                    icon: "questionmark.folder",
+                    icon: "questionmark.square.stack",
                     color: .orange
                 ) {
                     viewModel.selectUncategorizedPhotos()
@@ -344,7 +344,7 @@ struct BatchCategorizationView: View {
                 }) {
                     Label(
                         viewModel.showOnlyUncategorized ? "Show All" : "Show Uncategorized",
-                        systemImage: "questionmark.folder"
+                        systemImage: "questionmark.square.stack"
                     )
                 }
             } label: {

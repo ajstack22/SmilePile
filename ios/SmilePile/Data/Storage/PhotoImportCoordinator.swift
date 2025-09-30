@@ -76,7 +76,7 @@ actor PhotoImportCoordinator {
         progressHandler: @escaping (Double) -> Void
     ) async throws -> PhotoImportResult {
         guard case .idle = currentState else {
-            throw ImportError.importInProgress
+            throw CoordinatorImportError.importInProgress
         }
 
         currentState = .preparing
@@ -117,11 +117,11 @@ actor PhotoImportCoordinator {
     /// Resume a paused import session
     func resumeImport(sessionId: String) async throws -> ImportResult {
         guard case .idle = currentState else {
-            throw ImportError.importInProgress
+            throw CoordinatorImportError.importInProgress
         }
 
         guard let session = try await sessionManager.resumeSession(sessionId) else {
-            throw ImportError.sessionNotFound
+            throw CoordinatorImportError.sessionNotFound
         }
 
         currentState = .importing(sessionId: sessionId)
@@ -146,7 +146,7 @@ actor PhotoImportCoordinator {
     /// Pause the current import
     func pauseImport() async throws {
         guard case .importing(let sessionId) = currentState else {
-            throw ImportError.noActiveImport
+            throw CoordinatorImportError.noActiveImport
         }
 
         activeTask?.cancel()
@@ -165,7 +165,7 @@ actor PhotoImportCoordinator {
             currentState = .idle
             logger.info("Import cancelled: \(sessionId)")
         default:
-            throw ImportError.noActiveImport
+            throw CoordinatorImportError.noActiveImport
         }
     }
 
@@ -200,7 +200,7 @@ actor PhotoImportCoordinator {
         for batchStart in stride(from: 0, to: photoURLs.count, by: Configuration.maxBatchSize) {
             // Check for cancellation
             if Task.isCancelled {
-                throw ImportError.cancelled
+                throw CoordinatorImportError.cancelled
             }
 
             // Check memory pressure
@@ -272,7 +272,7 @@ actor PhotoImportCoordinator {
 
         // Check image validity
         guard UIImage(data: imageData) != nil else {
-            throw ImportError.invalidImageData
+            throw CoordinatorImportError.invalidImageData
         }
 
         // Process image for storage
@@ -348,7 +348,7 @@ actor PhotoImportCoordinator {
                         continuation.resume(throwing: error)
                     }
                 } else {
-                    continuation.resume(throwing: ImportError.failedToLoadPhoto)
+                    continuation.resume(throwing: CoordinatorImportError.failedToLoadPhoto)
                 }
             }
         }
@@ -395,7 +395,7 @@ actor PhotoImportCoordinator {
             logger.warning("Memory pressure detected: \(memoryUsage)MB (count: \(self.memoryPressureCount))")
 
             if memoryPressureCount > 3 {
-                throw ImportError.memoryPressure
+                throw CoordinatorImportError.memoryPressure
             }
 
             // Wait for memory to be freed
@@ -440,10 +440,10 @@ enum CoordinatorImportError: LocalizedError {
     case sessionNotFound
     case noActiveImport
     case cancelled
-    case memoryPressure
     case invalidImageData
-    case invalidCategory(String)
     case failedToLoadPhoto
+    case memoryPressure
+    case invalidCategory(String)
     case storageError(String)
 
     var errorDescription: String? {

@@ -5,7 +5,7 @@ import UniformTypeIdentifiers
 struct CategoryManagementViewEnhanced: View {
     @StateObject private var viewModel = CategoryViewModel()
     @State private var pulseAnimation = false
-    @State private var editMode = EditMode.inactive
+    @State private var editMode: SwiftUI.EditMode = .inactive
     @State private var showBatchActions = false
     @State private var draggedPhoto: Photo?
 
@@ -254,7 +254,7 @@ struct CategoryManagementViewEnhanced: View {
     @ViewBuilder
     private var emptyState: some View {
         VStack(spacing: 24) {
-            Image(systemName: "folder.badge.plus")
+            Image(systemName: "square.stack.badge.plus")
                 .font(.system(size: 72))
                 .foregroundStyle(
                     LinearGradient(

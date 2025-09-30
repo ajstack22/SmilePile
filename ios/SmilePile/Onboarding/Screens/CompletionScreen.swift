@@ -42,7 +42,7 @@ struct CompletionScreen: View {
                     // Categories created
                     if !coordinator.onboardingData.categories.isEmpty {
                         HStack {
-                            Image(systemName: "folder.fill")
+                            Image(systemName: "square.stack")
                                 .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
                                 .frame(width: 24)
 

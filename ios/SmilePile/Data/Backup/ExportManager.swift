@@ -39,8 +39,8 @@ final class ExportManager: ObservableObject {
 
     // MARK: - Initialization
     private init() {
-        self.categoryRepository = CategoryRepository.shared
-        self.photoRepository = PhotoRepository.shared
+        self.categoryRepository = CategoryRepositoryImpl()
+        self.photoRepository = PhotoRepositoryImpl()
         self.backupManager = BackupManager.shared
 
         // Configure JSON encoder
@@ -106,8 +106,10 @@ final class ExportManager: ObservableObject {
 
         // Get photos in date range
         let allPhotos = try await photoRepository.getAllPhotos()
+        let startTimestamp = Int64(startDate.timeIntervalSince1970 * 1000)
+        let endTimestamp = Int64(endDate.timeIntervalSince1970 * 1000)
         let photos = allPhotos.filter { photo in
-            photo.createdAt >= startDate && photo.createdAt <= endDate
+            photo.createdAt >= startTimestamp && photo.createdAt <= endTimestamp
         }
 
         guard !photos.isEmpty else {
@@ -368,7 +370,7 @@ final class ExportManager: ObservableObject {
                                 name: photo.name,
                                 imagePath: "images/\(imageName)",
                                 thumbnailPath: "thumbnails/\(thumbName)",
-                                date: photo.createdAt
+                                date: Date(timeIntervalSince1970: TimeInterval(photo.createdAt) / 1000)
                             ))
                         }
                     }

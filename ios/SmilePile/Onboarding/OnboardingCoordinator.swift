@@ -141,23 +141,23 @@ class OnboardingCoordinator: ObservableObject {
             do {
                 // Save categories
                 let categoryRepo = CategoryRepositoryImpl.shared
-                for tempCategory in onboardingData.categories {
+                for (index, tempCategory) in onboardingData.categories.enumerated() {
                     let category = Category(
-                        id: tempCategory.id,
-                        name: tempCategory.name,
+                        id: Int64(index + 1),
+                        name: tempCategory.name.lowercased().replacingOccurrences(of: " ", with: "_"),
                         displayName: tempCategory.name,
+                        position: index,
+                        iconResource: tempCategory.icon,
                         colorHex: tempCategory.colorHex,
-                        icon: tempCategory.icon,
-                        systemGenerated: false,
-                        createdAt: Date(),
-                        updatedAt: Date()
+                        isDefault: false,
+                        createdAt: Int64(Date().timeIntervalSince1970 * 1000)
                     )
-                    categoryRepo.saveCategory(category)
+                    _ = try await categoryRepo.insertCategory(category)
                 }
 
                 // Import photos if any
                 if !onboardingData.importedPhotos.isEmpty {
-                    let photoRepo = PhotoRepositoryImpl.shared
+                    let photoRepo = PhotoRepositoryImpl()
                     for importedPhoto in onboardingData.importedPhotos {
                         // Fetch the PHAsset and save to app storage
                         await importPhoto(importedPhoto, using: photoRepo)
@@ -197,7 +197,7 @@ class OnboardingCoordinator: ObservableObject {
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         options.isSynchronous = false
-        options.deliverPrioritizeQuality = true
+        options.deliveryMode = .highQualityFormat
 
         await withCheckedContinuation { continuation in
             manager.requestImageDataAndOrientation(for: asset, options: options) { data, _, _, info in
@@ -215,19 +215,21 @@ class OnboardingCoordinator: ObservableObject {
                     try imageData.write(to: imagePath)
 
                     // Create Photo object
-                    let photo = Photo(
-                        id: UUID(),
-                        name: fileName,
+                    let categoryId = Int64(photo.categoryId?.uuidString.hashValue ?? 1)
+                    let photoObj = Photo(
                         path: imagePath.path,
-                        thumbnailPath: nil,
-                        dateAdded: Date(),
-                        favorite: false,
+                        categoryId: categoryId,
+                        name: fileName,
                         isFromAssets: false,
-                        metadata: nil,
-                        categories: photo.categoryId.map { [$0] } ?? []
+                        createdAt: Int64(Date().timeIntervalSince1970 * 1000),
+                        fileSize: Int64(imageData.count),
+                        width: 0,
+                        height: 0
                     )
 
-                    repo.addPhoto(photo)
+                    Task {
+                        _ = try await repo.insertPhoto(photoObj)
+                    }
                 } catch {
                     print("Failed to save photo: \(error)")
                 }

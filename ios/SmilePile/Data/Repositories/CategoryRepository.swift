@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-protocol CategoryRepository {
+public protocol CategoryRepository {
     // CRUD Operations
     func insertCategory(_ category: Category) async throws -> Int64
     func insertCategories(_ categories: [Category]) async throws
