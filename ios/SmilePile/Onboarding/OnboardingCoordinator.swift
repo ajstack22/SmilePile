@@ -14,11 +14,11 @@ enum OnboardingStep: Int, CaseIterable {
         case .welcome:
             return "Welcome"
         case .categories:
-            return "Create Categories"
+            return "Create Piles"
         case .photoImport:
             return "Add Photos"
         case .pinSetup:
-            return "Security Setup"
+            return "PIN Setup"
         case .complete:
             return "All Set!"
         }
