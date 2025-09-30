@@ -460,6 +460,47 @@ class SettingsViewModel @Inject constructor(
     }
 
     /**
+     * Reset app for onboarding (debug only)
+     */
+    fun resetAppForOnboarding() {
+        viewModelScope.launch {
+            try {
+                _uiState.value = _uiState.value.copy(isLoading = true)
+
+                // Clear all app data
+                backupManager.clearAllData()
+
+                // Clear onboarding completed flag
+                settingsManager.setOnboardingCompleted(false)
+
+                // Clear security settings
+                securePreferencesManager.clearPIN()
+                securePreferencesManager.setBiometricEnabled(false)
+
+                // Give DataStore time to persist all changes
+                kotlinx.coroutines.delay(300)
+
+                // Restart the app to trigger onboarding
+                val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+                intent?.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                    Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP
+                )
+                context.startActivity(intent)
+
+                // Exit the app gracefully - the intent flags will restart it
+                (context as? android.app.Activity)?.finishAffinity()
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    error = "Failed to reset app: ${e.message}",
+                    isLoading = false
+                )
+            }
+        }
+    }
+
+    /**
      * Load backup statistics
      */
     private fun loadBackupStats() {

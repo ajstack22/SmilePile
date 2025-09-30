@@ -97,6 +97,7 @@ fun SettingsScreen(
     var showAboutDialog by remember { mutableStateOf(false) }
     var showPinDialog by remember { mutableStateOf(false) }
     var showChangePinDialog by remember { mutableStateOf(false) }
+    var showDebugOptions by remember { mutableStateOf(BuildConfig.DEBUG) }
 
     // Export launcher for Storage Access Framework
     val exportLauncher = rememberLauncherForActivityResult(
@@ -295,6 +296,43 @@ fun SettingsScreen(
                         icon = Icons.Default.Info,
                         onClick = { showAboutDialog = true }
                     )
+                }
+            }
+
+            // Debug Options (only in debug builds)
+            if (showDebugOptions) {
+                item {
+                    SettingsSection(
+                        title = "Debug Options"
+                    ) {
+                        Column {
+                            SettingsActionItem(
+                                title = "Launch Onboarding",
+                                subtitle = "Manually start the onboarding flow",
+                                icon = Icons.Default.Info,
+                                onClick = {
+                                    // Launch onboarding activity
+                                    val intent = android.content.Intent(context, com.smilepile.onboarding.OnboardingActivity::class.java)
+                                    context.startActivity(intent)
+                                }
+                            )
+
+                            Divider(
+                                modifier = Modifier.padding(start = 48.dp),
+                                color = MaterialTheme.colorScheme.surfaceVariant
+                            )
+
+                            SettingsActionItem(
+                                title = "Reset App (Clear Data & Onboard)",
+                                subtitle = "Clear all data and restart onboarding",
+                                icon = Icons.Default.Storage,
+                                onClick = {
+                                    // Clear settings and data, then restart app
+                                    viewModel.resetAppForOnboarding()
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }

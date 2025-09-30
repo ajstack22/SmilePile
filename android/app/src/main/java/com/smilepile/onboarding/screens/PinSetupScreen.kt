@@ -36,40 +36,40 @@ fun PinSetupScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Icon
         Icon(
             imageVector = Icons.Default.Lock,
             contentDescription = null,
-            modifier = Modifier.size(80.dp),
-            tint = Color(0xFFFF6B6B)
+            modifier = Modifier.size(64.dp),
+            tint = Color(0xFFFFBF00) // SmilePile yellow
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Title
         Text(
             text = if (isConfirming) "Confirm Your PIN" else "Set Up PIN Protection",
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Subtitle
-        Text(
-            text = if (isConfirming)
-                "Please enter your PIN again"
-            else "Create a $pinLength-digit PIN to protect Parent Mode",
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 32.dp)
-        )
-
-        Spacer(modifier = Modifier.height(40.dp))
+        // Subtitle - only show when confirming
+        if (isConfirming) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Please enter your PIN again",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 32.dp)
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+        } else {
+            Spacer(modifier = Modifier.height(32.dp))
+        }
 
         // PIN dots
         Row(
@@ -83,7 +83,7 @@ fun PinSetupScreen(
                         .clip(CircleShape)
                         .background(
                             if (index < currentPin.length)
-                                Color(0xFFFF6B6B)
+                                Color(0xFFFFBF00) // SmilePile yellow
                             else Color.Gray.copy(alpha = 0.2f)
                         )
                 )
@@ -98,9 +98,11 @@ fun PinSetupScreen(
                 fontSize = 12.sp,
                 modifier = Modifier.padding(top = 16.dp)
             )
+        } else {
+            Spacer(modifier = Modifier.height(16.dp))
         }
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         // Number pad
         Column(
@@ -182,55 +184,62 @@ fun PinSetupScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Action buttons
-        Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+        // Action buttons - side by side
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
         ) {
-            // Continue/Confirm button (shown when PIN is complete)
-            if ((isConfirming && confirmPinCode.length == pinLength) ||
-                (!isConfirming && pinCode.length == pinLength)) {
-                Button(
-                    onClick = {
-                        if (isConfirming) {
-                            if (pinCode == confirmPinCode) {
-                                onPinSet(pinCode)
-                            } else {
-                                errorMessage = "PINs don't match. Please try again."
-                                showError = true
-                                confirmPinCode = ""
-                            }
-                        } else {
-                            isConfirming = true
-                            confirmPinCode = ""
-                            showError = false
-                        }
-                    },
+            // Skip button - always visible on initial PIN entry
+            if (!isConfirming) {
+                OutlinedButton(
+                    onClick = onSkip,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFF6B6B)
-                    )
+                        .weight(1f)
+                        .height(56.dp)
                 ) {
                     Text(
-                        text = if (isConfirming) "Confirm PIN" else "Continue",
+                        text = "Skip",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
             }
 
-            // Skip option (only on initial PIN entry)
-            if (!isConfirming) {
-                TextButton(
-                    onClick = onSkip,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Skip for Now",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+            // Set PIN button
+            Button(
+                onClick = {
+                    if (isConfirming) {
+                        if (pinCode == confirmPinCode) {
+                            onPinSet(pinCode)
+                        } else {
+                            errorMessage = "PINs don't match. Please try again."
+                            showError = true
+                            confirmPinCode = ""
+                        }
+                    } else {
+                        if (pinCode.length == pinLength) {
+                            isConfirming = true
+                            confirmPinCode = ""
+                            showError = false
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .height(56.dp),
+                enabled = (isConfirming && confirmPinCode.length == pinLength) ||
+                          (!isConfirming && pinCode.length == pinLength),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF2196F3)
+                )
+            ) {
+                Text(
+                    text = if (isConfirming) "Confirm PIN" else "Set PIN",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }

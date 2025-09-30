@@ -117,7 +117,7 @@ fun PhotoGalleryScreen(
                             orchestratorState.onAddPhotoClick()
                         }
                     },
-                    icon = Icons.Filled.AddPhotoAlternate,
+                    icon = Icons.Default.Add,
                     contentDescription = "Add Photos",
                     backgroundColor = Color(0xFF4A90E2), // SmilePile blue
                     isPulsing = true, // Always animate to draw attention

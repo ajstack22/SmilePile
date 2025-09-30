@@ -18,10 +18,13 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
 
+/**
+ * UI Note for LLM Developers: "Pile" in user-facing text = "Category" in code/database
+ */
+
 enum class OnboardingStep {
     WELCOME,
     CATEGORIES,
-    PHOTO_IMPORT,
     PIN_SETUP,
     COMPLETE
 }
@@ -63,9 +66,8 @@ class OnboardingViewModel @Inject constructor(
     val progress: Float
         get() = when (_uiState.value.currentStep) {
             OnboardingStep.WELCOME -> 0f
-            OnboardingStep.CATEGORIES -> 0.25f
-            OnboardingStep.PHOTO_IMPORT -> 0.5f
-            OnboardingStep.PIN_SETUP -> 0.75f
+            OnboardingStep.CATEGORIES -> 0.33f
+            OnboardingStep.PIN_SETUP -> 0.67f
             OnboardingStep.COMPLETE -> 1f
         }
 
@@ -81,12 +83,8 @@ class OnboardingViewModel @Inject constructor(
         // Determine next step
         val nextStep = when (currentState.currentStep) {
             OnboardingStep.WELCOME -> OnboardingStep.CATEGORIES
-            OnboardingStep.CATEGORIES -> OnboardingStep.PHOTO_IMPORT
-            OnboardingStep.PHOTO_IMPORT -> OnboardingStep.PIN_SETUP
-            OnboardingStep.PIN_SETUP -> {
-                completeOnboarding()
-                OnboardingStep.COMPLETE
-            }
+            OnboardingStep.CATEGORIES -> OnboardingStep.PIN_SETUP
+            OnboardingStep.PIN_SETUP -> OnboardingStep.COMPLETE
             OnboardingStep.COMPLETE -> OnboardingStep.COMPLETE
         }
 
@@ -113,16 +111,11 @@ class OnboardingViewModel @Inject constructor(
         val currentState = _uiState.value
 
         when (currentState.currentStep) {
-            OnboardingStep.PHOTO_IMPORT -> {
-                _uiState.update { it.copy(
-                    currentStep = OnboardingStep.PIN_SETUP,
-                    navigationHistory = it.navigationHistory + it.currentStep
-                ) }
-            }
             OnboardingStep.PIN_SETUP -> {
-                _uiState.update { it.copy(skipPin = true) }
-                completeOnboarding()
-                _uiState.update { it.copy(currentStep = OnboardingStep.COMPLETE) }
+                _uiState.update { it.copy(
+                    skipPin = true,
+                    currentStep = OnboardingStep.COMPLETE
+                ) }
             }
             else -> {}
         }

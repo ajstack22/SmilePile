@@ -800,9 +800,9 @@ class BackupManager @Inject constructor(
     }
 
     /**
-     * Clear all existing data (for REPLACE strategy)
+     * Clear all existing data (for REPLACE strategy or reset)
      */
-    private suspend fun clearAllData() {
+    suspend fun clearAllData() {
         try {
             // Delete all photos first (due to foreign key constraints)
             val allPhotos = photoRepository.getAllPhotos()
@@ -810,12 +810,11 @@ class BackupManager @Inject constructor(
                 photoRepository.deletePhoto(photo)
             }
 
-            // Delete all categories except default ones
+            // Delete ALL categories (including defaults)
+            // This is used for complete reset and REPLACE imports
             val allCategories = categoryRepository.getAllCategories()
             allCategories.forEach { category ->
-                if (!category.isDefault) {
-                    categoryRepository.deleteCategory(category)
-                }
+                categoryRepository.deleteCategory(category)
             }
 
             Log.i(TAG, "Cleared all existing data")

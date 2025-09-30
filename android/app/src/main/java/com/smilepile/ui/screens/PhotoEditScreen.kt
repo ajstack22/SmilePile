@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Crop
 import androidx.compose.material.icons.filled.RotateRight
-import androidx.compose.material.icons.filled.Category
+import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -314,18 +314,18 @@ private fun EditBottomBar(
                         .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    // Category button
+                    // Pile button
                     IconButton(
                         onClick = onCategoryClick,
                         modifier = Modifier.size(56.dp)
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(
-                                Icons.Default.Category,
-                                contentDescription = "Category",
+                                Icons.Outlined.Layers,
+                                contentDescription = "Pile",
                                 tint = Color(0xFF4A90E2) // Blue color matching footer menu
                             )
-                            Text("Category", color = Color(0xFF4A90E2), style = MaterialTheme.typography.labelSmall)
+                            Text("Pile", color = Color(0xFF4A90E2), style = MaterialTheme.typography.labelSmall)
                         }
                     }
 
@@ -494,7 +494,7 @@ private fun CategorySelectionDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Select Category") },
+        title = { Text("Select Pile") },
         text = {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()

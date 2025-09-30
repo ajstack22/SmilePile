@@ -38,7 +38,7 @@ fun CategorySelectionDialog(
     onDismiss: () -> Unit,
     onCreateNewCategory: (() -> Unit)? = null,
     multiSelectMode: Boolean = true,
-    title: String = if (multiSelectMode) "Select Categories" else "Select Category"
+    title: String = if (multiSelectMode) "Select Piles" else "Select Pile"
 ) {
     var currentSelection by remember { mutableStateOf(selectedCategoryIds) }
 
@@ -92,7 +92,7 @@ fun CategorySelectionDialog(
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text(
-                            text = "${currentSelection.size} categories selected",
+                            text = "${currentSelection.size} piles selected",
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -130,12 +130,12 @@ fun CategorySelectionDialog(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Add,
-                                        contentDescription = "Add new category",
+                                        contentDescription = "Add new pile",
                                         tint = MaterialTheme.colorScheme.onSecondaryContainer
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "Create New Category",
+                                        text = "Create New Pile",
                                         style = MaterialTheme.typography.bodyLarge,
                                         fontWeight = FontWeight.Medium,
                                         color = MaterialTheme.colorScheme.onSecondaryContainer

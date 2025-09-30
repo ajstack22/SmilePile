@@ -16,11 +16,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -67,12 +69,12 @@ fun CategoryManagementScreen(
         floatingActionButton = {
             CustomFloatingActionButton(
                 onClick = { showAddDialog = true },
-                icon = Icons.Filled.CreateNewFolder,
-                contentDescription = "Add Category",
+                icon = Icons.Default.Add,
+                contentDescription = "Add Pile",
                 backgroundColor = Color(0xFFFF6600), // SmilePile orange
                 isPulsing = true, // Always animate to draw attention
                 modifier = Modifier
-                    .padding(end = 16.dp, bottom = 102.dp) // 86dp nav bar + 16dp padding - EXACT same as Gallery
+                    .padding(end = 16.dp, bottom = 102.dp)
             )
         },
         contentWindowInsets = WindowInsets(0.dp) // Same as PhotoGalleryScreen
@@ -114,13 +116,13 @@ fun CategoryManagementScreen(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "No categories yet",
+                            text = "No piles yet",
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Button(onClick = { showAddDialog = true }) {
-                            Text("Create First Category")
+                            Text("Create First Pile")
                         }
                     }
                 }
@@ -195,7 +197,7 @@ fun CategoryManagementScreen(
 
         AlertDialog(
             onDismissRequest = { showDeleteDialog = null },
-            title = { Text("Delete Category") },
+            title = { Text("Delete Pile") },
             text = {
                 Column {
                     Text("Delete '${category.displayName}'?")
@@ -204,7 +206,7 @@ fun CategoryManagementScreen(
                     if (!canDelete) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = reason ?: "Cannot delete this category",
+                            text = reason ?: "Cannot delete this pile",
                             color = MaterialTheme.colorScheme.error,
                             style = MaterialTheme.typography.bodySmall
                         )
@@ -218,7 +220,7 @@ fun CategoryManagementScreen(
                                 onCheckedChange = { deletePhotos = it }
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Also delete all photos in this category")
+                            Text("Also delete all photos in this pile")
                         }
                     }
                 }
@@ -315,7 +317,7 @@ fun CategoryManagementItem(
             IconButton(onClick = onEdit) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = "Edit category",
+                    contentDescription = "Edit pile",
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -323,7 +325,7 @@ fun CategoryManagementItem(
             IconButton(onClick = onDelete) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete category",
+                    contentDescription = "Delete pile",
                     tint = MaterialTheme.colorScheme.error
                 )
             }
@@ -369,7 +371,7 @@ fun CategoryEditDialog(
                 Spacer(modifier = Modifier.weight(1f))
 
                 Text(
-                    text = if (category != null) "Edit Category" else "Add Category",
+                    text = if (category != null) "Edit Pile" else "Add Pile",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -392,7 +394,7 @@ fun CategoryEditDialog(
 
             // Name input
             Text(
-                text = "Category Name",
+                text = "Pile Name",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -403,7 +405,7 @@ fun CategoryEditDialog(
             OutlinedTextField(
                 value = displayName,
                 onValueChange = { displayName = it },
-                placeholder = { Text("Enter category name") },
+                placeholder = { Text("Enter pile name") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
@@ -412,7 +414,7 @@ fun CategoryEditDialog(
 
             // Color selection
             Text(
-                text = "Category Color",
+                text = "Pile Color",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -481,7 +483,7 @@ fun CategoryEditDialog(
                 )
             } else {
                 Text(
-                    text = "Enter category name to see preview",
+                    text = "Enter pile name to see preview",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                     fontStyle = androidx.compose.ui.text.font.FontStyle.Italic

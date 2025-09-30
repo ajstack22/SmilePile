@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -59,14 +60,14 @@ fun CompletionScreen(
                     modifier = Modifier
                         .size(120.dp)
                         .clip(CircleShape)
-                        .background(Color(0xFFFF6B6B).copy(alpha = 0.1f)),
+                        .background(Color(0xFF4CAF50).copy(alpha = 0.1f)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         Icons.Default.CheckCircle,
                         contentDescription = null,
                         modifier = Modifier.size(80.dp),
-                        tint = Color(0xFFFF6B6B)
+                        tint = Color(0xFF4CAF50) // SmilePile green
                     )
                 }
             }
@@ -112,20 +113,20 @@ fun CompletionScreen(
                     modifier = Modifier.padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Categories created
+                    // Piles created
                     if (categories.isNotEmpty()) {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                Icons.Default.Folder,
+                                Icons.Outlined.Layers,
                                 contentDescription = null,
-                                tint = Color(0xFFFF6B6B),
+                                tint = Color(0xFFFF6600), // SmilePile orange
                                 modifier = Modifier.size(24.dp)
                             )
                             Text(
-                                text = "${categories.size} categories created",
+                                text = "${categories.size} piles created",
                                 fontSize = 14.sp
                             )
                         }
@@ -183,7 +184,7 @@ fun CompletionScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFF6B6B)
+                    containerColor = Color(0xFF2196F3)
                 ),
                 shape = MaterialTheme.shapes.medium
             ) {

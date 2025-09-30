@@ -124,7 +124,7 @@ fun PhotoGalleryEmptyState(
 
                 if (isFirstTime) {
                     Text(
-                        text = "Tip: You can organize your photos into categories and mark favorites!",
+                        text = "Tip: You can organize your photos into piles and mark favorites!",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
@@ -162,14 +162,14 @@ fun CategoryEmptyState(
             )
 
             Text(
-                text = "No photos in \"$categoryName\"",
+                text = "No photos in \"$categoryName\" pile",
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center
             )
 
             Text(
-                text = "This category is empty. Add photos by importing new ones or moving existing photos to this category.",
+                text = "This pile is empty. Add photos by importing new ones or moving existing photos to this pile.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center

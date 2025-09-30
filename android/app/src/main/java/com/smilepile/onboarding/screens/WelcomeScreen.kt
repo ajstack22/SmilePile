@@ -1,18 +1,54 @@
 package com.smilepile.onboarding.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.TextStyle
+import com.smilepile.R
+
+// SmilePile brand colors
+private val SmilePileYellow = Color(0xFFFFBF00)
+private val SmilePileBlue = Color(0xFF2196F3)
+private val SmilePileGreen = Color(0xFF4CAF50)
+private val SmilePileOrange = Color(0xFFFF6600)
+private val SmilePilePink = Color(0xFFE86082)
+
+// Google Fonts provider for Nunito
+private val provider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+// Nunito font family
+private val nunitoFontFamily = FontFamily(
+    Font(
+        googleFont = GoogleFont("Nunito"),
+        fontProvider = provider,
+        weight = FontWeight.ExtraBold
+    )
+)
 
 @Composable
 fun WelcomeScreen(
@@ -32,22 +68,109 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.PhotoLibrary,
+            // SmilePile logo icon
+            Image(
+                painter = painterResource(id = R.drawable.ic_smilepile_logo),
                 contentDescription = null,
-                modifier = Modifier.size(100.dp),
-                tint = Color(0xFFFF6B6B)
+                modifier = Modifier.size(100.dp)
+            )
+
+            // Multicolored "SmilePile" text
+            Text(
+                text = buildAnnotatedString {
+                    // "Smile" in yellow
+                    withStyle(
+                        style = SpanStyle(
+                            color = SmilePileYellow,
+                            fontFamily = nunitoFontFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 36.sp,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.9f),
+                                offset = Offset(4f, 4f),
+                                blurRadius = 6f
+                            )
+                        )
+                    ) {
+                        append("Smile")
+                    }
+
+                    // "P" in green
+                    withStyle(
+                        style = SpanStyle(
+                            color = SmilePileGreen,
+                            fontFamily = nunitoFontFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 36.sp,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.9f),
+                                offset = Offset(4f, 4f),
+                                blurRadius = 6f
+                            )
+                        )
+                    ) {
+                        append("P")
+                    }
+
+                    // "i" in blue
+                    withStyle(
+                        style = SpanStyle(
+                            color = SmilePileBlue,
+                            fontFamily = nunitoFontFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 36.sp,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.9f),
+                                offset = Offset(4f, 4f),
+                                blurRadius = 6f
+                            )
+                        )
+                    ) {
+                        append("i")
+                    }
+
+                    // "l" in orange
+                    withStyle(
+                        style = SpanStyle(
+                            color = SmilePileOrange,
+                            fontFamily = nunitoFontFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 36.sp,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.9f),
+                                offset = Offset(4f, 4f),
+                                blurRadius = 6f
+                            )
+                        )
+                    ) {
+                        append("l")
+                    }
+
+                    // "e" in pink
+                    withStyle(
+                        style = SpanStyle(
+                            color = SmilePilePink,
+                            fontFamily = nunitoFontFamily,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 36.sp,
+                            shadow = Shadow(
+                                color = Color.Black.copy(alpha = 0.9f),
+                                offset = Offset(4f, 4f),
+                                blurRadius = 6f
+                            )
+                        )
+                    ) {
+                        append("e")
+                    }
+                },
+                style = TextStyle(
+                    fontFamily = nunitoFontFamily,
+                    fontWeight = FontWeight.ExtraBold
+                )
             )
 
             Text(
-                text = "SmilePile",
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Text(
-                text = "A safe and fun photo gallery for kids",
+                text = "A safe and fun photo gallery for EVERYONE",
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
@@ -61,24 +184,24 @@ fun WelcomeScreen(
             modifier = Modifier.padding(vertical = 40.dp)
         ) {
             FeatureRow(
-                icon = Icons.Default.Folder,
-                title = "Organize photos",
-                description = "Create colorful categories",
-                tintColor = Color(0xFFFF6B6B)
+                icon = Icons.Outlined.Layers,
+                title = "Organize photos into piles",
+                description = "Create colorful piles for your photos",
+                tintColor = SmilePileYellow
             )
 
             FeatureRow(
-                icon = Icons.Default.Photo,
-                title = "Import memories",
-                description = "Add your favorite photos",
-                tintColor = Color(0xFF4ECDC4)
+                icon = Icons.Default.FitScreen,
+                title = "Distraction-free mode",
+                description = "Good for kids (and everyone else)",
+                tintColor = SmilePileOrange
             )
 
             FeatureRow(
                 icon = Icons.Default.Lock,
-                title = "Stay secure",
-                description = "Optional PIN protection",
-                tintColor = Color(0xFF45B7D1)
+                title = "Optional PIN protection",
+                description = "Prevent inadvertent changes",
+                tintColor = SmilePileGreen
             )
         }
 
@@ -90,14 +213,14 @@ fun WelcomeScreen(
                 .padding(bottom = 32.dp)
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFFF6B6B)
+                containerColor = SmilePileBlue
             ),
             shape = MaterialTheme.shapes.medium
         ) {
             Text(
                 text = "Get Started",
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Bold
             )
         }
     }

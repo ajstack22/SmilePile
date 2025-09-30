@@ -6,6 +6,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+/**
+ * UI Note for LLM Developers: "Pile" in user-facing text = "Category" in code/database
+ * This maintains backward compatibility while providing branded terminology to users.
+ */
 @Parcelize
 @Entity(tableName = "categories")
 data class Category(

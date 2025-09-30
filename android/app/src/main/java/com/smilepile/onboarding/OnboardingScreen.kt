@@ -36,35 +36,11 @@ fun OnboardingScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFFF6B6B).copy(alpha = 0.1f),
-                        Color(0xFF4ECDC4).copy(alpha = 0.1f)
-                    )
-                )
-            )
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Progress bar (except for welcome and complete screens)
-            if (uiState.currentStep != OnboardingStep.WELCOME &&
-                uiState.currentStep != OnboardingStep.COMPLETE) {
-                LinearProgressIndicator(
-                    progress = when (uiState.currentStep) {
-                        OnboardingStep.CATEGORIES -> 0.25f
-                        OnboardingStep.PHOTO_IMPORT -> 0.5f
-                        OnboardingStep.PIN_SETUP -> 0.75f
-                        else -> 0f
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    color = Color(0xFFFF6B6B)
-                )
-            }
-
             // Top bar with navigation
             if (uiState.currentStep != OnboardingStep.WELCOME &&
                 uiState.currentStep != OnboardingStep.COMPLETE) {
@@ -72,9 +48,8 @@ fun OnboardingScreen(
                     title = {
                         Text(
                             text = when (uiState.currentStep) {
-                                OnboardingStep.CATEGORIES -> "Create Categories"
-                                OnboardingStep.PHOTO_IMPORT -> "Add Photos"
-                                OnboardingStep.PIN_SETUP -> "Security Setup"
+                                OnboardingStep.CATEGORIES -> "Create Piles"
+                                OnboardingStep.PIN_SETUP -> "PIN Setup"
                                 else -> ""
                             },
                             fontWeight = FontWeight.Medium
@@ -86,13 +61,6 @@ fun OnboardingScreen(
                                 Icons.Default.ArrowBack,
                                 contentDescription = "Back"
                             )
-                        }
-                    },
-                    actions = {
-                        if (uiState.currentStep.canSkip()) {
-                            TextButton(onClick = onSkip) {
-                                Text("Skip")
-                            }
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -128,15 +96,6 @@ fun OnboardingScreen(
                             onContinue = onNavigateNext
                         )
                     }
-                    OnboardingStep.PHOTO_IMPORT -> {
-                        PhotoImportScreen(
-                            categories = uiState.categories,
-                            importedPhotos = uiState.importedPhotos,
-                            onPhotosSelected = onPhotosSelected,
-                            onContinue = onNavigateNext,
-                            onSkip = onSkip
-                        )
-                    }
                     OnboardingStep.PIN_SETUP -> {
                         PinSetupScreen(
                             onPinSet = { pin ->
@@ -151,7 +110,7 @@ fun OnboardingScreen(
                     OnboardingStep.COMPLETE -> {
                         CompletionScreen(
                             categories = uiState.categories,
-                            photosImported = uiState.importedPhotos.size,
+                            photosImported = 0,
                             pinEnabled = !uiState.skipPin && uiState.pinCode != null,
                             onComplete = onComplete
                         )
@@ -189,5 +148,5 @@ fun OnboardingScreen(
 }
 
 private fun OnboardingStep.canSkip(): Boolean {
-    return this == OnboardingStep.PHOTO_IMPORT || this == OnboardingStep.PIN_SETUP
+    return this == OnboardingStep.PIN_SETUP
 }

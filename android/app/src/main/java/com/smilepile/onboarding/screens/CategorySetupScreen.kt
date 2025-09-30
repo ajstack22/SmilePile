@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,15 +36,11 @@ fun CategorySetupScreen(
 ) {
     var newCategoryName by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf("#4CAF50") }
-    var showColorPicker by remember { mutableStateOf(false) }
 
     val suggestedCategories = listOf(
-        Triple("Family", "#FF6B6B", "👨‍👩‍👧‍👦"),
-        Triple("Friends", "#4ECDC4", "👫"),
-        Triple("Vacation", "#45B7D1", "🏖️"),
-        Triple("Pets", "#96CEB4", "🐾"),
-        Triple("Fun", "#FFEAA7", "🎉"),
-        Triple("School", "#DDA0DD", "🎒")
+        Pair("Family", "#FF6B6B"),
+        Pair("Friends", "#4ECDC4"),
+        Pair("Fun", "#FFEAA7")
     )
 
     val colorOptions = listOf(
@@ -57,164 +54,34 @@ fun CategorySetupScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Instructions
-        Column(
-            modifier = Modifier.padding(bottom = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Create Categories",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+        // Piles logo icon
+        Icon(
+            imageVector = Icons.Outlined.Layers,
+            contentDescription = "Piles",
+            modifier = Modifier
+                .size(48.dp)
+                .align(Alignment.CenterHorizontally),
+            tint = Color(0xFFFF6600) // SmilePile orange
+        )
 
-            Text(
-                text = "Organize your photos into colorful categories",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
-        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Instructions
+        Text(
+            text = "Organize your photos into colorful piles",
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp)
+        )
 
         LazyColumn(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // Quick add suggestions
-            if (suggestedCategories.isNotEmpty()) {
-                item {
-                    Column {
-                        Text(
-                            text = "Quick Add",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.padding(bottom = 12.dp)
-                        )
-
-                        LazyRow(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            items(suggestedCategories) { (name, colorHex, icon) ->
-                                if (!categories.any { it.name == name }) {
-                                    SuggestedCategoryCard(
-                                        name = name,
-                                        colorHex = colorHex,
-                                        icon = icon,
-                                        onAdd = {
-                                            onCategoryAdded(
-                                                TempCategory(
-                                                    name = name,
-                                                    colorHex = colorHex,
-                                                    icon = icon
-                                                )
-                                            )
-                                        }
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Custom category creation
-            item {
-                Column {
-                    Text(
-                        text = "Create Custom",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
-
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-                        )
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                OutlinedTextField(
-                                    value = newCategoryName,
-                                    onValueChange = { newCategoryName = it },
-                                    label = { Text("Category name") },
-                                    modifier = Modifier.weight(1f),
-                                    singleLine = true
-                                )
-
-                                Box(
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .clip(CircleShape)
-                                        .background(Color(android.graphics.Color.parseColor(selectedColor)))
-                                        .border(2.dp, Color.Gray.copy(alpha = 0.3f), CircleShape)
-                                        .clickable { showColorPicker = !showColorPicker }
-                                )
-                            }
-
-                            // Color palette
-                            if (showColorPicker) {
-                                LazyVerticalGrid(
-                                    columns = GridCells.Fixed(6),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                    modifier = Modifier.height(120.dp)
-                                ) {
-                                    items(colorOptions) { color ->
-                                        Box(
-                                            modifier = Modifier
-                                                .size(40.dp)
-                                                .clip(CircleShape)
-                                                .background(Color(android.graphics.Color.parseColor(color)))
-                                                .border(
-                                                    width = if (selectedColor == color) 3.dp else 0.dp,
-                                                    color = if (selectedColor == color) MaterialTheme.colorScheme.primary else Color.Transparent,
-                                                    shape = CircleShape
-                                                )
-                                                .clickable {
-                                                    selectedColor = color
-                                                    showColorPicker = false
-                                                }
-                                        )
-                                    }
-                                }
-                            }
-
-                            Button(
-                                onClick = {
-                                    if (newCategoryName.isNotBlank()) {
-                                        onCategoryAdded(
-                                            TempCategory(
-                                                name = newCategoryName,
-                                                colorHex = selectedColor
-                                            )
-                                        )
-                                        newCategoryName = ""
-                                        showColorPicker = false
-                                    }
-                                },
-                                modifier = Modifier.fillMaxWidth(),
-                                enabled = newCategoryName.isNotBlank() && categories.size < 5,
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFFFF6B6B)
-                                )
-                            ) {
-                                Text("Add Category")
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Created categories
+            // Created categories - at the top
             if (categories.isNotEmpty()) {
                 item {
                     Column {
@@ -226,7 +93,7 @@ fun CategorySetupScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Your Categories",
+                                text = "Your Piles",
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -249,6 +116,117 @@ fun CategorySetupScreen(
                     }
                 }
             }
+
+            // Custom category creation - seamlessly integrated
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        text = "Create Your Own",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    OutlinedTextField(
+                        value = newCategoryName,
+                        onValueChange = { newCategoryName = it },
+                        label = { Text("Custom pile name") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        trailingIcon = {
+                            IconButton(
+                                onClick = {
+                                    if (newCategoryName.isNotBlank()) {
+                                        onCategoryAdded(
+                                            TempCategory(
+                                                name = newCategoryName,
+                                                colorHex = selectedColor
+                                            )
+                                        )
+                                        newCategoryName = ""
+                                    }
+                                },
+                                enabled = newCategoryName.isNotBlank() && categories.size < 5
+                            ) {
+                                Icon(
+                                    Icons.Default.Add,
+                                    contentDescription = "Add",
+                                    tint = if (newCategoryName.isNotBlank() && categories.size < 5)
+                                        Color(0xFF2196F3) else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                                )
+                            }
+                        }
+                    )
+
+                    // Color picker - horizontal scroll
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        items(colorOptions) { color ->
+                            Box(
+                                modifier = Modifier
+                                    .size(44.dp)
+                                    .clip(CircleShape)
+                                    .background(Color(android.graphics.Color.parseColor(color)))
+                                    .border(
+                                        width = if (selectedColor == color) 3.dp else 1.dp,
+                                        color = if (selectedColor == color) {
+                                            Color(0xFF2196F3)
+                                        } else Color.Gray.copy(alpha = 0.3f),
+                                        shape = CircleShape
+                                    )
+                                    .clickable { selectedColor = color },
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (selectedColor == color) {
+                                    Icon(
+                                        Icons.Default.Check,
+                                        contentDescription = null,
+                                        tint = Color.White,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Quick add suggestions
+            if (suggestedCategories.isNotEmpty()) {
+                item {
+                    Column {
+                        Text(
+                            text = "Or Quick Add",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(bottom = 12.dp)
+                        )
+
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            suggestedCategories.filter { (name, _) ->
+                                !categories.any { it.name == name }
+                            }.forEach { (name, colorHex) ->
+                                SuggestedCategoryCard(
+                                    name = name,
+                                    colorHex = colorHex,
+                                    onAdd = {
+                                        onCategoryAdded(
+                                            TempCategory(
+                                                name = name,
+                                                colorHex = colorHex
+                                            )
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // Continue button
@@ -258,7 +236,7 @@ fun CategorySetupScreen(
         ) {
             if (categories.isEmpty()) {
                 Text(
-                    text = "Add at least one category to continue",
+                    text = "Add at least one pile to continue",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.fillMaxWidth(),
@@ -273,13 +251,13 @@ fun CategorySetupScreen(
                     .height(56.dp),
                 enabled = categories.isNotEmpty(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFF6B6B)
+                    containerColor = Color(0xFF2196F3)
                 )
             ) {
                 Text(
                     text = "Continue",
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
@@ -290,41 +268,49 @@ fun CategorySetupScreen(
 private fun SuggestedCategoryCard(
     name: String,
     colorHex: String,
-    icon: String,
     onAdd: () -> Unit
 ) {
     Card(
-        modifier = Modifier.width(100.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .clickable { onAdd() },
         colors = CardDefaults.cardColors(
-            containerColor = Color(android.graphics.Color.parseColor(colorHex)).copy(alpha = 0.2f)
-        )
+            containerColor = Color(android.graphics.Color.parseColor(colorHex)).copy(alpha = 0.15f)
+        ),
+        shape = RoundedCornerShape(8.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = icon,
-                fontSize = 32.sp
-            )
-
-            Text(
-                text = name,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium
-            )
-
-            IconButton(
-                onClick = onAdd,
-                modifier = Modifier.size(32.dp)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    Icons.Default.AddCircle,
-                    contentDescription = "Add",
-                    tint = Color(android.graphics.Color.parseColor(colorHex))
+                Box(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clip(CircleShape)
+                        .background(Color(android.graphics.Color.parseColor(colorHex)))
+                )
+
+                Text(
+                    text = name,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
                 )
             }
+
+            Icon(
+                Icons.Default.Add,
+                contentDescription = "Add",
+                tint = Color(android.graphics.Color.parseColor(colorHex)),
+                modifier = Modifier.size(20.dp)
+            )
         }
     }
 }
@@ -349,17 +335,10 @@ private fun CreatedCategoryRow(
         ) {
             Box(
                 modifier = Modifier
-                    .size(12.dp)
+                    .size(16.dp)
                     .clip(CircleShape)
                     .background(Color(android.graphics.Color.parseColor(category.colorHex)))
             )
-
-            category.icon?.let { icon ->
-                Text(
-                    text = icon,
-                    fontSize = 20.sp
-                )
-            }
 
             Text(
                 text = category.name,
@@ -374,7 +353,7 @@ private fun CreatedCategoryRow(
                 Icon(
                     Icons.Default.Cancel,
                     contentDescription = "Remove",
-                    tint = Color.Gray.copy(alpha = 0.5f)
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

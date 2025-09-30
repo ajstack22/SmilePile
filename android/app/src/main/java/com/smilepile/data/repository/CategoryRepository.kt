@@ -3,6 +3,9 @@ package com.smilepile.data.repository
 import com.smilepile.data.models.Category
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * UI Note for LLM Developers: "Pile" in user-facing text = "Category" in code/database
+ */
 interface CategoryRepository {
     suspend fun insertCategory(category: Category): Long
     suspend fun insertCategories(categories: List<Category>)

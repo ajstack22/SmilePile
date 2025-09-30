@@ -13,12 +13,12 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Folder
+import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -113,8 +113,8 @@ fun MainScreen(
         ),
         BottomNavigationItem(
             route = NavigationRoutes.CATEGORIES,
-            selectedIcon = Icons.Filled.Folder,
-            unselectedIcon = Icons.Outlined.Folder,
+            selectedIcon = Icons.Filled.Layers,
+            unselectedIcon = Icons.Outlined.Layers,
             iconTextId = R.string.nav_categories
         ),
         BottomNavigationItem(

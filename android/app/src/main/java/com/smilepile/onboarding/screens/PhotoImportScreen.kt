@@ -115,7 +115,7 @@ fun PhotoImportScreen(
                     Button(
                         onClick = { launcher.launch("image/*") },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4ECDC4)
+                            containerColor = Color(0xFF2196F3)
                         ),
                         modifier = Modifier
                             .width(200.dp)
@@ -214,7 +214,7 @@ fun PhotoImportScreen(
                 .height(56.dp)
                 .padding(top = 16.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFFF6B6B)
+                containerColor = Color(0xFF2196F3)
             )
         ) {
             Text(

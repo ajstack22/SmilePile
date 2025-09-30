@@ -72,6 +72,8 @@ class MainActivity : SecureActivity() {
         }
     }
 
+    private var hasSetupUI = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -80,13 +82,39 @@ class MainActivity : SecureActivity() {
 
         // Check for first launch and show onboarding if needed
         lifecycleScope.launch {
-            if (shouldShowOnboarding()) {
-                startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
-                finish() // Close main activity until onboarding is complete
+            val needsOnboarding = shouldShowOnboarding()
+
+            if (needsOnboarding) {
+                val intent = Intent(this@MainActivity, OnboardingActivity::class.java)
+                startActivity(intent)
+                // Don't setup UI yet - will do it when returning from onboarding
                 return@launch
             }
-        }
 
+            // Only set up the UI after onboarding check
+            if (!hasSetupUI) {
+                setupMainUI()
+                hasSetupUI = true
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // If returning from onboarding, set up the UI
+        if (!hasSetupUI) {
+            lifecycleScope.launch {
+                val needsOnboarding = shouldShowOnboarding()
+                if (!needsOnboarding) {
+                    setupMainUI()
+                    hasSetupUI = true
+                }
+            }
+        }
+    }
+
+    private fun setupMainUI() {
         // Initialize settings on first launch
         initializeSettings()
 
