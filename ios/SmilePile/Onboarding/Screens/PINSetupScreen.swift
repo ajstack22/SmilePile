@@ -14,23 +14,26 @@ struct PINSetupScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             // Instructions
-            VStack(spacing: 8) {
+            VStack(spacing: 16) {
                 Image(systemName: "lock.fill")
-                    .font(.system(size: 60))
-                    .foregroundColor(Color(red: 1.0, green: 0.42, blue: 0.42))
+                    .font(.system(size: 64))
+                    .foregroundColor(.smilePileYellow)  // Yellow not pink
                     .padding(.bottom, 20)
 
                 Text(isConfirming ? "Confirm Your PIN" : "Set Up PIN Protection")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.nunito(22, weight: .bold))
 
-                Text(isConfirming ?
-                     "Please enter your PIN again" :
-                     "Create a \(pinLength)-digit PIN to protect Parent Mode")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                if isConfirming {
+                    Text("Please enter your PIN again")
+                        .font(.nunito(14, weight: .regular))
+                        .foregroundColor(.secondary)
+                } else {
+                    Text("Create a \(pinLength)-digit PIN to protect Parent Mode")
+                        .font(.nunito(14, weight: .regular))
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 40)
+                }
             }
             .padding(.top, 40)
 
@@ -152,7 +155,7 @@ struct PINSetupScreen: View {
     private func getPinDotColor(for index: Int) -> Color {
         let currentPin = isConfirming ? confirmPinCode : pinCode
         return index < currentPin.count ?
-            Color(red: 1.0, green: 0.42, blue: 0.42) :
+            Color.smilePileYellow :  // Yellow not pink
             Color.gray.opacity(0.2)
     }
 
@@ -224,8 +227,7 @@ struct NumberButton: View {
     var body: some View {
         Button(action: action) {
             Text(number)
-                .font(.title)
-                .fontWeight(.medium)
+                .font(.nunito(24, weight: .medium))
                 .foregroundColor(.primary)
                 .frame(width: 70, height: 70)
                 .background(
