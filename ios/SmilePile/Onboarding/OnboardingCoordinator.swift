@@ -64,22 +64,7 @@ class OnboardingCoordinator: ObservableObject {
     @Published var showError = false
     @Published var errorMessage = ""
 
-    // Progress tracking
-    var progress: Double {
-        // Adjusted for 4-screen flow (excluding photoImport)
-        switch currentStep {
-        case .welcome:
-            return 0.0
-        case .categories:
-            return 0.33
-        case .photoImport:
-            return 0.5  // Should not be reached in normal flow
-        case .pinSetup:
-            return 0.66
-        case .complete:
-            return 1.0
-        }
-    }
+    // Progress tracking removed - iOS doesn't have progress bar per Android spec
 
     // Navigation
     func navigateToNext() {

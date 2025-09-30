@@ -18,13 +18,6 @@ struct OnboardingView: View {
             .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Progress bar
-                if coordinator.currentStep != .welcome && coordinator.currentStep != .complete {
-                    ProgressView(value: coordinator.progress)
-                        .progressViewStyle(LinearProgressViewStyle(tint: Color(red: 1.0, green: 0.42, blue: 0.42)))
-                        .padding()
-                }
-
                 // Navigation bar
                 if coordinator.currentStep != .welcome && coordinator.currentStep != .complete {
                     HStack {

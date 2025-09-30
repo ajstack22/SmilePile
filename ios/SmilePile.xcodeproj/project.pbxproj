@@ -107,7 +107,6 @@
 		D5BBF88E688D371BEE5CD467 /* ZipUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BCC3A6F7A4ED0D260406D9 /* ZipUtils.swift */; };
 		D6F1912733AC7DE8D2C9A4CA /* SmilePileLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772DC2557EF26E7733CD7E03 /* SmilePileLogo.swift */; };
 		D9D28EFB8F120D6C77C98C30 /* SafeThumbnailGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182538D98B9A5F996F09006 /* SafeThumbnailGenerator.swift */; };
-		DA94FEF92340A36C80C35492 /* FontDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44807AB142D720569372B92 /* FontDebug.swift */; };
 		DAA1A47FD9D913E7601B7B40 /* CropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C551A500677BE0B0821D8 /* CropOverlayView.swift */; };
 		DB04F4293D58616DDC62D9CC /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD4DCB9E123A2CCB6C22CBA /* ToastManager.swift */; };
 		DB80144D60262C7F930CAD9B /* SettingsViewNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C852D93F3947D066AC1559 /* SettingsViewNative.swift */; };
@@ -194,7 +193,6 @@
 		9F6E35A47CD8C9EB49C07E05 /* CategoryManagementCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementCard.swift; sourceTree = "<group>"; };
 		A26BA7ED19AABAFD4FF58997 /* Nunito-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Variable.ttf"; sourceTree = "<group>"; };
 		A3B3937B68BE902660E7C314 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
-		A44807AB142D720569372B92 /* FontDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDebug.swift; sourceTree = "<group>"; };
 		A49E8EDF2AB0879B0C763B3D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A9FC2CDCAC91403459A78B03 /* BackupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewModel.swift; sourceTree = "<group>"; };
 		AE3D2EEF20BCF298FCA33E1C /* SmilePile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmilePile.xcdatamodel; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				CDF0860B64572D6A6AD37362 /* Assets.xcassets */,
-				A44807AB142D720569372B92 /* FontDebug.swift */,
 				DF1D295BEED2719A2D568A28 /* FontManager.swift */,
 				58803E3EB913924D6DAF7271 /* Info.plist */,
 				A3B3937B68BE902660E7C314 /* Nunito-Black.ttf */,
@@ -697,7 +694,6 @@
 				AE82ADB716D7F17CB9B31846 /* ExportManager.swift in Sources */,
 				A550E83DD708F0870E184DA2 /* FileManagerExtensions.swift in Sources */,
 				77E7ABE595839FF3F8E86244 /* FloatingActionButton.swift in Sources */,
-				DA94FEF92340A36C80C35492 /* FontDebug.swift in Sources */,
 				C94F23CFA9F88E9F6B909E65 /* FontManager.swift in Sources */,
 				983941A4B0ADF286EB1D22DF /* ImageProcessor.swift in Sources */,
 				F602C690B34F6D408D16446E /* KeychainManager.swift in Sources */,
