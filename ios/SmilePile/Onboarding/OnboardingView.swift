@@ -9,8 +9,8 @@ struct OnboardingView: View {
             // Background
             LinearGradient(
                 colors: [
-                    Color(red: 1.0, green: 0.42, blue: 0.42).opacity(0.1),
-                    Color(red: 0.3, green: 0.7, blue: 1.0).opacity(0.1)
+                    Color.smilePilePink.opacity(0.1),
+                    Color.smilePileBlue.opacity(0.1)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -18,8 +18,8 @@ struct OnboardingView: View {
             .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Navigation bar
-                if coordinator.currentStep != .welcome && coordinator.currentStep != .complete {
+                // Navigation bar - simplified to match Android
+                if coordinator.currentStep == .categories || coordinator.currentStep == .pinSetup {
                     HStack {
                         Button(action: {
                             coordinator.navigateBack()
@@ -32,17 +32,17 @@ struct OnboardingView: View {
 
                         Spacer()
 
-                        Text(coordinator.currentStep.title)
-                            .font(.headline)
+                        Text(coordinator.currentStep == .categories ? "Create Piles" : "PIN Setup")
+                            .font(.nunito(18, weight: .semibold))
 
                         Spacer()
 
-                        // Skip button for applicable steps
-                        if coordinator.currentStep.canSkip {
-                            Button("Skip") {
-                                coordinator.skip()
-                            }
-                            .padding()
+                        // Skip button only for PIN
+                        if coordinator.currentStep == .pinSetup {
+                            // Skip handled within PIN screen
+                            Color.clear
+                                .frame(width: 44, height: 44)
+                                .padding()
                         } else {
                             Color.clear
                                 .frame(width: 44, height: 44)
