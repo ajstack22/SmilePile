@@ -6,14 +6,11 @@ struct CategorySetupScreen: View {
     @State private var selectedColor = "#4CAF50"
     @State private var showingColorPicker = false
 
-    // Predefined categories for quick setup
-    let suggestedCategories = [
-        ("Family", "#FF6B6B", "👨‍👩‍👧‍👦"),
-        ("Friends", "#4ECDC4", "👫"),
-        ("Vacation", "#45B7D1", "🏖️"),
-        ("Pets", "#96CEB4", "🐾"),
-        ("Fun", "#FFEAA7", "🎉"),
-        ("School", "#DDA0DD", "🎒")
+    // Predefined categories for quick setup (only 3 to match Android)
+    let suggestedCategories: [(String, String, String?)] = [
+        ("Family", "#FF6B6B", nil),  // No emoji
+        ("Friends", "#4ECDC4", nil),
+        ("Fun", "#FFEAA7", nil)
     ]
 
     // Color palette
@@ -44,8 +41,8 @@ struct CategorySetupScreen: View {
 
             ScrollView {
                 VStack(spacing: 20) {
-                    // Quick add suggestions
-                    if !suggestedCategories.isEmpty {
+                    // Quick add suggestions (hide when at max capacity)
+                    if !suggestedCategories.isEmpty && coordinator.onboardingData.categories.count < 5 {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Or Quick Add")
                                 .font(.nunito(16, weight: .medium))
@@ -59,7 +56,6 @@ struct CategorySetupScreen: View {
                                             SuggestedCategoryCard(
                                                 name: category.0,
                                                 colorHex: category.1,
-                                                icon: category.2,
                                                 onAdd: {
                                                     addCategory(name: category.0, colorHex: category.1, icon: category.2)
                                                 }
@@ -72,8 +68,9 @@ struct CategorySetupScreen: View {
                         }
                     }
 
-                    // Custom category creation
-                    VStack(alignment: .leading, spacing: 12) {
+                    // Custom category creation (hide when at max capacity)
+                    if coordinator.onboardingData.categories.count < 5 {
+                        VStack(alignment: .leading, spacing: 12) {
                         Text("Create Your Own")
                             .font(.nunito(16, weight: .medium))
                             .padding(.horizontal)
@@ -143,6 +140,7 @@ struct CategorySetupScreen: View {
                         )
                         .padding(.horizontal)
                     }
+                    }
 
                     // Created categories
                     if !coordinator.onboardingData.categories.isEmpty {
@@ -158,6 +156,14 @@ struct CategorySetupScreen: View {
                                     .foregroundColor(.secondary)
                             }
                             .padding(.horizontal)
+
+                            // Show max reached message
+                            if coordinator.onboardingData.categories.count >= 5 {
+                                Text("Maximum of 5 piles reached")
+                                    .font(.nunito(12, weight: .regular))
+                                    .foregroundColor(.secondary)
+                                    .padding(.horizontal)
+                            }
 
                             VStack(spacing: 8) {
                                 ForEach(coordinator.onboardingData.categories, id: \.id) { category in
@@ -206,7 +212,11 @@ struct CategorySetupScreen: View {
     }
 
     private func addCategory(name: String, colorHex: String, icon: String?) {
-        guard coordinator.onboardingData.categories.count < 5 else { return }
+        // Enforce maximum of 5 piles
+        guard coordinator.onboardingData.categories.count < 5 else {
+            // Could add an alert here if needed
+            return
+        }
 
         let category = TempCategory(
             name: name,
@@ -218,6 +228,10 @@ struct CategorySetupScreen: View {
 
     private func addCustomCategory() {
         guard !newCategoryName.isEmpty else { return }
+        guard coordinator.onboardingData.categories.count < 5 else {
+            // Maximum reached, could show alert
+            return
+        }
         addCategory(name: newCategoryName, colorHex: selectedColor, icon: nil)
         newCategoryName = ""
         showingColorPicker = false
@@ -231,28 +245,25 @@ struct CategorySetupScreen: View {
 struct SuggestedCategoryCard: View {
     let name: String
     let colorHex: String
-    let icon: String
     let onAdd: () -> Void
 
     var body: some View {
-        VStack(spacing: 8) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(hex: colorHex).opacity(0.2))
-                    .frame(width: 80, height: 80)
-
-                Text(icon)
-                    .font(.nunito(36, weight: .bold))
-            }
-
-            Text(name)
-                .font(.nunito(14, weight: .medium))
-
-            Button(action: onAdd) {
-                Image(systemName: "plus.circle.fill")
+        Button(action: onAdd) {
+            HStack {
+                Image(systemName: "plus")
+                    .font(.system(size: 20))
                     .foregroundColor(Color(hex: colorHex))
-                    .font(.nunito(22, weight: .medium))
+
+                Text(name)
+                    .font(.nunito(16, weight: .medium))
+                    .foregroundColor(.primary)
             }
+            .padding(.horizontal, 20)
+            .frame(height: 56)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: colorHex).opacity(0.15))
+            )
         }
     }
 }
