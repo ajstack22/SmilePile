@@ -120,6 +120,7 @@
 		F699D40153546B61F457C101 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBCF0493DC32C504A9684400 /* Nunito-Bold.ttf */; };
 		F9F56554C19D7C4622205822 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3076FD869E044C65FB65B2A7 /* ShareSheetView.swift */; };
 		FB5C570D9D4A460F134A3221 /* EnhancedPhotoImportCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18291FB06CA7992A26310C1 /* EnhancedPhotoImportCoordinator.swift */; };
+		C473B22D597D4E6684C78D15 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413D3F3C27549EEA5AFCD67 /* ColorConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -238,6 +239,7 @@
 		FE8206A6497390E29B2152E2 /* SmilePile.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SmilePile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0A78DE44A20DA8D396B70F /* SmilePileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileApp.swift; sourceTree = "<group>"; };
 		FF3A90BBE5D1A1B5CF73FCA5 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		1413D3F3C27549EEA5AFCD67 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -523,6 +525,7 @@
 				2D24FDDE4626DE4FF01D6217 /* Onboarding */,
 				94E498FBB2AC07E09E4B7971 /* Security */,
 				DD4BC041B36597C1F83F3312 /* Settings */,
+				E23CD80FC8124883B7C7788C /* Theme */,
 				B29A4769C292086291A7D86B /* Utils */,
 				77CE985AD41D319935E4ECF9 /* ViewModels */,
 				3E36693659E7B635FE3A3EEA /* Views */,
@@ -568,6 +571,14 @@
 				38E2929D065A5B506A024920 /* ThemeManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		E23CD80FC8124883B7C7788C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				1413D3F3C27549EEA5AFCD67 /* ColorConstants.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -666,6 +677,7 @@
 				8281C8E88E6D4ADEC538BF35 /* CategorySetupScreen.swift in Sources */,
 				043A26ACB21B9595D0BD02B9 /* CategoryViewModel.swift in Sources */,
 				4E0167BCBEAE815833518DA8 /* ColorSelectionButton.swift in Sources */,
+				C473B22D597D4E6684C78D15 /* ColorConstants.swift in Sources */,
 				358B6184560C0EC212E1248E /* CompletionScreen.swift in Sources */,
 				2B6BACED81BAAB923F45E90E /* ContentView.swift in Sources */,
 				AFEDF8A34A7474F7D2F8E83F /* CoreDataExtensions.swift in Sources */,
