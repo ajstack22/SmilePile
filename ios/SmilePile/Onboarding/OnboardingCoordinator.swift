@@ -66,7 +66,19 @@ class OnboardingCoordinator: ObservableObject {
 
     // Progress tracking
     var progress: Double {
-        Double(currentStep.rawValue) / Double(OnboardingStep.allCases.count - 1)
+        // Adjusted for 4-screen flow (excluding photoImport)
+        switch currentStep {
+        case .welcome:
+            return 0.0
+        case .categories:
+            return 0.33
+        case .photoImport:
+            return 0.5  // Should not be reached in normal flow
+        case .pinSetup:
+            return 0.66
+        case .complete:
+            return 1.0
+        }
     }
 
     // Navigation
@@ -80,9 +92,9 @@ class OnboardingCoordinator: ObservableObject {
         case .welcome:
             currentStep = .categories
         case .categories:
-            currentStep = .photoImport
+            currentStep = .pinSetup  // Skip directly to PIN (photoImport removed from flow)
         case .photoImport:
-            currentStep = .pinSetup
+            currentStep = .pinSetup  // Keep for compatibility but not used in flow
         case .pinSetup:
             completeOnboarding()
         case .complete:
@@ -100,6 +112,7 @@ class OnboardingCoordinator: ObservableObject {
 
         switch currentStep {
         case .photoImport:
+            // PhotoImport no longer in flow, but keep for compatibility
             navigationHistory.append(currentStep)
             currentStep = .pinSetup
         case .pinSetup:

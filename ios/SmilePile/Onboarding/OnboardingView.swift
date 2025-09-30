@@ -66,7 +66,9 @@ struct OnboardingView: View {
                     case .categories:
                         CategorySetupScreen(coordinator: coordinator)
                     case .photoImport:
-                        PhotoImportScreen(coordinator: coordinator)
+                        // PhotoImport removed from flow - should never reach here
+                        // Keep case to avoid compilation error but show PIN instead
+                        PINSetupScreen(coordinator: coordinator)
                     case .pinSetup:
                         PINSetupScreen(coordinator: coordinator)
                     case .complete:
