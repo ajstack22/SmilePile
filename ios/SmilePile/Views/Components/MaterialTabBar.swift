@@ -76,14 +76,14 @@ struct TabBarItem: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 24))
-                    .foregroundColor(isSelected ? Color(hex: "#E86082") : Color(UIColor.secondaryLabel))
+                    .foregroundColor(isSelected ? Color.smilePilePink : Color(UIColor.secondaryLabel))
                     .scaleEffect(isPressed ? 0.92 : (isSelected ? 1.15 : 1.0))
                     .animation(.easeOut(duration: 0.2), value: isSelected)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
 
                 Text(label)
                     .font(.system(size: 12, weight: isSelected ? .semibold : .regular))
-                    .foregroundColor(isSelected ? Color(hex: "#E86082") : Color(UIColor.secondaryLabel))
+                    .foregroundColor(isSelected ? Color.smilePilePink : Color(UIColor.secondaryLabel))
                     .scaleEffect(isPressed ? 0.92 : 1.0)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
             }

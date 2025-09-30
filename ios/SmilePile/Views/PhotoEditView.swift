@@ -184,7 +184,7 @@ struct PhotoEditView: View {
                 HStack {
                 Spacer()
 
-                // Category - Blue color #4A90E2
+                // Pile - Blue color
                 Button(action: { showCategoryPicker = true }) {
                     VStack(spacing: 4) {
                         Image(systemName: "square.stack")
@@ -192,7 +192,7 @@ struct PhotoEditView: View {
                         Text("Pile")
                             .font(.caption2)
                     }
-                    .foregroundColor(Color(red: 0.29, green: 0.565, blue: 0.886)) // #4A90E2
+                    .foregroundColor(Color.smilePileBlue)
                     .frame(width: 56, height: 56)
                 }
 
