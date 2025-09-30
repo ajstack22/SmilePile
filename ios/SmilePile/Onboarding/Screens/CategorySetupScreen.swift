@@ -26,13 +26,17 @@ struct CategorySetupScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             // Instructions
-            VStack(spacing: 8) {
-                Text("Create Categories")
-                    .font(.title2)
-                    .fontWeight(.bold)
+            VStack(spacing: 16) {
+                Image(systemName: "square.stack")
+                    .font(.system(size: 48))
+                    .foregroundColor(.smilePileOrange)
+                    .padding(.bottom, 16)
 
-                Text("Organize your photos into colorful categories")
-                    .font(.subheadline)
+                Text("Create Piles")
+                    .font(.nunito(22, weight: .bold))
+
+                Text("Organize your photos into colorful piles")
+                    .font(.nunito(14, weight: .regular))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
@@ -43,8 +47,8 @@ struct CategorySetupScreen: View {
                     // Quick add suggestions
                     if !suggestedCategories.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Quick Add")
-                                .font(.headline)
+                            Text("Or Quick Add")
+                                .font(.nunito(16, weight: .medium))
                                 .padding(.horizontal)
 
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -70,14 +74,14 @@ struct CategorySetupScreen: View {
 
                     // Custom category creation
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Create Custom")
-                            .font(.headline)
+                        Text("Create Your Own")
+                            .font(.nunito(16, weight: .medium))
                             .padding(.horizontal)
 
                         VStack(spacing: 16) {
                             // Name input
                             HStack {
-                                TextField("Category name", text: $newCategoryName)
+                                TextField("Pile name", text: $newCategoryName)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                                 // Color picker button
@@ -103,7 +107,7 @@ struct CategorySetupScreen: View {
                                             .frame(width: 44, height: 44)
                                             .overlay(
                                                 Circle()
-                                                    .stroke(selectedColor == color ? Color.primary : Color.clear, lineWidth: 3)
+                                                    .stroke(selectedColor == color ? Color.smilePileBlue : Color.clear, lineWidth: 3)
                                             )
                                             .onTapGesture {
                                                 selectedColor = color
@@ -118,15 +122,15 @@ struct CategorySetupScreen: View {
                             Button(action: {
                                 addCustomCategory()
                             }) {
-                                Text("Add Category")
-                                    .font(.subheadline)
+                                Text("Add Pile")
+                                    .font(.nunito(16, weight: .medium))
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 12)
+                                    .frame(height: 44)
                                     .background(
                                         newCategoryName.isEmpty ?
                                         Color.gray.opacity(0.3) :
-                                        Color(red: 1.0, green: 0.42, blue: 0.42)
+                                        Color.smilePileBlue
                                     )
                                     .cornerRadius(8)
                             }
@@ -144,13 +148,13 @@ struct CategorySetupScreen: View {
                     if !coordinator.onboardingData.categories.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
-                                Text("Your Categories")
-                                    .font(.headline)
+                                Text("Your Piles")
+                                    .font(.nunito(18, weight: .semibold))
 
                                 Spacer()
 
                                 Text("\(coordinator.onboardingData.categories.count)/5")
-                                    .font(.caption)
+                                    .font(.nunito(14, weight: .regular))
                                     .foregroundColor(.secondary)
                             }
                             .padding(.horizontal)
@@ -175,8 +179,8 @@ struct CategorySetupScreen: View {
             // Continue button
             VStack(spacing: 16) {
                 if coordinator.onboardingData.categories.isEmpty {
-                    Text("Add at least one category to continue")
-                        .font(.caption)
+                    Text("Add at least one pile to continue")
+                        .font(.nunito(12, weight: .regular))
                         .foregroundColor(.secondary)
                 }
 
@@ -184,14 +188,14 @@ struct CategorySetupScreen: View {
                     coordinator.navigateToNext()
                 }) {
                     Text("Continue")
-                        .font(.headline)
+                        .font(.nunito(18, weight: .bold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding()
+                        .frame(height: 56)
                         .background(
                             coordinator.onboardingData.categories.isEmpty ?
                             Color.gray.opacity(0.3) :
-                            Color(red: 1.0, green: 0.42, blue: 0.42)
+                            Color.smilePileBlue
                         )
                         .cornerRadius(12)
                 }
@@ -238,17 +242,16 @@ struct SuggestedCategoryCard: View {
                     .frame(width: 80, height: 80)
 
                 Text(icon)
-                    .font(.largeTitle)
+                    .font(.nunito(36, weight: .bold))
             }
 
             Text(name)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.nunito(14, weight: .medium))
 
             Button(action: onAdd) {
                 Image(systemName: "plus.circle.fill")
                     .foregroundColor(Color(hex: colorHex))
-                    .font(.title2)
+                    .font(.nunito(22, weight: .medium))
             }
         }
     }
@@ -262,20 +265,22 @@ struct CreatedCategoryRow: View {
         HStack {
             Circle()
                 .fill(Color(hex: category.colorHex))
-                .frame(width: 12, height: 12)
+                .frame(width: 16, height: 16)
 
             if let icon = category.icon {
                 Text(icon)
-                    .font(.title3)
+                    .font(.nunito(20, weight: .regular))
             }
 
             Text(category.name)
-                .font(.body)
+                .font(.nunito(16, weight: .regular))
+                .foregroundColor(.primary)
 
             Spacer()
 
             Button(action: onRemove) {
                 Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 24))
                     .foregroundColor(.gray.opacity(0.5))
             }
         }
