@@ -410,33 +410,48 @@ struct OptimizedPhotoGalleryView: View {
     }
 
     private func handleAddPhotosButtonTap() {
+        logAddPhotosAttempt()
+
+        if viewModel.selectedCategory == nil {
+            showCategorySelection()
+        } else {
+            proceedWithPhotoSelection()
+        }
+    }
+
+    private func logAddPhotosAttempt() {
         logger.info("Add photos button tapped")
         logger.info("Selected category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
         logger.info("Categories available: \(categories.count, privacy: .public)")
+    }
 
-        // First check if a category is selected
-        if viewModel.selectedCategory == nil {
-            // If no category selected, show category selection
-            logger.info("No category selected, showing selection sheet")
-            showingCategorySelection = true
-        } else {
-            // If category is selected, proceed with photo picker
-            logger.info("Category selected: \(viewModel.selectedCategory!.displayName, privacy: .public), opening photo picker")
-            permissionManager.checkCurrentAuthorizationStatus()
+    private func showCategorySelection() {
+        logger.info("No category selected, showing selection sheet")
+        showingCategorySelection = true
+    }
 
-            switch permissionManager.authorizationStatus {
-            case .notDetermined, .authorized, .limited:
-                showingPhotoPicker = true
-            case .denied:
-                permissionErrorMessage = "Photo library access is required to add photos. Please enable it in Settings."
-                showingPermissionError = true
-            case .restricted:
-                permissionErrorMessage = "Photo library access is restricted on this device."
-                showingPermissionError = true
-            @unknown default:
-                showingPhotoPicker = true
-            }
+    private func proceedWithPhotoSelection() {
+        logger.info("Category selected: \(viewModel.selectedCategory!.displayName, privacy: .public), opening photo picker")
+        permissionManager.checkCurrentAuthorizationStatus()
+        handlePhotoLibraryPermission()
+    }
+
+    private func handlePhotoLibraryPermission() {
+        switch permissionManager.authorizationStatus {
+        case .notDetermined, .authorized, .limited:
+            showingPhotoPicker = true
+        case .denied:
+            showPermissionError(message: "Photo library access is required to add photos. Please enable it in Settings.")
+        case .restricted:
+            showPermissionError(message: "Photo library access is restricted on this device.")
+        @unknown default:
+            showingPhotoPicker = true
         }
+    }
+
+    private func showPermissionError(message: String) {
+        permissionErrorMessage = message
+        showingPermissionError = true
     }
 
     private func handleSelectedPhotos(_ photos: [Photo]) {
