@@ -141,19 +141,7 @@ fun MainScreen(
                     items = bottomNavigationItems,
                     currentDestination = currentDestination,
                     onNavigateToDestination = { route ->
-                        navController.navigate(route) {
-                            // Pop up to the start destination of the graph to
-                            // avoid building up a large stack of destinations
-                            // on the back stack as users select items
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            // Avoid multiple copies of the same destination when
-                            // reselecting the same item
-                            launchSingleTop = true
-                            // Restore state when reselecting a previously selected item
-                            restoreState = true
-                        }
+                        navigateWithSingleTop(navController, route)
                     }
                 )
             }
@@ -186,6 +174,20 @@ fun MainScreen(
     }
 }
 
+// MARK: - Helper Functions
+
+private fun navigateWithSingleTop(navController: NavHostController, route: String) {
+    navController.navigate(route) {
+        // Pop up to the start destination to avoid building up large back stack
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        // Avoid multiple copies of the same destination
+        launchSingleTop = true
+        // Restore state when reselecting a previously selected item
+        restoreState = true
+    }
+}
 
 /**
  * Bottom navigation bar component for the SmilePile app
