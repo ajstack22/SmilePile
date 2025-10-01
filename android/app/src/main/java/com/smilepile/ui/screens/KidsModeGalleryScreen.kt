@@ -52,6 +52,7 @@ import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.mode.AppMode
 import com.smilepile.ui.viewmodels.AppModeViewModel
+import com.smilepile.ui.viewmodels.AppModeUiState
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 import com.smilepile.ui.toast.CategoryToastUI
@@ -82,36 +83,30 @@ fun KidsModeGalleryScreen(
     var zoomedPhoto by remember { mutableStateOf<Photo?>(null) }
     var maintainZoom by remember { mutableStateOf(false) }
 
-    // Handle back button in Kids Mode - request mode toggle (will handle PIN internally)
+    // Initialize state and side effects
+    KidsModeEffects(
+        categories = categories,
+        selectedCategoryId = selectedCategoryId,
+        zoomedPhoto = zoomedPhoto,
+        modeViewModel = modeViewModel,
+        galleryViewModel = galleryViewModel,
+        modeState = modeState,
+        onNavigateToParentalLock = onNavigateToParentalLock
+    )
+
+    // Handle back button
     BackHandler {
-        // Don't exit on back if in fullscreen
         if (zoomedPhoto == null) {
             modeViewModel.requestModeToggle()
         }
     }
 
-    // Initialize with first category if none selected
-    LaunchedEffect(categories, selectedCategoryId) {
-        if (selectedCategoryId == null && categories.isNotEmpty()) {
-            galleryViewModel.selectCategory(categories.first().id)
-        }
-    }
-
-    // Update fullscreen state when zooming changes
-    LaunchedEffect(zoomedPhoto) {
-        modeViewModel.setKidsFullscreen(zoomedPhoto != null)
-    }
-
-    // Filter photos by selected category (works with all photos or category-specific photos)
+    // Filter photos by selected category
     val displayedPhotos = remember(allPhotos, selectedCategoryId) {
-        if (selectedCategoryId == null || allPhotos.isEmpty()) {
-            allPhotos
-        } else {
-            allPhotos.filter { it.categoryId == selectedCategoryId }
-        }
+        filterPhotosByCategory(allPhotos, selectedCategoryId)
     }
 
-    // When category changes while zoomed, update to first photo of new category
+    // When category changes while zoomed, update to first photo
     LaunchedEffect(selectedCategoryId, displayedPhotos) {
         if (maintainZoom && displayedPhotos.isNotEmpty()) {
             zoomedPhoto = displayedPhotos.first()
@@ -119,31 +114,13 @@ fun KidsModeGalleryScreen(
         }
     }
 
-    // Note: Removed photo count tracking as it was incorrectly triggering when switching categories
-    // The photo count changes when filtering by category, not just when new photos are added
-
-    // Track category index for swipe navigation (only actual categories, no 'All')
+    // Track category navigation state
     val categoryIds = categories.map { it.id }
     val currentCategoryIndex = categoryIds.indexOf(selectedCategoryId).takeIf { it >= 0 } ?: 0
 
-    // Ensure selected category is valid when categories change
-    LaunchedEffect(categories) {
-        if (selectedCategoryId != null && categories.isNotEmpty()) {
-            val stillExists = categories.any { it.id == selectedCategoryId }
-            if (!stillExists) {
-                galleryViewModel.selectCategory(categories.first().id)
-            }
-        }
-    }
-
-    // Photos are filtered by selected category above
-    // Debug log
-    println("SmilePile Debug: Displaying ${displayedPhotos.size} photos for category: $selectedCategoryId")
-
-    // LazyColumn state for scrolling to bottom
     val listState = rememberLazyListState()
 
-    // Scroll to top when photos change or category switches
+    // Scroll to top when photos change
     LaunchedEffect(displayedPhotos) {
         if (displayedPhotos.isNotEmpty()) {
             listState.animateScrollToItem(0)
@@ -478,5 +455,55 @@ private fun ZoomedPhotoOverlay(
                 }
             }
         }
+    }
+}
+
+// MARK: - Helper Functions
+
+@Composable
+private fun KidsModeEffects(
+    categories: List<Category>,
+    selectedCategoryId: Long?,
+    zoomedPhoto: Photo?,
+    modeViewModel: AppModeViewModel,
+    galleryViewModel: PhotoGalleryViewModel,
+    modeState: AppModeUiState,
+    onNavigateToParentalLock: () -> Unit
+) {
+    LaunchedEffect(categories, selectedCategoryId) {
+        if (selectedCategoryId == null && categories.isNotEmpty()) {
+            galleryViewModel.selectCategory(categories.first().id)
+        }
+    }
+
+    LaunchedEffect(zoomedPhoto) {
+        modeViewModel.setKidsFullscreen(zoomedPhoto != null)
+    }
+
+    LaunchedEffect(categories) {
+        if (selectedCategoryId != null && categories.isNotEmpty()) {
+            val stillExists = categories.any { it.id == selectedCategoryId }
+            if (!stillExists) {
+                galleryViewModel.selectCategory(categories.first().id)
+            }
+        }
+    }
+
+    LaunchedEffect(modeState.requiresPinAuth) {
+        if (modeState.requiresPinAuth) {
+            modeViewModel.cancelPinAuth()
+            onNavigateToParentalLock()
+        }
+    }
+}
+
+private fun filterPhotosByCategory(
+    allPhotos: List<Photo>,
+    selectedCategoryId: Long?
+): List<Photo> {
+    return if (selectedCategoryId == null || allPhotos.isEmpty()) {
+        allPhotos
+    } else {
+        allPhotos.filter { it.categoryId == selectedCategoryId }
     }
 }
