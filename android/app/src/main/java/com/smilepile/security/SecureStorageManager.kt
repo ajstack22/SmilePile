@@ -163,11 +163,9 @@ class SecureStorageManager @Inject constructor(
         return try {
             val combined = Base64.decode(storedHash, Base64.DEFAULT)
 
-            // Extract salt and hash
-            val salt = ByteArray(32)
-            val hash = ByteArray(combined.size - 32)
-            System.arraycopy(combined, 0, salt, 0, salt.size)
-            System.arraycopy(combined, salt.size, hash, 0, hash.size)
+            // Extract salt and hash directly from combined array
+            val salt = combined.copyOfRange(0, 32)
+            val hash = combined.copyOfRange(32, combined.size)
 
             // Hash input password with extracted salt
             val spec = javax.crypto.spec.PBEKeySpec(
