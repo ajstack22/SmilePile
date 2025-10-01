@@ -37,229 +37,340 @@ fun CategorySetupScreen(
     var newCategoryName by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf("#4CAF50") }
 
-    val suggestedCategories = listOf(
-        Pair("Family", "#FF6B6B"),
-        Pair("Friends", "#4ECDC4"),
-        Pair("Fun", "#FFEAA7")
-    )
+    val suggestedCategories = remember {
+        listOf(
+            Pair("Family", "#FF6B6B"),
+            Pair("Friends", "#4ECDC4"),
+            Pair("Fun", "#FFEAA7")
+        )
+    }
 
-    val colorOptions = listOf(
-        "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4",
-        "#FFEAA7", "#DDA0DD", "#FFA07A", "#98D8C8",
-        "#F7DC6F", "#BB8FCE", "#85C1E2", "#F8B739"
-    )
+    val colorOptions = remember {
+        listOf(
+            "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4",
+            "#FFEAA7", "#DDA0DD", "#FFA07A", "#98D8C8",
+            "#F7DC6F", "#BB8FCE", "#85C1E2", "#F8B739"
+        )
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Piles logo icon
-        Icon(
-            imageVector = Icons.Outlined.Layers,
-            contentDescription = "Piles",
-            modifier = Modifier
-                .size(48.dp)
-                .align(Alignment.CenterHorizontally),
-            tint = Color(0xFFFF6600) // SmilePile orange
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // Instructions
-        Text(
-            text = "Organize your photos into colorful piles",
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 24.dp)
-        )
+        CategorySetupHeader()
 
         LazyColumn(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // Created categories - at the top
             if (categories.isNotEmpty()) {
                 item {
-                    Column {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(bottom = 12.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "Your Piles",
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-
-                            Text(
-                                text = "${categories.size}/5",
-                                fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            categories.forEach { category ->
-                                CreatedCategoryRow(
-                                    category = category,
-                                    onRemove = { onCategoryRemoved(category) }
-                                )
-                            }
-                        }
-                    }
+                    CreatedCategoriesSection(
+                        categories = categories,
+                        onCategoryRemoved = onCategoryRemoved
+                    )
                 }
             }
 
-            // Custom category creation - seamlessly integrated
             item {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text(
-                        text = "Create Your Own",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    OutlinedTextField(
-                        value = newCategoryName,
-                        onValueChange = { newCategoryName = it },
-                        label = { Text("Custom pile name") },
-                        modifier = Modifier.fillMaxWidth(),
-                        singleLine = true,
-                        trailingIcon = {
-                            IconButton(
-                                onClick = {
-                                    if (newCategoryName.isNotBlank()) {
-                                        onCategoryAdded(
-                                            TempCategory(
-                                                name = newCategoryName,
-                                                colorHex = selectedColor
-                                            )
-                                        )
-                                        newCategoryName = ""
-                                    }
-                                },
-                                enabled = newCategoryName.isNotBlank() && categories.size < 5
-                            ) {
-                                Icon(
-                                    Icons.Default.Add,
-                                    contentDescription = "Add",
-                                    tint = if (newCategoryName.isNotBlank() && categories.size < 5)
-                                        Color(0xFF2196F3) else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
-                                )
-                            }
-                        }
-                    )
-
-                    // Color picker - horizontal scroll
-                    LazyRow(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        items(colorOptions) { color ->
-                            Box(
-                                modifier = Modifier
-                                    .size(44.dp)
-                                    .clip(CircleShape)
-                                    .background(Color(android.graphics.Color.parseColor(color)))
-                                    .border(
-                                        width = if (selectedColor == color) 3.dp else 1.dp,
-                                        color = if (selectedColor == color) {
-                                            Color(0xFF2196F3)
-                                        } else Color.Gray.copy(alpha = 0.3f),
-                                        shape = CircleShape
-                                    )
-                                    .clickable { selectedColor = color },
-                                contentAlignment = Alignment.Center
-                            ) {
-                                if (selectedColor == color) {
-                                    Icon(
-                                        Icons.Default.Check,
-                                        contentDescription = null,
-                                        tint = Color.White,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+                CustomCategorySection(
+                    newCategoryName = newCategoryName,
+                    onCategoryNameChange = { newCategoryName = it },
+                    selectedColor = selectedColor,
+                    onColorChange = { selectedColor = it },
+                    colorOptions = colorOptions,
+                    categories = categories,
+                    onCategoryAdded = onCategoryAdded
+                )
             }
 
-            // Quick add suggestions
             if (suggestedCategories.isNotEmpty()) {
                 item {
-                    Column {
-                        Text(
-                            text = "Or Quick Add",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(bottom = 12.dp)
-                        )
-
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            suggestedCategories.filter { (name, _) ->
-                                !categories.any { it.name == name }
-                            }.forEach { (name, colorHex) ->
-                                SuggestedCategoryCard(
-                                    name = name,
-                                    colorHex = colorHex,
-                                    onAdd = {
-                                        onCategoryAdded(
-                                            TempCategory(
-                                                name = name,
-                                                colorHex = colorHex
-                                            )
-                                        )
-                                    }
-                                )
-                            }
-                        }
-                    }
+                    SuggestedCategoriesSection(
+                        suggestedCategories = suggestedCategories,
+                        categories = categories,
+                        onCategoryAdded = onCategoryAdded
+                    )
                 }
             }
         }
 
-        // Continue button
-        Column(
-            modifier = Modifier.padding(top = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            if (categories.isEmpty()) {
-                Text(
-                    text = "Add at least one pile to continue",
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
-            }
+        ContinueButtonSection(
+            categories = categories,
+            onContinue = onContinue
+        )
+    }
+}
 
-            Button(
-                onClick = onContinue,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                enabled = categories.isNotEmpty(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2196F3)
-                )
-            ) {
-                Text(
-                    text = "Continue",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+@Composable
+private fun CategorySetupHeader() {
+    Icon(
+        imageVector = Icons.Outlined.Layers,
+        contentDescription = "Piles",
+        modifier = Modifier
+            .size(48.dp),
+        tint = Color(0xFFFF6600)
+    )
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    Text(
+        text = "Organize your photos into colorful piles",
+        fontSize = 14.sp,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 24.dp)
+    )
+}
+
+@Composable
+private fun CreatedCategoriesSection(
+    categories: List<TempCategory>,
+    onCategoryRemoved: (TempCategory) -> Unit
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Your Piles",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            Text(
+                text = "${categories.size}/5",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            categories.forEach { category ->
+                CreatedCategoryRow(
+                    category = category,
+                    onRemove = { onCategoryRemoved(category) }
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun CustomCategorySection(
+    newCategoryName: String,
+    onCategoryNameChange: (String) -> Unit,
+    selectedColor: String,
+    onColorChange: (String) -> Unit,
+    colorOptions: List<String>,
+    categories: List<TempCategory>,
+    onCategoryAdded: (TempCategory) -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text(
+            text = "Create Your Own",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        CategoryNameInput(
+            newCategoryName = newCategoryName,
+            onCategoryNameChange = onCategoryNameChange,
+            selectedColor = selectedColor,
+            categories = categories,
+            onCategoryAdded = onCategoryAdded
+        )
+
+        ColorPickerRow(
+            colorOptions = colorOptions,
+            selectedColor = selectedColor,
+            onColorChange = onColorChange
+        )
+    }
+}
+
+@Composable
+private fun CategoryNameInput(
+    newCategoryName: String,
+    onCategoryNameChange: (String) -> Unit,
+    selectedColor: String,
+    categories: List<TempCategory>,
+    onCategoryAdded: (TempCategory) -> Unit
+) {
+    OutlinedTextField(
+        value = newCategoryName,
+        onValueChange = onCategoryNameChange,
+        label = { Text("Custom pile name") },
+        modifier = Modifier.fillMaxWidth(),
+        singleLine = true,
+        trailingIcon = {
+            AddCategoryButton(
+                newCategoryName = newCategoryName,
+                categories = categories,
+                onClick = {
+                    onCategoryAdded(
+                        TempCategory(
+                            name = newCategoryName,
+                            colorHex = selectedColor
+                        )
+                    )
+                    onCategoryNameChange("")
+                }
+            )
+        }
+    )
+}
+
+@Composable
+private fun AddCategoryButton(
+    newCategoryName: String,
+    categories: List<TempCategory>,
+    onClick: () -> Unit
+) {
+    val isEnabled = newCategoryName.isNotBlank() && categories.size < 5
+
+    IconButton(
+        onClick = { if (isEnabled) onClick() },
+        enabled = isEnabled
+    ) {
+        Icon(
+            Icons.Default.Add,
+            contentDescription = "Add",
+            tint = if (isEnabled)
+                Color(0xFF2196F3)
+            else
+                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+        )
+    }
+}
+
+@Composable
+private fun ColorPickerRow(
+    colorOptions: List<String>,
+    selectedColor: String,
+    onColorChange: (String) -> Unit
+) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(colorOptions) { color ->
+            ColorOption(
+                color = color,
+                isSelected = selectedColor == color,
+                onClick = { onColorChange(color) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun ColorOption(
+    color: String,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .size(44.dp)
+            .clip(CircleShape)
+            .background(Color(android.graphics.Color.parseColor(color)))
+            .border(
+                width = if (isSelected) 3.dp else 1.dp,
+                color = if (isSelected) Color(0xFF2196F3) else Color.Gray.copy(alpha = 0.3f),
+                shape = CircleShape
+            )
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
+    ) {
+        if (isSelected) {
+            Icon(
+                Icons.Default.Check,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun SuggestedCategoriesSection(
+    suggestedCategories: List<Pair<String, String>>,
+    categories: List<TempCategory>,
+    onCategoryAdded: (TempCategory) -> Unit
+) {
+    Column {
+        Text(
+            text = "Or Quick Add",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
+
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            suggestedCategories
+                .filter { (name, _) -> !categories.any { it.name == name } }
+                .forEach { (name, colorHex) ->
+                    SuggestedCategoryCard(
+                        name = name,
+                        colorHex = colorHex,
+                        onAdd = {
+                            onCategoryAdded(
+                                TempCategory(
+                                    name = name,
+                                    colorHex = colorHex
+                                )
+                            )
+                        }
+                    )
+                }
+        }
+    }
+}
+
+@Composable
+private fun ContinueButtonSection(
+    categories: List<TempCategory>,
+    onContinue: () -> Unit
+) {
+    Column(
+        modifier = Modifier.padding(top = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        if (categories.isEmpty()) {
+            Text(
+                text = "Add at least one pile to continue",
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+        }
+
+        Button(
+            onClick = onContinue,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            enabled = categories.isNotEmpty(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2196F3)
+            )
+        ) {
+            Text(
+                text = "Continue",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
