@@ -64,21 +64,39 @@ class SecuritySettingsViewModel: ObservableObject {
     }
 
     func checkSecurityStatus() {
+        updateAuthenticationStatus()
+        updateBiometricAvailability()
+        isSecure = hasPIN || hasPattern
+        updatePreferredMethodIfNeeded()
+    }
+
+    private func updateAuthenticationStatus() {
         hasPIN = pinManager.isPINEnabled()
         hasPattern = patternManager.hasPattern()
         currentPINLength = pinManager.getPINLength()
+    }
 
+    private func updateBiometricAvailability() {
         var error: NSError?
         isBiometricAvailable = context.canEvaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics,
             error: &error
         )
+    }
 
-        isSecure = hasPIN || hasPattern
-
+    private func updatePreferredMethodIfNeeded() {
         if !hasPIN && preferredAuthMethod == .pin {
-            preferredAuthMethod = hasPattern ? .pattern :
-                                 (isBiometricEnabled && isBiometricAvailable) ? .biometric : .pin
+            preferredAuthMethod = determineAlternateAuthMethod()
+        }
+    }
+
+    private func determineAlternateAuthMethod() -> AuthenticationMethod {
+        if hasPattern {
+            return .pattern
+        } else if isBiometricEnabled && isBiometricAvailable {
+            return .biometric
+        } else {
+            return .pin
         }
     }
 
