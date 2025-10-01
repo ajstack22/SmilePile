@@ -9,21 +9,21 @@ import SwiftUI
 extension Color {
     // SmilePile Brand Colors
     // These colors are used in the SmilePile logo where each letter has its own color
-    static let smilePileYellow = Color(hex: "#FFBF00")!  // Smile character
-    static let smilePileGreen = Color(hex: "#4CAF50")!   // P character
-    static let smilePileBlue = Color(hex: "#2196F3")!    // i character, buttons
-    static let smilePileOrange = Color(hex: "#FF6600")!  // l character, icons
-    static let smilePilePink = Color(hex: "#E86082")!    // e character
+    static let smilePileYellow = Color(hex: "#FFBF00")  // Smile character
+    static let smilePileGreen = Color(hex: "#4CAF50")   // P character
+    static let smilePileBlue = Color(hex: "#2196F3")    // i character, buttons
+    static let smilePileOrange = Color(hex: "#FF6600")  // l character, icons
+    static let smilePilePink = Color(hex: "#E86082")    // e character
 
     // Category/Pile Colors
     // Default colors for user-created piles
-    static let pileRed = Color(hex: "#FF6B6B")!
-    static let pileTeal = Color(hex: "#4ECDC4")!
-    static let pileYellow = Color(hex: "#FFEAA7")!
+    static let pileRed = Color(hex: "#FF6B6B")
+    static let pileTeal = Color(hex: "#4ECDC4")
+    static let pileYellow = Color(hex: "#FFEAA7")
 
     // Additional named colors from palette
-    static let pileAqua = Color(hex: "#45B7D1")!     // Light blue/aqua
-    static let pilePurple = Color(hex: "#DDA0DD")!   // Light purple
+    static let pileAqua = Color(hex: "#45B7D1")     // Light blue/aqua
+    static let pilePurple = Color(hex: "#DDA0DD")   // Light purple
 
     // Additional Palette Colors
     // Full set of colors available for pile creation

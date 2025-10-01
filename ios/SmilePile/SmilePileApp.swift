@@ -17,22 +17,25 @@ struct SmilePileApp: App {
         // Initialize settings manager and perform migration if needed
         SettingsManager.shared.migrateIfNeeded()
 
-        // Initialize default categories with proper error handling
+        // Initialize default categories ONLY if onboarding is already completed
+        // For first-time users, onboarding will create categories
         Task { @MainActor in
             // Run photo ID migration if needed
             await PhotoIDMigration.runMigrationIfNeeded()
 
-            let repository = CategoryRepositoryImpl.shared
-            do {
-                print("SmilePileApp: Starting category initialization...")
-                try await repository.initializeDefaultCategories()
-                let categories = try await repository.getAllCategories()
-                print("SmilePileApp: Default categories initialized successfully. Count: \(categories.count)")
-                for cat in categories {
-                    print("SmilePileApp: Category - \(cat.displayName) (id: \(cat.id))")
+            // Only initialize default categories if user has completed onboarding
+            if SettingsManager.shared.onboardingCompleted {
+                let repository = CategoryRepositoryImpl.shared
+                do {
+                    print("SmilePileApp: Onboarding completed, initializing default categories if needed...")
+                    try await repository.initializeDefaultCategories()
+                    let categories = try await repository.getAllCategories()
+                    print("SmilePileApp: Categories count: \(categories.count)")
+                } catch {
+                    print("SmilePileApp: Failed to initialize default categories: \(error)")
                 }
-            } catch {
-                print("SmilePileApp: Failed to initialize default categories: \(error)")
+            } else {
+                print("SmilePileApp: Onboarding not completed - skipping default category initialization")
             }
         }
 

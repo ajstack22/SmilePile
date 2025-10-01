@@ -15,16 +15,9 @@ final class CategoryRepositoryImpl: CategoryRepository {
     init(coreDataStack: CoreDataStack = CoreDataStack.shared) {
         self.coreDataStack = coreDataStack
 
-        // Start initialization immediately
-        self.initializationTask = Task {
-            do {
-                try await self.initializeDefaultCategories()
-                self.isInitialized = true
-            } catch {
-                self.logger.error("Failed to initialize default categories: \(error)")
-                throw error
-            }
-        }
+        // DON'T auto-initialize default categories - let onboarding handle it
+        // This prevents skipping onboarding for first-time users
+        self.isInitialized = true
     }
 
     // Ensure initialization is complete before operations
@@ -178,14 +171,8 @@ final class CategoryRepositoryImpl: CategoryRepository {
             return entities.compactMap { self.entityToCategory($0) }
         }
 
-        // If no categories exist after initialization, reinitialize
-        if categories.isEmpty && self.isInitialized {
-            self.logger.warning("No categories found after initialization, retrying...")
-            self.isInitialized = false
-            try await self.initializeDefaultCategories()
-            return try await self.getAllCategories()
-        }
-
+        // DON'T auto-initialize - let onboarding create categories for first-time users
+        // This prevents skipping onboarding wizard
         return categories
     }
 

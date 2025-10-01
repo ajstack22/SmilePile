@@ -136,29 +136,46 @@ struct ContentView: View {
     }
 
     private func checkFirstLaunch() {
+        print("🔍 checkFirstLaunch called")
+        print("🔍 onboardingCompleted = \(settingsManager.onboardingCompleted)")
+
         // Check if this is the first launch and we don't have completed onboarding
         if !settingsManager.onboardingCompleted {
+            print("🔍 Onboarding NOT completed, checking for existing data...")
             // Check if we have existing data
             Task {
+                // Small delay to ensure CoreData is fully initialized
+                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+
                 do {
                     let categoryRepo = CategoryRepositoryImpl.shared
                     let categories = try await categoryRepo.getAllCategories()
+                    print("🔍 Found \(categories.count) categories")
+
                     if categories.isEmpty {
                         // First time launch, show onboarding
+                        print("✅ No categories found - SHOWING ONBOARDING")
                         await MainActor.run {
                             showOnboarding = true
                         }
                     } else {
                         // Has data but no onboarding flag - mark as complete (migrating user)
+                        print("⚠️ Has categories but no onboarding flag - marking as complete (migration)")
                         await MainActor.run {
                             settingsManager.onboardingCompleted = true
                             settingsManager.firstLaunch = false
                         }
                     }
                 } catch {
-                    print("Error checking categories: \(error)")
+                    print("❌ Error checking categories: \(error)")
+                    // On error, show onboarding to be safe
+                    await MainActor.run {
+                        showOnboarding = true
+                    }
                 }
             }
+        } else {
+            print("⏭️ Onboarding already completed - skipping")
         }
     }
 
