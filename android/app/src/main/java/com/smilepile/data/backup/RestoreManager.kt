@@ -541,79 +541,130 @@ class RestoreManager @Inject constructor(
         options: RestoreOptions
     ): PhotoRestoreResult {
         try {
-            // Find manifest entry for photo file
             val manifestEntry = backupData.photoManifest.find { it.photoId == photoBackup.id }
-            var newPhotoPath = photoBackup.path
-            var fileRestored = false
 
-            if (manifestEntry != null) {
-                // Restore photo file
-                val sourceFile = File(photosDir, manifestEntry.fileName)
-                if (sourceFile.exists()) {
-                    // Verify integrity if requested
-                    if (options.validateIntegrity && manifestEntry.checksum != null) {
-                        val actualChecksum = calculateMD5(sourceFile)
-                        if (actualChecksum != manifestEntry.checksum) {
-                            return PhotoRestoreResult.Failed("Integrity check failed for ${manifestEntry.fileName}")
-                        }
-                    }
+            val restoreContext = restorePhotoFile(
+                manifestEntry,
+                photoBackup.path,
+                photosDir,
+                thumbnailsDir,
+                internalPhotosDir,
+                internalThumbnailsDir,
+                options
+            )
 
-                    val destFile = File(internalPhotosDir, manifestEntry.fileName)
-                    sourceFile.copyTo(destFile, overwrite = true)
-                    newPhotoPath = destFile.absolutePath
-                    fileRestored = true
+            val finalPath = handlePhotoDuplicate(
+                restoreContext.newPhotoPath,
+                photoBackup.name,
+                internalPhotosDir,
+                options
+            ) ?: return PhotoRestoreResult.Skipped("Duplicate photo: ${photoBackup.name}")
 
-                    // Restore thumbnail if available and requested
-                    if (options.restoreThumbnails) {
-                        val thumbSource = File(thumbnailsDir, "thumb_${manifestEntry.fileName}")
-                        if (thumbSource.exists()) {
-                            val thumbDest = File(internalThumbnailsDir, "thumb_${manifestEntry.fileName}")
-                            thumbSource.copyTo(thumbDest, overwrite = true)
-                        }
-                    }
-                }
-            }
-
-            // Check for duplicates
-            val existingPhotos = photoRepository.getAllPhotos()
-            val isDuplicate = existingPhotos.any { it.path == newPhotoPath }
-
-            if (isDuplicate) {
-                when (options.duplicateResolution) {
-                    DuplicateResolution.SKIP -> {
-                        return PhotoRestoreResult.Skipped("Duplicate photo: ${photoBackup.name}")
-                    }
-                    DuplicateResolution.REPLACE -> {
-                        val existingPhoto = existingPhotos.find { it.path == newPhotoPath }
-                        if (existingPhoto != null) {
-                            photoRepository.deletePhoto(existingPhoto)
-                        }
-                    }
-                    DuplicateResolution.RENAME -> {
-                        val newFileName = generateUniquePhotoName(File(newPhotoPath).name)
-                        val renamedFile = File(internalPhotosDir, newFileName)
-                        val sourceFile = File(newPhotoPath)
-                        if (!sourceFile.renameTo(renamedFile)) {
-                            return PhotoRestoreResult.Failed("Failed to rename photo file: ${sourceFile.name}")
-                        }
-                        newPhotoPath = renamedFile.absolutePath
-                    }
-                    DuplicateResolution.ASK_USER -> {
-                        // Would require UI interaction
-                        return PhotoRestoreResult.Skipped("Duplicate photo (user decision pending): ${photoBackup.name}")
-                    }
-                }
-            }
-
-            // Insert photo
-            val photoToInsert = photoBackup.toPhoto().copy(path = newPhotoPath)
+            val photoToInsert = photoBackup.toPhoto().copy(path = finalPath)
             photoRepository.insertPhoto(photoToInsert)
 
-            return PhotoRestoreResult.Imported(fileRestored)
+            return PhotoRestoreResult.Imported(restoreContext.fileRestored)
         } catch (e: Exception) {
             return PhotoRestoreResult.Failed("Failed to restore photo: ${e.message}")
         }
     }
+
+    private suspend fun restorePhotoFile(
+        manifestEntry: PhotoManifestEntry?,
+        originalPath: String,
+        photosDir: File,
+        thumbnailsDir: File,
+        internalPhotosDir: File,
+        internalThumbnailsDir: File,
+        options: RestoreOptions
+    ): PhotoRestoreContext {
+        if (manifestEntry == null) {
+            return PhotoRestoreContext(originalPath, false)
+        }
+
+        val sourceFile = File(photosDir, manifestEntry.fileName)
+        if (!sourceFile.exists()) {
+            return PhotoRestoreContext(originalPath, false)
+        }
+
+        verifyPhotoIntegrity(sourceFile, manifestEntry, options)
+
+        val destFile = File(internalPhotosDir, manifestEntry.fileName)
+        sourceFile.copyTo(destFile, overwrite = true)
+
+        restorePhotoThumbnail(manifestEntry, thumbnailsDir, internalThumbnailsDir, options)
+
+        return PhotoRestoreContext(destFile.absolutePath, true)
+    }
+
+    private fun verifyPhotoIntegrity(
+        sourceFile: File,
+        manifestEntry: PhotoManifestEntry,
+        options: RestoreOptions
+    ) {
+        if (options.validateIntegrity && manifestEntry.checksum != null) {
+            val actualChecksum = calculateMD5(sourceFile)
+            if (actualChecksum != manifestEntry.checksum) {
+                throw SecurityException("Integrity check failed for ${manifestEntry.fileName}")
+            }
+        }
+    }
+
+    private fun restorePhotoThumbnail(
+        manifestEntry: PhotoManifestEntry,
+        thumbnailsDir: File,
+        internalThumbnailsDir: File,
+        options: RestoreOptions
+    ) {
+        if (options.restoreThumbnails) {
+            val thumbSource = File(thumbnailsDir, "thumb_${manifestEntry.fileName}")
+            if (thumbSource.exists()) {
+                val thumbDest = File(internalThumbnailsDir, "thumb_${manifestEntry.fileName}")
+                thumbSource.copyTo(thumbDest, overwrite = true)
+            }
+        }
+    }
+
+    private suspend fun handlePhotoDuplicate(
+        photoPath: String,
+        photoName: String,
+        internalPhotosDir: File,
+        options: RestoreOptions
+    ): String? {
+        val existingPhotos = photoRepository.getAllPhotos()
+        val isDuplicate = existingPhotos.any { it.path == photoPath }
+
+        if (!isDuplicate) {
+            return photoPath
+        }
+
+        return when (options.duplicateResolution) {
+            DuplicateResolution.SKIP -> null
+            DuplicateResolution.REPLACE -> {
+                val existingPhoto = existingPhotos.find { it.path == photoPath }
+                if (existingPhoto != null) {
+                    photoRepository.deletePhoto(existingPhoto)
+                }
+                photoPath
+            }
+            DuplicateResolution.RENAME -> {
+                val newFileName = generateUniquePhotoName(File(photoPath).name)
+                val renamedFile = File(internalPhotosDir, newFileName)
+                val sourceFile = File(photoPath)
+                if (sourceFile.renameTo(renamedFile)) {
+                    renamedFile.absolutePath
+                } else {
+                    throw IllegalStateException("Failed to rename photo file: ${sourceFile.name}")
+                }
+            }
+            DuplicateResolution.ASK_USER -> null
+        }
+    }
+
+    private data class PhotoRestoreContext(
+        val newPhotoPath: String,
+        val fileRestored: Boolean
+    )
 
     /**
      * Restore app settings
