@@ -12,10 +12,13 @@ let package = Package(
             targets: ["SmilePile"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/weichsel/ZIPFoundation.git", from: "0.9.0")
+    ],
     targets: [
         .target(
             name: "SmilePile",
+            dependencies: ["ZIPFoundation"],
             path: "SmilePile",
             exclude: ["Preview Content"]
         ),

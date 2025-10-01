@@ -26,8 +26,6 @@ struct PhotoGalleryView: View {
     private let repository = CategoryRepositoryImpl()
     private let photoRepository = PhotoRepositoryImpl()
     @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
-    // Temporarily using PhotoImportCoordinator until we can add files to Xcode project
-    @State private var photoImportCoordinator: PhotoImportCoordinator?
 
     var body: some View {
         ZStack {
@@ -147,10 +145,6 @@ struct PhotoGalleryView: View {
             }
         }
         .onAppear {
-            // Initialize coordinator if needed
-            if photoImportCoordinator == nil {
-                photoImportCoordinator = PhotoImportCoordinator.createDefault()
-            }
             loadCategories()
             loadPhotos()
         }

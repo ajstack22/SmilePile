@@ -3,18 +3,14 @@ import SwiftUI
 struct SettingsViewNative: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @StateObject private var securityViewModel = SecuritySettingsViewModel()
+    @StateObject private var backupViewModel = BackupViewModel()
     @State private var backupPhotoCount: Int = 0
     @State private var backupCategoryCount: Int = 0
     @EnvironmentObject private var settingsManager: SettingsManager
     @State private var showPINSetup = false
     @State private var showPINChange = false
-    @State private var showingExportSheet = false
-    @State private var showingImportPicker = false
     @State private var showingAboutDialog = false
-    @State private var exportProgress: Double = 0.0
-    @State private var importProgress: Double = 0.0
-    @State private var isExporting = false
-    @State private var isImporting = false
+    @State private var selectedBackupFile: URL?
     @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
     @AppStorage("showPerformanceOverlay") private var showPerformanceOverlay = false
 
@@ -85,7 +81,7 @@ struct SettingsViewNative: View {
                             VStack(alignment: .leading) {
                                 Text("Library Contents")
                                     .font(.subheadline)
-                                Text("\(backupPhotoCount) photos in \(backupCategoryCount) categories")
+                                Text("\(backupPhotoCount) photos in \(backupCategoryCount) piles")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -93,13 +89,15 @@ struct SettingsViewNative: View {
                         .padding(.vertical, 4)
                     }
 
-                    Button(action: { showingExportSheet = true }) {
+                    Button(action: { backupViewModel.exportData() }) {
                         Label("Export Data", systemImage: "archivebox")
                     }
+                    .disabled(backupViewModel.isExporting)
 
-                    Button(action: { showingImportPicker = true }) {
+                    Button(action: { backupViewModel.showFilePicker() }) {
                         Label("Import Data", systemImage: "icloud.and.arrow.down")
                     }
+                    .disabled(backupViewModel.isImporting)
                 }
 
                 // Performance Section
@@ -164,46 +162,18 @@ struct SettingsViewNative: View {
                 onCancel: {}
             )
         }
-        .sheet(isPresented: $showingExportSheet) {
-            NavigationView {
-                VStack(spacing: 20) {
-                    Text("Exporting backup...")
-                        .font(.headline)
-
-                    if isExporting {
-                        ProgressView(value: exportProgress)
-                            .progressViewStyle(LinearProgressViewStyle())
-                            .padding(.horizontal)
-
-                        Text("Preparing backup...")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-
-                    Button("Export") {
-                        Task {
-                            isExporting = true
-                            // TODO: Implement export functionality
-                            try? await Task.sleep(nanoseconds: 2_000_000_000)
-                            isExporting = false
-                            showingExportSheet = false
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(isExporting)
-
-                    Spacer()
-                }
-                .padding()
-                .navigationTitle("Export Backup")
-                .navigationBarItems(trailing: Button("Cancel") {
-                    showingExportSheet = false
-                })
+        .sheet(isPresented: $backupViewModel.showDocumentPicker) {
+            DocumentPickerView(selectedURL: $selectedBackupFile) { url in
+                backupViewModel.handleSelectedFile(url)
             }
         }
-        .sheet(isPresented: $showingImportPicker) {
-            Text("Import functionality coming soon")
-                .padding()
+        .sheet(isPresented: $backupViewModel.showShareSheet) {
+            if let url = backupViewModel.exportedFileURL {
+                ShareSheetView(items: [url])
+                    .onDisappear {
+                        backupViewModel.dismissShareSheet()
+                    }
+            }
         }
         .sheet(isPresented: $showingAboutDialog) {
             AboutDialog(
@@ -211,12 +181,55 @@ struct SettingsViewNative: View {
                 appVersion: "25.09.27.006"
             )
         }
-        .alert("Import Progress", isPresented: .constant(isImporting)) {
-            Button("Cancel") {
-                isImporting = false
-            }
+.alert("Confirm Import", isPresented: $backupViewModel.showImportConfirmation) {
+            Button("Cancel", role: .cancel) { backupViewModel.cancelImport() }
+            Button("Import") { backupViewModel.confirmImport() }
         } message: {
-            Text("Importing data...")
+            if let result = backupViewModel.backupValidationResult {
+                Text("Import backup with \(result.photosCount) photos in \(result.categoriesCount) categories?")
+            }
+        }
+        .overlay {
+            if backupViewModel.isExporting {
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+
+                    VStack(spacing: 20) {
+                        ProgressView(value: backupViewModel.exportProgress)
+                            .progressViewStyle(LinearProgressViewStyle())
+                            .frame(width: 200)
+
+                        Text(backupViewModel.exportMessage)
+                            .font(.caption)
+                            .foregroundColor(.white)
+                    }
+                    .padding(30)
+                    .background(Color(.systemBackground))
+                    .cornerRadius(12)
+                }
+            }
+        }
+        .overlay {
+            if backupViewModel.isImporting {
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+
+                    VStack(spacing: 20) {
+                        ProgressView(value: backupViewModel.importProgress)
+                            .progressViewStyle(LinearProgressViewStyle())
+                            .frame(width: 200)
+
+                        Text(backupViewModel.importMessage)
+                            .font(.caption)
+                            .foregroundColor(.white)
+                    }
+                    .padding(30)
+                    .background(Color(.systemBackground))
+                    .cornerRadius(12)
+                }
+            }
         }
         .onAppear {
             Task {

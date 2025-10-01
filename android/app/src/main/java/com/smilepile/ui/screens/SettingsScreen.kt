@@ -87,7 +87,6 @@ import com.smilepile.theme.ThemeMode
 fun SettingsScreen(
     onNavigateUp: () -> Unit,
     onNavigateToKidsMode: () -> Unit = {},
-    onNavigateToParentalControls: () -> Unit = {},
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(0.dp),
     viewModel: SettingsViewModel = hiltViewModel()
@@ -214,20 +213,6 @@ fun SettingsScreen(
                                 onCheckedChange = { enabled ->
                                     viewModel.setBiometricEnabled(enabled)
                                 }
-                            )
-                        }
-
-                        // Parental Controls Access
-                        if (uiState.hasPIN) {
-                            Divider(
-                                modifier = Modifier.padding(start = 48.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant
-                            )
-                            SettingsActionItem(
-                                title = "Parental Controls",
-                                subtitle = "Manage child safety settings",
-                                icon = Icons.Default.ChildCare,
-                                onClick = onNavigateToParentalControls
                             )
                         }
 

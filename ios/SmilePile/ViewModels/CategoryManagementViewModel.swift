@@ -120,7 +120,7 @@ class CategoryManagementViewModel: ObservableObject {
 
             do {
                 if let _ = try await repository.getCategoryByName(displayName) {
-                    errorMessage = "Category '\(displayName)' already exists"
+                    errorMessage = "Pile '\(displayName)' already exists"
                     isLoading = false
                     return
                 }
@@ -161,7 +161,7 @@ class CategoryManagementViewModel: ObservableObject {
             do {
                 if displayName != category.displayName,
                    let _ = try await repository.getCategoryByName(displayName) {
-                    errorMessage = "Category '\(displayName)' already exists"
+                    errorMessage = "Pile '\(displayName)' already exists"
                     isLoading = false
                     return
                 }

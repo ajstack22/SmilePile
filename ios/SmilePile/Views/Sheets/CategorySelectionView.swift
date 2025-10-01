@@ -34,7 +34,7 @@ struct CategorySelectionView: View {
                     }
                 }
             }
-            .navigationTitle("Select Categories")
+            .navigationTitle("Select Piles")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -108,7 +108,7 @@ struct CategorySelectionView: View {
 
                     // Add Category button
                     QuickActionChip(
-                        title: "New Category",
+                        title: "New Pile",
                         icon: "plus.circle.fill",
                         color: .green
                     ) {
@@ -160,7 +160,7 @@ struct CategorySelectionView: View {
                 .foregroundColor(.secondary)
 
             VStack(spacing: 8) {
-                Text("No Categories")
+                Text("No Piles")
                     .font(.title2)
                     .fontWeight(.semibold)
 
@@ -171,7 +171,7 @@ struct CategorySelectionView: View {
             }
 
             Button(action: { showCreateCategory = true }) {
-                Label("Create Category", systemImage: "plus.circle.fill")
+                Label("Create Pile", systemImage: "plus.circle.fill")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.horizontal, 24)
@@ -378,7 +378,7 @@ struct CreateCategorySheet: View {
                     }
                 }
             }
-            .navigationTitle("New Category")
+            .navigationTitle("New Pile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

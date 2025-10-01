@@ -38,12 +38,12 @@ struct AddCategorySheet: View {
             ScrollView {
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Category Name")
+                        Text("Pile Name")
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
 
-                        TextField("Enter category name", text: $displayName)
+                        TextField("Enter pile name", text: $displayName)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .focused($isNameFieldFocused)
                             .onSubmit {
@@ -53,14 +53,14 @@ struct AddCategorySheet: View {
                             }
 
                         if showDuplicateError {
-                            Text("A category with this name already exists")
+                            Text("A pile with this name already exists")
                                 .font(.caption)
                                 .foregroundColor(.red)
                         }
                     }
 
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Category Color")
+                        Text("Pile Color")
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
@@ -86,7 +86,7 @@ struct AddCategorySheet: View {
                             }
                         } else {
                             HStack {
-                                Text("Enter category name to see preview")
+                                Text("Enter pile name to see preview")
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                     .italic()
@@ -101,7 +101,7 @@ struct AddCategorySheet: View {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.orange)
 
-                            Text("This is a default category. Only the color can be changed.")
+                            Text("This is a default pile. Only the color can be changed.")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
 
@@ -116,7 +116,7 @@ struct AddCategorySheet: View {
                 }
                 .padding()
             }
-            .navigationTitle(isEditMode ? "Edit Category" : "Add Category")
+            .navigationTitle(isEditMode ? "Edit Pile" : "Add Pile")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
