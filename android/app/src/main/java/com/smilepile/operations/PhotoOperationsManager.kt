@@ -61,24 +61,9 @@ class PhotoOperationsManager @Inject constructor(
             val failedPhotos = mutableListOf<Photo>()
 
             photos.forEach { photo ->
-                try {
-                    // Only delete file if it's not from assets and is in internal storage
-                    if (!photo.isFromAssets) {
-                        val file = File(photo.path)
-                        if (file.exists()) {
-                            val deleted = file.delete()
-                            if (!deleted) {
-                                Log.w("PhotoOps", "Failed to delete photo file: ${photo.path}")
-                                // Continue with database removal even if file deletion fails
-                            }
-                        }
-                    }
-
-                    // Remove from database
-                    photoRepository.deletePhoto(photo)
+                if (deleteSinglePhoto(photo)) {
                     successCount++
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                } else {
                     failureCount++
                     failedPhotos.add(photo)
                 }
@@ -89,6 +74,29 @@ class PhotoOperationsManager @Inject constructor(
                 failureCount = failureCount,
                 failedItems = failedPhotos
             )
+        }
+    }
+
+    private suspend fun deleteSinglePhoto(photo: Photo): Boolean {
+        return try {
+            deletePhotoFile(photo)
+            photoRepository.deletePhoto(photo)
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    private fun deletePhotoFile(photo: Photo) {
+        if (!photo.isFromAssets) {
+            val file = File(photo.path)
+            if (file.exists()) {
+                val deleted = file.delete()
+                if (!deleted) {
+                    Log.w("PhotoOps", "Failed to delete photo file: ${photo.path}")
+                }
+            }
         }
     }
 
