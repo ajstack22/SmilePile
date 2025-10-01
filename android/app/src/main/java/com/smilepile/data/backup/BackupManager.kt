@@ -14,6 +14,7 @@ import com.smilepile.theme.ThemeManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -384,75 +385,15 @@ class BackupManager @Inject constructor(
     ): Flow<ImportProgress> = flow {
         val errors = mutableListOf<String>()
         val warnings = mutableListOf<String>()
-        var photoFilesRestored = 0
 
         try {
-            emit(ImportProgress(1, 0, "Validating ZIP structure"))
-            progressCallback?.invoke(0, 100, "Validating ZIP structure")
-
-            val tempDir = extractAndValidateZip(zipFile, progressCallback)
-            progressCallback?.invoke(30, 100, "Reading backup metadata")
-
-            val backupData = readMetadataFromExtractedZip(tempDir)
-            checkBackupVersion(backupData.version)
-
-            val totalItems = backupData.categories.size + backupData.photos.size
-            var processedItems = 0
-
-            emit(ImportProgress(totalItems, processedItems, "Starting import"))
-            progressCallback?.invoke(40, 100, "Starting import")
-
-            if (strategy == ImportStrategy.REPLACE) {
-                emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
-                progressCallback?.invoke(45, 100, "Clearing existing data")
-                clearAllData()
-            }
-
-            processedItems = importCategories(
-                backupData,
-                strategy,
-                totalItems,
-                processedItems,
-                errors,
-                warnings
-            ) { progress ->
-                emit(progress)
-                progressCallback?.invoke(
-                    50 + (progress.processedItems * 20 / backupData.categories.size),
-                    100,
-                    progress.currentOperation
-                )
-            }
-
-            emit(ImportProgress(totalItems, processedItems, "Importing photos"))
-            progressCallback?.invoke(70, 100, "Importing photos")
-
-            val (imported, skipped, filesRestored) = importPhotosFromZip(
-                backupData,
-                tempDir,
-                strategy,
-                totalItems,
-                processedItems,
-                errors,
-                warnings
-            ) { progress ->
-                emit(progress)
-                progressCallback?.invoke(
-                    70 + (progress.processedItems * 25 / backupData.photos.size),
-                    100,
-                    progress.currentOperation
-                )
-            }
-
-            photoFilesRestored = filesRestored
-            processedItems += imported + skipped
-
-            tempDir.deleteRecursively()
+            val importContext = initializeZipImport(zipFile, strategy, progressCallback, errors, warnings)
+            val result = executeZipImport(importContext, progressCallback)
 
             progressCallback?.invoke(100, 100, "Import completed")
-            emit(ImportProgress(totalItems, processedItems, "Import completed", errors))
+            emit(ImportProgress(result.totalItems, result.processedItems, "Import completed", errors))
 
-            Log.i(TAG, "ZIP import completed: $imported photos, $photoFilesRestored files restored")
+            Log.i(TAG, "ZIP import completed: ${result.photosImported} photos, ${result.filesRestored} files restored")
 
         } catch (e: Exception) {
             errors.add("Import failed: ${e.message}")
@@ -472,30 +413,10 @@ class BackupManager @Inject constructor(
         val warnings = mutableListOf<String>()
 
         try {
-            emit(ImportProgress(1, 0, "Reading backup file"))
+            val importContext = initializeJsonImport(backupFile, strategy, errors, warnings)
+            val (categoriesImported, photosImported, photosSkipped) = executeJsonImport(importContext)
 
-            val backupData = readAndValidateBackup(backupFile)
-            val totalItems = backupData.categories.size + backupData.photos.size
-            var processedItems = 0
-
-            emit(ImportProgress(totalItems, processedItems, "Starting import"))
-
-            if (strategy == ImportStrategy.REPLACE) {
-                emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
-                clearAllData()
-            }
-
-            val categoriesImported = importCategories(backupData, strategy, totalItems, processedItems, errors, warnings) { progress ->
-                emit(progress)
-                processedItems = progress.processedItems
-            }
-
-            val (photosImported, photosSkipped) = importPhotos(backupData, strategy, totalItems, processedItems, errors, warnings) { progress ->
-                emit(progress)
-                processedItems = progress.processedItems
-            }
-
-            emit(ImportProgress(totalItems, processedItems, "Import completed", errors))
+            emit(ImportProgress(importContext.totalItems, importContext.totalItems, "Import completed", errors))
             Log.i(TAG, "Import completed: $categoriesImported categories, $photosImported photos imported, $photosSkipped photos skipped")
 
         } catch (e: Exception) {
@@ -1412,6 +1333,165 @@ class BackupManager @Inject constructor(
         } catch (e: Exception) {
             null
         }
+    }
+
+    // MARK: - Helper Methods for ZIP Import Complexity Reduction
+
+    private data class ZipImportContext(
+        val tempDir: File,
+        val backupData: AppBackup,
+        val totalItems: Int,
+        val strategy: ImportStrategy,
+        val errors: MutableList<String>,
+        val warnings: MutableList<String>
+    )
+
+    private data class ZipImportResult(
+        val totalItems: Int,
+        val processedItems: Int,
+        val photosImported: Int,
+        val filesRestored: Int
+    )
+
+    private suspend fun FlowCollector<ImportProgress>.initializeZipImport(
+        zipFile: File,
+        strategy: ImportStrategy,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?,
+        errors: MutableList<String>,
+        warnings: MutableList<String>
+    ): ZipImportContext {
+        emit(ImportProgress(1, 0, "Validating ZIP structure"))
+        progressCallback?.invoke(0, 100, "Validating ZIP structure")
+
+        val tempDir = extractAndValidateZip(zipFile, progressCallback)
+        progressCallback?.invoke(30, 100, "Reading backup metadata")
+
+        val backupData = readMetadataFromExtractedZip(tempDir)
+        checkBackupVersion(backupData.version)
+
+        val totalItems = backupData.categories.size + backupData.photos.size
+
+        emit(ImportProgress(totalItems, 0, "Starting import"))
+        progressCallback?.invoke(40, 100, "Starting import")
+
+        if (strategy == ImportStrategy.REPLACE) {
+            emit(ImportProgress(totalItems, 0, "Clearing existing data"))
+            progressCallback?.invoke(45, 100, "Clearing existing data")
+            clearAllData()
+        }
+
+        return ZipImportContext(tempDir, backupData, totalItems, strategy, errors, warnings)
+    }
+
+    private suspend fun FlowCollector<ImportProgress>.executeZipImport(
+        context: ZipImportContext,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): ZipImportResult {
+        var processedItems = 0
+
+        processedItems = importCategories(
+            context.backupData,
+            context.strategy,
+            context.totalItems,
+            processedItems,
+            context.errors,
+            context.warnings
+        ) { progress ->
+            emit(progress)
+            progressCallback?.invoke(
+                50 + (progress.processedItems * 20 / context.backupData.categories.size),
+                100,
+                progress.currentOperation
+            )
+        }
+
+        emit(ImportProgress(context.totalItems, processedItems, "Importing photos"))
+        progressCallback?.invoke(70, 100, "Importing photos")
+
+        val (imported, skipped, filesRestored) = importPhotosFromZip(
+            context.backupData,
+            context.tempDir,
+            context.strategy,
+            context.totalItems,
+            processedItems,
+            context.errors,
+            context.warnings
+        ) { progress ->
+            emit(progress)
+            progressCallback?.invoke(
+                70 + (progress.processedItems * 25 / context.backupData.photos.size),
+                100,
+                progress.currentOperation
+            )
+        }
+
+        processedItems += imported + skipped
+        context.tempDir.deleteRecursively()
+
+        return ZipImportResult(context.totalItems, processedItems, imported, filesRestored)
+    }
+
+    // MARK: - Helper Methods for JSON Import Complexity Reduction
+
+    private data class JsonImportContext(
+        val backupData: AppBackup,
+        val totalItems: Int,
+        val strategy: ImportStrategy,
+        val errors: MutableList<String>,
+        val warnings: MutableList<String>
+    )
+
+    private suspend fun FlowCollector<ImportProgress>.initializeJsonImport(
+        backupFile: File,
+        strategy: ImportStrategy,
+        errors: MutableList<String>,
+        warnings: MutableList<String>
+    ): JsonImportContext {
+        emit(ImportProgress(1, 0, "Reading backup file"))
+
+        val backupData = readAndValidateBackup(backupFile)
+        val totalItems = backupData.categories.size + backupData.photos.size
+
+        emit(ImportProgress(totalItems, 0, "Starting import"))
+
+        if (strategy == ImportStrategy.REPLACE) {
+            emit(ImportProgress(totalItems, 0, "Clearing existing data"))
+            clearAllData()
+        }
+
+        return JsonImportContext(backupData, totalItems, strategy, errors, warnings)
+    }
+
+    private suspend fun FlowCollector<ImportProgress>.executeJsonImport(
+        context: JsonImportContext
+    ): Triple<Int, Int, Int> {
+        var processedItems = 0
+
+        val categoriesImported = importCategories(
+            context.backupData,
+            context.strategy,
+            context.totalItems,
+            processedItems,
+            context.errors,
+            context.warnings
+        ) { progress ->
+            emit(progress)
+            processedItems = progress.processedItems
+        }
+
+        val (photosImported, photosSkipped) = importPhotos(
+            context.backupData,
+            context.strategy,
+            context.totalItems,
+            processedItems,
+            context.errors,
+            context.warnings
+        ) { progress ->
+            emit(progress)
+            processedItems = progress.processedItems
+        }
+
+        return Triple(categoriesImported, photosImported, photosSkipped)
     }
 }
 
