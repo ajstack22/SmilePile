@@ -38,23 +38,29 @@ class PatternManager {
             let storedHash = try keychainManager.load(for: patternKey)
             let salt = try keychainManager.load(for: patternSaltKey)
 
-            guard let hashedInput = hashPattern(pattern, with: salt) else {
-                incrementFailedAttempts()
-                return false
-            }
-
-            let isValid = hashedInput == storedHash
-
-            if isValid {
-                resetFailedAttempts()
-            } else {
-                incrementFailedAttempts()
-            }
-
-            return isValid
+            return try validateHashedPattern(pattern, against: storedHash, using: salt)
         } catch {
             incrementFailedAttempts()
             return false
+        }
+    }
+
+    private func validateHashedPattern(_ pattern: [Int], against storedHash: Data, using salt: Data) throws -> Bool {
+        guard let hashedInput = hashPattern(pattern, with: salt) else {
+            incrementFailedAttempts()
+            return false
+        }
+
+        let isValid = hashedInput == storedHash
+        updateAttemptsAfterValidation(isValid: isValid)
+        return isValid
+    }
+
+    private func updateAttemptsAfterValidation(isValid: Bool) {
+        if isValid {
+            resetFailedAttempts()
+        } else {
+            incrementFailedAttempts()
         }
     }
 
