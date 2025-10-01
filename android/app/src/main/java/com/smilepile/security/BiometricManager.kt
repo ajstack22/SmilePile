@@ -6,6 +6,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -67,22 +68,31 @@ class BiometricManager @Inject constructor(
     ): BiometricResult = suspendCancellableCoroutine { continuation ->
 
         val executor = ContextCompat.getMainExecutor(context)
+        val callback = createAuthenticationCallback(continuation)
+        val biometricPrompt = BiometricPrompt(activity, executor, callback)
+        val promptInfo = createPromptInfo(title, subtitle, description)
 
-        val biometricPrompt = BiometricPrompt(activity, executor, object : BiometricPrompt.AuthenticationCallback() {
+        continuation.invokeOnCancellation {
+            biometricPrompt.cancelAuthentication()
+        }
+
+        try {
+            biometricPrompt.authenticate(promptInfo)
+        } catch (e: Exception) {
+            if (continuation.isActive) {
+                continuation.resume(BiometricResult.ERROR)
+            }
+        }
+    }
+
+    private fun createAuthenticationCallback(
+        continuation: CancellableContinuation<BiometricResult>
+    ): BiometricPrompt.AuthenticationCallback {
+        return object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
                 if (continuation.isActive) {
-                    val result = when (errorCode) {
-                        BiometricPrompt.ERROR_USER_CANCELED,
-                        BiometricPrompt.ERROR_CANCELED -> BiometricResult.USER_CANCELED
-                        BiometricPrompt.ERROR_LOCKOUT,
-                        BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> BiometricResult.LOCKED_OUT
-                        BiometricPrompt.ERROR_NO_BIOMETRICS -> BiometricResult.NO_BIOMETRICS_ENROLLED
-                        BiometricPrompt.ERROR_HW_NOT_PRESENT,
-                        BiometricPrompt.ERROR_HW_UNAVAILABLE -> BiometricResult.HARDWARE_UNAVAILABLE
-                        else -> BiometricResult.ERROR
-                    }
-                    continuation.resume(result)
+                    continuation.resume(mapErrorCodeToResult(errorCode))
                 }
             }
 
@@ -96,29 +106,31 @@ class BiometricManager @Inject constructor(
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
                 // Don't complete the continuation here - let user try again
-                // The prompt will continue to show until max attempts are reached
             }
-        })
+        }
+    }
 
-        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+    private fun mapErrorCodeToResult(errorCode: Int): BiometricResult {
+        return when (errorCode) {
+            BiometricPrompt.ERROR_USER_CANCELED,
+            BiometricPrompt.ERROR_CANCELED -> BiometricResult.USER_CANCELED
+            BiometricPrompt.ERROR_LOCKOUT,
+            BiometricPrompt.ERROR_LOCKOUT_PERMANENT -> BiometricResult.LOCKED_OUT
+            BiometricPrompt.ERROR_NO_BIOMETRICS -> BiometricResult.NO_BIOMETRICS_ENROLLED
+            BiometricPrompt.ERROR_HW_NOT_PRESENT,
+            BiometricPrompt.ERROR_HW_UNAVAILABLE -> BiometricResult.HARDWARE_UNAVAILABLE
+            else -> BiometricResult.ERROR
+        }
+    }
+
+    private fun createPromptInfo(title: String, subtitle: String, description: String): BiometricPrompt.PromptInfo {
+        return BiometricPrompt.PromptInfo.Builder()
             .setTitle(title)
             .setSubtitle(subtitle)
             .setDescription(description)
             .setNegativeButtonText("Use PIN Instead")
             .setAllowedAuthenticators(AndroidBiometricManager.Authenticators.BIOMETRIC_WEAK)
             .build()
-
-        continuation.invokeOnCancellation {
-            biometricPrompt.cancelAuthentication()
-        }
-
-        try {
-            biometricPrompt.authenticate(promptInfo)
-        } catch (e: Exception) {
-            if (continuation.isActive) {
-                continuation.resume(BiometricResult.ERROR)
-            }
-        }
     }
 
     /**
