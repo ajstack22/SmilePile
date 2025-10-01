@@ -78,39 +78,29 @@ class AppModeViewModel @Inject constructor(
      * Validate PIN for exiting Kids Mode specifically
      */
     fun validatePinForKidsModeExit(pin: String): Boolean {
-        // If no PIN is set, allow direct switch to Parent Mode
-        if (!securePreferences.isPINEnabled()) {
-            viewModelScope.launch {
-                _uiState.value = _uiState.value.copy(isTransitioning = true)
-                modeManager.setMode(AppMode.PARENT)
-                _uiState.value = _uiState.value.copy(
-                    isTransitioning = false,
-                    requiresPinAuth = false,
-                    error = null
-                )
-            }
-            return true
-        }
-
-        // Validate the PIN
-        if (securePreferences.validatePIN(pin)) {
-            // Switch to Parent Mode
-            viewModelScope.launch {
-                _uiState.value = _uiState.value.copy(isTransitioning = true)
-                modeManager.setMode(AppMode.PARENT)
-                _uiState.value = _uiState.value.copy(
-                    isTransitioning = false,
-                    requiresPinAuth = false,
-                    error = null
-                )
-            }
-            return true
+        return if (!securePreferences.isPINEnabled() || securePreferences.validatePIN(pin)) {
+            switchToParentMode()
+            true
         } else {
-            _uiState.value = _uiState.value.copy(
-                error = "Incorrect PIN. Please try again."
-            )
-            return false
+            handleInvalidPin("Incorrect PIN. Please try again.")
+            false
         }
+    }
+
+    private fun switchToParentMode() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isTransitioning = true)
+            modeManager.setMode(AppMode.PARENT)
+            _uiState.value = _uiState.value.copy(
+                isTransitioning = false,
+                requiresPinAuth = false,
+                error = null
+            )
+        }
+    }
+
+    private fun handleInvalidPin(errorMessage: String) {
+        _uiState.value = _uiState.value.copy(error = errorMessage)
     }
 
     fun cancelPinAuth() {
