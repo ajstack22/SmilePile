@@ -41,12 +41,25 @@ class PhotoGalleryViewModel @Inject constructor(
         viewModelScope.launch {
             categoryRepository.initializeDefaultCategories()
 
-            // Default to showing all photos (no category filter)
-            categoryRepository.getAllCategoriesFlow().collect { categoriesList ->
+            // Collect both categories and photos to determine initial selection
+            combine(
+                categoryRepository.getAllCategoriesFlow(),
+                photoRepository.getAllPhotosFlow()
+            ) { categoriesList, photosList ->
+                Pair(categoriesList, photosList)
+            }.collect { (categoriesList, photosList) ->
                 if (_selectedCategoryIds.value.isEmpty() && categoriesList.isNotEmpty()) {
-                    // Start with no filter (show all photos)
-                    _selectedCategoryIds.value = emptySet()
-                    println("SmilePile Debug: Initialized with no category filter (showing all photos)")
+                    if (photosList.isEmpty()) {
+                        // Gallery is empty - auto-select first category for clear UX
+                        val firstCategoryId = categoriesList.first().id
+                        _selectedCategoryIds.value = setOf(firstCategoryId)
+                        _selectedCategoryId.value = firstCategoryId
+                        println("SmilePile Debug: Gallery empty - auto-selected first category (${categoriesList.first().displayName})")
+                    } else {
+                        // Gallery has photos - default to showing all photos (no filter)
+                        _selectedCategoryIds.value = emptySet()
+                        println("SmilePile Debug: Initialized with no category filter (showing all photos)")
+                    }
                 }
             }
         }

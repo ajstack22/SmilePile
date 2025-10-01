@@ -22,8 +22,6 @@ import com.smilepile.ui.screens.KidsModeGalleryScreen
 import com.smilepile.ui.screens.PhotoGalleryScreen
 import com.smilepile.ui.screens.PhotoViewerScreen
 import com.smilepile.ui.screens.SettingsScreen
-import com.smilepile.ui.screens.ParentalLockScreen
-import com.smilepile.ui.screens.ParentalSettingsScreen
 import com.smilepile.ui.screens.PhotoEditScreen
 import com.smilepile.sharing.ShareManager
 import android.os.Parcelable
@@ -66,9 +64,6 @@ object NavigationRoutes {
     const val SETTINGS = "settings"
     const val PHOTO_VIEWER = "photo_viewer"
     const val PHOTO_EDITOR = "photo_editor"
-    const val PARENTAL_LOCK = "parental_lock"
-    const val PARENTAL_LOCK_EXIT_KIDS = "parental_lock_exit_kids"
-    const val PARENTAL_SETTINGS = "parental_settings"
 
     // Route with arguments
     const val PHOTO_VIEWER_WITH_ARGS = "photo_viewer/{photoId}/{photoIndex}"
@@ -92,8 +87,6 @@ sealed class NavigationDestination(val route: String, val title: String) {
     object Settings : NavigationDestination(NavigationRoutes.SETTINGS, "Settings")
     object PhotoViewer : NavigationDestination(NavigationRoutes.PHOTO_VIEWER, "Photo Viewer")
     object PhotoEditor : NavigationDestination(NavigationRoutes.PHOTO_EDITOR, "Photo Editor")
-    object ParentalLock : NavigationDestination(NavigationRoutes.PARENTAL_LOCK, "Parental Lock")
-    object ParentalSettings : NavigationDestination(NavigationRoutes.PARENTAL_SETTINGS, "Parental Settings")
 }
 
 /**
@@ -125,7 +118,8 @@ fun AppNavHost(
                         // Navigation not needed for zoom-to-fit functionality
                     },
                     onNavigateToParentalLock = {
-                        navController.navigate(NavigationRoutes.PARENTAL_LOCK_EXIT_KIDS)
+                        // Exit Kids Mode directly - parental controls removed
+                        modeViewModel.forceParentMode()
                     },
                     toastState = toastState
                 )
@@ -183,9 +177,6 @@ fun AppNavHost(
                             popUpTo(NavigationRoutes.SETTINGS) { inclusive = true }
                         }
                     },
-                    onNavigateToParentalControls = {
-                        navController.navigate(NavigationRoutes.PARENTAL_LOCK)
-                    },
                     paddingValues = paddingValues
                 )
             } else {
@@ -196,51 +187,6 @@ fun AppNavHost(
                     }
                 }
             }
-        }
-
-        // Parental Lock Screen - Authentication required for parental controls
-        composable(NavigationRoutes.PARENTAL_LOCK) {
-            ParentalLockScreen(
-                onUnlocked = {
-                    navController.navigate(NavigationRoutes.PARENTAL_SETTINGS) {
-                        popUpTo(NavigationRoutes.PARENTAL_LOCK) { inclusive = true }
-                    }
-                },
-                onBackClick = {
-                    navController.navigateUp()
-                }
-            )
-        }
-
-        // Parental Lock Screen for Kids Mode Exit - Authentication required to exit Kids Mode
-        composable(NavigationRoutes.PARENTAL_LOCK_EXIT_KIDS) {
-            val modeViewModel: AppModeViewModel = hiltViewModel()
-            ParentalLockScreen(
-                onUnlocked = {
-                    // Switch to Parent Mode after successful authentication
-                    modeViewModel.forceParentMode()
-                    navController.navigate(NavigationRoutes.GALLERY) {
-                        popUpTo(NavigationRoutes.PARENTAL_LOCK_EXIT_KIDS) { inclusive = true }
-                    }
-                },
-                onBackClick = {
-                    navController.navigateUp()
-                }
-            )
-        }
-
-        // Parental Settings Screen - Child safety configuration
-        composable(NavigationRoutes.PARENTAL_SETTINGS) {
-            ParentalSettingsScreen(
-                onNavigateUp = {
-                    navController.navigateUp()
-                },
-                onNavigateToLock = {
-                    navController.navigate(NavigationRoutes.PARENTAL_LOCK) {
-                        popUpTo(NavigationRoutes.PARENTAL_SETTINGS) { inclusive = true }
-                    }
-                }
-            )
         }
 
         // Camera functionality has been removed from the app

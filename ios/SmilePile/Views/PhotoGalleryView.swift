@@ -288,6 +288,11 @@ struct PhotoGalleryView: View {
         Task {
             do {
                 categories = try await repository.getAllCategories()
+
+                // Auto-select first category if gallery is empty and no category is selected
+                if allPhotos.isEmpty && selectedCategory == nil && !categories.isEmpty {
+                    selectedCategory = categories.first
+                }
             } catch {
                 print("Failed to load categories: \(error)")
             }
@@ -300,6 +305,11 @@ struct PhotoGalleryView: View {
                 isLoadingPhotos = true
                 allPhotos = try await photoRepository.getAllPhotos()
                 isLoadingPhotos = false
+
+                // Auto-select first category if gallery is empty and no category is selected
+                if allPhotos.isEmpty && selectedCategory == nil && !categories.isEmpty {
+                    selectedCategory = categories.first
+                }
             } catch {
                 print("Failed to load photos: \(error)")
                 allPhotos = []
