@@ -476,51 +476,56 @@ class RestoreManager @Inject constructor(
         return try {
             val existingCategory = categoryRepository.getCategoryByName(categoryBackup.name)
 
-            when (options.duplicateResolution) {
-                DuplicateResolution.SKIP -> {
-                    if (existingCategory != null) {
-                        return CategoryRestoreResult(
-                            imported = false,
-                            warning = "Category already exists: ${categoryBackup.displayName}"
-                        )
-                    }
-                }
-                DuplicateResolution.REPLACE -> {
-                    if (existingCategory != null) {
-                        categoryRepository.deleteCategory(existingCategory)
-                    }
-                }
-                DuplicateResolution.RENAME -> {
-                    if (existingCategory != null) {
-                        val newName = generateUniqueCategoryName(categoryBackup.name)
-                        val renamedCategory = categoryBackup.copy(name = newName)
-                        categoryRepository.insertCategory(renamedCategory.toCategory())
-                        return CategoryRestoreResult(
-                            imported = true,
-                            warning = "Renamed category: ${categoryBackup.displayName} -> $newName"
-                        )
-                    }
-                }
-                DuplicateResolution.ASK_USER -> {
-                    // This would require UI interaction
-                    // For now, default to skip
-                    if (existingCategory != null) {
-                        return CategoryRestoreResult(
-                            imported = false,
-                            warning = "Category already exists: ${categoryBackup.displayName}"
-                        )
-                    }
-                }
+            if (existingCategory != null) {
+                handleDuplicateCategory(categoryBackup, existingCategory, options)
+            } else {
+                insertNewCategory(categoryBackup)
             }
-
-            categoryRepository.insertCategory(categoryBackup.toCategory())
-            CategoryRestoreResult(imported = true)
         } catch (e: Exception) {
             CategoryRestoreResult(
                 imported = false,
                 warning = "Failed to restore category: ${e.message}"
             )
         }
+    }
+
+    private suspend fun handleDuplicateCategory(
+        categoryBackup: BackupCategory,
+        existingCategory: com.smilepile.data.models.Category,
+        options: RestoreOptions
+    ): CategoryRestoreResult {
+        return when (options.duplicateResolution) {
+            DuplicateResolution.SKIP -> {
+                CategoryRestoreResult(
+                    imported = false,
+                    warning = "Category already exists: ${categoryBackup.displayName}"
+                )
+            }
+            DuplicateResolution.REPLACE -> {
+                categoryRepository.deleteCategory(existingCategory)
+                insertNewCategory(categoryBackup)
+            }
+            DuplicateResolution.RENAME -> {
+                val newName = generateUniqueCategoryName(categoryBackup.name)
+                val renamedCategory = categoryBackup.copy(name = newName)
+                categoryRepository.insertCategory(renamedCategory.toCategory())
+                CategoryRestoreResult(
+                    imported = true,
+                    warning = "Renamed category: ${categoryBackup.displayName} -> $newName"
+                )
+            }
+            DuplicateResolution.ASK_USER -> {
+                CategoryRestoreResult(
+                    imported = false,
+                    warning = "Category already exists: ${categoryBackup.displayName}"
+                )
+            }
+        }
+    }
+
+    private suspend fun insertNewCategory(categoryBackup: BackupCategory): CategoryRestoreResult {
+        categoryRepository.insertCategory(categoryBackup.toCategory())
+        return CategoryRestoreResult(imported = true)
     }
 
     /**
