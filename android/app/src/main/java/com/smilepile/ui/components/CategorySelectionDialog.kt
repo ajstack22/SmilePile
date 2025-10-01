@@ -62,137 +62,202 @@ fun CategorySelectionDialog(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                // Header
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    IconButton(onClick = onDismiss) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Close"
-                        )
-                    }
-                }
+                DialogHeader(
+                    title = title,
+                    onDismiss = onDismiss
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Selection info
                 if (multiSelectMode && currentSelection.isNotEmpty()) {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = "${currentSelection.size} piles selected",
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-
+                    SelectionInfoBanner(selectionCount = currentSelection.size)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
-                // Category list
-                LazyColumn(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Add new category option
-                    if (onCreateNewCategory != null) {
-                        item {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable { onCreateNewCategory() },
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.secondaryContainer
-                                ),
-                                shape = RoundedCornerShape(12.dp)
-                            ) {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(16.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Add,
-                                        contentDescription = "Add new pile",
-                                        tint = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
-                                    Spacer(modifier = Modifier.width(8.dp))
-                                    Text(
-                                        text = "Create New Pile",
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        fontWeight = FontWeight.Medium,
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
-                                }
-                            }
-                        }
+                CategoryList(
+                    categories = categories,
+                    currentSelection = currentSelection,
+                    multiSelectMode = multiSelectMode,
+                    onCreateNewCategory = onCreateNewCategory,
+                    onSelectionChange = { newSelection ->
+                        currentSelection = newSelection
                     }
-
-                    // Categories
-                    items(categories) { category ->
-                        CategorySelectionItem(
-                            category = category,
-                            isSelected = currentSelection.contains(category.id),
-                            onSelectionChange = { isSelected ->
-                                currentSelection = if (multiSelectMode) {
-                                    if (isSelected) {
-                                        currentSelection + category.id
-                                    } else {
-                                        currentSelection - category.id
-                                    }
-                                } else {
-                                    if (isSelected) {
-                                        setOf(category.id)
-                                    } else {
-                                        emptySet()
-                                    }
-                                }
-                            }
-                        )
-                    }
-                }
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Action buttons
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(onClick = onDismiss) {
-                        Text("Cancel")
+                DialogActionButtons(
+                    multiSelectMode = multiSelectMode,
+                    selectionEmpty = currentSelection.isEmpty(),
+                    onDismiss = onDismiss,
+                    onConfirm = {
+                        onCategorySelected(currentSelection)
+                        onDismiss()
                     }
-
-                    Spacer(modifier = Modifier.width(8.dp))
-
-                    Button(
-                        onClick = {
-                            onCategorySelected(currentSelection)
-                            onDismiss()
-                        },
-                        enabled = currentSelection.isNotEmpty()
-                    ) {
-                        Text(if (multiSelectMode) "Apply" else "Select")
-                    }
-                }
+                )
             }
+        }
+    }
+}
+
+// MARK: - Helper Composables
+
+@Composable
+private fun DialogHeader(
+    title: String,
+    onDismiss: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold
+        )
+
+        IconButton(onClick = onDismiss) {
+            Icon(
+                imageVector = Icons.Default.Close,
+                contentDescription = "Close"
+            )
+        }
+    }
+}
+
+@Composable
+private fun SelectionInfoBanner(selectionCount: Int) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Text(
+            text = "$selectionCount piles selected",
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    }
+}
+
+@Composable
+private fun ColumnScope.CategoryList(
+    categories: List<Category>,
+    currentSelection: Set<Long>,
+    multiSelectMode: Boolean,
+    onCreateNewCategory: (() -> Unit)?,
+    onSelectionChange: (Set<Long>) -> Unit
+) {
+    LazyColumn(
+        modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        if (onCreateNewCategory != null) {
+            item {
+                CreateNewCategoryCard(onClick = onCreateNewCategory)
+            }
+        }
+
+        items(categories) { category ->
+            CategorySelectionItem(
+                category = category,
+                isSelected = currentSelection.contains(category.id),
+                onSelectionChange = { isSelected ->
+                    val newSelection = updateSelection(
+                        currentSelection = currentSelection,
+                        categoryId = category.id,
+                        isSelected = isSelected,
+                        multiSelectMode = multiSelectMode
+                    )
+                    onSelectionChange(newSelection)
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun CreateNewCategoryCard(onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Add new pile",
+                tint = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = "Create New Pile",
+                style = MaterialTheme.typography.bodyLarge,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+        }
+    }
+}
+
+@Composable
+private fun DialogActionButtons(
+    multiSelectMode: Boolean,
+    selectionEmpty: Boolean,
+    onDismiss: () -> Unit,
+    onConfirm: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+        TextButton(onClick = onDismiss) {
+            Text("Cancel")
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Button(
+            onClick = onConfirm,
+            enabled = !selectionEmpty
+        ) {
+            Text(if (multiSelectMode) "Apply" else "Select")
+        }
+    }
+}
+
+private fun updateSelection(
+    currentSelection: Set<Long>,
+    categoryId: Long,
+    isSelected: Boolean,
+    multiSelectMode: Boolean
+): Set<Long> {
+    return if (multiSelectMode) {
+        if (isSelected) {
+            currentSelection + categoryId
+        } else {
+            currentSelection - categoryId
+        }
+    } else {
+        if (isSelected) {
+            setOf(categoryId)
+        } else {
+            emptySet()
         }
     }
 }
