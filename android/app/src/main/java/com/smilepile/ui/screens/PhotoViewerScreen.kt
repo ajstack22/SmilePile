@@ -62,6 +62,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import android.content.Context
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -176,23 +177,7 @@ fun PhotoViewerScreen(
                 photo = photos[pagerState.currentPage],
                 isParentMode = isParentMode,
                 onFavoriteToggle = { /* Favorites no longer supported */ },
-                onSharePhoto = { photo ->
-                    // Create share intent for photo
-                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                        type = "image/*"
-                        val photoFile = File(photo.path)
-                        if (photoFile.exists()) {
-                            val photoUri = FileProvider.getUriForFile(
-                                context,
-                                "${context.packageName}.fileprovider",
-                                photoFile
-                            )
-                            putExtra(Intent.EXTRA_STREAM, photoUri)
-                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                        }
-                    }
-                    context.startActivity(Intent.createChooser(shareIntent, "Share Photo"))
-                },
+                onSharePhoto = { photo -> sharePhoto(context, photo) },
                 onEditPhoto = onEditPhoto,
                 onDeletePhoto = { showDeleteDialog = true },
                 onMovePhoto = { showMoveDialog = true },
@@ -539,4 +524,23 @@ private fun MoveToCategoryDialog(
             }
         }
     )
+}
+
+// MARK: - Helper Functions
+
+private fun sharePhoto(context: Context, photo: Photo) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "image/*"
+        val photoFile = File(photo.path)
+        if (photoFile.exists()) {
+            val photoUri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                photoFile
+            )
+            putExtra(Intent.EXTRA_STREAM, photoUri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+    }
+    context.startActivity(Intent.createChooser(shareIntent, "Share Photo"))
 }
