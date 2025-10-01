@@ -32,78 +32,126 @@ class RestoreManager {
         at zipPath: URL,
         checkIntegrity: Bool = true
     ) async throws -> BackupValidationResult {
-        // Extract to temp directory for validation
-        let tempDir = fileManager.temporaryDirectory.appendingPathComponent("validate_temp_\(UUID().uuidString)")
+        let tempDir = createTempValidationDirectory()
+        defer { cleanupTempDirectory(tempDir) }
 
-        defer {
-            try? fileManager.removeItem(at: tempDir)
+        guard let backupData = try await extractAndParseBackup(zipPath: zipPath, tempDir: tempDir) else {
+            return createFailureResult(error: "Failed to extract or parse backup")
         }
 
-        // Extract ZIP
+        return try await performValidation(
+            backupData: backupData,
+            tempDir: tempDir,
+            checkIntegrity: checkIntegrity
+        )
+    }
+
+    private func createTempValidationDirectory() -> URL {
+        return fileManager.temporaryDirectory.appendingPathComponent("validate_temp_\(UUID().uuidString)")
+    }
+
+    private func cleanupTempDirectory(_ directory: URL) {
+        try? fileManager.removeItem(at: directory)
+    }
+
+    private func extractAndParseBackup(zipPath: URL, tempDir: URL) async throws -> AppBackup? {
         do {
             try await ZipUtils.extractZip(from: zipPath, to: tempDir)
         } catch {
-            return BackupValidationResult(
-                isValid: false,
-                errors: ["Failed to extract ZIP: \(error.localizedDescription)"]
-            )
+            return nil
         }
 
-        // Check for metadata.json
         let metadataPath = tempDir.appendingPathComponent(ZipUtils.METADATA_FILE)
         guard fileManager.fileExists(atPath: metadataPath.path) else {
-            return BackupValidationResult(
-                isValid: false,
-                errors: ["metadata.json not found in backup"]
-            )
+            return nil
         }
 
-        // Parse metadata
-        let backupData: AppBackup
-        do {
-            let metadataData = try Data(contentsOf: metadataPath)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .millisecondsSince1970
-            backupData = try decoder.decode(AppBackup.self, from: metadataData)
-        } catch {
-            return BackupValidationResult(
-                isValid: false,
-                errors: ["Failed to parse metadata: \(error.localizedDescription)"]
-            )
-        }
+        return try? parseBackupMetadata(from: metadataPath)
+    }
 
+    private func parseBackupMetadata(from path: URL) throws -> AppBackup {
+        let metadataData = try Data(contentsOf: path)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        return try decoder.decode(AppBackup.self, from: metadataData)
+    }
+
+    private func performValidation(
+        backupData: AppBackup,
+        tempDir: URL,
+        checkIntegrity: Bool
+    ) async throws -> BackupValidationResult {
         var errors: [String] = []
         var warnings: [String] = []
 
-        // Check version compatibility
-        if backupData.version < MIN_SUPPORTED_VERSION || backupData.version > MAX_SUPPORTED_VERSION {
-            errors.append("Unsupported backup version: \(backupData.version)")
-        }
+        validateVersion(backupData: backupData, errors: &errors)
 
-        // Check for photos directory
         let photosDir = tempDir.appendingPathComponent("photos")
         let hasPhotos = fileManager.fileExists(atPath: photosDir.path)
 
-        // Integrity checks
-        var integrityPassed = true
-        if checkIntegrity && !backupData.photoManifest.isEmpty {
-            for manifestEntry in backupData.photoManifest {
-                let photoFile = photosDir.appendingPathComponent(manifestEntry.fileName)
+        let integrityPassed = try await checkPhotoIntegrity(
+            backupData: backupData,
+            photosDir: photosDir,
+            shouldCheck: checkIntegrity,
+            warnings: &warnings
+        )
 
-                if fileManager.fileExists(atPath: photoFile.path) {
-                    if let expectedChecksum = manifestEntry.checksum {
-                        let actualChecksum = try calculateMD5(for: photoFile)
-                        if actualChecksum != expectedChecksum {
-                            warnings.append("Checksum mismatch for \(manifestEntry.fileName)")
-                            integrityPassed = false
-                        }
+        return createValidationResult(
+            backupData: backupData,
+            hasPhotos: hasPhotos,
+            integrityPassed: integrityPassed,
+            errors: errors,
+            warnings: warnings
+        )
+    }
+
+    private func validateVersion(backupData: AppBackup, errors: inout [String]) {
+        if backupData.version < MIN_SUPPORTED_VERSION || backupData.version > MAX_SUPPORTED_VERSION {
+            errors.append("Unsupported backup version: \(backupData.version)")
+        }
+    }
+
+    private func checkPhotoIntegrity(
+        backupData: AppBackup,
+        photosDir: URL,
+        shouldCheck: Bool,
+        warnings: inout [String]
+    ) async throws -> Bool {
+        guard shouldCheck && !backupData.photoManifest.isEmpty else {
+            return true
+        }
+
+        var integrityPassed = true
+        for manifestEntry in backupData.photoManifest {
+            let photoFile = photosDir.appendingPathComponent(manifestEntry.fileName)
+
+            if fileManager.fileExists(atPath: photoFile.path) {
+                if let expectedChecksum = manifestEntry.checksum {
+                    let actualChecksum = try calculateMD5(for: photoFile)
+                    if actualChecksum != expectedChecksum {
+                        warnings.append("Checksum mismatch for \(manifestEntry.fileName)")
+                        integrityPassed = false
                     }
-                } else {
-                    warnings.append("Missing photo file: \(manifestEntry.fileName)")
                 }
+            } else {
+                warnings.append("Missing photo file: \(manifestEntry.fileName)")
             }
         }
 
+        return integrityPassed
+    }
+
+    private func createFailureResult(error: String) -> BackupValidationResult {
+        return BackupValidationResult(isValid: false, errors: [error])
+    }
+
+    private func createValidationResult(
+        backupData: AppBackup,
+        hasPhotos: Bool,
+        integrityPassed: Bool,
+        errors: [String],
+        warnings: [String]
+    ) -> BackupValidationResult {
         return BackupValidationResult(
             isValid: errors.isEmpty,
             version: backupData.version,
