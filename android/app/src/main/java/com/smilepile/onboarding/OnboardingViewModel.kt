@@ -169,52 +169,9 @@ class OnboardingViewModel @Inject constructor(
 
             try {
                 val state = _uiState.value
-
-                // Save categories
-                val categoryIdMap = mutableMapOf<String, Long>()
-                state.categories.forEachIndexed { index, tempCategory ->
-                    val category = Category(
-                        id = 0, // Let Room auto-generate the ID
-                        name = tempCategory.name.lowercase().replace(" ", "_"),
-                        displayName = tempCategory.name,
-                        position = index,
-                        colorHex = tempCategory.colorHex,
-                        iconResource = tempCategory.icon,
-                        isDefault = false,
-                        createdAt = System.currentTimeMillis()
-                    )
-                    val newCategoryId = categoryRepository.insertCategory(category)
-                    categoryIdMap[tempCategory.id] = newCategoryId
-                }
-
-                // Import photos if any
-                state.importedPhotos.forEach { photoData ->
-                    // In a real implementation, you would copy the photo to app storage
-                    // and create proper Photo objects. This is a simplified version.
-                    photoData.categoryId?.let { tempCategoryId ->
-                        categoryIdMap[tempCategoryId]?.let { actualCategoryId ->
-                            val photo = Photo(
-                                id = 0, // Let Room auto-generate the ID
-                                path = photoData.uri.toString(),
-                                categoryId = actualCategoryId,
-                                name = "Imported Photo",
-                                isFromAssets = false,
-                                createdAt = System.currentTimeMillis(),
-                                fileSize = 0,
-                                width = 0,
-                                height = 0
-                            )
-                            photoRepository.insertPhoto(photo)
-                        }
-                    }
-                }
-
-                // Set up PIN if provided
-                state.pinCode?.let { pin ->
-                    securePreferencesManager.setPIN(pin)
-                }
-
-                // Mark onboarding as complete
+                val categoryIdMap = saveCategories(state.categories)
+                importPhotos(state.importedPhotos, categoryIdMap)
+                savePinIfProvided(state.pinCode)
                 settingsManager.setOnboardingCompleted(true)
 
                 _uiState.update { it.copy(
@@ -223,12 +180,80 @@ class OnboardingViewModel @Inject constructor(
                 ) }
 
             } catch (e: Exception) {
-                _uiState.update { it.copy(
-                    isLoading = false,
-                    error = "Failed to save onboarding data: ${e.message}"
-                ) }
+                handleOnboardingError(e)
             }
         }
+    }
+
+    private suspend fun saveCategories(categories: List<TempCategory>): Map<String, Long> {
+        val categoryIdMap = mutableMapOf<String, Long>()
+        categories.forEachIndexed { index, tempCategory ->
+            val category = createCategoryFromTemp(tempCategory, index)
+            val newCategoryId = categoryRepository.insertCategory(category)
+            categoryIdMap[tempCategory.id] = newCategoryId
+        }
+        return categoryIdMap
+    }
+
+    private fun createCategoryFromTemp(tempCategory: TempCategory, position: Int): Category {
+        return Category(
+            id = 0,
+            name = tempCategory.name.lowercase().replace(" ", "_"),
+            displayName = tempCategory.name,
+            position = position,
+            colorHex = tempCategory.colorHex,
+            iconResource = tempCategory.icon,
+            isDefault = false,
+            createdAt = System.currentTimeMillis()
+        )
+    }
+
+    private suspend fun importPhotos(
+        importedPhotos: List<ImportedPhotoData>,
+        categoryIdMap: Map<String, Long>
+    ) {
+        importedPhotos.forEach { photoData ->
+            importSinglePhoto(photoData, categoryIdMap)
+        }
+    }
+
+    private suspend fun importSinglePhoto(
+        photoData: ImportedPhotoData,
+        categoryIdMap: Map<String, Long>
+    ) {
+        photoData.categoryId?.let { tempCategoryId ->
+            categoryIdMap[tempCategoryId]?.let { actualCategoryId ->
+                val photo = createPhotoFromImport(photoData, actualCategoryId)
+                photoRepository.insertPhoto(photo)
+            }
+        }
+    }
+
+    private fun createPhotoFromImport(photoData: ImportedPhotoData, categoryId: Long): Photo {
+        return Photo(
+            id = 0,
+            path = photoData.uri.toString(),
+            categoryId = categoryId,
+            name = "Imported Photo",
+            isFromAssets = false,
+            createdAt = System.currentTimeMillis(),
+            fileSize = 0,
+            width = 0,
+            height = 0
+        )
+    }
+
+    private fun savePinIfProvided(pinCode: String?) {
+        pinCode?.let { pin ->
+            securePreferencesManager.setPIN(pin)
+        }
+    }
+
+    private fun handleOnboardingError(e: Exception) {
+        _uiState.update { it.copy(
+            isLoading = false,
+            error = "Failed to save onboarding data: ${e.message}"
+        ) }
     }
 
     fun clearError() {
