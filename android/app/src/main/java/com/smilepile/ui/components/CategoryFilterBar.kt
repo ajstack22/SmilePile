@@ -52,163 +52,34 @@ fun CategoryFilterBar(
                 .padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Filter icon/menu
-            Box {
-                IconButton(
-                    onClick = { showMenu = true },
-                    modifier = Modifier.padding(start = 8.dp)
-                ) {
-                    Badge(
-                        containerColor = if (selectedCategoryIds.isNotEmpty()) {
-                            MaterialTheme.colorScheme.primary
-                        } else {
-                            Color.Transparent
-                        }
-                    ) {
-                        if (selectedCategoryIds.isNotEmpty()) {
-                            Text(
-                                text = selectedCategoryIds.size.toString(),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onPrimary
-                            )
-                        }
-                    }
-                    Icon(
-                        imageVector = Icons.Default.FilterList,
-                        contentDescription = "Filter options",
-                        tint = if (selectedCategoryIds.isNotEmpty()) {
-                            MaterialTheme.colorScheme.primary
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        }
-                    )
-                }
+            FilterMenuButton(
+                selectedCategoryIds = selectedCategoryIds,
+                showMenu = showMenu,
+                onShowMenu = { showMenu = true },
+                onDismissMenu = { showMenu = false },
+                onSelectAll = onSelectAll,
+                onClearAll = onClearAll
+            )
 
-                // Dropdown menu
-                DropdownMenu(
-                    expanded = showMenu,
-                    onDismissRequest = { showMenu = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text("Select All") },
-                        onClick = {
-                            onSelectAll()
-                            showMenu = false
-                        },
-                        leadingIcon = {
-                            Icon(
-                                Icons.Default.SelectAll,
-                                contentDescription = null
-                            )
-                        }
-                    )
+            CategoryChipsRow(
+                categories = categories,
+                selectedCategoryIds = selectedCategoryIds,
+                showAllOption = showAllOption,
+                scrollState = scrollState,
+                onClearAll = onClearAll,
+                onCategoryToggle = onCategoryToggle
+            )
 
-                    DropdownMenuItem(
-                        text = { Text("Clear All") },
-                        onClick = {
-                            onClearAll()
-                            showMenu = false
-                        },
-                        leadingIcon = {
-                            Icon(
-                                Icons.Default.Clear,
-                                contentDescription = null
-                            )
-                        }
-                    )
-                }
-            }
-
-            // Categories horizontal list
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .horizontalScroll(scrollState)
-                    .padding(horizontal = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // "All" chip
-                if (showAllOption) {
-                    FilterChip(
-                        selected = selectedCategoryIds.isEmpty(),
-                        onClick = { onClearAll() },
-                        label = {
-                            Text(
-                                "All",
-                                fontWeight = if (selectedCategoryIds.isEmpty()) {
-                                    FontWeight.Bold
-                                } else {
-                                    FontWeight.Normal
-                                }
-                            )
-                        },
-                        leadingIcon = if (selectedCategoryIds.isEmpty()) {
-                            {
-                                Icon(
-                                    Icons.Default.Done,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                            }
-                        } else null,
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                            selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    )
-                }
-
-                // Category chips
-                categories.forEach { category ->
-                    CategoryFilterChip(
-                        category = category,
-                        isSelected = selectedCategoryIds.contains(category.id),
-                        onClick = { onCategoryToggle(category.id) }
-                    )
-                }
-            }
-
-            // Clear filters button (visible when filters are active)
-            AnimatedVisibility(
+            ClearFiltersButton(
                 visible = selectedCategoryIds.isNotEmpty(),
-                enter = expandHorizontally(),
-                exit = shrinkHorizontally()
-            ) {
-                IconButton(
-                    onClick = onClearAll,
-                    modifier = Modifier.padding(end = 8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Clear filters",
-                        tint = MaterialTheme.colorScheme.error
-                    )
-                }
-            }
+                onClearAll = onClearAll
+            )
         }
 
-        // Active filter summary
-        if (selectedCategoryIds.isNotEmpty()) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(4.dp)
-            ) {
-                val selectedCategoryNames = categories
-                    .filter { selectedCategoryIds.contains(it.id) }
-                    .map { it.displayName }
-                    .joinToString(", ")
-
-                Text(
-                    text = "Filtering by: $selectedCategoryNames",
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                )
-            }
-        }
+        ActiveFilterSummary(
+            categories = categories,
+            selectedCategoryIds = selectedCategoryIds
+        )
 
         Divider(
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
@@ -331,6 +202,216 @@ fun CompactCategoryFilterBar(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Expand",
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            )
+        }
+    }
+}
+
+// MARK: - Helper Composables for Complexity Reduction
+
+@Composable
+private fun FilterMenuButton(
+    selectedCategoryIds: Set<Long>,
+    showMenu: Boolean,
+    onShowMenu: () -> Unit,
+    onDismissMenu: () -> Unit,
+    onSelectAll: () -> Unit,
+    onClearAll: () -> Unit
+) {
+    Box {
+        IconButton(
+            onClick = onShowMenu,
+            modifier = Modifier.padding(start = 8.dp)
+        ) {
+            Badge(
+                containerColor = if (selectedCategoryIds.isNotEmpty()) {
+                    MaterialTheme.colorScheme.primary
+                } else {
+                    Color.Transparent
+                }
+            ) {
+                if (selectedCategoryIds.isNotEmpty()) {
+                    Text(
+                        text = selectedCategoryIds.size.toString(),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+            Icon(
+                imageVector = Icons.Default.FilterList,
+                contentDescription = "Filter options",
+                tint = if (selectedCategoryIds.isNotEmpty()) {
+                    MaterialTheme.colorScheme.primary
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                }
+            )
+        }
+
+        FilterDropdownMenu(
+            showMenu = showMenu,
+            onDismissMenu = onDismissMenu,
+            onSelectAll = onSelectAll,
+            onClearAll = onClearAll
+        )
+    }
+}
+
+@Composable
+private fun FilterDropdownMenu(
+    showMenu: Boolean,
+    onDismissMenu: () -> Unit,
+    onSelectAll: () -> Unit,
+    onClearAll: () -> Unit
+) {
+    DropdownMenu(
+        expanded = showMenu,
+        onDismissRequest = onDismissMenu
+    ) {
+        DropdownMenuItem(
+            text = { Text("Select All") },
+            onClick = {
+                onSelectAll()
+                onDismissMenu()
+            },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.SelectAll,
+                    contentDescription = null
+                )
+            }
+        )
+
+        DropdownMenuItem(
+            text = { Text("Clear All") },
+            onClick = {
+                onClearAll()
+                onDismissMenu()
+            },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Clear,
+                    contentDescription = null
+                )
+            }
+        )
+    }
+}
+
+@Composable
+private fun RowScope.CategoryChipsRow(
+    categories: List<Category>,
+    selectedCategoryIds: Set<Long>,
+    showAllOption: Boolean,
+    scrollState: androidx.compose.foundation.ScrollState,
+    onClearAll: () -> Unit,
+    onCategoryToggle: (Long) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .weight(1f)
+            .horizontalScroll(scrollState)
+            .padding(horizontal = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        if (showAllOption) {
+            AllCategoriesChip(
+                isSelected = selectedCategoryIds.isEmpty(),
+                onClick = onClearAll
+            )
+        }
+
+        categories.forEach { category ->
+            CategoryFilterChip(
+                category = category,
+                isSelected = selectedCategoryIds.contains(category.id),
+                onClick = { onCategoryToggle(category.id) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun AllCategoriesChip(
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    FilterChip(
+        selected = isSelected,
+        onClick = onClick,
+        label = {
+            Text(
+                "All",
+                fontWeight = if (isSelected) {
+                    FontWeight.Bold
+                } else {
+                    FontWeight.Normal
+                }
+            )
+        },
+        leadingIcon = if (isSelected) {
+            {
+                Icon(
+                    Icons.Default.Done,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        } else null,
+        colors = FilterChipDefaults.filterChipColors(
+            selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    )
+}
+
+@Composable
+private fun ClearFiltersButton(
+    visible: Boolean,
+    onClearAll: () -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = expandHorizontally(),
+        exit = shrinkHorizontally()
+    ) {
+        IconButton(
+            onClick = onClearAll,
+            modifier = Modifier.padding(end = 8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Close,
+                contentDescription = "Clear filters",
+                tint = MaterialTheme.colorScheme.error
+            )
+        }
+    }
+}
+
+@Composable
+private fun ActiveFilterSummary(
+    categories: List<Category>,
+    selectedCategoryIds: Set<Long>
+) {
+    if (selectedCategoryIds.isNotEmpty()) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+            shape = RoundedCornerShape(4.dp)
+        ) {
+            val selectedCategoryNames = categories
+                .filter { selectedCategoryIds.contains(it.id) }
+                .map { it.displayName }
+                .joinToString(", ")
+
+            Text(
+                text = "Filtering by: $selectedCategoryNames",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
         }
     }
