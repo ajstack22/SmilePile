@@ -21,15 +21,15 @@ struct PINSetupScreen: View {
                     .padding(.bottom, 20)
 
                 Text(isConfirming ? "Confirm Your PIN" : "Set Up PIN Protection")
-                    .font(.nunito(22, weight: .bold))
+                    .font(.custom("Nunito-Bold", size: 22))
 
                 if isConfirming {
                     Text("Please enter your PIN again")
-                        .font(.nunito(14, weight: .regular))
+                        .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(.secondary)
                 } else {
                     Text("Create a \(pinLength)-digit PIN to protect Parent Mode")
-                        .font(.nunito(14, weight: .regular))
+                        .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
@@ -74,9 +74,9 @@ struct PINSetupScreen: View {
                 }
 
                 // Numeric keypad
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     ForEach(0..<3) { row in
-                        HStack(spacing: 40) {
+                        HStack(spacing: 24) {
                             ForEach(1...3, id: \.self) { col in
                                 let number = row * 3 + col
                                 NumberButton(number: "\(number)") {
@@ -86,7 +86,7 @@ struct PINSetupScreen: View {
                         }
                     }
 
-                    HStack(spacing: 40) {
+                    HStack(spacing: 24) {
                         // Clear button
                         Button(action: clearPin) {
                             Image(systemName: "delete.left")
@@ -118,7 +118,7 @@ struct PINSetupScreen: View {
                         coordinator.navigateToNext()
                     }) {
                         Text("Skip")
-                            .font(.nunito(18, weight: .medium))
+                            .font(.custom("Nunito-Medium", size: 18))
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -138,7 +138,7 @@ struct PINSetupScreen: View {
                     }
                 }) {
                     Text(isConfirming ? "Confirm PIN" : "Continue")
-                        .font(.nunito(18, weight: .medium))
+                        .font(.custom("Nunito-Medium", size: 18))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
@@ -237,7 +237,7 @@ struct NumberButton: View {
     var body: some View {
         Button(action: action) {
             Text(number)
-                .font(.nunito(24, weight: .medium))
+                .font(.custom("Nunito-Medium", size: 24))
                 .foregroundColor(.primary)
                 .frame(width: 70, height: 70)
                 .background(

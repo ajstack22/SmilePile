@@ -4,19 +4,21 @@ struct WelcomeScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
 
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 20) {
             Spacer()
 
             // Logo and title section
-            VStack(spacing: 16) {
-                // App icon
-                Image(systemName: "photo.stack.fill")
+            VStack(spacing: 12) {
+                // SmilePile logo icon only (sharp rendering)
+                Image("SmilePileLogo")
                     .resizable()
-                    .scaledToFit()
+                    .renderingMode(.original)
+                    .interpolation(.high)
+                    .antialiased(true)
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 100, height: 100)
-                    .foregroundColor(Color.smilePileBlue)
 
-                // Multicolor app name
+                // Multicolor app name (separate component with shadow)
                 MulticolorSmilePileLogo(fontSize: 36, showShadow: true)
 
                 // Tagline
@@ -39,7 +41,7 @@ struct WelcomeScreen: View {
                 )
 
                 FeatureRow(
-                    icon: "viewfinder",
+                    icon: "arrow.up.left.and.arrow.down.right",
                     iconColor: .smilePileOrange,
                     title: "Distraction-free mode",
                     description: "Good for kids (and everyone else)"

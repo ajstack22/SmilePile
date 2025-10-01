@@ -10,7 +10,6 @@ struct SettingsViewCustom: View {
     @State private var showPINChange = false
     @State private var showingExportSheet = false
     @State private var showingImportPicker = false
-    @State private var showingParentalControls = false
     @State private var showingAboutDialog = false
     @State private var exportProgress: Double = 0.0
     @State private var importProgress: Double = 0.0
@@ -59,13 +58,6 @@ struct SettingsViewCustom: View {
                                         isOn: $securityViewModel.isBiometricEnabled
                                     )
                                 }
-
-                                SettingsActionItem(
-                                    title: "Parental Controls",
-                                    subtitle: "Manage child safety settings",
-                                    icon: "figure.and.child.holdinghands",
-                                    action: { showingParentalControls = true }
-                                )
 
                                 SettingsActionItem(
                                     title: "Remove PIN",
@@ -149,15 +141,6 @@ struct SettingsViewCustom: View {
                 },
                 onCancel: {}
             )
-        }
-        .sheet(isPresented: $showingParentalControls) {
-            NavigationView {
-                ParentalControlsView()
-                    .navigationTitle("Parental Controls")
-                    .navigationBarItems(trailing: Button("Done") {
-                        showingParentalControls = false
-                    })
-            }
         }
         .sheet(isPresented: $showingExportSheet) {
             NavigationView {

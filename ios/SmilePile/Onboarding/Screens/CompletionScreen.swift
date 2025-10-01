@@ -28,10 +28,10 @@ struct CompletionScreen: View {
             if showContent {
                 VStack(spacing: 12) {
                     Text("All Set!")
-                        .font(.nunito(32, weight: .bold))
+                        .font(.custom("Nunito-Bold", size: 32))
 
                     Text("SmilePile is ready to use")
-                        .font(.nunito(18, weight: .regular))
+                        .font(.custom("Nunito-Regular", size: 18))
                         .foregroundColor(.secondary)
                 }
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -47,7 +47,7 @@ struct CompletionScreen: View {
                                 .foregroundColor(.smilePileOrange)
 
                             Text("\(coordinator.onboardingData.categories.count) piles created")
-                                .font(.nunito(16, weight: .regular))
+                                .font(.custom("Nunito-Regular", size: 16))
                         }
                     }
 
@@ -55,10 +55,10 @@ struct CompletionScreen: View {
                     if !coordinator.onboardingData.skipPIN && coordinator.onboardingData.pinCode != nil {
                         HStack(spacing: 12) {
                             Image(systemName: "lock.fill")
-                                .foregroundColor(.smilePileBlue)
+                                .foregroundColor(Color(hex: "#45B7D1") ?? .smilePileBlue)
 
                             Text("PIN protection enabled")
-                                .font(.nunito(16, weight: .regular))
+                                .font(.custom("Nunito-Regular", size: 16))
                         }
                     }
                 }
@@ -66,7 +66,7 @@ struct CompletionScreen: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.1))
+                        .fill(Color.gray.opacity(0.5))
                 )
                 .padding(.horizontal, 40)
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -81,7 +81,7 @@ struct CompletionScreen: View {
                     coordinator.isComplete = true
                 }) {
                     Text("Start Using SmilePile")
-                        .font(.nunito(18, weight: .medium))
+                        .font(.custom("Nunito-Medium", size: 18))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
@@ -99,7 +99,7 @@ struct CompletionScreen: View {
                 showCheckmark = true
             }
 
-            withAnimation(.default.delay(0.6)) {
+            withAnimation(.default.delay(0.5)) {
                 showContent = true
             }
         }

@@ -1,5 +1,10 @@
 import SwiftUI
 
+// DEPRECATED: This view is no longer used in iOS.
+// iOS over-implemented parental controls with features not in Android spec (content filtering, time restrictions, schedules, etc).
+// Android's parental controls are simpler: just Kid-Safe Mode and Delete Protection toggles in ParentalSettingsScreen.
+// This file is kept for reference only.
+
 struct ParentalControlsView: View {
     @State private var kidsModeEnabled = false
     @State private var contentFilteringEnabled = false

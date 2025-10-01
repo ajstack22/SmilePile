@@ -4,7 +4,6 @@ struct CategorySetupScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
     @State private var newCategoryName = ""
     @State private var selectedColor = "#4CAF50"
-    @State private var showingColorPicker = false
 
     // Predefined categories for quick setup (only 3 to match Android)
     let suggestedCategories: [(String, String, String?)] = [
@@ -22,154 +21,36 @@ struct CategorySetupScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Instructions
-            VStack(spacing: 16) {
+            // Top icon and instructions
+            VStack(spacing: 8) {
                 Image(systemName: "square.stack")
                     .font(.system(size: 48))
                     .foregroundColor(.smilePileOrange)
-                    .padding(.bottom, 16)
 
-                Text("Create Piles")
-                    .font(.nunito(22, weight: .bold))
+                Spacer().frame(height: 8)
 
                 Text("Organize your photos into colorful piles")
-                    .font(.nunito(14, weight: .regular))
+                    .font(.custom("Nunito-Regular", size: 14))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
-            .padding()
+            .padding(.top, 16)
+            .padding(.bottom, 24)
 
             ScrollView {
-                VStack(spacing: 20) {
-                    // Quick add suggestions (hide when at max capacity)
-                    if !suggestedCategories.isEmpty && coordinator.onboardingData.categories.count < 5 {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Or Quick Add")
-                                .font(.nunito(16, weight: .medium))
-                                .padding(.horizontal)
-
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(suggestedCategories, id: \.0) { category in
-                                        // Only show if not already added
-                                        if !coordinator.onboardingData.categories.contains(where: { $0.name == category.0 }) {
-                                            SuggestedCategoryCard(
-                                                name: category.0,
-                                                colorHex: category.1,
-                                                onAdd: {
-                                                    addCategory(name: category.0, colorHex: category.1, icon: category.2)
-                                                }
-                                            )
-                                        }
-                                    }
-                                }
-                                .padding(.horizontal)
-                            }
-                        }
-                    }
-
-                    // Custom category creation (hide when at max capacity)
-                    if coordinator.onboardingData.categories.count < 5 {
-                        VStack(alignment: .leading, spacing: 12) {
-                        Text("Create Your Own")
-                            .font(.nunito(16, weight: .medium))
-                            .padding(.horizontal)
-
-                        VStack(spacing: 16) {
-                            // Name input
-                            HStack {
-                                TextField("Pile name", text: $newCategoryName)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                                // Color picker button
-                                Button(action: {
-                                    showingColorPicker.toggle()
-                                }) {
-                                    Circle()
-                                        .fill(Color(hex: selectedColor))
-                                        .frame(width: 40, height: 40)
-                                        .overlay(
-                                            Circle()
-                                                .stroke(Color.gray.opacity(0.3), lineWidth: 2)
-                                        )
-                                }
-                            }
-
-                            // Color palette (shown when picker is active)
-                            if showingColorPicker {
-                                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 6), spacing: 12) {
-                                    ForEach(colorOptions, id: \.self) { color in
-                                        Circle()
-                                            .fill(Color(hex: color))
-                                            .frame(width: 44, height: 44)
-                                            .overlay(
-                                                ZStack {
-                                                    if selectedColor == color {
-                                                        Circle()
-                                                            .stroke(Color.smilePileBlue, lineWidth: 3)
-                                                        Image(systemName: "checkmark")
-                                                            .font(.system(size: 20))
-                                                            .foregroundColor(.white)
-                                                    }
-                                                }
-                                            )
-                                            .onTapGesture {
-                                                selectedColor = color
-                                                showingColorPicker = false
-                                            }
-                                    }
-                                }
-                                .padding(.vertical, 8)
-                            }
-
-                            // Add button
-                            Button(action: {
-                                addCustomCategory()
-                            }) {
-                                Text("Add Pile")
-                                    .font(.nunito(16, weight: .medium))
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 44)
-                                    .background(
-                                        newCategoryName.isEmpty ?
-                                        Color.gray.opacity(0.3) :
-                                        Color.smilePileBlue
-                                    )
-                                    .cornerRadius(8)
-                            }
-                            .disabled(newCategoryName.isEmpty)
-                        }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray.opacity(0.1))
-                        )
-                        .padding(.horizontal)
-                    }
-                    }
-
-                    // Created categories
+                VStack(spacing: 24) {
+                    // SECTION 1: Your Piles (shown when categories exist)
                     if !coordinator.onboardingData.categories.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Text("Your Piles")
-                                    .font(.nunito(18, weight: .semibold))
+                                    .font(.custom("Nunito-SemiBold", size: 18))
 
                                 Spacer()
 
                                 Text("\(coordinator.onboardingData.categories.count)/5")
-                                    .font(.nunito(14, weight: .regular))
+                                    .font(.custom("Nunito-Regular", size: 14))
                                     .foregroundColor(.secondary)
-                            }
-                            .padding(.horizontal)
-
-                            // Show max reached message
-                            if coordinator.onboardingData.categories.count >= 5 {
-                                Text("Maximum of 5 piles reached")
-                                    .font(.nunito(12, weight: .regular))
-                                    .foregroundColor(.secondary)
-                                    .padding(.horizontal)
                             }
 
                             VStack(spacing: 8) {
@@ -182,18 +63,106 @@ struct CategorySetupScreen: View {
                                     )
                                 }
                             }
-                            .padding(.horizontal)
                         }
+                        .padding(.horizontal, 16)
+                    }
+
+                    // SECTION 2: Create Your Own
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Create Your Own")
+                            .font(.custom("Nunito-Medium", size: 16))
+                            .foregroundColor(.secondary)
+
+                        // Text field with inline + button
+                        HStack(spacing: 0) {
+                            TextField("Custom pile name", text: $newCategoryName)
+                                .padding(.leading, 16)
+                                .padding(.vertical, 12)
+                                .background(Color.clear)
+
+                            // Inline + button as trailing icon
+                            Button(action: {
+                                addCustomCategory()
+                            }) {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(
+                                        (newCategoryName.isNotEmpty && coordinator.onboardingData.categories.count < 5) ?
+                                        Color(hex: "#2196F3") :
+                                        Color.gray.opacity(0.4)
+                                    )
+                                    .frame(width: 44, height: 44)
+                            }
+                            .disabled(newCategoryName.isEmpty || coordinator.onboardingData.categories.count >= 5)
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                        )
+
+                        // Color picker - always visible horizontal scroll
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(colorOptions, id: \.self) { color in
+                                    Circle()
+                                        .fill(Color(hex: color))
+                                        .frame(width: 44, height: 44)
+                                        .overlay(
+                                            ZStack {
+                                                Circle()
+                                                    .stroke(
+                                                        selectedColor == color ? Color(hex: "#2196F3") : Color.gray.opacity(0.3),
+                                                        lineWidth: selectedColor == color ? 3 : 1
+                                                    )
+                                                if selectedColor == color {
+                                                    Image(systemName: "checkmark")
+                                                        .font(.system(size: 24))
+                                                        .foregroundColor(.white)
+                                                }
+                                            }
+                                        )
+                                        .onTapGesture {
+                                            selectedColor = color
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+
+                    // SECTION 3: Or Quick Add
+                    if !suggestedCategories.isEmpty {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Or Quick Add")
+                                .font(.custom("Nunito-Medium", size: 16))
+                                .foregroundColor(.secondary)
+
+                            VStack(spacing: 8) {
+                                ForEach(suggestedCategories, id: \.0) { category in
+                                    // Only show if not already added
+                                    if !coordinator.onboardingData.categories.contains(where: { $0.name == category.0 }) {
+                                        SuggestedCategoryCard(
+                                            name: category.0,
+                                            colorHex: category.1,
+                                            onAdd: {
+                                                addCategory(name: category.0, colorHex: category.1, icon: category.2)
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 16)
                     }
                 }
                 .padding(.vertical)
             }
 
             // Continue button
-            VStack(spacing: 16) {
+            VStack(spacing: 8) {
                 if coordinator.onboardingData.categories.isEmpty {
                     Text("Add at least one pile to continue")
-                        .font(.nunito(12, weight: .regular))
+                        .font(.custom("Nunito-Regular", size: 12))
                         .foregroundColor(.secondary)
                 }
 
@@ -201,27 +170,26 @@ struct CategorySetupScreen: View {
                     coordinator.navigateToNext()
                 }) {
                     Text("Continue")
-                        .font(.nunito(18, weight: .bold))
+                        .font(.custom("Nunito-Bold", size: 18))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
                         .background(
                             coordinator.onboardingData.categories.isEmpty ?
                             Color.gray.opacity(0.3) :
-                            Color.smilePileBlue
+                            Color(hex: "#2196F3")
                         )
-                        .cornerRadius(12)
+                        .cornerRadius(8)
                 }
                 .disabled(coordinator.onboardingData.categories.isEmpty)
             }
-            .padding()
+            .padding(16)
         }
     }
 
     private func addCategory(name: String, colorHex: String, icon: String?) {
         // Enforce maximum of 5 piles
         guard coordinator.onboardingData.categories.count < 5 else {
-            // Could add an alert here if needed
             return
         }
 
@@ -236,12 +204,10 @@ struct CategorySetupScreen: View {
     private func addCustomCategory() {
         guard !newCategoryName.isEmpty else { return }
         guard coordinator.onboardingData.categories.count < 5 else {
-            // Maximum reached, could show alert
             return
         }
         addCategory(name: newCategoryName, colorHex: selectedColor, icon: nil)
         newCategoryName = ""
-        showingColorPicker = false
     }
 
     private func removeCategory(_ category: TempCategory) {
@@ -249,6 +215,7 @@ struct CategorySetupScreen: View {
     }
 }
 
+// MARK: - Suggested Category Card (Vertical, Full Width)
 struct SuggestedCategoryCard: View {
     let name: String
     let colorHex: String
@@ -256,16 +223,28 @@ struct SuggestedCategoryCard: View {
 
     var body: some View {
         Button(action: onAdd) {
-            HStack {
+            HStack(spacing: 12) {
+                // Color dot on left
+                HStack(spacing: 8) {
+                    Circle()
+                        .fill(Color(hex: colorHex))
+                        .frame(width: 16, height: 16)
+
+                    Text(name)
+                        .font(.custom("Nunito-Medium", size: 14))
+                        .foregroundColor(.primary)
+                }
+
+                Spacer()
+
+                // + icon on right
                 Image(systemName: "plus")
                     .font(.system(size: 20))
                     .foregroundColor(Color(hex: colorHex))
-
-                Text(name)
-                    .font(.nunito(16, weight: .medium))
-                    .foregroundColor(.primary)
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity)
             .frame(height: 56)
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -275,23 +254,24 @@ struct SuggestedCategoryCard: View {
     }
 }
 
+// MARK: - Created Category Row
 struct CreatedCategoryRow: View {
     let category: TempCategory
     let onRemove: () -> Void
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Circle()
                 .fill(Color(hex: category.colorHex))
                 .frame(width: 16, height: 16)
 
             if let icon = category.icon {
                 Text(icon)
-                    .font(.nunito(20, weight: .regular))
+                    .font(.custom("Nunito-Regular", size: 20))
             }
 
             Text(category.name)
-                .font(.nunito(16, weight: .regular))
+                .font(.custom("Nunito-Regular", size: 16))
                 .foregroundColor(.primary)
 
             Spacer()
@@ -302,10 +282,18 @@ struct CreatedCategoryRow: View {
                     .foregroundColor(.gray.opacity(0.5))
             }
         }
-        .padding()
+        .padding(12)
+        .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color(hex: category.colorHex).opacity(0.1))
         )
+    }
+}
+
+// MARK: - String Helper
+extension String {
+    var isNotEmpty: Bool {
+        !self.isEmpty
     }
 }
