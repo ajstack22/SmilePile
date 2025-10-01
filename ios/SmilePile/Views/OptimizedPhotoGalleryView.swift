@@ -192,91 +192,27 @@ struct OptimizedPhotoGalleryView: View {
 
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
-                // Header with categories
-                AppHeaderComponent(
-                    onViewModeClick: {
-                        kidsModeViewModel.toggleKidsMode()
-                    },
-                    showViewModeButton: true
-                ) {
-                    // Always show categories so users can select one
-                    categoryFilterBar
-                }
+            mainContentView
+            floatingActionButton
 
-                // Main content
-                if viewModel.isLoading && viewModel.photos.isEmpty {
-                    loadingView
-                } else if viewModel.photos.isEmpty {
-                    emptyStateView
-                } else {
-                    photoStackView
-                }
-            }
-            .background(Color(UIColor.systemBackground))
-
-            // Floating Action Button - truly floating over content
-            FloatingActionButton(
-                action: handleAddPhotosButtonTap,
-                isPulsing: viewModel.photos.isEmpty,
-                backgroundColor: Color(red: 74/255, green: 144/255, blue: 226/255), // SP Blue #4A90E2
-                iconName: "photo.badge.plus"
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-            .padding(.trailing, 16)
-            .padding(.bottom, 16) // Position at bottom right corner
-
-            // Debug overlay (development only)
             if showingDebugInfo {
                 debugOverlay
             }
         }
         .task {
-            // Check storage health on startup
-            storage.checkStorageHealth()
-            await loadCategories()
-            await viewModel.loadPhotos()
+            await initializeView()
         }
         .sheet(isPresented: $showingPhotoEditor) {
-            if !selectedPhotos.isEmpty {
-                PhotoEditView(photos: selectedPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
-            } else if !pendingEditPhotos.isEmpty {
-                PhotoEditView(photos: pendingEditPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
-            }
+            photoEditorSheet
         }
         .onChange(of: showingPhotoEditor) { newValue in
-            if !newValue {
-                // Clean up after sheet dismisses
-                selectedPhotos = []
-                pendingEditPhotos = []
-                Task {
-                    await viewModel.refreshPhotos()
-                }
-            }
+            handlePhotoEditorDismissal(newValue)
         }
         .sheet(isPresented: $showingCategorySelection) {
-            CategorySelectionSheet(
-                categories: categories,
-                onSelectCategory: { category in
-                    viewModel.selectedCategory = category
-                    showingCategorySelection = false
-                    // After selecting category, open photo picker
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        showingPhotoPicker = true
-                    }
-                },
-                onCancel: {
-                    showingCategorySelection = false
-                }
-            )
+            categorySelectionSheet
         }
         .fullScreenCover(isPresented: $showingPhotoPicker) {
-            EnhancedPhotoPickerView(
-                isPresented: $showingPhotoPicker,
-                categoryId: viewModel.selectedCategory?.id ?? 1,
-                onPhotosSelected: handleSelectedPhotos,
-                onCancel: {}
-            )
+            photoPickerView
         }
         .alert("Permission Required", isPresented: $showingPermissionError) {
             Button("Open Settings") {
@@ -315,35 +251,7 @@ struct OptimizedPhotoGalleryView: View {
         .gesture(
             DragGesture()
                 .onEnded { value in
-                    let swipeThreshold: CGFloat = 150 // Match Android's 150px threshold
-
-                    if categories.isEmpty { return }
-
-                    let currentIndex = viewModel.selectedCategory != nil ?
-                        categories.firstIndex(where: { $0.id == viewModel.selectedCategory?.id }) ?? -1 :
-                        -1
-
-                    if value.translation.width > swipeThreshold {
-                        // Swipe right - previous category
-                        if currentIndex > 0 {
-                            viewModel.selectedCategory = categories[currentIndex - 1]
-                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
-                        } else if currentIndex == -1 && !categories.isEmpty {
-                            // If no category selected, select the last one
-                            viewModel.selectedCategory = categories.last
-                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
-                        }
-                    } else if value.translation.width < -swipeThreshold {
-                        // Swipe left - next category
-                        if currentIndex >= 0 && currentIndex < categories.count - 1 {
-                            viewModel.selectedCategory = categories[currentIndex + 1]
-                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
-                        } else if currentIndex == -1 && !categories.isEmpty {
-                            // If no category selected, select the first one
-                            viewModel.selectedCategory = categories.first
-                            logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
-                        }
-                    }
+                    handleSwipeGesture(value)
                 }
         )
     }
@@ -544,6 +452,144 @@ struct OptimizedPhotoGalleryView: View {
         Task {
             await viewModel.refreshPhotos()
         }
+    }
+
+    // MARK: - Extracted Views
+
+    private var mainContentView: some View {
+        VStack(spacing: 0) {
+            AppHeaderComponent(
+                onViewModeClick: {
+                    kidsModeViewModel.toggleKidsMode()
+                },
+                showViewModeButton: true
+            ) {
+                categoryFilterBar
+            }
+
+            contentBasedOnState
+        }
+        .background(Color(UIColor.systemBackground))
+    }
+
+    private var contentBasedOnState: some View {
+        Group {
+            if viewModel.isLoading && viewModel.photos.isEmpty {
+                loadingView
+            } else if viewModel.photos.isEmpty {
+                emptyStateView
+            } else {
+                photoStackView
+            }
+        }
+    }
+
+    private var floatingActionButton: some View {
+        FloatingActionButton(
+            action: handleAddPhotosButtonTap,
+            isPulsing: viewModel.photos.isEmpty,
+            backgroundColor: Color(red: 74/255, green: 144/255, blue: 226/255),
+            iconName: "photo.badge.plus"
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+        .padding(.trailing, 16)
+        .padding(.bottom, 16)
+    }
+
+    @ViewBuilder
+    private var photoEditorSheet: some View {
+        if !selectedPhotos.isEmpty {
+            PhotoEditView(photos: selectedPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
+        } else if !pendingEditPhotos.isEmpty {
+            PhotoEditView(photos: pendingEditPhotos, initialCategoryId: viewModel.selectedCategory?.id ?? 1)
+        }
+    }
+
+    private var categorySelectionSheet: some View {
+        CategorySelectionSheet(
+            categories: categories,
+            onSelectCategory: handleCategorySelection,
+            onCancel: {
+                showingCategorySelection = false
+            }
+        )
+    }
+
+    private var photoPickerView: some View {
+        EnhancedPhotoPickerView(
+            isPresented: $showingPhotoPicker,
+            categoryId: viewModel.selectedCategory?.id ?? 1,
+            onPhotosSelected: handleSelectedPhotos,
+            onCancel: {}
+        )
+    }
+
+    // MARK: - Helper Methods
+
+    private func initializeView() async {
+        storage.checkStorageHealth()
+        await loadCategories()
+        await viewModel.loadPhotos()
+    }
+
+    private func handlePhotoEditorDismissal(_ isShowing: Bool) {
+        if !isShowing {
+            selectedPhotos = []
+            pendingEditPhotos = []
+            Task {
+                await viewModel.refreshPhotos()
+            }
+        }
+    }
+
+    private func handleCategorySelection(_ category: Category) {
+        viewModel.selectedCategory = category
+        showingCategorySelection = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            showingPhotoPicker = true
+        }
+    }
+
+    private func handleSwipeGesture(_ gesture: DragGesture.Value) {
+        let swipeThreshold: CGFloat = 150
+        guard !categories.isEmpty else { return }
+
+        let currentIndex = getCurrentCategoryIndex()
+
+        if gesture.translation.width > swipeThreshold {
+            handleSwipeRight(currentIndex: currentIndex)
+        } else if gesture.translation.width < -swipeThreshold {
+            handleSwipeLeft(currentIndex: currentIndex)
+        }
+    }
+
+    private func getCurrentCategoryIndex() -> Int {
+        guard let selectedCategory = viewModel.selectedCategory else { return -1 }
+        return categories.firstIndex(where: { $0.id == selectedCategory.id }) ?? -1
+    }
+
+    private func handleSwipeRight(currentIndex: Int) {
+        if currentIndex > 0 {
+            viewModel.selectedCategory = categories[currentIndex - 1]
+            logCategorySwipe()
+        } else if currentIndex == -1 && !categories.isEmpty {
+            viewModel.selectedCategory = categories.last
+            logCategorySwipe()
+        }
+    }
+
+    private func handleSwipeLeft(currentIndex: Int) {
+        if currentIndex >= 0 && currentIndex < categories.count - 1 {
+            viewModel.selectedCategory = categories[currentIndex + 1]
+            logCategorySwipe()
+        } else if currentIndex == -1 && !categories.isEmpty {
+            viewModel.selectedCategory = categories.first
+            logCategorySwipe()
+        }
+    }
+
+    private func logCategorySwipe() {
+        logger.info("Swiped to category: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
     }
 }
 

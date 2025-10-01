@@ -85,84 +85,34 @@ class BackupViewModel: ObservableObject {
     }
 
     func handleSelectedFile(_ url: URL) {
-        // Store the URL for later use
         selectedImportURL = url
 
         Task {
             do {
-                // Validate backup first
-                isImporting = true
-                importError = nil
-                importMessage = "Validating backup..."
-
+                startValidation()
                 let validationResult = try await restoreManager.validateBackup(at: url)
                 backupValidationResult = validationResult
 
-                if validationResult.isValid {
-                    // Show confirmation dialog
-                    showImportConfirmation = true
-                } else {
-                    importError = NSError(
-                        domain: "BackupViewModel",
-                        code: -1,
-                        userInfo: [NSLocalizedDescriptionKey: validationResult.errors.joined(separator: "\n")]
-                    )
-                    importMessage = "Invalid backup file"
-                }
-
+                handleValidationResult(validationResult)
                 isImporting = false
-
             } catch {
-                importError = error
-                importMessage = "Validation failed: \(error.localizedDescription)"
-                isImporting = false
+                handleValidationError(error)
             }
         }
     }
 
     func confirmImport() {
-        guard let url = selectedImportURL else {
-            return
-        }
+        guard let url = selectedImportURL else { return }
 
         Task {
             do {
-                isImporting = true
-                importError = nil
-                importProgress = 0
-                importMessage = "Starting import..."
-                showImportConfirmation = false
+                startImport()
+                guard backupValidationResult != nil else { return }
 
-                // Use the URL from document picker (we need to store it)
-                // For now, use a placeholder - this will be fixed when UI is integrated
-                guard let validationResult = backupValidationResult else { return }
-
-                // Perform restore
-                let result = try await restoreManager.restoreBackup(
-                    from: url,
-                    options: RestoreOptions(
-                        strategy: .merge,
-                        duplicateResolution: .skip,
-                        validateIntegrity: true,
-                        restoreThumbnails: true,
-                        restoreSettings: true,
-                        dryRun: false
-                    )
-                ) { progress in
-                    Task { @MainActor in
-                        self.importProgress = Double(progress.processedItems) / 100.0
-                        self.importMessage = progress.currentOperation
-                    }
-                }
-
-                importResult = result
-                importMessage = "Import complete! \(result.photosImported) photos restored."
-                importProgress = 1.0
-                importSuccess = true
-
+                let result = try await performRestore(from: url)
+                handleImportSuccess(result)
             } catch {
-                importError = error
-                importMessage = "Import failed: \(error.localizedDescription)"
+                handleImportError(error)
             }
 
             isImporting = false
@@ -179,6 +129,80 @@ class BackupViewModel: ObservableObject {
         importSuccess = false
         importResult = nil
         backupValidationResult = nil
+    }
+
+    // MARK: - Helper Methods
+
+    private func startValidation() {
+        isImporting = true
+        importError = nil
+        importMessage = "Validating backup..."
+    }
+
+    private func handleValidationResult(_ result: BackupValidationResult) {
+        if result.isValid {
+            showImportConfirmation = true
+        } else {
+            importError = createValidationError(from: result.errors)
+            importMessage = "Invalid backup file"
+        }
+    }
+
+    private func handleValidationError(_ error: Error) {
+        importError = error
+        importMessage = "Validation failed: \(error.localizedDescription)"
+        isImporting = false
+    }
+
+    private func createValidationError(from errors: [String]) -> NSError {
+        NSError(
+            domain: "BackupViewModel",
+            code: -1,
+            userInfo: [NSLocalizedDescriptionKey: errors.joined(separator: "\n")]
+        )
+    }
+
+    private func startImport() {
+        isImporting = true
+        importError = nil
+        importProgress = 0
+        importMessage = "Starting import..."
+        showImportConfirmation = false
+    }
+
+    private func performRestore(from url: URL) async throws -> ImportResult {
+        try await restoreManager.restoreBackup(
+            from: url,
+            options: createRestoreOptions()
+        ) { progress in
+            Task { @MainActor in
+                self.importProgress = Double(progress.processedItems) / 100.0
+                self.importMessage = progress.currentOperation
+            }
+        }
+    }
+
+    private func createRestoreOptions() -> RestoreOptions {
+        RestoreOptions(
+            strategy: .merge,
+            duplicateResolution: .skip,
+            validateIntegrity: true,
+            restoreThumbnails: true,
+            restoreSettings: true,
+            dryRun: false
+        )
+    }
+
+    private func handleImportSuccess(_ result: ImportResult) {
+        importResult = result
+        importMessage = "Import complete! \(result.photosImported) photos restored."
+        importProgress = 1.0
+        importSuccess = true
+    }
+
+    private func handleImportError(_ error: Error) {
+        importError = error
+        importMessage = "Import failed: \(error.localizedDescription)"
     }
 }
 
