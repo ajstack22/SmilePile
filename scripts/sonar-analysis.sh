@@ -84,7 +84,9 @@ fi
 echo ""
 echo "☁️  Sending analysis to SonarCloud..."
 # Token is passed via environment variable for security
+# Skip JRE provisioning to avoid 403 errors with free plan
 sonar-scanner \
+  -Dsonar.scanner.skipJreProvisioning=true \
   -Dsonar.projectVersion="$GIT_COMMIT" \
   -Dsonar.branch.name="$GIT_BRANCH"
 

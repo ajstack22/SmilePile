@@ -296,11 +296,10 @@ class RestoreManagerTest {
 
     // Helper functions
     private fun createMockBackupFile(): File {
-        val file = mockk<File>()
-        every { file.exists() } returns true
-        every { file.name } returns "backup.json"
-        every { file.readText() } returns createMockBackupJson()
-        return file
+        val tempFile = File.createTempFile("test_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText(createMockBackupJson())
+        return tempFile
     }
 
     private fun createMockBackupFileWithChecksum(): File {

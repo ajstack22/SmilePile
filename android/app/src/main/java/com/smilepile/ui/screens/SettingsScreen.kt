@@ -40,6 +40,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -85,7 +86,7 @@ import com.smilepile.theme.ThemeMode
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onNavigateUp: () -> Unit,
+    @Suppress("UNUSED_PARAMETER") onNavigateUp: () -> Unit,
     onNavigateToKidsMode: () -> Unit = {},
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(0.dp),
@@ -148,7 +149,7 @@ fun SettingsScreen(
                             subtitle = "Automatic",
                             onClick = { viewModel.setThemeMode(ThemeMode.SYSTEM) }
                         )
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier.padding(start = 48.dp),
                             color = MaterialTheme.colorScheme.surfaceVariant
                         )
@@ -160,7 +161,7 @@ fun SettingsScreen(
                             title = "Light",
                             onClick = { viewModel.setThemeMode(ThemeMode.LIGHT) }
                         )
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier.padding(start = 48.dp),
                             color = MaterialTheme.colorScheme.surfaceVariant
                         )
@@ -201,7 +202,7 @@ fun SettingsScreen(
 
                         // Biometric Authentication Toggle
                         if (uiState.hasPIN && viewModel.isBiometricAvailable()) {
-                            Divider(
+                            HorizontalDivider(
                                 modifier = Modifier.padding(start = 48.dp),
                                 color = MaterialTheme.colorScheme.surfaceVariant
                             )
@@ -217,7 +218,7 @@ fun SettingsScreen(
                         }
 
                         if (uiState.hasPIN) {
-                            Divider(
+                            HorizontalDivider(
                                 modifier = Modifier.padding(start = 48.dp),
                                 color = MaterialTheme.colorScheme.surfaceVariant
                             )
@@ -252,7 +253,7 @@ fun SettingsScreen(
                         }
                     )
 
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier.padding(start = 48.dp),
                             color = MaterialTheme.colorScheme.surfaceVariant
                         )
@@ -302,7 +303,7 @@ fun SettingsScreen(
                                 }
                             )
 
-                            Divider(
+                            HorizontalDivider(
                                 modifier = Modifier.padding(start = 48.dp),
                                 color = MaterialTheme.colorScheme.surfaceVariant
                             )
@@ -391,8 +392,6 @@ fun SettingsScreen(
 private fun AboutDialog(
     onDismiss: () -> Unit
 ) {
-    val context = LocalContext.current
-
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {

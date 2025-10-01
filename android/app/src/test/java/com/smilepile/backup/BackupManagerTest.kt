@@ -34,6 +34,8 @@ class BackupManagerTest {
     private lateinit var themeManager: ThemeManager
     private lateinit var securePreferencesManager: SecurePreferencesManager
     private lateinit var deletionTracker: ManagedDeletionTracker
+    private lateinit var tempCacheDir: File
+    private lateinit var tempFilesDir: File
 
     @Before
     fun setup() {
@@ -56,9 +58,11 @@ class BackupManagerTest {
             deletionTracker
         )
 
-        // Setup default mocks
-        every { context.cacheDir } returns File("/test/cache")
-        every { context.filesDir } returns File("/test/files")
+        // Setup default mocks - use real temp directories for file operations
+        tempCacheDir = createTempDir("backup_test_cache")
+        tempFilesDir = createTempDir("backup_test_files")
+        every { context.cacheDir } returns tempCacheDir
+        every { context.filesDir } returns tempFilesDir
 
         // Mock package manager for version info
         val packageManager = mockk<android.content.pm.PackageManager>()
@@ -84,6 +88,9 @@ class BackupManagerTest {
     fun tearDown() {
         // Unmock the ZipUtils object to prevent affecting other tests
         unmockkObject(ZipUtils)
+        // Clean up temp directories
+        tempCacheDir.deleteRecursively()
+        tempFilesDir.deleteRecursively()
     }
 
     @Test
@@ -101,10 +108,18 @@ class BackupManagerTest {
         coEvery { categoryRepository.getAllCategories() } returns categories
         coEvery { photoRepository.getAllPhotos() } returns photos
 
-        // Mock ZipUtils.createZipFromDirectory to return success
+        // Mock ZipUtils.createZipFromDirectory to return success and ensure ZIP file gets created
         coEvery {
-            ZipUtils.createZipFromDirectory(any(), any(), any(), any())
-        } returns Result.success(Unit)
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            // Create the output file to simulate successful ZIP creation
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            // Call progress callback if provided
+            val progressCallback = arg<((Int, Int) -> Unit)?>(3)
+            progressCallback?.invoke(100, 100)
+            Result.success(Unit)
+        }
 
         val options = BackupOptions(
             includePhotos = true,
@@ -141,10 +156,18 @@ class BackupManagerTest {
         coEvery { categoryRepository.getAllCategories() } returns categories
         coEvery { photoRepository.getAllPhotos() } returns photos
 
-        // Mock ZipUtils.createZipFromDirectory to return success
+        // Mock ZipUtils.createZipFromDirectory to return success and ensure ZIP file gets created
         coEvery {
-            ZipUtils.createZipFromDirectory(any(), any(), any(), any())
-        } returns Result.success(Unit)
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            // Create the output file to simulate successful ZIP creation
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            // Call progress callback if provided
+            val progressCallback = arg<((Int, Int) -> Unit)?>(3)
+            progressCallback?.invoke(100, 100)
+            Result.success(Unit)
+        }
 
         val options = BackupOptions(
             selectedCategories = listOf(1L, 2L), // Only family and friends
@@ -253,6 +276,9 @@ class BackupManagerTest {
         coEvery {
             ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
         } answers {
+            // Create the output file to simulate successful ZIP creation
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
             // Call the progress callback
             val progressCallback = arg<((Int, Int) -> Unit)?>(3)
             progressCallback?.invoke(50, 100)
