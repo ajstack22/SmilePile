@@ -290,9 +290,14 @@ class SettingsViewModel @Inject constructor(
                     )
                     // Clean up temp file
                     pendingExportZipFile?.let { file ->
-                        if (!file.delete()) {
-                            Log.w(TAG, "Failed to delete temporary export file: ${file.name}")
+                        try {
+                            if (!file.delete()) {
+                                Log.w(TAG, "Failed to delete temporary export file: ${file.absolutePath}")
+                            }
+                        } catch (e: SecurityException) {
+                            Log.e(TAG, "Permission denied deleting temporary export file: ${file.absolutePath}", e)
                         }
+                        Unit
                     }
                     pendingExportZipFile = null
                 } else {
@@ -420,8 +425,12 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 // Clean up temp file
-                if (!tempFile.delete()) {
-                    Log.w(TAG, "Failed to delete temporary import file: ${tempFile.name}")
+                try {
+                    if (!tempFile.delete()) {
+                        Log.w(TAG, "Failed to delete temporary import file: ${tempFile.absolutePath}")
+                    }
+                } catch (e: SecurityException) {
+                    Log.e(TAG, "Permission denied deleting temporary import file: ${tempFile.absolutePath}", e)
                 }
 
             } catch (e: Exception) {
@@ -537,9 +546,14 @@ class SettingsViewModel @Inject constructor(
             exportProgress = null
         )
         pendingExportZipFile?.let { file ->
-            if (!file.delete()) {
-                Log.w(TAG, "Failed to delete pending export file: ${file.name}")
+            try {
+                if (!file.delete()) {
+                    Log.w(TAG, "Failed to delete pending export file: ${file.absolutePath}")
+                }
+            } catch (e: SecurityException) {
+                Log.e(TAG, "Permission denied deleting pending export file: ${file.absolutePath}", e)
             }
+            Unit
         }
         pendingExportZipFile = null
     }

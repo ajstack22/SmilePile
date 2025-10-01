@@ -589,7 +589,10 @@ class RestoreManager @Inject constructor(
                     DuplicateResolution.RENAME -> {
                         val newFileName = generateUniquePhotoName(File(newPhotoPath).name)
                         val renamedFile = File(internalPhotosDir, newFileName)
-                        File(newPhotoPath).renameTo(renamedFile)
+                        val sourceFile = File(newPhotoPath)
+                        if (!sourceFile.renameTo(renamedFile)) {
+                            return PhotoRestoreResult.Failed("Failed to rename photo file: ${sourceFile.name}")
+                        }
                         newPhotoPath = renamedFile.absolutePath
                     }
                     DuplicateResolution.ASK_USER -> {
