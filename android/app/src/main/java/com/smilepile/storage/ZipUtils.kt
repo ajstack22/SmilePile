@@ -446,7 +446,8 @@ object ZipUtils {
         destDir: File,
         entry: ZipEntry
     ): File {
-        val outputFile = File(destDir, entry.name)
+        val sanitizedName = sanitizeEntryName(entry.name)
+        val outputFile = File(destDir, sanitizedName)
         outputFile.parentFile?.mkdirs()
 
         BufferedOutputStream(FileOutputStream(outputFile)).use { output ->
