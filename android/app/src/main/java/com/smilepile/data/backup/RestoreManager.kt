@@ -97,19 +97,7 @@ class RestoreManager @Inject constructor(
             val structureResult = ZipUtils.validateZipStructure(zipFile)
             if (structureResult.isFailure) {
                 errors.add("Invalid ZIP structure: ${structureResult.exceptionOrNull()?.message}")
-                return@withContext Result.success(
-                    BackupValidationResult(
-                        isValid = false,
-                        version = 0,
-                        format = BackupFormat.ZIP,
-                        hasMetadata = false,
-                        hasPhotos = false,
-                        photosCount = 0,
-                        categoriesCount = 0,
-                        integrityCheckPassed = false,
-                        errors = errors
-                    )
-                )
+                return@withContext Result.success(createInvalidZipResult(errors))
             }
 
             // Extract and validate metadata
@@ -117,93 +105,103 @@ class RestoreManager @Inject constructor(
             tempDir.mkdirs()
 
             try {
-                val extractResult = ZipUtils.extractZip(zipFile, tempDir)
-                if (extractResult.isFailure) {
-                    errors.add("Failed to extract ZIP: ${extractResult.exceptionOrNull()?.message}")
-                    return@withContext Result.success(
-                        BackupValidationResult(
-                            isValid = false,
-                            version = 0,
-                            format = BackupFormat.ZIP,
-                            hasMetadata = false,
-                            hasPhotos = false,
-                            photosCount = 0,
-                            categoriesCount = 0,
-                            integrityCheckPassed = false,
-                            errors = errors
-                        )
-                    )
-                }
-
-                // Read metadata
-                val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
-                if (!metadataFile.exists()) {
-                    errors.add("metadata.json not found in backup")
-                    return@withContext Result.success(
-                        BackupValidationResult(
-                            isValid = false,
-                            version = 0,
-                            format = BackupFormat.ZIP,
-                            hasMetadata = false,
-                            hasPhotos = false,
-                            photosCount = 0,
-                            categoriesCount = 0,
-                            integrityCheckPassed = false,
-                            errors = errors
-                        )
-                    )
-                }
-
-                val backupData = json.decodeFromString<AppBackup>(metadataFile.readText())
-
-                // Check version compatibility
-                if (backupData.version < MIN_SUPPORTED_VERSION || backupData.version > MAX_SUPPORTED_VERSION) {
-                    errors.add("Unsupported backup version: ${backupData.version}")
-                }
-
-                // Check for photos directory
-                val photosDir = File(tempDir, "photos")
-                val hasPhotos = photosDir.exists() && photosDir.isDirectory
-
-                // Integrity checks if requested
-                var integrityPassed = true
-                if (checkIntegrity && backupData.photoManifest.isNotEmpty()) {
-                    for (manifestEntry in backupData.photoManifest) {
-                        val photoFile = File(photosDir, manifestEntry.fileName)
-                        if (photoFile.exists()) {
-                            if (manifestEntry.checksum != null) {
-                                val actualChecksum = calculateMD5(photoFile)
-                                if (actualChecksum != manifestEntry.checksum) {
-                                    warnings.add("Checksum mismatch for ${manifestEntry.fileName}")
-                                    integrityPassed = false
-                                }
-                            }
-                        } else {
-                            warnings.add("Missing photo file: ${manifestEntry.fileName}")
-                        }
-                    }
-                }
-
-                Result.success(
-                    BackupValidationResult(
-                        isValid = errors.isEmpty(),
-                        version = backupData.version,
-                        format = BackupFormat.ZIP,
-                        hasMetadata = true,
-                        hasPhotos = hasPhotos,
-                        photosCount = backupData.photos.size,
-                        categoriesCount = backupData.categories.size,
-                        integrityCheckPassed = integrityPassed,
-                        errors = errors,
-                        warnings = warnings
-                    )
-                )
+                validateZipContents(zipFile, tempDir, checkIntegrity, errors, warnings)
             } finally {
                 tempDir.deleteRecursively()
             }
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    private suspend fun validateZipContents(
+        zipFile: File,
+        tempDir: File,
+        checkIntegrity: Boolean,
+        errors: MutableList<String>,
+        warnings: MutableList<String>
+    ): Result<BackupValidationResult> {
+        val extractResult = ZipUtils.extractZip(zipFile, tempDir)
+        if (extractResult.isFailure) {
+            errors.add("Failed to extract ZIP: ${extractResult.exceptionOrNull()?.message}")
+            return Result.success(createInvalidZipResult(errors))
+        }
+
+        val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
+        if (!metadataFile.exists()) {
+            errors.add("metadata.json not found in backup")
+            return Result.success(createInvalidZipResult(errors))
+        }
+
+        val backupData = json.decodeFromString<AppBackup>(metadataFile.readText())
+        validateBackupVersion(backupData, errors)
+
+        val photosDir = File(tempDir, "photos")
+        val hasPhotos = photosDir.exists() && photosDir.isDirectory
+        val integrityPassed = performIntegrityChecks(backupData, photosDir, checkIntegrity, warnings)
+
+        return Result.success(
+            BackupValidationResult(
+                isValid = errors.isEmpty(),
+                version = backupData.version,
+                format = BackupFormat.ZIP,
+                hasMetadata = true,
+                hasPhotos = hasPhotos,
+                photosCount = backupData.photos.size,
+                categoriesCount = backupData.categories.size,
+                integrityCheckPassed = integrityPassed,
+                errors = errors,
+                warnings = warnings
+            )
+        )
+    }
+
+    private fun createInvalidZipResult(errors: List<String>): BackupValidationResult {
+        return BackupValidationResult(
+            isValid = false,
+            version = 0,
+            format = BackupFormat.ZIP,
+            hasMetadata = false,
+            hasPhotos = false,
+            photosCount = 0,
+            categoriesCount = 0,
+            integrityCheckPassed = false,
+            errors = errors
+        )
+    }
+
+    private fun validateBackupVersion(backupData: AppBackup, errors: MutableList<String>) {
+        if (backupData.version < MIN_SUPPORTED_VERSION || backupData.version > MAX_SUPPORTED_VERSION) {
+            errors.add("Unsupported backup version: ${backupData.version}")
+        }
+    }
+
+    private fun performIntegrityChecks(
+        backupData: AppBackup,
+        photosDir: File,
+        checkIntegrity: Boolean,
+        warnings: MutableList<String>
+    ): Boolean {
+        if (!checkIntegrity || backupData.photoManifest.isEmpty()) {
+            return true
+        }
+
+        var integrityPassed = true
+        for (manifestEntry in backupData.photoManifest) {
+            val photoFile = File(photosDir, manifestEntry.fileName)
+            if (photoFile.exists()) {
+                if (manifestEntry.checksum != null) {
+                    val actualChecksum = calculateMD5(photoFile)
+                    if (actualChecksum != manifestEntry.checksum) {
+                        warnings.add("Checksum mismatch for ${manifestEntry.fileName}")
+                        integrityPassed = false
+                    }
+                }
+            } else {
+                warnings.add("Missing photo file: ${manifestEntry.fileName}")
+            }
+        }
+        return integrityPassed
     }
 
     /**
