@@ -1,177 +1,2257 @@
-·
-acom.smilepile.performance.PerformanceOptimizer#createOptimizedImageLoader(LContext;)LImageLoader;p
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/performance/PerformanceOptimizer.kt (""0*(
-0 ("
- !(
-	<unknown>:'
-# (3
-contextjava.lang.ObjectB20
-.com.smilepile.performance.PerformanceOptimizerH£
-Vcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getTHUMBNAIL_SIZE()I
-__unknown_file ("0*‡
-0 (ß
-§
+˚
+ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
+__unknown_file ("0*©
+0 (”
+–
+ (6
+field-com.smilepile.data.repository.PhotoRepository"__id*Ö
+ (y*w3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"D
+ (8
+6
+field-com.smilepile.data.repository.PhotoRepositoryB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ö
+vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
+__unknown_file ("0*É
+0 (“
+œ
+ (w3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
+ (8
+6
+value-com.smilepile.data.repository.PhotoRepository"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.repository.PhotoRepositoryB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ç
+{com.smilepile.ui.viewmodels.PhotoGalleryViewModel#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;
+__unknown_file ("0*µ
+0 (‹
+Ÿ
+ (9
+field0com.smilepile.data.repository.CategoryRepository"__id*ã
+ (*}3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"F
+categoryRepository0com.smilepile.data.repository.CategoryRepository"G
+ (;
+9
+field0com.smilepile.data.repository.CategoryRepositoryB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`¨
+|com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V
+__unknown_file ("0*å
+0 (€
+ÿ
+ (}3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"F
+categoryRepository0com.smilepile.data.repository.CategoryRepository"__id*G
+ (;
+9
+value0com.smilepile.data.repository.CategoryRepository"
+ (
+implicit return:E
+ (9
+value0com.smilepile.data.repository.CategoryRepositoryB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ì
+~com.smilepile.ui.viewmodels.PhotoGalleryViewModel#getPhotoOperationsManager()Lcom/smilepile/operations/PhotoOperationsManager;
+__unknown_file ("0*∏
+0 (‡
+›
+ (8
+field/com.smilepile.operations.PhotoOperationsManager"__id*ê
+ (É*Ä3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManager"F
+ (:
+8
+field/com.smilepile.operations.PhotoOperationsManagerB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`±
+com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotoOperationsManager(Lcom/smilepile/operations/PhotoOperationsManager;)V
+__unknown_file ("0*è
+0 (ﬁ
+€
+ (Ä3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManager"__id*F
+ (:
+8
+value/com.smilepile.operations.PhotoOperationsManager"
+ (
+implicit return:D
+ (8
+value/com.smilepile.operations.PhotoOperationsManagerB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ÃO
+Õcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#<init>(Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/data/repository/CategoryRepository;Lcom/smilepile/operations/PhotoOperationsManager;)Vs
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt$ (/"0*œJ
+0 (#±
+Æ
+ (0
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepositoryÄ
+~
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
+
+__unknown_file (
+
+%0∑
+¥
+ (6
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*d
+
+__unknown_file (H
+F
+categoryRepository0com.smilepile.data.repository.CategoryRepositoryá
+Ñ
+ (6F
+categoryRepository0com.smilepile.data.repository.CategoryRepository"__annotation*"
+
+__unknown_file (
+
+%1∫
+∑
+ (>
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*g
+
+__unknown_file (K
+I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManagerä
+á
+ (>I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManager"__annotation*"
+
+__unknown_file (
+
+%2Ì
+Í
+ (03
+%3-com.smilepile.data.repository.PhotoRepository"vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*Q
+
+__unknown_file (53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*^
+
+__unknown_file (B
+@
+photoRepository-com.smilepile.data.repository.PhotoRepository¸
+˘
+ (66
+%40com.smilepile.data.repository.CategoryRepository"|com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*Q
+
+__unknown_file (53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*d
+
+__unknown_file (H
+F
+categoryRepository0com.smilepile.data.repository.CategoryRepositoryÅ
+˛
+ (>5
+%5/com.smilepile.operations.PhotoOperationsManager"com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotoOperationsManager(Lcom/smilepile/operations/PhotoOperationsManager;)V*Q
+
+__unknown_file (53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*g
+
+__unknown_file (K
+I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManager˘
+ˆ
+  (N
+%6java.lang.Object"dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedCategoryIds(Lerror/NonExistentClass;)V*A
+  (N53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Õ
+ 
+!4 !(H
+%7java.lang.Object"ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryIds()Lerror/NonExistentClass;*A
+!4 !(H53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelÎ
+Ë
+! !(V
+%8java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedCategoryIds(LStateFlow;)V*A
+! !(V53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>¯
+ı
+# $(C
+%9java.lang.Object"ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedCategoryId(Lerror/NonExistentClass;)V*A
+# $(C53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Õ
+ 
+%/ %(B
+%10java.lang.Object"bcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryId()Lerror/NonExistentClass;*A
+%/ %(B53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelÎ
+Ë
+% %(P
+%11java.lang.Object"Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedCategoryId(LStateFlow;)V*A
+% %(P53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>
+Ì
+D D(4
+%12java.lang.Object"Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isLoading(Lerror/NonExistentClass;)V*A
+D D(453
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>ƒ
+¡
+E( E(2
+%13java.lang.Object"Ycom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isLoading()Lerror/NonExistentClass;*A
+E( E(253
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel‚
+ﬂ
+E E(@
+%14java.lang.Object"Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsLoading(LStateFlow;)V*A
+E E(@53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Ï
+È
+G G(8
+%15java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_error(Lerror/NonExistentClass;)V*A
+G G(853
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>¿
+Ω
+H$ H(*
+%16java.lang.Object"Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_error()Lerror/NonExistentClass;*A
+H$ H(*53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelﬁ
+€
+H H(8
+%17java.lang.Object"Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setError(LStateFlow;)V*A
+H H(853
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>ˆ
+Û
+J K(:
+%18java.lang.Object"`com.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isSelectionMode(Lerror/NonExistentClass;)V*A
+J K(:53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown> 
+«
+L. L(>
+%19java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;*A
+L. L(>53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelË
+Â
+L L(L
+%20java.lang.Object"Rcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsSelectionMode(LStateFlow;)V*A
+L L(L53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>ı
+Ú
+N N(I
+%21java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedPhotos(Lerror/NonExistentClass;)V*A
+N N(I53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>…
+∆
+O/ O(>
+%22java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*A
+O/ O(>53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelÁ
+‰
+O O(L
+%23java.lang.Object"Qcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedPhotos(LStateFlow;)V*A
+O O(L53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Å
+˛
+Q Q(E
+%24java.lang.Object"kcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isBatchOperationInProgress(Lerror/NonExistentClass;)V*A
+Q Q(E53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>’
+“
+R9 R(T
+%25java.lang.Object"jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isBatchOperationInProgress()Lerror/NonExistentClass;*A
+R9 R(T53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelÛ
+
+R R(b
+%26java.lang.Object"]com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsBatchOperationInProgress(LStateFlow;)V*A
+R R(b53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Ü
+É
+U0 U(B7
+%270com.smilepile.data.repository.CategoryRepository"{com.smilepile.ui.viewmodels.PhotoGalleryViewModel#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*A
+U0 U(B53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel‘—
+UC U(Y
+%28java.lang.Object"Mcom.smilepile.data.repository.CategoryRepository#getAllCategoriesFlow()LFlow;*E
+U0 U(B9
+7
+%270com.smilepile.data.repository.CategoryRepository2getAllCategoriesFlow()„
+‡
+T Z(	
+%29java.lang.Object"Mcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setCategories(LStateFlow;)V*A
+T Z(	53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>˝
+˙
+], ](;4
+%30-com.smilepile.data.repository.PhotoRepository"ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*A
+], ](;53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel∆√
+]< ](N
+%31java.lang.Object"Fcom.smilepile.data.repository.PhotoRepository#getAllPhotosFlow()LFlow;*B
+], ](;6
+4
+%30-com.smilepile.data.repository.PhotoRepository2getAllPhotosFlow()‚
+ﬂ
+\ f(	
+%32java.lang.Object"Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setAllPhotos(LStateFlow;)V*A
+\ f(	53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>Œ
+À
+j) j(=
+%33java.lang.Object"ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryIds()Lerror/NonExistentClass;*A
+j) j(=53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel·
+ﬁ
+	h Ñ(	
+%34java.lang.Object"Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotos(LStateFlow;)V*B
+	h Ñ(	53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>ı
+Ú
+
+Ü è(
+%35java.lang.Object"[com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setBaseUiState(Lerror/NonExistentClass;)V*C
+
+Ü è(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>¯
+ı
+
+ë ó(
+%36java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectionState(Lerror/NonExistentClass;)V*C
+
+ë ó(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>‰
+·
+
+ô ¨(
+%37java.lang.Object"Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setUiState(LStateFlow;)V*C
+
+ô ¨(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:L
+ (0@
+photoRepository-com.smilepile.data.repository.PhotoRepository:R
+ (6F
+categoryRepository0com.smilepile.data.repository.CategoryRepository:U
+ (>I
+photoOperationsManager/com.smilepile.operations.PhotoOperationsManagerB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHñ
+ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryIds()Lerror/NonExistentClass;
+__unknown_file ("0*÷
+0 (ù
+ö
  (
-fieldjava.lang.Object"__id*w
- (k*iC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig""
-THUMBNAIL_SIZEjava.lang.Object"'
+fieldjava.lang.Object"__id*m
+ (a*_3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"(
+_selectedCategoryIdsjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`√
-Wcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setTHUMBNAIL_SIZE(I)V
-__unknown_file ("0*ÿ
-0 (ß
-§
- (iC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig""
-THUMBNAIL_SIZEjava.lang.Object"__id*'
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`∂
+dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedCategoryIds(Lerror/NonExistentClass;)V
+__unknown_file ("0*Œ
+0 (ù
+ö
+ (_3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"(
+_selectedCategoryIdsjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`•
-Wcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getFULL_IMAGE_SIZE()I
-__unknown_file ("0*·
-0 (®
-•
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`á
+Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getSelectedCategoryIds()LStateFlow;
+__unknown_file ("0*’
+0 (ú
+ô
  (
-fieldjava.lang.Object"__id*x
- (l*jC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"#
-FULL_IMAGE_SIZEjava.lang.Object"'
+fieldjava.lang.Object"__id*l
+ (`*^3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"'
+selectedCategoryIdsjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`≈
-Xcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setFULL_IMAGE_SIZE(I)V
-__unknown_file ("0*Ÿ
-0 (®
-•
- (jC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"#
-FULL_IMAGE_SIZEjava.lang.Object"__id*'
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ß
+Vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedCategoryIds(LStateFlow;)V
+__unknown_file ("0*Õ
+0 (ú
+ô
+ (^3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"'
+selectedCategoryIdsjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`≠
-[com.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getCACHE_DURATION_DAYS()I
-__unknown_file ("0*Â
-0 (¨
-©
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`î
+bcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryId()Lerror/NonExistentClass;
+__unknown_file ("0*’
+0 (ú
+ô
  (
-fieldjava.lang.Object"__id*|
- (p*nC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"'
-CACHE_DURATION_DAYSjava.lang.Object"'
+fieldjava.lang.Object"__id*l
+ (`*^3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"'
+_selectedCategoryIdjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`Õ
-\com.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setCACHE_DURATION_DAYS(I)V
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`¥
+ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedCategoryId(Lerror/NonExistentClass;)V
+__unknown_file ("0*Õ
+0 (ú
+ô
+ (^3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"'
+_selectedCategoryIdjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Ö
+Tcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getSelectedCategoryId()LStateFlow;
+__unknown_file ("0*‘
+0 (õ
+ò
+ (
+fieldjava.lang.Object"__id*k
+ (_*]3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"&
+selectedCategoryIdjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`•
+Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedCategoryId(LStateFlow;)V
+__unknown_file ("0*Ã
+0 (õ
+ò
+ (]3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"&
+selectedCategoryIdjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Ç
+Ycom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isLoading()Lerror/NonExistentClass;
+__unknown_file ("0*Ã
+0 (ì
+ê
+ (
+fieldjava.lang.Object"__id*c
+ (W*U3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+
+_isLoadingjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`¢
+Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isLoading(Lerror/NonExistentClass;)V
+__unknown_file ("0*ƒ
+0 (ì
+ê
+ (U3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+
+_isLoadingjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`
+Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#isLoading()LStateFlow;
+__unknown_file ("0*À
+0 (í
+è
+ (
+fieldjava.lang.Object"__id*b
+ (V*T3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+	isLoadingjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ì
+Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsLoading(LStateFlow;)V
+__unknown_file ("0*√
+0 (í
+è
+ (T3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+	isLoadingjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`˙
+Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_error()Lerror/NonExistentClass;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+_errorjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ö
+Vcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_error(Lerror/NonExistentClass;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+_errorjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Î
+Gcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getError()LStateFlow;
+__unknown_file ("0*«
+0 (é
+ã
+ (
+fieldjava.lang.Object"__id*^
+ (R*P3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+errorjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ã
+Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setError(LStateFlow;)V
+__unknown_file ("0*ø
+0 (é
+ã
+ (P3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+errorjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`é
+_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;
+__unknown_file ("0*“
+0 (ô
+ñ
+ (
+fieldjava.lang.Object"__id*i
+ (]*[3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"$
+_isSelectionModejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Æ
+`com.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isSelectionMode(Lerror/NonExistentClass;)V
+__unknown_file ("0* 
+0 (ô
+ñ
+ ([3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"$
+_isSelectionModejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`¸
+Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel#isSelectionMode()LStateFlow;
+__unknown_file ("0*—
+0 (ò
+ï
+ (
+fieldjava.lang.Object"__id*h
+ (\*Z3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"#
+isSelectionModejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ü
+Rcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsSelectionMode(LStateFlow;)V
+__unknown_file ("0*…
+0 (ò
+ï
+ (Z3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"#
+isSelectionModejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`å
+^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;
+__unknown_file ("0*—
+0 (ò
+ï
+ (
+fieldjava.lang.Object"__id*h
+ (\*Z3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"#
+_selectedPhotosjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`¨
+_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_selectedPhotos(Lerror/NonExistentClass;)V
+__unknown_file ("0*…
+0 (ò
+ï
+ (Z3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"#
+_selectedPhotosjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`˝
+Pcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getSelectedPhotos()LStateFlow;
+__unknown_file ("0*–
+0 (ó
+î
+ (
+fieldjava.lang.Object"__id*g
+ ([*Y3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel""
+selectedPhotosjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ù
+Qcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectedPhotos(LStateFlow;)V
+__unknown_file ("0*»
+0 (ó
+î
+ (Y3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel""
+selectedPhotosjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`§
+jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isBatchOperationInProgress()Lerror/NonExistentClass;
 __unknown_file ("0*›
-0 (¨
-©
- (nC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"'
-CACHE_DURATION_DAYSjava.lang.Object"__id*'
+0 (§
+°
+ (
+fieldjava.lang.Object"__id*t
+ (h*f3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"/
+_isBatchOperationInProgressjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ƒ
+kcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#set_isBatchOperationInProgress(Lerror/NonExistentClass;)V
+__unknown_file ("0*’
+0 (§
+°
+ (f3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"/
+_isBatchOperationInProgressjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectBEC
-Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`ë
-Qcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_IMAGE_LOADING()Z
-__unknown_file ("0*€
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`í
+Ycom.smilepile.ui.viewmodels.PhotoGalleryViewModel#isBatchOperationInProgress()LStateFlow;
+__unknown_file ("0*‹
+0 (£
+†
+ (
+fieldjava.lang.Object"__id*s
+ (g*e3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel".
+isBatchOperationInProgressjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`µ
+]com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setIsBatchOperationInProgress(LStateFlow;)V
+__unknown_file ("0*‘
+0 (£
+†
+ (e3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel".
+isBatchOperationInProgressjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ı
+Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getCategories()LStateFlow;
+__unknown_file ("0*Ã
+0 (ì
+ê
+ (
+fieldjava.lang.Object"__id*c
+ (W*U3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+
+categoriesjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ï
+Mcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setCategories(LStateFlow;)V
+__unknown_file ("0*ƒ
+0 (ì
+ê
+ (U3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+
+categoriesjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Û
+Kcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getAllPhotos()LStateFlow;
+__unknown_file ("0*À
+0 (í
+è
+ (
+fieldjava.lang.Object"__id*b
+ (V*T3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+	allPhotosjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ì
+Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setAllPhotos(LStateFlow;)V
+__unknown_file ("0*√
+0 (í
+è
+ (T3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+	allPhotosjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ü
+Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getPhotos()LStateFlow;
+__unknown_file ("0*˙
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+photosjava.lang.Objecte
+c
+ (
+%0"
+__annotate*
+ (
+kotlin.OptIn*'
+ (
+
+fieldjava.lang.ObjectI
+G
+ (
+fieldjava.lang.Object"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ø
+Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setPhotos(LStateFlow;)V
+__unknown_file ("0*Ú
+0 (e
+c
+ (
+%0"
+__annotate*
+ (
+kotlin.OptIn*'
+ (
+
+valuejava.lang.ObjectI
+G
+ (
+valuejava.lang.Object"__annotation*
+ (
+
+%0è
+å
+ (Q3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+photosjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Ñ
+Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getBaseUiState()Lerror/NonExistentClass;
+__unknown_file ("0*Õ
+0 (î
+ë
+ (
+fieldjava.lang.Object"__id*d
+ (X*V3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+baseUiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`§
+[com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setBaseUiState(Lerror/NonExistentClass;)V
+__unknown_file ("0*≈
+0 (î
+ë
+ (V3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+baseUiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ä
+]com.smilepile.ui.viewmodels.PhotoGalleryViewModel#getSelectionState()Lerror/NonExistentClass;
+__unknown_file ("0*–
+0 (ó
+î
+ (
+fieldjava.lang.Object"__id*g
+ ([*Y3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel""
+selectionStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`™
+^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#setSelectionState(Lerror/NonExistentClass;)V
+__unknown_file ("0*»
+0 (ó
+î
+ (Y3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel""
+selectionStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`Ô
+Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getUiState()LStateFlow;
+__unknown_file ("0*…
+0 (ê
+ç
+ (
+fieldjava.lang.Object"__id*`
+ (T*R3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+uiStatejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`è
+Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setUiState(LStateFlow;)V
+__unknown_file ("0*¡
+0 (ê
+ç
+ (R3
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"
+uiStatejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH`ê
+Ycom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#getPhotos()Ljava/util/List;
+__unknown_file ("0*Œ
+0 (ó
+î
+ (
+fieldjava.util.List"__id*i
+ (]*[?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+photosjava.util.List"%
+ (
+
+fieldjava.util.ListBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`∞
+Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setPhotos(Ljava/util/List;)V
+__unknown_file ("0*»
+0 (ó
+î
+ ([?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+photosjava.util.List"__id*%
+ (
+
+valuejava.util.List"
+ (
+implicit return:#
+ (
+valuejava.util.ListBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`ò
+]com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#getCategories()Ljava/util/List;
+__unknown_file ("0*“
+0 (õ
+ò
+ (
+fieldjava.util.List"__id*m
+ (a*_?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+
+categoriesjava.util.List"%
+ (
+
+fieldjava.util.ListBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`∏
+^com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setCategories(Ljava/util/List;)V
+__unknown_file ("0*Ã
+0 (õ
+ò
+ (_?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+
+categoriesjava.util.List"__id*%
+ (
+
+valuejava.util.List"
+ (
+implicit return:#
+ (
+valuejava.util.ListBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`¶
+ecom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#getSelectedCategoryIds()Ljava/util/Set;
+__unknown_file ("0*ÿ
 0 (¢
 ü
- (
-fieldjava.lang.Object"__id*r
- (f*d;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"%
-LOG_IMAGE_LOADINGjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`±
-Rcom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_IMAGE_LOADING(Z)V
+ (
+fieldjava.util.Set"__id*u
+ (i*g?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"$
+selectedCategoryIdsjava.util.Set"$
+ (
+
+fieldjava.util.SetBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`∆
+fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setSelectedCategoryIds(Ljava/util/Set;)V
 __unknown_file ("0*”
 0 (¢
 ü
- (d;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"%
-LOG_IMAGE_LOADINGjava.lang.Object"__id*'
+ (g?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"$
+selectedCategoryIdsjava.util.Set"__id*$
+ (
+
+valuejava.util.Set"
+ (
+implicit return:"
+ (
+valuejava.util.SetBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`Ô
+Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#isLoading()Z
+__unknown_file ("0*º
+0 (å
+â
+ (
+fieldboolean"__id*e
+ (Y*W?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+	isLoadingboolean"
+ (
+
+fieldbooleanBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`í
+Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setIsLoading(Z)V
+__unknown_file ("0*Ω
+0 (å
+â
+ (W?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+	isLoadingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`ñ
+Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#getError()Ljava/lang/String;
+__unknown_file ("0*”
+0 (ö
+ó
+ (
+fieldjava.lang.String"__id*j
+ (^*\?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+errorjava.lang.String"'
  (
 
-valuejava.lang.Object"
+fieldjava.lang.StringBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`∂
+[com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setError(Ljava/lang/String;)V
+__unknown_file ("0*À
+0 (ö
+ó
+ (\?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState"
+errorjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`ó
-Tcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_DATABASE_QUERIES()Z
-__unknown_file ("0*ﬁ
-0 (•
-¢
- (
-fieldjava.lang.Object"__id*u
- (i*g;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"(
-LOG_DATABASE_QUERIESjava.lang.Object"'
- (
+valuejava.lang.StringBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateH`ˆ
+âcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#<init>(Ljava/util/List;Ljava/util/List;Ljava/util/Set;ZLjava/lang/String;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktÆ Æ(""0*”
+0
+Æ" ¥(ò
+ï
+
+Ø Ø(
+%0java.util.List"Zcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setPhotos(Ljava/util/List;)V*]
+
+__unknown_file (A?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState*6
+
+__unknown_file (
+
+photosjava.util.List†
+ù
+
+∞ ∞(&
+%1java.util.List"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setCategories(Ljava/util/List;)V*]
+
+__unknown_file (A?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState*:
+
+__unknown_file (
+
+
+categoriesjava.util.ListØ
+¨
+
+± ±(*
+%2java.util.Set"fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setSelectedCategoryIds(Ljava/util/Set;)V*]
+
+__unknown_file (A?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState*B
+
+__unknown_file (&
+$
+selectedCategoryIdsjava.util.SetÅ
+˛
+
+≤ ≤(
+%3boolean"Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setIsLoading(Z)V*]
+
+__unknown_file (A?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState*2
+
+__unknown_file (
+
+	isLoadingbooleanú
+ô
+
+≥ ≥(
+%4java.lang.String"[com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#setError(Ljava/lang/String;)V*]
+
+__unknown_file (A?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState*7
+
+__unknown_file (
 
-fieldjava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`∑
-Ucom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_DATABASE_QUERIES(Z)V
+errorjava.lang.String"/
+
+__unknown_file (
+implicit return:&
+
+Ø Ø(
+photosjava.util.List:*
+
+∞ ∞(&
+
+categoriesjava.util.List:2
+
+± ±(*$
+selectedCategoryIdsjava.util.Set:"
+
+≤ ≤(
+	isLoadingboolean:'
+
+≥ ≥(
+errorjava.lang.StringBA?
+=com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiStateHÑ
+Scom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#isSelectionMode()Z
+__unknown_file ("0*≈
+0 (ï
+í
+ (
+fieldboolean"__id*n
+ (b*`B
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"
+isSelectionModeboolean"
+ (
+
+fieldbooleanBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`ß
+Wcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setIsSelectionMode(Z)V
+__unknown_file ("0*∆
+0 (ï
+í
+ (`B
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"
+isSelectionModeboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`•
+ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#getSelectedPhotos()Ljava/util/Set;
 __unknown_file ("0*÷
-0 (•
-¢
- (g;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"(
-LOG_DATABASE_QUERIESjava.lang.Object"__id*'
+0 (†
+ù
+ (
+fieldjava.util.Set"__id*s
+ (g*eB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"
+selectedPhotosjava.util.Set"$
+ (
+
+fieldjava.util.SetBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`≈
+dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setSelectedPhotos(Ljava/util/Set;)V
+__unknown_file ("0*—
+0 (†
+ù
+ (eB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"
+selectedPhotosjava.util.Set"__id*$
+ (
+
+valuejava.util.Set"
+ (
+implicit return:"
+ (
+valuejava.util.SetBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`ö
+^com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#isBatchOperationInProgress()Z
+__unknown_file ("0*–
+0 (†
+ù
+ (
+fieldboolean"__id*y
+ (m*kB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"%
+isBatchOperationInProgressboolean"
+ (
+
+fieldbooleanBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`Ω
+bcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setIsBatchOperationInProgress(Z)V
+__unknown_file ("0*—
+0 (†
+ù
+ (kB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState"%
+isBatchOperationInProgressboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateH`‡
+
+[com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#<init>(ZLjava/util/Set;Z)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt∂ ∂(%"0*∞
+0
+∂% ∫(ì
+ê
+
+∑ ∑($
+%0boolean"Wcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setIsSelectionMode(Z)V*`
+
+__unknown_file (DB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState*8
+
+__unknown_file (
+
+isSelectionModeboolean´
+®
+
+∏ ∏(%
+%1java.util.Set"dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setSelectedPhotos(Ljava/util/Set;)V*`
+
+__unknown_file (DB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState*=
+
+__unknown_file (!
+
+selectedPhotosjava.util.Set©
+¶
+
+π π(/
+%2boolean"bcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#setIsBatchOperationInProgress(Z)V*`
+
+__unknown_file (DB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState*C
+
+__unknown_file ('
+%
+isBatchOperationInProgressboolean"/
+
+__unknown_file (
+implicit return:(
+
+∑ ∑($
+isSelectionModeboolean:-
+
+∏ ∏(%
+selectedPhotosjava.util.Set:3
+
+π π(/%
+isBatchOperationInProgressbooleanBDB
+@com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStateHˆ
+Scom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectCategory(Ljava/lang/Long;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktº º("0*@
+0
+º º()"/
+
+__unknown_file (
+implicit return:*
+
+º º((
+
+categoryIdjava.lang.LongB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH„
+Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#toggleCategoryFilter(J)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt” ”("0*@
+0
+” ”(."/
+
+__unknown_file (
+implicit return: 
+
+” ”(-
+
+categoryIdlongB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHá
+Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#clearCategoryFilters()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktÈ È("0*Ü
+0
+È È(—
+Œ
+
+Í Í(
+%0java.lang.Object"ccom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryIds()Lerror/NonExistentClass;*C
+
+Í Í(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelZ
+X
+
+Í Í(/
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>–
+Õ
+
+Î Î(
+%1java.lang.Object"bcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedCategoryId()Lerror/NonExistentClass;*C
+
+Î Î(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelA
+?
+
+Î Î((
+valuejava.lang.Object"__id*
+
+Î$ Î(( "/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHø
+Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectAllCategories()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktÓ Ó("0*@
+0
+Ó Ó("/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHõ
+lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#removePhotoFromLibrary(Lcom/smilepile/data/models/Photo;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt˜ ˜("0*@
+0
+˜ ˜(,"/
+
+__unknown_file (
+implicit return:6
+
+˜ ˜(+(
+photocom.smilepile.data.models.PhotoB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHæ
+jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktÑ Ñ("0*@
+0
+Ñ Ñ(>"/
+
+__unknown_file (
+implicit return:6
+
+Ñ Ñ(((
+photocom.smilepile.data.models.Photo:#
+
+Ñ* Ñ(=
+newCategoryIdlongB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÿ
+Gcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#enterSelectionMode()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktì ì("0*Ÿ
+0
+ì ì(Õ
+ 
+
+î î(
+%0java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;*C
+
+î î(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelG
+E
+
+î î(%
+valuejava.lang.Object"__id*
+
+î! î(%
+true"/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÉ
+Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#exitSelectionMode()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.któ ó("0*Ö
+0
+ó ó(Õ
+ 
+
+ò ò(
+%0java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;*C
+
+ò ò(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH
+F
+
+ò ò(&
+valuejava.lang.Object"__id*
+
+ò! ò(&	
+falseÃ
+…
+
+ô ô(
+%1java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*C
+
+ô ô(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelZ
+X
+
+ô ô(*
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH‹
+Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#togglePhotoSelection(J)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktú ú("0*i
+2
+û0 †(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*i
+3
+† ¢(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*@
+4
+®	 ©("/
+
+__unknown_file (
+implicit return*É
+5
+¶( ®(	Õ
+ 
+
+ß ß(
+%4java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;*C
+
+ß ß(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH
+F
+
+ß ß(*
+valuejava.lang.Object"__id*
+
+ß% ß(*	
+falseS
+Q
+
+__unknown_file (
+%3"__id*)
+
+ß ß("
+
+valuejava.lang.Object*
+4*Õ
+0
+ú ú(+Ã
+…
+
+ù ù(.
+%0java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*C
+
+ù ù(.53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModele
+c
+
+ù ù(C$
+currentSelectionjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+3*Õ
+1
+¢	 £(Ã
+…
+
+£ £(
+%2java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*C
+
+£ £(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModele
+c
+
+£ £(0
+valuejava.lang.Object"__id*4
+
+£  £(0&
+$
+currentSelectionjava.lang.Object*
+4
+5:
+
+ú ú(*
+photoIdlongB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHâ
+Dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectAllPhotos()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt´ ´("0*ç
+0
+´ ´(∑
+¥
+
+¨ ¨(!
+%0java.lang.Object"Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#getUiState()LStateFlow;*C
+
+¨ ¨(!53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel`
+^
+
+¨ ¨(D
+allPhotoIdsjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>Ã
+…
+
+≠ ≠(
+%1java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*C
+
+≠ ≠(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModel`
+^
+
+≠ ≠(+
+valuejava.lang.Object"__id*/
+
+≠  ≠(+!
+
+allPhotoIdsjava.lang.Object"/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÉ
+Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#deselectAllPhotos()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt∞ ∞("0*Ö
+0
+∞ ∞(Ã
+…
+
+± ±(
+%0java.lang.Object"^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_selectedPhotos()Lerror/NonExistentClass;*C
+
+± ±(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelZ
+X
+
+± ±(*
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>Õ
+ 
+
+≤ ≤(
+%1java.lang.Object"_com.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_isSelectionMode()Lerror/NonExistentClass;*C
+
+≤ ≤(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH
+F
+
+≤ ≤(&
+valuejava.lang.Object"__id*
+
+≤! ≤(&	
+false"/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÀ
+Tcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#removeSelectedPhotosFromLibrary()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.kt∂ ∂('"0*@
+0
+∂' ∂()"/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÎ
+Rcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#moveSelectedPhotosToCategory(J)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktœ œ($"0*@
+0
+œ$ œ(6"/
+
+__unknown_file (
+implicit return: 
+
+œ% œ(5
+
+categoryIdlongB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHâ
+ecom.smilepile.ui.viewmodels.PhotoGalleryViewModel#assignSelectedPhotosToCategories(Ljava/util/List;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktË Ë(("0*@
+0
+Ë( Ë(A"/
+
+__unknown_file (
+implicit return:+
+
+Ë) Ë(@
+categoryIdsjava.util.ListB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelH¿
+?com.smilepile.ui.viewmodels.PhotoGalleryViewModel#clearError()Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktˇ ˇ("0*…
+0
+ˇ ˇ(√
+¿
+
+Ä Ä(
+%0java.lang.Object"Ucom.smilepile.ui.viewmodels.PhotoGalleryViewModel#get_error()Lerror/NonExistentClass;*C
+
+Ä Ä(53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelA
+?
+
+Ä Ä(
+valuejava.lang.Object"__id*
+
+Ä Ä( "/
+
+__unknown_file (
+implicit returnB53
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModelHÊ
+Kcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getPhotos()Ljava/util/List;
+__unknown_file ("0*¿
+0 (â
+Ü
+ (
+fieldjava.util.List"__id*[
+ (O*M1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+photosjava.util.List"%
+ (
+
+fieldjava.util.ListB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ü
+Lcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setPhotos(Ljava/util/List;)V
+__unknown_file ("0*∫
+0 (â
+Ü
+ (M1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+photosjava.util.List"__id*%
+ (
+
+valuejava.util.List"
+ (
+implicit return:#
+ (
+valuejava.util.ListB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ó
+Ocom.smilepile.ui.viewmodels.PhotoGalleryUiState#getCategories()Ljava/util/List;
+__unknown_file ("0*ƒ
+0 (ç
+ä
+ (
+fieldjava.util.List"__id*_
+ (S*Q1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+
+categoriesjava.util.List"%
+ (
+
+fieldjava.util.ListB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`é
+Pcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setCategories(Ljava/util/List;)V
+__unknown_file ("0*æ
+0 (ç
+ä
+ (Q1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+
+categoriesjava.util.List"__id*%
+ (
+
+valuejava.util.List"
+ (
+implicit return:#
+ (
+valuejava.util.ListB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`¸
+Wcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedCategoryIds()Ljava/util/Set;
+__unknown_file ("0* 
+0 (î
+ë
+ (
+fieldjava.util.Set"__id*g
+ ([*Y1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"$
+selectedCategoryIdsjava.util.Set"$
+ (
+
+fieldjava.util.SetB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`ú
+Xcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedCategoryIds(Ljava/util/Set;)V
+__unknown_file ("0*≈
+0 (î
+ë
+ (Y1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"$
+selectedCategoryIdsjava.util.Set"__id*$
+ (
+
+valuejava.util.Set"
+ (
+implicit return:"
+ (
+valuejava.util.SetB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`˛
+Wcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedCategoryId()Ljava/lang/Long;
+__unknown_file ("0*Ã
+0 (ï
+í
+ (
+fieldjava.lang.Long"__id*g
+ ([*Y1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"$
+selectedCategoryIdjava.lang.Long"%
+ (
+
+fieldjava.lang.LongB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`û
+Xcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedCategoryId(Ljava/lang/Long;)V
+__unknown_file ("0*∆
+0 (ï
+í
+ (Y1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"$
+selectedCategoryIdjava.lang.Long"__id*%
+ (
+
+valuejava.lang.Long"
+ (
+implicit return:#
+ (
+valuejava.lang.LongB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`√
+<com.smilepile.ui.viewmodels.PhotoGalleryUiState#isLoading()Z
+__unknown_file ("0*¨
+0 (}
+{
+ (
+fieldboolean"__id*W
+ (K*I1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+	isLoadingboolean"
+ (
+
+fieldbooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ê
+@com.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsLoading(Z)V
+__unknown_file ("0*≠
+0 (}
+{
+ (I1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+	isLoadingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ï
+Lcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getError()Ljava/lang/String;
+__unknown_file ("0*≈
+0 (å
+â
+ (
+fieldjava.lang.String"__id*\
+ (P*N1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+errorjava.lang.String"'
  (
 
-valuejava.lang.Object"
+fieldjava.lang.StringB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`å
+Mcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setError(Ljava/lang/String;)V
+__unknown_file ("0*Ω
+0 (å
+â
+ (N1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+errorjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`è
-Pcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_MEMORY_USAGE()Z
-__unknown_file ("0*⁄
-0 (°
-û
- (
-fieldjava.lang.Object"__id*q
- (e*c;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"$
-LOG_MEMORY_USAGEjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`Ø
-Qcom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_MEMORY_USAGE(Z)V
-__unknown_file ("0*“
-0 (°
-û
- (c;
-9com.smilepile.performance.PerformanceOptimizer$Monitoring"$
-LOG_MEMORY_USAGEjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
+valuejava.lang.StringB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`—
+Bcom.smilepile.ui.viewmodels.PhotoGalleryUiState#isSelectionMode()Z
+__unknown_file ("0*¥
+0 (Ñ
+Å
+ (
+fieldboolean"__id*]
+ (Q*O1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+isSelectionModeboolean"
+ (
+
+fieldbooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ù
+Fcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsSelectionMode(Z)V
+__unknown_file ("0*µ
+0 (Ñ
+Å
+ (O1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+isSelectionModeboolean"__id*
+ (
+
+valueboolean"
  (
-implicit return:%
- (
-valuejava.lang.ObjectB=;
-9com.smilepile.performance.PerformanceOptimizer$MonitoringH`
+implicit return:
+ (
+valuebooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Ú
+Rcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotos()Ljava/util/Set;
+__unknown_file ("0*≈
+0 (è
+å
+ (
+fieldjava.util.Set"__id*b
+ (V*T1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+selectedPhotosjava.util.Set"$
+ (
+
+fieldjava.util.SetB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`í
+Scom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedPhotos(Ljava/util/Set;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (T1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+selectedPhotosjava.util.Set"__id*$
+ (
+
+valuejava.util.Set"
+ (
+implicit return:"
+ (
+valuejava.util.SetB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`Á
+Mcom.smilepile.ui.viewmodels.PhotoGalleryUiState#isBatchOperationInProgress()Z
+__unknown_file ("0*ø
+0 (è
+å
+ (
+fieldboolean"__id*h
+ (\*Z1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"%
+isBatchOperationInProgressboolean"
+ (
+
+fieldbooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`ä
+Qcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsBatchOperationInProgress(Z)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Z1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"%
+isBatchOperationInProgressboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`“
+úcom.smilepile.ui.viewmodels.PhotoGalleryUiState#<init>(Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/lang/Long;ZLjava/lang/String;ZLjava/util/Set;Z)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktÑ Ñ("0*Ë
+0
+Ñ é(¸
+˘
+
+Ö Ö()
+%0java.util.List"Lcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setPhotos(Ljava/util/List;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*6
+
+__unknown_file (
+
+photosjava.util.ListÑ
+Å
+
+Ü Ü(0
+%1java.util.List"Pcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setCategories(Ljava/util/List;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*:
+
+__unknown_file (
+
+
+categoriesjava.util.Listì
+ê
+
+á á(3
+%2java.util.Set"Xcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedCategoryIds(Ljava/util/Set;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*B
+
+__unknown_file (&
+$
+selectedCategoryIdsjava.util.Setî
+ë
+
+à à((
+%3java.lang.Long"Xcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedCategoryId(Ljava/lang/Long;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*B
+
+__unknown_file (&
+$
+selectedCategoryIdjava.lang.LongÂ
+‚
+
+â â("
+%4boolean"@com.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsLoading(Z)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*2
+
+__unknown_file (
+
+	isLoadingbooleanÄ
+˝
+
+ä ä(
+%5java.lang.String"Mcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setError(Ljava/lang/String;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*7
+
+__unknown_file (
+
+errorjava.lang.StringÒ
+Ó
+
+ã ã((
+%6boolean"Fcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsSelectionMode(Z)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*8
+
+__unknown_file (
+
+isSelectionModebooleanâ
+Ü
+
+å å(.
+%7java.util.Set"Scom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedPhotos(Ljava/util/Set;)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*=
+
+__unknown_file (!
+
+selectedPhotosjava.util.Setá
+Ñ
+
+ç ç(3
+%8boolean"Qcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsBatchOperationInProgress(Z)V*O
+
+__unknown_file (31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState*C
+
+__unknown_file ('
+%
+isBatchOperationInProgressboolean"/
+
+__unknown_file (
+implicit return:&
+
+Ö Ö()
+photosjava.util.List:*
+
+Ü Ü(0
+
+categoriesjava.util.List:2
+
+á á(3$
+selectedCategoryIdsjava.util.Set:2
+
+à à(($
+selectedCategoryIdjava.lang.Long:"
+
+â â("
+	isLoadingboolean:'
+
+ä ä(
+errorjava.lang.String:(
+
+ã ã((
+isSelectionModeboolean:-
+
+å å(.
+selectedPhotosjava.util.Set:3
+
+ç ç(3%
+isBatchOperationInProgressbooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateHÓ
+Jcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setSelectedPhotosCount(I)V
+__unknown_file ("0*Ø
+0 (
+}
+ (O1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+selectedPhotosCountint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH` 
+Icom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotosCount()Iu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktê ê(#"0*À
+0
+ê ê(ª
+∏
+
+ê ê(
+%0java.util.Set"Rcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotos()Ljava/util/Set;*A
+
+ê ê(31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStatea
+_
+
+ê ê(#	
+%1int"!kotlin.collections.Set#getSize()I*#
+
+ê ê(
+
+%0java.util.Set"
+
+ê ê(#
+	
+%1intB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH¯
+Hcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setHasSelectedPhotos(Z)V
+__unknown_file ("0*∑
+0 (Ü
+É
+ (Q1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+hasSelectedPhotosboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`ı
+Gcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getHasSelectedPhotos()Zu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktì ì(+"0*¯
+0
+ì ì(ª
+∏
+
+ì ì(
+%0java.util.Set"Rcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotos()Ljava/util/Set;*A
+
+ì ì(31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState")
+
+__unknown_file (
+	<unknown>B31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH¸
+Jcom.smilepile.ui.viewmodels.PhotoGalleryUiState#setIsAllPhotosSelected(Z)V
+__unknown_file ("0*π
+0 (à
+Ö
+ (S1
+/com.smilepile.ui.viewmodels.PhotoGalleryUiState"
+isAllPhotosSelectedboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH`«	
+Fcom.smilepile.ui.viewmodels.PhotoGalleryUiState#isAllPhotosSelected()Zu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoGalleryViewModel.ktñ ñ(I"0*À
+0
+ñ ñ(µ
+≤
+
+ñ ñ(
+%0java.util.List"Kcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getPhotos()Ljava/util/List;*A
+
+ñ ñ(31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateª
+∏
+
+ñ' ñ(5
+%1java.util.Set"Rcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotos()Ljava/util/Set;*A
+
+ñ' ñ(531
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStatea
+_
+
+ñ6 ñ(:	
+%2int"!kotlin.collections.Set#getSize()I*#
+
+ñ' ñ(5
+
+%1java.util.Setµ
+≤
+
+ñ> ñ(D
+%3java.util.List"Kcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getPhotos()Ljava/util/List;*A
+
+ñ> ñ(D31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStatec
+a
+
+ñE ñ(I	
+%4int""kotlin.collections.List#getSize()I*$
+
+ñ> ñ(D
+
+%3java.util.Listòï
+
+ñ' ñ(I
+%5boolean"&kotlin.Int#equals(Ljava/lang/Object;)Z*
+
+ñ6 ñ(:
+	
+%2int*
+
+ñE ñ(I
+	
+%4int2equals(Ljava/lang/Object;)")
+
+__unknown_file (
+	<unknown>B31
+/com.smilepile.ui.viewmodels.PhotoGalleryUiStateH

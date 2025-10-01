@@ -1,9 +1,614 @@
-˜
-)com.smilepile.data.dao.PhotoDao#<init>()V`
-W/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/dao/PhotoDao.kt ®("0*<
-0 
-("/
+œ
+icom.smilepile.data.repository.CategoryRepositoryImpl#getCategoryDao()Lcom/smilepile/data/dao/CategoryDao;
+__unknown_file ("0*Ü
+0 (ª
+∏
+ (+
+field"com.smilepile.data.dao.CategoryDao"__id*y
+ (m*k6
+4com.smilepile.data.repository.CategoryRepositoryImpl"1
+categoryDao"com.smilepile.data.dao.CategoryDao"9
+ (-
++
+field"com.smilepile.data.dao.CategoryDaoB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`Ô
+jcom.smilepile.data.repository.CategoryRepositoryImpl#setCategoryDao(Lcom/smilepile/data/dao/CategoryDao;)V
+__unknown_file ("0*Ï
+0 (ª
+∏
+ (k6
+4com.smilepile.data.repository.CategoryRepositoryImpl"1
+categoryDao"com.smilepile.data.dao.CategoryDao"__id*9
+ (-
++
+value"com.smilepile.data.dao.CategoryDao"
+ (
+implicit return:7
+ (+
+value"com.smilepile.data.dao.CategoryDaoB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`Ó
+scom.smilepile.data.repository.CategoryRepositoryImpl#getPhotoCategoryDao()Lcom/smilepile/data/dao/PhotoCategoryDao;
+__unknown_file ("0*õ
+0 (À
+»
+ (0
+field'com.smilepile.data.dao.PhotoCategoryDao"__id*É
+ (w*u6
+4com.smilepile.data.repository.CategoryRepositoryImpl";
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDao">
+ (2
+0
+field'com.smilepile.data.dao.PhotoCategoryDaoB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`ç
+tcom.smilepile.data.repository.CategoryRepositoryImpl#setPhotoCategoryDao(Lcom/smilepile/data/dao/PhotoCategoryDao;)V
+__unknown_file ("0*˚
+0 ( 
+«
+ (u6
+4com.smilepile.data.repository.CategoryRepositoryImpl";
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDao"__id*>
+ (2
+0
+value'com.smilepile.data.dao.PhotoCategoryDao"
+ (
+implicit return:<
+ (0
+value'com.smilepile.data.dao.PhotoCategoryDaoB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`œ
+[com.smilepile.data.repository.CategoryRepositoryImpl#getIoDispatcher()LCoroutineDispatcher;
+__unknown_file ("0*î
+0 (ò
+ï
+ (
+fieldjava.lang.Object"__id*h
+ (\*Z6
+4com.smilepile.data.repository.CategoryRepositoryImpl" 
+ioDispatcherjava.lang.Objectv
+t
+ (
+%0"
+__annotate*-
+ (!
+com.smilepile.di.IoDispatcher*'
+ (
+
+fieldjava.lang.ObjectI
+G
+ (
+fieldjava.lang.Object"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.ObjectB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`Ô
+\com.smilepile.data.repository.CategoryRepositoryImpl#setIoDispatcher(LCoroutineDispatcher;)V
+__unknown_file ("0*å
+0 (v
+t
+ (
+%0"
+__annotate*-
+ (!
+com.smilepile.di.IoDispatcher*'
+ (
+
+valuejava.lang.ObjectI
+G
+ (
+valuejava.lang.Object"__annotation*
+ (
+
+%0ò
+ï
+ (Z6
+4com.smilepile.data.repository.CategoryRepositoryImpl" 
+ioDispatcherjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB86
+4com.smilepile.data.repository.CategoryRepositoryImplH`°
+†com.smilepile.data.repository.CategoryRepositoryImpl#<init>(Lcom/smilepile/data/dao/CategoryDao;Lcom/smilepile/data/dao/PhotoCategoryDao;LCoroutineDispatcher;)Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt% (0"0*é
+0 ($¢
+ü
+ ((
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+categoryDao"com.smilepile.data.dao.CategoryDaoq
+o
+ ((1
+categoryDao"com.smilepile.data.dao.CategoryDao"__annotation*"
+
+__unknown_file (
+
+%0¨
+©
+ (2
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*Y
+
+__unknown_file (=
+;
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDao{
+y
+ (2;
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDao"__annotation*"
+
+__unknown_file (
+
+%1û
+õ
+ (?
+%2"
+__annotate*=
+
+__unknown_file (!
+com.smilepile.di.IoDispatcher*>
+
+__unknown_file ("
+ 
+ioDispatcherjava.lang.Objectë
+é
+ (?
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*>
+
+__unknown_file ("
+ 
+ioDispatcherjava.lang.ObjectÖ
+Ç
+ (? 
+ioDispatcherjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3 
+«
+ (((
+%4"com.smilepile.data.dao.CategoryDao"jcom.smilepile.data.repository.CategoryRepositoryImpl#setCategoryDao(Lcom/smilepile/data/dao/CategoryDao;)V*T
+
+__unknown_file (86
+4com.smilepile.data.repository.CategoryRepositoryImpl*O
+
+__unknown_file (3
+1
+categoryDao"com.smilepile.data.dao.CategoryDao„
+‡
+ (2-
+%5'com.smilepile.data.dao.PhotoCategoryDao"tcom.smilepile.data.repository.CategoryRepositoryImpl#setPhotoCategoryDao(Lcom/smilepile/data/dao/PhotoCategoryDao;)V*T
+
+__unknown_file (86
+4com.smilepile.data.repository.CategoryRepositoryImpl*Y
+
+__unknown_file (=
+;
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDaoô
+ñ
+ (?
+%6java.lang.Object"\com.smilepile.data.repository.CategoryRepositoryImpl#setIoDispatcher(LCoroutineDispatcher;)V*T
+
+__unknown_file (86
+4com.smilepile.data.repository.CategoryRepositoryImpl*>
+
+__unknown_file ("
+ 
+ioDispatcherjava.lang.Object"/
 
 __unknown_file (
-implicit returnB#!
-com.smilepile.data.dao.PhotoDaoH`
+implicit return:=
+ ((1
+categoryDao"com.smilepile.data.dao.CategoryDao:G
+ (2;
+photoCategoryDao'com.smilepile.data.dao.PhotoCategoryDao:,
+ (? 
+ioDispatcherjava.lang.ObjectB86
+4com.smilepile.data.repository.CategoryRepositoryImplHõ
+ëcom.smilepile.data.repository.CategoryRepositoryImpl#toCategory(Lcom/smilepile/data/entities/CategoryEntity;)Lcom/smilepile/data/models/Category;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt ()"0*Õ
+0 (î
+ë
+! !(
+
+%0long"3com.smilepile.data.entities.CategoryEntity#getId()J*D
+! !(86
+4com.smilepile.data.repository.CategoryRepositoryImpl∫
+∑
+" "(#
+%1java.lang.String"Mcom.smilepile.data.entities.CategoryEntity#getDisplayName()Ljava/lang/String;*D
+" "(86
+4com.smilepile.data.repository.CategoryRepositoryImpl∫
+∑
+# #(*
+%2java.lang.String"Mcom.smilepile.data.entities.CategoryEntity#getDisplayName()Ljava/lang/String;*D
+# #(86
+4com.smilepile.data.repository.CategoryRepositoryImplô
+ñ
+$ $($	
+%3int"9com.smilepile.data.entities.CategoryEntity#getPosition()I*D
+$ $(86
+4com.smilepile.data.repository.CategoryRepositoryImpl∑
+¥
+%  %((
+%4java.lang.String"Jcom.smilepile.data.entities.CategoryEntity#getIconName()Ljava/lang/String;*D
+% %(86
+4com.smilepile.data.repository.CategoryRepositoryImpl∑
+¥
+& &($
+%5java.lang.String"Jcom.smilepile.data.entities.CategoryEntity#getColorHex()Ljava/lang/String;*D
+& &(86
+4com.smilepile.data.repository.CategoryRepositoryImplõ
+ò
+' '(&
+%6boolean"7com.smilepile.data.entities.CategoryEntity#isDefault()Z*D
+' '(86
+4com.smilepile.data.repository.CategoryRepositoryImplõ
+ò
+( ((&
+
+%7long":com.smilepile.data.entities.CategoryEntity#getCreatedAt()J*D
+( ((86
+4com.smilepile.data.repository.CategoryRepositoryImplZX
+  )(	(
+%8"com.smilepile.data.models.Category""com.smilepile.data.models.CategoryÃ
+…
+  )(	
+%9"xcom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)V*6
+  )(	*
+(
+%8"com.smilepile.data.models.Category*
+! !(
+
+
+%0long*)
+
+__unknown_file (
+	<unknown>*$
+# #(*
+
+%2java.lang.String*
+$ $($
+	
+%3int*$
+%  %((
+
+%4java.lang.String*$
+& &($
+
+%5java.lang.String*
+' '(&
+
+%6boolean*
+( ((&
+
+
+%7long"6
+  )(	*
+(
+%8"com.smilepile.data.models.CategoryB86
+4com.smilepile.data.repository.CategoryRepositoryImplH¥
+ócom.smilepile.data.repository.CategoryRepositoryImpl#toCategoryEntity(Lcom/smilepile/data/models/Category;)Lcom/smilepile/data/entities/CategoryEntity;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt/ /()"0*U
+23( 3(1A
+?
+
+__unknown_file (
+%2"__id*
+3) 3(0	
+#4CAF50*
+1*ó
+33 3($Ø
+¨
+3 3($
+%3java.lang.String"Bcom.smilepile.data.models.Category#getColorHex()Ljava/lang/String;*D
+3 3(86
+4com.smilepile.data.repository.CategoryRepositoryImplN
+L
+
+__unknown_file (
+%2"__id*$
+3 3($
+
+%3java.lang.String*
+2
+1*Ÿ
+0, .(å
+â
+1 1(
+
+%0long"+com.smilepile.data.models.Category#getId()J*D
+1 1(86
+4com.smilepile.data.repository.CategoryRepositoryImpl≤
+Ø
+2 2(*
+%1java.lang.String"Ecom.smilepile.data.models.Category#getDisplayName()Ljava/lang/String;*D
+2 2(86
+4com.smilepile.data.repository.CategoryRepositoryImpl*
+2
+3*ì
+13( 3(1ë
+é
+4 4($	
+%4int"1com.smilepile.data.models.Category#getPosition()I*D
+4 4(86
+4com.smilepile.data.repository.CategoryRepositoryImplì
+ê
+5 5(&
+%5boolean"/com.smilepile.data.models.Category#isDefault()Z*D
+5 5(86
+4com.smilepile.data.repository.CategoryRepositoryImplì
+ê
+6 6(&
+
+%6long"2com.smilepile.data.models.Category#getCreatedAt()J*D
+6 6(86
+4com.smilepile.data.repository.CategoryRepositoryImpljh
+0 7(	0
+%7*com.smilepile.data.entities.CategoryEntity"*com.smilepile.data.entities.CategoryEntityó
+î
+0 7(	
+%8"ncom.smilepile.data.entities.CategoryEntity#<init>(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)V*>
+0 7(	2
+0
+%7*com.smilepile.data.entities.CategoryEntity*
+1 1(
+
+
+%0long*$
+2 2(*
+
+%1java.lang.String*"
+
+__unknown_file (
+
+%2*
+
+__unknown_file ( *
+4 4($
+	
+%4int*
+5 5(&
+
+%5boolean*
+6 6(&
+
+
+%6long">
+0 7(	2
+0
+%7*com.smilepile.data.entities.CategoryEntityB86
+4com.smilepile.data.repository.CategoryRepositoryImplHâ
+jcom.smilepile.data.repository.CategoryRepositoryImpl#insertCategory(Lcom/smilepile/data/models/Category;)Jv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt: :('"0*(
+0: :("
+:D :(]
+	<unknown>::
+:( :(:.
+category"com.smilepile.data.models.CategoryB86
+4com.smilepile.data.repository.CategoryRepositoryImplHÂ
+Xcom.smilepile.data.repository.CategoryRepositoryImpl#insertCategories(Ljava/util/List;)Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktC C()"0*(
+0C C("
+CN C(g
+	<unknown>:(
+C* C(D
+
+categoriesjava.util.ListB86
+4com.smilepile.data.repository.CategoryRepositoryImplHâ
+jcom.smilepile.data.repository.CategoryRepositoryImpl#updateCategory(Lcom/smilepile/data/models/Category;)Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktL L('"0*(
+0L L("
+LD L(]
+	<unknown>::
+L( L(:.
+category"com.smilepile.data.models.CategoryB86
+4com.smilepile.data.repository.CategoryRepositoryImplHâ
+jcom.smilepile.data.repository.CategoryRepositoryImpl#deleteCategory(Lcom/smilepile/data/models/Category;)Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktY Y('"0*(
+0Y Y("
+YD Y(]
+	<unknown>::
+Y( Y(:.
+category"com.smilepile.data.models.CategoryB86
+4com.smilepile.data.repository.CategoryRepositoryImplHÓ
+kcom.smilepile.data.repository.CategoryRepositoryImpl#getCategoryById(J)Lcom/smilepile/data/models/Category;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktf f(("0*(
+0f f("
+fH f(a
+	<unknown>:
+f) f(9
+
+categoryIdlongB86
+4com.smilepile.data.repository.CategoryRepositoryImplH∫
+Wcom.smilepile.data.repository.CategoryRepositoryImpl#getAllCategories()Ljava/util/List;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktn n()"0*(
+0n n("
+n> n(W
+	<unknown>B86
+4com.smilepile.data.repository.CategoryRepositoryImplHΩ
+Qcom.smilepile.data.repository.CategoryRepositoryImpl#getAllCategoriesFlow()LFlow;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktw w(%"0*∞
+0w w(Ë
+Â
+x x((
+%0"com.smilepile.data.dao.CategoryDao"icom.smilepile.data.repository.CategoryRepositoryImpl#getCategoryDao()Lcom/smilepile/data/dao/CategoryDao;*D
+x x(86
+4com.smilepile.data.repository.CategoryRepositoryImplöó
+x x(#
+%1java.lang.Object"1com.smilepile.data.dao.CategoryDao#getAll()LFlow;*6
+x x(*
+(
+%0"com.smilepile.data.dao.CategoryDao2getAll()"
+x z(	
+	<unknown>B86
+4com.smilepile.data.repository.CategoryRepositoryImplHá
+~com.smilepile.data.repository.CategoryRepositoryImpl#getCategoryByName(Ljava/lang/String;)Lcom/smilepile/data/models/Category;v
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt} }(*"0*(
+0} }("
+}F }(_
+	<unknown>:$
+}+ }(7
+namejava.lang.StringB86
+4com.smilepile.data.repository.CategoryRepositoryImplHº
+Scom.smilepile.data.repository.CategoryRepositoryImpl#initializeDefaultCategories()Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktá á(4"0*,
+0
+á á("
+
+á? á(X
+	<unknown>B86
+4com.smilepile.data.repository.CategoryRepositoryImplH±
+Hcom.smilepile.data.repository.CategoryRepositoryImpl#getCategoryCount()Ix
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktï ï()"0*,
+0
+ï ï("
+
+ï3 ï(L
+	<unknown>B86
+4com.smilepile.data.repository.CategoryRepositoryImplHî
+_com.smilepile.data.repository.CategoryRepositoryImpl#assignPhotosToCategory(Ljava/util/List;J)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktü ü(/"0*,
+0
+ü ü("
+
+¢ ¢('
+	<unknown>:(
+
+† †(
+photoIdsjava.util.List: 
+
+° °(
+
+categoryIdlongB86
+4com.smilepile.data.repository.CategoryRepositoryImplHñ
+acom.smilepile.data.repository.CategoryRepositoryImpl#removePhotosFromCategory(Ljava/util/List;J)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt± ±(1"0*,
+0
+± ±("
+
+¥ ¥('
+	<unknown>:(
+
+≤ ≤(
+photoIdsjava.util.List: 
+
+≥ ≥(
+
+categoryIdlongB86
+4com.smilepile.data.repository.CategoryRepositoryImplH≤
+qcom.smilepile.data.repository.CategoryRepositoryImpl#assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.ktæ æ(0"0*,
+0
+æ æ("
+
+¡ ¡('
+	<unknown>:)
+
+ø ø(
+photoIdjava.lang.String:+
+
+¿ ¿(
+categoryIdsjava.util.ListB86
+4com.smilepile.data.repository.CategoryRepositoryImplHÇ
+ncom.smilepile.data.repository.CategoryRepositoryImpl#getCategoriesForPhoto(Ljava/lang/String;)Ljava/util/List;x
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt… …(."0*,
+0
+… …("
+
+…R …(k
+	<unknown>:)
+
+…/ …(>
+photoIdjava.lang.StringB86
+4com.smilepile.data.repository.CategoryRepositoryImplHù
+hcom.smilepile.data.repository.CategoryRepositoryImpl#getCategoriesForPhotoFlow(Ljava/lang/String;)LFlow;x
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt— —(*"0*Ã
+0
+— —(˚
+¯
+
+“ “(-
+%0'com.smilepile.data.dao.PhotoCategoryDao"scom.smilepile.data.repository.CategoryRepositoryImpl#getPhotoCategoryDao()Lcom/smilepile/data/dao/PhotoCategoryDao;*F
+
+“ “(86
+4com.smilepile.data.repository.CategoryRepositoryImplüú
+
+“  “(B
+%1java.lang.Object"[com.smilepile.data.dao.PhotoCategoryDao#getCategoriesForPhotoFlow(Ljava/lang/String;)LFlow;*=
+
+“ “(/
+-
+%0'com.smilepile.data.dao.PhotoCategoryDao*+
+
+“: “(A
+
+photoIdjava.lang.String2-getCategoriesForPhotoFlow(Ljava/lang/String;)"
+
+“ ‘(	
+	<unknown>:)
+
+—+ —(:
+photoIdjava.lang.StringB86
+4com.smilepile.data.repository.CategoryRepositoryImplH€
+Pcom.smilepile.data.repository.CategoryRepositoryImpl#getPhotoCountInCategory(J)Ix
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt◊ ◊(0"0*,
+0
+◊ ◊("
+
+◊J ◊(c
+	<unknown>: 
+
+◊1 ◊(A
+
+categoryIdlongB86
+4com.smilepile.data.repository.CategoryRepositoryImplHÿ
+jcom.smilepile.data.repository.CategoryRepositoryException#<init>(Ljava/lang/String;Ljava/lang/Throwable;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/CategoryRepositoryImpl.kt„ „(!"0*‘
+0
+„! Ê(ë
+é
+
+Ê Ê(
+%0"Djava.lang.Exception#<init>(Ljava/lang/String;Ljava/lang/Throwable;)V*Y
+
+__unknown_file (=;
+9com.smilepile.data.repository.CategoryRepositoryException*+
+
+Ê Ê(
+
+messagejava.lang.String*,
+
+Ê Ê(
+
+causejava.lang.Throwable"/
+
+__unknown_file (
+implicit return:)
+
+‰ ‰(
+messagejava.lang.String:*
+
+Â Â(
+causejava.lang.ThrowableB=;
+9com.smilepile.data.repository.CategoryRepositoryExceptionH

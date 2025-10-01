@@ -1,262 +1,303 @@
-à
-•com.smilepile.ui.components#DateRangePickerDialog(Lcom/smilepile/ui/viewmodels/DateRange;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;LModifier;)Vs
-i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/DateRangePickerDialog.kt= =("0*’
-0; <(¶
-£
-> >( 
-%0"
-__annotate*,
-
-__unknown_file (
-kotlin.OptIn*W
-
-__unknown_file (;
-9
-currentDateRange%com.smilepile.ui.viewmodels.DateRange™
-ß
-> >( 
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*W
-
-__unknown_file (;
-9
-currentDateRange%com.smilepile.ui.viewmodels.DateRangeû
-õ
-> >( 9
-currentDateRange%com.smilepile.ui.viewmodels.DateRange"__annotation*"
-
-__unknown_file (
-
-%0*"
-
-__unknown_file (
-
-%1¢
-ü
-? ?(-
-%2"
-__annotate*,
-
-__unknown_file (
-kotlin.OptIn*S
-
-__unknown_file (7
-5
-onDateRangeSelectedkotlin.jvm.functions.Function1¶
-£
-? ?(-
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*S
-
-__unknown_file (7
-5
-onDateRangeSelectedkotlin.jvm.functions.Function1ö
-ó
-? ?(-5
-onDateRangeSelectedkotlin.jvm.functions.Function1"__annotation*"
-
-__unknown_file (
-
-%2*"
-
-__unknown_file (
-
-%3ò
-ï
-@ @(
-%4"
-__annotate*,
-
-__unknown_file (
-kotlin.OptIn*I
-
-__unknown_file (-
-+
-	onDismisskotlin.jvm.functions.Function0ú
-ô
-@ @(
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*I
-
-__unknown_file (-
-+
-	onDismisskotlin.jvm.functions.Function0ê
-ç
-@ @(+
-	onDismisskotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%4*"
-
-__unknown_file (
-
-%5â
-Ü
-A A(!
-%6"
-__annotate*,
-
-__unknown_file (
-kotlin.OptIn*:
-
-__unknown_file (
-
-modifierjava.lang.Objectç
-ä
-A A(!
-%7"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.ObjectÄ
-~
-A A(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%6*"
-
-__unknown_file (
-
-%7g
-e
-G J((
-dateRangePickerStatejava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>`
-^
-M M(Z!
-dateFormatterjava.lang.Object"__id*)
+⁄
+,com.smilepile.SmilePileApplication#<init>()Vb
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt =("0*ñ
+0 (◊
+‘
+ (U
+%0java.lang.Object"Qcom.smilepile.SmilePileApplication#setApplicationScope(Lerror/NonExistentClass;)V*2
+ (U&$
+"com.smilepile.SmilePileApplication*)
 
 __unknown_file (
 	<unknown>"/
 
 __unknown_file (
-implicit return:E
-> >( 9
-currentDateRange%com.smilepile.ui.viewmodels.DateRange:A
-? ?(-5
-onDateRangeSelectedkotlin.jvm.functions.Function1:7
-@ @(+
-	onDismisskotlin.jvm.functions.Function0:(
-A A(!
-modifierjava.lang.ObjectB"
-com.smilepile.ui.componentsH¿
-äcom.smilepile.ui.components#DateRangePresetChip(Lcom/smilepile/ui/viewmodels/DateRangePreset;ZLkotlin/jvm/functions/Function0;LModifier;)Vu
-i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/DateRangePickerDialog.ktÊ Ê("0*ƒ
-0Â Â(®
-•
-
-Á Á(
+implicit returnB&$
+"com.smilepile.SmilePileApplicationH`È
+Vcom.smilepile.SmilePileApplication#getThemeManager()Lcom/smilepile/theme/ThemeManager;
+__unknown_file ("0*≈
+0 (¶
+£
+ ()
+field com.smilepile.theme.ThemeManager"__id*f
+ (Z*X$
+"com.smilepile.SmilePileApplication"0
+themeManager com.smilepile.theme.ThemeManagery
+w
+ (
 %0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*S
-
-__unknown_file (7
-5
-preset+com.smilepile.ui.viewmodels.DateRangePresetw
-u
-
-Á Á(5
-preset+com.smilepile.ui.viewmodels.DateRangePreset"__annotation*"
-
-__unknown_file (
-
-%0à
-Ö
-
-Ë Ë(
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*3
-
-__unknown_file (
-
-
-isSelectedbooleanW
-U
-
-Ë Ë(
-
-isSelectedboolean"__annotation*"
-
-__unknown_file (
-
-%1ú
-ô
-
-È È(
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*G
-
-__unknown_file (+
+__annotate* 
+ (
+java.lang.Object*7
+ (+
 )
-onClickkotlin.jvm.functions.Function0k
-i
-
-È È()
-onClickkotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
+field com.smilepile.theme.ThemeManagerY
+W
+ ()
+field com.smilepile.theme.ThemeManager"__annotation*
+ (
 
-%2è
-å
-
-Í Í(!
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object^
-\
-
-Í Í(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
+%0"7
+ (+
+)
+field com.smilepile.theme.ThemeManagerB&$
+"com.smilepile.SmilePileApplicationH`â
+Wcom.smilepile.SmilePileApplication#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
+__unknown_file ("0*≠
+0 (y
+w
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*7
+ (+
+)
+value com.smilepile.theme.ThemeManagerY
+W
+ ()
+value com.smilepile.theme.ThemeManager"__annotation*
+ (
 
-%3"/
+%0¶
+£
+ (X$
+"com.smilepile.SmilePileApplication"0
+themeManager com.smilepile.theme.ThemeManager"__id*7
+ (+
+)
+value com.smilepile.theme.ThemeManager"
+ (
+implicit return:5
+ ()
+value com.smilepile.theme.ThemeManagerB&$
+"com.smilepile.SmilePileApplicationH`±
+_com.smilepile.SmilePileApplication#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;
+__unknown_file ("0*Ñ
+0 (º
+π
+ (6
+field-com.smilepile.data.database.SmilePileDatabase"__id*o
+ (c*a$
+"com.smilepile.SmilePileApplication"9
+database-com.smilepile.data.database.SmilePileDatabaseá
+Ñ
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*D
+ (8
+6
+field-com.smilepile.data.database.SmilePileDatabasef
+d
+ (6
+field-com.smilepile.data.database.SmilePileDatabase"__annotation*
+ (
+
+%0"D
+ (8
+6
+field-com.smilepile.data.database.SmilePileDatabaseB&$
+"com.smilepile.SmilePileApplicationH`—
+`com.smilepile.SmilePileApplication#setDatabase(Lcom/smilepile/data/database/SmilePileDatabase;)V
+__unknown_file ("0*ﬂ
+0 (á
+Ñ
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*D
+ (8
+6
+value-com.smilepile.data.database.SmilePileDatabasef
+d
+ (6
+value-com.smilepile.data.database.SmilePileDatabase"__annotation*
+ (
+
+%0º
+π
+ (a$
+"com.smilepile.SmilePileApplication"9
+database-com.smilepile.data.database.SmilePileDatabase"__id*D
+ (8
+6
+value-com.smilepile.data.database.SmilePileDatabase"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.database.SmilePileDatabaseB&$
+"com.smilepile.SmilePileApplicationH`◊
+lcom.smilepile.SmilePileApplication#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;
+__unknown_file ("0*ù
+0 (Ã
+…
+ (9
+field0com.smilepile.data.repository.CategoryRepository"__id*|
+ (p*n$
+"com.smilepile.SmilePileApplication"F
+categoryRepository0com.smilepile.data.repository.CategoryRepositoryä
+á
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*G
+ (;
+9
+field0com.smilepile.data.repository.CategoryRepositoryi
+g
+ (9
+field0com.smilepile.data.repository.CategoryRepository"__annotation*
+ (
+
+%0"G
+ (;
+9
+field0com.smilepile.data.repository.CategoryRepositoryB&$
+"com.smilepile.SmilePileApplicationH`˜
+mcom.smilepile.SmilePileApplication#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V
+__unknown_file ("0*ı
+0 (ä
+á
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*G
+ (;
+9
+value0com.smilepile.data.repository.CategoryRepositoryi
+g
+ (9
+value0com.smilepile.data.repository.CategoryRepository"__annotation*
+ (
+
+%0Ã
+…
+ (n$
+"com.smilepile.SmilePileApplication"F
+categoryRepository0com.smilepile.data.repository.CategoryRepository"__id*G
+ (;
+9
+value0com.smilepile.data.repository.CategoryRepository"
+ (
+implicit return:E
+ (9
+value0com.smilepile.data.repository.CategoryRepositoryB&$
+"com.smilepile.SmilePileApplicationH`·
+Pcom.smilepile.SmilePileApplication#getApplicationScope()Lerror/NonExistentClass;
+__unknown_file ("0*√
+0 (ä
+á
+ (
+fieldjava.lang.Object"__id*Z
+ (N*L$
+"com.smilepile.SmilePileApplication"$
+applicationScopejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB&$
+"com.smilepile.SmilePileApplicationH`Å
+Qcom.smilepile.SmilePileApplication#setApplicationScope(Lerror/NonExistentClass;)V
+__unknown_file ("0*ª
+0 (ä
+á
+ (L$
+"com.smilepile.SmilePileApplication"$
+applicationScopejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB&$
+"com.smilepile.SmilePileApplicationH`
+.com.smilepile.SmilePileApplication#onCreate()Vd
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt ("0*™
+0 (L
+J
+ (
+%0java.lang.Object"__id* 
+ (
+java.lang.Objectä
+á
+   ((
+%1"com.smilepile.SmilePileApplication"_com.smilepile.SmilePileApplication$Companion#setInstance(Lcom/smilepile/SmilePileApplication;)V*<
+   (0.
+,com.smilepile.SmilePileApplication$Companion*2
+   (&$
+"com.smilepile.SmilePileApplicationé
+ã
+# #(
+%2kotlin.Unit"8com.smilepile.SmilePileApplication#initializeDatabase()V*2
+# #(&$
+"com.smilepile.SmilePileApplication"/
 
 __unknown_file (
-implicit return:C
-
-Á Á(5
-preset+com.smilepile.ui.viewmodels.DateRangePreset:#
-
-Ë Ë(
-
-isSelectedboolean:7
-
-È È()
-onClickkotlin.jvm.functions.Function0:*
-
-Í Í(!
-modifierjava.lang.ObjectB"
-com.smilepile.ui.componentsH
+implicit returnB&$
+"com.smilepile.SmilePileApplicationHº
+8com.smilepile.SmilePileApplication#initializeDatabase()Vd
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt) )(""0*Ï
+0& ((´
+®
+* *(
+%0java.lang.Object"Pcom.smilepile.SmilePileApplication#getApplicationScope()Lerror/NonExistentClass;*2
+* *(&$
+"com.smilepile.SmilePileApplication"/
+
+__unknown_file (
+implicit returnB&$
+"com.smilepile.SmilePileApplicationH±
+^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;
+__unknown_file ("0*˚
+0 (∞
+≠
+ (+
+field"com.smilepile.SmilePileApplication"__id*n
+ (b*`.
+,com.smilepile.SmilePileApplication$Companion".
+instance"com.smilepile.SmilePileApplication"9
+ (-
++
+field"com.smilepile.SmilePileApplicationB0.
+,com.smilepile.SmilePileApplication$CompanionH`Â
+`com.smilepile.SmilePileApplication$Companion#getThemeManager()Lcom/smilepile/theme/ThemeManager;d
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt9 9("0*„
+09 9(’
+“
+9. 9(6(
+%0"com.smilepile.SmilePileApplication"^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;*<
+9. 9(60.
+,com.smilepile.SmilePileApplication$Companion≈
+¬
+97 9(C&
+%1 com.smilepile.theme.ThemeManager"Vcom.smilepile.SmilePileApplication#getThemeManager()Lcom/smilepile/theme/ThemeManager;*6
+9. 9(6*
+(
+%0"com.smilepile.SmilePileApplication"4
+9. 9(C(
+&
+%1 com.smilepile.theme.ThemeManagerB0".
+,com.smilepile.SmilePileApplication$CompanionHë
+icom.smilepile.SmilePileApplication$Companion#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;d
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt; ;("0*Ü
+0; ;(’
+“
+;/ ;(7(
+%0"com.smilepile.SmilePileApplication"^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;*<
+;/ ;(70.
+,com.smilepile.SmilePileApplication$Companion€
+ÿ
+;8 ;(@3
+%1-com.smilepile.data.database.SmilePileDatabase"_com.smilepile.SmilePileApplication#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;*6
+;/ ;(7*
+(
+%0"com.smilepile.SmilePileApplication"A
+;/ ;(@5
+3
+%1-com.smilepile.data.database.SmilePileDatabaseB0".
+,com.smilepile.SmilePileApplication$CompanionH

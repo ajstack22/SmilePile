@@ -1,303 +1,885 @@
-⁄
-,com.smilepile.SmilePileApplication#<init>()Vb
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt =("0*ñ
-0 (◊
-‘
- (U
-%0java.lang.Object"Qcom.smilepile.SmilePileApplication#setApplicationScope(Lerror/NonExistentClass;)V*2
- (U&$
-"com.smilepile.SmilePileApplication*)
-
-__unknown_file (
-	<unknown>"/
-
-__unknown_file (
-implicit returnB&$
-"com.smilepile.SmilePileApplicationH`È
-Vcom.smilepile.SmilePileApplication#getThemeManager()Lcom/smilepile/theme/ThemeManager;
-__unknown_file ("0*≈
-0 (¶
-£
- ()
-field com.smilepile.theme.ThemeManager"__id*f
- (Z*X$
-"com.smilepile.SmilePileApplication"0
-themeManager com.smilepile.theme.ThemeManagery
-w
+ù
+(com.smilepile.data.models.Photo#getId()J
+__unknown_file ("0*™
+0 (`
+^
+ (
+fieldlong"__id*=
+ (1*/!
+com.smilepile.data.models.Photo"
+
+idlong]
+[
  (
 %0"
 __annotate* 
  (
-java.lang.Object*7
- (+
-)
-field com.smilepile.theme.ThemeManagerY
-W
- ()
-field com.smilepile.theme.ThemeManager"__annotation*
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
  (
 
-%0"7
- (+
-)
-field com.smilepile.theme.ThemeManagerB&$
-"com.smilepile.SmilePileApplicationH`â
-Wcom.smilepile.SmilePileApplication#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
-__unknown_file ("0*≠
-0 (y
-w
+%0"
+ (
+
+fieldlongB#!
+com.smilepile.data.models.PhotoH`Ω
+)com.smilepile.data.models.Photo#setId(J)V
+__unknown_file ("0*Æ
+0 (]
+[
  (
 %0"
 __annotate* 
  (
-java.lang.Object*7
- (+
-)
-value com.smilepile.theme.ThemeManagerY
-W
- ()
-value com.smilepile.theme.ThemeManager"__annotation*
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
  (
 
-%0¶
-£
- (X$
-"com.smilepile.SmilePileApplication"0
-themeManager com.smilepile.theme.ThemeManager"__id*7
- (+
-)
-value com.smilepile.theme.ThemeManager"
+%0`
+^
+ (/!
+com.smilepile.data.models.Photo"
+
+idlong"__id*
+ (
+
+valuelong"
  (
-implicit return:5
- ()
-value com.smilepile.theme.ThemeManagerB&$
-"com.smilepile.SmilePileApplicationH`±
-_com.smilepile.SmilePileApplication#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;
-__unknown_file ("0*Ñ
-0 (º
-π
- (6
-field-com.smilepile.data.database.SmilePileDatabase"__id*o
- (c*a$
-"com.smilepile.SmilePileApplication"9
-database-com.smilepile.data.database.SmilePileDatabaseá
-Ñ
- (
-%0"
-__annotate* 
- (
-java.lang.Object*D
- (8
-6
-field-com.smilepile.data.database.SmilePileDatabasef
-d
- (6
-field-com.smilepile.data.database.SmilePileDatabase"__annotation*
- (
-
-%0"D
- (8
-6
-field-com.smilepile.data.database.SmilePileDatabaseB&$
-"com.smilepile.SmilePileApplicationH`—
-`com.smilepile.SmilePileApplication#setDatabase(Lcom/smilepile/data/database/SmilePileDatabase;)V
-__unknown_file ("0*ﬂ
-0 (á
-Ñ
- (
-%0"
-__annotate* 
- (
-java.lang.Object*D
- (8
-6
-value-com.smilepile.data.database.SmilePileDatabasef
-d
- (6
-value-com.smilepile.data.database.SmilePileDatabase"__annotation*
- (
-
-%0º
-π
- (a$
-"com.smilepile.SmilePileApplication"9
-database-com.smilepile.data.database.SmilePileDatabase"__id*D
- (8
-6
-value-com.smilepile.data.database.SmilePileDatabase"
- (
-implicit return:B
- (6
-value-com.smilepile.data.database.SmilePileDatabaseB&$
-"com.smilepile.SmilePileApplicationH`◊
-lcom.smilepile.SmilePileApplication#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;
-__unknown_file ("0*ù
-0 (Ã
-…
- (9
-field0com.smilepile.data.repository.CategoryRepository"__id*|
- (p*n$
-"com.smilepile.SmilePileApplication"F
-categoryRepository0com.smilepile.data.repository.CategoryRepositoryä
-á
- (
-%0"
-__annotate* 
- (
-java.lang.Object*G
- (;
-9
-field0com.smilepile.data.repository.CategoryRepositoryi
-g
- (9
-field0com.smilepile.data.repository.CategoryRepository"__annotation*
- (
-
-%0"G
- (;
-9
-field0com.smilepile.data.repository.CategoryRepositoryB&$
-"com.smilepile.SmilePileApplicationH`˜
-mcom.smilepile.SmilePileApplication#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V
-__unknown_file ("0*ı
-0 (ä
-á
- (
-%0"
-__annotate* 
- (
-java.lang.Object*G
- (;
-9
-value0com.smilepile.data.repository.CategoryRepositoryi
-g
- (9
-value0com.smilepile.data.repository.CategoryRepository"__annotation*
- (
-
-%0Ã
-…
- (n$
-"com.smilepile.SmilePileApplication"F
-categoryRepository0com.smilepile.data.repository.CategoryRepository"__id*G
- (;
-9
-value0com.smilepile.data.repository.CategoryRepository"
- (
-implicit return:E
- (9
-value0com.smilepile.data.repository.CategoryRepositoryB&$
-"com.smilepile.SmilePileApplicationH`·
-Pcom.smilepile.SmilePileApplication#getApplicationScope()Lerror/NonExistentClass;
-__unknown_file ("0*√
-0 (ä
-á
+implicit return:
+ (
+valuelongB#!
+com.smilepile.data.models.PhotoH`Ó
+;com.smilepile.data.models.Photo#getPath()Ljava/lang/String;
+__unknown_file ("0*Ë
+0 (z
+x
  (
-fieldjava.lang.Object"__id*Z
- (N*L$
-"com.smilepile.SmilePileApplication"$
-applicationScopejava.lang.Object"'
+fieldjava.lang.String"__id*K
+ (?*=!
+com.smilepile.data.models.Photo"
+pathjava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
  (
 
-fieldjava.lang.ObjectB&$
-"com.smilepile.SmilePileApplicationH`Å
-Qcom.smilepile.SmilePileApplication#setApplicationScope(Lerror/NonExistentClass;)V
-__unknown_file ("0*ª
-0 (ä
-á
- (L$
-"com.smilepile.SmilePileApplication"$
-applicationScopejava.lang.Object"__id*'
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
  (
 
-valuejava.lang.Object"
+fieldjava.lang.StringB#!
+com.smilepile.data.models.PhotoH`é
+<com.smilepile.data.models.Photo#setPath(Ljava/lang/String;)V
+__unknown_file ("0*‡
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0z
+x
+ (=!
+com.smilepile.data.models.Photo"
+pathjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB&$
-"com.smilepile.SmilePileApplicationH`
-.com.smilepile.SmilePileApplication#onCreate()Vd
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt ("0*™
-0 (L
+valuejava.lang.StringB#!
+com.smilepile.data.models.PhotoH`≠
+0com.smilepile.data.models.Photo#getCategoryId()J
+__unknown_file ("0*≤
+0 (h
+f
+ (
+fieldlong"__id*E
+ (9*7!
+com.smilepile.data.models.Photo"
+
+categoryIdlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB#!
+com.smilepile.data.models.PhotoH`Õ
+1com.smilepile.data.models.Photo#setCategoryId(J)V
+__unknown_file ("0*∂
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0h
+f
+ (7!
+com.smilepile.data.models.Photo"
+
+categoryIdlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB#!
+com.smilepile.data.models.PhotoH`Ó
+;com.smilepile.data.models.Photo#getName()Ljava/lang/String;
+__unknown_file ("0*Ë
+0 (z
+x
+ (
+fieldjava.lang.String"__id*K
+ (?*=!
+com.smilepile.data.models.Photo"
+namejava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB#!
+com.smilepile.data.models.PhotoH`é
+<com.smilepile.data.models.Photo#setName(Ljava/lang/String;)V
+__unknown_file ("0*‡
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0z
+x
+ (=!
+com.smilepile.data.models.Photo"
+namejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB#!
+com.smilepile.data.models.PhotoH`Ω
+/com.smilepile.data.models.Photo#isFromAssets()Z
+__unknown_file ("0*√
+0 (p
+n
+ (
+fieldboolean"__id*J
+ (>*<!
+com.smilepile.data.models.Photo"
+isFromAssetsboolean`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldboolean@
+>
+ (
+fieldboolean"__annotation*
+ (
+
+%0"
+ (
+
+fieldbooleanB#!
+com.smilepile.data.models.PhotoH`‡
+3com.smilepile.data.models.Photo#setIsFromAssets(Z)V
+__unknown_file ("0*ƒ
+0 (`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueboolean@
+>
+ (
+valueboolean"__annotation*
+ (
+
+%0p
+n
+ (<!
+com.smilepile.data.models.Photo"
+isFromAssetsboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB#!
+com.smilepile.data.models.PhotoH`´
+/com.smilepile.data.models.Photo#getCreatedAt()J
+__unknown_file ("0*±
+0 (g
+e
+ (
+fieldlong"__id*D
+ (8*6!
+com.smilepile.data.models.Photo"
+	createdAtlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB#!
+com.smilepile.data.models.PhotoH`À
+0com.smilepile.data.models.Photo#setCreatedAt(J)V
+__unknown_file ("0*µ
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0g
+e
+ (6!
+com.smilepile.data.models.Photo"
+	createdAtlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB#!
+com.smilepile.data.models.PhotoH`©
+.com.smilepile.data.models.Photo#getFileSize()J
+__unknown_file ("0*∞
+0 (f
+d
+ (
+fieldlong"__id*C
+ (7*5!
+com.smilepile.data.models.Photo"
+fileSizelong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB#!
+com.smilepile.data.models.PhotoH`…
+/com.smilepile.data.models.Photo#setFileSize(J)V
+__unknown_file ("0*¥
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0f
+d
+ (5!
+com.smilepile.data.models.Photo"
+fileSizelong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB#!
+com.smilepile.data.models.PhotoH`û
++com.smilepile.data.models.Photo#getWidth()I
+__unknown_file ("0*®
+0 (a
+_
+ (
+fieldint"__id*?
+ (3*1!
+com.smilepile.data.models.Photo"
+widthint\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldint<
+:
+ (
+fieldint"__annotation*
+ (
+
+%0"
+ (
+
+fieldintB#!
+com.smilepile.data.models.PhotoH`æ
+,com.smilepile.data.models.Photo#setWidth(I)V
+__unknown_file ("0*≠
+0 (\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueint<
+:
+ (
+valueint"__annotation*
+ (
+
+%0a
+_
+ (1!
+com.smilepile.data.models.Photo"
+widthint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB#!
+com.smilepile.data.models.PhotoH`†
+,com.smilepile.data.models.Photo#getHeight()I
+__unknown_file ("0*©
+0 (b
+`
+ (
+fieldint"__id*@
+ (4*2!
+com.smilepile.data.models.Photo"
+heightint\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldint<
+:
+ (
+fieldint"__annotation*
+ (
+
+%0"
+ (
+
+fieldintB#!
+com.smilepile.data.models.PhotoH`¿
+-com.smilepile.data.models.Photo#setHeight(I)V
+__unknown_file ("0*Æ
+0 (\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueint<
+:
+ (
+valueint"__annotation*
+ (
+
+%0b
+`
+ (2!
+com.smilepile.data.models.Photo"
+heightint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB#!
+com.smilepile.data.models.PhotoH`…!
+Tcom.smilepile.data.models.Photo#<init>(JLjava/lang/String;JLjava/lang/String;ZJJII)Va
+W/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Photo.kt ("0*»
+0 1(z
+x
+ (
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*(
+
+__unknown_file (
+
+
+idlongJ
+H
+ (
+
+idlong"__annotation*"
+
+__unknown_file (
+
+%0â
+Ü
+ (
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+pathjava.lang.StringX
+V
+ (
+pathjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%1É
+Ä
+ (
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+
+categoryIdlongR
+P
+ (
+
+categoryIdlong"__annotation*"
+
+__unknown_file (
+
+%2â
+Ü
+  !(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+namejava.lang.StringX
+V
+  !(
+namejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%3à
+Ö
+# $(%
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*5
+
+__unknown_file (
+
+isFromAssetsbooleanW
+U
+# $(%
+isFromAssetsboolean"__annotation*"
+
+__unknown_file (
+
+%4Å
+
+& '(4
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*/
+
+__unknown_file (
+
+	createdAtlongQ
+O
+& '(4
+	createdAtlong"__annotation*"
+
+__unknown_file (
+
+%5Ä
+~
+) *(
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*.
+
+__unknown_file (
+
+fileSizelongP
+N
+) *(
+fileSizelong"__annotation*"
+
+__unknown_file (
+
+%6|
+z
+, -(
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object**
+
+__unknown_file (
+
+widthintL
 J
- (
-%0java.lang.Object"__id* 
- (
-java.lang.Objectä
-á
-   ((
-%1"com.smilepile.SmilePileApplication"_com.smilepile.SmilePileApplication$Companion#setInstance(Lcom/smilepile/SmilePileApplication;)V*<
-   (0.
-,com.smilepile.SmilePileApplication$Companion*2
-   (&$
-"com.smilepile.SmilePileApplicationé
-ã
-# #(
-%2kotlin.Unit"8com.smilepile.SmilePileApplication#initializeDatabase()V*2
-# #(&$
-"com.smilepile.SmilePileApplication"/
+, -(
+widthint"__annotation*"
+
+__unknown_file (
+
+%7}
+{
+/ 0(
+%8"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*+
+
+__unknown_file (
+
+heightintM
+K
+/ 0(
+heightint"__annotation*"
+
+__unknown_file (
+
+%8Ø
+¨
+ (
+
+%9long")com.smilepile.data.models.Photo#setId(J)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*(
+
+__unknown_file (
+
+
+idlong›
+⁄
+ (
+%10java.lang.String"<com.smilepile.data.models.Photo#setPath(Ljava/lang/String;)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*6
+
+__unknown_file (
+
+pathjava.lang.String¿
+Ω
+ (
+%11long"1com.smilepile.data.models.Photo#setCategoryId(J)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*0
+
+__unknown_file (
+
+
+categoryIdlong›
+⁄
+  !(
+%12java.lang.String"<com.smilepile.data.models.Photo#setName(Ljava/lang/String;)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*6
+
+__unknown_file (
+
+namejava.lang.String 
+«
+# $(%
+%13boolean"3com.smilepile.data.models.Photo#setIsFromAssets(Z)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*5
+
+__unknown_file (
+
+isFromAssetsbooleanæ
+ª
+& '(4
+%14long"0com.smilepile.data.models.Photo#setCreatedAt(J)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*/
+
+__unknown_file (
+
+	createdAtlongº
+π
+) *(
+%15long"/com.smilepile.data.models.Photo#setFileSize(J)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*.
+
+__unknown_file (
+
+fileSizelong¥
+±
+, -(
+
+%16int",com.smilepile.data.models.Photo#setWidth(I)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo**
+
+__unknown_file (
+
+widthint∂
+≥
+/ 0(
+
+%17int"-com.smilepile.data.models.Photo#setHeight(I)V*?
+
+__unknown_file (#!
+com.smilepile.data.models.Photo*+
+
+__unknown_file (
+
+heightint"/
 
 __unknown_file (
-implicit returnB&$
-"com.smilepile.SmilePileApplicationHº
-8com.smilepile.SmilePileApplication#initializeDatabase()Vd
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt) )(""0*Ï
-0& ((´
-®
-* *(
-%0java.lang.Object"Pcom.smilepile.SmilePileApplication#getApplicationScope()Lerror/NonExistentClass;*2
-* *(&$
-"com.smilepile.SmilePileApplication"/
+implicit return:
+ (
+
+idlong:$
+ (
+pathjava.lang.String:
+ (
+
+categoryIdlong:$
+  !(
+namejava.lang.String:#
+# $(%
+isFromAssetsboolean:
+& '(4
+	createdAtlong:
+) *(
+fileSizelong:
+, -(
+widthint:
+/ 0(
+heightintB#!
+com.smilepile.data.models.PhotoHÁ
+Ccom.smilepile.data.models.Photo#setDisplayName(Ljava/lang/String;)V
+__unknown_file ("0*≤
+0 (Å
+
+ (D!
+com.smilepile.data.models.Photo"
+displayNamejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB#!
+com.smilepile.data.models.PhotoH`¢
+Bcom.smilepile.data.models.Photo#getDisplayName()Ljava/lang/String;a
+W/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Photo.kt4 6(	"0*Œ
+04 4(ì
+ê
+4 4(
+%0java.lang.String";com.smilepile.data.models.Photo#getName()Ljava/lang/String;*/
+4 4(#!
+com.smilepile.data.models.Photo")
 
-__unknown_file (
-implicit returnB&$
-"com.smilepile.SmilePileApplicationH±
-^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;
-__unknown_file ("0*˚
-0 (∞
-≠
- (+
-field"com.smilepile.SmilePileApplication"__id*n
- (b*`.
-,com.smilepile.SmilePileApplication$Companion".
-instance"com.smilepile.SmilePileApplication"9
- (-
-+
-field"com.smilepile.SmilePileApplicationB0.
-,com.smilepile.SmilePileApplication$CompanionH`Â
-`com.smilepile.SmilePileApplication$Companion#getThemeManager()Lcom/smilepile/theme/ThemeManager;d
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt9 9("0*„
-09 9(’
-“
-9. 9(6(
-%0"com.smilepile.SmilePileApplication"^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;*<
-9. 9(60.
-,com.smilepile.SmilePileApplication$Companion≈
-¬
-97 9(C&
-%1 com.smilepile.theme.ThemeManager"Vcom.smilepile.SmilePileApplication#getThemeManager()Lcom/smilepile/theme/ThemeManager;*6
-9. 9(6*
-(
-%0"com.smilepile.SmilePileApplication"4
-9. 9(C(
-&
-%1 com.smilepile.theme.ThemeManagerB0".
-,com.smilepile.SmilePileApplication$CompanionHë
-icom.smilepile.SmilePileApplication$Companion#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;d
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/SmilePileApplication.kt; ;("0*Ü
-0; ;(’
-“
-;/ ;(7(
-%0"com.smilepile.SmilePileApplication"^com.smilepile.SmilePileApplication$Companion#getInstance()Lcom/smilepile/SmilePileApplication;*<
-;/ ;(70.
-,com.smilepile.SmilePileApplication$Companion€
-ÿ
-;8 ;(@3
-%1-com.smilepile.data.database.SmilePileDatabase"_com.smilepile.SmilePileApplication#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;*6
-;/ ;(7*
-(
-%0"com.smilepile.SmilePileApplication"A
-;/ ;(@5
-3
-%1-com.smilepile.data.database.SmilePileDatabaseB0".
-,com.smilepile.SmilePileApplication$CompanionH
+__unknown_file (
+	<unknown>B#!
+com.smilepile.data.models.PhotoH≤
+.com.smilepile.data.models.Photo#setIsValid(Z)V
+__unknown_file ("0*õ
+0 (k
+i
+ (7!
+com.smilepile.data.models.Photo"
+isValidboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB#!
+com.smilepile.data.models.PhotoH`„
+*com.smilepile.data.models.Photo#isValid()Za
+W/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Photo.kt9 9(3"0*ß
+09 9(ì
+ê
+9 9(
+%0java.lang.String";com.smilepile.data.models.Photo#getPath()Ljava/lang/String;*/
+9 9(#!
+com.smilepile.data.models.Photo{
+y
+9% 9(/
+
+%1long"0com.smilepile.data.models.Photo#getCategoryId()J*/
+9% 9(/#!
+com.smilepile.data.models.PhotoZ
+X
+9% 9(3
+%2"	__compare*
+90 9(1
+>*
+9% 9(/
+
+
+%1long*
+92 9(32 ")
+
+__unknown_file (
+	<unknown>B#!
+com.smilepile.data.models.PhotoH

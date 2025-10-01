@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -119,6 +119,16 @@
 		FC049BF2D92F0CE40EC1C442 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3456ADDBF7BB861423A9168F /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7B6BD9CC2E8DCAE400E42F09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7B611E103E9D8A7EDA77720 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2F476E75CA92A685EFF389;
+			remoteInfo = SmilePile;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01F513DAC79F7E2CEC36E996 /* CategoryManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementViewModel.swift; sourceTree = "<group>"; };
 		02122F667B4717446A219364 /* PhotoRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -173,11 +183,12 @@
 		73F107DE3D7C717939076A26 /* PhotoIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoIDGenerator.swift; sourceTree = "<group>"; };
 		772DC2557EF26E7733CD7E03 /* SmilePileLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmilePileLogo.swift; sourceTree = "<group>"; };
 		7ABE0712653E50F91F9FF62D /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		7B6BD9C82E8DCAE400E42F09 /* SmilePileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmilePileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EAFBEF5D8D4DA4F6BE15BEF /* MemoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMonitor.swift; sourceTree = "<group>"; };
 		7FDD6244000445DAF3A564F6 /* SimplePhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePhotoStorage.swift; sourceTree = "<group>"; };
 		80C852D93F3947D066AC1559 /* SettingsViewNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewNative.swift; sourceTree = "<group>"; };
 		8565611BD2AAF9F522909967 /* CategorySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionView.swift; sourceTree = "<group>"; };
-		8677B958BC9C0C8A9126095C /* FontDebug.swift.disabled.backup */ = {isa = PBXFileReference; path = FontDebug.swift.disabled.backup; sourceTree = "<group>"; };
+		8677B958BC9C0C8A9126095C /* FontDebug.swift.disabled.backup */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontDebug.swift.disabled.backup; sourceTree = "<group>"; };
 		8A362ECE31525051DD47E9DD /* SettingsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsComponents.swift; sourceTree = "<group>"; };
 		8CCD7867A78305B328265D0C /* RestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreManager.swift; sourceTree = "<group>"; };
 		8EFDC6239952C9B491F987B4 /* MaterialTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTabBar.swift; sourceTree = "<group>"; };
@@ -213,7 +224,7 @@
 		CC7A2757F47E3D8796D47490 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		CCB8FDC142247F2CAB7D4EFE /* SecuritySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsView.swift; sourceTree = "<group>"; };
 		CDF0860B64572D6A6AD37362 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CED7D2A583C4B7F6151EB7BA /* FontDebug.swift.disabled */ = {isa = PBXFileReference; path = FontDebug.swift.disabled; sourceTree = "<group>"; };
+		CED7D2A583C4B7F6151EB7BA /* FontDebug.swift.disabled */ = {isa = PBXFileReference; lastKnownFileType = text; path = FontDebug.swift.disabled; sourceTree = "<group>"; };
 		D2E43F0A342D7542AEDBDC52 /* PatternGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternGridView.swift; sourceTree = "<group>"; };
 		D443A515FD021052362FF4B9 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		D51C551A500677BE0B0821D8 /* CropOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropOverlayView.swift; sourceTree = "<group>"; };
@@ -233,12 +244,23 @@
 		FF3A90BBE5D1A1B5CF73FCA5 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7B6BD9C92E8DCAE400E42F09 /* SmilePileTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SmilePileTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		228DDA3B99413FAFD61598B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FC049BF2D92F0CE40EC1C442 /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6BD9C52E8DCAE400E42F09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				FE8206A6497390E29B2152E2 /* SmilePile.app */,
+				7B6BD9C82E8DCAE400E42F09 /* SmilePileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,6 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				CC414BA2D32C6980334F7B38 /* SmilePile */,
+				7B6BD9C92E8DCAE400E42F09 /* SmilePileTests */,
 				4AFDA1081300D2FAB1FDF223 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -589,6 +613,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7B6BD9C72E8DCAE400E42F09 /* SmilePileTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6BD9D02E8DCAE400E42F09 /* Build configuration list for PBXNativeTarget "SmilePileTests" */;
+			buildPhases = (
+				7B6BD9C42E8DCAE400E42F09 /* Sources */,
+				7B6BD9C52E8DCAE400E42F09 /* Frameworks */,
+				7B6BD9C62E8DCAE400E42F09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B6BD9CD2E8DCAE400E42F09 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7B6BD9C92E8DCAE400E42F09 /* SmilePileTests */,
+			);
+			name = SmilePileTests;
+			packageProductDependencies = (
+			);
+			productName = SmilePileTests;
+			productReference = 7B6BD9C82E8DCAE400E42F09 /* SmilePileTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		AC2F476E75CA92A685EFF389 /* SmilePile */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D043E74E3AE0C505927BDDD0 /* Build configuration list for PBXNativeTarget "SmilePile" */;
@@ -616,8 +663,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					7B6BD9C72E8DCAE400E42F09 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = AC2F476E75CA92A685EFF389;
+					};
 					AC2F476E75CA92A685EFF389 = {
 						DevelopmentTeam = 84W9WSYQQB;
 					};
@@ -636,16 +688,23 @@
 			packageReferences = (
 				1C8DDECE1DF173BB6DB3352B /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				AC2F476E75CA92A685EFF389 /* SmilePile */,
+				7B6BD9C72E8DCAE400E42F09 /* SmilePileTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7B6BD9C62E8DCAE400E42F09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3D1CF3F3CE522AECF64604A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -772,7 +831,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7B6BD9C42E8DCAE400E42F09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7B6BD9CD2E8DCAE400E42F09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2F476E75CA92A685EFF389 /* SmilePile */;
+			targetProxy = 7B6BD9CC2E8DCAE400E42F09 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		20BFC7F5077BF31137CC2AB1 /* Release */ = {
@@ -934,9 +1008,72 @@
 			};
 			name = Debug;
 		};
+		7B6BD9CE2E8DCAE400E42F09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84W9WSYQQB;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iosTests.SmilePileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmilePile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmilePile";
+			};
+			name = Debug;
+		};
+		7B6BD9CF2E8DCAE400E42F09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84W9WSYQQB;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iosTests.SmilePileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmilePile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SmilePile";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7B6BD9D02E8DCAE400E42F09 /* Build configuration list for PBXNativeTarget "SmilePileTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B6BD9CE2E8DCAE400E42F09 /* Debug */,
+				7B6BD9CF2E8DCAE400E42F09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		D043E74E3AE0C505927BDDD0 /* Build configuration list for PBXNativeTarget "SmilePile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,1115 +1,416 @@
-Ç
-Acom.smilepile.data.entities.PhotoEntity#getId()Ljava/lang/String;
-__unknown_file ("0*Ó
-0 (Ä
-~
+Ÿ
+Ecom.smilepile.storage.FileOperationHelpers#getTAG()Ljava/lang/String;
+__unknown_file ("0*æ
+0 (Ö
+Ç
  (
-fieldjava.lang.String"__id*Q
- (E*C)
-'com.smilepile.data.entities.PhotoEntity"
-idjava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.Object"__id*U
+ (I*G,
+*com.smilepile.storage.FileOperationHelpers"
+TAGjava.lang.Object"'
  (
 
-fieldjava.lang.Stringi
-g
- (
-%1"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`˘
+Fcom.smilepile.storage.FileOperationHelpers#setTAG(Ljava/lang/String;)V
+__unknown_file ("0*∂
+0 (Ö
+Ç
+ (G,
+*com.smilepile.storage.FileOperationHelpers"
+TAGjava.lang.Object"__id*'
  (
 
-fieldjava.lang.String]
-[
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0*
- (
-
-%1"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¢
-Bcom.smilepile.data.entities.PhotoEntity#setId(Ljava/lang/String;)V
-__unknown_file ("0*Ê
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.Stringi
-g
- (
-%1"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.String]
-[
- (
-valuejava.lang.String"__annotation*
- (
-
-%0*
- (
-
-%1Ä
-~
- (C)
-'com.smilepile.data.entities.PhotoEntity"
-idjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`Ö
-Bcom.smilepile.data.entities.PhotoEntity#getUri()Ljava/lang/String;
-__unknown_file ("0*
-0 (Å
-
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`Ì
+Ocom.smilepile.storage.FileOperationHelpers#getTEMP_DIR_NAME()Ljava/lang/String;
+__unknown_file ("0*»
+0 (è
+å
  (
-fieldjava.lang.String"__id*R
- (F*D)
-'com.smilepile.data.entities.PhotoEntity"
-urijava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.Object"__id*_
+ (S*Q,
+*com.smilepile.storage.FileOperationHelpers"!
+TEMP_DIR_NAMEjava.lang.Object"'
  (
 
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ç
+Pcom.smilepile.storage.FileOperationHelpers#setTEMP_DIR_NAME(Ljava/lang/String;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q,
+*com.smilepile.storage.FileOperationHelpers"!
+TEMP_DIR_NAMEjava.lang.Object"__id*'
  (
 
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`•
-Ccom.smilepile.data.entities.PhotoEntity#setUri(Ljava/lang/String;)V
-__unknown_file ("0*Ë
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0Å
-
- (D)
-'com.smilepile.data.entities.PhotoEntity"
-urijava.lang.String"__id*'
- (
-
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`≈
-8com.smilepile.data.entities.PhotoEntity#getCategoryId()J
-__unknown_file ("0*∫
-0 (p
-n
- (
-fieldlong"__id*M
- (A*?)
-'com.smilepile.data.entities.PhotoEntity"
-
-categoryIdlong]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldlong=
-;
- (
-fieldlong"__annotation*
- (
-
-%0"
- (
-
-fieldlongB+)
-'com.smilepile.data.entities.PhotoEntityH`Â
-9com.smilepile.data.entities.PhotoEntity#setCategoryId(J)V
-__unknown_file ("0*æ
-0 (]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valuelong=
-;
- (
-valuelong"__annotation*
- (
-
-%0p
-n
- (?)
-'com.smilepile.data.entities.PhotoEntity"
-
-categoryIdlong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB+)
-'com.smilepile.data.entities.PhotoEntityH`√
-7com.smilepile.data.entities.PhotoEntity#getTimestamp()J
-__unknown_file ("0*π
-0 (o
-m
- (
-fieldlong"__id*L
- (@*>)
-'com.smilepile.data.entities.PhotoEntity"
-	timestamplong]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldlong=
-;
- (
-fieldlong"__annotation*
- (
-
-%0"
- (
-
-fieldlongB+)
-'com.smilepile.data.entities.PhotoEntityH`„
-8com.smilepile.data.entities.PhotoEntity#setTimestamp(J)V
-__unknown_file ("0*Ω
-0 (]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valuelong=
-;
- (
-valuelong"__annotation*
- (
-
-%0o
-m
- (>)
-'com.smilepile.data.entities.PhotoEntity"
-	timestamplong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB+)
-'com.smilepile.data.entities.PhotoEntityH`—
-5com.smilepile.data.entities.PhotoEntity#isFavorite()Z
-__unknown_file ("0*…
-0 (v
-t
- (
-fieldboolean"__id*P
- (D*B)
-'com.smilepile.data.entities.PhotoEntity"
-
-isFavoriteboolean`
-^
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldboolean@
->
- (
-fieldboolean"__annotation*
- (
-
-%0"
- (
-
-fieldbooleanB+)
-'com.smilepile.data.entities.PhotoEntityH`Ù
-9com.smilepile.data.entities.PhotoEntity#setIsFavorite(Z)V
-__unknown_file ("0* 
-0 (`
-^
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valueboolean@
->
- (
-valueboolean"__annotation*
- (
-
-%0v
-t
- (B)
-'com.smilepile.data.entities.PhotoEntity"
-
-isFavoriteboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB+)
-'com.smilepile.data.entities.PhotoEntityH`§
-Qcom.smilepile.data.entities.PhotoEntity#getEncryptedChildName()Ljava/lang/String;
-__unknown_file ("0*Ä
-0 (ë
-é
- (
-fieldjava.lang.String"__id*a
- (U*S)
-'com.smilepile.data.entities.PhotoEntity"&
-encryptedChildNamejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`ƒ
-Rcom.smilepile.data.entities.PhotoEntity#setEncryptedChildName(Ljava/lang/String;)V
-__unknown_file ("0*¯
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ë
-é
- (S)
-'com.smilepile.data.entities.PhotoEntity"&
-encryptedChildNamejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¢
-Pcom.smilepile.data.entities.PhotoEntity#getEncryptedChildAge()Ljava/lang/String;
-__unknown_file ("0*ˇ
-0 (ê
-ç
- (
-fieldjava.lang.String"__id*`
- (T*R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedChildAgejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¬
-Qcom.smilepile.data.entities.PhotoEntity#setEncryptedChildAge(Ljava/lang/String;)V
-__unknown_file ("0*˜
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ê
-ç
- (R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedChildAgejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`ú
-Mcom.smilepile.data.entities.PhotoEntity#getEncryptedNotes()Ljava/lang/String;
-__unknown_file ("0*¸
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ÿ
+<com.smilepile.storage.FileOperationHelpers#getMAX_RETRIES()I
+__unknown_file ("0*∆
 0 (ç
 ä
  (
-fieldjava.lang.String"__id*]
- (Q*O)
-'com.smilepile.data.entities.PhotoEntity""
-encryptedNotesjava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.Object"__id*]
+ (Q*O,
+*com.smilepile.storage.FileOperationHelpers"
+MAX_RETRIESjava.lang.Object"'
  (
 
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`º
-Ncom.smilepile.data.entities.PhotoEntity#setEncryptedNotes(Ljava/lang/String;)V
-__unknown_file ("0*Ù
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ç
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`¯
+=com.smilepile.storage.FileOperationHelpers#setMAX_RETRIES(I)V
+__unknown_file ("0*æ
+0 (ç
 ä
- (O)
-'com.smilepile.data.entities.PhotoEntity""
-encryptedNotesjava.lang.String"__id*'
+ (O,
+*com.smilepile.storage.FileOperationHelpers"
+MAX_RETRIESjava.lang.Object"__id*'
  (
 
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`ö
-Lcom.smilepile.data.entities.PhotoEntity#getEncryptedTags()Ljava/lang/String;
-__unknown_file ("0*˚
-0 (å
-â
- (
-fieldjava.lang.String"__id*\
- (P*N)
-'com.smilepile.data.entities.PhotoEntity"!
-encryptedTagsjava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`∫
-Mcom.smilepile.data.entities.PhotoEntity#setEncryptedTags(Ljava/lang/String;)V
-__unknown_file ("0*Û
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0å
-â
- (N)
-'com.smilepile.data.entities.PhotoEntity"!
-encryptedTagsjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`§
-Qcom.smilepile.data.entities.PhotoEntity#getEncryptedMilestone()Ljava/lang/String;
-__unknown_file ("0*Ä
-0 (ë
-é
- (
-fieldjava.lang.String"__id*a
- (U*S)
-'com.smilepile.data.entities.PhotoEntity"&
-encryptedMilestonejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`ƒ
-Rcom.smilepile.data.entities.PhotoEntity#setEncryptedMilestone(Ljava/lang/String;)V
-__unknown_file ("0*¯
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ë
-é
- (S)
-'com.smilepile.data.entities.PhotoEntity"&
-encryptedMilestonejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¢
-Pcom.smilepile.data.entities.PhotoEntity#getEncryptedLocation()Ljava/lang/String;
-__unknown_file ("0*ˇ
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ﬁ
+?com.smilepile.storage.FileOperationHelpers#getRETRY_DELAY_MS()J
+__unknown_file ("0*…
 0 (ê
 ç
  (
-fieldjava.lang.String"__id*`
- (T*R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedLocationjava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.Object"__id*`
+ (T*R,
+*com.smilepile.storage.FileOperationHelpers""
+RETRY_DELAY_MSjava.lang.Object"'
  (
 
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¬
-Qcom.smilepile.data.entities.PhotoEntity#setEncryptedLocation(Ljava/lang/String;)V
-__unknown_file ("0*˜
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ê
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`˛
+@com.smilepile.storage.FileOperationHelpers#setRETRY_DELAY_MS(J)V
+__unknown_file ("0*¡
+0 (ê
 ç
- (R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedLocationjava.lang.String"__id*'
+ (R,
+*com.smilepile.storage.FileOperationHelpers""
+RETRY_DELAY_MSjava.lang.Object"__id*'
  (
 
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¢
-Pcom.smilepile.data.entities.PhotoEntity#getEncryptedMetadata()Ljava/lang/String;
-__unknown_file ("0*ˇ
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`Ö
+fcom.smilepile.storage.FileOperationHelpers#getDirectoryLocks()Ljava/util/concurrent/ConcurrentHashMap;
+__unknown_file ("0*…
 0 (ê
 ç
  (
-fieldjava.lang.String"__id*`
- (T*R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedMetadatajava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
+fieldjava.lang.Object"__id*`
+ (T*R,
+*com.smilepile.storage.FileOperationHelpers""
+directoryLocksjava.lang.Object"'
  (
 
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`¬
-Qcom.smilepile.data.entities.PhotoEntity#setEncryptedMetadata(Ljava/lang/String;)V
-__unknown_file ("0*˜
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0ê
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`•
+gcom.smilepile.storage.FileOperationHelpers#setDirectoryLocks(Ljava/util/concurrent/ConcurrentHashMap;)V
+__unknown_file ("0*¡
+0 (ê
 ç
- (R)
-'com.smilepile.data.entities.PhotoEntity"%
-encryptedMetadatajava.lang.String"__id*'
+ (R,
+*com.smilepile.storage.FileOperationHelpers""
+directoryLocksjava.lang.Object"__id*'
  (
 
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH`÷6
-÷com.smilepile.data.entities.PhotoEntity#<init>(Ljava/lang/String;Ljava/lang/String;JJZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Vi
-_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/entities/PhotoEntity.kt ("0*“/
-0 >(á
-Ñ
- (1
-%0"
-__annotate*0
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`
+Tcom.smilepile.storage.FileOperationHelpers#atomicMove(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt   ("0*(
+0 ("
+! D(	
+	<unknown>:"
+   ('
+sourcejava.io.File:'
+ )  (:
+destinationjava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHÓ
+Rcom.smilepile.storage.FileOperationHelpers#copyFile(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktJ J( "0*(
+0G I("
+K g(	
+	<unknown>:"
+J! J(-
+sourcejava.io.File:'
+J/ J(@
+destinationjava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHÚ
+]com.smilepile.storage.FileOperationHelpers#verifyFileIntegrity(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktm m(#"0*(
+0j l("
+n w(	
+	<unknown>:!
+m$ m(/
+file1java.io.File:!
+m1 m(<
+file2java.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersH–
+^com.smilepile.storage.FileOperationHelpers#calculateFileHash(Ljava/io/File;)Ljava/lang/String;l
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt} }()"0*)
+0z |("
+	~ à(	
+	<unknown>: 
+}* }(4
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHà
+bcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;n
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kté é(%"0*‘
+0
+ã ç(„
+‡
+
+è è(",
+%0&java.util.concurrent.ConcurrentHashMap"fcom.smilepile.storage.FileOperationHelpers#getDirectoryLocks()Ljava/util/concurrent/ConcurrentHashMap;*<
+
+è è(".,
+*com.smilepile.storage.FileOperationHelpers√
+¿
 
-__unknown_file (
-java.lang.Object*4
+__unknown_file (
+%1"__declareFunction*ä
 
-__unknown_file (
-
-idjava.lang.Stringá
-Ñ
- (1
-%1"
-__annotate*0
+__unknown_file (nl
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0õò
 
-__unknown_file (
-java.lang.Object*4
+__unknown_file (l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"__ScopeWrapperÊ
+„
 
-__unknown_file (
-
-idjava.lang.Stringz
-x
- (1
-idjava.lang.String"__annotation*"
+__unknown_file (à
+l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"
+pathjava.lang.String"__id*6
+
+__unknown_file (
+
+pathjava.lang.String¶
+£
+
+__unknown_file (t
+
+%1"l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"__id*ä
+
+__unknown_file (n
+l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0Ì
+
+è# è(8
+%2java.lang.Object"yjava.util.concurrent.ConcurrentHashMap#computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;*<
+
+è è(".
+,
+%0&java.util.concurrent.ConcurrentHashMap*(
+
+è3 è(7
+
+pathjava.lang.String*"
 
 __unknown_file (
 
-%0*"
-
-__unknown_file (
-
-%1à
-Ö
- (
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*5
-
-__unknown_file (
-
-urijava.lang.StringW
+%12@computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)W
 U
- (
-urijava.lang.String"__annotation*"
-
-__unknown_file (
-
-%2É
-Ä
- (
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*0
-
-__unknown_file (
-
 
-categoryIdlongR
-P
- (
+è è(D
+mutexjava.lang.Object"__id*&
 
-categoryIdlong"__annotation*"
-
-__unknown_file (
-
-%3Å
-
- (4
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*/
-
-__unknown_file (
-
-	timestamplongQ
-O
- (4
-	timestamplong"__annotation*"
-
-__unknown_file (
-
-%4Ü
-É
-  !(#
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*3
-
-__unknown_file (
-
+è# è(8
+
+%2java.lang.Object"
 
-isFavoritebooleanU
-S
-  !(#
+ë ¶(	
+	<unknown>:&
 
-isFavoriteboolean"__annotation*"
+é& é(2
+pathjava.lang.StringB.,
+*com.smilepile.storage.FileOperationHelpersHÎ
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0n
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktè9 è(D"0*£
+0
+è9 è(DË
+Â
 
-__unknown_file (
-
-%5ó
-î
-$ %(*
-%6"
-__annotate*0
+__unknown_file (
+%0"__id*º
 
-__unknown_file (
-java.lang.Object*D
-
-__unknown_file ((
-&
-encryptedChildNamejava.lang.Stringf
-d
-$ %(*&
-encryptedChildNamejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%6ñ
-ì
-( )()
-%7"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*C
-
-__unknown_file ('
-%
-encryptedChildAgejava.lang.Stringe
-c
-( )()%
-encryptedChildAgejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%7ì
-ê
-, -(&
-%8"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*@
-
-__unknown_file ($
-"
-encryptedNotesjava.lang.Stringb
-`
-, -(&"
-encryptedNotesjava.lang.String"__annotation*"
-
-__unknown_file (
-
-%8í
-è
-0 1(%
-%9"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*?
-
-__unknown_file (#
-!
-encryptedTagsjava.lang.Stringa
-_
-0 1(%!
-encryptedTagsjava.lang.String"__annotation*"
-
-__unknown_file (
-
-%9ò
-ï
-4 5(*
-%10"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*D
-
-__unknown_file ((
-&
-encryptedMilestonejava.lang.Stringg
-e
-4 5(*&
-encryptedMilestonejava.lang.String"__annotation*#
-
-__unknown_file (
-
-%10ó
-î
-8 9()
-%11"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*C
-
-__unknown_file ('
-%
-encryptedLocationjava.lang.Stringf
-d
-8 9()%
-encryptedLocationjava.lang.String"__annotation*#
-
-__unknown_file (
-
-%11ó
-î
-< =()
-%12"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*C
-
-__unknown_file ('
-%
-encryptedMetadatajava.lang.Stringf
-d
-< =()%
-encryptedMetadatajava.lang.String"__annotation*#
-
-__unknown_file (
-
-%12È
-Ê
- (1
-%13java.lang.String"Bcom.smilepile.data.entities.PhotoEntity#setId(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*4
+__unknown_file (ü*ú,
+*com.smilepile.storage.FileOperationHelpers"l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0|
+z
 
 __unknown_file (
-
-idjava.lang.StringÎ
-Ë
- (
-%14java.lang.String"Ccom.smilepile.data.entities.PhotoEntity#setUri(Ljava/lang/String;)V*G
+pathjava.lang.String"__id*>
 
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*5
+__unknown_file ("* 
+
+%0"
+pathjava.lang.String")
 
-__unknown_file (
-
-urijava.lang.String–
-Õ
- (
-%15long"9com.smilepile.data.entities.PhotoEntity#setCategoryId(J)V*G
+__unknown_file (
+	<unknown>:2
 
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*0
-
-__unknown_file (
-
-
-categoryIdlongŒ
-À
- (4
-%16long"8com.smilepile.data.entities.PhotoEntity#setTimestamp(J)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*/
-
-__unknown_file (
-
-	timestamplong÷
-”
-  !(#
-%17boolean"9com.smilepile.data.entities.PhotoEntity#setIsFavorite(Z)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*3
-
-__unknown_file (
-
-
-isFavoritebooleanâ
-Ü
-$ %(*
-%18java.lang.String"Rcom.smilepile.data.entities.PhotoEntity#setEncryptedChildName(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*D
-
-__unknown_file ((
-&
-encryptedChildNamejava.lang.Stringá
-Ñ
-( )()
-%19java.lang.String"Qcom.smilepile.data.entities.PhotoEntity#setEncryptedChildAge(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*C
-
-__unknown_file ('
-%
-encryptedChildAgejava.lang.StringÅ
-˛
-, -(&
-%20java.lang.String"Ncom.smilepile.data.entities.PhotoEntity#setEncryptedNotes(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*@
-
-__unknown_file ($
-"
-encryptedNotesjava.lang.Stringˇ
-¸
-0 1(%
-%21java.lang.String"Mcom.smilepile.data.entities.PhotoEntity#setEncryptedTags(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*?
-
-__unknown_file (#
-!
-encryptedTagsjava.lang.Stringâ
-Ü
-4 5(*
-%22java.lang.String"Rcom.smilepile.data.entities.PhotoEntity#setEncryptedMilestone(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*D
-
-__unknown_file ((
-&
-encryptedMilestonejava.lang.Stringá
-Ñ
-8 9()
-%23java.lang.String"Qcom.smilepile.data.entities.PhotoEntity#setEncryptedLocation(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*C
-
-__unknown_file ('
-%
-encryptedLocationjava.lang.Stringá
-Ñ
-< =()
-%24java.lang.String"Qcom.smilepile.data.entities.PhotoEntity#setEncryptedMetadata(Ljava/lang/String;)V*G
-
-__unknown_file (+)
-'com.smilepile.data.entities.PhotoEntity*C
-
-__unknown_file ('
-%
-encryptedMetadatajava.lang.String"/
+__unknown_file (
+itjava.lang.StringB.,
+*com.smilepile.storage.FileOperationHelpersHå
+Xcom.smilepile.storage.FileOperationHelpers#cleanupTempFiles(Landroid.content.Context;J)Vn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt¨ ¨( "0*@
+0
+© ´("/
 
 __unknown_file (
-implicit return:"
- (1
-idjava.lang.String:#
- (
-urijava.lang.String:
- (
+implicit return:)
 
-categoryIdlong:
- (4
-	timestamplong:!
-  !(#
+¨! ¨(A
+contextjava.lang.Object:
 
-isFavoriteboolean:2
-$ %(*&
-encryptedChildNamejava.lang.String:1
-( )()%
-encryptedChildAgejava.lang.String:.
-, -(&"
-encryptedNotesjava.lang.String:-
-0 1(%!
-encryptedTagsjava.lang.String:2
-4 5(*&
-encryptedMilestonejava.lang.String:1
-8 9()%
-encryptedLocationjava.lang.String:1
-< =()%
-encryptedMetadatajava.lang.StringB+)
-'com.smilepile.data.entities.PhotoEntityH
+¨C ¨(\
+maxAgeMslongB.,
+*com.smilepile.storage.FileOperationHelpersHø
+Fcom.smilepile.storage.FileOperationHelpers#safeDelete(Ljava/io/File;)Zn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt¬ ¬("0*,
+0
+ø ¡("
+
+√ Ê(	
+	<unknown>:"
+
+¬ ¬(%
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersH”
+Mcom.smilepile.storage.FileOperationHelpers#getAvailableSpace(Ljava/io/File;)Jn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktÏ Ï("1*%
+2
+Ô
+ Ú(	"
+
+Ì Ú(	
+
+%0*P
+3
+Ô Ú(	:
+8
+
+__unknown_file (
+%0"__id*
+
+Ò Ò(2 *
+2*ø
+1
+Ì Ô(	`
+^
+
+Ó Ó(
+
+%1long"java.io.File#getUsableSpace()J*$
+
+Ó Ó(
+
+filejava.io.FileD
+B
+
+__unknown_file (
+%0"__id*
+
+Ó Ó(
+
+
+%1long*
+2
+3:"
+
+Ï Ï($
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersH•
+Ocom.smilepile.storage.FileOperationHelpers#checkStorageQuota(Ljava/io/File;JJ)Zn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt¯ ¯("0*ø
+0
+ı ˜(Œ
+À
+
+˘ ˘(/
+
+%0long"Mcom.smilepile.storage.FileOperationHelpers#getAvailableSpace(Ljava/io/File;)J*<
+
+˘ ˘(/.,
+*com.smilepile.storage.FileOperationHelpers*$
+
+˘* ˘(.
+
+filejava.io.FileC
+A
+
+˘ ˘(/
+	availablelong"__id*
+
+˘ ˘(/
+
+
+%0longÑ
+Å
+
+˙ ˙(8
+%1"__calculate*
+
+˙* ˙(+
++*%
+
+˙ ˙()
+
+requiredSpacelong*$
+
+˙, ˙(8
+
+safetyMarginlong{
+y
+
+˙ ˙(9
+%2"	__compare*
+
+˙ ˙(
+>*!
+
+˙ ˙(
+
+	availablelong*"
+
+__unknown_file (
+
+%1"
+
+˙ ˙(9
+
+%2:"
+
+¯ ¯($
+filejava.io.File:#
+
+¯& ¯(9
+requiredSpacelong:"
+
+¯; ¯(`
+safetyMarginlongB.,
+*com.smilepile.storage.FileOperationHelpersH

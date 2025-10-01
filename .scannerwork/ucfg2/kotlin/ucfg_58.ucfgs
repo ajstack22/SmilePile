@@ -1,203 +1,672 @@
-´
-^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;
-__unknown_file ("0*˜
-0 (Æ
-´
- ()
-field com.smilepile.theme.ThemeManager"__id*n
- (b*`,
-*com.smilepile.ui.viewmodels.ThemeViewModel"0
-themeManager com.smilepile.theme.ThemeManager"7
- (+
-)
-field com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`À
-_com.smilepile.ui.viewmodels.ThemeViewModel#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
-__unknown_file ("0*ﬂ
-0 (Æ
-´
- (`,
-*com.smilepile.ui.viewmodels.ThemeViewModel"0
-themeManager com.smilepile.theme.ThemeManager"__id*7
- (+
-)
-value com.smilepile.theme.ThemeManager"
+±
+3com.smilepile.data.entities.CategoryEntity#getId()J
+__unknown_file ("0*®
+0 (k
+i
+ (
+fieldlong"__id*H
+ (<*:,
+*com.smilepile.data.entities.CategoryEntity"
+
+idlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong]
+[
+ (
+%1"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlongQ
+O
+ (
+fieldlong"__annotation*
+ (
+
+%0*
+ (
+
+%1"
+ (
+
+fieldlongB.,
+*com.smilepile.data.entities.CategoryEntityH`—
+4com.smilepile.data.entities.CategoryEntity#setId(J)V
+__unknown_file ("0*¨
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong]
+[
+ (
+%1"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelongQ
+O
+ (
+valuelong"__annotation*
+ (
+
+%0*
+ (
+
+%1k
+i
+ (:,
+*com.smilepile.data.entities.CategoryEntity"
+
+idlong"__id*
+ (
+
+valuelong"
  (
-implicit return:5
- ()
-value com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`¬
-Vcom.smilepile.ui.viewmodels.ThemeViewModel#<init>(Lcom/smilepile/theme/ThemeManager;)Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt (("0*Ü
-0 (°
-û
- (*
+implicit return:
+ (
+valuelongB.,
+*com.smilepile.data.entities.CategoryEntityH`ü
+Mcom.smilepile.data.entities.CategoryEntity#getDisplayName()Ljava/lang/String;
+__unknown_file ("0*¸
+0 (ç
+ä
+ (
+fieldjava.lang.String"__id*]
+ (Q*O,
+*com.smilepile.data.entities.CategoryEntity"
+displayNamejava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ø
+Ncom.smilepile.data.entities.CategoryEntity#setDisplayName(Ljava/lang/String;)V
+__unknown_file ("0*Ù
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0ç
+ä
+ (O,
+*com.smilepile.data.entities.CategoryEntity"
+displayNamejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ô
+Jcom.smilepile.data.entities.CategoryEntity#getColorHex()Ljava/lang/String;
+__unknown_file ("0*˘
+0 (ä
+á
+ (
+fieldjava.lang.String"__id*Z
+ (N*L,
+*com.smilepile.data.entities.CategoryEntity"
+colorHexjava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`π
+Kcom.smilepile.data.entities.CategoryEntity#setColorHex(Ljava/lang/String;)V
+__unknown_file ("0*Ò
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0ä
+á
+ (L,
+*com.smilepile.data.entities.CategoryEntity"
+colorHexjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ô
+Jcom.smilepile.data.entities.CategoryEntity#getIconName()Ljava/lang/String;
+__unknown_file ("0*˘
+0 (ä
+á
+ (
+fieldjava.lang.String"__id*Z
+ (N*L,
+*com.smilepile.data.entities.CategoryEntity"
+iconNamejava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`π
+Kcom.smilepile.data.entities.CategoryEntity#setIconName(Ljava/lang/String;)V
+__unknown_file ("0*Ò
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0ä
+á
+ (L,
+*com.smilepile.data.entities.CategoryEntity"
+iconNamejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`≈
+9com.smilepile.data.entities.CategoryEntity#getPosition()I
+__unknown_file ("0*∂
+0 (o
+m
+ (
+fieldint"__id*M
+ (A*?,
+*com.smilepile.data.entities.CategoryEntity"
+positionint\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldint<
+:
+ (
+fieldint"__annotation*
+ (
+
+%0"
+ (
+
+fieldintB.,
+*com.smilepile.data.entities.CategoryEntityH`Â
+:com.smilepile.data.entities.CategoryEntity#setPosition(I)V
+__unknown_file ("0*ª
+0 (\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueint<
+:
+ (
+valueint"__annotation*
+ (
+
+%0o
+m
+ (?,
+*com.smilepile.data.entities.CategoryEntity"
+positionint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB.,
+*com.smilepile.data.entities.CategoryEntityH`ÿ
+7com.smilepile.data.entities.CategoryEntity#isDefault()Z
+__unknown_file ("0*À
+0 (x
+v
+ (
+fieldboolean"__id*R
+ (F*D,
+*com.smilepile.data.entities.CategoryEntity"
+	isDefaultboolean`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldboolean@
+>
+ (
+fieldboolean"__annotation*
+ (
+
+%0"
+ (
+
+fieldbooleanB.,
+*com.smilepile.data.entities.CategoryEntityH`˚
+;com.smilepile.data.entities.CategoryEntity#setIsDefault(Z)V
+__unknown_file ("0*Ã
+0 (`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueboolean@
+>
+ (
+valueboolean"__annotation*
+ (
+
+%0x
+v
+ (D,
+*com.smilepile.data.entities.CategoryEntity"
+	isDefaultboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB.,
+*com.smilepile.data.entities.CategoryEntityH`Ã
+:com.smilepile.data.entities.CategoryEntity#getCreatedAt()J
+__unknown_file ("0*º
+0 (r
+p
+ (
+fieldlong"__id*O
+ (C*A,
+*com.smilepile.data.entities.CategoryEntity"
+	createdAtlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB.,
+*com.smilepile.data.entities.CategoryEntityH`Ï
+;com.smilepile.data.entities.CategoryEntity#setCreatedAt(J)V
+__unknown_file ("0*¿
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0r
+p
+ (A,
+*com.smilepile.data.entities.CategoryEntity"
+	createdAtlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB.,
+*com.smilepile.data.entities.CategoryEntityH`ÿ
+ncom.smilepile.data.entities.CategoryEntity#<init>(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)Vl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/entities/CategoryEntity.kt ("0*À
+0 "(z
+x
+ (
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*N
+java.lang.Object*(
 
-__unknown_file (2
-0
-themeManager com.smilepile.theme.ThemeManagerp
-n
- (*0
-themeManager com.smilepile.theme.ThemeManager"__annotation*"
+__unknown_file (
+
+
+idlongz
+x
+ (
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*(
+
+__unknown_file (
+
+
+idlongn
+l
+ (
+
+idlong"__annotation*"
 
 __unknown_file (
 
-%0≤
-Ø
- (*&
-%1 com.smilepile.theme.ThemeManager"_com.smilepile.ui.viewmodels.ThemeViewModel#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V*J
+%0*"
+
+__unknown_file (
+
+%1ê
+ç
+ (
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+displayNamejava.lang.String_
+]
+ (
+displayNamejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%2ç
+ä
+ (
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+colorHexjava.lang.String\
+Z
+ (
+colorHexjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%3ç
+ä
+ ( 
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+iconNamejava.lang.String\
+Z
+ ( 
+iconNamejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%4
+}
+ (
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*-
+
+__unknown_file (
+
+positionintO
+M
+ (
+positionint"__annotation*"
+
+__unknown_file (
+
+%5Ö
+Ç
+ ("
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*2
+
+__unknown_file (
+
+	isDefaultbooleanT
+R
+ ("
+	isDefaultboolean"__annotation*"
+
+__unknown_file (
+
+%6Å
+
+  !(4
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*/
+
+__unknown_file (
+
+	createdAtlongQ
+O
+  !(4
+	createdAtlong"__annotation*"
+
+__unknown_file (
+
+%7≈
+¬
+ (
+
+%8long"4com.smilepile.data.entities.CategoryEntity#setId(J)V*J
 
 __unknown_file (.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*N
+*com.smilepile.data.entities.CategoryEntity*(
 
-__unknown_file (2
-0
-themeManager com.smilepile.theme.ThemeManager—
-Œ
-) (5&
-%2 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
-) (5.,
-*com.smilepile.ui.viewmodels.ThemeViewModelï
-í
-6 (@
-%3java.lang.Object"8com.smilepile.theme.ThemeManager#isDarkMode()LStateFlow;*4
-) (5(
-&
-%2 com.smilepile.theme.ThemeManagerœ
-Ã
- (@
-%4java.lang.Object"Fcom.smilepile.ui.viewmodels.ThemeViewModel#setIsDarkMode(LStateFlow;)V*:
- (@.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*$
-6 (@
-
-%3java.lang.Object—
-Œ
-* (6&
-%5 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
-* (6.,
-*com.smilepile.ui.viewmodels.ThemeViewModeló
-î
-7 (@
-%6java.lang.Object":com.smilepile.theme.ThemeManager#getThemeMode()LStateFlow;*4
-* (6(
-&
-%5 com.smilepile.theme.ThemeManagerŒ
-À
- (@
-%7java.lang.Object"Ecom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(LStateFlow;)V*:
- (@.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*$
-7 (@
-
-%6java.lang.Object"/
-
-__unknown_file (
-implicit return:<
- (*0
-themeManager com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH›
-Bcom.smilepile.ui.viewmodels.ThemeViewModel#isDarkMode()LStateFlow;
-__unknown_file ("0*≈
-0 (å
-â
- (
-fieldjava.lang.Object"__id*\
- (P*N,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
+__unknown_file (
 
-isDarkModejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`Ä
-Fcom.smilepile.ui.viewmodels.ThemeViewModel#setIsDarkMode(LStateFlow;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (N,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
 
-isDarkModejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`ﬁ
-Dcom.smilepile.ui.viewmodels.ThemeViewModel#getThemeMode()LStateFlow;
-__unknown_file ("0*ƒ
-0 (ã
-à
- (
-fieldjava.lang.Object"__id*[
- (O*M,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
-	themeModejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`˛
-Ecom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(LStateFlow;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
-	themeModejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`˝
-9com.smilepile.ui.viewmodels.ThemeViewModel#toggleTheme()Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt ("0*ú
-0 (—
-Œ
- (&
-%0 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
- (.,
-*com.smilepile.ui.viewmodels.ThemeViewModelá
-Ñ
- ("
-%1kotlin.Unit"/com.smilepile.theme.ThemeManager#toggleTheme()V*4
- ((
-&
-%0 com.smilepile.theme.ThemeManager"/
+idlongÄ
+˝
+ (
+%9java.lang.String"Ncom.smilepile.data.entities.CategoryEntity#setDisplayName(Ljava/lang/String;)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*=
+
+__unknown_file (!
+
+displayNamejava.lang.String˚
+¯
+ (
+%10java.lang.String"Kcom.smilepile.data.entities.CategoryEntity#setColorHex(Ljava/lang/String;)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*:
+
+__unknown_file (
+
+colorHexjava.lang.String˚
+¯
+ ( 
+%11java.lang.String"Kcom.smilepile.data.entities.CategoryEntity#setIconName(Ljava/lang/String;)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*:
+
+__unknown_file (
+
+iconNamejava.lang.String–
+Õ
+ (
+
+%12int":com.smilepile.data.entities.CategoryEntity#setPosition(I)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*-
+
+__unknown_file (
+
+positionint⁄
+◊
+ ("
+%13boolean";com.smilepile.data.entities.CategoryEntity#setIsDefault(Z)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*2
+
+__unknown_file (
+
+	isDefaultboolean‘
+—
+  !(4
+%14long";com.smilepile.data.entities.CategoryEntity#setCreatedAt(J)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*/
+
+__unknown_file (
+
+	createdAtlong"/
 
 __unknown_file (
-implicit returnB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH•
-Ycom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(Lcom/smilepile/theme/ThemeMode;)Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt ("0*Ò
-0 (%—
-Œ
- (&
-%0 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
- (.,
-*com.smilepile.ui.viewmodels.ThemeViewModel‹
-Ÿ
- ('
-%1kotlin.Unit"Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V*4
- ((
-&
-%0 com.smilepile.theme.ThemeManager*3
-" (&'
-%
-modecom.smilepile.theme.ThemeMode"/
-
-__unknown_file (
-implicit return:1
- ($%
-modecom.smilepile.theme.ThemeModeB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH
+implicit return:
+ (
+
+idlong:+
+ (
+displayNamejava.lang.String:(
+ (
+colorHexjava.lang.String:(
+ ( 
+iconNamejava.lang.String:
+ (
+positionint: 
+ ("
+	isDefaultboolean:
+  !(4
+	createdAtlongB.,
+*com.smilepile.data.entities.CategoryEntityH

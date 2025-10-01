@@ -1,64 +1,21 @@
-®
-Ïcom.smilepile.ui.components#OptimizedPhotoGrid(Ljava/util/List;Ljava/util/Set;ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;LLazyGridState;Lkotlin/jvm/functions/Function0;ZI)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt" "("0*ì
-0  (â
-Ü
-# #(
+∂
+ßcom.smilepile.ui.screens#PhotoGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;LPaddingValues;)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktT T("0*Ã
+0R S(õ
+ò
+U U(.
 %0"
-__annotate*0
+__annotate*,
 
-__unknown_file (
-java.lang.Object*6
+__unknown_file (
+kotlin.OptIn*L
 
-__unknown_file (
-
-photosjava.util.ListX
-V
-# #(
-photosjava.util.List"__annotation*"
-
-__unknown_file (
-
-%0ê
-ç
-$ $(
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*=
-
-__unknown_file (!
-
-selectedPhotosjava.util.Set_
-]
-$ $(
-selectedPhotosjava.util.Set"__annotation*"
-
-__unknown_file (
-
-%1ã
-à
-% %(
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*8
-
-__unknown_file (
-
-isSelectionModebooleanZ
-X
-% %(
-isSelectionModeboolean"__annotation*"
-
-__unknown_file (
-
-%2ü
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function2ü
 ú
-& &(!
-%3"
+U U(.
+%1"
 __annotate*0
 
 __unknown_file (
@@ -66,825 +23,43 @@ __annotate*0
 
 __unknown_file (0
 .
-onPhotoClickkotlin.jvm.functions.Function1n
-l
-& &(!.
-onPhotoClickkotlin.jvm.functions.Function1"__annotation*"
+onPhotoClickkotlin.jvm.functions.Function2ì
+ê
+U U(..
+onPhotoClickkotlin.jvm.functions.Function2"__annotation*"
 
 __unknown_file (
 
-%3£
-†
-' '(%
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*P
-
-__unknown_file (4
-2
-onPhotoLongClickkotlin.jvm.functions.Function1r
-p
-' '(%2
-onPhotoLongClickkotlin.jvm.functions.Function1"__annotation*"
+%0*"
 
 __unknown_file (
 
-%4£
-†
-( ((%
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*P
-
-__unknown_file (4
-2
-onFavoriteTogglekotlin.jvm.functions.Function1r
-p
-( ((%2
-onFavoriteTogglekotlin.jvm.functions.Function1"__annotation*"
-
-__unknown_file (
-
-%5ç
-ä
-) )(!
-%6"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object\
-Z
-) )(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%6é
-ã
-* *(6
-%7"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*;
-
-__unknown_file (
-
-	gridStatejava.lang.Object]
-[
-* *(6
-	gridStatejava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%7ù
-ö
-+ +($
-%8"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*J
-
-__unknown_file (.
-,
-
-onLoadMorekotlin.jvm.functions.Function0l
-j
-+ +($,
-
-onLoadMorekotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%8Ö
-Ç
-, ,(
-%9"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*2
-
-__unknown_file (
-
-	isLoadingbooleanT
-R
-, ,(
-	isLoadingboolean"__annotation*"
-
-__unknown_file (
-
-%9â
-Ü
-- -(
-%10"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*5
-
-__unknown_file (
-
-loadingItemCountintX
-V
-- -(
-loadingItemCountint"__annotation*#
-
-__unknown_file (
-
-%10`
-^
-/ /(2!
-configurationjava.lang.Object"__id*)
-/+ /(2
-
-currentjava.lang.ObjectY
-W
-0 0(4
-screenWidthjava.lang.Object"__id*$
-02 0(4
-
-dpjava.lang.Object^
-\
-3 :(
-columnCountjava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>"/
-
-__unknown_file (
-implicit return:$
-# #(
-photosjava.util.List:+
-$ $(
-selectedPhotosjava.util.Set:&
-% %(
-isSelectionModeboolean::
-& &(!.
-onPhotoClickkotlin.jvm.functions.Function1:>
-' '(%2
-onPhotoLongClickkotlin.jvm.functions.Function1:>
-( ((%2
-onFavoriteTogglekotlin.jvm.functions.Function1:(
-) )(!
-modifierjava.lang.Object:)
-* *(6
-	gridStatejava.lang.Object:8
-+ +($,
-
-onLoadMorekotlin.jvm.functions.Function0: 
-, ,(
-	isLoadingboolean:#
-- -(
-loadingItemCountintB"
-com.smilepile.ui.componentsHÂ
-¬com.smilepile.ui.components#OptimizedPhotoGridItem(Lcom/smilepile/data/models/Photo;ZZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;LModifier;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kts s(""0*†
-0o q(ô
-ñ
-t t(
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*F
-
-__unknown_file (*
-(
-photocom.smilepile.data.models.Photoh
-f
-t t((
-photocom.smilepile.data.models.Photo"__annotation*"
-
-__unknown_file (
-
-%0Ü
-É
-u u(
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*3
-
-__unknown_file (
-
-
-isSelectedbooleanU
-S
-u u(
-
-isSelectedboolean"__annotation*"
-
-__unknown_file (
-
-%1ã
-à
-v v(
+%1¶
+£
+V V(8
 %2"
-__annotate*0
+__annotate*,
 
-__unknown_file (
-java.lang.Object*8
+__unknown_file (
+kotlin.OptIn*W
 
-__unknown_file (
-
-isSelectionModebooleanZ
-X
-v v(
-isSelectionModeboolean"__annotation*"
-
-__unknown_file (
-
-%2ü
-ú
-w w(
+__unknown_file (;
+9
+onNavigateToPhotoEditorkotlin.jvm.functions.Function1™
+ß
+V V(8
 %3"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*L
+java.lang.Object*W
 
-__unknown_file (0
-.
-onPhotoClickkotlin.jvm.functions.Function0n
-l
-w w(.
-onPhotoClickkotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%3£
-†
-x x( 
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*P
-
-__unknown_file (4
-2
-onPhotoLongClickkotlin.jvm.functions.Function0r
-p
-x x( 2
-onPhotoLongClickkotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%4£
-†
-y y( 
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*P
-
-__unknown_file (4
-2
-onFavoriteTogglekotlin.jvm.functions.Function0r
-p
-y y( 2
-onFavoriteTogglekotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%5ç
-ä
-z z(!
-%6"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object\
-Z
-z z(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%6^
-\
-	} É(
-
-imageModeljava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>"/
-
-__unknown_file (
-implicit return:4
-t t((
-photocom.smilepile.data.models.Photo:!
-u u(
-
-isSelectedboolean:&
-v v(
-isSelectionModeboolean::
-w w(.
-onPhotoClickkotlin.jvm.functions.Function0:>
-x x( 2
-onPhotoLongClickkotlin.jvm.functions.Function0:>
-y y( 2
-onFavoriteTogglekotlin.jvm.functions.Function0:(
-z z(!
-modifierjava.lang.ObjectB"
-com.smilepile.ui.componentsHù
-
-;com.smilepile.ui.components.GridConfig#getOptimalColumns()Ip
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktñ ñ("0*®
-2
-ú ú( é
-ã
-
-ú ú( 
-%2"	__compare*
-
-ú ú(
-<*/
-
-ú ú(!
-
-screenWidthjava.lang.Object*&
-
-ú ú( 
-
-dpjava.lang.Object*
-4
-5*R
-3
-õ$ õ(%<
-:
-
-__unknown_file (
-%0"__id*
-
-õ$ õ(%2*
-1*®
-4
-ù ù( é
-ã
-
-ù ù( 
-%3"	__compare*
-
-ù ù(
-<*/
-
-ù ù(!
-
-screenWidthjava.lang.Object*&
-
-ù ù( 
-
-dpjava.lang.Object*
-7
-8*R
-5
-ú$ ú(%<
-:
-
-__unknown_file (
-%0"__id*
-
-ú$ ú(%2*
-1*R
-7
-ù$ ù(%<
-:
-
-__unknown_file (
-%0"__id*
-
-ù$ ù(%2*
-1*R
-8
-û û(<
-:
-
-__unknown_file (
-%0"__id*
-
-û û(2*
-1*Ì
-0
-ï ï(d
-b
-
-ó ó(6!
-configurationjava.lang.Object"__id*+
-
-ó/ ó(6
-
-currentjava.lang.Object]
-[
-
-ò ò(8
-screenWidthjava.lang.Object"__id*&
-
-ò6 ò(8
-
-dpjava.lang.Objecté
-ã
-
-õ õ( 
-%1"	__compare*
-
-õ õ(
-<*/
-
-õ õ(!
-
-screenWidthjava.lang.Object*&
-
-õ õ( 
-
-dpjava.lang.Object*
-2
-3*%
-1
-ü ü(	"
-
-ö ü(	
-
-%0B*(
-&com.smilepile.ui.components.GridConfigH¢
-?com.smilepile.ui.components.GridConfig#getOptimalItemSpacing()Ip
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt£ £("0*®
-2
-© ©( é
-ã
-
-© ©( 
-%2"	__compare*
-
-© ©(
-<*/
-
-© ©(!
-
-screenWidthjava.lang.Object*&
-
-© ©( 
-
-dpjava.lang.Object*
-5
-6*R
-3
-®$ ®(%<
-:
-
-__unknown_file (
-%0"__id*
-
-®$ ®(%2*
-1*R
-5
-©$ ©(%<
-:
-
-__unknown_file (
-%0"__id*
-
-©$ ©(%2*
-1*R
-6
-™ ™(<
-:
-
-__unknown_file (
-%0"__id*
-
-™ ™(2*
-1*Ì
-0
-¢ ¢(d
-b
-
-§ §(6!
-configurationjava.lang.Object"__id*+
-
-§/ §(6
-
-currentjava.lang.Object]
-[
-
-• •(8
-screenWidthjava.lang.Object"__id*&
-
-•6 •(8
-
-dpjava.lang.Objecté
-ã
-
-® ®( 
-%1"	__compare*
-
-® ®(
-<*/
-
-® ®(!
-
-screenWidthjava.lang.Object*&
-
-® ®( 
-
-dpjava.lang.Object*
-2
-3*%
-1
-´ ´(	"
-
-ß ´(	
-
-%0B*(
-&com.smilepile.ui.components.GridConfigH‘	
-Pcom.smilepile.ui.components.GridConfig#getOptimalContentPadding()LPaddingValues;p
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktØ Ø( "0*®
-2
-µ µ( é
-ã
-
-µ µ( 
-%2"	__compare*
-
-µ µ(
-<*/
-
-µ µ(!
-
-screenWidthjava.lang.Object*&
-
-µ µ( 
-
-dpjava.lang.Object*
-5
-6*f
-3
-¥$ ¥()P
-N
-
-__unknown_file (
-%0"__id*&
-
-¥' ¥()
-
-dpjava.lang.Object*
-1*f
-5
-µ$ µ()P
-N
-
-__unknown_file (
-%0"__id*&
-
-µ' µ()
-
-dpjava.lang.Object*
-1*f
-6
-∂ ∂(P
-N
-
-__unknown_file (
-%0"__id*&
-
-∂ ∂(
-
-dpjava.lang.Object*
-1*Ì
-0
-Æ Æ(d
-b
-
-∞ ∞(6!
-configurationjava.lang.Object"__id*+
-
-∞/ ∞(6
-
-currentjava.lang.Object]
-[
-
-± ±(8
-screenWidthjava.lang.Object"__id*&
-
-±6 ±(8
-
-dpjava.lang.Objecté
-ã
-
-¥ ¥( 
-%1"	__compare*
-
-¥ ¥(
-<*/
-
-¥ ¥(!
-
-screenWidthjava.lang.Object*&
-
-¥ ¥( 
-
-dpjava.lang.Object*
-2
-3*â
-1
-∑ ∑(	[
-Y
-
-≥ ∑(	!
-paddingerror.NonExistentClass"__id*"
-
-__unknown_file (
-
-%0"
-
-π π(%
-	<unknown>B*(
-&com.smilepile.ui.components.GridConfigH≠
-\com.smilepile.ui.components.ScrollPerformance#rememberPerformantScrollState()LLazyGridState;p
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt≈ ≈(%"0*¢
-0
-¡ √(`
-^
-
-∆ ∆(1
-scrollStatejava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>"/
-
-‘ ‘(!
-
-scrollStatejava.lang.ObjectB1/
--com.smilepile.ui.components.ScrollPerformanceHÓ
-Qcom.smilepile.ui.components.ScrollPerformance#smoothScrollToTop(LLazyGridState;)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt⁄ ⁄(!"0*@
-0
-◊ Ÿ("/
-
-__unknown_file (
-implicit return:-
-
-⁄" ⁄(<
-scrollStatejava.lang.ObjectB1/
--com.smilepile.ui.components.ScrollPerformanceHÂ
-Ucom.smilepile.ui.components.ScrollPerformance#shouldShowScrollToTop(LLazyGridState;)Zp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt‚ ‚("0*≤
-0
-ﬁ ‡(í
-è
-
-‚ ‚(8
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*=
-
-__unknown_file (!
-
-scrollStatejava.lang.Objecta
-_
-
-‚ ‚(8
-scrollStatejava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%0")
-
-„ Á(
-
-valuejava.lang.Object:-
-
-‚ ‚(8
-scrollStatejava.lang.ObjectB1/
--com.smilepile.ui.components.ScrollPerformanceH√
-Ecom.smilepile.ui.components.MemoryOptimization#getOptimalImageSize()Ip
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktÛ Û("0*Œ
-0
-Ô Ò(d
-b
-
-Ù Ù(6!
-configurationjava.lang.Object"__id*+
-
-Ù/ Ù(6
-
-currentjava.lang.Objecth
-f
-
-ı ı(5
-screenWidthjava.lang.Object"__id*1
-
-ı( ı(5#
-!
-screenWidthDpjava.lang.Objectù
-ö
-
-ˆ! ˆ(4	
-%0int";com.smilepile.ui.components.GridConfig#getOptimalColumns()I*D
-
-ˆ ˆ( 6
-4
-
-GridConfig&com.smilepile.ui.components.GridConfig?
-=
-
-ˆ ˆ(4
-columnsint"__id*
-
-ˆ! ˆ(4
-	
-%0int°
-û
-
-˜! ˜(8	
-%1int"?com.smilepile.ui.components.GridConfig#getOptimalItemSpacing()I*D
-
-˜ ˜( 6
-4
-
-GridConfig&com.smilepile.ui.components.GridConfig?
-=
-
-˜ ˜(8
-spacingint"__id*
-
-˜! ˜(8
-	
-%1int8
-6
-
-¯ ¯(4
-paddingint"__id*
-
-¯ ¯(2 à
-Ö
-
-˙ ˙(.
-%2"__calculate*
-
-˙% ˙(&
--*/
-
-˙ ˙($!
-
-screenWidthjava.lang.Object*
-
-˙' ˙(.
-
-paddingintj
-h
-
-˙= ˙(H
-%3"__calculate*
-
-˙E ˙(F
--*
-
-˙= ˙(D
-
-columnsint*
-
-˙G ˙(H2z
-x
-
-˙2 ˙(I
-%4"__calculate*
-
-˙: ˙(;
-**
-
-˙2 ˙(9
-
-spacingint*"
-
-__unknown_file (
-
-%3~
-|
-
-˙ ˙(J
-%5"__calculate*
-
-˙/ ˙(0
--*"
+__unknown_file (;
+9
+onNavigateToPhotoEditorkotlin.jvm.functions.Function1û
+õ
+V V(89
+onNavigateToPhotoEditorkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
@@ -892,243 +67,1435 @@ x
 
 __unknown_file (
 
-%4z
-x
-
-˙ ˙(U
-%6"__calculate*
-
-˙L ˙(M
-/*"
+%3Æ
+´
+W W(I
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*_
+
+__unknown_file (C
+A
+onNavigateToPhotoEditorWithUriskotlin.jvm.functions.Function1≤
+Ø
+W W(I
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*_
+
+__unknown_file (C
+A
+onNavigateToPhotoEditorWithUriskotlin.jvm.functions.Function1¶
+£
+W W(IA
+onNavigateToPhotoEditorWithUriskotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%5*
-
-˙N ˙(U
-
-columnsintW
-U
-
-˙ ˙(U
-	itemWidthjava.lang.Object"__id*"
+%4*"
 
 __unknown_file (
 
-%6ñ
-ì
-
-˝ ˝(4
-%7"__calculate*
-
-˝ ˝(
-**-
-
-˝ ˝(
-
-	itemWidthjava.lang.Object*.
-
-˝* ˝(4 
-
-
-densityDpijava.lang.Objecto
-m
-
-˝ ˝(:
-%8"__calculate*
-
-˝5 ˝(6
-/*"
+%5â
+Ü
+X X(!
+%6"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*:
+
+__unknown_file (
+
+modifierjava.lang.Objectç
+ä
+X X(!
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.ObjectÄ
+~
+X X(!
+modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%7*
-
-˝7 ˝(:2†"
-
-˝ ˝(C
-	<unknown>B20
-.com.smilepile.ui.components.MemoryOptimizationH–
-Ncom.smilepile.ui.components.PaginationUtils#shouldLoadMore(LLazyGridState;II)Zp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktâ â("0*Ê
-0
-Ö á(í
+%6*"
+
+__unknown_file (
+
+%7é
+ã
+Y Y(6
+%8"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.Objectí
 è
-
-ä ä("
+Y Y(6
+%9"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.ObjectÜ
+É
+Y Y(6!
+paddingValuesjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%8*"
+
+__unknown_file (
+
+%9d
+b
+[ [(<%
+snackbarHostStatejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return::
+U U(..
+onPhotoClickkotlin.jvm.functions.Function2:E
+V V(89
+onNavigateToPhotoEditorkotlin.jvm.functions.Function1:M
+W W(IA
+onNavigateToPhotoEditorWithUriskotlin.jvm.functions.Function1:(
+X X(!
+modifierjava.lang.Object:-
+Y Y(6!
+paddingValuesjava.lang.ObjectB"
+com.smilepile.ui.screensHå
+Pcom.smilepile.ui.screens#EmptyState(Lkotlin/jvm/functions/Function0;LModifier;)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktr r("0*æ
+0q r(†
+ù
+s s(
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*=
+java.lang.Object*M
 
-__unknown_file (!
-
-scrollStatejava.lang.Objecta
-_
-
-ä ä("
-scrollStatejava.lang.Object"__annotation*"
+__unknown_file (1
+/
+onImportClickkotlin.jvm.functions.Function0o
+m
+s s(/
+onImportClickkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%0É
-Ä
-
-ã ã(
+%0ç
+ä
+t t(!
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*.
+java.lang.Object*:
 
-__unknown_file (
-
-	itemCountintR
-P
-
-ã ã(
-	itemCountint"__annotation*"
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+t t(!
+modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%1É
-Ä
+%1"/
+
+__unknown_file (
+implicit return:;
+s s(/
+onImportClickkotlin.jvm.functions.Function0:(
+t t(!
+modifierjava.lang.ObjectB"
+com.smilepile.ui.screensHˇ
 
-å å(
+Qcom.smilepile.ui.screens#ImportProgressIndicator(FZLjava/lang/String;LModifier;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktï ï(#"0*
+0î ï(Ñ
+Å
+
+ñ ñ(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*/
+
+__unknown_file (
+
+progressfloatS
+Q
+
+ñ ñ(
+progressfloat"__annotation*"
+
+__unknown_file (
+
+%0ã
+à
+
+ó ó(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+isBatchImportbooleanZ
+X
+
+ó ó(
+isBatchImportboolean"__annotation*"
+
+__unknown_file (
+
+%1ì
+ê
+
+ò ò(
 %2"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*.
+java.lang.Object*>
 
-__unknown_file (
-
-	thresholdintR
-P
+__unknown_file ("
+ 
+progressTextjava.lang.Stringb
+`
 
-å å(
-	thresholdint"__annotation*"
+ò ò( 
+progressTextjava.lang.String"__annotation*"
 
 __unknown_file (
 
-%2")
+%2è
+å
 
-é ì(
-
-valuejava.lang.Object:-
+ô ô(!
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
 
-ä ä("
-scrollStatejava.lang.Object:
-
-ã ã(
-	itemCountint:
-
-å å(
-	thresholdintB/-
-+com.smilepile.ui.components.PaginationUtilsH¯
-ºcom.smilepile.ui.components.PaginationUtils#optimizedItems(LLazyGridScope;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktô ô(("0*@
-0
-ñ ò("/
+ô ô(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%3"/
 
 __unknown_file (
-implicit return:%
+implicit return:
 
-ö ö(
-itemsjava.util.List:3
+ñ ñ(
+progressfloat:&
 
-õ õ('%
-keykotlin.jvm.functions.Function1:4
+ó ó(
+isBatchImportboolean:.
 
-ú ú(1&
-spankotlin.jvm.functions.Function1:;
+ò ò( 
+progressTextjava.lang.String:*
 
-ù ù(2-
-itemContentkotlin.jvm.functions.Function1B/-
-+com.smilepile.ui.components.PaginationUtilsH•
-Ücom.smilepile.ui.components.RecompositionUtils#rememberStablePhoto(Lcom/smilepile/data/models/Photo;)Lcom/smilepile/data/models/Photo;p
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt± ±("0*∂
-0
-≠ Ø(õ
-ò
+ô ô(!
+modifierjava.lang.ObjectB"
+com.smilepile.ui.screensH‡
+µcom.smilepile.ui.screens#BatchOperationsBottomBar(ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktÏ Ï($"0*ˆ
 
-± ±((
+0Î Ï(á
+Ñ
+
+Ì Ì(
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*F
+java.lang.Object*2
 
-__unknown_file (*
-(
-photocom.smilepile.data.models.Photoj
-h
+__unknown_file (
+
+selectedCountintV
+T
 
-± ±(((
-photocom.smilepile.data.models.Photo"__annotation*"
-
-__unknown_file (
-
-%0"
-
-≤ ≤(N
-	<unknown>:6
-
-± ±(((
-photocom.smilepile.data.models.PhotoB20
-.com.smilepile.ui.components.RecompositionUtilsH◊
-^com.smilepile.ui.components.RecompositionUtils#rememberStableSelectionState(Ljava/util/Set;J)Zp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktπ π($"0*˚
-0
-µ ∑(í
-è
-
-∫ ∫(!
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*=
-
-__unknown_file (!
-
-selectedPhotosjava.util.Seta
-_
-
-∫ ∫(!
-selectedPhotosjava.util.Set"__annotation*"
+Ì Ì(
+selectedCountint"__annotation*"
 
 __unknown_file (
 
-%0Å
-
+%0¢
+ü
 
-ª ª(
+Ó Ó(
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*-
+java.lang.Object*M
 
-__unknown_file (
-
-photoIdlongQ
-O
+__unknown_file (1
+/
+onDeleteClickkotlin.jvm.functions.Function0q
+o
 
-ª ª(
-photoIdlong"__annotation*"
+Ó Ó(/
+onDeleteClickkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%1"
+%1†
+ù
 
-Ω ø(	
-	<unknown>:-
+Ô Ô(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*K
+
+__unknown_file (/
+-
+onMoveClickkotlin.jvm.functions.Function0o
+m
 
-∫ ∫(!
-selectedPhotosjava.util.Set:
+Ô Ô(-
+onMoveClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2°
+û
 
-ª ª(
-photoIdlongB20
-.com.smilepile.ui.components.RecompositionUtilsH
+ (
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+onShareClickkotlin.jvm.functions.Function0p
+n
+
+ (.
+onShareClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3†
+ù
+
+Ò Ò( 
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*K
+
+__unknown_file (/
+-
+onEditClickkotlin.jvm.functions.Function0o
+m
+
+Ò Ò( -
+onEditClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%4"/
+
+__unknown_file (
+implicit return:"
+
+Ì Ì(
+selectedCountint:=
+
+Ó Ó(/
+onDeleteClickkotlin.jvm.functions.Function0:;
+
+Ô Ô(-
+onMoveClickkotlin.jvm.functions.Function0:<
+
+ (.
+onShareClickkotlin.jvm.functions.Function0:;
+
+Ò Ò( -
+onEditClickkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensH≥
+Ücom.smilepile.ui.screens#BatchMoveToCategoryDialog(Ljava/util/List;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt° °(%"0*ƒ
+0† °(è
+å
+
+¢ ¢(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+¢ ¢(
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0á
+Ñ
+
+£ £(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*2
+
+__unknown_file (
+
+selectedCountintV
+T
+
+£ £(
+selectedCountint"__annotation*"
+
+__unknown_file (
+
+%1ß
+§
+
+§ §(&
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*R
+
+__unknown_file (6
+4
+onCategorySelectedkotlin.jvm.functions.Function1v
+t
+
+§ §(&4
+onCategorySelectedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%2û
+õ
+
+• •(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0m
+k
+
+• •(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3"/
+
+__unknown_file (
+implicit return:*
+
+¢ ¢(
+
+categoriesjava.util.List:"
+
+£ £(
+selectedCountint:B
+
+§ §(&4
+onCategorySelectedkotlin.jvm.functions.Function1:9
+
+• •(+
+	onDismisskotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensH™
+
+Écom.smilepile.ui.screens#CategorySelectionDialog(Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt“ “(#"0*‚
+0— “(è
+å
+
+” ”(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+” ”(
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0ß
+§
+
+‘ ‘(&
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*R
+
+__unknown_file (6
+4
+onCategorySelectedkotlin.jvm.functions.Function1v
+t
+
+‘ ‘(&4
+onCategorySelectedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%1û
+õ
+
+’ ’(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0m
+k
+
+’ ’(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:*
+
+” ”(
+
+categoriesjava.util.List:B
+
+‘ ‘(&4
+onCategorySelectedkotlin.jvm.functions.Function1:9
+
+’ ’(+
+	onDismisskotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensH¡
+ïcom.smilepile.ui.screens#GalleryScaffold(LModifier;Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;LSnackbarHostState;LPaddingValues;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktÅ Å("0*ü
+0ˇ Å(ã
+à
+
+Ç Ç(
+%0"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*:
+
+__unknown_file (
+
+modifierjava.lang.Objectè
+å
+
+Ç Ç(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.ObjectÉ
+Ä
+
+Ç Ç(
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0*"
+
+__unknown_file (
+
+%1¿
+Ω
+
+É É(4
+%2"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateƒ
+¡
+
+É É(4
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState∏
+µ
+
+É É(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3î
+ë
+
+Ñ Ñ((
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*C
+
+__unknown_file ('
+%
+snackbarHostStatejava.lang.Objectò
+ï
+
+Ñ Ñ((
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*C
+
+__unknown_file ('
+%
+snackbarHostStatejava.lang.Objectå
+â
+
+Ñ Ñ((%
+snackbarHostStatejava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5ê
+ç
+
+Ö Ö( 
+%6"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.Objectî
+ë
+
+Ö Ö( 
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.Objectà
+Ö
+
+Ö Ö( !
+paddingValuesjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6*"
+
+__unknown_file (
+
+%7"/
+
+__unknown_file (
+implicit return:*
+
+Ç Ç(
+modifierjava.lang.Object:_
+
+É É(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState:3
+
+Ñ Ñ((%
+snackbarHostStatejava.lang.Object:/
+
+Ö Ö( !
+paddingValuesjava.lang.ObjectB"
+com.smilepile.ui.screensH∫
+wcom.smilepile.ui.screens#GalleryContent(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;LPaddingValues;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktπ π("0*ò
+0∏ π(ƒ
+¡
+
+∫ ∫(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+∫ ∫(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0î
+ë
+
+ª ª( 
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.Objectc
+a
+
+ª ª( !
+paddingValuesjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:_
+
+∫ ∫(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState:/
+
+ª ª( !
+paddingValuesjava.lang.ObjectB"
+com.smilepile.ui.screensHÖ
+ocom.smilepile.ui.screens#PhotoGridWithGestures(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt‰ ‰(!"0*ú
+0„ ‰(ƒ
+¡
+
+Â Â(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+Â Â(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:_
+
+Â Â(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateB"
+com.smilepile.ui.screensHµ
+äcom.smilepile.ui.screens#handleCategorySwipeGestures(LPointerInputScope;Ljava/util/List;Ljava/lang/Long;Lkotlin/jvm/functions/Function1;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt˘& ˘(A"0*Ì
+0˘ ˘(X
+V
+
+˛ ˛(
+swipeThresholdfloat"__id*)
+
+__unknown_file (
+	<unknown>S
+Q
+
+ˇ ˇ(
+	totalDragfloat"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:*
+
+˙ ˙(
+
+categoriesjava.util.List:2
+
+˚ ˚($
+selectedCategoryIdjava.lang.Long:B
+
+¸ ¸(&4
+onCategorySelectedkotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensH°
+jcom.smilepile.ui.screens#PhotoGridContent(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktò ò("0*Ù
+2
+§ §(7™
+ß
+
+§ §(&5
+%4/com.smilepile.ui.viewmodels.PhotoGalleryUiState"com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getGalleryState()Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;*a
+
+§ §(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateπ
+∂
+
+§' §(-
+%5java.util.List"Kcom.smilepile.ui.viewmodels.PhotoGalleryUiState#getPhotos()Ljava/util/List;*E
+
+§ §(&7
+5
+%4/com.smilepile.ui.viewmodels.PhotoGalleryUiStaterp
+
+§. §(7
+%6boolean""kotlin.collections.List#isEmpty()Z*$
+
+§' §(-
+
+%5java.util.List2	isEmpty()*
+5
+6*i
+3
+ú4 £(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*Á
+5
+§; ©(	ã
+à
+
+¶2 ¶(A$
+%7kotlin.jvm.functions.Function0"qcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getOnAddPhotoClick()Lkotlin/jvm/functions/Function0;*a
+
+¶  ¶(1S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateı
+Ú
+
+• ®(
+%8kotlin.Unit"Pcom.smilepile.ui.screens#EmptyState(Lkotlin/jvm/functions/Function0;LModifier;)V*
+
+__unknown_file ( *4
+
+¶2 ¶(A&
+$
+%7kotlin.jvm.functions.Function0*)
+
+__unknown_file (
+	<unknown>K
+I
+
+__unknown_file (
+%1"__id*!
+
+• ®(
+
+%8kotlin.Unit*
+1*i
+6
+™ ∑(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*∆
+0ó ò(ƒ
+¡
+
+ô ô(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+ô ô(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0™
+ß
+
+ú ú(&5
+%2/com.smilepile.ui.viewmodels.PhotoGalleryUiState"com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getGalleryState()Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;*a
+
+ú ú(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState£
+†
+
+ú' ú(0
+%3boolean"<com.smilepile.ui.viewmodels.PhotoGalleryUiState#isLoading()Z*E
+
+ú ú(&7
+5
+%2/com.smilepile.ui.viewmodels.PhotoGalleryUiState*
+2
+3*>
+1∏ π"/
+
+__unknown_file (
+implicit return:_
+
+ô ô(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateB"
+com.smilepile.ui.screensHÀ:
+hcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktº º("0*π
+2
+ø1 ≈(™
+ß
+
+¡+ ¡(75
+%3/com.smilepile.ui.viewmodels.PhotoGalleryUiState"com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getGalleryState()Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;*a
+
+¡ ¡(*S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateΩ
+∫
+
+¡8 ¡(B
+%4java.util.List"Ocom.smilepile.ui.viewmodels.PhotoGalleryUiState#getCategories()Ljava/util/List;*E
+
+¡+ ¡(77
+5
+%3/com.smilepile.ui.viewmodels.PhotoGalleryUiStateó
+î
+
+¬3 ¬(N$
+%5kotlin.jvm.functions.Function1"}com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getOnCategorySelectedForImport()Lkotlin/jvm/functions/Function1;*a
+
+¬! ¬(2S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState…
+∆
+
+__unknown_file (
+%6"__declareFunction*ê
+
+__unknown_file (tr
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0°û
+
+__unknown_file (r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0"__ScopeWrapperﬁ
+€
+
+__unknown_file («
+r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0"Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__id*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState≤
+Ø
+
+__unknown_file (z
+
+%6"r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0"__id*ê
+
+__unknown_file (t
+r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0»
+≈
+
+¿ ƒ(	
+%7kotlin.Unit"Écom.smilepile.ui.screens#CategorySelectionDialog(Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V*
+
+__unknown_file ( *$
+
+¡8 ¡(B
+
+%4java.util.List*4
+
+¬3 ¬(N&
+$
+%5kotlin.jvm.functions.Function1*"
+
+__unknown_file (
+
+%6K
+I
+
+__unknown_file (
+%2"__id*!
+
+¿ ƒ(	
+
+%7kotlin.Unit*
+1*ˆ
+3
+… À(‹
+Ÿ
+
+À À(/
+%11boolean"Xcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getShowBatchDeleteDialog()Z*a
+
+À À(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState*
+5
+6*˜
+4
+«0 …(í
+è
+
+» »(?
+%10kotlin.Unit"jcom.smilepile.ui.screens#PermissionDialog(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V*
+
+__unknown_file ( *a
+
+»- »(>S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateL
+J
+
+__unknown_file (
+%9"__id*"
+
+» »(?
+
+%10kotlin.Unit*
+3*Ù
+5
+Õ œ(⁄
+◊
+
+œ œ(-
+%14boolean"Vcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getShowBatchMoveDialog()Z*a
+
+œ œ(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState*
+7
+8*˘
+6
+À1 Õ(ì
+ê
+
+Ã Ã(@
+%13kotlin.Unit"kcom.smilepile.ui.screens#BatchDeleteDialog(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V*
+
+__unknown_file ( *a
+
+Ã. Ã(?S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateM
+K
+
+__unknown_file (
+%12"__id*"
+
+Ã Ã(@
+
+%13kotlin.Unit*
+5*>
+7÷ ◊"/
+
+__unknown_file (
+implicit return*º
+8
+œ/ ÷(´
+®
+
+—+ —(76
+%16/com.smilepile.ui.viewmodels.PhotoGalleryUiState"com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getGalleryState()Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;*a
+
+— —(*S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateø
+º
+
+—8 —(B
+%17java.util.List"Ocom.smilepile.ui.viewmodels.PhotoGalleryUiState#getCategories()Ljava/util/List;*F
+
+—+ —(78
+6
+%16/com.smilepile.ui.viewmodels.PhotoGalleryUiState´
+®
+
+“. “(:6
+%18/com.smilepile.ui.viewmodels.PhotoGalleryUiState"com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getGalleryState()Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;*a
+
+“ “(-S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateÆ
+´
+
+“; “(N
+
+%19int"Icom.smilepile.ui.viewmodels.PhotoGalleryUiState#getSelectedPhotosCount()I*F
+
+“. “(:8
+6
+%18/com.smilepile.ui.viewmodels.PhotoGalleryUiStateë
+é
+
+”3 ”(G%
+%20kotlin.jvm.functions.Function1"vcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getOnMoveSelectedPhotos()Lkotlin/jvm/functions/Function1;*a
+
+”! ”(2S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState 
+«
+
+__unknown_file (
+%21"__declareFunction*ê
+
+__unknown_file (tr
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1°û
+
+__unknown_file (r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1"__ScopeWrapperﬁ
+€
+
+__unknown_file («
+r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1"Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__id*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState≥
+∞
+
+__unknown_file ({
+
+%21"r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1"__id*ê
+
+__unknown_file (t
+r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1Î
+Ë
+
+– ’(	
+%22kotlin.Unit"Ücom.smilepile.ui.screens#BatchMoveToCategoryDialog(Ljava/util/List;ILkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V*
+
+__unknown_file ( *%
+
+—8 —(B
+
+%17java.util.List*
+
+“; “(N
+
+
+%19int*5
+
+”3 ”(G'
+%
+%20kotlin.jvm.functions.Function1*#
+
+__unknown_file (
+
+%21M
+K
+
+__unknown_file (
+%15"__id*"
+
+– ’(	
+
+%22kotlin.Unit*
+7*—
+0ª º(ƒ
+¡
+
+Ω Ω(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+Ω Ω(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0€
+ÿ
+
+ø ø(/
+%1boolean"Xcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getShowCategorySelection()Z*a
+
+ø ø(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState*
+2
+1*Ù
+1
+≈ «(⁄
+◊
+
+« «(.
+%8boolean"Wcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getShowPermissionDialog()Z*a
+
+« «(S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState*
+3
+4:_
+
+Ω Ω(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateB"
+com.smilepile.ui.screensHˇ	
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0o
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt√ √(L"0*ˆ
+0
+√ √(L‹
+Ÿ
+
+__unknown_file (
+%0"__id*∞
+
+__unknown_file (ì*ê
+com.smilepile.ui.screens"r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda0Ô
+Ï
+
+__unknown_file (Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__id*w
+
+__unknown_file ([*Y
+
+%0"Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateì
+ê
+
+√, √(C$
+%1kotlin.jvm.functions.Function1"ycom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getOnShowCategorySelection()Lkotlin/jvm/functions/Function1;*a
+
+√ √(+S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateÃ…
+
+√, √(J
+%2kotlin.Unit"=kotlin.Function1#invoke(Ljava/lang/Object;)Ljava/lang/Object;*4
+
+√, √(C&
+$
+%1kotlin.jvm.functions.Function1*
+
+√D √(I	
+false2invoke(Ljava/lang/Object;)"/
+
+__unknown_file (
+
+%2kotlin.UnitB
+com.smilepile.ui.screensH˝	
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1o
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt‘ ‘(J"0*Ù
+0
+‘ ‘(J‹
+Ÿ
+
+__unknown_file (
+%0"__id*∞
+
+__unknown_file (ì*ê
+com.smilepile.ui.screens"r
+pcom.smilepile.ui.screens#GalleryDialogs(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)V$lambda1Ô
+Ï
+
+__unknown_file (Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__id*w
+
+__unknown_file ([*Y
+
+%0"Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateë
+é
+
+‘, ‘(A$
+%1kotlin.jvm.functions.Function1"wcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#getOnShowBatchMoveDialog()Lkotlin/jvm/functions/Function1;*a
+
+‘ ‘(+S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateÃ…
+
+‘, ‘(H
+%2kotlin.Unit"=kotlin.Function1#invoke(Ljava/lang/Object;)Ljava/lang/Object;*4
+
+‘, ‘(A&
+$
+%1kotlin.jvm.functions.Function1*
+
+‘B ‘(G	
+false2invoke(Ljava/lang/Object;)"/
+
+__unknown_file (
+
+%2kotlin.UnitB
+com.smilepile.ui.screensHÄ
+jcom.smilepile.ui.screens#PermissionDialog(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.kt⁄ ⁄("0*ú
+0Ÿ ⁄(ƒ
+¡
+
+€ €(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+€ €(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:_
+
+€ €(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateB"
+com.smilepile.ui.screensHÅ
+kcom.smilepile.ui.screens#BatchDeleteDialog(Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoGalleryScreen.ktÙ Ù("0*ú
+0Û Ù(ƒ
+¡
+
+ı ı(4
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*o
+
+__unknown_file (S
+Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateî
+ë
+
+ı ı(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:_
+
+ı ı(4Q
+orchestratorState<com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorStateB"
+com.smilepile.ui.screensH

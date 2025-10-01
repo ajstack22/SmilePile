@@ -1,12 +1,1309 @@
-¸
-:com.smilepile.storage.StorageManager#getContext()LContext;
-__unknown_file ("0*Ú
-0 (É
-Ä
+ä
+.com.smilepile.data.backup.EntityType#<init>()Vi
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt ("0*<
+0 ("/
+
+__unknown_file (
+implicit returnB(&
+$com.smilepile.data.backup.EntityTypeH`∏
+1com.smilepile.data.backup.DeletionRecord#getId()J
+__unknown_file ("0*≥
+0 (i
+g
+ (
+fieldlong"__id*F
+ (:*8*
+(com.smilepile.data.backup.DeletionRecord"
+
+idlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB,*
+(com.smilepile.data.backup.DeletionRecordH`ÿ
+2com.smilepile.data.backup.DeletionRecord#setId(J)V
+__unknown_file ("0*∑
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0i
+g
+ (8*
+(com.smilepile.data.backup.DeletionRecord"
+
+idlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB,*
+(com.smilepile.data.backup.DeletionRecordH`è
+^com.smilepile.data.backup.DeletionRecord#getEntityType()Lcom/smilepile/data/backup/EntityType;
+__unknown_file ("0*›
+0 (≤
+Ø
+ (-
+field$com.smilepile.data.backup.EntityType"__id*n
+ (b*`*
+(com.smilepile.data.backup.DeletionRecord"2
+
+entityType$com.smilepile.data.backup.EntityType}
+{
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*;
+ (/
+-
+field$com.smilepile.data.backup.EntityType]
+[
+ (-
+field$com.smilepile.data.backup.EntityType"__annotation*
+ (
+
+%0";
+ (/
+-
+field$com.smilepile.data.backup.EntityTypeB,*
+(com.smilepile.data.backup.DeletionRecordH`Ø
+_com.smilepile.data.backup.DeletionRecord#setEntityType(Lcom/smilepile/data/backup/EntityType;)V
+__unknown_file ("0*¡
+0 (}
+{
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*;
+ (/
+-
+value$com.smilepile.data.backup.EntityType]
+[
+ (-
+value$com.smilepile.data.backup.EntityType"__annotation*
+ (
+
+%0≤
+Ø
+ (`*
+(com.smilepile.data.backup.DeletionRecord"2
+
+entityType$com.smilepile.data.backup.EntityType"__id*;
+ (/
+-
+value$com.smilepile.data.backup.EntityType"
+ (
+implicit return:9
+ (-
+value$com.smilepile.data.backup.EntityTypeB,*
+(com.smilepile.data.backup.DeletionRecordH`ì
+Hcom.smilepile.data.backup.DeletionRecord#getEntityId()Ljava/lang/String;
+__unknown_file ("0*˜
+0 (à
+Ö
  (
-fieldjava.lang.Object"__id*S
- (G*E&
-$com.smilepile.storage.StorageManager"
+fieldjava.lang.String"__id*X
+ (L*J*
+(com.smilepile.data.backup.DeletionRecord"
+entityIdjava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB,*
+(com.smilepile.data.backup.DeletionRecordH`≥
+Icom.smilepile.data.backup.DeletionRecord#setEntityId(Ljava/lang/String;)V
+__unknown_file ("0*Ô
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0à
+Ö
+ (J*
+(com.smilepile.data.backup.DeletionRecord"
+entityIdjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB,*
+(com.smilepile.data.backup.DeletionRecordH`œ
+8com.smilepile.data.backup.DeletionRecord#getMetadata()[B
+__unknown_file ("0*√
+0 (s
+q
+ (
+fieldbyte[]"__id*N
+ (B*@*
+(com.smilepile.data.backup.DeletionRecord"
+metadatabyte[]_
+]
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldbyte[]?
+=
+ (
+fieldbyte[]"__annotation*
+ (
+
+%0"
+ (
+
+fieldbyte[]B,*
+(com.smilepile.data.backup.DeletionRecordH`Ô
+9com.smilepile.data.backup.DeletionRecord#setMetadata([B)V
+__unknown_file ("0*≈
+0 (_
+]
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuebyte[]?
+=
+ (
+valuebyte[]"__annotation*
+ (
+
+%0s
+q
+ (@*
+(com.smilepile.data.backup.DeletionRecord"
+metadatabyte[]"__id*
+ (
+
+valuebyte[]"
+ (
+implicit return:
+ (
+valuebyte[]B,*
+(com.smilepile.data.backup.DeletionRecordH`∆
+8com.smilepile.data.backup.DeletionRecord#getDeletedAt()J
+__unknown_file ("0*∫
+0 (p
+n
+ (
+fieldlong"__id*M
+ (A*?*
+(com.smilepile.data.backup.DeletionRecord"
+	deletedAtlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB,*
+(com.smilepile.data.backup.DeletionRecordH`Ê
+9com.smilepile.data.backup.DeletionRecord#setDeletedAt(J)V
+__unknown_file ("0*æ
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0p
+n
+ (?*
+(com.smilepile.data.backup.DeletionRecord"
+	deletedAtlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB,*
+(com.smilepile.data.backup.DeletionRecordH`∞
+ncom.smilepile.data.backup.DeletionRecord#<init>(JLcom/smilepile/data/backup/EntityType;Ljava/lang/String;[BJ)Vk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt" "("0*‹
+0" -(z
+x
+# $(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*(
+
+__unknown_file (
+
+
+idlongJ
+H
+# $(
+
+idlong"__annotation*"
+
+__unknown_file (
+
+%0£
+†
+% &(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+
+entityType$com.smilepile.data.backup.EntityTyper
+p
+% &(2
+
+entityType$com.smilepile.data.backup.EntityType"__annotation*"
+
+__unknown_file (
+
+%1ç
+ä
+' ((
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+entityIdjava.lang.String\
+Z
+' ((
+entityIdjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%2É
+Ä
+) *(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+metadatabyte[]R
+P
+) *(
+metadatabyte[]"__annotation*"
+
+__unknown_file (
+
+%3Å
+
++ ,(
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*/
+
+__unknown_file (
+
+	deletedAtlongQ
+O
++ ,(
+	deletedAtlong"__annotation*"
+
+__unknown_file (
+
+%4¡
+æ
+# $(
+
+%5long"2com.smilepile.data.backup.DeletionRecord#setId(J)V*H
+
+__unknown_file (,*
+(com.smilepile.data.backup.DeletionRecord*(
+
+__unknown_file (
+
+
+idlong∂
+≥
+% &(*
+%6$com.smilepile.data.backup.EntityType"_com.smilepile.data.backup.DeletionRecord#setEntityType(Lcom/smilepile/data/backup/EntityType;)V*H
+
+__unknown_file (,*
+(com.smilepile.data.backup.DeletionRecord*P
+
+__unknown_file (4
+2
+
+entityType$com.smilepile.data.backup.EntityTypeˆ
+Û
+' ((
+%7java.lang.String"Icom.smilepile.data.backup.DeletionRecord#setEntityId(Ljava/lang/String;)V*H
+
+__unknown_file (,*
+(com.smilepile.data.backup.DeletionRecord*:
+
+__unknown_file (
+
+entityIdjava.lang.String“
+œ
+) *(
+%8byte[]"9com.smilepile.data.backup.DeletionRecord#setMetadata([B)V*H
+
+__unknown_file (,*
+(com.smilepile.data.backup.DeletionRecord*0
+
+__unknown_file (
+
+metadatabyte[]œ
+Ã
++ ,(
+
+%9long"9com.smilepile.data.backup.DeletionRecord#setDeletedAt(J)V*H
+
+__unknown_file (,*
+(com.smilepile.data.backup.DeletionRecord*/
+
+__unknown_file (
+
+	deletedAtlong"/
+
+__unknown_file (
+implicit return:
+# $(
+
+idlong:>
+% &(2
+
+entityType$com.smilepile.data.backup.EntityType:(
+' ((
+entityIdjava.lang.String:
+) *(
+metadatabyte[]:
++ ,(
+	deletedAtlongB,*
+(com.smilepile.data.backup.DeletionRecordH¿
+Dcom.smilepile.data.backup.DeletionRecord#equals(Ljava/lang/Object;)Zk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt. .("0*$
+1386 :("
+: :(
+true*%
+148* 8(6"
+8* 8(6	
+false*Æ
+0. .(ñ
+ì
+/ /(
+%0"	__compare*
+/ /(
+===*8
+/ /(,*
+(com.smilepile.data.backup.DeletionRecord*'
+/ /(
+
+otherjava.lang.Object*
+2
+1*“
+1/' 0(∫∑
+0 0()
+%2boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*+
+0 0(
+
+	javaClassjava.lang.Object*+
+0  0()
+
+	javaClassjava.lang.Object2equals(Ljava/lang/Object;)*
+3
+4*#
+2/ /('"
+/ /('
+true*≥
+307 2(k
+i
+2 2(.
+%4(com.smilepile.data.backup.DeletionRecord"__id*'
+2 2(
+
+otherjava.lang.ObjectÜ
+É
+4 4(
+
+%5long"1com.smilepile.data.backup.DeletionRecord#getId()J*8
+4 4(,*
+(com.smilepile.data.backup.DeletionRecordç
+ä
+4 4(
+
+%6long"1com.smilepile.data.backup.DeletionRecord#getId()J*?
+4 4(3
+1
+other(com.smilepile.data.backup.DeletionRecordïí
+4 4(
+%7boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*
+4 4(
+
+
+%5long*
+4 4(
+
+
+%6long2equals(Ljava/lang/Object;)*
+5
+6*$
+40+ 0(7"
+0+ 0(7	
+false*á
+54( 5(”
+–
+5 5(*
+%9$com.smilepile.data.backup.EntityType"^com.smilepile.data.backup.DeletionRecord#getEntityType()Lcom/smilepile/data/backup/EntityType;*8
+5 5(,*
+(com.smilepile.data.backup.DeletionRecord€
+ÿ
+5  5(*+
+%10$com.smilepile.data.backup.EntityType"^com.smilepile.data.backup.DeletionRecord#getEntityType()Lcom/smilepile/data/backup/EntityType;*?
+5 5(3
+1
+other(com.smilepile.data.backup.DeletionRecordª
+∏
+5 5(*
+%11boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*8
+5 5(,
+*
+%9$com.smilepile.data.backup.EntityType*9
+5  5(*-
++
+%10$com.smilepile.data.backup.EntityType*
+7
+8*$
+64 4(("
+4 4((	
+false*¨
+758 6(™
+ß
+6 6(
+%13java.lang.String"Hcom.smilepile.data.backup.DeletionRecord#getEntityId()Ljava/lang/String;*8
+6 6(,*
+(com.smilepile.data.backup.DeletionRecord±
+Æ
+6 6(&
+%14java.lang.String"Hcom.smilepile.data.backup.DeletionRecord#getEntityId()Ljava/lang/String;*?
+6 6(3
+1
+other(com.smilepile.data.backup.DeletionRecord≤Ø
+6 6(&
+%15boolean")kotlin.String#equals(Ljava/lang/Object;)Z*%
+6 6(
+
+%13java.lang.String*%
+6 6(&
+
+%14java.lang.String2equals(Ljava/lang/Object;)*
+9
+10*$
+85, 5(8"
+5, 5(8	
+false*™
+964 7(ê
+ç
+7 7(
+%17byte[]"8com.smilepile.data.backup.DeletionRecord#getMetadata()[B*8
+7 7(,*
+(com.smilepile.data.backup.DeletionRecord*
+11
+12*%
+106( 6(4"
+6( 6(4	
+false*‹
+117A 8(é
+ã
+8 8(
+%19long"8com.smilepile.data.backup.DeletionRecord#getDeletedAt()J*8
+8 8(,*
+(com.smilepile.data.backup.DeletionRecordï
+í
+8 8((
+%20long"8com.smilepile.data.backup.DeletionRecord#getDeletedAt()J*?
+8 8(3
+1
+other(com.smilepile.data.backup.DeletionRecordòï
+8 8((
+%21boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*
+8 8(
+
+%19long*
+8 8((
+
+%20long2equals(Ljava/lang/Object;)*
+13
+14*%
+1275 7(A"
+75 7(A	
+false:%
+. .(#
+otherjava.lang.ObjectB,*
+(com.smilepile.data.backup.DeletionRecordHú
+4com.smilepile.data.backup.DeletionRecord#hashCode()Ik
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt= =("0*√
+0= =(Ü
+É
+> >(
+
+%0long"1com.smilepile.data.backup.DeletionRecord#getId()J*8
+> >(,*
+(com.smilepile.data.backup.DeletionRecordUS
+> >("	
+%1int"kotlin.Any#hashCode()I*
+> >(
+
+
+%0long2
+hashCode():
+8
+> >("
+resultint"__id*
+> >("
+	
+%1inta
+_
+? ?(
+%2"__calculate*
+? ?(
+**
+? ?(2*
+? ?(
+
+resultint”
+–
+? ?()*
+%3$com.smilepile.data.backup.EntityType"^com.smilepile.data.backup.DeletionRecord#getEntityType()Lcom/smilepile/data/backup/EntityType;*8
+? ?(),*
+(com.smilepile.data.backup.DeletionRecordj
+h
+?* ?(4	
+%4int"kotlin.Enum#hashCode()I*8
+? ?(),
+*
+%3$com.smilepile.data.backup.EntityTypeY
+W
+? ?(4
+%5"__concat*"
+
+__unknown_file (
+
+%2*
+?* ?(4
+	
+%4intE
+C
+? ?(4
+resultint"__id*"
+
+__unknown_file (
+
+%5a
+_
+@ @(
+%6"__calculate*
+@ @(
+**
+@ @(2*
+@ @(
+
+resultint©
+¶
+@ @('
+%7java.lang.String"Hcom.smilepile.data.backup.DeletionRecord#getEntityId()Ljava/lang/String;*8
+@ @(',*
+(com.smilepile.data.backup.DeletionRecorda_
+@( @(2	
+%8int"kotlin.Any#hashCode()I*$
+@ @('
+
+%7java.lang.String2
+hashCode()Y
+W
+@ @(2
+%9"__concat*"
+
+__unknown_file (
+
+%6*
+@( @(2
+	
+%8intE
+C
+@ @(2
+resultint"__id*"
+
+__unknown_file (
+
+%9b
+`
+A A(
+%10"__calculate*
+A A(
+**
+A A(2*
+A A(
+
+resultintê
+ç
+A A('
+%11byte[]"8com.smilepile.data.backup.DeletionRecord#getMetadata()[B*8
+A A(',*
+(com.smilepile.data.backup.DeletionRecordm
+k
+A A(9
+%12"__concat*#
+
+__unknown_file (
+
+%10*)
+
+__unknown_file (
+	<unknown>F
+D
+A A(9
+resultint"__id*#
+
+__unknown_file (
+
+%12b
+`
+B B(
+%13"__calculate*
+B B(
+**
+B B(2*
+B B(
+
+resultinté
+ã
+B B((
+%14long"8com.smilepile.data.backup.DeletionRecord#getDeletedAt()J*8
+B B((,*
+(com.smilepile.data.backup.DeletionRecordWU
+B) B(3
+
+%15int"kotlin.Any#hashCode()I*
+B B((
+
+%14long2
+hashCode()\
+Z
+B B(3
+%16"__concat*#
+
+__unknown_file (
+
+%13*
+B) B(3
+
+
+%15intF
+D
+B B(3
+resultint"__id*#
+
+__unknown_file (
+
+%16"
+C C(
+
+resultintB,*
+(com.smilepile.data.backup.DeletionRecordH¡
+4com.smilepile.data.backup.CompressedArchive#getId()J
+__unknown_file ("0*∂
+0 (l
+j
+ (
+fieldlong"__id*I
+ (=*;-
++com.smilepile.data.backup.CompressedArchive"
+
+idlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB/-
++com.smilepile.data.backup.CompressedArchiveH`·
+5com.smilepile.data.backup.CompressedArchive#setId(J)V
+__unknown_file ("0*∫
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0l
+j
+ (;-
++com.smilepile.data.backup.CompressedArchive"
+
+idlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB/-
++com.smilepile.data.backup.CompressedArchiveH`–
+7com.smilepile.data.backup.CompressedArchive#getData()[B
+__unknown_file ("0*¬
+0 (r
+p
+ (
+fieldbyte[]"__id*M
+ (A*?-
++com.smilepile.data.backup.CompressedArchive"
+databyte[]_
+]
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldbyte[]?
+=
+ (
+fieldbyte[]"__annotation*
+ (
+
+%0"
+ (
+
+fieldbyte[]B/-
++com.smilepile.data.backup.CompressedArchiveH`
+8com.smilepile.data.backup.CompressedArchive#setData([B)V
+__unknown_file ("0*ƒ
+0 (_
+]
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuebyte[]?
+=
+ (
+valuebyte[]"__annotation*
+ (
+
+%0r
+p
+ (?-
++com.smilepile.data.backup.CompressedArchive"
+databyte[]"__id*
+ (
+
+valuebyte[]"
+ (
+implicit return:
+ (
+valuebyte[]B/-
++com.smilepile.data.backup.CompressedArchiveH`œ
+;com.smilepile.data.backup.CompressedArchive#getCreatedAt()J
+__unknown_file ("0*Ω
+0 (s
+q
+ (
+fieldlong"__id*P
+ (D*B-
++com.smilepile.data.backup.CompressedArchive"
+	createdAtlong]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlong=
+;
+ (
+fieldlong"__annotation*
+ (
+
+%0"
+ (
+
+fieldlongB/-
++com.smilepile.data.backup.CompressedArchiveH`Ô
+<com.smilepile.data.backup.CompressedArchive#setCreatedAt(J)V
+__unknown_file ("0*¡
+0 (]
+[
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelong=
+;
+ (
+valuelong"__annotation*
+ (
+
+%0s
+q
+ (B-
++com.smilepile.data.backup.CompressedArchive"
+	createdAtlong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB/-
++com.smilepile.data.backup.CompressedArchiveH`÷
+9com.smilepile.data.backup.CompressedArchive#<init>(J[BJ)Vk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktK K("0*¢
+
+0K R(z
+x
+L M(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*(
+
+__unknown_file (
+
+
+idlongJ
+H
+L M(
+
+idlong"__annotation*"
+
+__unknown_file (
+
+%0~
+|
+N O(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*,
+
+__unknown_file (
+
+databyte[]N
+L
+N O(
+databyte[]"__annotation*"
+
+__unknown_file (
+
+%1Å
+
+P Q(4
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*/
+
+__unknown_file (
+
+	createdAtlongQ
+O
+P Q(4
+	createdAtlong"__annotation*"
+
+__unknown_file (
+
+%2«
+ƒ
+L M(
+
+%3long"5com.smilepile.data.backup.CompressedArchive#setId(J)V*K
+
+__unknown_file (/-
++com.smilepile.data.backup.CompressedArchive*(
+
+__unknown_file (
+
+
+idlong–
+Õ
+N O(
+%4byte[]"8com.smilepile.data.backup.CompressedArchive#setData([B)V*K
+
+__unknown_file (/-
++com.smilepile.data.backup.CompressedArchive*,
+
+__unknown_file (
+
+databyte[]’
+“
+P Q(4
+
+%5long"<com.smilepile.data.backup.CompressedArchive#setCreatedAt(J)V*K
+
+__unknown_file (/-
++com.smilepile.data.backup.CompressedArchive*/
+
+__unknown_file (
+
+	createdAtlong"/
+
+__unknown_file (
+implicit return:
+L M(
+
+idlong:
+N O(
+databyte[]:
+P Q(4
+	createdAtlongB/-
++com.smilepile.data.backup.CompressedArchiveHŸ
+Gcom.smilepile.data.backup.CompressedArchive#equals(Ljava/lang/Object;)Zk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktS S("0*#
+2T T('"
+T T('
+true*¬
+3U7 W(n
+l
+W W("1
+%4+com.smilepile.data.backup.CompressedArchive"__id*'
+W W(
+
+otherjava.lang.Objectå
+â
+Y Y(
+
+%5long"4com.smilepile.data.backup.CompressedArchive#getId()J*;
+Y Y(/-
++com.smilepile.data.backup.CompressedArchiveì
+ê
+Y Y(
+
+%6long"4com.smilepile.data.backup.CompressedArchive#getId()J*B
+Y Y(6
+4
+other+com.smilepile.data.backup.CompressedArchiveïí
+Y Y(
+%7boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*
+Y Y(
+
+
+%5long*
+Y Y(
+
+
+%6long2equals(Ljava/lang/Object;)*
+5
+6*$
+4U+ U(7"
+U+ U(7	
+false*©
+5Y( Z(ë
+é
+Z Z(
+%9byte[]"7com.smilepile.data.backup.CompressedArchive#getData()[B*;
+Z Z(/-
++com.smilepile.data.backup.CompressedArchive*
+7
+8*$
+6Y Y(("
+Y Y((	
+false*Ê
+7Z9 [(î
+ë
+[ [(
+%11long";com.smilepile.data.backup.CompressedArchive#getCreatedAt()J*;
+[ [(/-
++com.smilepile.data.backup.CompressedArchiveõ
+ò
+[ [((
+%12long";com.smilepile.data.backup.CompressedArchive#getCreatedAt()J*B
+[ [(6
+4
+other+com.smilepile.data.backup.CompressedArchiveòï
+[ [((
+%13boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*
+[ [(
+
+%11long*
+[ [((
+
+%12long2equals(Ljava/lang/Object;)*
+9
+10*$
+8Z- Z(9"
+Z- Z(9	
+false*#
+9[6 ]("
+] ](
+true*%
+10[* [(6"
+[* [(6	
+false*±
+0S S(ô
+ñ
+T T(
+%0"	__compare*
+T T(
+===*;
+T T(/-
++com.smilepile.data.backup.CompressedArchive*'
+T T(
+
+otherjava.lang.Object*
+2
+1*“
+1T' U(∫∑
+U U()
+%2boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*+
+U U(
+
+	javaClassjava.lang.Object*+
+U  U()
+
+	javaClassjava.lang.Object2equals(Ljava/lang/Object;)*
+3
+4:%
+S S(#
+otherjava.lang.ObjectB/-
++com.smilepile.data.backup.CompressedArchiveH»
+7com.smilepile.data.backup.CompressedArchive#hashCode()Ik
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt` `("0*È	
+0` `(å
+â
+a a(
+
+%0long"4com.smilepile.data.backup.CompressedArchive#getId()J*;
+a a(/-
++com.smilepile.data.backup.CompressedArchiveUS
+a a("	
+%1int"kotlin.Any#hashCode()I*
+a a(
+
+
+%0long2
+hashCode():
+8
+a a("
+resultint"__id*
+a a("
+	
+%1inta
+_
+b b(
+%2"__calculate*
+b b(
+**
+b b(2*
+b b(
+
+resultintë
+é
+b b(#
+%3byte[]"7com.smilepile.data.backup.CompressedArchive#getData()[B*;
+b b(#/-
++com.smilepile.data.backup.CompressedArchivek
+i
+b b(5
+%4"__concat*"
+
+__unknown_file (
+
+%2*)
+
+__unknown_file (
+	<unknown>E
+C
+b b(5
+resultint"__id*"
+
+__unknown_file (
+
+%4a
+_
+c c(
+%5"__calculate*
+c c(
+**
+c c(2*
+c c(
+
+resultintì
+ê
+c c((
+
+%6long";com.smilepile.data.backup.CompressedArchive#getCreatedAt()J*;
+c c((/-
++com.smilepile.data.backup.CompressedArchiveUS
+c) c(3	
+%7int"kotlin.Any#hashCode()I*
+c c((
+
+
+%6long2
+hashCode()Y
+W
+c c(3
+%8"__concat*"
+
+__unknown_file (
+
+%5*
+c) c(3
+	
+%7intE
+C
+c c(3
+resultint"__id*"
+
+__unknown_file (
+
+%8"
+d d(
+
+resultintB/-
++com.smilepile.data.backup.CompressedArchiveHç
+/com.smilepile.data.backup.DeletionDao#<init>()Vj
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kth á("0*<
+0h j("/
+
+__unknown_file (
+implicit returnB)'
+%com.smilepile.data.backup.DeletionDaoH`é
+.com.smilepile.data.backup.ArchiveDao#<init>()Vk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktâ ñ("0*>
+0â ã("/
+
+__unknown_file (
+implicit returnB(&
+$com.smilepile.data.backup.ArchiveDaoH`†
+Fcom.smilepile.data.backup.ManagedDeletionTracker#getContext()LContext;
+__unknown_file ("0*˛
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q2
+0com.smilepile.data.backup.ManagedDeletionTracker"
 contextjava.lang.Objecti
 g
  (
@@ -25,10 +1322,10 @@ G
 %0"'
  (
 
-fieldjava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH`ú
-;com.smilepile.storage.StorageManager#setContext(LContext;)V
-__unknown_file ("0*Í
+fieldjava.lang.ObjectB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`¿
+Gcom.smilepile.data.backup.ManagedDeletionTracker#setContext(LContext;)V
+__unknown_file ("0*ˆ
 0 (i
 g
  (
@@ -44,10 +1341,10 @@ G
 valuejava.lang.Object"__annotation*
  (
 
-%0É
-Ä
- (E&
-$com.smilepile.storage.StorageManager"
+%0è
+å
+ (Q2
+0com.smilepile.data.backup.ManagedDeletionTracker"
 contextjava.lang.Object"__id*'
  (
 
@@ -55,13 +1352,43 @@ $com.smilepile.storage.StorageManager"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH`˚
-7com.smilepile.storage.StorageManager#<init>(LContext;)Vf
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt   (("0*ˇ	
-0   (å
-â
-! !(4
+valuejava.lang.ObjectB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`È
+mcom.smilepile.data.backup.ManagedDeletionTracker#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;
+__unknown_file ("0*†
+0 ( 
+«
+ (6
+field-com.smilepile.data.database.SmilePileDatabase"__id*}
+ (q*o2
+0com.smilepile.data.backup.ManagedDeletionTracker"9
+database-com.smilepile.data.database.SmilePileDatabase"D
+ (8
+6
+field-com.smilepile.data.database.SmilePileDatabaseB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`â
+ncom.smilepile.data.backup.ManagedDeletionTracker#setDatabase(Lcom/smilepile/data/database/SmilePileDatabase;)V
+__unknown_file ("0*˚
+0 ( 
+«
+ (o2
+0com.smilepile.data.backup.ManagedDeletionTracker"9
+database-com.smilepile.data.database.SmilePileDatabase"__id*D
+ (8
+6
+value-com.smilepile.data.database.SmilePileDatabase"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.database.SmilePileDatabaseB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`°
+rcom.smilepile.data.backup.ManagedDeletionTracker#<init>(LContext;Lcom/smilepile/data/database/SmilePileDatabase;)Vm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktù% ù(0"0*å
+0
+ù ù($é
+ã
+
+û û(4
 %0"
 __annotate*0
 
@@ -70,9 +1397,10 @@ __annotate*0
 
 __unknown_file (
 
-contextjava.lang.Objectå
-â
-! !(4
+contextjava.lang.Objecté
+ã
+
+û û(4
 %1"
 __annotate*0
 
@@ -81,9 +1409,10 @@ __annotate*0
 
 __unknown_file (
 
-contextjava.lang.Object
-}
-! !(4
+contextjava.lang.ObjectÅ
+
+
+û û(4
 contextjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -92,61 +1421,138 @@ __annotate*0
 
 __unknown_file (
 
-%1„
-‡
-! !(4
-%2java.lang.Object";com.smilepile.storage.StorageManager#setContext(LContext;)V*D
+%1¨
+©
+
+ü ü(+
+%2"
+__annotate*0
 
-__unknown_file ((&
-$com.smilepile.storage.StorageManager*9
+__unknown_file (
+java.lang.Object*W
+
+__unknown_file (;
+9
+database-com.smilepile.data.database.SmilePileDatabase{
+y
+
+ü ü(+9
+database-com.smilepile.data.database.SmilePileDatabase"__annotation*"
+
+__unknown_file (
+
+%2˝
+˙
+
+û û(4
+%3java.lang.Object"Gcom.smilepile.data.backup.ManagedDeletionTracker#setContext(LContext;)V*P
+
+__unknown_file (42
+0com.smilepile.data.backup.ManagedDeletionTracker*9
 
 __unknown_file (
 
-contextjava.lang.Object`^
-.. 2(+
-%3%com.smilepile.security.CircuitBreaker"%com.smilepile.security.CircuitBreaker∫
-∑
-.. 2(
-%4"2com.smilepile.security.CircuitBreaker#<init>(IJI)V*9
-.. 2(-
+contextjava.lang.Objectﬂ
+‹
+
+ü ü(+3
+%4-com.smilepile.data.database.SmilePileDatabase"ncom.smilepile.data.backup.ManagedDeletionTracker#setDatabase(Lcom/smilepile/data/database/SmilePileDatabase;)V*P
+
+__unknown_file (42
+0com.smilepile.data.backup.ManagedDeletionTracker*W
+
+__unknown_file (;
+9
+database-com.smilepile.data.database.SmilePileDatabase˜
+Ù
+
+´# ´(+3
+%5-com.smilepile.data.database.SmilePileDatabase"mcom.smilepile.data.backup.ManagedDeletionTracker#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;*B
+
+´# ´(+42
+0com.smilepile.data.backup.ManagedDeletionTrackerÙÒ
+
+´, ´(9+
+%6%com.smilepile.data.backup.DeletionDao"bcom.smilepile.data.database.SmilePileDatabase#deletionDao()Lcom/smilepile/data/backup/DeletionDao;*C
+
+´# ´(+5
+3
+%5-com.smilepile.data.database.SmilePileDatabase2deletionDao()†
+ù
+
+´ ´(9+
+%7%com.smilepile.data.backup.DeletionDao"acom.smilepile.data.backup.ManagedDeletionTracker#setDao(Lcom/smilepile/data/backup/DeletionDao;)V*B
+
+´ ´(942
+0com.smilepile.data.backup.ManagedDeletionTracker*;
+
+´, ´(9-
 +
-%3%com.smilepile.security.CircuitBreaker*
-/ /(2*
-0 0( 2∞Í*
-1 1(2ö
-ó
-- 2(+
-%5%com.smilepile.security.CircuitBreaker"mcom.smilepile.storage.StorageManager#setFileOperationCircuitBreaker(Lcom/smilepile/security/CircuitBreaker;)V*4
-- 2((&
-$com.smilepile.storage.StorageManager*9
-.. 2(-
-+
-%3%com.smilepile.security.CircuitBreaker"/
+%6%com.smilepile.data.backup.DeletionDao˜
+Ù
+
+¨) ¨(13
+%8-com.smilepile.data.database.SmilePileDatabase"mcom.smilepile.data.backup.ManagedDeletionTracker#getDatabase()Lcom/smilepile/data/database/SmilePileDatabase;*B
+
+¨) ¨(142
+0com.smilepile.data.backup.ManagedDeletionTrackerÌ
+
+¨2 ¨(>*
+%9$com.smilepile.data.backup.ArchiveDao"`com.smilepile.data.database.SmilePileDatabase#archiveDao()Lcom/smilepile/data/backup/ArchiveDao;*C
+
+¨) ¨(15
+3
+%8-com.smilepile.data.database.SmilePileDatabase2archiveDao()•
+¢
+
+¨ ¨(>+
+%10$com.smilepile.data.backup.ArchiveDao"gcom.smilepile.data.backup.ManagedDeletionTracker#setArchiveDao(Lcom/smilepile/data/backup/ArchiveDao;)V*B
+
+¨ ¨(>42
+0com.smilepile.data.backup.ManagedDeletionTracker*:
+
+¨2 ¨(>,
+*
+%9$com.smilepile.data.backup.ArchiveDaoÏ
+È
+
+≠ ≠(8
+%11java.lang.Object"Scom.smilepile.data.backup.ManagedDeletionTracker#setJson(Lerror/NonExistentClass;)V*B
+
+≠ ≠(842
+0com.smilepile.data.backup.ManagedDeletionTracker*)
+
+__unknown_file (
+	<unknown>"/
 
 __unknown_file (
-implicit return:'
-! !(4
-contextjava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerHÂ
-Icom.smilepile.storage.StorageManager$Companion#getTAG()Ljava/lang/String;
-__unknown_file ("0*¬
-0 (â
-Ü
+implicit return:)
+
+û û(4
+contextjava.lang.Object:G
+
+ü ü(+9
+database-com.smilepile.data.database.SmilePileDatabaseB42
+0com.smilepile.data.backup.ManagedDeletionTrackerHâ
+Ucom.smilepile.data.backup.ManagedDeletionTracker$Companion#getTAG()Ljava/lang/String;
+__unknown_file ("0*Œ
+0 (ï
+í
  (
-fieldjava.lang.Object"__id*Y
- (M*K0
-.com.smilepile.storage.StorageManager$Companion"
+fieldjava.lang.Object"__id*e
+ (Y*W<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"
 TAGjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`Ö
-Jcom.smilepile.storage.StorageManager$Companion#setTAG(Ljava/lang/String;)V
-__unknown_file ("0*∫
-0 (â
-Ü
- (K0
-.com.smilepile.storage.StorageManager$Companion"
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`©
+Vcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setTAG(Ljava/lang/String;)V
+__unknown_file ("0*∆
+0 (ï
+í
+ (W<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"
 TAGjava.lang.Object"__id*'
  (
 
@@ -154,742 +1560,463 @@ Jcom.smilepile.storage.StorageManager$Companion#setTAG(Ljava/lang/String;)V
  (
 implicit return:%
  (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`Û
-Pcom.smilepile.storage.StorageManager$Companion#getPHOTOS_DIR()Ljava/lang/String;
-__unknown_file ("0*…
-0 (ê
-ç
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`ö
+Ucom.smilepile.data.backup.ManagedDeletionTracker$Companion#getMAX_DELETION_RECORDS()I
+__unknown_file ("0*ﬂ
+0 (¶
+£
  (
-fieldjava.lang.Object"__id*`
- (T*R0
-.com.smilepile.storage.StorageManager$Companion"
-
-PHOTOS_DIRjava.lang.Object"'
+fieldjava.lang.Object"__id*v
+ (j*h<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"(
+MAX_DELETION_RECORDSjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`ì
-Qcom.smilepile.storage.StorageManager$Companion#setPHOTOS_DIR(Ljava/lang/String;)V
-__unknown_file ("0*¡
-0 (ê
-ç
- (R0
-.com.smilepile.storage.StorageManager$Companion"
-
-PHOTOS_DIRjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`˚
-Tcom.smilepile.storage.StorageManager$Companion#getTHUMBNAILS_DIR()Ljava/lang/String;
-__unknown_file ("0*Õ
-0 (î
-ë
- (
-fieldjava.lang.Object"__id*d
- (X*V0
-.com.smilepile.storage.StorageManager$Companion""
-THUMBNAILS_DIRjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`õ
-Ucom.smilepile.storage.StorageManager$Companion#setTHUMBNAILS_DIR(Ljava/lang/String;)V
-__unknown_file ("0*≈
-0 (î
-ë
- (V0
-.com.smilepile.storage.StorageManager$Companion""
-THUMBNAILS_DIRjava.lang.Object"__id*'
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`∫
+Vcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setMAX_DELETION_RECORDS(I)V
+__unknown_file ("0*◊
+0 (¶
+£
+ (h<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"(
+MAX_DELETION_RECORDSjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`Í
-Ccom.smilepile.storage.StorageManager$Companion#getTHUMBNAIL_SIZE()I
-__unknown_file ("0*Õ
-0 (î
-ë
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`ú
+Vcom.smilepile.data.backup.ManagedDeletionTracker$Companion#getLOW_STORAGE_THRESHOLD()J
+__unknown_file ("0*‡
+0 (ß
+§
  (
-fieldjava.lang.Object"__id*d
- (X*V0
-.com.smilepile.storage.StorageManager$Companion""
-THUMBNAIL_SIZEjava.lang.Object"'
+fieldjava.lang.Object"__id*w
+ (k*i<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion")
+LOW_STORAGE_THRESHOLDjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`ä
-Dcom.smilepile.storage.StorageManager$Companion#setTHUMBNAIL_SIZE(I)V
-__unknown_file ("0*≈
-0 (î
-ë
- (V0
-.com.smilepile.storage.StorageManager$Companion""
-THUMBNAIL_SIZEjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`
-Fcom.smilepile.storage.StorageManager$Companion#getTHUMBNAIL_QUALITY()I
-__unknown_file ("0*–
-0 (ó
-î
- (
-fieldjava.lang.Object"__id*g
- ([*Y0
-.com.smilepile.storage.StorageManager$Companion"%
-THUMBNAIL_QUALITYjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`ê
-Gcom.smilepile.storage.StorageManager$Companion#setTHUMBNAIL_QUALITY(I)V
-__unknown_file ("0*»
-0 (ó
-î
- (Y0
-.com.smilepile.storage.StorageManager$Companion"%
-THUMBNAIL_QUALITYjava.lang.Object"__id*'
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`º
+Wcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setLOW_STORAGE_THRESHOLD(J)V
+__unknown_file ("0*ÿ
+0 (ß
+§
+ (i<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion")
+LOW_STORAGE_THRESHOLDjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`Í
-Ccom.smilepile.storage.StorageManager$Companion#getMAX_PHOTO_SIZE()I
-__unknown_file ("0*Õ
-0 (î
-ë
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`ú
+Vcom.smilepile.data.backup.ManagedDeletionTracker$Companion#getCOMPRESSION_THRESHOLD()I
+__unknown_file ("0*‡
+0 (ß
+§
  (
-fieldjava.lang.Object"__id*d
- (X*V0
-.com.smilepile.storage.StorageManager$Companion""
-MAX_PHOTO_SIZEjava.lang.Object"'
+fieldjava.lang.Object"__id*w
+ (k*i<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion")
+COMPRESSION_THRESHOLDjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`ä
-Dcom.smilepile.storage.StorageManager$Companion#setMAX_PHOTO_SIZE(I)V
-__unknown_file ("0*≈
-0 (î
-ë
- (V0
-.com.smilepile.storage.StorageManager$Companion""
-MAX_PHOTO_SIZEjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`Ë
-Bcom.smilepile.storage.StorageManager$Companion#getPHOTO_QUALITY()I
-__unknown_file ("0*Ã
-0 (ì
-ê
- (
-fieldjava.lang.Object"__id*c
- (W*U0
-.com.smilepile.storage.StorageManager$Companion"!
-PHOTO_QUALITYjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`à
-Ccom.smilepile.storage.StorageManager$Companion#setPHOTO_QUALITY(I)V
-__unknown_file ("0*ƒ
-0 (ì
-ê
- (U0
-.com.smilepile.storage.StorageManager$Companion"!
-PHOTO_QUALITYjava.lang.Object"__id*'
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`º
+Wcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setCOMPRESSION_THRESHOLD(I)V
+__unknown_file ("0*ÿ
+0 (ß
+§
+ (i<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion")
+COMPRESSION_THRESHOLDjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB20
-.com.smilepile.storage.StorageManager$CompanionH`å
-lcom.smilepile.storage.StorageManager#getFileOperationCircuitBreaker()Lcom/smilepile/security/CircuitBreaker;
-__unknown_file ("0*–
-0 (ó
-î
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`î
+Rcom.smilepile.data.backup.ManagedDeletionTracker$Companion#getMETADATA_MAX_SIZE()I
+__unknown_file ("0*‹
+0 (£
+†
  (
-fieldjava.lang.Object"__id*g
- ([*Y&
-$com.smilepile.storage.StorageManager"/
-fileOperationCircuitBreakerjava.lang.Object"'
+fieldjava.lang.Object"__id*s
+ (g*e<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"%
+METADATA_MAX_SIZEjava.lang.Object"'
  (
 
-fieldjava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH`¨
-mcom.smilepile.storage.StorageManager#setFileOperationCircuitBreaker(Lcom/smilepile/security/CircuitBreaker;)V
-__unknown_file ("0*»
-0 (ó
-î
- (Y&
-$com.smilepile.storage.StorageManager"/
-fileOperationCircuitBreakerjava.lang.Object"__id*'
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`¥
+Scom.smilepile.data.backup.ManagedDeletionTracker$Companion#setMETADATA_MAX_SIZE(I)V
+__unknown_file ("0*‘
+0 (£
+†
+ (e<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"%
+METADATA_MAX_SIZEjava.lang.Object"__id*'
  (
 
 valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH`¡
-Acom.smilepile.storage.StorageManager#getPhotosDir()Ljava/io/File;
-__unknown_file ("0*∞
-0 (|
-z
- (
-fieldjava.io.File"__id*Q
- (E*C&
-$com.smilepile.storage.StorageManager"
-	photosDirjava.io.File"#
- (
-
-fieldjava.io.FileB(&
-$com.smilepile.storage.StorageManagerH`·
-Bcom.smilepile.storage.StorageManager#setPhotosDir(Ljava/io/File;)V
-__unknown_file ("0*¨
-0 (|
-z
- (C&
-$com.smilepile.storage.StorageManager"
-	photosDirjava.io.File"__id*#
- (
-
-valuejava.io.File"
- (
-implicit return:!
- (
-valuejava.io.FileB(&
-$com.smilepile.storage.StorageManagerH` 
-Ecom.smilepile.storage.StorageManager#getThumbnailsDir()Ljava/io/File;
-__unknown_file ("0*µ
-0 (Ä
-~
- (
-fieldjava.io.File"__id*U
- (I*G&
-$com.smilepile.storage.StorageManager"
-thumbnailsDirjava.io.File"#
- (
-
-fieldjava.io.FileB(&
-$com.smilepile.storage.StorageManagerH`Í
-Fcom.smilepile.storage.StorageManager#setThumbnailsDir(Ljava/io/File;)V
-__unknown_file ("0*±
-0 (Ä
-~
- (G&
-$com.smilepile.storage.StorageManager"
-thumbnailsDirjava.io.File"__id*#
- (
-
-valuejava.io.File"
- (
-implicit return:!
- (
-valuejava.io.FileB(&
-$com.smilepile.storage.StorageManagerH` 
-\com.smilepile.storage.StorageManager#importPhoto(LUri;)Lcom/smilepile/storage/StorageResult;f
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktI I("0*(
-0B H("
-I> I(Y
-	<unknown>:)
-I I(*
-	sourceUrijava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH˛
-icom.smilepile.storage.StorageManager#savePhotoToInternalStorage(LBitmap;Ljava/lang/String;)Ljava/io/File;f
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt{ {(*"0*(
-0u z("
-{V {(q
-	<unknown>:&
-{+ {(9
-bitmapjava.lang.Object:(
-{; {(K
-filenamejava.lang.StringB(&
-$com.smilepile.storage.StorageManagerH»
-Scom.smilepile.storage.StorageManager#importPhotos(Ljava/util/List;)Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktê ê("0*,
-0
-ã è("
-
-êK ê(f
-	<unknown>:*
-
-ê ê(2
-
-sourceUrisjava.util.ListB(&
-$com.smilepile.storage.StorageManagerHª
-Ecom.smilepile.storage.StorageManager#deletePhoto(Ljava/lang/String;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt† †("0*,
-0
-õ ü("
-
-†: †(U
-	<unknown>:+
-
-† †(-
-	photoPathjava.lang.StringB(&
-$com.smilepile.storage.StorageManagerH’
-[com.smilepile.storage.StorageManager#getThumbnailPath(Ljava/lang/String;)Ljava/lang/String;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¿ ¿("0*Ò
-2
-ƒ+ ƒ(Eà
-Ö
-
-ƒ9 ƒ(E
-%9java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*-
-
-ƒ+ ƒ(8
-
-thumbnailFilejava.io.FileP
-N
-
-__unknown_file (
-%8"__id*&
-
-ƒ9 ƒ(E
-
-%9java.lang.String*
-1*P
-3
-ƒK ƒ(O:
-8
-
-__unknown_file (
-%8"__id*
-
-ƒK ƒ(O *
-1*¬	
-0
-Ω ø(0.
-
-¡ ¡('
-%0java.io.File"java.io.Fileí
-è
-
-¡ ¡('
-%1"(java.io.File#<init>(Ljava/lang/String;)V*"
-
-¡ ¡('
-
-%0java.io.File*-
-
-¡ ¡(&
-
-	photoPathjava.lang.StringS
-Q
-
-¡ ¡('
-	photoFilejava.io.File"__id*"
-
-¡ ¡('
-
-%0java.io.File{
-y
-
-¬! ¬(%
-%2java.lang.String"(java.io.File#getName()Ljava/lang/String;*)
-
-¬ ¬( 
-
-	photoFilejava.io.FileZ
-X
-
-¬ ¬(%
-fileNamejava.lang.String"__id*&
-
-¬! ¬(%
-
-%2java.lang.String¢
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`í
+Qcom.smilepile.data.backup.ManagedDeletionTracker$Companion#getPURGE_BATCH_SIZE()I
+__unknown_file ("0*€
+0 (¢
 ü
+ (
+fieldjava.lang.Object"__id*r
+ (f*d<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"$
+PURGE_BATCH_SIZEjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`≤
+Rcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setPURGE_BATCH_SIZE(I)V
+__unknown_file ("0*”
+0 (¢
+ü
+ (d<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"$
+PURGE_BATCH_SIZEjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`ñ
+Scom.smilepile.data.backup.ManagedDeletionTracker$Companion#getTHIRTY_DAYS_MILLIS()J
+__unknown_file ("0*›
+0 (§
+°
+ (
+fieldjava.lang.Object"__id*t
+ (h*f<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"&
+THIRTY_DAYS_MILLISjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`∂
+Tcom.smilepile.data.backup.ManagedDeletionTracker$Companion#setTHIRTY_DAYS_MILLIS(J)V
+__unknown_file ("0*’
+0 (§
+°
+ (f<
+:com.smilepile.data.backup.ManagedDeletionTracker$Companion"&
+THIRTY_DAYS_MILLISjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB><
+:com.smilepile.data.backup.ManagedDeletionTracker$CompanionH`ø
+`com.smilepile.data.backup.ManagedDeletionTracker#getDao()Lcom/smilepile/data/backup/DeletionDao;
+__unknown_file ("0*É
+0 (µ
+≤
+ (.
+field%com.smilepile.data.backup.DeletionDao"__id*p
+ (d*b2
+0com.smilepile.data.backup.ManagedDeletionTracker",
+dao%com.smilepile.data.backup.DeletionDao"<
+ (0
+.
+field%com.smilepile.data.backup.DeletionDaoB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`ﬂ
+acom.smilepile.data.backup.ManagedDeletionTracker#setDao(Lcom/smilepile/data/backup/DeletionDao;)V
+__unknown_file ("0*Ê
+0 (µ
+≤
+ (b2
+0com.smilepile.data.backup.ManagedDeletionTracker",
+dao%com.smilepile.data.backup.DeletionDao"__id*<
+ (0
+.
+value%com.smilepile.data.backup.DeletionDao"
+ (
+implicit return::
+ (.
+value%com.smilepile.data.backup.DeletionDaoB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`…
+fcom.smilepile.data.backup.ManagedDeletionTracker#getArchiveDao()Lcom/smilepile/data/backup/ArchiveDao;
+__unknown_file ("0*á
+0 (∫
+∑
+ (-
+field$com.smilepile.data.backup.ArchiveDao"__id*v
+ (j*h2
+0com.smilepile.data.backup.ManagedDeletionTracker"2
 
-√! √(.
-%3java.io.File"Ecom.smilepile.storage.StorageManager#getThumbnailsDir()Ljava/io/File;*6
+archiveDao$com.smilepile.data.backup.ArchiveDao";
+ (/
+-
+field$com.smilepile.data.backup.ArchiveDaoB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`È
+gcom.smilepile.data.backup.ManagedDeletionTracker#setArchiveDao(Lcom/smilepile/data/backup/ArchiveDao;)V
+__unknown_file ("0*Î
+0 (∫
+∑
+ (h2
+0com.smilepile.data.backup.ManagedDeletionTracker"2
 
-√! √(.(&
-$com.smilepile.storage.StorageManagerf
+archiveDao$com.smilepile.data.backup.ArchiveDao"__id*;
+ (/
+-
+value$com.smilepile.data.backup.ArchiveDao"
+ (
+implicit return:9
+ (-
+value$com.smilepile.data.backup.ArchiveDaoB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`Û
+Rcom.smilepile.data.backup.ManagedDeletionTracker#getJson()Lerror/NonExistentClass;
+__unknown_file ("0*≈
+0 (å
+â
+ (
+fieldjava.lang.Object"__id*\
+ (P*N2
+0com.smilepile.data.backup.ManagedDeletionTracker"
+jsonjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`ì
+Scom.smilepile.data.backup.ManagedDeletionTracker#setJson(Lerror/NonExistentClass;)V
+__unknown_file ("0*Ω
+0 (å
+â
+ (N2
+0com.smilepile.data.backup.ManagedDeletionTracker"
+jsonjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH`ë
+ücom.smilepile.data.backup.ManagedDeletionTracker#trackDeletion(Lcom/smilepile/data/backup/EntityType;Ljava/lang/String;Ljava/util/Map;)Lerror/NonExistentClass;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt≤ ≤("0*,
+0
+Ø ±("
+
+∂ ∂(#
+	<unknown>:@
+
+≥ ≥(2
+
+entityType$com.smilepile.data.backup.EntityType:*
+
+¥ ¥(
+entityIdjava.lang.String:'
+
+µ µ(/
+metadatajava.util.MapB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH–
+Ucom.smilepile.data.backup.ManagedDeletionTracker#getDeletionsSince(J)Ljava/util/List;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktË Ë(!"0*,
+0
+Â Á("
+
+ËK Ë(f
+	<unknown>:
+
+Ë" Ë(1
+	timestamplongB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH¨
+Rcom.smilepile.data.backup.ManagedDeletionTracker#getAllDeletions()Ljava/util/List;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktÔ Ô("0*,
+0
+Ï Ó("
+
+Ô: Ô(U
+	<unknown>B42
+0com.smilepile.data.backup.ManagedDeletionTrackerHÿ
+]com.smilepile.data.backup.ManagedDeletionTracker#cleanupOldRecords(I)Lerror/NonExistentClass;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktˆ ˆ(!"0*,
+0
+Û ı("
+
+ˆ: ˆ(U
+	<unknown>:
+
+ˆ" ˆ(6
+
+daysToKeepintB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH∑
+]com.smilepile.data.backup.ManagedDeletionTracker#compressOldRecords()Lerror/NonExistentClass;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktÄ Ä(*"0*,
+0
+˝ ˇ("
+
+Ä/ Ä(J
+	<unknown>B42
+0com.smilepile.data.backup.ManagedDeletionTrackerH‰
+acom.smilepile.data.backup.ManagedDeletionTracker#validateMetadata(Ljava/util/Map;)Ljava/util/Map;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt• •( "0*,
+0
+¢ §("
+
+¶ ™(	
+	<unknown>:'
+
+•! •(;
+metadatajava.util.MapB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH®
+[com.smilepile.data.backup.ManagedDeletionTracker#containsSensitiveData(Ljava/lang/String;)Zm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt∞ ∞(%"0*ı
+0
+≠ Ø(f
 d
 
-√0 √(A
-%4"__concat*
+± ¥(	%
+sensitivePatternsjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>_
+]
 
-√1 √(7
-
-thumb_*,
+µ µ(*
 
-√8 √(@
-
-fileNamejava.lang.String0.
+lowerValuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"
 
-√ √(B
-%5java.io.File"java.io.File´
-®
+∂ ∂(P
+	<unknown>:'
 
-√ √(B
-%6"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
+∞& ∞(3
+valuejava.lang.StringB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH¡	
+Tcom.smilepile.data.backup.ManagedDeletionTracker#compressMetadata(Ljava/util/Map;)[Bm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktº º( "0*€
+2
+Ω' ø(	$"
 
-√ √(B
-
-%5java.io.File*"
-
-√! √(.
-
-%3java.io.File*
-
-√0 √(A
-
-%4W
+æ æ(
+%2byte[]"byte[]W
 U
 
-√ √(B
-thumbnailFilejava.io.File"__id*"
+æ æ(
+%3"byte[]#<init>(I)V*
 
-√ √(B
-
-%5java.io.Filenl
+æ æ(
+
+%2byte[]*
 
-ƒ! ƒ()
-%7boolean"java.io.File#exists()Z*-
+æ æ(2 F
+D
+
+__unknown_file (
+%1"__id*
 
-ƒ ƒ( 
-
-thumbnailFilejava.io.File2exists()*
+æ æ(
+
+%2byte[]*
+1*˛
+3
+ø ¡(	ø
+º
+
+¿ ¿(
+%4java.lang.Object"Rcom.smilepile.data.backup.ManagedDeletionTracker#getJson()Lerror/NonExistentClass;*B
+
+¿ ¿(42
+0com.smilepile.data.backup.ManagedDeletionTracker›
+⁄
+
+¿ ¿(3
+%5byte[]"Ocom.smilepile.data.backup.ManagedDeletionTracker#compress(Ljava/lang/String;)[B*B
+
+¿ ¿(342
+0com.smilepile.data.backup.ManagedDeletionTracker*)
+
+__unknown_file (
+	<unknown>F
+D
+
+__unknown_file (
+%1"__id*
+
+¿ ¿(3
+
+%5byte[]*
+1*è
+0
+π ª(vt
+
+Ω Ω(%
+%0boolean"!kotlin.collections.Map#isEmpty()Z*)
+
+Ω Ω(
+
+metadatajava.util.Map2	isEmpty()*
 2
 3*%
 1
-ƒK ƒ(O"
+ø ¡(	"
 
-ƒ ƒ(O
+Ω ¡(	
 
-%8:+
+%1:'
 
-¿ ¿(*
-	photoPathjava.lang.StringB(&
-$com.smilepile.storage.StorageManagerH©
-`com.smilepile.storage.StorageManager#calculateStorageUsage()Lcom/smilepile/storage/StorageUsage;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÀ À(%"0*,
-0
-«  ("
-
-À8 À(S
-	<unknown>B(&
-$com.smilepile.storage.StorageManagerHä
-Acom.smilepile.storage.StorageManager#cleanupOrphanedThumbnails()Ih
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÊ Ê()"0*,
-0
-„ Â("
-
-Ê3 Ê(N
-	<unknown>B(&
-$com.smilepile.storage.StorageManagerH≥
-9com.smilepile.storage.StorageManager#getAvailableSpace()Jh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÑ Ñ("0*‹
-0
-Å É(õ
-ò
-
-Ö Ö(
-%0java.lang.Object":com.smilepile.storage.StorageManager#getContext()LContext;*6
-
-Ö Ö((&
-$com.smilepile.storage.StorageManager"-
-
-Ö Ö()
-
-	freeSpacejava.lang.ObjectB(&
-$com.smilepile.storage.StorageManagerH©
-7com.smilepile.storage.StorageManager#hasEnoughSpace(J)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktå å("0*Ø
-0
-à ã(é
-ã
-
-ç ç("
-
-%0long"9com.smilepile.storage.StorageManager#getAvailableSpace()J*6
-
-ç ç("(&
-$com.smilepile.storage.StorageManagerw
-u
-
-ç ç(2
-%1"	__compare*
-
-ç# ç($
->*
-
-ç ç("
-
-
-%0long*%
-
-ç% ç(2
-
-estimatedSizelong"
-
-ç ç(2
-
-%1:#
-
-å å(=
-estimatedSizelongB(&
-$com.smilepile.storage.StorageManagerHî
-Kcom.smilepile.storage.StorageManager#getAllInternalPhotos()Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktî î($"0*,
-0
-ê ì("
-
-î7 î(R
-	<unknown>B(&
-$com.smilepile.storage.StorageManagerHÁ
-tcom.smilepile.storage.StorageManager#copyPhotoToInternalStorage(Ljava/io/File;)Lcom/smilepile/storage/StorageResult;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¶ ¶(*"0*,
-0
-† •("
-
-¶W ¶(r
-	<unknown>:(
-
-¶+ ¶(C
-
-sourceFilejava.io.FileB(&
-$com.smilepile.storage.StorageManagerH‰
-fcom.smilepile.storage.StorageManager#migrateExternalPhotosToInternal(Ljava/util/List;)Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt‘ ‘(/"0*-
-0
-Œ ”("
-‘i ‘(Ñ
-	<unknown>:2
-
-‘0 ‘(P$
-externalPhotoPathsjava.util.ListB(&
-$com.smilepile.storage.StorageManagerHù
-Ocom.smilepile.storage.StorageManager#isInternalStoragePath(Ljava/lang/String;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÍ Í("1*%
+º! º(;
+metadatajava.util.MapB42
+0com.smilepile.data.backup.ManagedDeletionTrackerHª
+Vcom.smilepile.data.backup.ManagedDeletionTracker#decompressMetadata([B)Ljava/util/Map;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt« «(""2"4*i
 2
-Ó
- (	"
-
-Î (	
-
-%0*W
-3
-Ó (	A
-?
-
-__unknown_file (
-%0"__id*
-
-Ô Ô(	
-false*
-2*É
-1
-Î Ó(	0.
-
-Ï Ï(&
-%1java.io.File"java.io.Fileí
-è
-
-Ï Ï(&
-%2"(java.io.File#<init>(Ljava/lang/String;)V*"
-
-Ï Ï(&
-
-%1java.io.File*-
-
-Ï Ï(%
-
-	photoPathjava.lang.StringN
-L
-
-Ï Ï(&
-filejava.io.File"__id*"
-
-Ï Ï(&
-
-%1java.io.File~
-|
-
-Ì Ì(
-%3java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*$
-
-Ì Ì(
-
-filejava.io.FileS
+»)  (	S
 Q
 
 __unknown_file (
 %0"__id*)
 
 __unknown_file (
-	<unknown>*
-2
-3:+
+	<unknown>*
+1*Æ
+4
+À Õ(ø
+º
 
-Í Í(/
-	photoPathjava.lang.StringB(&
-$com.smilepile.storage.StorageManagerH˚
-^com.smilepile.storage.StorageManager#copyAndResizePhotoFromFile(Ljava/io/File;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktˆ ˆ(2"0*,
-0
-Û ı("
+Ã Ã(
+%2java.lang.Object"Rcom.smilepile.data.backup.ManagedDeletionTracker#getJson()Lerror/NonExistentClass;*B
 
-ˆb ˆ(}
-	<unknown>:(
-
-ˆ3 ˆ(C
-
-sourceFilejava.io.File:(
-
-ˆE ˆ(U
-
-targetFilejava.io.FileB(&
-$com.smilepile.storage.StorageManagerHÌ
-Mcom.smilepile.storage.StorageManager#copyAndResizePhoto(LUri;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktô ô(*"0*,
-0
-ô ô("
-
-ôX ô(s
-	<unknown>:+
-
-ô+ ô(9
-	sourceUrijava.lang.Object:(
-
-ô; ô(K
-
-targetFilejava.io.FileB(&
-$com.smilepile.storage.StorageManagerHı
-Ucom.smilepile.storage.StorageManager#generateThumbnail(Ljava/io/File;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktº º()"0*,
-0
-º º("
-
-º\ º(w
-	<unknown>:(
-
-º* º(:
-
-sourceFilejava.io.File:+
-
-º< º(O
-thumbnailFilejava.io.FileB(&
-$com.smilepile.storage.StorageManagerH≠	
->com.smilepile.storage.StorageManager#calculateSampleSize(III)Ih
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÊ Ê(#"0*û
-2
-Í4 Ï(	n
-l
-
-Î Î(
-%4"__calculate*
-
-Î Î(
-*=*!
-
-Î Î(
-
-
-sampleSizeint*
-
-Î Î(2K
-I
-
-Î Î(
-
-sampleSizeint"__id*"
-
-__unknown_file (
-
-%4K
-I
+Ã Ã(42
+0com.smilepile.data.backup.ManagedDeletionTrackerS
+Q
 
 __unknown_file (
-%3"__id*!
-
-Î Î(
-
-
-sampleSizeint*
-1*2
-3
-Ï	 Ó("!
-
-Ó Ó(
-
-
-sampleSizeint*¥
-0
-Ê Ê(;
-9
-
-Á Á(
-
-sampleSizeint"__id*
-
-Á Á(2a
-_
-
-Ë Ë(/ 
-maxDimensionjava.lang.Object"__id*)
+%1"__id*)
 
 __unknown_file (
-	<unknown>*
-1*Ó
-1
-Í Í(2å
-â
-
-Í Í((
-%1"__calculate*
-
-Í Í(
-/*0
-
-Í Í("
- 
-maxDimensionjava.lang.Object*!
-
-Í Í((
-
-
-sampleSizeintx
-v
-
-Í Í(2
-%2"	__compare*
-
-Í) Í(*
->*"
-
-__unknown_file (
-
-%1*
-
-Í+ Í(2
-
-maxSizeintL
+	<unknown>*
+5
+6*b
+5
+– —(L
 J
 
 __unknown_file (
@@ -897,522 +2024,449 @@ J
 
 __unknown_file (
 
-%2*
-2
-3:
+%1*
+1*i
+6
+Õ# –(S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+5*%
+1
+  —(	"
 
-Ê$ Ê(.
-widthint:
+» —(	
+
+%0:"
 
-Ê0 Ê(;
-heightint:
+«# «(8
 
-Ê= Ê(I
-maxSizeintB(&
-$com.smilepile.storage.StorageManagerH–
-Dcom.smilepile.storage.StorageResult#getPhotoPath()Ljava/lang/String;
-__unknown_file ("0*Ω
-0 (Ñ
-Å
- (
-fieldjava.lang.String"__id*T
- (H*F%
-#com.smilepile.storage.StorageResult"
-	photoPathjava.lang.String"'
- (
-
-fieldjava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`
-Ecom.smilepile.storage.StorageResult#setPhotoPath(Ljava/lang/String;)V
-__unknown_file ("0*µ
-0 (Ñ
-Å
- (F%
-#com.smilepile.storage.StorageResult"
-	photoPathjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`ÿ
-Hcom.smilepile.storage.StorageResult#getThumbnailPath()Ljava/lang/String;
-__unknown_file ("0*¡
-0 (à
-Ö
- (
-fieldjava.lang.String"__id*X
- (L*J%
-#com.smilepile.storage.StorageResult"!
-thumbnailPathjava.lang.String"'
- (
-
-fieldjava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`¯
-Icom.smilepile.storage.StorageResult#setThumbnailPath(Ljava/lang/String;)V
-__unknown_file ("0*π
-0 (à
-Ö
- (J%
-#com.smilepile.storage.StorageResult"!
-thumbnailPathjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`Œ
-Ccom.smilepile.storage.StorageResult#getFileName()Ljava/lang/String;
-__unknown_file ("0*º
-0 (É
-Ä
- (
-fieldjava.lang.String"__id*S
- (G*E%
-#com.smilepile.storage.StorageResult"
-fileNamejava.lang.String"'
- (
-
-fieldjava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`Ó
-Dcom.smilepile.storage.StorageResult#setFileName(Ljava/lang/String;)V
-__unknown_file ("0*¥
-0 (É
-Ä
- (E%
-#com.smilepile.storage.StorageResult"
-fileNamejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB'%
-#com.smilepile.storage.StorageResultH`ó
-2com.smilepile.storage.StorageResult#getFileSize()J
-__unknown_file ("0*ñ
-0 (j
-h
- (
-fieldlong"__id*G
- (;*9%
-#com.smilepile.storage.StorageResult"
-fileSizelong"
- (
-
-fieldlongB'%
-#com.smilepile.storage.StorageResultH`∑
-3com.smilepile.storage.StorageResult#setFileSize(J)V
-__unknown_file ("0*ö
-0 (j
-h
- (9%
-#com.smilepile.storage.StorageResult"
-fileSizelong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB'%
-#com.smilepile.storage.StorageResultH`í
-dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)Vh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktı ı("0*Á
+compressedbyte[]B42
+0com.smilepile.data.backup.ManagedDeletionTrackerH’
+Ocom.smilepile.data.backup.ManagedDeletionTracker#compress(Ljava/lang/String;)[Bm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt◊ ◊("0*Ø
 0
-ı ˙(
-Ì
+‘ ÷(RP
 
-ˆ ˆ(
-%0java.lang.String"Ecom.smilepile.storage.StorageResult#setPhotoPath(Ljava/lang/String;)V*C
-
-__unknown_file ('%
-#com.smilepile.storage.StorageResult*;
-
-__unknown_file (
-
-	photoPathjava.lang.String¯
-ı
+ÿ ÿ(2#
+%0java.io.ByteArrayOutputStream"java.io.ByteArrayOutputStreamr
+p
 
-˜ ˜(
-%1java.lang.String"Icom.smilepile.storage.StorageResult#setThumbnailPath(Ljava/lang/String;)V*C
-
-__unknown_file ('%
-#com.smilepile.storage.StorageResult*?
-
-__unknown_file (#
-!
-thumbnailPathjava.lang.StringÓ
-Î
+ÿ ÿ(2
+%1"'java.io.ByteArrayOutputStream#<init>()V*3
 
-¯ ¯(
-%2java.lang.String"Dcom.smilepile.storage.StorageResult#setFileName(Ljava/lang/String;)V*C
-
-__unknown_file ('%
-#com.smilepile.storage.StorageResult*:
-
-__unknown_file (
-
-fileNamejava.lang.String≈
+ÿ ÿ(2%
+#
+%0java.io.ByteArrayOutputStreamx
+v
+
+ÿ ÿ(2-
+outputStreamjava.io.ByteArrayOutputStream"__id*3
+
+ÿ ÿ(2%
+#
+%0java.io.ByteArrayOutputStreamTR
+
+Ÿ Ÿ(&$
+%2java.util.zip.GZIPOutputStream"java.util.zip.GZIPOutputStream 
+«
+
+Ÿ Ÿ(&
+%3">java.util.zip.GZIPOutputStream#<init>(Ljava/io/OutputStream;)V*4
+
+Ÿ Ÿ(&&
+$
+%2java.util.zip.GZIPOutputStream*=
+
+Ÿ Ÿ(%/
+-
+outputStreamjava.io.ByteArrayOutputStreamöó
+
+‹ ‹()
+%4byte[]"-java.io.ByteArrayOutputStream#toByteArray()[B*=
+
+‹ ‹(/
+-
+outputStreamjava.io.ByteArrayOutputStream2toByteArray()"
+
+‹ ‹()
+
+%4byte[]:&
+
+◊ ◊(%
+datajava.lang.StringB42
+0com.smilepile.data.backup.ManagedDeletionTrackerH—
+Qcom.smilepile.data.backup.ManagedDeletionTracker#decompress([B)Ljava/lang/String;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt‚ ‚("0*≠
+0
+ﬂ ·(PN
+
+„ „(:"
+%0java.io.ByteArrayInputStream"java.io.ByteArrayInputStreamô
+ñ
+
+„ „(:
+%1"(java.io.ByteArrayInputStream#<init>([B)V*2
+
+„ „(:$
+"
+%0java.io.ByteArrayInputStream*$
+
+„/ „(9
+
+
+compressedbyte[]u
+s
+
+„ „(:+
+inputStreamjava.io.ByteArrayInputStream"__id*2
+
+„ „(:$
+"
+%0java.io.ByteArrayInputStreamRP
+
+‰ ‰(+#
+%2java.util.zip.GZIPInputStream"java.util.zip.GZIPInputStream≈
 ¬
 
-˘ ˘(
+‰ ‰(+
+%3"<java.util.zip.GZIPInputStream#<init>(Ljava/io/InputStream;)V*3
 
-%3long"3com.smilepile.storage.StorageResult#setFileSize(J)V*C
+‰ ‰(+%
+#
+%2java.util.zip.GZIPInputStream*;
+
+‰ ‰(*-
++
+inputStreamjava.io.ByteArrayInputStream"
+
+‰ Ê(	
+	<unknown>:"
+
+‚ ‚(0
+
+compressedbyte[]B42
+0com.smilepile.data.backup.ManagedDeletionTrackerH“
+Gcom.smilepile.data.backup.ManagedDeletionTracker#getAvailableStorage()Jm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktÏ Ï(#"1*%
+2
+
+ Û(	"
+
+Ì Û(	
+
+%0*‡
+3
+ Û(	É
+Ä
+
+Ú Ú(
+
+%1long"%kotlin.Long$Companion#getMAX_VALUE()J*?
+
+Ú Ú(1
+/
+Long'kotlin.jvm.internal.LongCompanionObjectD
+B
 
-__unknown_file ('%
-#com.smilepile.storage.StorageResult*.
+__unknown_file (
+%0"__id*
+
+Ú Ú(
+
+
+%1long*
+2*“
+1
+Ì (	[
+Y
+
+Ó Ó(>
+statFsjava.lang.Object"__id*)
 
-__unknown_file (
-
-fileSizelong"/
+__unknown_file (
+	<unknown>\
+Z
 
-__unknown_file (
-implicit return:+
+__unknown_file (
+%0"__id*2
 
-ˆ ˆ(
-	photoPathjava.lang.String:/
+Ô Ô(!$
+"
+availableBytesjava.lang.Object*
+2
+3B42
+0com.smilepile.data.backup.ManagedDeletionTrackerH»
+ncom.smilepile.data.backup.ManagedDeletionTracker#getStatistics()Lcom/smilepile/data/backup/DeletionStatistics;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.kt˘ ˘("0*,
+0
+ˆ ¯("
 
-˜ ˜(!
-thumbnailPathjava.lang.String:*
-
-¯ ¯(
-fileNamejava.lang.String:
-
-˘ ˘(
-fileSizelongB'%
-#com.smilepile.storage.StorageResultHò
-3com.smilepile.storage.StorageUsage#getTotalBytes()J
-__unknown_file ("0*ó
-0 (k
-i
- (
-fieldlong"__id*H
- (<*:$
-"com.smilepile.storage.StorageUsage"
-
-totalByteslong"
- (
-
-fieldlongB&$
-"com.smilepile.storage.StorageUsageH`∏
-4com.smilepile.storage.StorageUsage#setTotalBytes(J)V
-__unknown_file ("0*õ
-0 (k
-i
- (:$
-"com.smilepile.storage.StorageUsage"
-
-totalByteslong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB&$
-"com.smilepile.storage.StorageUsageH`ò
-3com.smilepile.storage.StorageUsage#getPhotoBytes()J
-__unknown_file ("0*ó
-0 (k
-i
- (
-fieldlong"__id*H
- (<*:$
-"com.smilepile.storage.StorageUsage"
-
-photoByteslong"
- (
-
-fieldlongB&$
-"com.smilepile.storage.StorageUsageH`∏
-4com.smilepile.storage.StorageUsage#setPhotoBytes(J)V
-__unknown_file ("0*õ
-0 (k
-i
- (:$
-"com.smilepile.storage.StorageUsage"
-
-photoByteslong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB&$
-"com.smilepile.storage.StorageUsageH`†
-7com.smilepile.storage.StorageUsage#getThumbnailBytes()J
-__unknown_file ("0*õ
-0 (o
-m
- (
-fieldlong"__id*L
- (@*>$
-"com.smilepile.storage.StorageUsage"
-thumbnailByteslong"
- (
-
-fieldlongB&$
-"com.smilepile.storage.StorageUsageH`¿
-8com.smilepile.storage.StorageUsage#setThumbnailBytes(J)V
-__unknown_file ("0*ü
-0 (o
-m
- (>$
-"com.smilepile.storage.StorageUsage"
-thumbnailByteslong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB&$
-"com.smilepile.storage.StorageUsageH`ï
-3com.smilepile.storage.StorageUsage#getPhotoCount()I
-__unknown_file ("0*î
-0 (i
-g
+˘6 ˘(Q
+	<unknown>B42
+0com.smilepile.data.backup.ManagedDeletionTrackerH∑
+?com.smilepile.data.backup.DeletionStatistics#getTotalRecords()I
+__unknown_file ("0*†
+0 (u
+s
  (
-fieldint"__id*G
- (;*9$
-"com.smilepile.storage.StorageUsage"
-
-photoCountint"
+fieldint"__id*S
+ (G*E.
+,com.smilepile.data.backup.DeletionStatistics"
+totalRecordsint"
  (
 
-fieldintB&$
-"com.smilepile.storage.StorageUsageH`µ
-4com.smilepile.storage.StorageUsage#setPhotoCount(I)V
-__unknown_file ("0*ô
-0 (i
-g
- (9$
-"com.smilepile.storage.StorageUsage"
-
-photoCountint"__id*
+fieldintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`◊
+@com.smilepile.data.backup.DeletionStatistics#setTotalRecords(I)V
+__unknown_file ("0*•
+0 (u
+s
+ (E.
+,com.smilepile.data.backup.DeletionStatistics"
+totalRecordsint"__id*
  (
 
 valueint"
  (
 implicit return:
  (
-valueintB&$
-"com.smilepile.storage.StorageUsageH`≈	
-0com.smilepile.storage.StorageUsage#<init>(JJJI)Vh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktˇ ˇ("0*Ó
+valueintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`∑
+?com.smilepile.data.backup.DeletionStatistics#getPhotoRecords()I
+__unknown_file ("0*†
+0 (u
+s
+ (
+fieldint"__id*S
+ (G*E.
+,com.smilepile.data.backup.DeletionStatistics"
+photoRecordsint"
+ (
+
+fieldintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`◊
+@com.smilepile.data.backup.DeletionStatistics#setPhotoRecords(I)V
+__unknown_file ("0*•
+0 (u
+s
+ (E.
+,com.smilepile.data.backup.DeletionStatistics"
+photoRecordsint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`Ω
+Bcom.smilepile.data.backup.DeletionStatistics#getCategoryRecords()I
+__unknown_file ("0*£
+0 (x
+v
+ (
+fieldint"__id*V
+ (J*H.
+,com.smilepile.data.backup.DeletionStatistics"
+categoryRecordsint"
+ (
+
+fieldintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`›
+Ccom.smilepile.data.backup.DeletionStatistics#setCategoryRecords(I)V
+__unknown_file ("0*®
+0 (x
+v
+ (H.
+,com.smilepile.data.backup.DeletionStatistics"
+categoryRecordsint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`√
+Ecom.smilepile.data.backup.DeletionStatistics#getCompressedArchives()I
+__unknown_file ("0*¶
+0 ({
+y
+ (
+fieldint"__id*Y
+ (M*K.
+,com.smilepile.data.backup.DeletionStatistics"
+compressedArchivesint"
+ (
+
+fieldintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`„
+Fcom.smilepile.data.backup.DeletionStatistics#setCompressedArchives(I)V
+__unknown_file ("0*´
+0 ({
+y
+ (K.
+,com.smilepile.data.backup.DeletionStatistics"
+compressedArchivesint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB0.
+,com.smilepile.data.backup.DeletionStatisticsH`Õ
+Hcom.smilepile.data.backup.DeletionStatistics#getAvailableStorageBytes()J
+__unknown_file ("0*≠
+0 (Ä
+~
+ (
+fieldlong"__id*]
+ (Q*O.
+,com.smilepile.data.backup.DeletionStatistics"
+availableStorageByteslong"
+ (
+
+fieldlongB0.
+,com.smilepile.data.backup.DeletionStatisticsH`Ì
+Icom.smilepile.data.backup.DeletionStatistics#setAvailableStorageBytes(J)V
+__unknown_file ("0*±
+0 (Ä
+~
+ (O.
+,com.smilepile.data.backup.DeletionStatistics"
+availableStorageByteslong"__id*
+ (
+
+valuelong"
+ (
+implicit return:
+ (
+valuelongB0.
+,com.smilepile.data.backup.DeletionStatisticsH`æ
+;com.smilepile.data.backup.DeletionStatistics#isNearLimit()Z
+__unknown_file ("0*´
+0 (|
+z
+ (
+fieldboolean"__id*V
+ (J*H.
+,com.smilepile.data.backup.DeletionStatistics"
+isNearLimitboolean"
+ (
+
+fieldbooleanB0.
+,com.smilepile.data.backup.DeletionStatisticsH`·
+?com.smilepile.data.backup.DeletionStatistics#setIsNearLimit(Z)V
+__unknown_file ("0*¨
+0 (|
+z
+ (H.
+,com.smilepile.data.backup.DeletionStatistics"
+isNearLimitboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB0.
+,com.smilepile.data.backup.DeletionStatisticsH`˚
+<com.smilepile.data.backup.DeletionStatistics#<init>(IIIIJZ)Vm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/DeletionTracker.ktè è("0*¨
 0
-ˇ Ñ(«
-ƒ
+è ñ(›
+⁄
 
-Ä Ä(
-
-%0long"4com.smilepile.storage.StorageUsage#setTotalBytes(J)V*B
+ê ê(	
+%0int"@com.smilepile.data.backup.DeletionStatistics#setTotalRecords(I)V*L
 
-__unknown_file (&$
-"com.smilepile.storage.StorageUsage*0
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*1
 
-__unknown_file (
-
+__unknown_file (
+
+totalRecordsint›
+⁄
 
-totalByteslong«
-ƒ
-
-Å Å(
-
-%1long"4com.smilepile.storage.StorageUsage#setPhotoBytes(J)V*B
+ë ë(	
+%1int"@com.smilepile.data.backup.DeletionStatistics#setPhotoRecords(I)V*L
 
-__unknown_file (&$
-"com.smilepile.storage.StorageUsage*0
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*1
 
-__unknown_file (
-
+__unknown_file (
+
+photoRecordsint„
+‡
 
-photoByteslongœ
-Ã
-
-Ç Ç( 
-
-%2long"8com.smilepile.storage.StorageUsage#setThumbnailBytes(J)V*B
+í í(	
+%2int"Ccom.smilepile.data.backup.DeletionStatistics#setCategoryRecords(I)V*L
 
-__unknown_file (&$
-"com.smilepile.storage.StorageUsage*4
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*4
 
 __unknown_file (
 
-thumbnailByteslong≈
-¬
+categoryRecordsintÈ
+Ê
 
-É É(	
-%3int"4com.smilepile.storage.StorageUsage#setPhotoCount(I)V*B
+ì ì(	
+%3int"Fcom.smilepile.data.backup.DeletionStatistics#setCompressedArchives(I)V*L
 
-__unknown_file (&$
-"com.smilepile.storage.StorageUsage*/
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*7
 
-__unknown_file (
-
+__unknown_file (
+
+compressedArchivesintÒ
+Ó
 
-photoCountint"/
+î î(#
+
+%4long"Icom.smilepile.data.backup.DeletionStatistics#setAvailableStorageBytes(J)V*L
+
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*;
+
+__unknown_file (
+
+availableStorageByteslong„
+‡
+
+ï ï(
+%5boolean"?com.smilepile.data.backup.DeletionStatistics#setIsNearLimit(Z)V*L
+
+__unknown_file (0.
+,com.smilepile.data.backup.DeletionStatistics*4
+
+__unknown_file (
+
+isNearLimitboolean"/
 
 __unknown_file (
-implicit return: 
+implicit return:!
 
-Ä Ä(
+ê ê(
+totalRecordsint:!
 
-totalByteslong: 
+ë ë(
+photoRecordsint:$
 
-Å Å(
+í í(
+categoryRecordsint:'
 
-photoByteslong:$
+ì ì(
+compressedArchivesint:+
 
-Ç Ç( 
-thumbnailByteslong:
+î î(#
+availableStorageByteslong:$
 
-É É(
-
-photoCountintB&$
-"com.smilepile.storage.StorageUsageHÇ
-0com.smilepile.storage.StorageUsage#getTotalMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÖ Ö("0*∂
-0
-Ö Ö(Ü
-É
-
-Ö Ö()
-
-%0long"3com.smilepile.storage.StorageUsage#getTotalBytes()J*4
-
-Ö Ö()&$
-"com.smilepile.storage.StorageUsageç
-ä
-
-Ö- Ö(<
-%1"__calculate*
-
-Ö4 Ö(5
-**)
-
-__unknown_file (
-	<unknown>*)
-
-__unknown_file (
-	<unknown>v
-t
-
-Ö Ö(=
-%2"__calculate*
-
-Ö* Ö(+
-/*
-
-Ö Ö()
-
-
-%0long*"
-
-__unknown_file (
-
-%1"
-
-Ö Ö(=
-
-%2B&$
-"com.smilepile.storage.StorageUsageHÇ
-0com.smilepile.storage.StorageUsage#getPhotoMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÜ Ü("0*∂
-0
-Ü Ü(Ü
-É
-
-Ü Ü()
-
-%0long"3com.smilepile.storage.StorageUsage#getPhotoBytes()J*4
-
-Ü Ü()&$
-"com.smilepile.storage.StorageUsageç
-ä
-
-Ü- Ü(<
-%1"__calculate*
-
-Ü4 Ü(5
-**)
-
-__unknown_file (
-	<unknown>*)
-
-__unknown_file (
-	<unknown>v
-t
-
-Ü Ü(=
-%2"__calculate*
-
-Ü* Ü(+
-/*
-
-Ü Ü()
-
-
-%0long*"
-
-__unknown_file (
-
-%1"
-
-Ü Ü(=
-
-%2B&$
-"com.smilepile.storage.StorageUsageHä
-4com.smilepile.storage.StorageUsage#getThumbnailMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktá á("0*∫
-0
-á á(ä
-á
-
-á# á(1
-
-%0long"7com.smilepile.storage.StorageUsage#getThumbnailBytes()J*4
-
-á# á(1&$
-"com.smilepile.storage.StorageUsageç
-ä
-
-á5 á(D
-%1"__calculate*
-
-á< á(=
-**)
-
-__unknown_file (
-	<unknown>*)
-
-__unknown_file (
-	<unknown>v
-t
-
-á# á(E
-%2"__calculate*
-
-á2 á(3
-/*
-
-á# á(1
-
-
-%0long*"
-
-__unknown_file (
-
-%1"
-
-á# á(E
-
-%2B&$
-"com.smilepile.storage.StorageUsageH
+ï ï(
+isNearLimitbooleanB0.
+,com.smilepile.data.backup.DeletionStatisticsH

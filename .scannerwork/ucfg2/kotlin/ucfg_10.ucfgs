@@ -1,363 +1,1134 @@
-∫
-bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;
-__unknown_file ("0*˘
-0 (±
-Æ
- ((
-fieldcom.smilepile.data.dao.PhotoDao"__id*r
- (f*d5
-3com.smilepile.data.repository.SecurePhotoRepository"+
-photoDaocom.smilepile.data.dao.PhotoDao"6
- (*
-(
-fieldcom.smilepile.data.dao.PhotoDaoB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH`⁄
-ccom.smilepile.data.repository.SecurePhotoRepository#setPhotoDao(Lcom/smilepile/data/dao/PhotoDao;)V
-__unknown_file ("0*‚
-0 (±
-Æ
- (d5
-3com.smilepile.data.repository.SecurePhotoRepository"+
-photoDaocom.smilepile.data.dao.PhotoDao"__id*6
- (*
-(
-valuecom.smilepile.data.dao.PhotoDao"
- (
-implicit return:4
- ((
-valuecom.smilepile.data.dao.PhotoDaoB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH`˜
-vcom.smilepile.data.repository.SecurePhotoRepository#getMetadataEncryption()Lcom/smilepile/security/MetadataEncryption;
-__unknown_file ("0*¢
-0 (–
-Õ
- (2
-field)com.smilepile.security.MetadataEncryption"__id*Ü
- (z*x5
-3com.smilepile.data.repository.SecurePhotoRepository"?
-metadataEncryption)com.smilepile.security.MetadataEncryption"@
- (4
-2
-field)com.smilepile.security.MetadataEncryptionB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH`ñ
-wcom.smilepile.data.repository.SecurePhotoRepository#setMetadataEncryption(Lcom/smilepile/security/MetadataEncryption;)V
-__unknown_file ("0*Ä
-0 (œ
-Ã
- (x5
-3com.smilepile.data.repository.SecurePhotoRepository"?
-metadataEncryption)com.smilepile.security.MetadataEncryption"__id*@
- (4
-2
-value)com.smilepile.security.MetadataEncryption"
- (
-implicit return:>
- (2
-value)com.smilepile.security.MetadataEncryptionB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH`Ú
-âcom.smilepile.data.repository.SecurePhotoRepository#<init>(Lcom/smilepile/data/dao/PhotoDao;Lcom/smilepile/security/MetadataEncryption;)Vu
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt$ (/"0*®
-
-0 (#ú
-ô
- ("
+®
+Ïcom.smilepile.ui.components#OptimizedPhotoGrid(Ljava/util/List;Ljava/util/Set;ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;LLazyGridState;Lkotlin/jvm/functions/Function0;ZI)Vn
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt" "("0*ì
+0  (â
+Ü
+# #(
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*I
+java.lang.Object*6
 
-__unknown_file (-
-+
-photoDaocom.smilepile.data.dao.PhotoDaok
-i
- ("+
-photoDaocom.smilepile.data.dao.PhotoDao"__annotation*"
+__unknown_file (
+
+photosjava.util.ListX
+V
+# #(
+photosjava.util.List"__annotation*"
 
 __unknown_file (
 
-%0∞
-≠
- (6
+%0ê
+ç
+$ $(
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*]
+java.lang.Object*=
 
-__unknown_file (A
-?
-metadataEncryption)com.smilepile.security.MetadataEncryption
-}
- (6?
-metadataEncryption)com.smilepile.security.MetadataEncryption"__annotation*"
+__unknown_file (!
+
+selectedPhotosjava.util.Set_
+]
+$ $(
+selectedPhotosjava.util.Set"__annotation*"
 
 __unknown_file (
 
-%1π
-∂
- ("%
-%2com.smilepile.data.dao.PhotoDao"ccom.smilepile.data.repository.SecurePhotoRepository#setPhotoDao(Lcom/smilepile/data/dao/PhotoDao;)V*S
+%1ã
+à
+% %(
+%2"
+__annotate*0
 
-__unknown_file (75
-3com.smilepile.data.repository.SecurePhotoRepository*I
+__unknown_file (
+java.lang.Object*8
 
-__unknown_file (-
-+
-photoDaocom.smilepile.data.dao.PhotoDaoÎ
-Ë
- (6/
-%3)com.smilepile.security.MetadataEncryption"wcom.smilepile.data.repository.SecurePhotoRepository#setMetadataEncryption(Lcom/smilepile/security/MetadataEncryption;)V*S
+__unknown_file (
+
+isSelectionModebooleanZ
+X
+% %(
+isSelectionModeboolean"__annotation*"
 
-__unknown_file (75
-3com.smilepile.data.repository.SecurePhotoRepository*]
+__unknown_file (
+
+%2ü
+ú
+& &(!
+%3"
+__annotate*0
 
-__unknown_file (A
-?
-metadataEncryption)com.smilepile.security.MetadataEncryption"/
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function1n
+l
+& &(!.
+onPhotoClickkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%3£
+†
+' '(%
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+onPhotoLongClickkotlin.jvm.functions.Function1r
+p
+' '(%2
+onPhotoLongClickkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4£
+†
+( ((%
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+onFavoriteTogglekotlin.jvm.functions.Function1r
+p
+( ((%2
+onFavoriteTogglekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%5ç
+ä
+) )(!
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+) )(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6é
+ã
+* *(6
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*;
+
+__unknown_file (
+
+	gridStatejava.lang.Object]
+[
+* *(6
+	gridStatejava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%7ù
+ö
++ +($
+%8"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*J
+
+__unknown_file (.
+,
+
+onLoadMorekotlin.jvm.functions.Function0l
+j
++ +($,
+
+onLoadMorekotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%8Ö
+Ç
+, ,(
+%9"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*2
+
+__unknown_file (
+
+	isLoadingbooleanT
+R
+, ,(
+	isLoadingboolean"__annotation*"
+
+__unknown_file (
+
+%9â
+Ü
+- -(
+%10"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*5
+
+__unknown_file (
+
+loadingItemCountintX
+V
+- -(
+loadingItemCountint"__annotation*#
+
+__unknown_file (
+
+%10`
+^
+/ /(2!
+configurationjava.lang.Object"__id*)
+/+ /(2
+
+currentjava.lang.ObjectY
+W
+0 0(4
+screenWidthjava.lang.Object"__id*$
+02 0(4
+
+dpjava.lang.Object^
+\
+3 :(
+columnCountjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
 
 __unknown_file (
-implicit return:7
- ("+
-photoDaocom.smilepile.data.dao.PhotoDao:K
- (6?
-metadataEncryption)com.smilepile.security.MetadataEncryptionB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH™
-Çcom.smilepile.data.repository.SecurePhotoRepository#insertSecurePhoto(Lcom/smilepile/data/models/PhotoMetadata;)Ljava/lang/String;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt (!"0*(
-0 ("
-J (e
-	<unknown>:D
-" (>8
-photoMetadata'com.smilepile.data.models.PhotoMetadataB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH∞
-àcom.smilepile.data.repository.SecurePhotoRepository#updateSecurePhoto(Lcom/smilepile/data/models/PhotoMetadata;)Lerror/NonExistentClass;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt, ,(!"0*(
-0( +("
-,B ,(]
-	<unknown>:D
-," ,(>8
-photoMetadata'com.smilepile.data.models.PhotoMetadataB75
-3com.smilepile.data.repository.SecurePhotoRepositoryHâ
-Écom.smilepile.data.repository.SecurePhotoRepository#getSecurePhotoById(Ljava/lang/String;)Lcom/smilepile/data/models/PhotoMetadata;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt; ;(""0*(
-06 :("
-;A ;(\
-	<unknown>:"
-;# ;(-
-idjava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryHà
-Çcom.smilepile.data.repository.SecurePhotoRepository#getBasicPhotoById(Ljava/lang/String;)Lcom/smilepile/data/models/PhotoMetadata;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktE E(!"0*(
-0@ D("
-E@ E([
-	<unknown>:"
-E" E(,
-idjava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryHç
-Vcom.smilepile.data.repository.SecurePhotoRepository#getSecurePhotosByCategory(J)LFlow;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktP P(!"0*›
-0J O(›
-⁄
-Q Q(%
-%0com.smilepile.data.dao.PhotoDao"bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;*C
-Q Q(75
-3com.smilepile.data.repository.SecurePhotoRepository“œ
-Q Q(7
-%1java.lang.Object"<com.smilepile.data.dao.PhotoDao#getPhotosByCategory(J)LFlow;*3
-Q Q('
-%
-%0com.smilepile.data.dao.PhotoDao* 
-Q, Q(6
-
+implicit return:$
+# #(
+photosjava.util.List:+
+$ $(
+selectedPhotosjava.util.Set:&
+% %(
+isSelectionModeboolean::
+& &(!.
+onPhotoClickkotlin.jvm.functions.Function1:>
+' '(%2
+onPhotoLongClickkotlin.jvm.functions.Function1:>
+( ((%2
+onFavoriteTogglekotlin.jvm.functions.Function1:(
+) )(!
+modifierjava.lang.Object:)
+* *(6
+	gridStatejava.lang.Object:8
++ +($,
 
-categoryIdlong2getPhotosByCategory(J)"
-Q U(	
-	<unknown>:
-P" P(2
+onLoadMorekotlin.jvm.functions.Function0: 
+, ,(
+	isLoadingboolean:#
+- -(
+loadingItemCountintB"
+com.smilepile.ui.componentsHÂ
+¬com.smilepile.ui.components#OptimizedPhotoGridItem(Lcom/smilepile/data/models/Photo;ZZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;LModifier;)Vn
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kts s(""0*†
+0o q(ô
+ñ
+t t(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*F
+
+__unknown_file (*
+(
+photocom.smilepile.data.models.Photoh
+f
+t t((
+photocom.smilepile.data.models.Photo"__annotation*"
+
+__unknown_file (
+
+%0Ü
+É
+u u(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*3
+
+__unknown_file (
+
 
-categoryIdlongB75
-3com.smilepile.data.repository.SecurePhotoRepositoryHå
-Ucom.smilepile.data.repository.SecurePhotoRepository#getBasicPhotosByCategory(J)LFlow;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt] ]( "0*›
-0X \(›
-⁄
-^ ^(%
-%0com.smilepile.data.dao.PhotoDao"bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;*C
-^ ^(75
-3com.smilepile.data.repository.SecurePhotoRepository“œ
-^ ^(7
-%1java.lang.Object"<com.smilepile.data.dao.PhotoDao#getPhotosByCategory(J)LFlow;*3
-^ ^('
-%
-%0com.smilepile.data.dao.PhotoDao* 
-^, ^(6
-
+isSelectedbooleanU
+S
+u u(
 
-categoryIdlong2getPhotosByCategory(J)"
-^ b(	
-	<unknown>:
-]! ](1
+isSelectedboolean"__annotation*"
+
+__unknown_file (
+
+%1ã
+à
+v v(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*8
+
+__unknown_file (
+
+isSelectionModebooleanZ
+X
+v v(
+isSelectionModeboolean"__annotation*"
+
+__unknown_file (
+
+%2ü
+ú
+w w(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function0n
+l
+w w(.
+onPhotoClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3£
+†
+x x( 
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+onPhotoLongClickkotlin.jvm.functions.Function0r
+p
+x x( 2
+onPhotoLongClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%4£
+†
+y y( 
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+onFavoriteTogglekotlin.jvm.functions.Function0r
+p
+y y( 2
+onFavoriteTogglekotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%5ç
+ä
+z z(!
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+z z(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6^
+\
+	} É(
 
-categoryIdlongB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH≥
-Ncom.smilepile.data.repository.SecurePhotoRepository#getAllSecurePhotos()LFlow;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktj j("0*´
-0e i(›
-⁄
-k k(%
-%0com.smilepile.data.dao.PhotoDao"bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;*C
-k k(75
-3com.smilepile.data.repository.SecurePhotoRepository†ù
-k k(&
-%1java.lang.Object"4com.smilepile.data.dao.PhotoDao#getAllPhotos()LFlow;*3
-k k('
-%
-%0com.smilepile.data.dao.PhotoDao2getAllPhotos()"
-k o(	
-	<unknown>B75
-3com.smilepile.data.repository.SecurePhotoRepositoryH≤
-Mcom.smilepile.data.repository.SecurePhotoRepository#getAllBasicPhotos()LFlow;u
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktv v("0*´
-0r u(›
-⁄
-w w(%
-%0com.smilepile.data.dao.PhotoDao"bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;*C
-w w(75
-3com.smilepile.data.repository.SecurePhotoRepository†ù
-w w(&
-%1java.lang.Object"4com.smilepile.data.dao.PhotoDao#getAllPhotos()LFlow;*3
-w w('
-%
-%0com.smilepile.data.dao.PhotoDao2getAllPhotos()"
-w {(	
-	<unknown>B75
-3com.smilepile.data.repository.SecurePhotoRepositoryH˜
-kcom.smilepile.data.repository.SecurePhotoRepository#deletePhoto(Ljava/lang/String;)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktÇ Ç("0*+
-0	~ Å("
+imageModeljava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:4
+t t((
+photocom.smilepile.data.models.Photo:!
+u u(
 
-Ç* Ç(E
-	<unknown>:$
+isSelectedboolean:&
+v v(
+isSelectionModeboolean::
+w w(.
+onPhotoClickkotlin.jvm.functions.Function0:>
+x x( 2
+onPhotoLongClickkotlin.jvm.functions.Function0:>
+y y( 2
+onFavoriteTogglekotlin.jvm.functions.Function0:(
+z z(!
+modifierjava.lang.ObjectB"
+com.smilepile.ui.componentsHù
 
-Ç Ç(&
-idjava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryHÓ
-ecom.smilepile.data.repository.SecurePhotoRepository#deletePhotosByCategory(J)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktä ä(&"0*,
+;com.smilepile.ui.components.GridConfig#getOptimalColumns()Ip
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktñ ñ("0*®
+2
+ú ú( é
+ã
+
+ú ú( 
+%2"	__compare*
+
+ú ú(
+<*/
+
+ú ú(!
+
+screenWidthjava.lang.Object*&
+
+ú ú( 
+
+dpjava.lang.Object*
+4
+5*R
+3
+õ$ õ(%<
+:
+
+__unknown_file (
+%0"__id*
+
+õ$ õ(%2*
+1*®
+4
+ù ù( é
+ã
+
+ù ù( 
+%3"	__compare*
+
+ù ù(
+<*/
+
+ù ù(!
+
+screenWidthjava.lang.Object*&
+
+ù ù( 
+
+dpjava.lang.Object*
+7
+8*R
+5
+ú$ ú(%<
+:
+
+__unknown_file (
+%0"__id*
+
+ú$ ú(%2*
+1*R
+7
+ù$ ù(%<
+:
+
+__unknown_file (
+%0"__id*
+
+ù$ ù(%2*
+1*R
+8
+û û(<
+:
+
+__unknown_file (
+%0"__id*
+
+û û(2*
+1*Ì
 0
-Ü â("
+ï ï(d
+b
 
-ä; ä(V
-	<unknown>: 
+ó ó(6!
+configurationjava.lang.Object"__id*+
 
-ä' ä(7
+ó/ ó(6
+
+currentjava.lang.Object]
+[
 
-categoryIdlongB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH¡
-Åcom.smilepile.data.repository.SecurePhotoRepository#updateChildName(Ljava/lang/String;Ljava/lang/String;)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktì ì("0*,
+ò ò(8
+screenWidthjava.lang.Object"__id*&
+
+ò6 ò(8
+
+dpjava.lang.Objecté
+ã
+
+õ õ( 
+%1"	__compare*
+
+õ õ(
+<*/
+
+õ õ(!
+
+screenWidthjava.lang.Object*&
+
+õ õ( 
+
+dpjava.lang.Object*
+2
+3*%
+1
+ü ü(	"
+
+ö ü(	
+
+%0B*(
+&com.smilepile.ui.components.GridConfigH¢
+?com.smilepile.ui.components.GridConfig#getOptimalItemSpacing()Ip
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt£ £("0*®
+2
+© ©( é
+ã
+
+© ©( 
+%2"	__compare*
+
+© ©(
+<*/
+
+© ©(!
+
+screenWidthjava.lang.Object*&
+
+© ©( 
+
+dpjava.lang.Object*
+5
+6*R
+3
+®$ ®(%<
+:
+
+__unknown_file (
+%0"__id*
+
+®$ ®(%2*
+1*R
+5
+©$ ©(%<
+:
+
+__unknown_file (
+%0"__id*
+
+©$ ©(%2*
+1*R
+6
+™ ™(<
+:
+
+__unknown_file (
+%0"__id*
+
+™ ™(2*
+1*Ì
 0
-é í("
+¢ ¢(d
+b
 
-ìG ì(b
-	<unknown>:)
+§ §(6!
+configurationjava.lang.Object"__id*+
 
-ì  ì(/
-photoIdjava.lang.String:+
+§/ §(6
+
+currentjava.lang.Object]
+[
 
-ì1 ì(C
-	childNamejava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH∏
-}com.smilepile.data.repository.SecurePhotoRepository#updateNotes(Ljava/lang/String;Ljava/lang/String;)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktü ü("0*,
+• •(8
+screenWidthjava.lang.Object"__id*&
+
+•6 •(8
+
+dpjava.lang.Objecté
+ã
+
+® ®( 
+%1"	__compare*
+
+® ®(
+<*/
+
+® ®(!
+
+screenWidthjava.lang.Object*&
+
+® ®( 
+
+dpjava.lang.Object*
+2
+3*%
+1
+´ ´(	"
+
+ß ´(	
+
+%0B*(
+&com.smilepile.ui.components.GridConfigH‘	
+Pcom.smilepile.ui.components.GridConfig#getOptimalContentPadding()LPaddingValues;p
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktØ Ø( "0*®
+2
+µ µ( é
+ã
+
+µ µ( 
+%2"	__compare*
+
+µ µ(
+<*/
+
+µ µ(!
+
+screenWidthjava.lang.Object*&
+
+µ µ( 
+
+dpjava.lang.Object*
+5
+6*f
+3
+¥$ ¥()P
+N
+
+__unknown_file (
+%0"__id*&
+
+¥' ¥()
+
+dpjava.lang.Object*
+1*f
+5
+µ$ µ()P
+N
+
+__unknown_file (
+%0"__id*&
+
+µ' µ()
+
+dpjava.lang.Object*
+1*f
+6
+∂ ∂(P
+N
+
+__unknown_file (
+%0"__id*&
+
+∂ ∂(
+
+dpjava.lang.Object*
+1*Ì
 0
-ö û("
+Æ Æ(d
+b
 
-ü? ü(Z
-	<unknown>:)
+∞ ∞(6!
+configurationjava.lang.Object"__id*+
 
-ü ü(+
-photoIdjava.lang.String:'
+∞/ ∞(6
+
+currentjava.lang.Object]
+[
 
-ü- ü(;
-notesjava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH≤
-zcom.smilepile.data.repository.SecurePhotoRepository#updateTags(Ljava/lang/String;Ljava/util/List;)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt´ ´("0*,
+± ±(8
+screenWidthjava.lang.Object"__id*&
+
+±6 ±(8
+
+dpjava.lang.Objecté
+ã
+
+¥ ¥( 
+%1"	__compare*
+
+¥ ¥(
+<*/
+
+¥ ¥(!
+
+screenWidthjava.lang.Object*&
+
+¥ ¥( 
+
+dpjava.lang.Object*
+2
+3*â
+1
+∑ ∑(	[
+Y
+
+≥ ∑(	!
+paddingerror.NonExistentClass"__id*"
+
+__unknown_file (
+
+%0"
+
+π π(%
+	<unknown>B*(
+&com.smilepile.ui.components.GridConfigH≠
+\com.smilepile.ui.components.ScrollPerformance#rememberPerformantScrollState()LLazyGridState;p
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt≈ ≈(%"0*¢
 0
-¶ ™("
+¡ √(`
+^
 
-´B ´(]
-	<unknown>:)
+∆ ∆(1
+scrollStatejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
 
-´ ´(*
-photoIdjava.lang.String:$
-
-´, ´(>
-tagsjava.util.ListB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH¨
-ucom.smilepile.data.repository.SecurePhotoRepository#updateFavoriteStatus(Ljava/lang/String;Z)Lerror/NonExistentClass;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt∑ ∑($"0*,
+‘ ‘(!
+
+scrollStatejava.lang.ObjectB1/
+-com.smilepile.ui.components.ScrollPerformanceHÓ
+Qcom.smilepile.ui.components.ScrollPerformance#smoothScrollToTop(LLazyGridState;)Vp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt⁄ ⁄(!"0*@
 0
-≤ ∂("
+◊ Ÿ("/
+
+__unknown_file (
+implicit return:-
 
-∑M ∑(h
-	<unknown>:)
-
-∑% ∑(4
-photoIdjava.lang.String:#
-
-∑6 ∑(I
-
-isFavoritebooleanB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH·
-Rcom.smilepile.data.repository.SecurePhotoRepository#getPhotosWithChildData()LFlow;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktø ø("0*”
+⁄" ⁄(<
+scrollStatejava.lang.ObjectB1/
+-com.smilepile.ui.components.ScrollPerformanceHÂ
+Ucom.smilepile.ui.components.ScrollPerformance#shouldShowScrollToTop(LLazyGridState;)Zp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt‚ ‚("0*≤
 0
-ª æ(·
-ﬁ
+ﬁ ‡(í
+è
 
-¿ ¿(%
-%0com.smilepile.data.dao.PhotoDao"bcom.smilepile.data.repository.SecurePhotoRepository#getPhotoDao()Lcom/smilepile/data/dao/PhotoDao;*E
+‚ ‚(8
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+scrollStatejava.lang.Objecta
+_
 
-¿ ¿(75
-3com.smilepile.data.repository.SecurePhotoRepository¿Ω
+‚ ‚(8
+scrollStatejava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0")
 
-¿ ¿(4
-%1java.lang.Object"Bcom.smilepile.data.dao.PhotoDao#getPhotosWithEncryptedData()LFlow;*5
+„ Á(
+
+valuejava.lang.Object:-
 
-¿ ¿('
-%
-%0com.smilepile.data.dao.PhotoDao2getPhotosWithEncryptedData()"
-
-¿ ƒ(	
-	<unknown>B75
-3com.smilepile.data.repository.SecurePhotoRepositoryH˝
-icom.smilepile.data.repository.SecurePhotoRepository#searchByChildName(Ljava/lang/String;)Ljava/util/List;w
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktÕ Õ(!"0*,
+‚ ‚(8
+scrollStatejava.lang.ObjectB1/
+-com.smilepile.ui.components.ScrollPerformanceH√
+Ecom.smilepile.ui.components.MemoryOptimization#getOptimalImageSize()Ip
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktÛ Û("0*Œ
 0
-« Ã("
+Ô Ò(d
+b
 
-ÕL Õ(g
-	<unknown>:+
+Ù Ù(6!
+configurationjava.lang.Object"__id*+
 
-Õ" Õ(3
-	childNamejava.lang.StringB75
-3com.smilepile.data.repository.SecurePhotoRepositoryH∞
-Icom.smilepile.data.repository.SecurePhotoRepository#validateEncryption()Zw
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.kt· ·(""0*,
+Ù/ Ù(6
+
+currentjava.lang.Objecth
+f
+
+ı ı(5
+screenWidthjava.lang.Object"__id*1
+
+ı( ı(5#
+!
+screenWidthDpjava.lang.Objectù
+ö
+
+ˆ! ˆ(4	
+%0int";com.smilepile.ui.components.GridConfig#getOptimalColumns()I*D
+
+ˆ ˆ( 6
+4
+
+GridConfig&com.smilepile.ui.components.GridConfig?
+=
+
+ˆ ˆ(4
+columnsint"__id*
+
+ˆ! ˆ(4
+	
+%0int°
+û
+
+˜! ˜(8	
+%1int"?com.smilepile.ui.components.GridConfig#getOptimalItemSpacing()I*D
+
+˜ ˜( 6
+4
+
+GridConfig&com.smilepile.ui.components.GridConfig?
+=
+
+˜ ˜(8
+spacingint"__id*
+
+˜! ˜(8
+	
+%1int8
+6
+
+¯ ¯(4
+paddingint"__id*
+
+¯ ¯(2 à
+Ö
+
+˙ ˙(.
+%2"__calculate*
+
+˙% ˙(&
+-*/
+
+˙ ˙($!
+
+screenWidthjava.lang.Object*
+
+˙' ˙(.
+
+paddingintj
+h
+
+˙= ˙(H
+%3"__calculate*
+
+˙E ˙(F
+-*
+
+˙= ˙(D
+
+columnsint*
+
+˙G ˙(H2z
+x
+
+˙2 ˙(I
+%4"__calculate*
+
+˙: ˙(;
+**
+
+˙2 ˙(9
+
+spacingint*"
+
+__unknown_file (
+
+%3~
+|
+
+˙ ˙(J
+%5"__calculate*
+
+˙/ ˙(0
+-*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%4z
+x
+
+˙ ˙(U
+%6"__calculate*
+
+˙L ˙(M
+/*"
+
+__unknown_file (
+
+%5*
+
+˙N ˙(U
+
+columnsintW
+U
+
+˙ ˙(U
+	itemWidthjava.lang.Object"__id*"
+
+__unknown_file (
+
+%6ñ
+ì
+
+˝ ˝(4
+%7"__calculate*
+
+˝ ˝(
+**-
+
+˝ ˝(
+
+	itemWidthjava.lang.Object*.
+
+˝* ˝(4 
+
+
+densityDpijava.lang.Objecto
+m
+
+˝ ˝(:
+%8"__calculate*
+
+˝5 ˝(6
+/*"
+
+__unknown_file (
+
+%7*
+
+˝7 ˝(:2†"
+
+˝ ˝(C
+	<unknown>B20
+.com.smilepile.ui.components.MemoryOptimizationH–
+Ncom.smilepile.ui.components.PaginationUtils#shouldLoadMore(LLazyGridState;II)Zp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktâ â("0*Ê
 0
-› ‡("
+Ö á(í
+è
 
-·0 ·(K
-	<unknown>B75
-3com.smilepile.data.repository.SecurePhotoRepositoryH±
-Jcom.smilepile.data.repository.SecurePhotoRepository#getSecurePhotoCount()Iw
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/SecurePhotoRepository.ktÈ È(#"0*,
+ä ä("
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+scrollStatejava.lang.Objecta
+_
+
+ä ä("
+scrollStatejava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0É
+Ä
+
+ã ã(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*.
+
+__unknown_file (
+
+	itemCountintR
+P
+
+ã ã(
+	itemCountint"__annotation*"
+
+__unknown_file (
+
+%1É
+Ä
+
+å å(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*.
+
+__unknown_file (
+
+	thresholdintR
+P
+
+å å(
+	thresholdint"__annotation*"
+
+__unknown_file (
+
+%2")
+
+é ì(
+
+valuejava.lang.Object:-
+
+ä ä("
+scrollStatejava.lang.Object:
+
+ã ã(
+	itemCountint:
+
+å å(
+	thresholdintB/-
++com.smilepile.ui.components.PaginationUtilsH¯
+ºcom.smilepile.ui.components.PaginationUtils#optimizedItems(LLazyGridScope;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Vp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktô ô(("0*@
 0
-Â Ë("
+ñ ò("/
+
+__unknown_file (
+implicit return:%
 
-È- È(H
-	<unknown>B75
-3com.smilepile.data.repository.SecurePhotoRepositoryH
+ö ö(
+itemsjava.util.List:3
+
+õ õ('%
+keykotlin.jvm.functions.Function1:4
+
+ú ú(1&
+spankotlin.jvm.functions.Function1:;
+
+ù ù(2-
+itemContentkotlin.jvm.functions.Function1B/-
++com.smilepile.ui.components.PaginationUtilsH•
+Ücom.smilepile.ui.components.RecompositionUtils#rememberStablePhoto(Lcom/smilepile/data/models/Photo;)Lcom/smilepile/data/models/Photo;p
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.kt± ±("0*∂
+0
+≠ Ø(õ
+ò
+
+± ±((
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*F
+
+__unknown_file (*
+(
+photocom.smilepile.data.models.Photoj
+h
+
+± ±(((
+photocom.smilepile.data.models.Photo"__annotation*"
+
+__unknown_file (
+
+%0"
+
+≤ ≤(<
+	<unknown>:6
+
+± ±(((
+photocom.smilepile.data.models.PhotoB20
+.com.smilepile.ui.components.RecompositionUtilsH◊
+^com.smilepile.ui.components.RecompositionUtils#rememberStableSelectionState(Ljava/util/Set;J)Zp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/PerformanceUtils.ktπ π($"0*˚
+0
+µ ∑(í
+è
+
+∫ ∫(!
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+selectedPhotosjava.util.Seta
+_
+
+∫ ∫(!
+selectedPhotosjava.util.Set"__annotation*"
+
+__unknown_file (
+
+%0Å
+
+
+ª ª(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*-
+
+__unknown_file (
+
+photoIdlongQ
+O
+
+ª ª(
+photoIdlong"__annotation*"
+
+__unknown_file (
+
+%1"
+
+Ω ø(	
+	<unknown>:-
+
+∫ ∫(!
+selectedPhotosjava.util.Set:
+
+ª ª(
+photoIdlongB20
+.com.smilepile.ui.components.RecompositionUtilsH

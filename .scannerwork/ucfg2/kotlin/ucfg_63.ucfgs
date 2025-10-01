@@ -1,550 +1,11 @@
-¶
-+com.smilepile.data.models.Category#getId()J
-__unknown_file ("0*≠
-0 (c
-a
- (
-fieldlong"__id*@
- (4*2$
-"com.smilepile.data.models.Category"
+æ
+çcom.smilepile.ui.components#ErrorState(Ljava/lang/String;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/components/ErrorType;Z)Vr
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/ErrorStateComponents.kt- -("0*†
 
-idlong]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldlong=
-;
- (
-fieldlong"__annotation*
- (
-
-%0"
- (
-
-fieldlongB&$
-"com.smilepile.data.models.CategoryH`∆
-,com.smilepile.data.models.Category#setId(J)V
-__unknown_file ("0*±
-0 (]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valuelong=
-;
- (
-valuelong"__annotation*
- (
-
-%0c
-a
- (2$
-"com.smilepile.data.models.Category"
-
-idlong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB&$
-"com.smilepile.data.models.CategoryH`˜
->com.smilepile.data.models.Category#getName()Ljava/lang/String;
-__unknown_file ("0*Î
-0 (}
-{
- (
-fieldjava.lang.String"__id*N
- (B*@$
-"com.smilepile.data.models.Category"
-namejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`ó
-?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V
-__unknown_file ("0*„
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0}
-{
- (@$
-"com.smilepile.data.models.Category"
-namejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`á
-Ecom.smilepile.data.models.Category#getDisplayName()Ljava/lang/String;
-__unknown_file ("0*Ù
-0 (Ö
-Ç
- (
-fieldjava.lang.String"__id*U
- (I*G$
-"com.smilepile.data.models.Category"
-displayNamejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`ß
-Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V
-__unknown_file ("0*Ï
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0Ö
-Ç
- (G$
-"com.smilepile.data.models.Category"
-displayNamejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`≠
-1com.smilepile.data.models.Category#getPosition()I
-__unknown_file ("0*Æ
-0 (g
-e
- (
-fieldint"__id*E
- (9*7$
-"com.smilepile.data.models.Category"
-positionint\
-Z
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldint<
-:
- (
-fieldint"__annotation*
- (
-
-%0"
- (
-
-fieldintB&$
-"com.smilepile.data.models.CategoryH`Õ
-2com.smilepile.data.models.Category#setPosition(I)V
-__unknown_file ("0*≥
-0 (\
-Z
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valueint<
-:
- (
-valueint"__annotation*
- (
-
-%0g
-e
- (7$
-"com.smilepile.data.models.Category"
-positionint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB&$
-"com.smilepile.data.models.CategoryH`â
-Fcom.smilepile.data.models.Category#getIconResource()Ljava/lang/String;
-__unknown_file ("0*ı
-0 (Ü
-É
- (
-fieldjava.lang.String"__id*V
- (J*H$
-"com.smilepile.data.models.Category" 
-iconResourcejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`©
-Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V
-__unknown_file ("0*Ì
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0Ü
-É
- (H$
-"com.smilepile.data.models.Category" 
-iconResourcejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`Ä
-Bcom.smilepile.data.models.Category#getColorHex()Ljava/lang/String;
-__unknown_file ("0*
-0 (Å
-
- (
-fieldjava.lang.String"__id*R
- (F*D$
-"com.smilepile.data.models.Category"
-colorHexjava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`†
-Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V
-__unknown_file ("0*Ë
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0Å
-
- (D$
-"com.smilepile.data.models.Category"
-colorHexjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`¿
-/com.smilepile.data.models.Category#isDefault()Z
-__unknown_file ("0*√
-0 (p
-n
- (
-fieldboolean"__id*J
- (>*<$
-"com.smilepile.data.models.Category"
-	isDefaultboolean`
-^
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldboolean@
->
- (
-fieldboolean"__annotation*
- (
-
-%0"
- (
-
-fieldbooleanB&$
-"com.smilepile.data.models.CategoryH`„
-3com.smilepile.data.models.Category#setIsDefault(Z)V
-__unknown_file ("0*ƒ
-0 (`
-^
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valueboolean@
->
- (
-valueboolean"__annotation*
- (
-
-%0p
-n
- (<$
-"com.smilepile.data.models.Category"
-	isDefaultboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB&$
-"com.smilepile.data.models.CategoryH`¥
-2com.smilepile.data.models.Category#getCreatedAt()J
-__unknown_file ("0*¥
-0 (j
-h
- (
-fieldlong"__id*G
- (;*9$
-"com.smilepile.data.models.Category"
-	createdAtlong]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldlong=
-;
- (
-fieldlong"__annotation*
- (
-
-%0"
- (
-
-fieldlongB&$
-"com.smilepile.data.models.CategoryH`‘
-3com.smilepile.data.models.Category#setCreatedAt(J)V
-__unknown_file ("0*∏
-0 (]
-[
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valuelong=
-;
- (
-valuelong"__annotation*
- (
-
-%0j
-h
- (9$
-"com.smilepile.data.models.Category"
-	createdAtlong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB&$
-"com.smilepile.data.models.CategoryH`» 
-xcom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)Vd
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt ("0*ó
-0 #(z
-x
- (
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*(
-
-__unknown_file (
-
-
-idlongJ
-H
- (
-
-idlong"__annotation*"
-
-__unknown_file (
-
-%0â
-Ü
- (
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*6
-
-__unknown_file (
-
-namejava.lang.StringX
-V
- (
-namejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%1ê
-ç
- (
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*=
-
-__unknown_file (!
-
-displayNamejava.lang.String_
-]
- (
-displayNamejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%2
-}
- (
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*-
-
-__unknown_file (
-
-positionintO
-M
- (
-positionint"__annotation*"
-
-__unknown_file (
-
-%3ë
+0# +(ë
 é
- ($
-%4"
+. .(
+%0"
 __annotate*0
 
 __unknown_file (
@@ -552,17 +13,35 @@ __annotate*0
 
 __unknown_file ("
  
-iconResourcejava.lang.String`
+errorMessagejava.lang.String`
 ^
- ($ 
-iconResourcejava.lang.String"__annotation*"
+. .( 
+errorMessagejava.lang.String"__annotation*"
 
 __unknown_file (
 
-%4ç
+%0ö
+ó
+/ /(!
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onRetrykotlin.jvm.functions.Function0i
+g
+/ /(!)
+onRetrykotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1ç
 ä
- ( 
-%5"
+0 0(!
+%2"
 __annotate*0
 
 __unknown_file (
@@ -570,17 +49,35 @@ __annotate*0
 
 __unknown_file (
 
-colorHexjava.lang.String\
+modifierjava.lang.Object\
 Z
- ( 
-colorHexjava.lang.String"__annotation*"
+0 0(!
+modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%5Ö
+%2£
+†
+1 1(,
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+	errorType%com.smilepile.ui.components.ErrorTyper
+p
+1 1(,2
+	errorType%com.smilepile.ui.components.ErrorType"__annotation*"
+
+__unknown_file (
+
+%3Ö
 Ç
- ("
-%6"
+2 2(
+%4"
 __annotate*0
 
 __unknown_file (
@@ -588,139 +85,320 @@ __annotate*0
 
 __unknown_file (
 
-	isDefaultbooleanT
+	showRetrybooleanT
 R
- ("
-	isDefaultboolean"__annotation*"
+2 2(
+	showRetryboolean"__annotation*"
 
 __unknown_file (
 
-%6Å
-
-! "(4
-%7"
+%4"/
+
+__unknown_file (
+implicit return:,
+. .( 
+errorMessagejava.lang.String:5
+/ /(!)
+onRetrykotlin.jvm.functions.Function0:(
+0 0(!
+modifierjava.lang.Object:>
+1 1(,2
+	errorType%com.smilepile.ui.components.ErrorType: 
+2 2(
+	showRetrybooleanB"
+com.smilepile.ui.componentsH¬	
+lcom.smilepile.ui.components#CompactErrorState(Ljava/lang/String;Lkotlin/jvm/functions/Function0;LModifier;)Vr
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/ErrorStateComponents.ktr r("0*®
+0n p(ë
+é
+s s(
+%0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*/
-
-__unknown_file (
-
-	createdAtlongQ
-O
-! "(4
-	createdAtlong"__annotation*"
-
-__unknown_file (
-
-%7µ
-≤
- (
-
-%8long",com.smilepile.data.models.Category#setId(J)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*(
-
-__unknown_file (
-
-
-idlong‚
-ﬂ
- (
-%9java.lang.String"?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*6
-
-__unknown_file (
-
-namejava.lang.StringÒ
-Ó
- (
-%10java.lang.String"Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*=
-
-__unknown_file (!
-
-displayNamejava.lang.String¿
-Ω
- (
-
-%11int"2com.smilepile.data.models.Category#setPosition(I)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*-
-
-__unknown_file (
-
-positionintÛ
-
- ($
-%12java.lang.String"Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*>
+java.lang.Object*>
 
 __unknown_file ("
  
-iconResourcejava.lang.StringÎ
-Ë
- ( 
-%13java.lang.String"Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V*B
+errorMessagejava.lang.String`
+^
+s s( 
+errorMessagejava.lang.String"__annotation*"
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*:
+__unknown_file (
+
+%0ö
+ó
+t t(!
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onRetrykotlin.jvm.functions.Function0i
+g
+t t(!)
+onRetrykotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1ç
+ä
+u u(!
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
 
 __unknown_file (
 
-colorHexjava.lang.String 
-«
- ("
-%14boolean"3com.smilepile.data.models.Category#setIsDefault(Z)V*B
+modifierjava.lang.Object\
+Z
+u u(!
+modifierjava.lang.Object"__annotation*"
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*2
-
-__unknown_file (
-
-	isDefaultbooleanƒ
-¡
-! "(4
-%15long"3com.smilepile.data.models.Category#setCreatedAt(J)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*/
-
-__unknown_file (
-
-	createdAtlong"/
+__unknown_file (
+
+%2"/
 
 __unknown_file (
-implicit return:
- (
+implicit return:,
+s s( 
+errorMessagejava.lang.String:5
+t t(!)
+onRetrykotlin.jvm.functions.Function0:(
+u u(!
+modifierjava.lang.ObjectB"
+com.smilepile.ui.componentsH’
+åcom.smilepile.ui.components#ErrorBoundary(Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/ErrorStateComponents.ktô ô("0*˚
+0ï ó(ú
+ô
 
-idlong:$
- (
-namejava.lang.String:+
- (
-displayNamejava.lang.String:
- (
-positionint:,
- ($ 
-iconResourcejava.lang.String:(
- ( 
-colorHexjava.lang.String: 
- ("
-	isDefaultboolean:
-! "(4
-	createdAtlongB&$
-"com.smilepile.data.models.CategoryHú
-Scom.smilepile.data.models.Category$Companion#getDefaultCategories()Ljava/util/List;d
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt& &( "0*(
-0&  &(""
-&5 G(	
-	<unknown>B0".
-,com.smilepile.data.models.Category$CompanionH
+ö ö(%
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onErrorkotlin.jvm.functions.Function1k
+i
+
+ö ö(%)
+onErrorkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%0ù
+ö
+
+õ °(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*H
+
+__unknown_file (,
+*
+fallbackkotlin.jvm.functions.Function1l
+j
+
+õ °(*
+fallbackkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%1ú
+ô
+
+¢ ¢(#
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+contentkotlin.jvm.functions.Function0k
+i
+
+¢ ¢(#)
+contentkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2îë
+
+¶ ¶(
+%3kotlin.Unit"+kotlin.Function0#invoke()Ljava/lang/Object;*9
+
+¶ ¶(+
+)
+contentkotlin.jvm.functions.Function02invoke()"/
+
+__unknown_file (
+implicit return:7
+
+ö ö(%)
+onErrorkotlin.jvm.functions.Function1:8
+
+õ °(*
+fallbackkotlin.jvm.functions.Function1:7
+
+¢ ¢(#)
+contentkotlin.jvm.functions.Function0B"
+com.smilepile.ui.componentsHô
+Wcom.smilepile.ui.components#ImageLoadError(Lkotlin/jvm/functions/Function0;LModifier;)Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/ErrorStateComponents.kt≠ ≠("0*º
+0© ´(ú
+ô
+
+Æ Æ(!
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onRetrykotlin.jvm.functions.Function0k
+i
+
+Æ Æ(!)
+onRetrykotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+Ø Ø(!
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+Ø Ø(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:7
+
+Æ Æ(!)
+onRetrykotlin.jvm.functions.Function0:*
+
+Ø Ø(!
+modifierjava.lang.ObjectB"
+com.smilepile.ui.componentsH∆
+<com.smilepile.ui.components.ErrorType#getIcon()LImageVector;
+__unknown_file ("0*π
+0 (Ä
+~
+ (
+fieldjava.lang.Object"__id*Q
+ (E*C'
+%com.smilepile.ui.components.ErrorType"
+iconjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB)'
+%com.smilepile.ui.components.ErrorTypeH`Ê
+=com.smilepile.ui.components.ErrorType#setIcon(LImageVector;)V
+__unknown_file ("0*±
+0 (Ä
+~
+ (C'
+%com.smilepile.ui.components.ErrorType"
+iconjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB)'
+%com.smilepile.ui.components.ErrorTypeH`Õ
+Bcom.smilepile.ui.components.ErrorType#getTitle()Ljava/lang/String;
+__unknown_file ("0*∫
+0 (Å
+
+ (
+fieldjava.lang.String"__id*R
+ (F*D'
+%com.smilepile.ui.components.ErrorType"
+titlejava.lang.String"'
+ (
+
+fieldjava.lang.StringB)'
+%com.smilepile.ui.components.ErrorTypeH`Ì
+Ccom.smilepile.ui.components.ErrorType#setTitle(Ljava/lang/String;)V
+__unknown_file ("0*≤
+0 (Å
+
+ (D'
+%com.smilepile.ui.components.ErrorType"
+titlejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB)'
+%com.smilepile.ui.components.ErrorTypeH`·
+Ncom.smilepile.ui.components.ErrorType#<init>(LImageVector;Ljava/lang/String;)Vt
+h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/ErrorStateComponents.kt€ €("0*ó
+0
+€ ﬁ(Â
+‚
+
+‹ ‹(
+%0java.lang.Object"=com.smilepile.ui.components.ErrorType#setIcon(LImageVector;)V*E
+
+__unknown_file ()'
+%com.smilepile.ui.components.ErrorType*6
+
+__unknown_file (
+
+iconjava.lang.ObjectÏ
+È
+
+› ›(
+%1java.lang.String"Ccom.smilepile.ui.components.ErrorType#setTitle(Ljava/lang/String;)V*E
+
+__unknown_file ()'
+%com.smilepile.ui.components.ErrorType*7
+
+__unknown_file (
+
+titlejava.lang.String"/
+
+__unknown_file (
+implicit return:&
+
+‹ ‹(
+iconjava.lang.Object:'
+
+› ›(
+titlejava.lang.StringB)'
+%com.smilepile.ui.components.ErrorTypeH

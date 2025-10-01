@@ -1,594 +1,745 @@
-«
-$com.smilepile.MainActivity#<init>()V[
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt# ë("0*ö
-0# #(
-}
-$ $(%
-%0"/com.smilepile.security.SecureActivity#<init>()V*:
-
-__unknown_file (
-com.smilepile.MainActivitylj
-1* <(1
-%1+com.smilepile.MainActivity#<init>()V$class0"+com.smilepile.MainActivity#<init>()V$class0ã
-à
-1* <(
-%2"5com.smilepile.MainActivity#<init>()V$class0#<init>()V*?
-1* <(3
-1
-%1+com.smilepile.MainActivity#<init>()V$class0ﬁ
-€
-1 <(
-%3java.lang.Object"Jcom.smilepile.MainActivity#setKidsBackPressedCallback(Ljava/lang/Object;)V**
-1 <(
-com.smilepile.MainActivity*?
-1* <(3
-1
-%1+com.smilepile.MainActivity#<init>()V$class0"/
-
-__unknown_file (
-implicit returnB
-com.smilepile.MainActivityH`ç
-5com.smilepile.MainActivity#<init>()V$class0#<init>()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt1* <("0*>
-013 1(O"/
-
-__unknown_file (
-implicit returnB/-
-+com.smilepile.MainActivity#<init>()V$class0H`¶
-Bcom.smilepile.MainActivity#<init>()V$class0#handleOnBackPressed()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt2 2(("0*ù
-249 7(∏
-µ
-6 6(-
-%3java.lang.Object"Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V**
-6 6(-
-com.smilepile.MainActivity*
-6) 6(-
-trueN
-L
-
-__unknown_file (
-%2"__id*$
-6 6(-
-
-%3java.lang.Object*
-1*–
-37 :( 
-«
-9 9(2
-%4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;**
-9 9(
-com.smilepile.MainActivity£
-†
-9 9(/
-%5kotlin.Unit"?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()V*@
-9 9(4
-2
-%4,com.smilepile.ui.viewmodels.AppModeViewModelI
-G
-
-__unknown_file (
-%2"__id*
-9 9(/
-
-%5kotlin.Unit*
-1*ò
-02 2(€
-ÿ
-4 4((5
-%0/com.smilepile.security.SecurePreferencesManager"icom.smilepile.MainActivity#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;**
-4 4((
-com.smilepile.MainActivity¢
-ü
-4) 4(7
-%1boolean"?com.smilepile.security.SecurePreferencesManager#isPINEnabled()Z*C
-4 4((7
-5
-%0/com.smilepile.security.SecurePreferencesManager*
-2
-3*>
-1: ;("/
-
-__unknown_file (
-implicit returnB/-
-+com.smilepile.MainActivity#<init>()V$class0H≈
-icom.smilepile.MainActivity#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;
-__unknown_file ("0*ñ
-0 (»
-≈
- (8
-field/com.smilepile.security.SecurePreferencesManager"__id*y
- (m*k
-com.smilepile.MainActivity"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManagerâ
-Ü
- (
+∞
+ácom.smilepile.ui.components.shared#PhotoGalleryEmptyState(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;LModifier;Z)Vx
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.kt- -("0*¥
+0) +(†
+ù
+. .(
 %0"
-__annotate* 
- (
-java.lang.Object*F
- (:
-8
-field/com.smilepile.security.SecurePreferencesManagerh
-f
- (8
-field/com.smilepile.security.SecurePreferencesManager"__annotation*
- (
-
-%0"F
- (:
-8
-field/com.smilepile.security.SecurePreferencesManagerB
-com.smilepile.MainActivityH`Â
-jcom.smilepile.MainActivity#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V
-__unknown_file ("0*Ô
-0 (â
-Ü
- (
-%0"
-__annotate* 
- (
-java.lang.Object*F
- (:
-8
-value/com.smilepile.security.SecurePreferencesManagerh
-f
- (8
-value/com.smilepile.security.SecurePreferencesManager"__annotation*
- (
-
-%0»
-≈
- (k
-com.smilepile.MainActivity"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__id*F
- (:
-8
-value/com.smilepile.security.SecurePreferencesManager"
- (
-implicit return:D
- (8
-value/com.smilepile.security.SecurePreferencesManagerB
-com.smilepile.MainActivityH`—
-Ncom.smilepile.MainActivity#getThemeManager()Lcom/smilepile/theme/ThemeManager;
-__unknown_file ("0*Ω
-0 (û
-õ
- ()
-field com.smilepile.theme.ThemeManager"__id*^
- (R*P
-com.smilepile.MainActivity"0
-themeManager com.smilepile.theme.ThemeManagery
-w
- (
-%0"
-__annotate* 
- (
-java.lang.Object*7
- (+
-)
-field com.smilepile.theme.ThemeManagerY
-W
- ()
-field com.smilepile.theme.ThemeManager"__annotation*
- (
-
-%0"7
- (+
-)
-field com.smilepile.theme.ThemeManagerB
-com.smilepile.MainActivityH`Ò
-Ocom.smilepile.MainActivity#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
-__unknown_file ("0*•
-0 (y
-w
- (
-%0"
-__annotate* 
- (
-java.lang.Object*7
- (+
-)
-value com.smilepile.theme.ThemeManagerY
-W
- ()
-value com.smilepile.theme.ThemeManager"__annotation*
- (
-
-%0û
-õ
- (P
-com.smilepile.MainActivity"0
-themeManager com.smilepile.theme.ThemeManager"__id*7
- (+
-)
-value com.smilepile.theme.ThemeManager"
- (
-implicit return:5
- ()
-value com.smilepile.theme.ThemeManagerB
-com.smilepile.MainActivityH`ß
-Zcom.smilepile.MainActivity#getThemeViewModel()Lcom/smilepile/ui/viewmodels/ThemeViewModel;
-__unknown_file ("0*á
-0 (¥
-±
- (3
-field*com.smilepile.ui.viewmodels.ThemeViewModel"__id*j
- (^*\
-com.smilepile.MainActivity"<
-themeViewModel*com.smilepile.ui.viewmodels.ThemeViewModel"A
- (5
-3
-field*com.smilepile.ui.viewmodels.ThemeViewModelB
-com.smilepile.MainActivityH`«
-[com.smilepile.MainActivity#setThemeViewModel(Lcom/smilepile/ui/viewmodels/ThemeViewModel;)V
-__unknown_file ("0*Â
-0 (¥
-±
- (\
-com.smilepile.MainActivity"<
-themeViewModel*com.smilepile.ui.viewmodels.ThemeViewModel"__id*A
- (5
-3
-value*com.smilepile.ui.viewmodels.ThemeViewModel"
- (
-implicit return:?
- (3
-value*com.smilepile.ui.viewmodels.ThemeViewModelB
-com.smilepile.MainActivityH`≠
-[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;
-__unknown_file ("0*å
-0 (∑
-¥
- (5
-field,com.smilepile.ui.viewmodels.AppModeViewModel"__id*k
- (_*]
-com.smilepile.MainActivity"=
-modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"C
- (7
-5
-field,com.smilepile.ui.viewmodels.AppModeViewModelB
-com.smilepile.MainActivityH`Õ
-\com.smilepile.MainActivity#setModeViewModel(Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V
-__unknown_file ("0*Ë
-0 (∑
-¥
- (]
-com.smilepile.MainActivity"=
-modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*C
- (7
-5
-value,com.smilepile.ui.viewmodels.AppModeViewModel"
- (
-implicit return:A
- (5
-value,com.smilepile.ui.viewmodels.AppModeViewModelB
-com.smilepile.MainActivityH`’
-Ncom.smilepile.MainActivity#getShowKidsModeExitDialog()Lerror/NonExistentClass;
-__unknown_file ("0*¡
-0 (à
-Ö
- (
-fieldjava.lang.Object"__id*X
- (L*J
-com.smilepile.MainActivity"*
-showKidsModeExitDialogjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB
-com.smilepile.MainActivityH`ı
-Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V
-__unknown_file ("0*π
-0 (à
-Ö
- (J
-com.smilepile.MainActivity"*
-showKidsModeExitDialogjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB
-com.smilepile.MainActivityH`—
-Icom.smilepile.MainActivity#getKidsBackPressedCallback()Ljava/lang/Object;
-__unknown_file ("0*¬
-0 (â
-Ü
- (
-fieldjava.lang.Object"__id*Y
- (M*K
-com.smilepile.MainActivity"+
-kidsBackPressedCallbackjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB
-com.smilepile.MainActivityH`Ò
-Jcom.smilepile.MainActivity#setKidsBackPressedCallback(Ljava/lang/Object;)V
-__unknown_file ("0*∫
-0 (â
-Ü
- (K
-com.smilepile.MainActivity"+
-kidsBackPressedCallbackjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB
-com.smilepile.MainActivityH`ì
-.com.smilepile.MainActivity#onCreate(LBundle;)V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt> >("0*©
-0> >(v
-t
-? ?(+
-%0%com.smilepile.security.SecureActivity"__id*5
-? ?()'
-%com.smilepile.security.SecureActivityÌ
-? ?(*
-%1kotlin.Unit"9com.smilepile.security.SecureActivity#onCreate(LBundle;)V*I
+__annotate*0
 
-__unknown_file (-
-+
-%0%com.smilepile.security.SecureActivity*4
-? ?()(
-&
-savedInstanceStatejava.lang.Object2onCreate(LBundle;)"/
+__unknown_file (
+java.lang.Object*M
 
-__unknown_file (
-implicit return:2
-> >(5&
-savedInstanceStatejava.lang.ObjectB
-com.smilepile.MainActivityHŸ
-Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktd d("0*©
-2i] o(	a
-_
-j j(>"
-statusBarColorjava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>i
-g
-m m(_*
-windowInsetsControllerjava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>|
-z
-nA n(L
-%3boolean"kotlin.Boolean#not()Z*#
-nB n(L
-
-
-isDarkModeboolean*#
-nB n(L
-
-
-isDarkModeboolean`
-^
-n n(L/
-isAppearanceLightStatusBarsjava.lang.Object"__id*
-nA n(L
-
-%3booleang
-e
-
-__unknown_file (
-%2"__id*=
-n# n(>1
+__unknown_file (1
 /
-isAppearanceLightStatusBarsjava.lang.Object*
-1*>
-3~	 ("/
+onImportClickkotlin.jvm.functions.Function0o
+m
+. .(/
+onImportClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0†
+ù
+/ /(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*M
+
+__unknown_file (1
+/
+onCameraClickkotlin.jvm.functions.Function0o
+m
+/ /(/
+onCameraClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1ç
+ä
+0 0(!
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+0 0(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%2á
+Ñ
+1 1(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*4
+
+__unknown_file (
+
+isFirstTimebooleanV
+T
+1 1(
+isFirstTimeboolean"__annotation*"
+
+__unknown_file (
+
+%3"/
 
 __unknown_file (
-implicit return*“
-4r) z(	i
-g
-s s(_*
-windowInsetsControllerjava.lang.Object"__id*)
+implicit return:;
+. .(/
+onImportClickkotlin.jvm.functions.Function0:;
+/ /(/
+onCameraClickkotlin.jvm.functions.Function0:(
+0 0(!
+modifierjava.lang.Object:"
+1 1(
+isFirstTimebooleanB&"$
+"com.smilepile.ui.components.sharedHÉ
+îcom.smilepile.ui.components.shared#CategoryEmptyState(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;LModifier;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.kté é("0*‚
+0ä å(ì
+ê
+
+è è(
+%0"
+__annotate*0
 
-__unknown_file (
-	<unknown>S
-Q
+__unknown_file (
+java.lang.Object*>
 
-__unknown_file (
-%5"__id*)
+__unknown_file ("
+ 
+categoryNamejava.lang.Stringb
+`
+
+è è( 
+categoryNamejava.lang.String"__annotation*"
 
-__unknown_file (
-	<unknown>*
-3*“
-5z ~(	i
-g
-| |(_*
-windowInsetsControllerjava.lang.Object"__id*)
+__unknown_file (
+
+%0§
+°
+
+ê ê(
+%1"
+__annotate*0
 
-__unknown_file (
-	<unknown>S
-Q
+__unknown_file (
+java.lang.Object*O
 
-__unknown_file (
-%5"__id*)
+__unknown_file (3
+1
+onAddToCategorykotlin.jvm.functions.Function0s
+q
+
+ê ê(1
+onAddToCategorykotlin.jvm.functions.Function0"__annotation*"
 
-__unknown_file (
-	<unknown>*
-3*Œ
-0d d(≤
-Ø
-i i()
-%0boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*7
-i i(+
-)
-currentModecom.smilepile.mode.AppMode*2
-i# i()&
-$
-PARENTcom.smilepile.mode.AppModeÅ
-
-i- i([
-%1"	__compare*
-iC i(E
->=*)
-i; i(B
-
-SDK_INTjava.lang.Object*#
-iZ i([
+__unknown_file (
+
+%1§
+°
+
+ë ë(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+onViewAllPhotoskotlin.jvm.functions.Function0s
+q
+
+ë ë(1
+onViewAllPhotoskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2è
+å
+
+í í(!
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+í í(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%3"/
+
+__unknown_file (
+implicit return:.
+
+è è( 
+categoryNamejava.lang.String:?
+
+ê ê(1
+onAddToCategorykotlin.jvm.functions.Function0:?
+
+ë ë(1
+onViewAllPhotoskotlin.jvm.functions.Function0:*
+
+í í(!
+modifierjava.lang.ObjectB&"$
+"com.smilepile.ui.components.sharedHƒ
+´com.smilepile.ui.components.shared#EnhancedEmptySearchState(Ljava/lang/String;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;LModifier;Ljava/util/List;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.ktÃ Ã("0*∫
+0»  (í
+è
+
+Õ Õ(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+searchQueryjava.lang.Stringa
+_
+
+Õ Õ(
+searchQueryjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0à
+Ö
+
+Œ Œ(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*3
+
+__unknown_file (
 
-Mjava.lang.Object*
-2
-1*»
-1o	 q(∞
-≠
-r r('
-%4boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*7
-r r(+
-)
-currentModecom.smilepile.mode.AppMode*0
-r# r('$
-"
-KIDScom.smilepile.mode.AppMode*
-4
-5:!
-d d(1
 
-isDarkModeboolean:5
-d3 d(G)
-currentModecom.smilepile.mode.AppModeB
-com.smilepile.MainActivityH„
-3com.smilepile.MainActivity#onWindowFocusChanged(Z)V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktÇ Ç(%"0*´
+hasFiltersbooleanW
+U
 
-2
-Ñ â(	À
-»
+Œ Œ(
 
-Ü Ü(+0
-%2*com.smilepile.ui.viewmodels.ThemeViewModel"Zcom.smilepile.MainActivity#getThemeViewModel()Lcom/smilepile/ui/viewmodels/ThemeViewModel;*,
+hasFiltersboolean"__annotation*"
+
+__unknown_file (
+
+%1£
+†
 
-Ü Ü(+
-com.smilepile.MainActivity≠
-™
-
-Ü, Ü(6
-%3java.lang.Object"Bcom.smilepile.ui.viewmodels.ThemeViewModel#isDarkMode()LStateFlow;*@
-
-Ü Ü(+2
+œ œ(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
 0
-%2*com.smilepile.ui.viewmodels.ThemeViewModel_
+onClearFilterskotlin.jvm.functions.Function0r
+p
+
+œ œ(0
+onClearFilterskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2¶
+£
+
+– –(,
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*Q
+
+__unknown_file (5
+3
+onSuggestedSearchkotlin.jvm.functions.Function1u
+s
+
+– –(,3
+onSuggestedSearchkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%3è
+å
+
+— —(!
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+— —(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%4ê
+ç
+
+“ “(J
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*;
+
+__unknown_file (
+
+suggestionsjava.util.List_
 ]
 
-Ü Ü(<
+“ “(J
+suggestionsjava.util.List"__annotation*"
+
+__unknown_file (
+
+%5"/
+
+__unknown_file (
+implicit return:-
 
-isDarkModejava.lang.Object"__id*)
+Õ Õ(
+searchQueryjava.lang.String:#
 
-Ü7 Ü(<
+Œ Œ(
+
+hasFiltersboolean:>
+
+œ œ(0
+onClearFilterskotlin.jvm.functions.Function0:A
+
+– –(,3
+onSuggestedSearchkotlin.jvm.functions.Function1:*
+
+— —(!
+modifierjava.lang.Object:+
+
+“ “(J
+suggestionsjava.util.ListB&"$
+"com.smilepile.ui.components.sharedHÿ
+
+äcom.smilepile.ui.components.shared#PermissionDeniedEmptyState(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;LModifier;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.któ ó("0*Ó
+0ì ï(®
+•
+
+ò ò(#
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*S
+
+__unknown_file (7
+5
+onRequestPermissionkotlin.jvm.functions.Function0w
+u
+
+ò ò(#5
+onRequestPermissionkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0£
+†
+
+ô ô(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*N
+
+__unknown_file (2
+0
+onOpenSettingskotlin.jvm.functions.Function0r
+p
+
+ô ô(0
+onOpenSettingskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1è
+å
+
+ö ö(!
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+ö ö(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:C
+
+ò ò(#5
+onRequestPermissionkotlin.jvm.functions.Function0:>
+
+ô ô(0
+onOpenSettingskotlin.jvm.functions.Function0:*
+
+ö ö(!
+modifierjava.lang.ObjectB&"$
+"com.smilepile.ui.components.sharedHµ
+fcom.smilepile.ui.components.shared#NetworkErrorEmptyState(Lkotlin/jvm/functions/Function0;LModifier;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.ktŸ Ÿ("0*º
+0’ ◊(ú
+ô
+
+⁄ ⁄(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onRetrykotlin.jvm.functions.Function0k
+i
+
+⁄ ⁄()
+onRetrykotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+€ €(!
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+€ €(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:7
+
+⁄ ⁄()
+onRetrykotlin.jvm.functions.Function0:*
+
+€ €(!
+modifierjava.lang.ObjectB&"$
+"com.smilepile.ui.components.sharedHÎ
+‹com.smilepile.ui.components.shared#GenericEmptyState(LImageVector;Ljava/lang/String;Ljava/lang/String;Lcom/smilepile/ui/components/shared/EmptyStateAction;Lcom/smilepile/ui/components/shared/EmptyStateAction;LModifier;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.ktÖ Ö("0*ä
+0Å É(ã
+à
+
+Ü Ü(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+iconjava.lang.ObjectZ
+X
+
+Ü Ü(
+iconjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0å
+â
+
+á á(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
 
-valuejava.lang.ObjectŒ
-À
+titlejava.lang.String[
+Y
 
-á á(+2
-%4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;*,
-
-á á(+
-com.smilepile.MainActivity±
-Æ
-
-á, á(3
-%5java.lang.Object"Dcom.smilepile.ui.viewmodels.AppModeViewModel#getUiState()LStateFlow;*B
-
-á á(+4
-2
-%4,com.smilepile.ui.viewmodels.AppModeViewModelf
-d
-
-á á(E
-currentModejava.lang.Object"__id*/
-
-á: á(E!
-
-currentModejava.lang.Object˚
-¯
-
-à à(2
-%6kotlin.Unit"Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V*,
-
-à à(2
-com.smilepile.MainActivity*.
-
-à à($ 
-
-
-isDarkModejava.lang.Object*/
-
-à& à(1!
-
-currentModejava.lang.ObjectK
-I
+á á(
+titlejava.lang.String"__annotation*"
 
-__unknown_file (
-%1"__id*!
+__unknown_file (
+
+%1í
+è
 
-à à(2
-
-%6kotlin.Unit*
-1*ì
-0
-Ç Ç(z
-x
+à à(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+descriptionjava.lang.Stringa
+_
 
-É É(+
-%0%com.smilepile.security.SecureActivity"__id*7
+à à(
+descriptionjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%2∑
+¥
 
-É É()'
-%com.smilepile.security.SecureActivity*
-2
-1*@
-1
-â	 ä("/
+â â(+
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*b
+
+__unknown_file (F
+D
+primaryAction3com.smilepile.ui.components.shared.EmptyStateActioná
+Ñ
+
+â â(+D
+primaryAction3com.smilepile.ui.components.shared.EmptyStateAction"__annotation*"
+
+__unknown_file (
+
+%3π
+∂
+
+ä ä(-
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*d
+
+__unknown_file (H
+F
+secondaryAction3com.smilepile.ui.components.shared.EmptyStateActionâ
+Ü
+
+ä ä(-F
+secondaryAction3com.smilepile.ui.components.shared.EmptyStateAction"__annotation*"
+
+__unknown_file (
+
+%4è
+å
+
+ã ã(!
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+ã ã(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%5"/
 
 __unknown_file (
-implicit return:!
+implicit return:&
 
-Ç& Ç(7
-hasFocusbooleanB
-com.smilepile.MainActivityH≈
-Ccom.smilepile.MainActivity#onConfigurationChanged(LConfiguration;)V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktå å('"0*À
+Ü Ü(
+iconjava.lang.Object:'
+
+á á(
+titlejava.lang.String:-
+
+à à(
+descriptionjava.lang.String:R
+
+â â(+D
+primaryAction3com.smilepile.ui.components.shared.EmptyStateAction:T
+
+ä ä(-F
+secondaryAction3com.smilepile.ui.components.shared.EmptyStateAction:*
+
+ã ã(!
+modifierjava.lang.ObjectB&"$
+"com.smilepile.ui.components.sharedHˆ
+Ocom.smilepile.ui.components.shared.EmptyStateAction#getText()Ljava/lang/String;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.String"__id*_
+ (S*Q5
+3com.smilepile.ui.components.shared.EmptyStateAction"
+textjava.lang.String"'
+ (
+
+fieldjava.lang.StringB75
+3com.smilepile.ui.components.shared.EmptyStateActionH`ñ
+Pcom.smilepile.ui.components.shared.EmptyStateAction#setText(Ljava/lang/String;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q5
+3com.smilepile.ui.components.shared.EmptyStateAction"
+textjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB75
+3com.smilepile.ui.components.shared.EmptyStateActionH`¥
+`com.smilepile.ui.components.shared.EmptyStateAction#getOnClick()Lkotlin/jvm/functions/Function0;
+__unknown_file ("0*ı
+0 (Æ
+´
+ ('
+fieldkotlin.jvm.functions.Function0"__id*p
+ (d*b5
+3com.smilepile.ui.components.shared.EmptyStateAction")
+onClickkotlin.jvm.functions.Function0"5
+ ()
+'
+fieldkotlin.jvm.functions.Function0B75
+3com.smilepile.ui.components.shared.EmptyStateActionH`‘
+acom.smilepile.ui.components.shared.EmptyStateAction#setOnClick(Lkotlin/jvm/functions/Function0;)V
+__unknown_file ("0*ﬂ
+0 (Æ
+´
+ (b5
+3com.smilepile.ui.components.shared.EmptyStateAction")
+onClickkotlin.jvm.functions.Function0"__id*5
+ ()
+'
+valuekotlin.jvm.functions.Function0"
+ (
+implicit return:3
+ ('
+valuekotlin.jvm.functions.Function0B75
+3com.smilepile.ui.components.shared.EmptyStateActionH`Ò
+Jcom.smilepile.ui.components.shared.EmptyStateAction#getIcon()LImageVector;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q5
+3com.smilepile.ui.components.shared.EmptyStateAction"
+iconjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB75
+3com.smilepile.ui.components.shared.EmptyStateActionH`ë
+Kcom.smilepile.ui.components.shared.EmptyStateAction#setIcon(LImageVector;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q5
+3com.smilepile.ui.components.shared.EmptyStateAction"
+iconjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB75
+3com.smilepile.ui.components.shared.EmptyStateActionH` 
+
+|com.smilepile.ui.components.shared.EmptyStateAction#<init>(Ljava/lang/String;Lkotlin/jvm/functions/Function0;LImageVector;)Vz
+n/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/shared/EmptyStateComponent.ktÕ Õ("0*Ü
 0
-å å(z
-x
+Õ —(Ü
+É
 
-ç ç(+
-%0%com.smilepile.security.SecureActivity"__id*7
+Œ Œ(
+%0java.lang.String"Pcom.smilepile.ui.components.shared.EmptyStateAction#setText(Ljava/lang/String;)V*S
+
+__unknown_file (75
+3com.smilepile.ui.components.shared.EmptyStateAction*6
+
+__unknown_file (
+
+textjava.lang.String∂
+≥
 
-ç ç()'
-%com.smilepile.security.SecureActivityµ
-≤
+œ œ($
+%1kotlin.jvm.functions.Function0"acom.smilepile.ui.components.shared.EmptyStateAction#setOnClick(Lkotlin/jvm/functions/Function0;)V*S
+
+__unknown_file (75
+3com.smilepile.ui.components.shared.EmptyStateAction*G
+
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0Å
+˛
 
-è è(&
-%1 com.smilepile.theme.ThemeManager"Ncom.smilepile.MainActivity#getThemeManager()Lcom/smilepile/theme/ThemeManager;*,
-
-è è(
-com.smilepile.MainActivity‘
-—
-
-è è(6
-%2kotlin.Unit"Icom.smilepile.theme.ThemeManager#onConfigurationChanged(LConfiguration;)V*6
-
-è è((
-&
-%1 com.smilepile.theme.ThemeManager*-
-
-è, è(5
-
-	newConfigjava.lang.Object"/
+– –(!
+%2java.lang.Object"Kcom.smilepile.ui.components.shared.EmptyStateAction#setIcon(LImageVector;)V*S
+
+__unknown_file (75
+3com.smilepile.ui.components.shared.EmptyStateAction*6
+
+__unknown_file (
+
+iconjava.lang.Object"/
 
 __unknown_file (
-implicit return:+
+implicit return:&
 
-å( å(@
-	newConfigjava.lang.ObjectB
-com.smilepile.MainActivityH
+Œ Œ(
+textjava.lang.String:7
+
+œ œ()
+onClickkotlin.jvm.functions.Function0:&
+
+– –(!
+iconjava.lang.ObjectB75
+3com.smilepile.ui.components.shared.EmptyStateActionH
