@@ -109,31 +109,10 @@ class CategoryViewModel @Inject constructor(
             try {
                 _isLoading.value = true
 
-                if (displayName.isBlank()) {
-                    _error.value = "Category name cannot be empty"
-                    return@launch
-                }
+                if (!validateCategoryName(displayName)) return@launch
+                if (!checkForDuplicateName(displayName)) return@launch
 
-                // Check for duplicate display names
-                val normalizedName = displayName.trim().lowercase().replace(" ", "_")
-                val existingCategory = categoryRepository.getCategoryByName(normalizedName)
-                if (existingCategory != null) {
-                    _error.value = "Category '$displayName' already exists"
-                    return@launch
-                }
-
-                // Get the next position
-                val categories = categoryRepository.getAllCategories()
-                val nextPosition = (categories.maxOfOrNull { it.position } ?: -1) + 1
-
-                val newCategory = Category(
-                    name = displayName.trim().lowercase().replace(" ", "_"), // Auto-generate normalized name
-                    displayName = displayName.trim(),
-                    position = nextPosition,
-                    colorHex = colorHex,
-                    isDefault = false
-                )
-
+                val newCategory = createNewCategory(displayName, colorHex)
                 categoryRepository.insertCategory(newCategory)
                 hideDialog()
                 refreshCategoriesWithCounts()
@@ -145,28 +124,53 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
+    private fun validateCategoryName(displayName: String): Boolean {
+        if (displayName.isBlank()) {
+            _error.value = "Category name cannot be empty"
+            return false
+        }
+        return true
+    }
+
+    private suspend fun checkForDuplicateName(displayName: String, excludeId: Long? = null): Boolean {
+        val normalizedName = normalizeDisplayName(displayName)
+        val existingCategory = categoryRepository.getCategoryByName(normalizedName)
+        if (existingCategory != null && existingCategory.id != excludeId) {
+            _error.value = "Category '$displayName' already exists"
+            return false
+        }
+        return true
+    }
+
+    private fun normalizeDisplayName(displayName: String): String {
+        return displayName.trim().lowercase().replace(" ", "_")
+    }
+
+    private suspend fun createNewCategory(displayName: String, colorHex: String): Category {
+        val categories = categoryRepository.getAllCategories()
+        val nextPosition = (categories.maxOfOrNull { it.position } ?: -1) + 1
+
+        return Category(
+            name = normalizeDisplayName(displayName),
+            displayName = displayName.trim(),
+            position = nextPosition,
+            colorHex = colorHex,
+            isDefault = false
+        )
+    }
+
     fun updateCategory(category: Category, displayName: String, colorHex: String) {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
 
-                if (displayName.isBlank()) {
-                    _error.value = "Category name cannot be empty"
-                    return@launch
-                }
-
-                // Check for duplicate display names (only if changed)
+                if (!validateCategoryName(displayName)) return@launch
                 if (displayName.trim() != category.displayName) {
-                    val normalizedName = displayName.trim().lowercase().replace(" ", "_")
-                    val existingCategory = categoryRepository.getCategoryByName(normalizedName)
-                    if (existingCategory != null && existingCategory.id != category.id) {
-                        _error.value = "Category '$displayName' already exists"
-                        return@launch
-                    }
+                    if (!checkForDuplicateName(displayName, category.id)) return@launch
                 }
 
                 val updatedCategory = category.copy(
-                    name = displayName.trim().lowercase().replace(" ", "_"), // Auto-generate normalized name
+                    name = normalizeDisplayName(displayName),
                     displayName = displayName.trim(),
                     colorHex = colorHex
                 )
