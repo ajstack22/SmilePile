@@ -184,45 +184,58 @@ class BackupViewModel @Inject constructor(
             _uiState.update { it.copy(isRestoreInProgress = true, lastError = null) }
 
             try {
-                restoreManager.restoreFromBackup(
-                    backupFile = backupFile,
-                    options = options,
-                    progressCallback = { current, total, operation ->
-                        _restoreProgress.value = ImportProgress(total, current, operation)
-                    }
-                ).collect { progress ->
-                    _restoreProgress.value = progress
-
-                    // Check if restore completed
-                    if (progress.currentOperation.contains("completed", ignoreCase = true)) {
-                        _uiState.update {
-                            it.copy(
-                                isRestoreInProgress = false,
-                                restoreSuccess = true,
-                                lastRestoreTime = System.currentTimeMillis()
-                            )
-                        }
-                    } else if (progress.currentOperation.contains("failed", ignoreCase = true)) {
-                        _uiState.update {
-                            it.copy(
-                                isRestoreInProgress = false,
-                                restoreSuccess = false,
-                                lastError = progress.errors.firstOrNull()
-                            )
-                        }
-                    }
-                }
+                executeRestoreOperation(backupFile, options)
             } catch (e: Exception) {
-                _uiState.update {
-                    it.copy(
-                        isRestoreInProgress = false,
-                        lastError = e.message,
-                        restoreSuccess = false
-                    )
-                }
+                handleRestoreError(e)
             } finally {
                 _restoreProgress.value = null
             }
+        }
+    }
+
+    private suspend fun executeRestoreOperation(backupFile: File, options: RestoreOptions) {
+        restoreManager.restoreFromBackup(
+            backupFile = backupFile,
+            options = options,
+            progressCallback = { current, total, operation ->
+                _restoreProgress.value = ImportProgress(total, current, operation)
+            }
+        ).collect { progress ->
+            _restoreProgress.value = progress
+            handleRestoreProgress(progress)
+        }
+    }
+
+    private fun handleRestoreProgress(progress: ImportProgress) {
+        when {
+            progress.currentOperation.contains("completed", ignoreCase = true) -> {
+                _uiState.update {
+                    it.copy(
+                        isRestoreInProgress = false,
+                        restoreSuccess = true,
+                        lastRestoreTime = System.currentTimeMillis()
+                    )
+                }
+            }
+            progress.currentOperation.contains("failed", ignoreCase = true) -> {
+                _uiState.update {
+                    it.copy(
+                        isRestoreInProgress = false,
+                        restoreSuccess = false,
+                        lastError = progress.errors.firstOrNull()
+                    )
+                }
+            }
+        }
+    }
+
+    private fun handleRestoreError(e: Exception) {
+        _uiState.update {
+            it.copy(
+                isRestoreInProgress = false,
+                lastError = e.message,
+                restoreSuccess = false
+            )
         }
     }
 
