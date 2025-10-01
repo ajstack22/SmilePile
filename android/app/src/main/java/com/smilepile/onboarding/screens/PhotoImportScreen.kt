@@ -39,6 +39,62 @@ fun PhotoImportScreen(
     var localPhotos by remember { mutableStateOf(importedPhotos) }
     val maxPhotos = 5
 
+    val photoHandlers = rememberPhotoHandlers(
+        localPhotos = localPhotos,
+        maxPhotos = maxPhotos,
+        categories = categories,
+        onPhotosUpdated = { newPhotos ->
+            localPhotos = newPhotos
+            onPhotosSelected(newPhotos)
+        }
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        PhotoImportHeader(maxPhotos = maxPhotos)
+
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            if (localPhotos.isEmpty()) {
+                EmptyPhotoState(onSelectPhotos = photoHandlers.onSelectPhotos)
+            } else {
+                PhotoGridContent(
+                    localPhotos = localPhotos,
+                    maxPhotos = maxPhotos,
+                    categories = categories,
+                    photoHandlers = photoHandlers
+                )
+            }
+        }
+
+        ContinueButton(
+            isEmpty = localPhotos.isEmpty(),
+            onContinue = onContinue
+        )
+    }
+}
+
+// MARK: - Helper Data Classes and Functions
+
+private data class PhotoHandlers(
+    val onSelectPhotos: () -> Unit,
+    val onCategoryChanged: (ImportedPhotoData, String?) -> Unit,
+    val onRemovePhoto: (ImportedPhotoData) -> Unit
+)
+
+@Composable
+private fun rememberPhotoHandlers(
+    localPhotos: List<ImportedPhotoData>,
+    maxPhotos: Int,
+    categories: List<TempCategory>,
+    onPhotosUpdated: (List<ImportedPhotoData>) -> Unit
+): PhotoHandlers {
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents()
     ) { uris ->
@@ -48,181 +104,205 @@ fun PhotoImportScreen(
                 categoryId = categories.firstOrNull()?.id
             )
         }
-        localPhotos = localPhotos + newPhotos
-        onPhotosSelected(localPhotos)
+        onPhotosUpdated(localPhotos + newPhotos)
     }
 
+    return remember(localPhotos, onPhotosUpdated) {
+        PhotoHandlers(
+            onSelectPhotos = { launcher.launch("image/*") },
+            onCategoryChanged = { photo, categoryId ->
+                val updatedPhotos = localPhotos.map {
+                    if (it.uri == photo.uri) it.copy(categoryId = categoryId) else it
+                }
+                onPhotosUpdated(updatedPhotos)
+            },
+            onRemovePhoto = { photo ->
+                onPhotosUpdated(localPhotos.filter { it.uri != photo.uri })
+            }
+        )
+    }
+}
+
+// MARK: - Composable Components
+
+@Composable
+private fun PhotoImportHeader(maxPhotos: Int) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+        modifier = Modifier.padding(bottom = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Instructions
-        Column(
-            modifier = Modifier.padding(bottom = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Add Your First Photos",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+        Text(
+            text = "Add Your First Photos",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
 
-            Text(
-                text = "Select up to $maxPhotos photos to get started",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
+        Text(
+            text = "Select up to $maxPhotos photos to get started",
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center
+        )
 
-            Text(
-                text = "You can always add more later",
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-        }
+        Text(
+            text = "You can always add more later",
+            fontSize = 12.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 4.dp)
+        )
+    }
+}
 
-        Box(
+@Composable
+private fun EmptyPhotoState(onSelectPhotos: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            imageVector = Icons.Default.PhotoLibrary,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp),
+            tint = Color.Gray.copy(alpha = 0.3f)
+        )
+
+        Text(
+            text = "No photos selected yet",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+
+        Button(
+            onClick = onSelectPhotos,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2196F3)
+            ),
             modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
+                .width(200.dp)
+                .height(48.dp)
         ) {
-            if (localPhotos.isEmpty()) {
-                // Empty state
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.PhotoLibrary,
-                        contentDescription = null,
-                        modifier = Modifier.size(80.dp),
-                        tint = Color.Gray.copy(alpha = 0.3f)
-                    )
+            Icon(
+                Icons.Default.Photo,
+                contentDescription = null,
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Text("Select Photos")
+        }
+    }
+}
 
-                    Text(
-                        text = "No photos selected yet",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(vertical = 16.dp)
-                    )
-
-                    Button(
-                        onClick = { launcher.launch("image/*") },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF2196F3)
-                        ),
-                        modifier = Modifier
-                            .width(200.dp)
-                            .height(48.dp)
-                    ) {
-                        Icon(
-                            Icons.Default.Photo,
-                            contentDescription = null,
-                            modifier = Modifier.padding(end = 8.dp)
-                        )
-                        Text("Select Photos")
-                    }
-                }
-            } else {
-                // Photos grid
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    LazyVerticalGrid(
-                        columns = GridCells.Fixed(3),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        items(localPhotos) { photo ->
-                            PhotoThumbnail(
-                                photo = photo,
-                                categories = categories,
-                                onCategoryChanged = { categoryId ->
-                                    localPhotos = localPhotos.map {
-                                        if (it.uri == photo.uri) {
-                                            it.copy(categoryId = categoryId)
-                                        } else it
-                                    }
-                                    onPhotosSelected(localPhotos)
-                                },
-                                onRemove = {
-                                    localPhotos = localPhotos.filter { it.uri != photo.uri }
-                                    onPhotosSelected(localPhotos)
-                                }
-                            )
-                        }
-                    }
-
-                    // Add more photos button
-                    if (localPhotos.size < maxPhotos) {
-                        OutlinedButton(
-                            onClick = { launcher.launch("image/*") },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Icon(
-                                Icons.Default.Add,
-                                contentDescription = null,
-                                modifier = Modifier.padding(end = 8.dp)
-                            )
-                            Text("Add More Photos (${localPhotos.size}/$maxPhotos)")
-                        }
-                    }
-
-                    // Category assignment reminder
-                    if (localPhotos.any { it.categoryId == null }) {
-                        Card(
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
-                            )
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(12.dp),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    Icons.Default.Info,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                                Text(
-                                    text = "Tap photos to assign categories",
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-                    }
-                }
+@Composable
+private fun PhotoGridContent(
+    localPhotos: List<ImportedPhotoData>,
+    maxPhotos: Int,
+    categories: List<TempCategory>,
+    photoHandlers: PhotoHandlers
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.weight(1f)
+        ) {
+            items(localPhotos) { photo ->
+                PhotoThumbnail(
+                    photo = photo,
+                    categories = categories,
+                    onCategoryChanged = { categoryId ->
+                        photoHandlers.onCategoryChanged(photo, categoryId)
+                    },
+                    onRemove = { photoHandlers.onRemovePhoto(photo) }
+                )
             }
         }
 
-        // Continue button
-        Button(
-            onClick = onContinue,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .padding(top = 16.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF2196F3)
-            )
-        ) {
-            Text(
-                text = if (localPhotos.isEmpty()) "Skip for Now" else "Continue",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium
+        if (localPhotos.size < maxPhotos) {
+            AddMorePhotosButton(
+                currentCount = localPhotos.size,
+                maxPhotos = maxPhotos,
+                onSelectPhotos = photoHandlers.onSelectPhotos
             )
         }
+
+        if (localPhotos.any { it.categoryId == null }) {
+            CategoryAssignmentReminder()
+        }
+    }
+}
+
+@Composable
+private fun AddMorePhotosButton(
+    currentCount: Int,
+    maxPhotos: Int,
+    onSelectPhotos: () -> Unit
+) {
+    OutlinedButton(
+        onClick = onSelectPhotos,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Icon(
+            Icons.Default.Add,
+            contentDescription = null,
+            modifier = Modifier.padding(end = 8.dp)
+        )
+        Text("Add More Photos ($currentCount/$maxPhotos)")
+    }
+}
+
+@Composable
+private fun CategoryAssignmentReminder() {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+        )
+    ) {
+        Row(
+            modifier = Modifier.padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                Icons.Default.Info,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                text = "Tap photos to assign categories",
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun ContinueButton(
+    isEmpty: Boolean,
+    onContinue: () -> Unit
+) {
+    Button(
+        onClick = onContinue,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .padding(top = 16.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF2196F3)
+        )
+    ) {
+        Text(
+            text = if (isEmpty) "Skip for Now" else "Continue",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium
+        )
     }
 }
 
