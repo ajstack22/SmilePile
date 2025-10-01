@@ -32,6 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
@@ -75,6 +76,7 @@ import com.smilepile.ui.components.gallery.SelectionToolbarComponent
 import com.smilepile.ui.components.dialogs.UniversalCrudDialog
 import com.smilepile.ui.components.dialogs.DialogBuilder
 import com.smilepile.ui.orchestrators.PhotoGalleryOrchestrator
+import com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState
 import com.smilepile.utils.PermissionRationale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,237 +97,14 @@ fun PhotoGalleryScreen(
         snackbarHostState = snackbarHostState
     ) { orchestratorState ->
 
-        Scaffold(
+        GalleryScaffold(
             modifier = modifier,
-            contentWindowInsets = WindowInsets(0.dp),
-            topBar = {
-                if (orchestratorState.galleryState.isSelectionMode) {
-                    SelectionToolbarComponent(
-                        selectedCount = orchestratorState.galleryState.selectedPhotosCount,
-                        isAllSelected = orchestratorState.galleryState.isAllPhotosSelected,
-                        onExitSelectionMode = orchestratorState.onExitSelectionMode,
-                        onSelectAll = orchestratorState.onSelectAllPhotos,
-                        onDeselectAll = orchestratorState.onDeselectAllPhotos
-                    )
-                }
-            },
-            floatingActionButton = {
-                // Custom FAB matching iOS implementation exactly
-                CustomFloatingActionButton(
-                    onClick = {
-                        if (!orchestratorState.isAddingPhotos) {
-                            orchestratorState.onAddPhotoClick()
-                        }
-                    },
-                    icon = Icons.Default.Add,
-                    contentDescription = "Add Photos",
-                    backgroundColor = Color(0xFF4A90E2), // SmilePile blue
-                    isPulsing = true, // Always animate to draw attention
-                    enabled = !orchestratorState.isAddingPhotos,
-                    modifier = Modifier
-                        .padding(end = 16.dp, bottom = 102.dp) // 86dp nav bar + 16dp padding
-                )
-            },
-            bottomBar = {
-                if (orchestratorState.canPerformBatchOperations) {
-                    BatchOperationsBottomBar(
-                        selectedCount = orchestratorState.galleryState.selectedPhotosCount,
-                        onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
-                        onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
-                        onShareClick = orchestratorState.onShareSelectedPhotos,
-                        onEditClick = {
-                            // Navigate to edit screen with selected photos
-                            orchestratorState.onEditSelectedPhotos()
-                        }
-                    )
-                }
-            },
-            snackbarHost = { SnackbarHost(snackbarHostState) }
-        ) { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                // Add header when not in selection mode (outside padding to extend to top)
-                if (!orchestratorState.galleryState.isSelectionMode) {
-                    AppHeaderComponent(
-                        onViewModeClick = orchestratorState.onSwitchToKidsMode,
-                        showViewModeButton = true
-                    ) {
-                        // Category filter chips
-                        CategoryFilterComponent(
-                            categories = orchestratorState.galleryState.categories,
-                            selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
-                            onCategorySelected = orchestratorState.onCategorySelected,
-                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-                        )
-                    }
-                }
+            orchestratorState = orchestratorState,
+            snackbarHostState = snackbarHostState,
+            paddingValues = paddingValues
+        )
 
-                // Content with padding applied (only bottom padding since header is outside)
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = paddingValues.calculateBottomPadding())
-                ) {
-                // Import progress indicator
-                if (orchestratorState.importState.isImporting) {
-                    ImportProgressIndicator(
-                        progress = orchestratorState.importState.importProgress,
-                        isBatchImport = orchestratorState.importState.isBatchImport,
-                        progressText = if (orchestratorState.importState.isBatchImport) {
-                            orchestratorState.importState.batchProgressText
-                        } else {
-                            "Importing photo..."
-                        },
-                        modifier = Modifier.padding(16.dp)
-                    )
-                }
-
-                // Photos grid with swipe gesture support
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .pointerInput(
-                            orchestratorState.galleryState.categories,
-                            orchestratorState.galleryState.selectedCategoryId
-                        ) {
-                            val swipeThreshold = 150f // Minimum swipe distance
-                            var totalDrag = 0f
-
-                            detectHorizontalDragGestures(
-                                onDragStart = {
-                                    totalDrag = 0f // Reset on each new swipe
-                                },
-                                onDragEnd = {
-                                    val categories = orchestratorState.galleryState.categories
-                                    if (categories.isEmpty()) return@detectHorizontalDragGestures
-
-                                    val currentId = orchestratorState.galleryState.selectedCategoryId
-                                    val currentIndex = if (currentId != null) {
-                                        categories.indexOfFirst { it.id == currentId }
-                                    } else {
-                                        0 // Default to first category if none selected
-                                    }
-
-                                    // Only process if we have a valid current index
-                                    if (currentIndex >= 0) {
-                                        when {
-                                            totalDrag < -swipeThreshold && currentIndex < categories.size - 1 -> {
-                                                // Swipe left - next category
-                                                orchestratorState.onCategorySelected(categories[currentIndex + 1].id)
-                                            }
-                                            totalDrag > swipeThreshold && currentIndex > 0 -> {
-                                                // Swipe right - previous category
-                                                orchestratorState.onCategorySelected(categories[currentIndex - 1].id)
-                                            }
-                                        }
-                                    }
-                                    totalDrag = 0f // Reset after processing
-                                },
-                                onDragCancel = {
-                                    totalDrag = 0f // Reset on cancel
-                                },
-                                onHorizontalDrag = { _, dragAmount ->
-                                    totalDrag += dragAmount
-                                }
-                            )
-                        }
-                ) {
-                    when {
-                        orchestratorState.galleryState.isLoading -> {
-                            Box(
-                                modifier = Modifier.fillMaxSize(),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                CircularProgressIndicator()
-                            }
-                        }
-                        orchestratorState.galleryState.photos.isEmpty() -> {
-                            EmptyState(
-                                onImportClick = orchestratorState.onAddPhotoClick,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        else -> {
-                            println("DEBUG: PhotoGrid displaying ${orchestratorState.galleryState.photos.size} photos")
-                            println("DEBUG: Selected Category: ${orchestratorState.galleryState.selectedCategoryId}")
-                            println("DEBUG: First 3 in grid: ${orchestratorState.galleryState.photos.take(3).map { "${it.id}:${it.displayName}" }}")
-                            PhotoStackComponent(
-                                photos = orchestratorState.galleryState.photos,
-                                selectedPhotos = orchestratorState.galleryState.selectedPhotos,
-                                isSelectionMode = orchestratorState.galleryState.isSelectionMode,
-                                showEditActions = false, // No overlay buttons for cleaner UI
-                                onPhotoClick = orchestratorState.onPhotoClick,
-                                onPhotoLongClick = orchestratorState.onPhotoLongClick,
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                    }
-                }
-                } // Close the inner Column with padding
-            }
-        }
-
-        // Category selection dialog for import
-        if (orchestratorState.showCategorySelection) {
-            CategorySelectionDialog(
-                categories = orchestratorState.galleryState.categories,
-                onCategorySelected = orchestratorState.onCategorySelectedForImport,
-                onDismiss = { orchestratorState.onShowCategorySelection(false) }
-            )
-        }
-
-        // Permission rationale dialog
-        if (orchestratorState.showPermissionDialog) {
-            UniversalCrudDialog(
-                    config = DialogBuilder.custom(
-                        title = PermissionRationale.STORAGE_PERMISSION_TITLE,
-                        message = PermissionRationale.STORAGE_PERMISSION_MESSAGE,
-                        primaryText = PermissionRationale.GRANT_BUTTON_TEXT,
-                        secondaryText = "Settings",
-                        cancelText = PermissionRationale.CANCEL_BUTTON_TEXT,
-                        icon = Icons.Default.Warning,
-                        onPrimary = {
-                            orchestratorState.onShowPermissionDialog(false)
-                            orchestratorState.onRequestStoragePermission()
-                        },
-                        onSecondary = {
-                            orchestratorState.onShowPermissionDialog(false)
-                            orchestratorState.onOpenAppSettings()
-                        },
-                        onCancel = { orchestratorState.onShowPermissionDialog(false) }
-                ),
-                onDismiss = { orchestratorState.onShowPermissionDialog(false) }
-            )
-        }
-
-        // Batch delete confirmation dialog
-        if (orchestratorState.showBatchDeleteDialog) {
-            UniversalCrudDialog(
-                    config = DialogBuilder.confirmation(
-                        title = "Remove Photos from Library",
-                        message = "Are you sure you want to remove ${orchestratorState.galleryState.selectedPhotosCount} selected photos from your SmilePile library? The photos will remain on your device but won't appear in the app.",
-                        confirmText = "Remove",
-                        cancelText = "Cancel",
-                        isDestructive = false,
-                        icon = Icons.Default.RemoveCircleOutline,
-                        onConfirm = orchestratorState.onDeleteSelectedPhotos,
-                        onCancel = { orchestratorState.onShowBatchDeleteDialog(false) }
-                ),
-                onDismiss = { orchestratorState.onShowBatchDeleteDialog(false) }
-            )
-        }
-
-        // Batch move dialog
-        if (orchestratorState.showBatchMoveDialog) {
-            BatchMoveToCategoryDialog(
-                    categories = orchestratorState.galleryState.categories,
-                    selectedCount = orchestratorState.galleryState.selectedPhotosCount,
-                    onCategorySelected = orchestratorState.onMoveSelectedPhotos,
-                onDismiss = { orchestratorState.onShowBatchMoveDialog(false) }
-            )
-        }
+        GalleryDialogs(orchestratorState = orchestratorState)
     }
 }
 
@@ -598,5 +377,268 @@ private fun CategorySelectionDialog(
             onCancel = onDismiss
         ),
         onDismiss = onDismiss
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun GalleryScaffold(
+    modifier: Modifier,
+    orchestratorState: PhotoGalleryOrchestratorState,
+    snackbarHostState: SnackbarHostState,
+    paddingValues: PaddingValues
+) {
+    Scaffold(
+        modifier = modifier,
+        contentWindowInsets = WindowInsets(0.dp),
+        topBar = {
+            if (orchestratorState.galleryState.isSelectionMode) {
+                SelectionToolbarComponent(
+                    selectedCount = orchestratorState.galleryState.selectedPhotosCount,
+                    isAllSelected = orchestratorState.galleryState.isAllPhotosSelected,
+                    onExitSelectionMode = orchestratorState.onExitSelectionMode,
+                    onSelectAll = orchestratorState.onSelectAllPhotos,
+                    onDeselectAll = orchestratorState.onDeselectAllPhotos
+                )
+            }
+        },
+        floatingActionButton = {
+            CustomFloatingActionButton(
+                onClick = {
+                    if (!orchestratorState.isAddingPhotos) {
+                        orchestratorState.onAddPhotoClick()
+                    }
+                },
+                icon = Icons.Default.Add,
+                contentDescription = "Add Photos",
+                backgroundColor = Color(0xFF4A90E2),
+                isPulsing = true,
+                enabled = !orchestratorState.isAddingPhotos,
+                modifier = Modifier.padding(end = 16.dp, bottom = 102.dp)
+            )
+        },
+        bottomBar = {
+            if (orchestratorState.canPerformBatchOperations) {
+                BatchOperationsBottomBar(
+                    selectedCount = orchestratorState.galleryState.selectedPhotosCount,
+                    onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
+                    onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
+                    onShareClick = orchestratorState.onShareSelectedPhotos,
+                    onEditClick = { orchestratorState.onEditSelectedPhotos() }
+                )
+            }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { _ ->
+        GalleryContent(
+            orchestratorState = orchestratorState,
+            paddingValues = paddingValues
+        )
+    }
+}
+
+@Composable
+private fun GalleryContent(
+    orchestratorState: PhotoGalleryOrchestratorState,
+    paddingValues: PaddingValues
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        if (!orchestratorState.galleryState.isSelectionMode) {
+            AppHeaderComponent(
+                onViewModeClick = orchestratorState.onSwitchToKidsMode,
+                showViewModeButton = true
+            ) {
+                CategoryFilterComponent(
+                    categories = orchestratorState.galleryState.categories,
+                    selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
+                    onCategorySelected = orchestratorState.onCategorySelected,
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = paddingValues.calculateBottomPadding())
+        ) {
+            if (orchestratorState.importState.isImporting) {
+                ImportProgressIndicator(
+                    progress = orchestratorState.importState.importProgress,
+                    isBatchImport = orchestratorState.importState.isBatchImport,
+                    progressText = if (orchestratorState.importState.isBatchImport) {
+                        orchestratorState.importState.batchProgressText
+                    } else {
+                        "Importing photo..."
+                    },
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+
+            PhotoGridWithGestures(orchestratorState = orchestratorState)
+        }
+    }
+}
+
+@Composable
+private fun PhotoGridWithGestures(
+    orchestratorState: PhotoGalleryOrchestratorState
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(
+                orchestratorState.galleryState.categories,
+                orchestratorState.galleryState.selectedCategoryId
+            ) {
+                handleCategorySwipeGestures(
+                    categories = orchestratorState.galleryState.categories,
+                    selectedCategoryId = orchestratorState.galleryState.selectedCategoryId,
+                    onCategorySelected = orchestratorState.onCategorySelected
+                )
+            }
+    ) {
+        PhotoGridContent(orchestratorState = orchestratorState)
+    }
+}
+
+private suspend fun PointerInputScope.handleCategorySwipeGestures(
+    categories: List<Category>,
+    selectedCategoryId: Long?,
+    onCategorySelected: (Long) -> Unit
+) {
+    val swipeThreshold = 150f
+    var totalDrag = 0f
+
+    detectHorizontalDragGestures(
+        onDragStart = { totalDrag = 0f },
+        onDragEnd = {
+            if (categories.isEmpty()) return@detectHorizontalDragGestures
+
+            val currentIndex = categories.indexOfFirst { it.id == selectedCategoryId }.takeIf { it >= 0 } ?: 0
+
+            when {
+                totalDrag < -swipeThreshold && currentIndex < categories.size - 1 -> {
+                    onCategorySelected(categories[currentIndex + 1].id)
+                }
+                totalDrag > swipeThreshold && currentIndex > 0 -> {
+                    onCategorySelected(categories[currentIndex - 1].id)
+                }
+            }
+            totalDrag = 0f
+        },
+        onDragCancel = { totalDrag = 0f },
+        onHorizontalDrag = { _, dragAmount -> totalDrag += dragAmount }
+    )
+}
+
+@Composable
+private fun PhotoGridContent(
+    orchestratorState: PhotoGalleryOrchestratorState
+) {
+    when {
+        orchestratorState.galleryState.isLoading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        orchestratorState.galleryState.photos.isEmpty() -> {
+            EmptyState(
+                onImportClick = orchestratorState.onAddPhotoClick,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+        else -> {
+            println("DEBUG: PhotoGrid displaying ${orchestratorState.galleryState.photos.size} photos")
+            println("DEBUG: Selected Category: ${orchestratorState.galleryState.selectedCategoryId}")
+            println("DEBUG: First 3 in grid: ${orchestratorState.galleryState.photos.take(3).map { photo -> "${photo.id}:${photo.displayName}" }}")
+            PhotoStackComponent(
+                photos = orchestratorState.galleryState.photos,
+                selectedPhotos = orchestratorState.galleryState.selectedPhotos,
+                isSelectionMode = orchestratorState.galleryState.isSelectionMode,
+                showEditActions = false,
+                onPhotoClick = orchestratorState.onPhotoClick,
+                onPhotoLongClick = orchestratorState.onPhotoLongClick,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
+}
+
+@Composable
+private fun GalleryDialogs(
+    orchestratorState: PhotoGalleryOrchestratorState
+) {
+    if (orchestratorState.showCategorySelection) {
+        CategorySelectionDialog(
+            categories = orchestratorState.galleryState.categories,
+            onCategorySelected = orchestratorState.onCategorySelectedForImport,
+            onDismiss = { orchestratorState.onShowCategorySelection(false) }
+        )
+    }
+
+    if (orchestratorState.showPermissionDialog) {
+        PermissionDialog(orchestratorState = orchestratorState)
+    }
+
+    if (orchestratorState.showBatchDeleteDialog) {
+        BatchDeleteDialog(orchestratorState = orchestratorState)
+    }
+
+    if (orchestratorState.showBatchMoveDialog) {
+        BatchMoveToCategoryDialog(
+            categories = orchestratorState.galleryState.categories,
+            selectedCount = orchestratorState.galleryState.selectedPhotosCount,
+            onCategorySelected = orchestratorState.onMoveSelectedPhotos,
+            onDismiss = { orchestratorState.onShowBatchMoveDialog(false) }
+        )
+    }
+}
+
+@Composable
+private fun PermissionDialog(
+    orchestratorState: PhotoGalleryOrchestratorState
+) {
+    UniversalCrudDialog(
+        config = DialogBuilder.custom(
+            title = PermissionRationale.STORAGE_PERMISSION_TITLE,
+            message = PermissionRationale.STORAGE_PERMISSION_MESSAGE,
+            primaryText = PermissionRationale.GRANT_BUTTON_TEXT,
+            secondaryText = "Settings",
+            cancelText = PermissionRationale.CANCEL_BUTTON_TEXT,
+            icon = Icons.Default.Warning,
+            onPrimary = {
+                orchestratorState.onShowPermissionDialog(false)
+                orchestratorState.onRequestStoragePermission()
+            },
+            onSecondary = {
+                orchestratorState.onShowPermissionDialog(false)
+                orchestratorState.onOpenAppSettings()
+            },
+            onCancel = { orchestratorState.onShowPermissionDialog(false) }
+        ),
+        onDismiss = { orchestratorState.onShowPermissionDialog(false) }
+    )
+}
+
+@Composable
+private fun BatchDeleteDialog(
+    orchestratorState: PhotoGalleryOrchestratorState
+) {
+    UniversalCrudDialog(
+        config = DialogBuilder.confirmation(
+            title = "Remove Photos from Library",
+            message = "Are you sure you want to remove ${orchestratorState.galleryState.selectedPhotosCount} selected photos from your SmilePile library? The photos will remain on your device but won't appear in the app.",
+            confirmText = "Remove",
+            cancelText = "Cancel",
+            isDestructive = false,
+            icon = Icons.Default.RemoveCircleOutline,
+            onConfirm = orchestratorState.onDeleteSelectedPhotos,
+            onCancel = { orchestratorState.onShowBatchDeleteDialog(false) }
+        ),
+        onDismiss = { orchestratorState.onShowBatchDeleteDialog(false) }
     )
 }

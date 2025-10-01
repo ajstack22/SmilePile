@@ -384,49 +384,16 @@ class BackupManager @Inject constructor(
     ): Flow<ImportProgress> = flow {
         val errors = mutableListOf<String>()
         val warnings = mutableListOf<String>()
-        var categoriesImported = 0
-        var photosImported = 0
-        var photosSkipped = 0
         var photoFilesRestored = 0
 
         try {
             emit(ImportProgress(1, 0, "Validating ZIP structure"))
             progressCallback?.invoke(0, 100, "Validating ZIP structure")
 
-            // Validate ZIP structure
-            val structureResult = ZipUtils.validateZipStructure(zipFile)
-            if (structureResult.isFailure) {
-                throw IllegalArgumentException("Invalid ZIP structure: ${structureResult.exceptionOrNull()?.message}")
-            }
-
-            emit(ImportProgress(1, 0, "Extracting ZIP archive"))
-            progressCallback?.invoke(10, 100, "Extracting ZIP archive")
-
-            // Extract ZIP to temporary directory
-            val tempDir = File(context.cacheDir, "import_temp_${System.currentTimeMillis()}")
-            tempDir.mkdirs()
-
-            val extractResult = ZipUtils.extractZip(zipFile, tempDir)
-            if (extractResult.isFailure) {
-                throw Exception("Failed to extract ZIP: ${extractResult.exceptionOrNull()?.message}")
-            }
-
+            val tempDir = extractAndValidateZip(zipFile, progressCallback)
             progressCallback?.invoke(30, 100, "Reading backup metadata")
 
-            // Read metadata.json
-            val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
-            if (!metadataFile.exists()) {
-                throw FileNotFoundException("metadata.json not found in ZIP")
-            }
-
-            val backupJson = metadataFile.readText()
-            val backupData = try {
-                json.decodeFromString<AppBackup>(backupJson)
-            } catch (e: Exception) {
-                throw IllegalArgumentException("Invalid backup metadata format: ${e.message}")
-            }
-
-            // Validate backup version
+            val backupData = readMetadataFromExtractedZip(tempDir)
             checkBackupVersion(backupData.version)
 
             val totalItems = backupData.categories.size + backupData.photos.size
@@ -435,132 +402,57 @@ class BackupManager @Inject constructor(
             emit(ImportProgress(totalItems, processedItems, "Starting import"))
             progressCallback?.invoke(40, 100, "Starting import")
 
-            // Handle strategy
             if (strategy == ImportStrategy.REPLACE) {
                 emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
                 progressCallback?.invoke(45, 100, "Clearing existing data")
                 clearAllData()
             }
 
-            // Import categories first
-            emit(ImportProgress(totalItems, processedItems, "Importing categories"))
-            progressCallback?.invoke(50, 100, "Importing categories")
-
-            for ((index, categoryBackup) in backupData.categories.withIndex()) {
-                try {
-                    val existingCategory = categoryRepository.getCategoryByName(categoryBackup.name)
-
-                    if (strategy == ImportStrategy.MERGE && existingCategory != null) {
-                        val updatedCategory = categoryBackup.toCategory().copy(id = existingCategory.id)
-                        categoryRepository.updateCategory(updatedCategory)
-                        warnings.add("Updated existing category: ${categoryBackup.displayName}")
-                    } else {
-                        val categoryToInsert = if (strategy == ImportStrategy.REPLACE) {
-                            categoryBackup.toCategory()
-                        } else {
-                            categoryBackup.toCategory().copy(id = 0)
-                        }
-                        categoryRepository.insertCategory(categoryToInsert)
-                        categoriesImported++
-                    }
-                } catch (e: Exception) {
-                    errors.add("Failed to import category '${categoryBackup.displayName}': ${e.message}")
-                    Log.e(TAG, "Error importing category: ${categoryBackup.displayName}", e)
-                }
-
-                processedItems++
-                val progress = 50 + ((index + 1) * 20 / backupData.categories.size)
-                progressCallback?.invoke(progress, 100, "Importing categories (${index + 1}/${backupData.categories.size})")
-                emit(ImportProgress(totalItems, processedItems, "Importing categories", errors))
+            processedItems = importCategories(
+                backupData,
+                strategy,
+                totalItems,
+                processedItems,
+                errors,
+                warnings
+            ) { progress ->
+                emit(progress)
+                progressCallback?.invoke(
+                    50 + (progress.processedItems * 20 / backupData.categories.size),
+                    100,
+                    progress.currentOperation
+                )
             }
 
-            // Import photos and restore photo files
             emit(ImportProgress(totalItems, processedItems, "Importing photos"))
             progressCallback?.invoke(70, 100, "Importing photos")
 
-            val photosDir = File(tempDir, "photos")
-            val internalPhotosDir = File(context.filesDir, "photos")
-            internalPhotosDir.mkdirs()
-
-            for ((index, photoBackup) in backupData.photos.withIndex()) {
-                try {
-                    // Find corresponding file in extracted photos
-                    val manifestEntry = backupData.photoManifest.find { it.photoId == photoBackup.id }
-                    var newPhotoPath = photoBackup.path
-
-                    if (manifestEntry != null) {
-                        // Restore photo file from ZIP
-                        val sourceFile = File(photosDir, manifestEntry.fileName)
-                        if (sourceFile.exists()) {
-                            val destFile = File(internalPhotosDir, manifestEntry.fileName)
-                            sourceFile.copyTo(destFile, overwrite = true)
-                            newPhotoPath = destFile.absolutePath
-                            photoFilesRestored++
-                        } else {
-                            warnings.add("Photo file not found in ZIP: ${manifestEntry.fileName}")
-                        }
-                    }
-
-                    // Check for duplicates in merge mode
-                    if (strategy == ImportStrategy.MERGE) {
-                        val existingPhotos = photoRepository.getAllPhotos()
-                        val isDuplicate = existingPhotos.any { it.path == newPhotoPath }
-
-                        if (isDuplicate) {
-                            photosSkipped++
-                            warnings.add("Skipped duplicate photo: ${photoBackup.name}")
-                            processedItems++
-                            continue
-                        }
-                    }
-
-                    // Get the actual category ID for merge mode
-                    val actualCategoryId = if (strategy == ImportStrategy.REPLACE) {
-                        photoBackup.categoryId
-                    } else {
-                        val categoryBackupForPhoto = backupData.categories.find { it.id == photoBackup.categoryId }
-                        categoryBackupForPhoto?.let {
-                            categoryRepository.getCategoryByName(it.name)?.id
-                        } ?: photoBackup.categoryId
-                    }
-
-                    // Insert photo with updated path
-                    val photoToInsert = if (strategy == ImportStrategy.REPLACE) {
-                        photoBackup.toPhoto().copy(path = newPhotoPath)
-                    } else {
-                        photoBackup.toPhoto().copy(
-                            id = 0,
-                            categoryId = actualCategoryId,
-                            path = newPhotoPath
-                        )
-                    }
-
-                    photoRepository.insertPhoto(photoToInsert)
-                    photosImported++
-
-                } catch (e: Exception) {
-                    errors.add("Failed to import photo '${photoBackup.name}': ${e.message}")
-                    Log.e(TAG, "Error importing photo: ${photoBackup.name}", e)
-                }
-
-                processedItems++
-                val progress = 70 + ((index + 1) * 25 / backupData.photos.size)
-                progressCallback?.invoke(progress, 100, "Importing photos (${index + 1}/${backupData.photos.size})")
-                emit(ImportProgress(totalItems, processedItems, "Importing photos", errors))
+            val (imported, skipped, filesRestored) = importPhotosFromZip(
+                backupData,
+                tempDir,
+                strategy,
+                totalItems,
+                processedItems,
+                errors,
+                warnings
+            ) { progress ->
+                emit(progress)
+                progressCallback?.invoke(
+                    70 + (progress.processedItems * 25 / backupData.photos.size),
+                    100,
+                    progress.currentOperation
+                )
             }
 
-            // Clean up temp directory
+            photoFilesRestored = filesRestored
+            processedItems += imported + skipped
+
             tempDir.deleteRecursively()
 
             progressCallback?.invoke(100, 100, "Import completed")
-            emit(ImportProgress(
-                totalItems,
-                processedItems,
-                "Import completed",
-                errors
-            ))
+            emit(ImportProgress(totalItems, processedItems, "Import completed", errors))
 
-            Log.i(TAG, "ZIP import completed: $categoriesImported categories, $photosImported photos, $photoFilesRestored files restored")
+            Log.i(TAG, "ZIP import completed: $imported photos, $photoFilesRestored files restored")
 
         } catch (e: Exception) {
             errors.add("Import failed: ${e.message}")
@@ -578,161 +470,32 @@ class BackupManager @Inject constructor(
     ): Flow<ImportProgress> = flow {
         val errors = mutableListOf<String>()
         val warnings = mutableListOf<String>()
-        var categoriesImported = 0
-        var photosImported = 0
-        var photosSkipped = 0
 
         try {
             emit(ImportProgress(1, 0, "Reading backup file"))
 
-            // Read and parse backup file
-            val backupJson = withContext(Dispatchers.IO) {
-                if (!backupFile.exists()) {
-                    throw FileNotFoundException("Backup file not found: ${backupFile.absolutePath}")
-                }
-                backupFile.readText()
-            }
-
-            val backupData = try {
-                json.decodeFromString<AppBackup>(backupJson)
-            } catch (e: Exception) {
-                throw IllegalArgumentException("Invalid backup file format: ${e.message}")
-            }
-
-            emit(ImportProgress(1, 0, "Validating backup"))
-
-            // Validate backup version
-            checkBackupVersion(backupData.version)
-
+            val backupData = readAndValidateBackup(backupFile)
             val totalItems = backupData.categories.size + backupData.photos.size
             var processedItems = 0
 
             emit(ImportProgress(totalItems, processedItems, "Starting import"))
 
-            // Handle strategy
             if (strategy == ImportStrategy.REPLACE) {
                 emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
                 clearAllData()
             }
 
-            // Import categories first
-            emit(ImportProgress(totalItems, processedItems, "Importing categories"))
-            for (categoryBackup in backupData.categories) {
-                try {
-                    val existingCategory = categoryRepository.getCategoryByName(categoryBackup.name)
-
-                    if (strategy == ImportStrategy.MERGE && existingCategory != null) {
-                        // Update existing category
-                        val updatedCategory = categoryBackup.toCategory().copy(id = existingCategory.id)
-                        categoryRepository.updateCategory(updatedCategory)
-                        warnings.add("Updated existing category: ${categoryBackup.displayName}")
-                    } else {
-                        // Insert new category
-                        val categoryToInsert = if (strategy == ImportStrategy.REPLACE) {
-                            categoryBackup.toCategory()
-                        } else {
-                            categoryBackup.toCategory().copy(id = 0) // Let Room auto-generate ID for merge
-                        }
-                        categoryRepository.insertCategory(categoryToInsert)
-                        categoriesImported++
-                    }
-                } catch (e: Exception) {
-                    errors.add("Failed to import category '${categoryBackup.displayName}': ${e.message}")
-                    Log.e(TAG, "Error importing category: ${categoryBackup.displayName}", e)
-                }
-
-                processedItems++
-                emit(ImportProgress(totalItems, processedItems, "Importing categories", errors))
+            val categoriesImported = importCategories(backupData, strategy, totalItems, processedItems, errors, warnings) { progress ->
+                emit(progress)
+                processedItems = progress.processedItems
             }
 
-            // Import photos
-            emit(ImportProgress(totalItems, processedItems, "Importing photos"))
-            for (photoBackup in backupData.photos) {
-                try {
-                    // Validate MediaStore URI if photo is not from assets
-                    if (!photoBackup.isFromAssets) {
-                        val isValid = validateMediaStoreUri(photoBackup.path)
-                        if (!isValid) {
-                            photosSkipped++
-                            warnings.add("Skipped missing photo: ${photoBackup.name}")
-                            processedItems++
-                            continue
-                        }
-                    }
-
-                    // Check for duplicates in merge mode
-                    if (strategy == ImportStrategy.MERGE) {
-                        val existingPhotos = photoRepository.getAllPhotos()
-                        val isDuplicate = existingPhotos.any { it.path == photoBackup.path }
-
-                        if (isDuplicate) {
-                            photosSkipped++
-                            warnings.add("Skipped duplicate photo: ${photoBackup.name}")
-                            processedItems++
-                            continue
-                        }
-                    }
-
-                    // Verify category exists
-                    val categoryExists = if (strategy == ImportStrategy.REPLACE) {
-                        // In replace mode, categories should have been imported with their original IDs
-                        categoryRepository.getCategoryById(photoBackup.categoryId) != null
-                    } else {
-                        // In merge mode, we need to find the category by name since IDs might have changed
-                        val categoryBackupForPhoto = backupData.categories.find { it.id == photoBackup.categoryId }
-                        if (categoryBackupForPhoto != null) {
-                            categoryRepository.getCategoryByName(categoryBackupForPhoto.name) != null
-                        } else {
-                            false
-                        }
-                    }
-
-                    if (!categoryExists) {
-                        errors.add("Category not found for photo: ${photoBackup.name}")
-                        processedItems++
-                        continue
-                    }
-
-                    // Get the actual category ID for merge mode
-                    val actualCategoryId = if (strategy == ImportStrategy.REPLACE) {
-                        photoBackup.categoryId
-                    } else {
-                        val categoryBackupForPhoto = backupData.categories.find { it.id == photoBackup.categoryId }
-                        categoryBackupForPhoto?.let {
-                            categoryRepository.getCategoryByName(it.name)?.id
-                        } ?: photoBackup.categoryId
-                    }
-
-                    // Insert photo
-                    val photoToInsert = if (strategy == ImportStrategy.REPLACE) {
-                        photoBackup.toPhoto()
-                    } else {
-                        photoBackup.toPhoto().copy(
-                            id = 0, // Let Room auto-generate ID for merge
-                            categoryId = actualCategoryId
-                        )
-                    }
-
-                    photoRepository.insertPhoto(photoToInsert)
-                    photosImported++
-
-                } catch (e: Exception) {
-                    errors.add("Failed to import photo '${photoBackup.name}': ${e.message}")
-                    Log.e(TAG, "Error importing photo: ${photoBackup.name}", e)
-                }
-
-                processedItems++
-                emit(ImportProgress(totalItems, processedItems, "Importing photos", errors))
+            val (photosImported, photosSkipped) = importPhotos(backupData, strategy, totalItems, processedItems, errors, warnings) { progress ->
+                emit(progress)
+                processedItems = progress.processedItems
             }
 
-            // Final progress update
-            emit(ImportProgress(
-                totalItems,
-                processedItems,
-                "Import completed",
-                errors
-            ))
-
+            emit(ImportProgress(totalItems, processedItems, "Import completed", errors))
             Log.i(TAG, "Import completed: $categoriesImported categories, $photosImported photos imported, $photosSkipped photos skipped")
 
         } catch (e: Exception) {
@@ -741,6 +504,178 @@ class BackupManager @Inject constructor(
             emit(ImportProgress(0, 0, "Import failed", errors))
         }
     }.flowOn(Dispatchers.IO)
+
+    private suspend fun readAndValidateBackup(backupFile: File): AppBackup {
+        val backupJson = withContext(Dispatchers.IO) {
+            if (!backupFile.exists()) {
+                throw FileNotFoundException("Backup file not found: ${backupFile.absolutePath}")
+            }
+            backupFile.readText()
+        }
+
+        val backupData = try {
+            json.decodeFromString<AppBackup>(backupJson)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Invalid backup file format: ${e.message}")
+        }
+
+        checkBackupVersion(backupData.version)
+        return backupData
+    }
+
+    private suspend fun importCategories(
+        backupData: AppBackup,
+        strategy: ImportStrategy,
+        totalItems: Int,
+        startIndex: Int,
+        errors: MutableList<String>,
+        warnings: MutableList<String>,
+        onProgress: suspend (ImportProgress) -> Unit
+    ): Int {
+        var categoriesImported = 0
+        var processedItems = startIndex
+
+        for (categoryBackup in backupData.categories) {
+            try {
+                importSingleCategory(categoryBackup, strategy, warnings)
+                categoriesImported++
+            } catch (e: Exception) {
+                errors.add("Failed to import category '${categoryBackup.displayName}': ${e.message}")
+                Log.e(TAG, "Error importing category: ${categoryBackup.displayName}", e)
+            }
+
+            processedItems++
+            onProgress(ImportProgress(totalItems, processedItems, "Importing categories", errors))
+        }
+
+        return categoriesImported
+    }
+
+    private suspend fun importSingleCategory(
+        categoryBackup: BackupCategory,
+        strategy: ImportStrategy,
+        warnings: MutableList<String>
+    ) {
+        val existingCategory = categoryRepository.getCategoryByName(categoryBackup.name)
+
+        if (strategy == ImportStrategy.MERGE && existingCategory != null) {
+            val updatedCategory = categoryBackup.toCategory().copy(id = existingCategory.id)
+            categoryRepository.updateCategory(updatedCategory)
+            warnings.add("Updated existing category: ${categoryBackup.displayName}")
+        } else {
+            val categoryToInsert = if (strategy == ImportStrategy.REPLACE) {
+                categoryBackup.toCategory()
+            } else {
+                categoryBackup.toCategory().copy(id = 0)
+            }
+            categoryRepository.insertCategory(categoryToInsert)
+        }
+    }
+
+    private suspend fun importPhotos(
+        backupData: AppBackup,
+        strategy: ImportStrategy,
+        totalItems: Int,
+        startIndex: Int,
+        errors: MutableList<String>,
+        warnings: MutableList<String>,
+        onProgress: suspend (ImportProgress) -> Unit
+    ): Pair<Int, Int> {
+        var photosImported = 0
+        var photosSkipped = 0
+        var processedItems = startIndex
+
+        for (photoBackup in backupData.photos) {
+            val result = processPhotoImport(photoBackup, backupData, strategy, warnings, errors)
+
+            when (result) {
+                is PhotoImportResult.Imported -> photosImported++
+                is PhotoImportResult.Skipped -> photosSkipped++
+                is PhotoImportResult.Failed -> {}
+            }
+
+            processedItems++
+            onProgress(ImportProgress(totalItems, processedItems, "Importing photos", errors))
+        }
+
+        return Pair(photosImported, photosSkipped)
+    }
+
+    private suspend fun processPhotoImport(
+        photoBackup: BackupPhoto,
+        backupData: AppBackup,
+        strategy: ImportStrategy,
+        warnings: MutableList<String>,
+        errors: MutableList<String>
+    ): PhotoImportResult {
+        return try {
+            if (!validatePhotoForImport(photoBackup, strategy, warnings)) {
+                return PhotoImportResult.Skipped
+            }
+
+            val actualCategoryId = resolveCategoryId(photoBackup, backupData, strategy) ?: run {
+                errors.add("Category not found for photo: ${photoBackup.name}")
+                return PhotoImportResult.Failed
+            }
+
+            val photoToInsert = if (strategy == ImportStrategy.REPLACE) {
+                photoBackup.toPhoto()
+            } else {
+                photoBackup.toPhoto().copy(id = 0, categoryId = actualCategoryId)
+            }
+
+            photoRepository.insertPhoto(photoToInsert)
+            PhotoImportResult.Imported
+        } catch (e: Exception) {
+            errors.add("Failed to import photo '${photoBackup.name}': ${e.message}")
+            Log.e(TAG, "Error importing photo: ${photoBackup.name}", e)
+            PhotoImportResult.Failed
+        }
+    }
+
+    private suspend fun validatePhotoForImport(
+        photoBackup: BackupPhoto,
+        strategy: ImportStrategy,
+        warnings: MutableList<String>
+    ): Boolean {
+        if (!photoBackup.isFromAssets && !validateMediaStoreUri(photoBackup.path)) {
+            warnings.add("Skipped missing photo: ${photoBackup.name}")
+            return false
+        }
+
+        if (strategy == ImportStrategy.MERGE) {
+            val existingPhotos = photoRepository.getAllPhotos()
+            if (existingPhotos.any { it.path == photoBackup.path }) {
+                warnings.add("Skipped duplicate photo: ${photoBackup.name}")
+                return false
+            }
+        }
+
+        return true
+    }
+
+    private suspend fun resolveCategoryId(
+        photoBackup: BackupPhoto,
+        backupData: AppBackup,
+        strategy: ImportStrategy
+    ): Long? {
+        return if (strategy == ImportStrategy.REPLACE) {
+            if (categoryRepository.getCategoryById(photoBackup.categoryId) != null) {
+                photoBackup.categoryId
+            } else null
+        } else {
+            val categoryBackupForPhoto = backupData.categories.find { it.id == photoBackup.categoryId }
+            categoryBackupForPhoto?.let {
+                categoryRepository.getCategoryByName(it.name)?.id
+            }
+        }
+    }
+
+    private sealed class PhotoImportResult {
+        object Imported : PhotoImportResult()
+        object Skipped : PhotoImportResult()
+        object Failed : PhotoImportResult()
+    }
 
     /**
      * Check if backup version is compatible
@@ -853,6 +788,191 @@ class BackupManager @Inject constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    /**
+     * Extract and validate ZIP file
+     */
+    private suspend fun extractAndValidateZip(
+        zipFile: File,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): File {
+        val structureResult = ZipUtils.validateZipStructure(zipFile)
+        if (structureResult.isFailure) {
+            throw IllegalArgumentException("Invalid ZIP structure: ${structureResult.exceptionOrNull()?.message}")
+        }
+
+        progressCallback?.invoke(10, 100, "Extracting ZIP archive")
+
+        val tempDir = File(context.cacheDir, "import_temp_${System.currentTimeMillis()}")
+        tempDir.mkdirs()
+
+        val extractResult = ZipUtils.extractZip(zipFile, tempDir)
+        if (extractResult.isFailure) {
+            throw Exception("Failed to extract ZIP: ${extractResult.exceptionOrNull()?.message}")
+        }
+
+        return tempDir
+    }
+
+    /**
+     * Read and parse metadata.json from extracted ZIP
+     */
+    private suspend fun readMetadataFromExtractedZip(tempDir: File): AppBackup {
+        val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
+        if (!metadataFile.exists()) {
+            throw FileNotFoundException("metadata.json not found in ZIP")
+        }
+
+        val backupJson = metadataFile.readText()
+        return try {
+            json.decodeFromString<AppBackup>(backupJson)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Invalid backup metadata format: ${e.message}")
+        }
+    }
+
+    /**
+     * Import photos from ZIP backup with file restoration
+     */
+    private suspend fun importPhotosFromZip(
+        backupData: AppBackup,
+        tempDir: File,
+        strategy: ImportStrategy,
+        totalItems: Int,
+        startIndex: Int,
+        errors: MutableList<String>,
+        warnings: MutableList<String>,
+        onProgress: suspend (ImportProgress) -> Unit
+    ): Triple<Int, Int, Int> {
+        var processedItems = startIndex
+        var photosImported = 0
+        var photosSkipped = 0
+        var photoFilesRestored = 0
+
+        val photosDir = File(tempDir, "photos")
+        val internalPhotosDir = File(context.filesDir, "photos")
+        internalPhotosDir.mkdirs()
+
+        for (photoBackup in backupData.photos) {
+            val result = processPhotoFromZip(
+                photoBackup,
+                backupData,
+                photosDir,
+                internalPhotosDir,
+                strategy,
+                warnings
+            )
+
+            when (result) {
+                is ZipPhotoImportResult.Imported -> {
+                    photosImported++
+                    if (result.fileRestored) photoFilesRestored++
+                }
+                is ZipPhotoImportResult.Skipped -> photosSkipped++
+                is ZipPhotoImportResult.Failed -> {
+                    errors.add("Failed to import photo '${photoBackup.name}': ${result.error}")
+                    Log.e(TAG, "Error importing photo: ${photoBackup.name}", result.exception)
+                }
+            }
+
+            processedItems++
+            onProgress(ImportProgress(totalItems, processedItems, "Importing photos", errors))
+        }
+
+        return Triple(photosImported, photosSkipped, photoFilesRestored)
+    }
+
+    /**
+     * Process single photo import from ZIP
+     */
+    private suspend fun processPhotoFromZip(
+        photoBackup: BackupPhoto,
+        backupData: AppBackup,
+        photosDir: File,
+        internalPhotosDir: File,
+        strategy: ImportStrategy,
+        warnings: MutableList<String>
+    ): ZipPhotoImportResult {
+        return try {
+            val (newPhotoPath, fileRestored) = restorePhotoFileFromZip(
+                photoBackup,
+                backupData,
+                photosDir,
+                internalPhotosDir,
+                warnings
+            )
+
+            if (strategy == ImportStrategy.MERGE && isDuplicatePhoto(newPhotoPath)) {
+                warnings.add("Skipped duplicate photo: ${photoBackup.name}")
+                return ZipPhotoImportResult.Skipped
+            }
+
+            val actualCategoryId = resolveCategoryId(photoBackup, backupData, strategy)
+                ?: photoBackup.categoryId
+
+            val photoToInsert = if (strategy == ImportStrategy.REPLACE) {
+                photoBackup.toPhoto().copy(path = newPhotoPath)
+            } else {
+                photoBackup.toPhoto().copy(
+                    id = 0,
+                    categoryId = actualCategoryId,
+                    path = newPhotoPath
+                )
+            }
+
+            photoRepository.insertPhoto(photoToInsert)
+            ZipPhotoImportResult.Imported(fileRestored)
+
+        } catch (e: Exception) {
+            ZipPhotoImportResult.Failed(e.message ?: "Unknown error", e)
+        }
+    }
+
+    /**
+     * Restore photo file from ZIP to internal storage
+     */
+    private fun restorePhotoFileFromZip(
+        photoBackup: BackupPhoto,
+        backupData: AppBackup,
+        photosDir: File,
+        internalPhotosDir: File,
+        warnings: MutableList<String>
+    ): Pair<String, Boolean> {
+        val manifestEntry = backupData.photoManifest.find { it.photoId == photoBackup.id }
+        var newPhotoPath = photoBackup.path
+        var fileRestored = false
+
+        if (manifestEntry != null) {
+            val sourceFile = File(photosDir, manifestEntry.fileName)
+            if (sourceFile.exists()) {
+                val destFile = File(internalPhotosDir, manifestEntry.fileName)
+                sourceFile.copyTo(destFile, overwrite = true)
+                newPhotoPath = destFile.absolutePath
+                fileRestored = true
+            } else {
+                warnings.add("Photo file not found in ZIP: ${manifestEntry.fileName}")
+            }
+        }
+
+        return Pair(newPhotoPath, fileRestored)
+    }
+
+    /**
+     * Check if photo already exists (duplicate detection)
+     */
+    private suspend fun isDuplicatePhoto(photoPath: String): Boolean {
+        val existingPhotos = photoRepository.getAllPhotos()
+        return existingPhotos.any { it.path == photoPath }
+    }
+
+    /**
+     * Result type for ZIP photo import operations
+     */
+    private sealed class ZipPhotoImportResult {
+        data class Imported(val fileRestored: Boolean) : ZipPhotoImportResult()
+        object Skipped : ZipPhotoImportResult()
+        data class Failed(val error: String, val exception: Exception) : ZipPhotoImportResult()
     }
 
     /**

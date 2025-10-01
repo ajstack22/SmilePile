@@ -383,140 +383,152 @@ class PhotoEditViewModel @Inject constructor(
         val savedPhotos = mutableListOf<Photo>()
 
         _uiState.value.editQueue.forEach { item ->
-            if (item.isProcessed && item.wasEdited && item.processedBitmap != null) {
-                try {
-                    // Check if we're editing an existing photo or importing a new one
-                    if (item.path != null && editMode == EditMode.GALLERY) {
-                        // Editing existing photo - overwrite the original file
-                        val existingFile = File(item.path)
-                        val filename = existingFile.name
+            val savedPhoto = when {
+                shouldSaveEditedPhoto(item) && editMode == EditMode.GALLERY ->
+                    saveEditedGalleryPhoto(item)
+                shouldSaveEditedPhoto(item) && editMode == EditMode.IMPORT ->
+                    saveNewImportedPhoto(item, savedPhotos.size)
+                shouldSaveUneditedImport(item) ->
+                    saveUneditedImport(item, savedPhotos.size)
+                shouldUpdateCategoryOnly(item) ->
+                    updatePhotoCategory(item)
+                else -> null
+            }
 
-                        // Overwrite the existing file
-                        val savedFile = storageManager.savePhotoToInternalStorage(
-                            bitmap = item.processedBitmap,
-                            filename = filename
-                        )
-
-                        if (savedFile != null) {
-                            // Find and update the existing photo in database
-                            val existingPhoto = photoRepository.getPhotoByPath(item.path)
-                            if (existingPhoto != null) {
-                                val updatedPhoto = existingPhoto.copy(
-                                    categoryId = pendingCategoryId, // Update category
-                                    width = item.processedBitmap.width,
-                                    height = item.processedBitmap.height,
-                                    fileSize = savedFile.length(),
-                                    createdAt = System.currentTimeMillis() // Update timestamp
-                                )
-                                photoRepository.updatePhoto(updatedPhoto)
-                                savedPhotos.add(updatedPhoto)
-                            }
-
-                            // Update item with saved path
-                            val index = _uiState.value.editQueue.indexOf(item)
-                            if (index >= 0) {
-                                val updatedQueue = _uiState.value.editQueue.toMutableList()
-                                updatedQueue[index] = item.copy(savedPath = savedFile.absolutePath)
-                                _uiState.value = _uiState.value.copy(editQueue = updatedQueue)
-                            }
-                        }
-                    } else {
-                        // New import - create a new file
-                        val filename = "edited_${System.currentTimeMillis()}_${savedPhotos.size}.jpg"
-
-                        // Save to internal storage
-                        val savedFile = storageManager.savePhotoToInternalStorage(
-                            bitmap = item.processedBitmap,
-                            filename = filename
-                        )
-
-                        if (savedFile != null) {
-                            // Create photo entry
-                            val photo = Photo(
-                                id = 0,
-                                name = filename,
-                                path = savedFile.absolutePath,
-                                categoryId = pendingCategoryId,
-                                createdAt = System.currentTimeMillis(),
-                                width = item.processedBitmap.width,
-                                height = item.processedBitmap.height,
-                                fileSize = savedFile.length(),
-                                isFromAssets = false
-                            )
-
-                            // Save to database
-                            val photoId = photoRepository.insertPhoto(photo)
-                            savedPhotos.add(photo.copy(id = photoId))
-
-                            // Update item with saved path
-                            val index = _uiState.value.editQueue.indexOf(item)
-                            if (index >= 0) {
-                                val updatedQueue = _uiState.value.editQueue.toMutableList()
-                                updatedQueue[index] = item.copy(savedPath = savedFile.absolutePath)
-                                _uiState.value = _uiState.value.copy(editQueue = updatedQueue)
-                            }
-                        }
-                    }
-                } catch (e: Exception) {
-                    android.util.Log.e("SmilePile", "Failed to save edited photo: ${e.message}")
-                }
-            } else if (item.isProcessed && !item.wasEdited && editMode == EditMode.IMPORT) {
-                // For imports that weren't edited, still save them
-                item.uri?.let { uri ->
-                    try {
-                        val filename = "import_${System.currentTimeMillis()}_${savedPhotos.size}.jpg"
-
-                        // Copy from URI to internal storage
-                        val inputStream = context.contentResolver.openInputStream(uri)
-                        val bitmap = BitmapFactory.decodeStream(inputStream)
-                        inputStream?.close()
-
-                        val savedFile = storageManager.savePhotoToInternalStorage(bitmap, filename)
-
-                        savedFile?.let { file ->
-                            val photo = Photo(
-                                id = 0,
-                                name = filename,
-                                path = savedFile.absolutePath,
-                                categoryId = pendingCategoryId,
-                                createdAt = System.currentTimeMillis(),
-                                width = bitmap.width,
-                                height = bitmap.height,
-                                fileSize = savedFile.length(),
-                                isFromAssets = false
-                            )
-
-                            val photoId = photoRepository.insertPhoto(photo)
-                            savedPhotos.add(photo.copy(id = photoId))
-                        }
-                    } catch (e: Exception) {
-                        android.util.Log.e("SmilePile", "Failed to save unedited import: ${e.message}")
-                    }
-                }
-            } else if (item.isProcessed && !item.wasEdited && editMode == EditMode.GALLERY) {
-                // For gallery photos that were skipped but category may have changed
-                item.path?.let { path ->
-                    try {
-                        val existingPhoto = photoRepository.getPhotoByPath(path)
-                        existingPhoto?.let { photo ->
-                            if (photo.categoryId != pendingCategoryId) {
-                                // Only update if category changed
-                                val updatedPhoto = photo.copy(categoryId = pendingCategoryId)
-                                photoRepository.updatePhoto(updatedPhoto)
-                                savedPhotos.add(updatedPhoto)
-                            } else {
-                                // Photo exists but category hasn't changed, still add to saved photos
-                                savedPhotos.add(photo)
-                            }
-                        }
-                    } catch (e: Exception) {
-                        android.util.Log.e("SmilePile", "Failed to update category for skipped photo: ${e.message}")
-                    }
-                }
+            savedPhoto?.let { photo ->
+                savedPhotos.add(photo)
+                updateQueueItemPath(item, photo.path)
             }
         }
 
         return savedPhotos
+    }
+
+    private fun shouldSaveEditedPhoto(item: PhotoEditItem): Boolean {
+        return item.isProcessed && item.wasEdited && item.processedBitmap != null
+    }
+
+    private fun shouldSaveUneditedImport(item: PhotoEditItem): Boolean {
+        return item.isProcessed && !item.wasEdited && editMode == EditMode.IMPORT && item.uri != null
+    }
+
+    private fun shouldUpdateCategoryOnly(item: PhotoEditItem): Boolean {
+        return item.isProcessed && !item.wasEdited && editMode == EditMode.GALLERY && item.path != null
+    }
+
+    private suspend fun saveEditedGalleryPhoto(item: PhotoEditItem): Photo? {
+        return try {
+            val existingFile = File(item.path!!)
+            val savedFile = storageManager.savePhotoToInternalStorage(
+                bitmap = item.processedBitmap!!,
+                filename = existingFile.name
+            ) ?: return null
+
+            val existingPhoto = photoRepository.getPhotoByPath(item.path) ?: return null
+
+            val updatedPhoto = existingPhoto.copy(
+                categoryId = pendingCategoryId,
+                width = item.processedBitmap.width,
+                height = item.processedBitmap.height,
+                fileSize = savedFile.length(),
+                createdAt = System.currentTimeMillis()
+            )
+            photoRepository.updatePhoto(updatedPhoto)
+            updatedPhoto
+        } catch (e: Exception) {
+            android.util.Log.e("SmilePile", "Failed to save edited photo: ${e.message}")
+            null
+        }
+    }
+
+    private suspend fun saveNewImportedPhoto(item: PhotoEditItem, index: Int): Photo? {
+        return try {
+            val filename = "edited_${System.currentTimeMillis()}_$index.jpg"
+            val savedFile = storageManager.savePhotoToInternalStorage(
+                bitmap = item.processedBitmap!!,
+                filename = filename
+            ) ?: return null
+
+            val photo = createPhotoEntity(
+                filename = filename,
+                path = savedFile.absolutePath,
+                width = item.processedBitmap.width,
+                height = item.processedBitmap.height,
+                fileSize = savedFile.length()
+            )
+
+            val photoId = photoRepository.insertPhoto(photo)
+            photo.copy(id = photoId)
+        } catch (e: Exception) {
+            android.util.Log.e("SmilePile", "Failed to save edited photo: ${e.message}")
+            null
+        }
+    }
+
+    private suspend fun saveUneditedImport(item: PhotoEditItem, index: Int): Photo? {
+        return try {
+            val filename = "import_${System.currentTimeMillis()}_$index.jpg"
+
+            val inputStream = context.contentResolver.openInputStream(item.uri!!)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            inputStream?.close()
+
+            val savedFile = storageManager.savePhotoToInternalStorage(bitmap, filename) ?: return null
+
+            val photo = createPhotoEntity(
+                filename = filename,
+                path = savedFile.absolutePath,
+                width = bitmap.width,
+                height = bitmap.height,
+                fileSize = savedFile.length()
+            )
+
+            val photoId = photoRepository.insertPhoto(photo)
+            photo.copy(id = photoId)
+        } catch (e: Exception) {
+            android.util.Log.e("SmilePile", "Failed to save unedited import: ${e.message}")
+            null
+        }
+    }
+
+    private suspend fun updatePhotoCategory(item: PhotoEditItem): Photo? {
+        return try {
+            val existingPhoto = photoRepository.getPhotoByPath(item.path!!) ?: return null
+
+            if (existingPhoto.categoryId != pendingCategoryId) {
+                val updatedPhoto = existingPhoto.copy(categoryId = pendingCategoryId)
+                photoRepository.updatePhoto(updatedPhoto)
+                updatedPhoto
+            } else {
+                existingPhoto
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("SmilePile", "Failed to update category for skipped photo: ${e.message}")
+            null
+        }
+    }
+
+    private fun createPhotoEntity(filename: String, path: String, width: Int, height: Int, fileSize: Long): Photo {
+        return Photo(
+            id = 0,
+            name = filename,
+            path = path,
+            categoryId = pendingCategoryId,
+            createdAt = System.currentTimeMillis(),
+            width = width,
+            height = height,
+            fileSize = fileSize,
+            isFromAssets = false
+        )
+    }
+
+    private fun updateQueueItemPath(item: PhotoEditItem, savedPath: String) {
+        val index = _uiState.value.editQueue.indexOf(item)
+        if (index >= 0) {
+            val updatedQueue = _uiState.value.editQueue.toMutableList()
+            updatedQueue[index] = item.copy(savedPath = savedPath)
+            _uiState.value = _uiState.value.copy(editQueue = updatedQueue)
+        }
     }
 }
 

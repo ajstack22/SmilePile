@@ -78,7 +78,7 @@ fun CategoryManagementScreen(
             )
         },
         contentWindowInsets = WindowInsets(0.dp) // Same as PhotoGalleryScreen
-    ) { scaffoldPaddingValues ->
+    ) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()

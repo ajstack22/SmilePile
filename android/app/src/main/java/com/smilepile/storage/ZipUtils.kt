@@ -181,117 +181,23 @@ object ZipUtils {
                 return@withContext Result.failure(IllegalArgumentException("ZIP file does not exist"))
             }
 
-            // Create destination directory if it doesn't exist
             if (!destDir.exists()) {
                 destDir.mkdirs()
             }
 
-            val extractedFiles = mutableListOf<File>()
-            var totalUncompressedSize = 0L
-            var entryCount = 0
-
-            // First pass: validate ZIP structure and check for security issues
-            ZipInputStream(BufferedInputStream(FileInputStream(zipFile))).use { zipIn ->
-                var entry: ZipEntry?
-                while (zipIn.nextEntry.also { entry = it } != null) {
-                    val currentEntry = entry!!
-                    entryCount++
-
-                    // Check entry count limit
-                    if (entryCount > MAX_ENTRIES) {
-                        return@withContext Result.failure(
-                            SecurityException("ZIP contains too many entries (max: $MAX_ENTRIES)")
-                        )
-                    }
-
-                    // Check for path traversal
-                    val sanitizedName = sanitizeEntryName(currentEntry.name)
-                    if (sanitizedName != currentEntry.name) {
-                        return@withContext Result.failure(
-                            SecurityException("ZIP contains unsafe path: ${currentEntry.name}")
-                        )
-                    }
-
-                    // Check uncompressed size
-                    if (currentEntry.size > 0) {
-                        totalUncompressedSize += currentEntry.size
-                        if (totalUncompressedSize > MAX_UNCOMPRESSED_SIZE) {
-                            return@withContext Result.failure(
-                                SecurityException("ZIP uncompressed size exceeds limit")
-                            )
-                        }
-                    }
-
-                    // Check compression ratio to detect ZIP bombs
-                    if (currentEntry.size > 0 && currentEntry.compressedSize > 0) {
-                        val ratio = currentEntry.size / max(currentEntry.compressedSize, 1)
-                        if (ratio > MAX_COMPRESSION_RATIO) {
-                            return@withContext Result.failure(
-                                SecurityException("ZIP compression ratio too high (potential ZIP bomb)")
-                            )
-                        }
-                    }
-
-                    zipIn.closeEntry()
-                }
+            val validationResult = validateZipSecurityFirstPass(zipFile)
+            if (validationResult.isFailure) {
+                return@withContext Result.failure(validationResult.exceptionOrNull()!!)
             }
 
-            // Validate ZIP structure
+            val entryCount = validationResult.getOrNull() ?: 0
+
             val structureValidation = validateZipStructure(zipFile)
             if (structureValidation.isFailure) {
                 return@withContext Result.failure(structureValidation.exceptionOrNull()!!)
             }
 
-            var processedEntries = 0
-
-            // Second pass: actual extraction
-            ZipInputStream(BufferedInputStream(FileInputStream(zipFile))).use { zipIn ->
-                var entry: ZipEntry?
-                while (zipIn.nextEntry.also { entry = it } != null) {
-                    val currentEntry = entry!!
-
-                    if (currentEntry.isDirectory) {
-                        // Create directory
-                        val dir = File(destDir, currentEntry.name)
-                        dir.mkdirs()
-                    } else {
-                        // Extract file
-                        val outputFile = File(destDir, currentEntry.name)
-
-                        // Ensure parent directory exists
-                        outputFile.parentFile?.mkdirs()
-
-                        BufferedOutputStream(FileOutputStream(outputFile)).use { output ->
-                            val buffer = ByteArray(BUFFER_SIZE)
-                            var bytesRead: Int
-                            var totalBytesRead = 0L
-
-                            while (zipIn.read(buffer).also { bytesRead = it } != -1) {
-                                output.write(buffer, 0, bytesRead)
-                                totalBytesRead += bytesRead
-
-                                // Additional size check during extraction
-                                if (totalBytesRead > MAX_UNCOMPRESSED_SIZE) {
-                                    throw SecurityException("File size exceeds limit during extraction")
-                                }
-                            }
-                        }
-
-                        // Set last modified time
-                        if (!outputFile.setLastModified(currentEntry.time)) {
-                            Log.w(TAG, "Failed to set last modified time for: ${outputFile.name}")
-                        }
-                        extractedFiles.add(outputFile)
-                    }
-
-                    zipIn.closeEntry()
-                    processedEntries++
-                    progressCallback?.invoke(processedEntries, entryCount)
-                }
-            }
-
-            Log.i(TAG, "Successfully extracted ${extractedFiles.size} files to: ${destDir.absolutePath}")
-            Result.success(extractedFiles)
+            extractZipSecondPass(zipFile, destDir, entryCount, progressCallback)
 
         } catch (e: Exception) {
             Log.e(TAG, "Failed to extract ZIP file", e)
@@ -427,6 +333,142 @@ object ZipUtils {
             Log.e(TAG, "Failed to get ZIP info", e)
             Result.failure(e)
         }
+    }
+
+    private suspend fun validateZipSecurityFirstPass(zipFile: File): Result<Int> = withContext(Dispatchers.IO) {
+        try {
+            var totalUncompressedSize = 0L
+            var entryCount = 0
+
+            ZipInputStream(BufferedInputStream(FileInputStream(zipFile))).use { zipIn ->
+                var entry: ZipEntry?
+                while (zipIn.nextEntry.also { entry = it } != null) {
+                    val currentEntry = entry!!
+                    entryCount++
+
+                    val validationResult = validateZipEntryForSecurity(currentEntry, entryCount, totalUncompressedSize)
+                    if (validationResult.isFailure) {
+                        return@withContext validationResult
+                    }
+
+                    if (currentEntry.size > 0) {
+                        totalUncompressedSize += currentEntry.size
+                    }
+
+                    zipIn.closeEntry()
+                }
+            }
+
+            Result.success(entryCount)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private fun validateZipEntryForSecurity(
+        entry: ZipEntry,
+        currentCount: Int,
+        currentTotalSize: Long
+    ): Result<Int> {
+        if (currentCount > MAX_ENTRIES) {
+            return Result.failure(
+                SecurityException("ZIP contains too many entries (max: $MAX_ENTRIES)")
+            )
+        }
+
+        val sanitizedName = sanitizeEntryName(entry.name)
+        if (sanitizedName != entry.name) {
+            return Result.failure(
+                SecurityException("ZIP contains unsafe path: ${entry.name}")
+            )
+        }
+
+        if (entry.size > 0 && currentTotalSize + entry.size > MAX_UNCOMPRESSED_SIZE) {
+            return Result.failure(
+                SecurityException("ZIP uncompressed size exceeds limit")
+            )
+        }
+
+        if (entry.size > 0 && entry.compressedSize > 0) {
+            val ratio = entry.size / max(entry.compressedSize, 1)
+            if (ratio > MAX_COMPRESSION_RATIO) {
+                return Result.failure(
+                    SecurityException("ZIP compression ratio too high (potential ZIP bomb)")
+                )
+            }
+        }
+
+        return Result.success(0)
+    }
+
+    private suspend fun extractZipSecondPass(
+        zipFile: File,
+        destDir: File,
+        totalEntries: Int,
+        progressCallback: ((current: Int, total: Int) -> Unit)?
+    ): Result<List<File>> = withContext(Dispatchers.IO) {
+        try {
+            val extractedFiles = mutableListOf<File>()
+            var processedEntries = 0
+
+            ZipInputStream(BufferedInputStream(FileInputStream(zipFile))).use { zipIn ->
+                var entry: ZipEntry?
+                while (zipIn.nextEntry.also { entry = it } != null) {
+                    val currentEntry = entry!!
+
+                    if (currentEntry.isDirectory) {
+                        createZipDirectory(destDir, currentEntry.name)
+                    } else {
+                        val extractedFile = extractZipFile(zipIn, destDir, currentEntry)
+                        extractedFiles.add(extractedFile)
+                    }
+
+                    zipIn.closeEntry()
+                    processedEntries++
+                    progressCallback?.invoke(processedEntries, totalEntries)
+                }
+            }
+
+            Log.i(TAG, "Successfully extracted ${extractedFiles.size} files to: ${destDir.absolutePath}")
+            Result.success(extractedFiles)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private fun createZipDirectory(destDir: File, entryName: String) {
+        val dir = File(destDir, entryName)
+        dir.mkdirs()
+    }
+
+    private fun extractZipFile(
+        zipIn: ZipInputStream,
+        destDir: File,
+        entry: ZipEntry
+    ): File {
+        val outputFile = File(destDir, entry.name)
+        outputFile.parentFile?.mkdirs()
+
+        BufferedOutputStream(FileOutputStream(outputFile)).use { output ->
+            val buffer = ByteArray(BUFFER_SIZE)
+            var bytesRead: Int
+            var totalBytesRead = 0L
+
+            while (zipIn.read(buffer).also { bytesRead = it } != -1) {
+                output.write(buffer, 0, bytesRead)
+                totalBytesRead += bytesRead
+
+                if (totalBytesRead > MAX_UNCOMPRESSED_SIZE) {
+                    throw SecurityException("File size exceeds limit during extraction")
+                }
+            }
+        }
+
+        if (!outputFile.setLastModified(entry.time)) {
+            Log.w(TAG, "Failed to set last modified time for: ${outputFile.name}")
+        }
+
+        return outputFile
     }
 }
 
