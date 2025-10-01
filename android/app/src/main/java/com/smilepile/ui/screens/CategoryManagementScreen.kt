@@ -193,55 +193,13 @@ fun CategoryManagementScreen(
 
     // Delete confirmation dialog
     showDeleteDialog?.let { category ->
-        var deletePhotos by remember { mutableStateOf(false) }
-
-        AlertDialog(
-            onDismissRequest = { showDeleteDialog = null },
-            title = { Text("Delete Pile") },
-            text = {
-                Column {
-                    Text("Delete '${category.displayName}'?")
-
-                    val (canDelete, reason) = viewModel.canDeleteCategory(category)
-                    if (!canDelete) {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = reason ?: "Cannot delete this pile",
-                            color = MaterialTheme.colorScheme.error,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    } else {
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Checkbox(
-                                checked = deletePhotos,
-                                onCheckedChange = { deletePhotos = it }
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Also delete all photos in this pile")
-                        }
-                    }
-                }
-            },
-            confirmButton = {
-                val (canDelete, _) = viewModel.canDeleteCategory(category)
-                if (canDelete) {
-                    TextButton(
-                        onClick = {
-                            viewModel.deleteCategory(category, deletePhotos)
-                            showDeleteDialog = null
-                        }
-                    ) {
-                        Text("Delete", color = MaterialTheme.colorScheme.error)
-                    }
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDeleteDialog = null }) {
-                    Text("Cancel")
-                }
+        DeleteCategoryDialog(
+            category = category,
+            viewModel = viewModel,
+            onDismiss = { showDeleteDialog = null },
+            onConfirm = { deletePhotos ->
+                viewModel.deleteCategory(category, deletePhotos)
+                showDeleteDialog = null
             }
         )
     }
@@ -492,5 +450,97 @@ fun CategoryEditDialog(
 
             Spacer(modifier = Modifier.weight(1f))
         }
+    }
+}
+
+@Composable
+private fun DeleteCategoryDialog(
+    category: Category,
+    viewModel: CategoryViewModel,
+    onDismiss: () -> Unit,
+    onConfirm: (Boolean) -> Unit
+) {
+    var deletePhotos by remember { mutableStateOf(false) }
+    val (canDelete, reason) = viewModel.canDeleteCategory(category)
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Delete Pile") },
+        text = {
+            DeleteDialogContent(
+                category = category,
+                canDelete = canDelete,
+                reason = reason,
+                deletePhotos = deletePhotos,
+                onDeletePhotosChange = { deletePhotos = it }
+            )
+        },
+        confirmButton = {
+            if (canDelete) {
+                DeleteConfirmButton(
+                    onConfirm = { onConfirm(deletePhotos) }
+                )
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+private fun DeleteDialogContent(
+    category: Category,
+    canDelete: Boolean,
+    reason: String?,
+    deletePhotos: Boolean,
+    onDeletePhotosChange: (Boolean) -> Unit
+) {
+    Column {
+        Text("Delete '${category.displayName}'?")
+
+        if (!canDelete) {
+            DeleteErrorMessage(reason)
+        } else {
+            DeletePhotosCheckbox(
+                checked = deletePhotos,
+                onCheckedChange = onDeletePhotosChange
+            )
+        }
+    }
+}
+
+@Composable
+private fun DeleteErrorMessage(reason: String?) {
+    Spacer(modifier = Modifier.height(8.dp))
+    Text(
+        text = reason ?: "Cannot delete this pile",
+        color = MaterialTheme.colorScheme.error,
+        style = MaterialTheme.typography.bodySmall
+    )
+}
+
+@Composable
+private fun DeletePhotosCheckbox(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Spacer(modifier = Modifier.height(16.dp))
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text("Also delete all photos in this pile")
+    }
+}
+
+@Composable
+private fun DeleteConfirmButton(onConfirm: () -> Unit) {
+    TextButton(onClick = onConfirm) {
+        Text("Delete", color = MaterialTheme.colorScheme.error)
     }
 }
