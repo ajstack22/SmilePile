@@ -120,106 +120,17 @@ class PhotoImportViewModel @Inject constructor(
      * Import multiple photos from the device gallery using enhanced PhotoImportManager
      */
     fun importPhotos(uris: List<Uri>, categoryId: Long) {
-        if (uris.isEmpty()) return
-
-        // Validate batch size
-        if (uris.size > PhotoImportManager.MAX_BATCH_SIZE) {
-            _uiState.value = _uiState.value.copy(
-                error = "Cannot import more than ${PhotoImportManager.MAX_BATCH_SIZE} photos at once"
-            )
-            return
-        }
+        if (!validateBatchImport(uris)) return
 
         viewModelScope.launch {
             try {
-                _uiState.value = _uiState.value.copy(
-                    isImporting = true,
-                    importProgress = 0f,
-                    error = null,
-                    batchImportTotal = uris.size,
-                    batchImportCompleted = 0
-                )
+                initializeBatchImport(uris)
+                if (!checkStorageForBatch(uris.size)) return@launch
 
-                // Check available space for batch import
-                val estimatedTotalSize = uris.size * 10 * 1024 * 1024L // 10MB per photo estimate
-                if (!storageManager.hasEnoughSpace(estimatedTotalSize)) {
-                    _uiState.value = _uiState.value.copy(
-                        isImporting = false,
-                        error = "Not enough storage space for ${uris.size} photos"
-                    )
-                    return@launch
-                }
+                val stats = executeBatchImport(uris, categoryId)
+                updateFinalBatchState(uris.size, stats)
 
-                val importedPhotos = mutableListOf<Photo>()
-                val failedImports = mutableListOf<String>()
-                val duplicateCount = mutableListOf<String>()
-                var processedCount = 0
-
-                // Use PhotoImportManager with progress tracking
-                photoImportManager.importPhotosWithProgress(
-                    uris = uris,
-                    onProgress = { progress ->
-                        _uiState.value = _uiState.value.copy(
-                            importProgress = progress
-                        )
-                    }
-                ).collect { result ->
-                    processedCount++
-                    _uiState.value = _uiState.value.copy(
-                        batchImportCompleted = processedCount
-                    )
-
-                    when (result) {
-                        is ImportResult.Success -> {
-                            // Create photo entity with metadata
-                            val photo = createPhotoFromImportResult(result, categoryId)
-                            val photoId = photoRepository.insertPhoto(photo)
-                            if (photoId > 0) {
-                                importedPhotos.add(photo.copy(id = photoId))
-                                Log.d(TAG, "Successfully imported photo ${processedCount}/${uris.size}")
-                            } else {
-                                failedImports.add("Photo ${processedCount}: Database save failed")
-                            }
-                        }
-                        is ImportResult.Duplicate -> {
-                            duplicateCount.add(result.hash)
-                            Log.d(TAG, "Duplicate photo detected: ${result.hash}")
-                        }
-                        is ImportResult.Error -> {
-                            failedImports.add("Photo ${processedCount}: ${result.message}")
-                            Log.e(TAG, "Import error: ${result.message}")
-                        }
-                    }
-                }
-
-                // Update final state with enhanced statistics
-                val successCount = importedPhotos.size
-                val failureCount = failedImports.size
-                val duplicatesFound = duplicateCount.size
-
-                val successMessage = buildString {
-                    if (successCount > 0) {
-                        append("$successCount photos imported successfully")
-                    }
-                    if (duplicatesFound > 0) {
-                        if (successCount > 0) append(". ")
-                        append("$duplicatesFound duplicates skipped")
-                    }
-                }
-
-                _uiState.value = _uiState.value.copy(
-                    isImporting = false,
-                    importProgress = 1f,
-                    batchImportCompleted = uris.size,
-                    successMessage = if (successMessage.isNotEmpty()) successMessage else null,
-                    error = when {
-                        failureCount == uris.size -> "Failed to import all photos"
-                        failureCount > 0 -> "Failed to import $failureCount photos"
-                        else -> null
-                    }
-                )
-
-                Log.d(TAG, "Batch import completed: $successCount success, $failureCount failed")
+                Log.d(TAG, "Batch import completed: ${stats.successCount} success, ${stats.failureCount} failed")
             } catch (e: Exception) {
                 Log.e(TAG, "Error in batch photo import", e)
                 _uiState.value = _uiState.value.copy(
@@ -318,6 +229,134 @@ class PhotoImportViewModel @Inject constructor(
             width = importResult.metadata?.width ?: 0,
             height = importResult.metadata?.height ?: 0
         )
+    }
+
+    // MARK: - Batch Import Helper Methods
+
+    private data class BatchImportStats(
+        val successCount: Int,
+        val failureCount: Int,
+        val duplicatesFound: Int
+    )
+
+    private fun validateBatchImport(uris: List<Uri>): Boolean {
+        if (uris.isEmpty()) return false
+
+        if (uris.size > PhotoImportManager.MAX_BATCH_SIZE) {
+            _uiState.value = _uiState.value.copy(
+                error = "Cannot import more than ${PhotoImportManager.MAX_BATCH_SIZE} photos at once"
+            )
+            return false
+        }
+
+        return true
+    }
+
+    private fun initializeBatchImport(uris: List<Uri>) {
+        _uiState.value = _uiState.value.copy(
+            isImporting = true,
+            importProgress = 0f,
+            error = null,
+            batchImportTotal = uris.size,
+            batchImportCompleted = 0
+        )
+    }
+
+    private suspend fun checkStorageForBatch(photoCount: Int): Boolean {
+        val estimatedTotalSize = photoCount * 10 * 1024 * 1024L // 10MB per photo estimate
+        if (!storageManager.hasEnoughSpace(estimatedTotalSize)) {
+            _uiState.value = _uiState.value.copy(
+                isImporting = false,
+                error = "Not enough storage space for $photoCount photos"
+            )
+            return false
+        }
+        return true
+    }
+
+    private suspend fun executeBatchImport(uris: List<Uri>, categoryId: Long): BatchImportStats {
+        val importedPhotos = mutableListOf<Photo>()
+        val failedImports = mutableListOf<String>()
+        val duplicateCount = mutableListOf<String>()
+        var processedCount = 0
+
+        photoImportManager.importPhotosWithProgress(
+            uris = uris,
+            onProgress = { progress ->
+                _uiState.value = _uiState.value.copy(importProgress = progress)
+            }
+        ).collect { result ->
+            processedCount++
+            _uiState.value = _uiState.value.copy(batchImportCompleted = processedCount)
+
+            when (result) {
+                is ImportResult.Success -> handleSuccessfulImport(result, categoryId, processedCount, uris.size, importedPhotos, failedImports)
+                is ImportResult.Duplicate -> handleDuplicateImport(result, duplicateCount)
+                is ImportResult.Error -> handleFailedImport(result, processedCount, failedImports)
+            }
+        }
+
+        return BatchImportStats(importedPhotos.size, failedImports.size, duplicateCount.size)
+    }
+
+    private suspend fun handleSuccessfulImport(
+        result: ImportResult.Success,
+        categoryId: Long,
+        processedCount: Int,
+        totalCount: Int,
+        importedPhotos: MutableList<Photo>,
+        failedImports: MutableList<String>
+    ) {
+        val photo = createPhotoFromImportResult(result, categoryId)
+        val photoId = photoRepository.insertPhoto(photo)
+        if (photoId > 0) {
+            importedPhotos.add(photo.copy(id = photoId))
+            Log.d(TAG, "Successfully imported photo $processedCount/$totalCount")
+        } else {
+            failedImports.add("Photo $processedCount: Database save failed")
+        }
+    }
+
+    private fun handleDuplicateImport(result: ImportResult.Duplicate, duplicateCount: MutableList<String>) {
+        duplicateCount.add(result.hash)
+        Log.d(TAG, "Duplicate photo detected: ${result.hash}")
+    }
+
+    private fun handleFailedImport(result: ImportResult.Error, processedCount: Int, failedImports: MutableList<String>) {
+        failedImports.add("Photo $processedCount: ${result.message}")
+        Log.e(TAG, "Import error: ${result.message}")
+    }
+
+    private fun updateFinalBatchState(totalCount: Int, stats: BatchImportStats) {
+        val successMessage = buildBatchSuccessMessage(stats)
+
+        _uiState.value = _uiState.value.copy(
+            isImporting = false,
+            importProgress = 1f,
+            batchImportCompleted = totalCount,
+            successMessage = if (successMessage.isNotEmpty()) successMessage else null,
+            error = buildBatchErrorMessage(stats, totalCount)
+        )
+    }
+
+    private fun buildBatchSuccessMessage(stats: BatchImportStats): String {
+        return buildString {
+            if (stats.successCount > 0) {
+                append("${stats.successCount} photos imported successfully")
+            }
+            if (stats.duplicatesFound > 0) {
+                if (stats.successCount > 0) append(". ")
+                append("${stats.duplicatesFound} duplicates skipped")
+            }
+        }
+    }
+
+    private fun buildBatchErrorMessage(stats: BatchImportStats, totalCount: Int): String? {
+        return when {
+            stats.failureCount == totalCount -> "Failed to import all photos"
+            stats.failureCount > 0 -> "Failed to import ${stats.failureCount} photos"
+            else -> null
+        }
     }
 }
 
