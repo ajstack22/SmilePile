@@ -108,55 +108,63 @@ class PhotoEditViewModel @Inject constructor(
 
         try {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
-
-            // Load bitmap based on source
-            val bitmap = when {
-                currentItem.uri != null -> {
-                    // Load from URI (new import)
-                    withContext(Dispatchers.IO) {
-                        context.contentResolver.openInputStream(currentItem.uri)?.use {
-                            BitmapFactory.decodeStream(it)
-                        }
-                    }
-                }
-                currentItem.path != null -> {
-                    // Load from path (existing photo)
-                    withContext(Dispatchers.IO) {
-                        BitmapFactory.decodeFile(currentItem.path)
-                    }
-                }
-                else -> null
-            }
+            val bitmap = loadBitmapFromItem(currentItem)
 
             bitmap?.let {
-                // Check for EXIF rotation and apply if needed
-                val exifRotation = currentItem.path?.let { path ->
-                    ImageProcessor.getExifRotation(path)
-                } ?: 0
-
-                // Apply EXIF rotation to the bitmap if needed
-                val correctedBitmap = if (exifRotation != 0) {
-                    ImageProcessor.rotateBitmap(it, exifRotation.toFloat())
-                } else {
-                    it
-                }
-
-                // Create preview for UI (memory efficient)
+                val correctedBitmap = applyExifRotation(it, currentItem.path)
                 val preview = ImageProcessor.createPreviewBitmap(correctedBitmap)
-
-                _uiState.value = _uiState.value.copy(
-                    currentBitmap = correctedBitmap,
-                    previewBitmap = preview,
-                    currentRotation = 0f, // Reset rotation since EXIF is already applied
-                    isLoading = false
-                )
+                updateStateWithLoadedPhoto(correctedBitmap, preview)
             }
         } catch (e: Exception) {
-            _uiState.value = _uiState.value.copy(
-                isLoading = false,
-                error = "Failed to load photo: ${e.message}"
-            )
+            handleLoadPhotoError(e)
         }
+    }
+
+    private suspend fun loadBitmapFromItem(item: PhotoEditItem): android.graphics.Bitmap? {
+        return when {
+            item.uri != null -> loadBitmapFromUri(item.uri)
+            item.path != null -> loadBitmapFromPath(item.path)
+            else -> null
+        }
+    }
+
+    private suspend fun loadBitmapFromUri(uri: Uri): android.graphics.Bitmap? {
+        return withContext(Dispatchers.IO) {
+            context.contentResolver.openInputStream(uri)?.use {
+                BitmapFactory.decodeStream(it)
+            }
+        }
+    }
+
+    private suspend fun loadBitmapFromPath(path: String): android.graphics.Bitmap? {
+        return withContext(Dispatchers.IO) {
+            BitmapFactory.decodeFile(path)
+        }
+    }
+
+    private suspend fun applyExifRotation(bitmap: android.graphics.Bitmap, path: String?): android.graphics.Bitmap {
+        val exifRotation = path?.let { ImageProcessor.getExifRotation(it) } ?: 0
+        return if (exifRotation != 0) {
+            ImageProcessor.rotateBitmap(bitmap, exifRotation.toFloat())
+        } else {
+            bitmap
+        }
+    }
+
+    private fun updateStateWithLoadedPhoto(bitmap: android.graphics.Bitmap, preview: android.graphics.Bitmap) {
+        _uiState.value = _uiState.value.copy(
+            currentBitmap = bitmap,
+            previewBitmap = preview,
+            currentRotation = 0f,
+            isLoading = false
+        )
+    }
+
+    private fun handleLoadPhotoError(e: Exception) {
+        _uiState.value = _uiState.value.copy(
+            isLoading = false,
+            error = "Failed to load photo: ${e.message}"
+        )
     }
 
     /**
