@@ -32,31 +32,47 @@ class PINManager {
 
     func setPIN(_ pin: String, length: Int? = nil) throws {
         let pinLength = length ?? pin.count
+        try validatePINRequirements(pin, expectedLength: pinLength)
 
+        let pinData = try createPINData(from: pin)
+        try savePINData(pinData, length: pinLength)
+        resetFailedAttempts()
+    }
+
+    private func validatePINRequirements(_ pin: String, expectedLength: Int) throws {
+        try validatePINLength(pin)
+        try validatePINMatchesExpectedLength(pin, expectedLength: expectedLength)
+        try validatePINContainsOnlyNumbers(pin)
+    }
+
+    private func validatePINLength(_ pin: String) throws {
         guard pin.count >= minPINLength && pin.count <= maxPINLength else {
             throw PINError.invalidPIN
         }
+    }
 
-        guard pin.count == pinLength else {
+    private func validatePINMatchesExpectedLength(_ pin: String, expectedLength: Int) throws {
+        guard pin.count == expectedLength else {
             throw PINError.invalidPIN
         }
+    }
 
+    private func validatePINContainsOnlyNumbers(_ pin: String) throws {
         guard pin.allSatisfy({ $0.isNumber }) else {
             throw PINError.invalidPIN
         }
+    }
 
+    private func createPINData(from pin: String) throws -> PINData {
         let salt = generateSalt()
         let hash = hashPIN(pin, salt: salt)
+        return PINData(hash: hash, salt: salt)
+    }
 
-        let pinData = PINData(hash: hash, salt: salt)
+    private func savePINData(_ pinData: PINData, length: Int) throws {
         let encoded = try JSONEncoder().encode(pinData)
-
         try keychain.save(encoded, for: pinKey)
-
-        // Save PIN length preference
-        UserDefaults.standard.set(pinLength, forKey: pinLengthKey)
-
-        resetFailedAttempts()
+        UserDefaults.standard.set(length, forKey: pinLengthKey)
     }
 
     func validatePIN(_ pin: String) -> Bool {
