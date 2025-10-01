@@ -37,32 +37,50 @@ class PhotoGalleryViewModel @Inject constructor(
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
 
     init {
-        // Initialize default categories if needed
+        initializeGallery()
+    }
+
+    private fun initializeGallery() {
         viewModelScope.launch {
             categoryRepository.initializeDefaultCategories()
+            observeInitialCategorySelection()
+        }
+    }
 
-            // Collect both categories and photos to determine initial selection
-            combine(
-                categoryRepository.getAllCategoriesFlow(),
-                photoRepository.getAllPhotosFlow()
-            ) { categoriesList, photosList ->
-                Pair(categoriesList, photosList)
-            }.collect { (categoriesList, photosList) ->
-                if (_selectedCategoryIds.value.isEmpty() && categoriesList.isNotEmpty()) {
-                    if (photosList.isEmpty()) {
-                        // Gallery is empty - auto-select first category for clear UX
-                        val firstCategoryId = categoriesList.first().id
-                        _selectedCategoryIds.value = setOf(firstCategoryId)
-                        _selectedCategoryId.value = firstCategoryId
-                        println("SmilePile Debug: Gallery empty - auto-selected first category (${categoriesList.first().displayName})")
-                    } else {
-                        // Gallery has photos - default to showing all photos (no filter)
-                        _selectedCategoryIds.value = emptySet()
-                        println("SmilePile Debug: Initialized with no category filter (showing all photos)")
-                    }
-                }
+    private suspend fun observeInitialCategorySelection() {
+        combine(
+            categoryRepository.getAllCategoriesFlow(),
+            photoRepository.getAllPhotosFlow()
+        ) { categoriesList, photosList ->
+            Pair(categoriesList, photosList)
+        }.collect { (categoriesList, photosList) ->
+            if (shouldInitializeSelection(categoriesList)) {
+                applyInitialSelection(categoriesList, photosList)
             }
         }
+    }
+
+    private fun shouldInitializeSelection(categoriesList: List<Category>): Boolean {
+        return _selectedCategoryIds.value.isEmpty() && categoriesList.isNotEmpty()
+    }
+
+    private fun applyInitialSelection(categoriesList: List<Category>, photosList: List<Photo>) {
+        if (photosList.isEmpty()) {
+            setInitialCategorySelection(categoriesList.first())
+        } else {
+            setInitialViewAllPhotos()
+        }
+    }
+
+    private fun setInitialCategorySelection(category: Category) {
+        _selectedCategoryIds.value = setOf(category.id)
+        _selectedCategoryId.value = category.id
+        println("SmilePile Debug: Gallery empty - auto-selected first category (${category.displayName})")
+    }
+
+    private fun setInitialViewAllPhotos() {
+        _selectedCategoryIds.value = emptySet()
+        println("SmilePile Debug: Initialized with no category filter (showing all photos)")
     }
 
     private val _isLoading = MutableStateFlow(false)
