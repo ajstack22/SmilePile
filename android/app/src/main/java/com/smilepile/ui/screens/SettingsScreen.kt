@@ -135,190 +135,48 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                // Appearance Section
-                SettingsSection(
-                    title = stringResource(R.string.settings_appearance),
-                    modifier = Modifier.padding(top = 16.dp)
-                ) {
-                    Column {
-                        // System theme option
-                        RadioButtonRow(
-                            isSelected = uiState.themeMode == ThemeMode.SYSTEM,
-                            icon = Icons.Default.PhoneAndroid,
-                            title = "System",
-                            subtitle = "Automatic",
-                            onClick = { viewModel.setThemeMode(ThemeMode.SYSTEM) }
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier.padding(start = 48.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        )
-
-                        // Light theme option
-                        RadioButtonRow(
-                            isSelected = uiState.themeMode == ThemeMode.LIGHT,
-                            icon = Icons.Default.LightMode,
-                            title = "Light",
-                            onClick = { viewModel.setThemeMode(ThemeMode.LIGHT) }
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier.padding(start = 48.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        )
-
-                        // Dark theme option
-                        RadioButtonRow(
-                            isSelected = uiState.themeMode == ThemeMode.DARK,
-                            icon = Icons.Default.DarkMode,
-                            title = "Dark",
-                            onClick = { viewModel.setThemeMode(ThemeMode.DARK) }
-                        )
-                    }
-                }
+                AppearanceSection(
+                    themeMode = uiState.themeMode,
+                    onThemeModeChange = { viewModel.setThemeMode(it) }
+                )
             }
 
             item {
-                // Security Section
-                SettingsSection(
-                    title = "Security"
-                ) {
-                    Column {
-                    SettingsActionItem(
-                        title = if (uiState.hasPIN) "Change PIN" else "Set PIN",
-                        subtitle = if (uiState.hasPIN) {
-                            "PIN protection is enabled for Parent Mode"
-                        } else {
-                            "Set a PIN to protect Parent Mode access"
-                        },
-                        icon = Icons.Default.Lock,
-                        onClick = {
-                            if (uiState.hasPIN) {
-                                showChangePinDialog = true
-                            } else {
-                                showPinDialog = true
-                            }
-                        }
-                    )
-
-                        // Biometric Authentication Toggle
-                        if (uiState.hasPIN && viewModel.isBiometricAvailable()) {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(start = 48.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant
-                            )
-                            SettingsToggleItem(
-                                title = "Use Biometrics",
-                                subtitle = "Quick access with fingerprint",
-                                icon = Icons.Default.Fingerprint,
-                                checked = uiState.biometricEnabled,
-                                onCheckedChange = { enabled ->
-                                    viewModel.setBiometricEnabled(enabled)
-                                }
-                            )
-                        }
-
-                        if (uiState.hasPIN) {
-                            HorizontalDivider(
-                                modifier = Modifier.padding(start = 48.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant
-                            )
-                            SettingsActionItem(
-                                title = "Remove PIN",
-                                subtitle = "Disable PIN protection",
-                                icon = Icons.Default.LockOpen,
-                                onClick = {
-                                    viewModel.removePIN()
-                                }
-                            )
-                        }
-                    }
-
-                }
+                SecuritySection(
+                    hasPIN = uiState.hasPIN,
+                    biometricEnabled = uiState.biometricEnabled,
+                    isBiometricAvailable = viewModel.isBiometricAvailable(),
+                    onSetPIN = { showPinDialog = true },
+                    onChangePIN = { showChangePinDialog = true },
+                    onRemovePIN = { viewModel.removePIN() },
+                    onBiometricToggle = { viewModel.setBiometricEnabled(it) }
+                )
             }
 
             item {
-                // Backup & Restore Section
-                SettingsSection(
-                    title = "Backup & Restore"
-                ) {
-                    Column {
-
-                        SettingsActionItem(
-                            title = "Export Data",
-                            subtitle = "Save your photos and categories",
-                            icon = Icons.Default.Upload,
-                            onClick = {
-                            val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
-                            exportLauncher.launch("smilepile_backup_$timestamp.zip")
-                        }
-                    )
-
-                        HorizontalDivider(
-                            modifier = Modifier.padding(start = 48.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        )
-                        SettingsActionItem(
-                            title = "Import Data",
-                            subtitle = "Restore from backup",
-                            icon = Icons.Default.Download,
-                            onClick = {
-                            importLauncher.launch(arrayOf("application/zip", "*/*"))
-                        }
-                        )
+                BackupSection(
+                    onExport = {
+                        val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
+                        exportLauncher.launch("smilepile_backup_$timestamp.zip")
+                    },
+                    onImport = {
+                        importLauncher.launch(arrayOf("application/zip", "*/*"))
                     }
-                }
+                )
             }
-
-            // Data Management section removed - clear cache button no longer needed
 
             item {
-                // About Section
-                SettingsSection(
-                    title = stringResource(R.string.settings_about)
-                ) {
-                    SettingsActionItem(
-                        title = "SmilePile",
-                        subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
-                        icon = Icons.Default.Info,
-                        onClick = { showAboutDialog = true }
-                    )
-                }
+                AboutSection(
+                    onAboutClick = { showAboutDialog = true }
+                )
             }
 
-            // Debug Options (only in debug builds)
             if (showDebugOptions) {
                 item {
-                    SettingsSection(
-                        title = "Debug Options"
-                    ) {
-                        Column {
-                            SettingsActionItem(
-                                title = "Launch Onboarding",
-                                subtitle = "Manually start the onboarding flow",
-                                icon = Icons.Default.Info,
-                                onClick = {
-                                    // Launch onboarding activity
-                                    val intent = android.content.Intent(context, com.smilepile.onboarding.OnboardingActivity::class.java)
-                                    context.startActivity(intent)
-                                }
-                            )
-
-                            HorizontalDivider(
-                                modifier = Modifier.padding(start = 48.dp),
-                                color = MaterialTheme.colorScheme.surfaceVariant
-                            )
-
-                            SettingsActionItem(
-                                title = "Reset App (Clear Data & Onboard)",
-                                subtitle = "Clear all data and restart onboarding",
-                                icon = Icons.Default.Storage,
-                                onClick = {
-                                    // Clear settings and data, then restart app
-                                    viewModel.resetAppForOnboarding()
-                                }
-                            )
-                        }
-                    }
+                    DebugSection(
+                        context = context,
+                        onResetApp = { viewModel.resetAppForOnboarding() }
+                    )
                 }
             }
         }
@@ -381,9 +239,183 @@ fun SettingsScreen(
 
 }
 
+// MARK: - Settings Sections
 
+@Composable
+private fun AppearanceSection(
+    themeMode: ThemeMode,
+    onThemeModeChange: (ThemeMode) -> Unit
+) {
+    SettingsSection(
+        title = stringResource(R.string.settings_appearance),
+        modifier = Modifier.padding(top = 16.dp)
+    ) {
+        Column {
+            RadioButtonRow(
+                isSelected = themeMode == ThemeMode.SYSTEM,
+                icon = Icons.Default.PhoneAndroid,
+                title = "System",
+                subtitle = "Automatic",
+                onClick = { onThemeModeChange(ThemeMode.SYSTEM) }
+            )
+            SectionDivider()
 
+            RadioButtonRow(
+                isSelected = themeMode == ThemeMode.LIGHT,
+                icon = Icons.Default.LightMode,
+                title = "Light",
+                onClick = { onThemeModeChange(ThemeMode.LIGHT) }
+            )
+            SectionDivider()
 
+            RadioButtonRow(
+                isSelected = themeMode == ThemeMode.DARK,
+                icon = Icons.Default.DarkMode,
+                title = "Dark",
+                onClick = { onThemeModeChange(ThemeMode.DARK) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun SecuritySection(
+    hasPIN: Boolean,
+    biometricEnabled: Boolean,
+    isBiometricAvailable: Boolean,
+    onSetPIN: () -> Unit,
+    onChangePIN: () -> Unit,
+    onRemovePIN: () -> Unit,
+    onBiometricToggle: (Boolean) -> Unit
+) {
+    SettingsSection(title = "Security") {
+        Column {
+            PINSettingsItem(
+                hasPIN = hasPIN,
+                onSetPIN = onSetPIN,
+                onChangePIN = onChangePIN
+            )
+
+            if (hasPIN && isBiometricAvailable) {
+                SectionDivider()
+                SettingsToggleItem(
+                    title = "Use Biometrics",
+                    subtitle = "Quick access with fingerprint",
+                    icon = Icons.Default.Fingerprint,
+                    checked = biometricEnabled,
+                    onCheckedChange = onBiometricToggle
+                )
+            }
+
+            if (hasPIN) {
+                SectionDivider()
+                SettingsActionItem(
+                    title = "Remove PIN",
+                    subtitle = "Disable PIN protection",
+                    icon = Icons.Default.LockOpen,
+                    onClick = onRemovePIN
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PINSettingsItem(
+    hasPIN: Boolean,
+    onSetPIN: () -> Unit,
+    onChangePIN: () -> Unit
+) {
+    SettingsActionItem(
+        title = if (hasPIN) "Change PIN" else "Set PIN",
+        subtitle = if (hasPIN) {
+            "PIN protection is enabled for Parent Mode"
+        } else {
+            "Set a PIN to protect Parent Mode access"
+        },
+        icon = Icons.Default.Lock,
+        onClick = if (hasPIN) onChangePIN else onSetPIN
+    )
+}
+
+@Composable
+private fun BackupSection(
+    onExport: () -> Unit,
+    onImport: () -> Unit
+) {
+    SettingsSection(title = "Backup & Restore") {
+        Column {
+            SettingsActionItem(
+                title = "Export Data",
+                subtitle = "Save your photos and categories",
+                icon = Icons.Default.Upload,
+                onClick = onExport
+            )
+
+            SectionDivider()
+
+            SettingsActionItem(
+                title = "Import Data",
+                subtitle = "Restore from backup",
+                icon = Icons.Default.Download,
+                onClick = onImport
+            )
+        }
+    }
+}
+
+@Composable
+private fun AboutSection(
+    onAboutClick: () -> Unit
+) {
+    SettingsSection(title = stringResource(R.string.settings_about)) {
+        SettingsActionItem(
+            title = "SmilePile",
+            subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
+            icon = Icons.Default.Info,
+            onClick = onAboutClick
+        )
+    }
+}
+
+@Composable
+private fun DebugSection(
+    context: android.content.Context,
+    onResetApp: () -> Unit
+) {
+    SettingsSection(title = "Debug Options") {
+        Column {
+            SettingsActionItem(
+                title = "Launch Onboarding",
+                subtitle = "Manually start the onboarding flow",
+                icon = Icons.Default.Info,
+                onClick = {
+                    val intent = android.content.Intent(context, com.smilepile.onboarding.OnboardingActivity::class.java)
+                    context.startActivity(intent)
+                }
+            )
+
+            SectionDivider()
+
+            SettingsActionItem(
+                title = "Reset App (Clear Data & Onboard)",
+                subtitle = "Clear all data and restart onboarding",
+                icon = Icons.Default.Storage,
+                onClick = onResetApp
+            )
+        }
+    }
+}
+
+@Composable
+private fun SectionDivider() {
+    HorizontalDivider(
+        modifier = Modifier.padding(start = 48.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant
+    )
+}
+
+// MARK: - Dialogs
 
 /**
  * About app dialog
