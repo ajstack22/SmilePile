@@ -64,32 +64,44 @@ class PhotoRepositoryImpl @Inject constructor(
      */
     private suspend fun Photo.toPhotoEntity(): PhotoEntity {
         return if (this.id == 0L) {
-            // New photo - generate new UUID
-            PhotoEntity(
-                id = java.util.UUID.randomUUID().toString(),
-                uri = this.path,
-                categoryId = this.categoryId,
-                timestamp = this.createdAt
-            )
+            createNewPhotoEntity()
         } else {
-            // Existing photo - find by URI to get the actual UUID
-            val existingEntity = photoDao.getByUri(this.path)
-            if (existingEntity != null) {
-                // Update existing entity
-                existingEntity.copy(
-                    categoryId = this.categoryId,
-                    timestamp = this.createdAt
-                )
-            } else {
-                // Photo not found by URI, create new one with deterministic UUID
-                PhotoEntity(
-                    id = generateDeterministicUuidFromUri(this.path),
-                    uri = this.path,
-                    categoryId = this.categoryId,
-                    timestamp = this.createdAt
-                )
-            }
+            resolveExistingPhotoEntity()
         }
+    }
+
+    private fun Photo.createNewPhotoEntity(): PhotoEntity {
+        return PhotoEntity(
+            id = java.util.UUID.randomUUID().toString(),
+            uri = this.path,
+            categoryId = this.categoryId,
+            timestamp = this.createdAt
+        )
+    }
+
+    private suspend fun Photo.resolveExistingPhotoEntity(): PhotoEntity {
+        val existingEntity = photoDao.getByUri(this.path)
+        return if (existingEntity != null) {
+            updateExistingEntity(existingEntity)
+        } else {
+            createDeterministicPhotoEntity()
+        }
+    }
+
+    private fun Photo.updateExistingEntity(existingEntity: PhotoEntity): PhotoEntity {
+        return existingEntity.copy(
+            categoryId = this.categoryId,
+            timestamp = this.createdAt
+        )
+    }
+
+    private fun Photo.createDeterministicPhotoEntity(): PhotoEntity {
+        return PhotoEntity(
+            id = generateDeterministicUuidFromUri(this.path),
+            uri = this.path,
+            categoryId = this.categoryId,
+            timestamp = this.createdAt
+        )
     }
 
     /**
