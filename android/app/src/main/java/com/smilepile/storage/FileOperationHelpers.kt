@@ -42,24 +42,32 @@ object FileOperationHelpers {
 
                 // Copy to temp file first
                 if (!copyFile(source, tempFile)) {
-                    tempFile.delete()
+                    if (!tempFile.delete()) {
+                        Log.w(TAG, "Failed to delete temp file after copy failure: ${tempFile.absolutePath}")
+                    }
                     return@withContext false
                 }
 
                 // Verify copy integrity
                 if (!verifyFileIntegrity(source, tempFile)) {
-                    tempFile.delete()
+                    if (!tempFile.delete()) {
+                        Log.w(TAG, "Failed to delete temp file after integrity check failure: ${tempFile.absolutePath}")
+                    }
                     return@withContext false
                 }
 
                 // Atomic rename from temp to final
                 if (!tempFile.renameTo(destination)) {
-                    tempFile.delete()
+                    if (!tempFile.delete()) {
+                        Log.w(TAG, "Failed to delete temp file after rename failure: ${tempFile.absolutePath}")
+                    }
                     return@withContext false
                 }
 
                 // Delete source only after successful move
-                source.delete()
+                if (!source.delete()) {
+                    Log.w(TAG, "Failed to delete source file after move: ${source.absolutePath}")
+                }
                 true
             } catch (e: Exception) {
                 Log.e(TAG, "Atomic move failed: ${e.message}")
@@ -218,7 +226,10 @@ object FileOperationHelpers {
                         // Overwrite failed, continue with normal delete
                     }
 
-                    file.delete()
+                    if (!file.delete()) {
+                        Log.w(TAG, "Failed to delete file: ${file.absolutePath}")
+                        return@withContext false
+                    }
                 }
 
                 // Verify deletion
