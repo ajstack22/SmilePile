@@ -271,14 +271,24 @@ struct ParentalLockView: View {
     // MARK: - Helper Methods
 
     private func checkInitialAuth() {
-        // If no security is set, allow access to set it up
-        if !viewModel.isPINSet && !viewModel.hasPattern {
+        if shouldAllowSetup() {
             handleUnlock()
-        } else if viewModel.isBiometricEnabled && viewModel.isBiometricAvailable {
-            // Auto-prompt for biometric if enabled
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                authenticateWithBiometric()
-            }
+        } else if shouldPromptBiometric() {
+            promptBiometricAfterDelay()
+        }
+    }
+
+    private func shouldAllowSetup() -> Bool {
+        return !viewModel.isPINSet && !viewModel.hasPattern
+    }
+
+    private func shouldPromptBiometric() -> Bool {
+        return viewModel.isBiometricEnabled && viewModel.isBiometricAvailable
+    }
+
+    private func promptBiometricAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            authenticateWithBiometric()
         }
     }
 
