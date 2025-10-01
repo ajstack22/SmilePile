@@ -94,28 +94,11 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
-    var showAboutDialog by remember { mutableStateOf(false) }
-    var showPinDialog by remember { mutableStateOf(false) }
-    var showChangePinDialog by remember { mutableStateOf(false) }
-    var showDebugOptions by remember { mutableStateOf(BuildConfig.DEBUG) }
+    val dialogState = rememberDialogState()
+    val showDebugOptions by remember { mutableStateOf(BuildConfig.DEBUG) }
 
-    // Export launcher for Storage Access Framework
-    val exportLauncher = rememberLauncherForActivityResult(
-        contract = androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")
-    ) { uri ->
-        uri?.let {
-            viewModel.completeExport(it)
-        }
-    }
-
-    // Import launcher for Storage Access Framework
-    val importLauncher = rememberLauncherForActivityResult(
-        contract = androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
-    ) { uri ->
-        uri?.let {
-            viewModel.importFromUri(it)
-        }
-    }
+    val launchers = rememberBackupLaunchers(viewModel)
+    val pinDialogHandlers = rememberPinDialogHandlers(viewModel, dialogState)
 
     Scaffold(
         modifier = modifier,
@@ -126,102 +109,185 @@ fun SettingsScreen(
             )
         }
     ) { scaffoldPaddingValues ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(scaffoldPaddingValues)
-                .padding(bottom = paddingValues.calculateBottomPadding())
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            item {
-                AppearanceSection(
-                    themeMode = uiState.themeMode,
-                    onThemeModeChange = { viewModel.setThemeMode(it) }
-                )
-            }
+        SettingsContent(
+            scaffoldPaddingValues = scaffoldPaddingValues,
+            paddingValues = paddingValues,
+            uiState = uiState,
+            viewModel = viewModel,
+            context = context,
+            showDebugOptions = showDebugOptions,
+            launchers = launchers,
+            onShowAboutDialog = { dialogState.showAbout.value = true },
+            onShowPinDialog = { dialogState.showPinSetup.value = true },
+            onShowChangePinDialog = { dialogState.showChangePinDialog.value = true }
+        )
+    }
 
-            item {
-                SecuritySection(
-                    hasPIN = uiState.hasPIN,
-                    biometricEnabled = uiState.biometricEnabled,
-                    isBiometricAvailable = viewModel.isBiometricAvailable(),
-                    onSetPIN = { showPinDialog = true },
-                    onChangePIN = { showChangePinDialog = true },
-                    onRemovePIN = { viewModel.removePIN() },
-                    onBiometricToggle = { viewModel.setBiometricEnabled(it) }
-                )
-            }
+    SettingsDialogs(
+        dialogState = dialogState,
+        uiState = uiState,
+        pinDialogHandlers = pinDialogHandlers,
+        viewModel = viewModel
+    )
+}
 
-            item {
-                BackupSection(
-                    onExport = {
-                        val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
-                        exportLauncher.launch("smilepile_backup_$timestamp.zip")
-                    },
-                    onImport = {
-                        importLauncher.launch(arrayOf("application/zip", "*/*"))
-                    }
-                )
-            }
+// MARK: - Helper Data Classes and Composables
 
-            item {
-                AboutSection(
-                    onAboutClick = { showAboutDialog = true }
-                )
-            }
+@Composable
+private fun rememberDialogState(): DialogState {
+    return remember {
+        DialogState(
+            showAbout = mutableStateOf(false),
+            showPinSetup = mutableStateOf(false),
+            showChangePinDialog = mutableStateOf(false)
+        )
+    }
+}
 
-            if (showDebugOptions) {
-                item {
-                    DebugSection(
-                        context = context,
-                        onResetApp = { viewModel.resetAppForOnboarding() }
-                    )
+@Composable
+private fun rememberBackupLaunchers(viewModel: SettingsViewModel): BackupLaunchers {
+    val exportLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/zip")
+    ) { uri ->
+        uri?.let { viewModel.completeExport(it) }
+    }
+
+    val importLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let { viewModel.importFromUri(it) }
+    }
+
+    return remember { BackupLaunchers(exportLauncher, importLauncher) }
+}
+
+@Composable
+private fun rememberPinDialogHandlers(
+    viewModel: SettingsViewModel,
+    dialogState: DialogState
+): PinDialogHandlers {
+    var changePinError by remember { mutableStateOf<String?>(null) }
+
+    return remember(viewModel, dialogState) {
+        PinDialogHandlers(
+            onSetPinConfirm = { pin ->
+                viewModel.setPIN(pin)
+                dialogState.showPinSetup.value = false
+            },
+            onChangePinConfirm = { oldPin, newPin ->
+                if (viewModel.changePIN(oldPin, newPin)) {
+                    dialogState.showChangePinDialog.value = false
+                    changePinError = null
+                    true
+                } else {
+                    changePinError = "Current PIN is incorrect"
+                    false
                 }
+            },
+            changePinError = changePinError,
+            onClearError = { changePinError = null }
+        )
+    }
+}
+
+@Composable
+private fun SettingsContent(
+    scaffoldPaddingValues: PaddingValues,
+    paddingValues: PaddingValues,
+    uiState: com.smilepile.ui.viewmodels.SettingsUiState,
+    viewModel: SettingsViewModel,
+    context: android.content.Context,
+    showDebugOptions: Boolean,
+    launchers: BackupLaunchers,
+    onShowAboutDialog: () -> Unit,
+    onShowPinDialog: () -> Unit,
+    onShowChangePinDialog: () -> Unit
+) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(scaffoldPaddingValues)
+            .padding(bottom = paddingValues.calculateBottomPadding())
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            AppearanceSection(
+                themeMode = uiState.themeMode,
+                onThemeModeChange = { viewModel.setThemeMode(it) }
+            )
+        }
+
+        item {
+            SecuritySection(
+                hasPIN = uiState.hasPIN,
+                biometricEnabled = uiState.biometricEnabled,
+                isBiometricAvailable = viewModel.isBiometricAvailable(),
+                onSetPIN = onShowPinDialog,
+                onChangePIN = onShowChangePinDialog,
+                onRemovePIN = { viewModel.removePIN() },
+                onBiometricToggle = { viewModel.setBiometricEnabled(it) }
+            )
+        }
+
+        item {
+            BackupSection(
+                onExport = {
+                    val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
+                    launchers.exportLauncher.launch("smilepile_backup_$timestamp.zip")
+                },
+                onImport = {
+                    launchers.importLauncher.launch(arrayOf("application/zip", "*/*"))
+                }
+            )
+        }
+
+        item {
+            AboutSection(onAboutClick = onShowAboutDialog)
+        }
+
+        if (showDebugOptions) {
+            item {
+                DebugSection(
+                    context = context,
+                    onResetApp = { viewModel.resetAppForOnboarding() }
+                )
             }
         }
     }
+}
 
-    // About App Dialog
-    if (showAboutDialog) {
-        AboutDialog(
-            onDismiss = { showAboutDialog = false }
-        )
+@Composable
+private fun SettingsDialogs(
+    dialogState: DialogState,
+    uiState: com.smilepile.ui.viewmodels.SettingsUiState,
+    pinDialogHandlers: PinDialogHandlers,
+    viewModel: SettingsViewModel
+) {
+    if (dialogState.showAbout.value) {
+        AboutDialog(onDismiss = { dialogState.showAbout.value = false })
     }
 
-    // PIN Setup Dialog
-    if (showPinDialog) {
+    if (dialogState.showPinSetup.value) {
         PinSetupDialog(
-            onDismiss = { showPinDialog = false },
-            onConfirm = { pin ->
-                viewModel.setPIN(pin)
-                showPinDialog = false
-            }
+            onDismiss = { dialogState.showPinSetup.value = false },
+            onConfirm = pinDialogHandlers.onSetPinConfirm
         )
     }
 
-    // Change PIN Dialog
-    if (showChangePinDialog) {
-        var changePinError by remember { mutableStateOf<String?>(null) }
-
+    if (dialogState.showChangePinDialog.value) {
         ChangePinDialog(
             onDismiss = {
-                showChangePinDialog = false
-                changePinError = null
+                dialogState.showChangePinDialog.value = false
+                pinDialogHandlers.onClearError()
             },
             onConfirm = { oldPin, newPin ->
-                if (viewModel.changePIN(oldPin, newPin)) {
-                    showChangePinDialog = false
-                    changePinError = null
-                } else {
-                    changePinError = "Current PIN is incorrect"
-                }
+                pinDialogHandlers.onChangePinConfirm(oldPin, newPin)
             },
-            error = changePinError
+            error = pinDialogHandlers.changePinError
         )
     }
 
-    // Export Progress Dialog
     if (uiState.isLoading || uiState.exportProgress != null) {
         ExportProgressDialog(
             progress = uiState.exportProgress,
@@ -229,15 +295,33 @@ fun SettingsScreen(
         )
     }
 
-    // Import Progress Dialog
     uiState.importProgress?.let { progress ->
         ImportProgressDialog(
             progress = progress,
             onDismiss = { viewModel.clearImportProgress() }
         )
     }
-
 }
+
+// MARK: - Data Classes
+
+private data class DialogState(
+    val showAbout: androidx.compose.runtime.MutableState<Boolean>,
+    val showPinSetup: androidx.compose.runtime.MutableState<Boolean>,
+    val showChangePinDialog: androidx.compose.runtime.MutableState<Boolean>
+)
+
+private data class BackupLaunchers(
+    val exportLauncher: androidx.activity.result.ActivityResultLauncher<String>,
+    val importLauncher: androidx.activity.result.ActivityResultLauncher<Array<String>>
+)
+
+private data class PinDialogHandlers(
+    val onSetPinConfirm: (String) -> Unit,
+    val onChangePinConfirm: (String, String) -> Boolean,
+    val changePinError: String?,
+    val onClearError: () -> Unit
+)
 
 // MARK: - Settings Sections
 
