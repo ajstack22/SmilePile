@@ -167,70 +167,21 @@ class PhotoImportManager @Inject constructor(
      */
     private suspend fun processPhotoImport(uri: Uri): ImportResult = withContext(Dispatchers.IO) {
         try {
-            // Step 1: Check if format is supported
-            val format = getFileFormat(uri)
-            if (format == null || format.lowercase() !in SUPPORTED_FORMATS) {
-                return@withContext ImportResult.Error("Unsupported format: $format")
-            }
-
-            // Step 2: Read photo data and calculate hash
-            val photoData = context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
-                ?: return@withContext ImportResult.Error("Cannot read photo data")
-
+            val format = validateFormat(uri) ?: return@withContext ImportResult.Error("Unsupported format")
+            val photoData = readPhotoData(uri) ?: return@withContext ImportResult.Error("Cannot read photo data")
             val photoHash = duplicateDetector.calculateHash(photoData)
 
-            // Step 3: Check for duplicates
             if (duplicateDetector.isDuplicate(photoHash)) {
                 Log.d(TAG, "Duplicate photo detected: $photoHash")
                 return@withContext ImportResult.Duplicate(photoHash)
             }
 
-            // Step 4: Extract EXIF metadata from byte array
-            val metadata = ByteArrayInputStream(photoData).use {
-                metadataExtractor.extractMetadata(it)
-            }
+            val metadata = extractMetadataFromData(photoData)
+            val optimizedBitmap = optimizeBitmapFromData(photoData)
+            val fileName = generateUniqueFileName()
+            val (photoFile, thumbnailFile) = savePhotoAndThumbnail(optimizedBitmap, fileName)
 
-            Log.d(TAG, "Extracted metadata: $metadata")
-
-            // Step 5: Optimize photo from byte array
-            val optimizedBitmap = ByteArrayInputStream(photoData).use {
-                photoOptimizer.optimizePhoto(it, MAX_PHOTO_DIMENSION, JPEG_QUALITY)
-            }
-
-            // Step 6: Generate unique filename
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-            val uniqueId = UUID.randomUUID().toString().take(8)
-            val fileName = "IMG_${timestamp}_${uniqueId}.jpg"
-
-            // Step 7: Save to internal storage
-            val photosDir = File(context.filesDir, "photos").apply { mkdirs() }
-            val photoFile = File(photosDir, fileName)
-
-            FileOutputStream(photoFile).use { out ->
-                optimizedBitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, out)
-            }
-
-            // Step 8: Generate thumbnail
-            val thumbnailsDir = File(context.filesDir, "thumbnails").apply { mkdirs() }
-            val thumbnailFile = File(thumbnailsDir, "thumb_$fileName")
-
-            val thumbnail = photoOptimizer.generateThumbnail(optimizedBitmap, THUMBNAIL_SIZE)
-            FileOutputStream(thumbnailFile).use { out ->
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, THUMBNAIL_QUALITY, out)
-            }
-
-            // Clean up bitmaps
-            optimizedBitmap.recycle()
-            thumbnail.recycle()
-
-            // Step 9: Preserve EXIF metadata in saved file
-            metadata?.let {
-                metadataExtractor.preserveMetadata(photoFile.absolutePath, it)
-            }
-
-            // Step 10: Mark as processed
-            duplicateDetector.markAsProcessed(photoHash)
-            processedHashes.add(photoHash)
+            finalizeSaveWithMetadata(photoFile, metadata, photoHash)
 
             Log.d(TAG, "Successfully imported photo: $fileName")
 
@@ -247,6 +198,70 @@ class PhotoImportManager @Inject constructor(
             Log.e(TAG, "Error processing photo import", e)
             ImportResult.Error("Processing error: ${e.message}")
         }
+    }
+
+    private fun validateFormat(uri: Uri): String? {
+        val format = getFileFormat(uri)
+        return if (format != null && format.lowercase() in SUPPORTED_FORMATS) format else null
+    }
+
+    private suspend fun readPhotoData(uri: Uri): ByteArray? = withContext(Dispatchers.IO) {
+        context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+    }
+
+    private fun extractMetadataFromData(photoData: ByteArray): PhotoMetadata? {
+        return ByteArrayInputStream(photoData).use {
+            metadataExtractor.extractMetadata(it).also { metadata ->
+                Log.d(TAG, "Extracted metadata: $metadata")
+            }
+        }
+    }
+
+    private fun optimizeBitmapFromData(photoData: ByteArray): Bitmap {
+        return ByteArrayInputStream(photoData).use {
+            photoOptimizer.optimizePhoto(it, MAX_PHOTO_DIMENSION, JPEG_QUALITY)
+        }
+    }
+
+    private fun generateUniqueFileName(): String {
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val uniqueId = UUID.randomUUID().toString().take(8)
+        return "IMG_${timestamp}_${uniqueId}.jpg"
+    }
+
+    private fun savePhotoAndThumbnail(bitmap: Bitmap, fileName: String): Pair<File, File> {
+        val photoFile = savePhotoFile(bitmap, fileName)
+        val thumbnailFile = saveThumbnailFile(bitmap, fileName)
+        bitmap.recycle()
+        return Pair(photoFile, thumbnailFile)
+    }
+
+    private fun savePhotoFile(bitmap: Bitmap, fileName: String): File {
+        val photosDir = File(context.filesDir, "photos").apply { mkdirs() }
+        val photoFile = File(photosDir, fileName)
+        FileOutputStream(photoFile).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, out)
+        }
+        return photoFile
+    }
+
+    private fun saveThumbnailFile(bitmap: Bitmap, fileName: String): File {
+        val thumbnailsDir = File(context.filesDir, "thumbnails").apply { mkdirs() }
+        val thumbnailFile = File(thumbnailsDir, "thumb_$fileName")
+        val thumbnail = photoOptimizer.generateThumbnail(bitmap, THUMBNAIL_SIZE)
+        FileOutputStream(thumbnailFile).use { out ->
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, THUMBNAIL_QUALITY, out)
+        }
+        thumbnail.recycle()
+        return thumbnailFile
+    }
+
+    private fun finalizeSaveWithMetadata(photoFile: File, metadata: PhotoMetadata?, photoHash: String) {
+        metadata?.let {
+            metadataExtractor.preserveMetadata(photoFile.absolutePath, it)
+        }
+        duplicateDetector.markAsProcessed(photoHash)
+        processedHashes.add(photoHash)
     }
 
     /**
