@@ -326,112 +326,10 @@ class SettingsViewModel @Inject constructor(
             try {
                 _uiState.value = _uiState.value.copy(isLoading = true, error = null, importProgress = null)
 
-                // Determine file format based on content
-                val inputStream = context.contentResolver.openInputStream(uri)
-                if (inputStream == null) {
-                    _uiState.value = _uiState.value.copy(
-                        error = "Failed to read backup file",
-                        isLoading = false
-                    )
-                    return@launch
-                }
-
-                // Create temporary file
-                val tempFile = java.io.File(context.cacheDir, "import_temp_${System.currentTimeMillis()}")
-
-                inputStream.use { input ->
-                    tempFile.outputStream().use { output ->
-                        input.copyTo(output)
-                    }
-                }
-
-                // Detect format by examining file content
-                val isZipFile = try {
-                    tempFile.name.endsWith(".zip") ||
-                    (tempFile.length() > 4 &&
-                     tempFile.inputStream().use { stream ->
-                         val header = ByteArray(4)
-                         stream.read(header)
-                         // ZIP file signature: 0x504b0304
-                         header[0] == 0x50.toByte() && header[1] == 0x4b.toByte() &&
-                         header[2] == 0x03.toByte() && header[3] == 0x04.toByte()
-                     })
-                } catch (e: Exception) {
-                    false
-                }
-
-                // Import based on detected format
-                if (isZipFile) {
-                    backupManager.importFromZip(
-                        zipFile = tempFile,
-                        strategy = ImportStrategy.MERGE
-                    ) { current, total, operation ->
-                        val progress = ImportProgress(
-                            totalItems = total,
-                            processedItems = current,
-                            currentOperation = operation,
-                            errors = emptyList()
-                        )
-                        _uiState.value = _uiState.value.copy(importProgress = progress)
-                    }.collect { progress ->
-                        _uiState.value = _uiState.value.copy(importProgress = progress)
-
-                        when {
-                            progress.errors.isNotEmpty() -> {
-                                _uiState.value = _uiState.value.copy(
-                                    error = "Import completed with errors: ${progress.errors.firstOrNull()}",
-                                    isLoading = false,
-                                    importProgress = null
-                                )
-                            }
-                            progress.currentOperation.contains("completed", ignoreCase = true) -> {
-                                _uiState.value = _uiState.value.copy(
-                                    isLoading = false,
-                                    error = null,
-                                    importProgress = null
-                                )
-                                // Reload backup stats after successful import
-                                loadBackupStats()
-                            }
-                        }
-                    }
-                } else {
-                    // JSON format
-                    backupManager.importFromJson(
-                        backupFile = tempFile,
-                        strategy = ImportStrategy.MERGE
-                    ).collect { progress ->
-                        _uiState.value = _uiState.value.copy(importProgress = progress)
-
-                        when {
-                            progress.errors.isNotEmpty() -> {
-                                _uiState.value = _uiState.value.copy(
-                                    error = "Import completed with errors: ${progress.errors.firstOrNull()}",
-                                    isLoading = false,
-                                    importProgress = null
-                                )
-                            }
-                            progress.currentOperation.contains("completed", ignoreCase = true) -> {
-                                _uiState.value = _uiState.value.copy(
-                                    isLoading = false,
-                                    error = null,
-                                    importProgress = null
-                                )
-                                // Reload backup stats after successful import
-                                loadBackupStats()
-                            }
-                        }
-                    }
-                }
-
-                // Clean up temp file
-                try {
-                    if (!tempFile.delete()) {
-                        Log.w(TAG, "Failed to delete temporary import file: ${tempFile.absolutePath}")
-                    }
-                } catch (e: SecurityException) {
-                    Log.e(TAG, "Permission denied deleting temporary import file: ${tempFile.absolutePath}", e)
-                }
+                val tempFile = copyUriToTempFile(uri) ?: return@launch
+                val isZipFile = detectZipFormat(tempFile)
+                executeImport(tempFile, isZipFile)
+                cleanupTempFile(tempFile)
 
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
@@ -440,6 +338,106 @@ class SettingsViewModel @Inject constructor(
                     importProgress = null
                 )
             }
+        }
+    }
+
+    private suspend fun copyUriToTempFile(uri: Uri): java.io.File? {
+        val inputStream = context.contentResolver.openInputStream(uri)
+        if (inputStream == null) {
+            _uiState.value = _uiState.value.copy(
+                error = "Failed to read backup file",
+                isLoading = false
+            )
+            return null
+        }
+
+        val tempFile = java.io.File(context.cacheDir, "import_temp_${System.currentTimeMillis()}")
+        inputStream.use { input ->
+            tempFile.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        }
+        return tempFile
+    }
+
+    private fun detectZipFormat(tempFile: java.io.File): Boolean {
+        return try {
+            tempFile.name.endsWith(".zip") ||
+            (tempFile.length() > 4 &&
+             tempFile.inputStream().use { stream ->
+                 val header = ByteArray(4)
+                 stream.read(header)
+                 header[0] == 0x50.toByte() && header[1] == 0x4b.toByte() &&
+                 header[2] == 0x03.toByte() && header[3] == 0x04.toByte()
+             })
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private suspend fun executeImport(tempFile: java.io.File, isZipFile: Boolean) {
+        if (isZipFile) {
+            executeZipImport(tempFile)
+        } else {
+            executeJsonImport(tempFile)
+        }
+    }
+
+    private suspend fun executeZipImport(tempFile: java.io.File) {
+        backupManager.importFromZip(
+            zipFile = tempFile,
+            strategy = ImportStrategy.MERGE
+        ) { current, total, operation ->
+            val progress = ImportProgress(
+                totalItems = total,
+                processedItems = current,
+                currentOperation = operation,
+                errors = emptyList()
+            )
+            _uiState.value = _uiState.value.copy(importProgress = progress)
+        }.collect { progress ->
+            handleImportProgress(progress)
+        }
+    }
+
+    private suspend fun executeJsonImport(tempFile: java.io.File) {
+        backupManager.importFromJson(
+            backupFile = tempFile,
+            strategy = ImportStrategy.MERGE
+        ).collect { progress ->
+            handleImportProgress(progress)
+        }
+    }
+
+    private fun handleImportProgress(progress: ImportProgress) {
+        _uiState.value = _uiState.value.copy(importProgress = progress)
+
+        when {
+            progress.errors.isNotEmpty() -> {
+                _uiState.value = _uiState.value.copy(
+                    error = "Import completed with errors: ${progress.errors.firstOrNull()}",
+                    isLoading = false,
+                    importProgress = null
+                )
+            }
+            progress.currentOperation.contains("completed", ignoreCase = true) -> {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    error = null,
+                    importProgress = null
+                )
+                loadBackupStats()
+            }
+        }
+    }
+
+    private fun cleanupTempFile(tempFile: java.io.File) {
+        try {
+            if (!tempFile.delete()) {
+                Log.w(TAG, "Failed to delete temporary import file: ${tempFile.absolutePath}")
+            }
+        } catch (e: SecurityException) {
+            Log.e(TAG, "Permission denied deleting temporary import file: ${tempFile.absolutePath}", e)
         }
     }
 
