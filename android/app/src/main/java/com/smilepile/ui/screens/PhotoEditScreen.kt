@@ -127,69 +127,11 @@ fun PhotoEditScreen(
 
                         // Crop overlay when active
                         if (showCropOverlay) {
-                            // Calculate initial crop rect based on selected aspect ratio
-                            val initialRect = when (selectedAspectRatio) {
-                                    ImageProcessor.AspectRatio.FREE -> {
-                                        // Full image by default
-                                        androidx.compose.ui.geometry.Rect(
-                                            offset = androidx.compose.ui.geometry.Offset.Zero,
-                                            size = androidx.compose.ui.geometry.Size(
-                                                previewBitmap.width.toFloat(),
-                                                previewBitmap.height.toFloat()
-                                            )
-                                        )
-                                    }
-                                    ImageProcessor.AspectRatio.SQUARE -> {
-                                        // Center square crop
-                                        val size = min(previewBitmap.width, previewBitmap.height).toFloat()
-                                        val offsetX = (previewBitmap.width - size) / 2f
-                                        val offsetY = (previewBitmap.height - size) / 2f
-                                        androidx.compose.ui.geometry.Rect(
-                                            offset = androidx.compose.ui.geometry.Offset(offsetX, offsetY),
-                                            size = androidx.compose.ui.geometry.Size(size, size)
-                                        )
-                                    }
-                                    ImageProcessor.AspectRatio.RATIO_4_3 -> {
-                                        // 4:3 aspect ratio crop
-                                        val targetRatio = 4f / 3f
-                                        val imageRatio = previewBitmap.width.toFloat() / previewBitmap.height
-                                        val (width, height) = if (imageRatio > targetRatio) {
-                                            val h = previewBitmap.height.toFloat()
-                                            val w = h * targetRatio
-                                            w to h
-                                        } else {
-                                            val w = previewBitmap.width.toFloat()
-                                            val h = w / targetRatio
-                                            w to h
-                                        }
-                                        val offsetX = (previewBitmap.width - width) / 2f
-                                        val offsetY = (previewBitmap.height - height) / 2f
-                                        androidx.compose.ui.geometry.Rect(
-                                            offset = androidx.compose.ui.geometry.Offset(offsetX, offsetY),
-                                            size = androidx.compose.ui.geometry.Size(width, height)
-                                        )
-                                    }
-                                    ImageProcessor.AspectRatio.RATIO_16_9 -> {
-                                        // 16:9 aspect ratio crop
-                                        val targetRatio = 16f / 9f
-                                        val imageRatio = previewBitmap.width.toFloat() / previewBitmap.height
-                                        val (width, height) = if (imageRatio > targetRatio) {
-                                            val h = previewBitmap.height.toFloat()
-                                            val w = h * targetRatio
-                                            w to h
-                                        } else {
-                                            val w = previewBitmap.width.toFloat()
-                                            val h = w / targetRatio
-                                            w to h
-                                        }
-                                        val offsetX = (previewBitmap.width - width) / 2f
-                                        val offsetY = (previewBitmap.height - height) / 2f
-                                        androidx.compose.ui.geometry.Rect(
-                                            offset = androidx.compose.ui.geometry.Offset(offsetX, offsetY),
-                                            size = androidx.compose.ui.geometry.Size(width, height)
-                                        )
-                                    }
-                                }
+                            val initialRect = calculateInitialCropRect(
+                                selectedAspectRatio,
+                                previewBitmap.width,
+                                previewBitmap.height
+                            )
 
                             // Use key to force recreation when aspect ratio changes
                             key(cropOverlayKey) {
@@ -537,5 +479,60 @@ private fun CategorySelectionDialog(
                 Text("Cancel")
             }
         }
+    )
+}
+
+// MARK: - Helper Functions for Complexity Reduction
+
+private fun calculateInitialCropRect(
+    aspectRatio: ImageProcessor.AspectRatio,
+    imageWidth: Int,
+    imageHeight: Int
+): androidx.compose.ui.geometry.Rect {
+    return when (aspectRatio) {
+        ImageProcessor.AspectRatio.FREE -> calculateFreeCropRect(imageWidth, imageHeight)
+        ImageProcessor.AspectRatio.SQUARE -> calculateSquareCropRect(imageWidth, imageHeight)
+        ImageProcessor.AspectRatio.RATIO_4_3 -> calculateRatioCropRect(4f / 3f, imageWidth, imageHeight)
+        ImageProcessor.AspectRatio.RATIO_16_9 -> calculateRatioCropRect(16f / 9f, imageWidth, imageHeight)
+    }
+}
+
+private fun calculateFreeCropRect(width: Int, height: Int): androidx.compose.ui.geometry.Rect {
+    return androidx.compose.ui.geometry.Rect(
+        offset = androidx.compose.ui.geometry.Offset.Zero,
+        size = androidx.compose.ui.geometry.Size(width.toFloat(), height.toFloat())
+    )
+}
+
+private fun calculateSquareCropRect(width: Int, height: Int): androidx.compose.ui.geometry.Rect {
+    val size = min(width, height).toFloat()
+    val offsetX = (width - size) / 2f
+    val offsetY = (height - size) / 2f
+    return androidx.compose.ui.geometry.Rect(
+        offset = androidx.compose.ui.geometry.Offset(offsetX, offsetY),
+        size = androidx.compose.ui.geometry.Size(size, size)
+    )
+}
+
+private fun calculateRatioCropRect(
+    targetRatio: Float,
+    imageWidth: Int,
+    imageHeight: Int
+): androidx.compose.ui.geometry.Rect {
+    val imageRatio = imageWidth.toFloat() / imageHeight
+    val (width, height) = if (imageRatio > targetRatio) {
+        val h = imageHeight.toFloat()
+        val w = h * targetRatio
+        w to h
+    } else {
+        val w = imageWidth.toFloat()
+        val h = w / targetRatio
+        w to h
+    }
+    val offsetX = (imageWidth - width) / 2f
+    val offsetY = (imageHeight - height) / 2f
+    return androidx.compose.ui.geometry.Rect(
+        offset = androidx.compose.ui.geometry.Offset(offsetX, offsetY),
+        size = androidx.compose.ui.geometry.Size(width, height)
     )
 }
