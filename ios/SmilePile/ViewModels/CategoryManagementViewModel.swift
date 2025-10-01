@@ -56,18 +56,12 @@ class CategoryManagementViewModel: ObservableObject {
             do {
                 let categories = try await repository.getAllCategories()
 
-                // If no categories found, initialize defaults and retry
+                // DON'T auto-initialize - user may need to complete onboarding first
                 if categories.isEmpty {
-                    logger.warning("No categories found, initializing defaults...")
-                    try await repository.initializeDefaultCategories()
-                    let retryCategories = try await repository.getAllCategories()
-
-                    if retryCategories.isEmpty {
-                        logger.error("Failed to load categories after initialization")
-                        errorMessage = "Failed to load categories"
-                        isLoading = false
-                        return
-                    }
+                    logger.warning("No categories found - may need to complete onboarding")
+                    errorMessage = "Please complete onboarding to create categories"
+                    isLoading = false
+                    return
                 }
 
                 var categoriesWithCounts: [CategoryWithCount] = []

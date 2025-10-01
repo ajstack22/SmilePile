@@ -470,12 +470,10 @@ struct OptimizedPhotoGalleryView: View {
             categories = try await repository.getAllCategories()
             logger.info("Loaded \(categories.count, privacy: .public) categories")
 
-            // If no categories exist, initialize defaults
+            // DON'T auto-initialize categories - let onboarding handle it for first-time users
             if categories.isEmpty {
-                logger.info("No categories found, initializing defaults...")
-                try await repository.initializeDefaultCategories()
-                categories = try await repository.getAllCategories()
-                logger.info("After initialization: \(categories.count, privacy: .public) categories")
+                logger.info("No categories found - onboarding may not be complete yet")
+                // Use empty array - onboarding will create categories
             }
 
             // Debug: log all category names
@@ -488,21 +486,9 @@ struct OptimizedPhotoGalleryView: View {
         } catch {
             logger.error("Failed to load categories: \(error.localizedDescription, privacy: .public)")
 
-            // Use default categories as fallback and save them to CoreData
-            let defaultCategories = Category.getDefaultCategories()
-
-            // Try to save defaults to CoreData
-            do {
-                try await repository.initializeDefaultCategories()
-                categories = try await repository.getAllCategories()
-            } catch {
-                logger.error("Failed to save default categories: \(error.localizedDescription, privacy: .public)")
-                // Use in-memory defaults as last resort
-                categories = defaultCategories
-                logger.info("Using in-memory defaults: \(categories.count, privacy: .public) categories")
-            }
-
-            // Don't auto-select - let user choose
+            // DON'T auto-initialize - onboarding will handle category creation
+            logger.info("Error loading categories - may be first launch, onboarding will create them")
+            categories = []  // Empty array - onboarding will populate
         }
     }
 

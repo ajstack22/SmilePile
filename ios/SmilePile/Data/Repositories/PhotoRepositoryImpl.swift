@@ -326,4 +326,11 @@ final class PhotoRepositoryImpl: PhotoRepository {
             height: 0    // Will be calculated when needed
         )
     }
+
+    func getTotalPhotoCount() async throws -> Int {
+        return try await coreDataStack.performBackgroundTask { context in
+            let request: NSFetchRequest<PhotoEntity> = PhotoEntity.fetchRequest()
+            return try context.count(for: request)
+        }
+    }
 }

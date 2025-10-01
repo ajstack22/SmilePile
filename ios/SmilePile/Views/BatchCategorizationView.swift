@@ -96,11 +96,10 @@ struct BatchCategorizationView: View {
 
             // Progress indicator
             if viewModel.categorizedCount > 0 {
-                CircularProgressView(
-                    progress: Double(viewModel.categorizedCount) / Double(viewModel.photos.count),
-                    color: .green
-                )
-                .frame(width: 50, height: 50)
+                ProgressView(value: Double(viewModel.categorizedCount), total: Double(viewModel.photos.count))
+                    .progressViewStyle(.circular)
+                    .tint(Color.smilePileGreen)
+                    .frame(width: 50, height: 50)
             }
         }
         .padding()

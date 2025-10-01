@@ -5,7 +5,7 @@ struct PhotoThumbnailWithCategory: View {
     let photo: Photo
     let category: Category?
     let isSelected: Bool
-    let editMode: EditMode
+    let editMode: SwiftUI.EditMode
     let onTap: () -> Void
     let onLongPress: () -> Void
 
@@ -32,7 +32,7 @@ struct PhotoThumbnailWithCategory: View {
             }
 
             // Selection overlay
-            if editMode == EditMode.active {
+            if editMode == .active {
                 selectionOverlay
             }
 
@@ -116,7 +116,7 @@ struct PhotoThumbnailWithCategory: View {
     private var selectionOverlay: some View {
         ZStack(alignment: .topLeading) {
             // Semi-transparent overlay when in edit mode
-            if editMode == EditMode.active && !isSelected {
+            if editMode == .active && !isSelected {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.black.opacity(0.2))
             }
