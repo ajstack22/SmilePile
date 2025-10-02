@@ -53,10 +53,18 @@ if [ -f "android/gradlew" ]; then
         echo "⚠️  Android build had issues, continuing..."
     }
 
-    # Generate JaCoCo coverage if available
-    ./gradlew jacocoTestReport 2>/dev/null || {
-        echo "ℹ️  No Android coverage report generated"
+    # Generate JaCoCo coverage report
+    echo "📊 Generating code coverage report..."
+    ./gradlew :app:jacocoDebugTestReport --no-daemon || {
+        echo "⚠️  Coverage report generation had issues, continuing..."
     }
+
+    # Check if coverage report was generated
+    if [ -f "app/build/reports/jacoco/jacocoDebugTestReport/jacocoDebugTestReport.xml" ]; then
+        echo "✅ Coverage report generated successfully"
+    else
+        echo "⚠️  Coverage report not found, analysis will continue without coverage"
+    fi
     cd ..
 fi
 
@@ -88,8 +96,9 @@ fi
 echo ""
 echo "☁️  Sending analysis to SonarCloud..."
 # Token is passed via environment variable for security
-# Note: SONAR_SCANNER_SKIP_JRE_PROVISIONING already set above to avoid 403 errors
-npx sonar-scanner \
+# Skip JRE provisioning to avoid 403 errors (set inline to ensure it's passed to npx)
+SONAR_SCANNER_SKIP_JRE_PROVISIONING=true npx sonar-scanner \
+  -Dsonar.scanner.skipJreProvisioning=true \
   -Dsonar.projectVersion="$GIT_COMMIT" \
   -Dsonar.branch.name="$GIT_BRANCH"
 
