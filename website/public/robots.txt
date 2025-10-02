@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://smilepile.app/sitemap.xml
+
+# Crawl-delay for specific bots (optional)
+User-agent: GPTBot
+Crawl-delay: 10

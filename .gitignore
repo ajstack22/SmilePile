@@ -206,3 +206,8 @@ get_*.py
 
 # SonarQube/SonarCloud analysis artifacts
 .scannerwork/
+
+# Gitleaks secret scanning reports
+gitleaks-report.json
+gitleaks-report.sarif
+gitleaks-report.txt

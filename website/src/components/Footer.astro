@@ -1,0 +1,39 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-gray-300 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Company Info -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">SmilePile</h3>
+        <p class="text-sm">
+          Organize your family photos by timeline. Local-only storage keeps your memories private.
+        </p>
+      </div>
+
+      <!-- Legal Links -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Legal</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/privacy" class="hover:text-white transition-colors focus-visible-ring rounded">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-white transition-colors focus-visible-ring rounded">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Support</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/support" class="hover:text-white transition-colors focus-visible-ring rounded">Help & FAQs</a></li>
+          <li><a href="mailto:support@stackmap.app" class="hover:text-white transition-colors focus-visible-ring rounded">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-gray-800 text-sm text-center">
+      <p>&copy; {currentYear} StackMap. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

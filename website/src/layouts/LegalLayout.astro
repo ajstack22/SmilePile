@@ -1,0 +1,39 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lastUpdated: string;
+}
+
+const { title, description, lastUpdated } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header slot="header" />
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article class="prose prose-lg max-w-none">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
+        <p class="text-sm text-gray-600">Last Updated: {lastUpdated}</p>
+      </header>
+
+      <slot />
+
+      <footer class="mt-12 pt-8 border-t border-gray-200">
+        <p class="text-sm text-gray-600">
+          Have questions? Contact us at{' '}
+          <a href="mailto:support@stackmap.app" class="text-primary-600 hover:underline focus-visible-ring rounded">
+            support@stackmap.app
+          </a>
+        </p>
+      </footer>
+    </article>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+
+const faqs = [
+  {
+    id: 'backup-photos',
+    question: 'How do I backup my photos?',
+    answer: 'SmilePile stores photos locally on your device. To backup, use your device\'s native backup solution:<br><strong>iOS:</strong> iCloud Photo Library or iTunes backup<br><strong>Android:</strong> Google Photos or local backup to computer'
+  },
+  {
+    id: 'cloud-sync',
+    question: 'Is my data synced to the cloud?',
+    answer: 'No, all data is stored <strong>locally on your device</strong>. SmilePile does not sync to any cloud service, ensuring your photos remain private and under your control.'
+  },
+  {
+    id: 'delete-data',
+    question: 'How do I delete my data?',
+    answer: 'Go to <strong>Settings → Clear All Data</strong> in the app, or simply uninstall SmilePile. This permanently removes all photos and data from the app (but does not delete photos from your device\'s photo library).'
+  },
+  {
+    id: 'multiple-devices',
+    question: 'Can I use SmilePile on multiple devices?',
+    answer: 'Yes, you can install SmilePile on multiple devices (iPhone, iPad, Android phone/tablet). However, data is <strong>not synced between devices</strong> - each device maintains its own independent photo library.'
+  },
+  {
+    id: 'photos-not-showing',
+    question: 'Why aren\'t my photos showing up?',
+    answer: 'Check these steps:<br>1. Grant photo permissions: <strong>Settings → Privacy → Photos → SmilePile</strong><br>2. Restart the app<br>3. Verify photos are saved to device (not just cloud)<br>4. Check for app updates in App Store/Google Play'
+  },
+  {
+    id: 'pricing',
+    question: 'Is SmilePile free?',
+    answer: 'Yes, SmilePile is <strong>completely free</strong> with no in-app purchases, subscriptions, or ads. We believe in keeping family memories accessible to everyone.'
+  },
+  {
+    id: 'age-requirement',
+    question: 'What\'s the minimum age to use SmilePile?',
+    answer: 'SmilePile is designed for ages <strong>13 and up</strong>, or younger with parental supervision. We comply with COPPA (Children\'s Online Privacy Protection Act) and do not collect data from children. See our <a href="/privacy" class="text-primary-600 hover:underline">Privacy Policy</a> for details.'
+  }
+];
+---
+
+<BaseLayout
+  title="Support & Help - SmilePile"
+  description="Get help with SmilePile. Browse FAQs, contact support, and find solutions to common photo organization questions."
+>
+  <Header slot="header" />
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Page Header -->
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Support & Help</h1>
+      <p class="text-xl text-gray-600">
+        Find answers to common questions or get in touch with our support team
+      </p>
+    </header>
+
+    <!-- FAQ Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+      <div class="space-y-0">
+        {faqs.map(faq => (
+          <FAQ {...faq} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Troubleshooting Section -->
+    <section class="mb-16 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Troubleshooting Tips</h2>
+      <ul class="space-y-3 text-gray-700">
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Try restarting the app</strong> - Force close and reopen SmilePile</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Check for app updates</strong> in the App Store or Google Play</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Verify photo permissions</strong> are enabled in device settings</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><strong>Ensure sufficient device storage</strong> is available</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Contact Support Section -->
+    <section class="bg-primary-50 rounded-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Still Need Help?</h2>
+      <p class="text-gray-700 mb-6">
+        Can't find what you're looking for? We're here to help!
+      </p>
+
+      <a
+        href="mailto:support@stackmap.app?subject=SmilePile Support Request"
+        class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition-colors focus-visible-ring text-lg font-semibold"
+      >
+        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        support@stackmap.app
+      </a>
+
+      <div class="mt-6 text-sm text-gray-600">
+        <p class="mb-4"><strong>Response Time:</strong> We typically respond within 1-2 business days</p>
+        <p><strong>To help us assist you faster, please include:</strong></p>
+        <ul class="list-disc list-inside mt-2 space-y-1">
+          <li>Your device model (e.g., iPhone 14, Samsung Galaxy S23)</li>
+          <li>Your operating system version (e.g., iOS 18, Android 14)</li>
+          <li>SmilePile app version (found in Settings → About)</li>
+          <li>A detailed description of the issue</li>
+          <li>Screenshots if applicable</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Additional Resources -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Resources</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="/privacy" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-500 transition-colors focus-visible-ring">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Privacy Policy</h3>
+          <p class="text-gray-600">Learn how we protect your family's privacy</p>
+        </a>
+        <a href="/terms" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-500 transition-colors focus-visible-ring">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Terms of Service</h3>
+          <p class="text-gray-600">Read our terms and conditions</p>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

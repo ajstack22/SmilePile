@@ -1,0 +1,20 @@
+#!/bin/bash
+# SmilePile gitleaks pre-commit hook
+# Installation: git config core.hooksPath .githooks
+
+echo "Running gitleaks secret scan on staged files..."
+
+# Run gitleaks on staged files only
+gitleaks protect --staged --verbose
+
+if [ $? -eq 1 ]; then
+    echo ""
+    echo "Gitleaks detected secrets in your staged files!"
+    echo "   Review findings above and remove secrets before committing."
+    echo "   If this is a false positive, add to .gitleaks.toml allowlist."
+    echo ""
+    exit 1
+fi
+
+echo "No secrets detected"
+exit 0

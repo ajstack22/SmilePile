@@ -1,0 +1,57 @@
+title = "SmilePile Gitleaks Configuration"
+
+[extend]
+# Use default gitleaks rules as baseline
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+description = "Detected a Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey)[\s]*[=:]\s*['"]?[a-zA-Z0-9]{32,}['"]?'''
+tags = ["api", "key"]
+
+[[rules]]
+id = "google-oauth"
+description = "Google OAuth Client Secret"
+regex = '''[0-9]+-[0-9A-Za-z_]{32}\.apps\.googleusercontent\.com'''
+tags = ["google", "oauth"]
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["aws", "key"]
+
+# Allowlist for known false positives
+[allowlist]
+description = "Allowlisted files and patterns"
+
+# Example code and test files
+paths = [
+    '''.*_test\.kt''',                        # Kotlin test files
+    '''.*_test\.swift''',                     # Swift test files
+    '''.*Test\.java''',                       # Java test files
+    '''.*/fixtures/.*''',                     # Test fixtures
+    '''.*/examples/.*''',                     # Example code
+    '''atlas/examples/.*''',                  # Atlas example documentation
+    '''atlas/\.atlas/context_cache/.*\.json''', # Atlas context cache (MD5 hashes, not secrets)
+    '''deploy/environments/\.env\.example''', # Environment variable example/template file
+    '''atlas/docs/SPRINT-10-.*\.md''',        # Sprint 10 documentation with example commands
+    '''\.gitleaks\.toml''',                   # Gitleaks config file itself (contains regex patterns)
+]
+
+# Allowlist specific patterns
+regexes = [
+    '''example-api-key-12345''',              # Obvious fake keys
+    '''your-api-key-here''',                  # Placeholder text
+    '''sk-test-[a-zA-Z0-9]+''',               # Stripe test keys (publicly safe)
+    '''sk_live_xxxxxxxxxxxxx''',              # Placeholder Stripe key from .env.example
+    '''AKIAIOSFODNN7EXAMPLE''',               # AWS example key from documentation
+    '''[0-9a-f]{32}''',                        # MD5 hashes (32 hex chars) - Atlas cache keys
+    '''cache_key": "[0-9a-f]{32}"''',         # Atlas cache_key JSON fields
+    '''ENCRYPTION_KEY=''',                     # Empty env var placeholders in scripts
+    '''DATABASE_PASSWORD=""''',                # Empty env var placeholders in scripts
+]
+
+# Allowlist specific commits (none needed for now)
+commits = []

@@ -1,0 +1,24 @@
+# Build outputs
+dist/
+.astro/
+build/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Minified files
+*.min.js
+*.min.css
+
+# Config files
+astro.config.mjs
+tailwind.config.mjs
+
+# Test artifacts
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
