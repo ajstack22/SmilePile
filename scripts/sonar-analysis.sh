@@ -41,6 +41,10 @@ echo "📌 Commit: $GIT_COMMIT"
 echo "✅ Public repo: Unlimited analysis!"
 echo ""
 
+# IMPORTANT: Skip JRE provisioning to avoid 403 errors
+# This must be set BEFORE running the scanner
+export SONAR_SCANNER_SKIP_JRE_PROVISIONING=true
+
 # Build Android if gradle is present
 if [ -f "android/gradlew" ]; then
     echo "📱 Building Android project..."
@@ -84,8 +88,7 @@ fi
 echo ""
 echo "☁️  Sending analysis to SonarCloud..."
 # Token is passed via environment variable for security
-# Skip JRE provisioning to avoid 403 errors with free plan (must be env var, not flag)
-export SONAR_SCANNER_SKIP_JRE_PROVISIONING=true
+# Note: SONAR_SCANNER_SKIP_JRE_PROVISIONING already set above to avoid 403 errors
 npx sonar-scanner \
   -Dsonar.projectVersion="$GIT_COMMIT" \
   -Dsonar.branch.name="$GIT_BRANCH"
