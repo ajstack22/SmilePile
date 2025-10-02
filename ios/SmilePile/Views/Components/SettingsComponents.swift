@@ -37,18 +37,20 @@ struct SettingsActionItem: View {
     let title: String
     let subtitle: String?
     let icon: String
+    let iconColor: Color
     let action: () -> Void
 
     init(
         title: String,
         subtitle: String? = nil,
         icon: String,
-        iconColor: Color = .accentColor,
+        iconColor: Color = .secondary,
         action: @escaping () -> Void
     ) {
         self.title = title
         self.subtitle = subtitle
         self.icon = icon
+        self.iconColor = iconColor
         self.action = action
     }
 
@@ -57,7 +59,7 @@ struct SettingsActionItem: View {
             HStack(spacing: 12) {
                 Image(systemName: icon)
                     .font(.system(size: 20))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(iconColor)
                     .frame(width: 28)
 
                 VStack(alignment: .leading, spacing: 2) {

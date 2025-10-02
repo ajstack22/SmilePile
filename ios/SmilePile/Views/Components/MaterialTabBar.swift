@@ -112,50 +112,7 @@ struct TabPositionPreferenceKey: PreferenceKey {
 }
 
 // MARK: - Parent Mode View with Material Tab Bar
-struct MaterialParentModeView: View {
-    @State private var selectedTab = 0
-    @State private var navigationPaths: [NavigationPath] = [
-        NavigationPath(),
-        NavigationPath(),
-        NavigationPath()
-    ]
-
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            // Content
-            Group {
-                switch selectedTab {
-                case 0:
-                    NavigationStack(path: $navigationPaths[0]) {
-                        PhotoGalleryView()
-                    }
-                case 1:
-                    NavigationStack(path: $navigationPaths[1]) {
-                        CategoryManagementView()
-                    }
-                case 2:
-                    NavigationStack(path: $navigationPaths[2]) {
-                        SettingsViewNative()
-                    }
-                default:
-                    EmptyView()
-                }
-            }
-            .transition(.asymmetric(
-                insertion: .move(edge: .trailing).combined(with: .opacity),
-                removal: .move(edge: .leading).combined(with: .opacity)
-            ))
-
-            // Custom Material Tab Bar
-            VStack(spacing: 0) {
-                Divider()
-                MaterialTabBar(selection: $selectedTab)
-                    .background(Color(UIColor.systemBackground))
-            }
-        }
-        .ignoresSafeArea(.keyboard) // Keep tab bar visible when keyboard appears
-    }
-}
+// MaterialParentModeView removed - was unused and referenced deleted SettingsViewNative
 
 // MARK: - Color Extension
 // Color extension removed - using the one from Photo.swift

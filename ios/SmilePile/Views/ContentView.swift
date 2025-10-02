@@ -3,64 +3,7 @@ import Photos
 import PhotosUI
 import CoreData
 
-// Test view to verify edge-to-edge display
-struct EdgeToEdgeTestView: View {
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                // Red bars to show if there are any black bars
-                VStack(spacing: 0) {
-                    // Top indicator
-                    Rectangle()
-                        .fill(Color.red)
-                        .frame(height: 50)
-
-                    Spacer()
-
-                    // Bottom indicator
-                    Rectangle()
-                        .fill(Color.red)
-                        .frame(height: 50)
-                }
-                .ignoresSafeArea(.all)
-
-                // Show dimensions
-                VStack {
-                    Text("Edge-to-Edge Test")
-                        .font(.title)
-                        .padding()
-
-                    Text("Width: \(Int(geometry.size.width))")
-                    Text("Height: \(Int(geometry.size.height))")
-
-                    Text("\nUIScreen Bounds:")
-                    Text("Width: \(Int(UIScreen.main.bounds.width))")
-                    Text("Height: \(Int(UIScreen.main.bounds.height))")
-
-                    Text("\nSafe Area:")
-                    Text("Top: \(Int(geometry.safeAreaInsets.top))")
-                    Text("Bottom: \(Int(geometry.safeAreaInsets.bottom))")
-                    Text("Leading: \(Int(geometry.safeAreaInsets.leading))")
-                    Text("Trailing: \(Int(geometry.safeAreaInsets.trailing))")
-
-                    if let window = UIApplication.shared.connectedScenes
-                        .compactMap({ $0 as? UIWindowScene })
-                        .first?.windows.first {
-                        Text("\nWindow Safe Area:")
-                        Text("Top: \(Int(window.safeAreaInsets.top))")
-                        Text("Bottom: \(Int(window.safeAreaInsets.bottom))")
-                    }
-                }
-                .foregroundColor(.white)
-                .background(Color.blue.opacity(0.7))
-                .cornerRadius(10)
-                .padding()
-            }
-            .background(Color.green)
-        }
-        .ignoresSafeArea(.all)
-    }
-}
+// EdgeToEdgeTestView removed - was unused test artifact
 
 struct ContentView: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
@@ -622,64 +565,7 @@ struct PhotoViewerPage: View {
     }
 }
 
-// MARK: - Kids Mode Placeholder
-private struct KidsModePlaceholderView: View {
-    @ObservedObject var viewModel: KidsModeViewModel
-
-    var body: some View {
-        ZStack {
-            Color.orange.opacity(0.1)
-
-            VStack(spacing: 20) {
-                Text("Kids Mode")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-
-                // Category buttons for testing toast
-                if !viewModel.categories.isEmpty {
-                    ForEach(viewModel.categories) { category in
-                        Button(action: {
-                            viewModel.selectCategory(category)
-                            viewModel.showCategoryToast(category)
-                        }) {
-                            Text(category.displayName)
-                                .padding()
-                                .background(category.color)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    }
-                } else {
-                    Text("Loading categories...")
-                        .foregroundColor(.secondary)
-                }
-
-                // Test toast buttons
-                VStack(spacing: 10) {
-                    Button("Test Success Toast") {
-                        ToastManager.shared.showSuccess("Photo saved successfully!")
-                    }
-                    .buttonStyle(.borderedProminent)
-
-                    Button("Test Error Toast") {
-                        ToastManager.shared.showError("Failed to load photo")
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(.red)
-
-                    Button("Test Info Toast") {
-                        ToastManager.shared.showInfo("3 photos selected")
-                    }
-                    .buttonStyle(.bordered)
-                }
-                .padding(.top, 40)
-            }
-        }
-        .onAppear {
-            // Categories will be loaded by the view model automatically
-        }
-    }
-}
+// KidsModePlaceholderView removed - was unused development artifact
 
 // MARK: - About Dialog Component
 struct AboutDialog: View {

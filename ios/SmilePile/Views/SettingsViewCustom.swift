@@ -16,6 +16,10 @@ struct SettingsViewCustom: View {
     @State private var isExporting = false
     @State private var isImporting = false
 
+    private var appVersionString: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // App Header with glass effect
@@ -102,13 +106,29 @@ struct SettingsViewCustom: View {
                     }
                     .padding(.horizontal, 16)
 
+                    // Developer Section
+                    SettingsSection(
+                        title: "Developer"
+                    ) {
+                        SettingsActionItem(
+                            title: "Clear All Data",
+                            subtitle: "Permanently delete all photos, categories, and settings",
+                            icon: "trash.fill",
+                            iconColor: .red,
+                            action: {
+                                // Clear data action - will implement
+                            }
+                        )
+                    }
+                    .padding(.horizontal, 16)
+
                     // About Section
                     SettingsSection(
                         title: "About"
                     ) {
                         SettingsActionItem(
                             title: "SmilePile",
-                            subtitle: "Version 25.09.27.006",
+                            subtitle: appVersionString,
                             icon: "info.circle",
                             action: { showingAboutDialog = true }
                         )
@@ -186,7 +206,7 @@ struct SettingsViewCustom: View {
         .sheet(isPresented: $showingAboutDialog) {
             AboutDialog(
                 isPresented: $showingAboutDialog,
-                appVersion: "25.09.27.006"
+                appVersion: appVersionString
             )
         }
         .onAppear {
