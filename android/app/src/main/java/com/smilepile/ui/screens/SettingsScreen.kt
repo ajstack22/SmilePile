@@ -25,7 +25,9 @@ import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.ChildCare
 import androidx.compose.material.icons.filled.Archive
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
@@ -467,28 +469,147 @@ private fun DebugSection(
     context: android.content.Context,
     onResetApp: () -> Unit
 ) {
-    SettingsSection(title = "Debug Options") {
-        Column {
-            SettingsActionItem(
-                title = "Launch Onboarding",
-                subtitle = "Manually start the onboarding flow",
-                icon = Icons.Default.Info,
-                onClick = {
-                    val intent = android.content.Intent(context, com.smilepile.onboarding.OnboardingActivity::class.java)
-                    context.startActivity(intent)
+    var showResetConfirmation by remember { mutableStateOf(false) }
+    var showPinVerification by remember { mutableStateOf(false) }
+    var isResetting by remember { mutableStateOf(false) }
+    val viewModel: SettingsViewModel = hiltViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+
+    SettingsSection(title = "Developer") {
+        SettingsActionItem(
+            title = "Clear All Data",
+            subtitle = "Clear all data and restart onboarding",
+            icon = Icons.Default.Delete,
+            iconTint = MaterialTheme.colorScheme.error,
+            onClick = {
+                // Check if PIN is set
+                if (uiState.hasPIN) {
+                    showPinVerification = true
+                } else {
+                    showResetConfirmation = true
                 }
-            )
-
-            SectionDivider()
-
-            SettingsActionItem(
-                title = "Reset App (Clear Data & Onboard)",
-                subtitle = "Clear all data and restart onboarding",
-                icon = Icons.Default.Storage,
-                onClick = onResetApp
-            )
-        }
+            },
+            enabled = !isResetting
+        )
     }
+
+    // PIN Verification Dialog
+    if (showPinVerification) {
+        PinVerificationDialog(
+            onDismiss = { showPinVerification = false },
+            onSuccess = {
+                showPinVerification = false
+                showResetConfirmation = true
+            },
+            viewModel = viewModel
+        )
+    }
+
+    // Reset Confirmation Dialog
+    if (showResetConfirmation) {
+        AlertDialog(
+            onDismissRequest = { if (!isResetting) showResetConfirmation = false },
+            title = {
+                Text(
+                    "Clear All Data?",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            },
+            text = {
+                Text(
+                    "This will permanently delete all photos, categories, settings, and PIN. This action cannot be undone.",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        isResetting = true
+                        onResetApp()
+                    },
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    ),
+                    enabled = !isResetting
+                ) {
+                    Text("Clear All Data")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showResetConfirmation = false },
+                    enabled = !isResetting
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+private fun PinVerificationDialog(
+    onDismiss: () -> Unit,
+    onSuccess: () -> Unit,
+    viewModel: SettingsViewModel
+) {
+    var pin by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Enter PIN") },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text("Enter your PIN to continue")
+
+                OutlinedTextField(
+                    value = pin,
+                    onValueChange = {
+                        if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+                            pin = it
+                            error = null
+                        }
+                    },
+                    label = { Text("PIN") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    visualTransformation = PasswordVisualTransformation(),
+                    isError = error != null,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                error?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    // Use proper PIN validation method instead of changePIN
+                    if (viewModel.validatePIN(pin)) {
+                        onSuccess()
+                    } else {
+                        error = "Incorrect PIN"
+                    }
+                }
+            ) {
+                Text("Verify")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 @Composable

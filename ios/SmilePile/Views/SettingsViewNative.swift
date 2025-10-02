@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct SettingsViewNative: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
@@ -121,6 +122,13 @@ struct SettingsViewNative: View {
                             .foregroundColor(.red)
                     }
                 }
+
+                // Developer Section (only in debug builds)
+                #if DEBUG
+                Section("Developer") {
+                    ClearAllDataButton()
+                }
+                #endif
 
                 // About Section
                 Section("About") {
@@ -245,6 +253,112 @@ struct SettingsViewNative: View {
                 }
             }
             securityViewModel.refreshSecurityStatus()
+        }
+    }
+}
+
+// MARK: - Clear All Data Button Component
+
+struct ClearAllDataButton: View {
+    @State private var showPINVerification = false
+    @State private var showConfirmation = false
+    @State private var isClearing = false
+    @State private var pinError: String?
+    @State private var shouldRestartApp = false
+
+    var body: some View {
+        Button(action: {
+            // Check if PIN is set
+            if PINManager.shared.isPINEnabled() {
+                showPINVerification = true
+            } else {
+                showConfirmation = true
+            }
+        }) {
+            HStack {
+                Image(systemName: "trash.fill")
+                    .foregroundColor(.red)
+                Text("Clear All Data")
+                Spacer()
+            }
+        }
+        .disabled(isClearing)
+        .sheet(isPresented: $showPINVerification) {
+            PINEntryView(
+                isPresented: $showPINVerification,
+                mode: .validate,
+                onSuccess: { _ in
+                    showPINVerification = false
+                    showConfirmation = true
+                },
+                onCancel: {
+                    showPINVerification = false
+                }
+            )
+        }
+        .alert("Clear All Data?", isPresented: $showConfirmation) {
+            Button("Cancel", role: .cancel) {
+                showConfirmation = false
+            }
+            Button("Clear All Data", role: .destructive) {
+                performClearAllData()
+            }
+            .disabled(isClearing)
+        } message: {
+            Text("This will permanently delete all photos, categories, settings, and PIN. This action cannot be undone.")
+        }
+        .onChange(of: shouldRestartApp) { newValue in
+            if newValue {
+                restartApp()
+            }
+        }
+    }
+
+    private func performClearAllData() {
+        isClearing = true
+
+        Task {
+            do {
+                // Clear all data
+                try await BackupManager.shared.clearAllData()
+
+                // Small delay to ensure all operations complete
+                try await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+
+                // Trigger app restart on main thread
+                await MainActor.run {
+                    shouldRestartApp = true
+                }
+            } catch {
+                print("Error clearing data: \(error)")
+                await MainActor.run {
+                    isClearing = false
+                    showConfirmation = false
+                }
+            }
+        }
+    }
+
+    private func restartApp() {
+        // Post notification to restart the app
+        NotificationCenter.default.post(name: NSNotification.Name("ResetToOnboarding"), object: nil)
+
+        // Alternative: Reset the window's root view controller
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            // Create a new root view controller
+            let newRootView = ContentView()
+                .environmentObject(SettingsManager.shared)
+                .environmentObject(KidsModeViewModel())
+
+            window.rootViewController = UIHostingController(rootView: newRootView)
+
+            // Animate the transition
+            UIView.transition(with: window,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         }
     }
 }

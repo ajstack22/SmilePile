@@ -182,6 +182,13 @@ class SettingsViewModel @Inject constructor(
     }
 
     /**
+     * Validate PIN without changing it
+     */
+    fun validatePIN(pin: String): Boolean {
+        return securePreferencesManager.validatePIN(pin)
+    }
+
+    /**
      * Change existing PIN
      */
     fun changePIN(oldPin: String, newPin: String): Boolean {
@@ -496,8 +503,8 @@ class SettingsViewModel @Inject constructor(
                 )
                 context.startActivity(intent)
 
-                // Exit the app gracefully - the intent flags will restart it
-                (context as? android.app.Activity)?.finishAffinity()
+                // Force kill the process to ensure a clean restart
+                android.os.Process.killProcess(android.os.Process.myPid())
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     error = "Failed to reset app: ${e.message}",

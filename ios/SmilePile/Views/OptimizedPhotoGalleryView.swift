@@ -227,6 +227,11 @@ struct OptimizedPhotoGalleryView: View {
                 await viewModel.clearCache()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .onboardingComplete)) { _ in
+            Task {
+                await loadCategories()
+            }
+        }
     }
 
     // MARK: - Views

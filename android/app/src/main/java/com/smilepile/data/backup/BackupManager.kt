@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.io.File
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -663,6 +664,20 @@ class BackupManager @Inject constructor(
             // Delete all photos first (due to foreign key constraints)
             val allPhotos = photoRepository.getAllPhotos()
             allPhotos.forEach { photo ->
+                // Delete the actual file from filesystem if it exists and is not from assets
+                if (!photo.isFromAssets) {
+                    try {
+                        val file = File(photo.path)
+                        if (file.exists()) {
+                            file.delete()
+                            Log.d(TAG, "Deleted photo file: ${photo.path}")
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Failed to delete photo file: ${photo.path}", e)
+                        // Continue with database deletion even if file deletion fails
+                    }
+                }
+                // Delete from database
                 photoRepository.deletePhoto(photo)
             }
 
@@ -673,7 +688,7 @@ class BackupManager @Inject constructor(
                 categoryRepository.deleteCategory(category)
             }
 
-            Log.i(TAG, "Cleared all existing data")
+            Log.i(TAG, "Cleared all existing data and files")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to clear existing data", e)
             throw e

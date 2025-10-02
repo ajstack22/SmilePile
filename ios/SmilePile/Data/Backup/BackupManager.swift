@@ -321,6 +321,50 @@ class BackupManager {
         return zipPath
     }
 
+    // MARK: - Clear All Data
+
+    func clearAllData() async throws {
+        // 1. Delete all photos from filesystem
+        let photos = try await photoRepository.getAllPhotos()
+        let documentsDir = getDocumentsDirectory()
+
+        for photo in photos {
+            let photoPath = documentsDir.appendingPathComponent(photo.path)
+            if fileManager.fileExists(atPath: photoPath.path) {
+                try? fileManager.removeItem(at: photoPath)
+            }
+        }
+
+        // 2. Delete all categories from CoreData
+        let categories = try await categoryRepository.getAllCategories()
+        for category in categories {
+            try await categoryRepository.deleteCategory(category)
+        }
+
+        // 3. Delete all photos from CoreData
+        for photo in photos {
+            try await photoRepository.deletePhoto(photo)
+        }
+
+        // 4. Clear UserDefaults
+        if let bundleIdentifier = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleIdentifier)
+            UserDefaults.standard.synchronize()
+        }
+
+        // 5. Clear PIN using PINManager
+        try? PINManager.shared.clearPIN()
+
+        // 6. Reset SettingsManager flags
+        settingsManager.resetToDefaults()
+        settingsManager.onboardingCompleted = false
+
+        // 7. Clear keychain data if it has deleteAll
+        // Note: KeychainManager may not have deleteAll, so we'll just clear known keys
+        try? keychainManager.delete(for: "pin")
+        try? keychainManager.delete(for: "biometric_enabled")
+    }
+
     // MARK: - Utilities
 
     private func getDocumentsDirectory() -> URL {

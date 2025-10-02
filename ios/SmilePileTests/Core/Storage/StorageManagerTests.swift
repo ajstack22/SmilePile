@@ -187,7 +187,7 @@ class StorageManagerTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 5.0)
+        await fulfillment(of: [expectation], timeout: 5.0)
     }
 
     // MARK: - Thread Safety Tests
@@ -208,7 +208,7 @@ class StorageManagerTests: XCTestCase {
             }
         }
 
-        wait(for: [expectation], timeout: 10.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
     // MARK: - Memory Tests
@@ -230,6 +230,261 @@ class StorageManagerTests: XCTestCase {
 
         // Should not exceed reasonable threshold
         XCTAssertLessThan(memoryIncrease, 100 * 1024 * 1024) // 100MB
+    }
+
+    // MARK: - Batch Import Tests
+
+    func testImportPhotosInBatches() async throws {
+        // Given
+        let testURLs = createTestImageFiles(count: 15)
+        var progressUpdates: [Double] = []
+
+        // When
+        let results = try await sut.importPhotosInBatches(
+            sourceURLs: testURLs,
+            batchSize: 5,
+            progressHandler: { progress in
+                progressUpdates.append(progress)
+            }
+        )
+
+        // Then
+        XCTAssertEqual(results.count, 15)
+        XCTAssertGreaterThan(progressUpdates.count, 0)
+        XCTAssertEqual(progressUpdates.last ?? 0, 1.0, accuracy: 0.01)
+
+        // Verify all files were imported
+        for result in results {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fullPath = documentsURL.appendingPathComponent(result.photoPath).path
+            XCTAssertTrue(fileManager.fileExists(atPath: fullPath))
+        }
+
+        // Cleanup
+        cleanupTestImageFiles(testURLs)
+    }
+
+    func testImportPhotosWithMemoryPressure() async throws {
+        // Given
+        let largeTestURLs = createLargeTestImageFiles(count: 10)
+
+        // When
+        let results = try await sut.importPhotosInBatches(
+            sourceURLs: largeTestURLs,
+            batchSize: 3
+        )
+
+        // Then
+        XCTAssertLessThanOrEqual(results.count, 10)
+
+        // Check memory stayed within limits
+        let currentMemory = await sut.getCurrentMemoryUsage()
+        XCTAssertLessThan(currentMemory, 100)
+
+        // Cleanup
+        cleanupTestImageFiles(largeTestURLs)
+    }
+
+    func testImportWithInsufficientSpace() async {
+        // Mock insufficient space scenario
+        // This test validates error handling when space is insufficient
+
+        let testURL = createTestImageFiles(count: 1).first!
+
+        // Check if storage pressure is critical
+        let pressure = await sut.getStoragePressure()
+
+        if case .critical = pressure {
+            do {
+                _ = try await sut.importPhoto(from: testURL)
+                XCTFail("Should fail with insufficient space")
+            } catch let error as StorageError {
+                if case .insufficientSpace = error {
+                    // Expected error
+                    XCTAssertTrue(true)
+                } else {
+                    XCTFail("Wrong error type: \(error)")
+                }
+            } catch {
+                XCTFail("Unexpected error: \(error)")
+            }
+        } else {
+            // Skip test if sufficient space
+            XCTAssertTrue(true)
+        }
+
+        // Cleanup
+        cleanupTestImageFiles([testURL])
+    }
+
+    func testSequentialThumbnailGeneration() async throws {
+        // Given
+        let testURLs = createTestImageFiles(count: 5)
+        var progressValues: [Double] = []
+
+        // When
+        let generator = SafeThumbnailGenerator()
+        let testImages = testURLs.compactMap { url -> (data: Data, identifier: String)? in
+            guard let data = try? Data(contentsOf: url) else { return nil }
+            return (data: data, identifier: url.lastPathComponent)
+        }
+
+        let thumbnails = try await generator.generateThumbnailsSequentially(
+            for: testImages,
+            targetSize: 300,
+            progressHandler: { progress in
+                progressValues.append(progress)
+            }
+        )
+
+        // Then
+        XCTAssertEqual(thumbnails.count, testImages.count)
+        XCTAssertGreaterThan(progressValues.count, 0)
+        XCTAssertEqual(progressValues.last ?? 0, 1.0, accuracy: 0.01)
+
+        // Cleanup
+        cleanupTestImageFiles(testURLs)
+    }
+
+    // MARK: - Storage Pressure Tests
+
+    func testGetStoragePressure() async {
+        let pressure = await sut.getStoragePressure()
+
+        // Verify pressure level is valid
+        switch pressure {
+        case .low, .medium, .high, .critical:
+            XCTAssertTrue(true)
+        }
+
+        XCTAssertNotNil(pressure.description)
+    }
+
+    func testHasEnoughSpace() async {
+        let hasSpace = await sut.hasEnoughSpace(estimatedSize: 1024 * 1024) // 1MB
+
+        // Should have at least 1MB available in most cases
+        // This may fail in extreme low storage scenarios
+        let availableSpace = await sut.getAvailableSpace()
+        XCTAssertTrue(hasSpace || availableSpace < 1024 * 1024)
+    }
+
+    // MARK: - Internal Storage Tests
+
+    func testIsInternalStoragePath() async {
+        // Given
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let photosPath = documentsURL.appendingPathComponent("photos/test.jpg").path
+        let externalPath = "/tmp/external.jpg"
+
+        // Then
+        let isInternalPhotos = await sut.isInternalStoragePath(photosPath)
+        let isInternalExternal = await sut.isInternalStoragePath(externalPath)
+        XCTAssertTrue(isInternalPhotos)
+        XCTAssertFalse(isInternalExternal)
+    }
+
+    func testGetThumbnailPath() async throws {
+        // Given
+        let result = try await sut.saveImage(testImage, filename: "test.jpg")
+
+        // When
+        let thumbnailPath = await sut.getThumbnailPath(for: result.photoPath)
+
+        // Then
+        XCTAssertNotNil(thumbnailPath)
+        if let path = thumbnailPath {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fullPath = documentsURL.appendingPathComponent(path).path
+            XCTAssertTrue(fileManager.fileExists(atPath: fullPath))
+        }
+    }
+
+    // MARK: - Migration Tests
+
+    func testCopyPhotoToInternalStorage() async throws {
+        // Given
+        let sourceFile = createTestImageFiles(count: 1).first!
+
+        // When
+        let result = try await sut.copyPhotoToInternalStorage(sourceFile: sourceFile)
+
+        // Then
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fullPath = documentsURL.appendingPathComponent(result.photoPath).path
+        XCTAssertTrue(fileManager.fileExists(atPath: fullPath))
+        XCTAssertGreaterThan(result.fileSize, 0)
+
+        // Cleanup
+        cleanupTestImageFiles([sourceFile])
+    }
+
+    func testMigrateExternalPhotosToInternal() async throws {
+        // Given
+        let externalFiles = createTestImageFiles(count: 5)
+        let externalPaths = externalFiles.map { $0.path }
+
+        // When
+        let results = try await sut.migrateExternalPhotosToInternal(externalPhotoPaths: externalPaths)
+
+        // Then
+        XCTAssertEqual(results.count, 5)
+        for result in results {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fullPath = documentsURL.appendingPathComponent(result.photoPath).path
+            XCTAssertTrue(fileManager.fileExists(atPath: fullPath))
+        }
+
+        // Cleanup
+        cleanupTestImageFiles(externalFiles)
+    }
+
+    // MARK: - Error Recovery Tests
+
+    func testImportWithPartialFailure() async throws {
+        // Given - Mix of valid and invalid URLs
+        var testURLs = createTestImageFiles(count: 3)
+        testURLs.append(URL(fileURLWithPath: "/invalid/path/image.jpg"))
+
+        // When
+        let results = try await sut.importPhotosInBatches(
+            sourceURLs: testURLs,
+            batchSize: 2
+        )
+
+        // Then - Should import valid files and skip invalid ones
+        XCTAssertEqual(results.count, 3)
+
+        // Cleanup
+        cleanupTestImageFiles(Array(testURLs.prefix(3)))
+    }
+
+    func testRecoverFromMemoryPressure() async throws {
+        // Given
+        let testURLs = createTestImageFiles(count: 5)
+        let generator = SafeThumbnailGenerator()
+
+        // Simulate memory pressure scenario
+        var processedCount = 0
+        for url in testURLs {
+            if generator.isSafeToProcess() {
+                _ = try await sut.importPhoto(from: url)
+                processedCount += 1
+            } else {
+                // Wait for memory to recover
+                try await Task.sleep(nanoseconds: 500_000_000)
+                if generator.isSafeToProcess() {
+                    _ = try await sut.importPhoto(from: url)
+                    processedCount += 1
+                }
+            }
+        }
+
+        // Then
+        XCTAssertGreaterThan(processedCount, 0)
+
+        // Cleanup
+        cleanupTestImageFiles(testURLs)
     }
 
     // MARK: - Helper Methods
@@ -257,5 +512,60 @@ class StorageManagerTests: XCTestCase {
         }
 
         return result == KERN_SUCCESS ? Int64(info.resident_size) : 0
+    }
+
+    private func createTestImageFiles(count: Int) -> [URL] {
+        var urls: [URL] = []
+        let tempDir = FileManager.default.temporaryDirectory
+
+        for i in 0..<count {
+            let image = createLargeTestImage(size: CGSize(width: 100, height: 100))
+            if let data = image.jpegData(compressionQuality: 0.8) {
+                let url = tempDir.appendingPathComponent("test_image_\(i).jpg")
+                try? data.write(to: url)
+                urls.append(url)
+            }
+        }
+
+        return urls
+    }
+
+    private func createLargeTestImageFiles(count: Int) -> [URL] {
+        var urls: [URL] = []
+        let tempDir = FileManager.default.temporaryDirectory
+
+        for i in 0..<count {
+            let image = createLargeTestImage(size: CGSize(width: 2000, height: 2000))
+            if let data = image.jpegData(compressionQuality: 0.9) {
+                let url = tempDir.appendingPathComponent("large_image_\(i).jpg")
+                try? data.write(to: url)
+                urls.append(url)
+            }
+        }
+
+        return urls
+    }
+
+    private func cleanupTestImageFiles(_ urls: [URL]) {
+        for url in urls {
+            try? FileManager.default.removeItem(at: url)
+        }
+    }
+}
+
+extension FileManager {
+    var photosDirectory: URL {
+        let documentsURL = urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return documentsURL.appendingPathComponent("photos")
+    }
+
+    var thumbnailsDirectory: URL {
+        let documentsURL = urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return documentsURL.appendingPathComponent("thumbnails")
+    }
+
+    func createSmilePileDirectories() throws {
+        try createDirectory(at: photosDirectory, withIntermediateDirectories: true)
+        try createDirectory(at: thumbnailsDirectory, withIntermediateDirectories: true)
     }
 }

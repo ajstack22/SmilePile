@@ -136,6 +136,7 @@ fun SettingsActionItem(
     icon: ImageVector,
     onClick: () -> Unit,
     enabled: Boolean = true,
+    iconTint: androidx.compose.ui.graphics.Color? = null,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -153,7 +154,7 @@ fun SettingsActionItem(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                tint = iconTint ?: MaterialTheme.colorScheme.onSurfaceVariant.copy(
                     alpha = if (enabled) 1f else 0.38f
                 ),
                 modifier = Modifier.size(20.dp)

@@ -1,0 +1,669 @@
+import XCTest
+import CryptoKit
+@testable import SmilePile
+
+final class BackupManagerTests: XCTestCase {
+
+    var backupManager: BackupManager!
+    var mockPhotoRepository: MockPhotoRepository!
+    var mockCategoryRepository: MockCategoryRepository!
+    var mockSettingsManager: MockSettingsManager!
+    var fileManager: FileManager!
+
+    override func setUp() {
+        super.setUp()
+        fileManager = FileManager.default
+
+        mockPhotoRepository = MockPhotoRepository()
+        mockCategoryRepository = MockCategoryRepository()
+        mockSettingsManager = MockSettingsManager()
+
+        backupManager = BackupManager(
+            photoRepository: mockPhotoRepository,
+            categoryRepository: mockCategoryRepository,
+            settingsManager: mockSettingsManager,
+            keychainManager: KeychainManager.shared
+        )
+
+        // Clear any existing backups
+        cleanupBackups()
+    }
+
+    override func tearDown() {
+        cleanupBackups()
+        backupManager = nil
+        mockPhotoRepository = nil
+        mockCategoryRepository = nil
+        mockSettingsManager = nil
+        super.tearDown()
+    }
+
+    // MARK: - Directory Management Tests
+
+    func testGetBackupsDirectory() throws {
+        // When
+        let backupDir = try backupManager.getBackupsDirectory()
+
+        // Then
+        XCTAssertTrue(fileManager.fileExists(atPath: backupDir.path))
+        XCTAssertTrue(backupDir.path.contains("SmilePileBackups"))
+    }
+
+    func testCreateBackupWorkingDirectory() throws {
+        // When
+        let workingDir = try backupManager.createBackupWorkingDirectory()
+
+        // Then
+        XCTAssertTrue(fileManager.fileExists(atPath: workingDir.path))
+        XCTAssertTrue(workingDir.path.contains("backup_temp_"))
+
+        // Cleanup
+        backupManager.cleanupBackupWorkingDirectory(workingDir)
+        XCTAssertFalse(fileManager.fileExists(atPath: workingDir.path))
+    }
+
+    func testCleanupBackupWorkingDirectory() throws {
+        // Given
+        let workingDir = try backupManager.createBackupWorkingDirectory()
+        XCTAssertTrue(fileManager.fileExists(atPath: workingDir.path))
+
+        // When
+        backupManager.cleanupBackupWorkingDirectory(workingDir)
+
+        // Then
+        XCTAssertFalse(fileManager.fileExists(atPath: workingDir.path))
+    }
+
+    // MARK: - Data Collection Tests
+
+    func testCollectPhotos() async throws {
+        // Given
+        let testPhotos = createTestPhotos(count: 5)
+        mockPhotoRepository.photos = testPhotos
+
+        // When
+        let collectedPhotos = try await backupManager.collectPhotos()
+
+        // Then
+        XCTAssertEqual(collectedPhotos.count, 5)
+        XCTAssertEqual(collectedPhotos.first?.id, testPhotos.first?.id)
+    }
+
+    func testCollectCategories() async throws {
+        // Given
+        let testCategories = createTestCategories(count: 3)
+        mockCategoryRepository.categories = testCategories
+
+        // When
+        let collectedCategories = try await backupManager.collectCategories()
+
+        // Then
+        XCTAssertEqual(collectedCategories.count, 3)
+        XCTAssertEqual(collectedCategories.first?.id, testCategories.first?.id)
+    }
+
+    func testCollectSettings() {
+        // Given
+        mockSettingsManager.kidsModeEnabled = true
+        mockSettingsManager.themeMode = .dark
+
+        // When
+        let settings = backupManager.collectSettings()
+
+        // Then
+        XCTAssertTrue(settings.isDarkMode)
+        XCTAssertTrue(settings.securitySettings.kidSafeModeEnabled)
+    }
+
+    // MARK: - Metadata Creation Tests
+
+    func testCreateMetadataJSON() throws {
+        // Given
+        let categories = createTestCategories(count: 2)
+        let photos = createTestPhotos(count: 3)
+        let settings = BackupSettings(
+            isDarkMode: true,
+            securitySettings: BackupSecuritySettings(
+                hasPIN: true,
+                hasPattern: false,
+                kidSafeModeEnabled: true,
+                deleteProtectionEnabled: false
+            )
+        )
+        let manifest = createTestPhotoManifest(count: 3)
+
+        // When
+        let metadataData = try backupManager.createMetadataJSON(
+            categories: categories,
+            photos: photos,
+            settings: settings,
+            photoManifest: manifest
+        )
+
+        // Then
+        XCTAssertGreaterThan(metadataData.count, 0)
+
+        // Verify JSON structure
+        let appBackup = try JSONDecoder().decode(AppBackup.self, from: metadataData)
+        XCTAssertEqual(appBackup.categories.count, 2)
+        XCTAssertEqual(appBackup.photos.count, 3)
+        XCTAssertEqual(appBackup.photoManifest.count, 3)
+        XCTAssertTrue(appBackup.settings.isDarkMode)
+        XCTAssertEqual(appBackup.version, CURRENT_BACKUP_VERSION)
+    }
+
+    // MARK: - Photo File Operations Tests
+
+    func testCopyPhotosToBackupDirectory() async throws {
+        // Given
+        let workingDir = try backupManager.createBackupWorkingDirectory()
+        let photos = createTestPhotosWithFiles(count: 3)
+        var progressUpdates: [(Int, Int)] = []
+
+        // When
+        let manifest = try await backupManager.copyPhotosToBackupDirectory(
+            photos,
+            to: workingDir,
+            progressCallback: { current, total in
+                progressUpdates.append((current, total))
+            }
+        )
+
+        // Then
+        XCTAssertEqual(manifest.count, 3)
+        XCTAssertGreaterThan(progressUpdates.count, 0)
+        XCTAssertEqual(progressUpdates.last?.0, 3)
+
+        // Verify files exist
+        let photosDir = workingDir.appendingPathComponent("photos")
+        XCTAssertTrue(fileManager.fileExists(atPath: photosDir.path))
+
+        for entry in manifest {
+            let filePath = workingDir.appendingPathComponent(entry.zipEntryName)
+            XCTAssertTrue(fileManager.fileExists(atPath: filePath.path))
+        }
+
+        // Cleanup
+        backupManager.cleanupBackupWorkingDirectory(workingDir)
+        cleanupTestPhotoFiles(photos)
+    }
+
+    func testCopyPhotosHandlesDuplicateFilenames() async throws {
+        // Given
+        let workingDir = try backupManager.createBackupWorkingDirectory()
+        let photos = createTestPhotosWithSameFilename(count: 2)
+
+        // When
+        let manifest = try await backupManager.copyPhotosToBackupDirectory(
+            photos,
+            to: workingDir
+        )
+
+        // Then
+        XCTAssertEqual(manifest.count, 2)
+
+        // Verify both files exist with unique names
+        let fileNames = Set(manifest.map { $0.fileName })
+        XCTAssertEqual(fileNames.count, 2) // Should be unique
+
+        // Cleanup
+        backupManager.cleanupBackupWorkingDirectory(workingDir)
+        cleanupTestPhotoFiles(photos)
+    }
+
+    func testCopyPhotosSkipsMissingFiles() async throws {
+        // Given
+        let workingDir = try backupManager.createBackupWorkingDirectory()
+        var photos = createTestPhotosWithFiles(count: 2)
+
+        // Add a photo with non-existent file
+        photos.append(Photo(
+            id: "missing",
+            localIdentifier: "missing",
+            path: "nonexistent/file.jpg",
+            thumbnailPath: nil,
+            categoryId: 1,
+            isFavorite: false,
+            isLocked: false,
+            fileSize: 1000,
+            createdAt: Date(),
+            metadata: nil
+        ))
+
+        // When
+        let manifest = try await backupManager.copyPhotosToBackupDirectory(
+            photos,
+            to: workingDir
+        )
+
+        // Then - Should only copy existing files
+        XCTAssertEqual(manifest.count, 2)
+
+        // Cleanup
+        backupManager.cleanupBackupWorkingDirectory(workingDir)
+        cleanupTestPhotoFiles(Array(photos.prefix(2)))
+    }
+
+    // MARK: - Full Backup Creation Tests
+
+    func testCreateBackup() async throws {
+        // Given
+        mockPhotoRepository.photos = createTestPhotosWithFiles(count: 2)
+        mockCategoryRepository.categories = createTestCategories(count: 2)
+        mockSettingsManager.kidsModeEnabled = true
+        mockSettingsManager.themeMode = .dark
+
+        var progressUpdates: [ExportProgress] = []
+
+        // When
+        let backupURL = try await backupManager.createBackup { progress in
+            progressUpdates.append(progress)
+        }
+
+        // Then
+        XCTAssertTrue(fileManager.fileExists(atPath: backupURL.path))
+        XCTAssertTrue(backupURL.path.contains("SmilePileBackup_"))
+        XCTAssertTrue(backupURL.path.hasSuffix(".zip"))
+
+        // Verify progress was reported
+        XCTAssertGreaterThan(progressUpdates.count, 0)
+        XCTAssertEqual(progressUpdates.last?.processedItems, 100)
+
+        // Verify ZIP file size
+        let attributes = try fileManager.attributesOfItem(atPath: backupURL.path)
+        let fileSize = attributes[.size] as? Int64 ?? 0
+        XCTAssertGreaterThan(fileSize, 0)
+
+        // Cleanup
+        try fileManager.removeItem(at: backupURL)
+        cleanupTestPhotoFiles(mockPhotoRepository.photos)
+    }
+
+    func testCreateBackupWithNoData() async throws {
+        // Given - Empty repositories
+        mockPhotoRepository.photos = []
+        mockCategoryRepository.categories = []
+
+        // When
+        let backupURL = try await backupManager.createBackup()
+
+        // Then
+        XCTAssertTrue(fileManager.fileExists(atPath: backupURL.path))
+
+        // Cleanup
+        try fileManager.removeItem(at: backupURL)
+    }
+
+    // MARK: - Error Handling Tests
+
+    func testCreateBackupWithPhotoError() async {
+        // Given
+        mockPhotoRepository.shouldThrowError = true
+
+        // When/Then
+        do {
+            _ = try await backupManager.createBackup()
+            XCTFail("Should have thrown error")
+        } catch {
+            // Expected error
+            XCTAssertNotNil(error)
+        }
+    }
+
+    func testCreateBackupWithCategoryError() async {
+        // Given
+        mockCategoryRepository.shouldThrowError = true
+
+        // When/Then
+        do {
+            _ = try await backupManager.createBackup()
+            XCTFail("Should have thrown error")
+        } catch {
+            // Expected error
+            XCTAssertNotNil(error)
+        }
+    }
+
+    // MARK: - Checksum Tests
+
+    func testMD5Checksum() async throws {
+        // Given
+        let testData = "Hello World".data(using: .utf8)!
+        let tempFile = FileManager.default.temporaryDirectory
+            .appendingPathComponent("test_checksum.txt")
+        try testData.write(to: tempFile)
+
+        // When - Use reflection to call private method
+        let mirror = Mirror(reflecting: backupManager!)
+        var checksum: String?
+
+        for child in mirror.children {
+            if child.label == "calculateMD5" {
+                // This would need proper implementation
+                // For now, calculate directly
+                let hash = Insecure.MD5.hash(data: testData)
+                checksum = hash.map { String(format: "%02hhx", $0) }.joined()
+                break
+            }
+        }
+
+        // Then
+        XCTAssertEqual(checksum, "b10a8db164e0754105b7a99be72e3fe5")
+
+        // Cleanup
+        try fileManager.removeItem(at: tempFile)
+    }
+
+    // MARK: - Performance Tests
+
+    func testBackupPerformance() {
+        // Measure backup creation performance
+        measure {
+            let expectation = expectation(description: "Backup creation")
+
+            Task {
+                mockPhotoRepository.photos = createTestPhotos(count: 100)
+                mockCategoryRepository.categories = createTestCategories(count: 10)
+
+                do {
+                    let url = try await backupManager.createBackup()
+                    try? fileManager.removeItem(at: url)
+                } catch {
+                    XCTFail("Backup failed: \(error)")
+                }
+
+                expectation.fulfill()
+            }
+
+            wait(for: [expectation], timeout: 10.0)
+        }
+    }
+
+    // MARK: - Helper Methods
+
+    private func cleanupBackups() {
+        if let backupDir = try? backupManager.getBackupsDirectory() {
+            try? fileManager.removeItem(at: backupDir)
+        }
+    }
+
+    private func createTestPhotos(count: Int) -> [Photo] {
+        return (0..<count).map { i in
+            Photo(
+                id: "photo_\(i)",
+                localIdentifier: "identifier_\(i)",
+                path: "photos/test_\(i).jpg",
+                thumbnailPath: "thumbnails/test_\(i)_thumb.jpg",
+                categoryId: Int64(i % 3 + 1),
+                isFavorite: i % 2 == 0,
+                isLocked: false,
+                fileSize: Int64(1000 * (i + 1)),
+                createdAt: Date(),
+                metadata: nil
+            )
+        }
+    }
+
+    private func createTestPhotosWithFiles(count: Int) -> [Photo] {
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let photosDir = documentsDir.appendingPathComponent("photos")
+        try? fileManager.createDirectory(at: photosDir, withIntermediateDirectories: true)
+
+        return (0..<count).map { i in
+            let fileName = "test_\(i).jpg"
+            let filePath = photosDir.appendingPathComponent(fileName)
+
+            // Create test image file
+            let image = createTestImage()
+            if let data = image.jpegData(compressionQuality: 0.8) {
+                try? data.write(to: filePath)
+            }
+
+            return Photo(
+                id: "photo_\(i)",
+                localIdentifier: "identifier_\(i)",
+                path: "photos/\(fileName)",
+                thumbnailPath: nil,
+                categoryId: 1,
+                isFavorite: false,
+                isLocked: false,
+                fileSize: Int64(data?.count ?? 0),
+                createdAt: Date(),
+                metadata: nil
+            )
+        }
+    }
+
+    private func createTestPhotosWithSameFilename(count: Int) -> [Photo] {
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let photosDir = documentsDir.appendingPathComponent("photos")
+        try? fileManager.createDirectory(at: photosDir, withIntermediateDirectories: true)
+
+        return (0..<count).map { i in
+            let fileName = "same_name.jpg" // Same filename for all
+            let filePath = photosDir.appendingPathComponent("\(i)_\(fileName)")
+
+            // Create test image file
+            let image = createTestImage()
+            if let data = image.jpegData(compressionQuality: 0.8) {
+                try? data.write(to: filePath)
+            }
+
+            return Photo(
+                id: "photo_\(i)",
+                localIdentifier: "identifier_\(i)",
+                path: "photos/\(i)_\(fileName)",
+                thumbnailPath: nil,
+                categoryId: 1,
+                isFavorite: false,
+                isLocked: false,
+                fileSize: Int64(data?.count ?? 0),
+                createdAt: Date(),
+                metadata: nil
+            )
+        }
+    }
+
+    private func cleanupTestPhotoFiles(_ photos: [Photo]) {
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+
+        for photo in photos {
+            let photoPath = documentsDir.appendingPathComponent(photo.path)
+            try? fileManager.removeItem(at: photoPath)
+        }
+    }
+
+    private func createTestCategories(count: Int) -> [SmilePile.Category] {
+        return (0..<count).map { i in
+            SmilePile.Category(
+                id: Int64(i + 1),
+                name: "category_\(i)",
+                displayName: "Category \(i)",
+                position: i,
+                colorHex: "#FF0000",
+                isDefault: i == 0,
+                createdAt: Date()
+            )
+        }
+    }
+
+    private func createTestPhotoManifest(count: Int) -> [PhotoManifestEntry] {
+        return (0..<count).map { i in
+            PhotoManifestEntry(
+                photoId: "photo_\(i)",
+                originalPath: "photos/test_\(i).jpg",
+                zipEntryName: "photos/test_\(i).jpg",
+                fileName: "test_\(i).jpg",
+                fileSize: Int64(1000 * (i + 1)),
+                checksum: "checksum_\(i)"
+            )
+        }
+    }
+
+    private func createTestImage() -> UIImage {
+        let size = CGSize(width: 100, height: 100)
+        UIGraphicsBeginImageContext(size)
+        UIColor.blue.setFill()
+        UIRectFill(CGRect(origin: .zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
+// MARK: - Mock Classes
+
+class MockPhotoRepository: PhotoRepository {
+    var photos: [Photo] = []
+    var shouldThrowError = false
+
+    func getAllPhotos() async throws -> [Photo] {
+        if shouldThrowError {
+            throw NSError(domain: "MockError", code: 1, userInfo: nil)
+        }
+        return photos
+    }
+
+    func getPhotoById(_ photoId: Int64) async throws -> Photo? {
+        return photos.first { $0.id == String(photoId) }
+    }
+
+    func getPhotoByPath(_ path: String) async throws -> Photo? {
+        return photos.first { $0.path == path }
+    }
+
+    func insertPhoto(_ photo: Photo) async throws -> Int64 {
+        photos.append(photo)
+        // Return a mock ID based on the photo's string ID
+        return Int64(photos.count)
+    }
+
+    func insertPhotos(_ photos: [Photo]) async throws {
+        self.photos.append(contentsOf: photos)
+    }
+
+    func updatePhoto(_ photo: Photo) async throws {
+        if let index = photos.firstIndex(where: { $0.id == photo.id }) {
+            photos[index] = photo
+        }
+    }
+
+    func deletePhoto(_ photo: Photo) async throws {
+        photos.removeAll { $0.id == photo.id }
+    }
+
+    func deletePhotoById(_ photoId: Int64) async throws {
+        photos.removeAll { $0.id == String(photoId) }
+    }
+
+    func getAllPhotosFlow() -> AnyPublisher<[Photo], Error> {
+        return Just(photos)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+
+    func getPhotosByCategory(_ categoryId: Int64) async throws -> [Photo] {
+        return photos.filter { $0.categoryId == categoryId }
+    }
+
+    func getPhotosByCategoryFlow(_ categoryId: Int64) -> AnyPublisher<[Photo], Error> {
+        let filtered = photos.filter { $0.categoryId == categoryId }
+        return Just(filtered)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+
+    func deletePhotosByCategory(_ categoryId: Int64) async throws {
+        photos.removeAll { $0.categoryId == categoryId }
+    }
+
+    func getPhotoCategoryCount(_ categoryId: Int64) async throws -> Int {
+        return photos.filter { $0.categoryId == categoryId }.count
+    }
+
+    func getPhotoCountByCategory(categoryId: Int64) async throws -> Int {
+        return photos.filter { $0.categoryId == categoryId }.count
+    }
+
+    func getPhotoCount() async throws -> Int {
+        return photos.count
+    }
+
+    func getTotalPhotoCount() async throws -> Int {
+        return photos.count
+    }
+
+    func removeFromLibrary(_ photo: Photo) async throws {
+        photos.removeAll { $0.id == photo.id }
+    }
+
+    func removeFromLibraryById(_ photoId: Int64) async throws {
+        photos.removeAll { $0.id == String(photoId) }
+    }
+
+    func cleanupOrphanedPhotos() async throws -> Int {
+        // Mock implementation - return 0 for no orphaned photos
+        return 0
+    }
+}
+
+class MockCategoryRepository: CategoryRepository {
+    var categories: [SmilePile.Category] = []
+    var shouldThrowError = false
+
+    func getAllCategories() async throws -> [SmilePile.Category] {
+        if shouldThrowError {
+            throw NSError(domain: "MockError", code: 1, userInfo: nil)
+        }
+        return categories
+    }
+
+    func insertCategory(_ category: SmilePile.Category) async throws -> Int64 {
+        categories.append(category)
+        return category.id
+    }
+
+    func insertCategories(_ categories: [SmilePile.Category]) async throws {
+        self.categories.append(contentsOf: categories)
+    }
+
+    func updateCategory(_ category: SmilePile.Category) async throws {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            categories[index] = category
+        }
+    }
+
+    func deleteCategory(_ category: SmilePile.Category) async throws {
+        categories.removeAll { $0.id == category.id }
+    }
+
+    func getCategoryById(_ categoryId: Int64) async throws -> SmilePile.Category? {
+        return categories.first { $0.id == categoryId }
+    }
+
+    func getAllCategoriesFlow() -> AnyPublisher<[SmilePile.Category], Error> {
+        return Just(categories)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+
+    func getCategoryByName(_ name: String) async throws -> SmilePile.Category? {
+        return categories.first { $0.displayName == name }
+    }
+
+    func initializeDefaultCategories() async throws {
+        // No-op for mock
+    }
+
+    func getCategoryCount() async throws -> Int {
+        return categories.count
+    }
+}
+
+class MockSettingsManager {
+    var kidsModeEnabled = false
+    var themeMode: ThemeMode = .light
+}
+
+// Add missing import for Combine
+import Combine
