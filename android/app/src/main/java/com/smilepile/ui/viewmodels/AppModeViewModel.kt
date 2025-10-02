@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smilepile.mode.AppMode
 import com.smilepile.mode.ModeManager
-import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.ISecurePreferencesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +25,7 @@ data class AppModeUiState(
 @HiltViewModel
 class AppModeViewModel @Inject constructor(
     private val modeManager: ModeManager,
-    private val securePreferences: SecurePreferencesManager
+    private val securePreferences: ISecurePreferencesManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AppModeUiState())

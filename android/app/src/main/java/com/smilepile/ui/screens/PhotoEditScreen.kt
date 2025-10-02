@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.smilepile.ui.components.editor.CropOverlay
 import com.smilepile.ui.viewmodels.PhotoEditViewModel
-import com.smilepile.utils.ImageProcessor
+import com.smilepile.utils.IImageProcessor
 import com.smilepile.data.models.Category
 import kotlin.math.min
 
@@ -48,7 +48,7 @@ fun PhotoEditScreen(
     val uiState by viewModel.uiState.collectAsState()
     val categories by viewModel.categories.collectAsState()
     var showCropOverlay by remember { mutableStateOf(false) }
-    var selectedAspectRatio by remember { mutableStateOf(ImageProcessor.AspectRatio.FREE) }
+    var selectedAspectRatio by remember { mutableStateOf(IImageProcessor.AspectRatio.FREE) }
     var showCategoryDialog by remember { mutableStateOf(false) }
     var showDeleteDialog by remember { mutableStateOf(false) }
 
@@ -365,8 +365,8 @@ private fun EditBottomBar(
 
 @Composable
 private fun AspectRatioButtons(
-    selectedRatio: ImageProcessor.AspectRatio,
-    onRatioSelected: (ImageProcessor.AspectRatio) -> Unit,
+    selectedRatio: IImageProcessor.AspectRatio,
+    onRatioSelected: (IImageProcessor.AspectRatio) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -376,19 +376,19 @@ private fun AspectRatioButtons(
             .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        AspectRatioChip("Free", ImageProcessor.AspectRatio.FREE, selectedRatio, onRatioSelected)
-        AspectRatioChip("1:1", ImageProcessor.AspectRatio.SQUARE, selectedRatio, onRatioSelected)
-        AspectRatioChip("4:3", ImageProcessor.AspectRatio.RATIO_4_3, selectedRatio, onRatioSelected)
-        AspectRatioChip("16:9", ImageProcessor.AspectRatio.RATIO_16_9, selectedRatio, onRatioSelected)
+        AspectRatioChip("Free", IImageProcessor.AspectRatio.FREE, selectedRatio, onRatioSelected)
+        AspectRatioChip("1:1", IImageProcessor.AspectRatio.SQUARE, selectedRatio, onRatioSelected)
+        AspectRatioChip("4:3", IImageProcessor.AspectRatio.RATIO_4_3, selectedRatio, onRatioSelected)
+        AspectRatioChip("16:9", IImageProcessor.AspectRatio.RATIO_16_9, selectedRatio, onRatioSelected)
     }
 }
 
 @Composable
 private fun AspectRatioChip(
     label: String,
-    ratio: ImageProcessor.AspectRatio,
-    selectedRatio: ImageProcessor.AspectRatio,
-    onSelect: (ImageProcessor.AspectRatio) -> Unit
+    ratio: IImageProcessor.AspectRatio,
+    selectedRatio: IImageProcessor.AspectRatio,
+    onSelect: (IImageProcessor.AspectRatio) -> Unit
 ) {
     FilterChip(
         selected = ratio == selectedRatio,
@@ -485,15 +485,15 @@ private fun CategorySelectionDialog(
 // MARK: - Helper Functions for Complexity Reduction
 
 private fun calculateInitialCropRect(
-    aspectRatio: ImageProcessor.AspectRatio,
+    aspectRatio: IImageProcessor.AspectRatio,
     imageWidth: Int,
     imageHeight: Int
 ): androidx.compose.ui.geometry.Rect {
     return when (aspectRatio) {
-        ImageProcessor.AspectRatio.FREE -> calculateFreeCropRect(imageWidth, imageHeight)
-        ImageProcessor.AspectRatio.SQUARE -> calculateSquareCropRect(imageWidth, imageHeight)
-        ImageProcessor.AspectRatio.RATIO_4_3 -> calculateRatioCropRect(4f / 3f, imageWidth, imageHeight)
-        ImageProcessor.AspectRatio.RATIO_16_9 -> calculateRatioCropRect(16f / 9f, imageWidth, imageHeight)
+        IImageProcessor.AspectRatio.FREE -> calculateFreeCropRect(imageWidth, imageHeight)
+        IImageProcessor.AspectRatio.SQUARE -> calculateSquareCropRect(imageWidth, imageHeight)
+        IImageProcessor.AspectRatio.RATIO_4_3 -> calculateRatioCropRect(4f / 3f, imageWidth, imageHeight)
+        IImageProcessor.AspectRatio.RATIO_16_9 -> calculateRatioCropRect(16f / 9f, imageWidth, imageHeight)
     }
 }
 

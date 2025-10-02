@@ -6,9 +6,10 @@ import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.smilepile.data.backup.*
+import com.smilepile.fakes.FakeSecurePreferencesManager
 import com.smilepile.security.BiometricAvailability
 import com.smilepile.security.BiometricManager
-import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.ISecurePreferencesManager
 import com.smilepile.settings.SettingsManager
 import com.smilepile.theme.ThemeManager
 import com.smilepile.theme.ThemeMode
@@ -40,22 +41,12 @@ class SettingsViewModelTest {
     private lateinit var context: Context
     private lateinit var themeManager: ThemeManager
     private lateinit var backupManager: BackupManager
-    private lateinit var securePreferencesManager: SecurePreferencesManager
+    private lateinit var securePreferencesManager: ISecurePreferencesManager
     private lateinit var biometricManager: BiometricManager
     private lateinit var settingsManager: SettingsManager
     private lateinit var viewModel: SettingsViewModel
 
-    private val testDispatcher = UnconfinedTestDispatcher()
-
-    // Custom test function that sets up the dispatcher
-    private fun runViewModelTest(block: suspend TestScope.() -> Unit) = runTest(testDispatcher) {
-        Dispatchers.setMain(testDispatcher)
-        try {
-            block()
-        } finally {
-            Dispatchers.resetMain()
-        }
-    }
+    private val testDispatcher = StandardTestDispatcher()
 
     // Test data
     private val testBackupStats = BackupStats(
@@ -69,25 +60,23 @@ class SettingsViewModelTest {
 
     @Before
     fun setup() {
+        Dispatchers.setMain(testDispatcher)
+
         // Initialize context
         context = ApplicationProvider.getApplicationContext()
 
         // Initialize mocks - use relaxUnitFun to avoid constructor issues
         themeManager = mockk(relaxed = true, relaxUnitFun = true)
         backupManager = mockk(relaxed = true, relaxUnitFun = true)
-        securePreferencesManager = mockk(relaxed = true, relaxUnitFun = true)
         biometricManager = mockk(relaxed = true, relaxUnitFun = true)
         settingsManager = mockk(relaxed = true, relaxUnitFun = true)
+
+        // Initialize fake for SecurePreferencesManager
+        securePreferencesManager = FakeSecurePreferencesManager()
 
         // Setup default mock responses
         every { themeManager.isDarkMode } returns MutableStateFlow(false)
         every { themeManager.themeMode } returns MutableStateFlow(ThemeMode.SYSTEM)
-        every { securePreferencesManager.isPINEnabled() } returns false
-        every { securePreferencesManager.getBiometricEnabled() } returns false
-        every { securePreferencesManager.getKidSafeModeEnabled() } returns true
-        // Mock the property getter
-        every { securePreferencesManager.kidSafeModeEnabled } returns MutableStateFlow(true)
-        every { securePreferencesManager.deleteProtectionEnabled } returns MutableStateFlow(false)
         coEvery { backupManager.getBackupStats() } returns testBackupStats
         every { settingsManager.getGridSize() } returns flowOf(3)
         every { settingsManager.getAutoBackupEnabled() } returns flowOf(false)
@@ -96,12 +85,12 @@ class SettingsViewModelTest {
 
     @After
     fun tearDown() {
-        unmockkAll()
         Dispatchers.resetMain()
+        unmockkAll()
     }
 
     @Test
-    fun `initial state is correct`() = runViewModelTest {
+    fun `initial state is correct`() = runTest {
         // Given & When
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -118,7 +107,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `observes theme changes`() = runViewModelTest {
+    fun `observes theme changes`() = runTest {
         // Given
         val darkModeFlow = MutableStateFlow(false)
         val themeModeFlow = MutableStateFlow(ThemeMode.SYSTEM)
@@ -140,7 +129,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `sets theme mode`() = runViewModelTest {
+    fun `sets theme mode`() = runTest {
         // Given
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -153,7 +142,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `toggles dark mode`() = runViewModelTest {
+    fun `toggles dark mode`() = runTest {
         // Given
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -166,10 +155,8 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `sets PIN successfully`() = runViewModelTest {
+    fun `sets PIN successfully`() = runTest {
         // Given
-        every { securePreferencesManager.setPIN(any()) } just Runs
-
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
 
@@ -178,15 +165,16 @@ class SettingsViewModelTest {
         advanceUntilIdle()
 
         // Then
-        verify { securePreferencesManager.setPIN("1234") }
+        assertTrue(securePreferencesManager.isPINEnabled())
+        assertTrue(securePreferencesManager.validatePIN("1234"))
         assertTrue(viewModel.uiState.value.hasPIN)
     }
 
     @Test
-    fun `removes PIN and disables biometric`() = runViewModelTest {
+    fun `removes PIN and disables biometric`() = runTest {
         // Given
-        every { securePreferencesManager.clearPIN() } just Runs
-        every { securePreferencesManager.setBiometricEnabled(any()) } just Runs
+        securePreferencesManager.setPIN("1234")
+        securePreferencesManager.setBiometricEnabled(true)
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -196,17 +184,16 @@ class SettingsViewModelTest {
         advanceUntilIdle()
 
         // Then
-        verify { securePreferencesManager.clearPIN() }
-        verify { securePreferencesManager.setBiometricEnabled(false) }
+        assertFalse(securePreferencesManager.isPINEnabled())
+        assertFalse(securePreferencesManager.getBiometricEnabled())
         assertFalse(viewModel.uiState.value.hasPIN)
         assertFalse(viewModel.uiState.value.biometricEnabled)
     }
 
     @Test
-    fun `changes PIN with correct old PIN`() = runViewModelTest {
+    fun `changes PIN with correct old PIN`() = runTest {
         // Given
-        every { securePreferencesManager.validatePIN("1234") } returns true
-        every { securePreferencesManager.setPIN("5678") } just Runs
+        securePreferencesManager.setPIN("1234")
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
 
@@ -215,13 +202,13 @@ class SettingsViewModelTest {
 
         // Then
         assertTrue(result)
-        verify { securePreferencesManager.setPIN("5678") }
+        assertTrue(securePreferencesManager.validatePIN("5678"))
     }
 
     @Test
-    fun `rejects PIN change with incorrect old PIN`() = runViewModelTest {
+    fun `rejects PIN change with incorrect old PIN`() = runTest {
         // Given
-        every { securePreferencesManager.validatePIN("wrong") } returns false
+        securePreferencesManager.setPIN("1234")
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
 
@@ -230,14 +217,13 @@ class SettingsViewModelTest {
 
         // Then
         assertFalse(result)
-        verify(exactly = 0) { securePreferencesManager.setPIN("5678") }
+        assertFalse(securePreferencesManager.validatePIN("5678"))
+        assertTrue(securePreferencesManager.validatePIN("1234")) // Original PIN unchanged
     }
 
     @Test
-    fun `enables biometric authentication`() = runViewModelTest {
+    fun `enables biometric authentication`() = runTest {
         // Given
-        every { securePreferencesManager.setBiometricEnabled(true) } just Runs
-
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
 
@@ -246,12 +232,12 @@ class SettingsViewModelTest {
         advanceUntilIdle()
 
         // Then
-        verify { securePreferencesManager.setBiometricEnabled(true) }
+        assertTrue(securePreferencesManager.getBiometricEnabled())
         assertTrue(viewModel.uiState.value.biometricEnabled)
     }
 
     @Test
-    fun `checks biometric availability`() = runViewModelTest {
+    fun `checks biometric availability`() = runTest {
         // Given
         every { biometricManager.isBiometricAvailable() } returns BiometricAvailability.AVAILABLE
 
@@ -265,7 +251,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `prepares export successfully`() = runViewModelTest {
+    fun `prepares export successfully`() = runTest {
         // Given
         val mockIntent = mockk<Intent>()
         coEvery { backupManager.exportToZip(any()) } returns Result.success(testExportFile)
@@ -284,7 +270,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `handles export preparation failure`() = runViewModelTest {
+    fun `handles export preparation failure`() = runTest {
         // Given
         coEvery { backupManager.exportToZip(any()) } returns Result.failure(RuntimeException("Export failed"))
 
@@ -300,7 +286,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `completes export to URI`() = runViewModelTest {
+    fun `completes export to URI`() = runTest {
         // Given
         val uri = mockk<Uri>()
         coEvery { backupManager.exportToZip(any()) } returns Result.success(testExportFile)
@@ -320,7 +306,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `imports from ZIP file URI`() = runViewModelTest {
+    fun `imports from ZIP file URI`() = runTest {
         // Given
         val uri = mockk<Uri>()
         val contentResolver = mockk<android.content.ContentResolver>()
@@ -349,7 +335,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `imports from JSON file URI`() = runViewModelTest {
+    fun `imports from JSON file URI`() = runTest {
         // Given
         val uri = mockk<Uri>()
         val contentResolver = mockk<android.content.ContentResolver>()
@@ -376,7 +362,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `clears cache`() = runViewModelTest {
+    fun `clears cache`() = runTest {
         // Given
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -390,12 +376,12 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `resets app for onboarding`() = runViewModelTest {
+    fun `resets app for onboarding`() = runTest {
         // Given
+        securePreferencesManager.setPIN("1234")
+        securePreferencesManager.setBiometricEnabled(true)
         coEvery { backupManager.clearAllData() } just Runs
         coEvery { settingsManager.setOnboardingCompleted(false) } just Runs
-        every { securePreferencesManager.clearPIN() } just Runs
-        every { securePreferencesManager.setBiometricEnabled(false) } just Runs
         every { context.packageManager } returns mockk(relaxed = true)
         every { context.packageName } returns "com.smilepile"
 
@@ -409,12 +395,12 @@ class SettingsViewModelTest {
         // Then
         coVerify { backupManager.clearAllData() }
         coVerify { settingsManager.setOnboardingCompleted(false) }
-        verify { securePreferencesManager.clearPIN() }
-        verify { securePreferencesManager.setBiometricEnabled(false) }
+        assertFalse(securePreferencesManager.isPINEnabled())
+        assertFalse(securePreferencesManager.getBiometricEnabled())
     }
 
     @Test
-    fun `loads backup statistics`() = runViewModelTest {
+    fun `loads backup statistics`() = runTest {
         // Given
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
@@ -428,7 +414,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `clears error state`() = runViewModelTest {
+    fun `clears error state`() = runTest {
         // Given
         coEvery { backupManager.exportToZip(any()) } returns Result.failure(RuntimeException("Test error"))
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
@@ -444,7 +430,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `exports all settings`() = runViewModelTest {
+    fun `exports all settings`() = runTest {
         // Given
         val testSettings = mapOf("key1" to "value1", "key2" to 42)
         coEvery { settingsManager.exportSettings() } returns testSettings
@@ -459,7 +445,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `imports all settings`() = runViewModelTest {
+    fun `imports all settings`() = runTest {
         // Given
         val testSettings = mapOf("key1" to "value1", "key2" to 42)
         coEvery { settingsManager.importSettings(any(), any()) } just Runs
@@ -476,7 +462,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `resets settings to defaults`() = runViewModelTest {
+    fun `resets settings to defaults`() = runTest {
         // Given
         coEvery { settingsManager.resetToDefaults() } just Runs
 
@@ -492,7 +478,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `updates gallery settings`() = runViewModelTest {
+    fun `updates gallery settings`() = runTest {
         // Given
         coEvery { settingsManager.setGridSize(any()) } just Runs
         coEvery { settingsManager.setSortOrder(any()) } just Runs
@@ -510,7 +496,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `updates notification settings`() = runViewModelTest {
+    fun `updates notification settings`() = runTest {
         // Given
         coEvery { settingsManager.setNotificationsEnabled(any()) } just Runs
         coEvery { settingsManager.setBackupNotifications(any()) } just Runs
@@ -534,7 +520,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `updates backup settings`() = runViewModelTest {
+    fun `updates backup settings`() = runTest {
         // Given
         coEvery { settingsManager.setAutoBackupEnabled(any()) } just Runs
         coEvery { settingsManager.setBackupWifiOnly(any()) } just Runs
@@ -558,7 +544,7 @@ class SettingsViewModelTest {
     }
 
     @Test
-    fun `updates photo quality settings`() = runViewModelTest {
+    fun `updates photo quality settings`() = runTest {
         // Given
         coEvery { settingsManager.setUploadQuality(any()) } just Runs
         coEvery { settingsManager.setThumbnailQuality(any()) } just Runs

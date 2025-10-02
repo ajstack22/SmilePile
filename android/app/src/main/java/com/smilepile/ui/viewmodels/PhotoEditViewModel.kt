@@ -7,7 +7,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smilepile.storage.StorageManager
-import com.smilepile.utils.ImageProcessor
+import com.smilepile.utils.IImageProcessor
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.models.Photo
@@ -35,7 +35,8 @@ class PhotoEditViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val storageManager: StorageManager,
     private val photoRepository: PhotoRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val imageProcessor: IImageProcessor
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PhotoEditUiState())
@@ -112,7 +113,7 @@ class PhotoEditViewModel @Inject constructor(
 
             bitmap?.let {
                 val correctedBitmap = applyExifRotation(it, currentItem.path)
-                val preview = ImageProcessor.createPreviewBitmap(correctedBitmap)
+                val preview = imageProcessor.createPreviewBitmap(correctedBitmap)
                 updateStateWithLoadedPhoto(correctedBitmap, preview)
             }
         } catch (e: Exception) {
@@ -143,9 +144,9 @@ class PhotoEditViewModel @Inject constructor(
     }
 
     private suspend fun applyExifRotation(bitmap: android.graphics.Bitmap, path: String?): android.graphics.Bitmap {
-        val exifRotation = path?.let { ImageProcessor.getExifRotation(it) } ?: 0
+        val exifRotation = path?.let { imageProcessor.getExifRotation(it) } ?: 0
         return if (exifRotation != 0) {
-            ImageProcessor.rotateBitmap(bitmap, exifRotation.toFloat())
+            imageProcessor.rotateBitmap(bitmap, exifRotation.toFloat())
         } else {
             bitmap
         }
@@ -176,12 +177,12 @@ class PhotoEditViewModel @Inject constructor(
         val newRotation = (currentRotation + 90) % 360
 
         // Apply rotation to the preview bitmap
-        val rotatedBitmap = ImageProcessor.rotateBitmap(currentBitmap, 90f)
+        val rotatedBitmap = imageProcessor.rotateBitmap(currentBitmap, 90f)
 
         _uiState.value = _uiState.value.copy(
             currentRotation = newRotation,
             currentBitmap = rotatedBitmap,
-            previewBitmap = ImageProcessor.createPreviewBitmap(rotatedBitmap)
+            previewBitmap = imageProcessor.createPreviewBitmap(rotatedBitmap)
         )
     }
 
@@ -201,10 +202,10 @@ class PhotoEditViewModel @Inject constructor(
     /**
      * Apply aspect ratio preset
      */
-    fun applyAspectRatio(aspectRatio: ImageProcessor.AspectRatio) {
+    fun applyAspectRatio(aspectRatio: IImageProcessor.AspectRatio) {
         val bitmap = _uiState.value.currentBitmap ?: return
 
-        val cropRect = ImageProcessor.calculateAspectRatioCrop(
+        val cropRect = imageProcessor.calculateAspectRatioCrop(
             bitmap.width,
             bitmap.height,
             aspectRatio
@@ -233,7 +234,7 @@ class PhotoEditViewModel @Inject constructor(
             // Process the image - rotation is already applied to currentBitmap
             // so we only need to apply crop if present
             val processedBitmap = if (cropRect != null) {
-                ImageProcessor.cropBitmap(bitmap, cropRect)
+                imageProcessor.cropBitmap(bitmap, cropRect)
             } else {
                 bitmap
             }

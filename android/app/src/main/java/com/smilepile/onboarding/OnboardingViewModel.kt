@@ -7,7 +7,7 @@ import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.repository.PhotoRepository
-import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.ISecurePreferencesManager
 import com.smilepile.settings.SettingsManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -56,7 +56,7 @@ data class OnboardingUiState(
 class OnboardingViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val photoRepository: PhotoRepository,
-    private val securePreferencesManager: SecurePreferencesManager,
+    private val securePreferencesManager: ISecurePreferencesManager,
     private val settingsManager: SettingsManager
 ) : ViewModel() {
 

@@ -13,7 +13,7 @@ import com.smilepile.data.backup.ImportProgress
 import com.smilepile.data.backup.BackupFormat
 import com.smilepile.theme.ThemeManager
 import com.smilepile.theme.ThemeMode
-import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.ISecurePreferencesManager
 import com.smilepile.security.BiometricManager
 import com.smilepile.settings.SettingsManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,7 +50,7 @@ class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val themeManager: ThemeManager,
     private val backupManager: BackupManager,
-    private val securePreferencesManager: SecurePreferencesManager,
+    private val securePreferencesManager: ISecurePreferencesManager,
     private val biometricManager: BiometricManager,
     private val settingsManager: SettingsManager
 ) : ViewModel() {
