@@ -111,7 +111,7 @@ class BackupViewModelTest {
     fun `initial state is correct`() = runTest {
         // Given & When
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -129,7 +129,7 @@ class BackupViewModelTest {
     fun `loads backup history on initialization`() = runTest {
         // Given & When
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val history = viewModel.uiState.value.backupHistory
@@ -142,7 +142,7 @@ class BackupViewModelTest {
     fun `loads backup schedule on initialization`() = runTest {
         // Given & When
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val schedule = viewModel.uiState.value.backupSchedule
@@ -157,15 +157,15 @@ class BackupViewModelTest {
     fun `creates backup successfully`() = runTest {
         // Given
         coEvery {
-            backupManager.exportToZip(any(), any())
+            backupManager.exportToZip(any(), any(), any())
         } returns Result.success(testBackupFile)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.createBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -181,15 +181,15 @@ class BackupViewModelTest {
         // Given
         val errorMessage = "Backup failed due to storage issue"
         coEvery {
-            backupManager.exportToZip(any(), any())
+            backupManager.exportToZip(any(), any(), any())
         } returns Result.failure(RuntimeException(errorMessage))
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.createBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -203,18 +203,18 @@ class BackupViewModelTest {
         // Given
         val destinationUri = mockk<Uri>(relaxed = true)
         coEvery {
-            backupManager.exportToZip(any(), any())
+            backupManager.exportToZip(any(), any(), any())
         } returns Result.success(testBackupFile)
         coEvery {
             backupManager.writeZipToFile(any(), any())
         } returns Result.success(Unit)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.createBackup(destinationUri = destinationUri)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         coVerify { backupManager.writeZipToFile(testBackupFile, destinationUri) }
@@ -225,15 +225,15 @@ class BackupViewModelTest {
     fun `creates incremental backup successfully`() = runTest {
         // Given
         coEvery {
-            backupManager.performIncrementalBackup(any(), any())
+            backupManager.performIncrementalBackup(any(), any(), any())
         } returns Result.success(testBackupFile)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.createIncrementalBackup("backup1")
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -250,11 +250,11 @@ class BackupViewModelTest {
         } returns Result.success(testValidationResult)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.validateBackup(testBackupFile)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -272,11 +272,11 @@ class BackupViewModelTest {
         } returns Result.failure(RuntimeException(errorMessage))
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.validateBackup(testBackupFile)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -299,11 +299,11 @@ class BackupViewModelTest {
         } returns flowOf(successProgress)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.restoreBackup(testBackupFile)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -326,11 +326,11 @@ class BackupViewModelTest {
         } returns flowOf(failureProgress)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.restoreBackup(testBackupFile)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -348,11 +348,11 @@ class BackupViewModelTest {
         } returns Result.success(exportFile)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.exportData(ExportFormat.JSON)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -374,11 +374,11 @@ class BackupViewModelTest {
         coEvery { backupManager.scheduleBackup(any()) } just Runs
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.scheduleBackup(newSchedule)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         coVerify { backupManager.scheduleBackup(newSchedule) }
@@ -391,11 +391,11 @@ class BackupViewModelTest {
         coEvery { backupManager.scheduleBackup(any()) } just Runs
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.cancelScheduledBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         coVerify {
@@ -413,7 +413,7 @@ class BackupViewModelTest {
 
         // When
         viewModel.loadBackupStats()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -425,11 +425,11 @@ class BackupViewModelTest {
     fun `deletes backup from history`() = runTest {
         // Given
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.deleteBackup("backup1")
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val history = viewModel.uiState.value.backupHistory
@@ -444,14 +444,14 @@ class BackupViewModelTest {
 
         // Set an error
         coEvery {
-            backupManager.exportToZip(any(), any())
+            backupManager.exportToZip(any(), any(), any())
         } returns Result.failure(RuntimeException("Test error"))
         viewModel.createBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.clearError()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         assertNull(viewModel.uiState.value.lastError)
@@ -461,16 +461,16 @@ class BackupViewModelTest {
     fun `resets success states`() = runTest {
         // Given
         coEvery {
-            backupManager.exportToZip(any(), any())
+            backupManager.exportToZip(any(), any(), any())
         } returns Result.success(testBackupFile)
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
         viewModel.createBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.resetSuccessStates()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
         val uiState = viewModel.uiState.value
@@ -482,24 +482,24 @@ class BackupViewModelTest {
     @Test
     fun `tracks backup progress`() = runTest {
         // Given
-        var progressCalled = false
+        val progressSlot = slot<(Int, Int, String) -> Unit>()
         coEvery {
-            backupManager.exportToZip(any(), captureLambda())
+            backupManager.exportToZip(any(), any(), capture(progressSlot))
         } answers {
-            val progressCallback = lambda<(Int, Int, String) -> Unit>()
-            progressCallback.invoke(50, 100, "Processing photos")
-            progressCalled = true
+            progressSlot.captured.invoke(50, 100, "Processing photos")
             Result.success(testBackupFile)
         }
 
         viewModel = BackupViewModel(backupManager, restoreManager, exportManager)
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // When
         viewModel.createBackup()
-        testScheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         // Then
-        assertTrue(progressCalled)
+        assertTrue(progressSlot.isCaptured)
+        // Verify the callback would have been called with expected values
+        coVerify { backupManager.exportToZip(any(), any(), any()) }
     }
 }
