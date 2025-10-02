@@ -1,0 +1,110 @@
+2025-10-01 22:56:14.689137-0500 SmilePile[74134:20999674] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-01 22:56:14.691018-0500 SmilePile[74134:20999674] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-Black.ttf"
+2025-10-01 22:56:14.691709-0500 SmilePile[74134:20999674] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-01 22:56:14.692227-0500 SmilePile[74134:20999674] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-Bold.ttf"
+2025-10-01 22:56:14.692696-0500 SmilePile[74134:20999674] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-01 22:56:14.693183-0500 SmilePile[74134:20999674] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Bundle/Application/B4A4B02B-2A50-4F9B-85AD-9DE0992ADB1E/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-01 22:56:14.695862-0500 SmilePile[74134:20999674] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-01 22:56:14.696429-0500 SmilePile[74134:20999674] GSFontRegisterCGFont(<CGFont (0x600002c1c000): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c1c000): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-01 22:56:14.764570-0500 SmilePile[74134:20999674] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Data/Application/58ABC9B7-040F-4BE3-8CFD-A27B76F0B740/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-01 22:56:14.851956-0500 SmilePile[74134:20999674] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Data/Application/58ABC9B7-040F-4BE3-8CFD-A27B76F0B740/Library/Application%20Support/SmilePile.sqlite
+2025-10-01 22:56:14.867632-0500 SmilePile[74134:20999674] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-01 22:56:14.867803-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Data/Application/58ABC9B7-040F-4BE3-8CFD-A27B76F0B740/Documents/simple_photos
+2025-10-01 22:56:14.867869-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/317D53BD-E675-42DD-9E98-9F71A1D50F01/data/Containers/Data/Application/58ABC9B7-040F-4BE3-8CFD-A27B76F0B740/Documents/simple_thumbs
+2025-10-01 22:56:14.887595-0500 SmilePile[74134:20999674] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-01 22:56:15.070294-0500 SmilePile[74134:20999913] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-10-01 22:56:15.112978-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-01 22:56:15.114465-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-01 22:56:15.114644-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-01 22:56:15.115471-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-01 22:56:15.115799-0500 SmilePile[74134:20999674] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-01 22:56:15.116238-0500 SmilePile[74134:20999674] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-01 22:56:15.143551-0500 SmilePile[74134:20999674] [OptimizedPhotoGalleryView] Loaded 1 categories
+2025-10-01 22:56:15.143976-0500 SmilePile[74134:20999674] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-01 22:56:15.144875-0500 SmilePile[74134:20999920] [CategoryRepository] Categories already exist (1), skipping initialization
+SmilePileApp: Categories count: 1
+2025-10-01 22:56:15.321971-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] Loading photos from repository
+2025-10-01 22:56:15.323555-0500 SmilePile[74134:20999920] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-01 22:56:15.325767-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] Loaded 0 photos in 0.00s
+2025-10-01 22:56:15.383026-0500 SmilePile[74134:20999920] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+2025-10-01 22:56:15.888567-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 176MB
+Test Suite 'PhotoImportIntegrationTest' started at 2025-10-01 22:56:16.649.
+Test Case '-[SmilePileTests.PhotoImportIntegrationTest testFullImportPipeline]' started.
+🧪 Starting full import pipeline test...
+📥 Importing 3 photos...
+2025-10-01 22:56:16.806034-0500 SmilePile[74134:20999674] [StorageManager] Memory pressure detected - pausing import
+2025-10-01 22:56:16.889266-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 229MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:439: error: -[SmilePileTests.PhotoImportIntegrationTest testFullImportPipeline] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.PhotoImportIntegrationTest testFullImportPipeline]' failed (2.199 seconds).
+Test Suite 'PhotoImportIntegrationTest' failed at 2025-10-01 22:56:18.849.
+	 Executed 1 test, with 1 failure (1 unexpected) in 2.199 (2.200) seconds
+2025-10-01 22:56:18.853116-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 179MB
+Test Suite 'MemoryMonitoringTests' started at 2025-10-01 22:56:18.866.
+Test Case '-[SmilePileTests.MemoryMonitoringTests testMemorySafetyCheck]' started.
+Is safe to process: false
+Test Case '-[SmilePileTests.MemoryMonitoringTests testMemorySafetyCheck]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.MemoryMonitoringTests testMemoryUsageReporting]' started.
+Initial memory usage: 180MB
+2025-10-01 22:56:18.889205-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 181MB
+2025-10-01 22:56:18.891103-0500 SmilePile[74134:20999909] [SafeThumbnailGenerator] Memory usage high: 182MB
+Final memory usage: 181MB
+Test Case '-[SmilePileTests.MemoryMonitoringTests testMemoryUsageReporting]' passed (0.569 seconds).
+Test Suite 'MemoryMonitoringTests' passed at 2025-10-01 22:56:19.437.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.570 (0.571) seconds
+Test Suite 'ImageProcessorTests' started at 2025-10-01 22:56:19.443.
+Test Case '-[SmilePileTests.ImageProcessorTests testImageNotResizedIfSmallerThanMax]' started.
+Test Case '-[SmilePileTests.ImageProcessorTests testImageNotResizedIfSmallerThanMax]' passed (0.048 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testImageResizeMaintainsAspectRatio]' started.
+Test Case '-[SmilePileTests.ImageProcessorTests testImageResizeMaintainsAspectRatio]' passed (0.148 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testInvalidImageDataReturnsNil]' started.
+2025-10-01 22:56:19.677143-0500 SmilePile[74134:20999674] [ImageProcessor] Failed to create UIImage from data
+Test Case '-[SmilePileTests.ImageProcessorTests testInvalidImageDataReturnsNil]' passed (0.038 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testJPEGCompression]' started.
+2025-10-01 22:56:19.891136-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 220MB
+Test Case '-[SmilePileTests.ImageProcessorTests testJPEGCompression]' passed (0.410 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testMemoryEfficientLargeImageProcessing]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/ImageProcessorTests.swift:161: error: -[SmilePileTests.ImageProcessorTests testMemoryEfficientLargeImageProcessing] : XCTAssertLessThan failed: ("204570624") is not less than ("52428800")
+Test Case '-[SmilePileTests.ImageProcessorTests testMemoryEfficientLargeImageProcessing]' failed (0.552 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testResizePerformance]' started.
+2025-10-01 22:56:20.889195-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 224MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/ImageProcessorTests.swift:123: Test Case '-[SmilePileTests.ImageProcessorTests testResizePerformance]' measured [Time, seconds] average: 0.079, relative standard deviation: 4.782%, values: [0.086365, 0.077582, 0.078707, 0.074796, 0.078410, 0.073347, 0.076257, 0.080589, 0.076606, 0.083547], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.ImageProcessorTests testResizePerformance]' passed (1.150 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailCenterCrop]' started.
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailCenterCrop]' passed (0.070 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailGeneration]' started.
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailGeneration]' passed (0.184 seconds).
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailGenerationPerformance]' started.
+2025-10-01 22:56:22.169507-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 272MB
+2025-10-01 22:56:22.889213-0500 SmilePile[74134:20999674] [PhotoGalleryViewModel] High memory usage: 273MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/ImageProcessorTests.swift:136: Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailGenerationPerformance]' measured [Time, seconds] average: 0.089, relative standard deviation: 11.854%, values: [0.111837, 0.071803, 0.083561, 0.090245, 0.102647, 0.092803, 0.086272, 0.082435, 0.084093, 0.088202], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.ImageProcessorTests testThumbnailGenerationPerformance]' passed (1.269 seconds).
+Test Suite 'ImageProcessorTests' failed at 2025-10-01 22:56:23.321.
+	 Executed 9 tests, with 1 failure (0 unexpected) in 3.869 (3.878) seconds
+◇ Test run started.
+↳ Testing Library Version: 124.4
+↳ Target Platform: arm64-apple-ios13.0-simulator
+◇ Suite SmilePileTests started.
+◇ Test example() started.
+✔ Test example() passed after 0.001 seconds.
+✔ Suite SmilePileTests passed after 0.001 seconds.
+✔ Test run with 1 test passed after 0.002 seconds.
+Test Suite 'DIContainerTests' started at 2025-10-01 22:56:23.401.
+Test Case '-[SmilePileTests.DIContainerTests testIsRegistered]' started.
+Test Case '-[SmilePileTests.DIContainerTests testIsRegistered]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.DIContainerTests testPropertyWrapper]' started.

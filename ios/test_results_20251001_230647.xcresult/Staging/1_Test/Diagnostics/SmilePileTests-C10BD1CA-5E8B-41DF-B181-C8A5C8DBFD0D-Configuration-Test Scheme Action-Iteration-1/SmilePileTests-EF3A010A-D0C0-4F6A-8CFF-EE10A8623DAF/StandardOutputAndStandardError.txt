@@ -1,0 +1,55 @@
+2025-10-01 23:13:07.499136-0500 SmilePile[78139:21060507] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.502097-0500 SmilePile[78139:21060507] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-Black.ttf"
+2025-10-01 23:13:07.504448-0500 SmilePile[78139:21060507] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.504986-0500 SmilePile[78139:21060507] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-Bold.ttf"
+2025-10-01 23:13:07.505487-0500 SmilePile[78139:21060507] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.506174-0500 SmilePile[78139:21060507] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Bundle/Application/527A6B9B-7AE1-4C98-9326-52ACAC92FB54/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-01 23:13:07.511287-0500 SmilePile[78139:21060507] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-01 23:13:07.511977-0500 SmilePile[78139:21060507] GSFontRegisterCGFont(<CGFont (0x600002c1c000): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c1c000): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-01 23:13:07.740135-0500 SmilePile[78139:21060507] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Data/Application/5C90BF79-0853-40E5-BBE1-4CEAC3731BF5/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-01 23:13:07.897045-0500 SmilePile[78139:21060507] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Data/Application/5C90BF79-0853-40E5-BBE1-4CEAC3731BF5/Library/Application%20Support/SmilePile.sqlite
+2025-10-01 23:13:07.949079-0500 SmilePile[78139:21060507] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-01 23:13:07.950255-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Data/Application/5C90BF79-0853-40E5-BBE1-4CEAC3731BF5/Documents/simple_photos
+2025-10-01 23:13:07.950433-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/8F6BD1E3-60C9-44C9-B4AD-79D91095234A/data/Containers/Data/Application/5C90BF79-0853-40E5-BBE1-4CEAC3731BF5/Documents/simple_thumbs
+2025-10-01 23:13:08.017935-0500 SmilePile[78139:21060507] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-01 23:13:08.329760-0500 SmilePile[78139:21063128] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-10-01 23:13:08.429988-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-01 23:13:08.433405-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-01 23:13:08.433673-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-01 23:13:08.434801-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-01 23:13:08.435445-0500 SmilePile[78139:21060507] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-01 23:13:08.435590-0500 SmilePile[78139:21060507] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-01 23:13:08.446007-0500 SmilePile[78139:21060507] [OptimizedPhotoGalleryView] Loaded 1 categories
+2025-10-01 23:13:08.447241-0500 SmilePile[78139:21063140] [CategoryRepository] Categories already exist (1), skipping initialization
+2025-10-01 23:13:08.448641-0500 SmilePile[78139:21060507] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+SmilePileApp: Categories count: 1
+2025-10-01 23:13:08.568943-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] Loading photos from repository
+2025-10-01 23:13:08.574043-0500 SmilePile[78139:21063148] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-01 23:13:08.576228-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] Loaded 0 photos in 0.01s
+2025-10-01 23:13:08.727940-0500 SmilePile[78139:21063148] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+2025-10-01 23:13:09.028554-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 169MB
+2025-10-01 23:13:10.019496-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 167MB
+2025-10-01 23:13:11.019229-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 168MB
+2025-10-01 23:13:12.019816-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 160MB
+2025-10-01 23:13:13.021871-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 158MB
+2025-10-01 23:13:14.020348-0500 SmilePile[78139:21060507] [PhotoGalleryViewModel] High memory usage: 157MB
+
+
+*** If you believe this error represents a bug, please attach the result bundle at /Users/adamstack/SmilePile/ios/test_results_20251001_230647.xcresult
+

@@ -1,0 +1,161 @@
+2025-10-01 23:12:50.234141-0500 SmilePile[78079:21057680] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-01 23:12:50.237096-0500 SmilePile[78079:21057680] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-Black.ttf"
+2025-10-01 23:12:50.238053-0500 SmilePile[78079:21057680] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-01 23:12:50.239424-0500 SmilePile[78079:21057680] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-Bold.ttf"
+2025-10-01 23:12:50.240195-0500 SmilePile[78079:21057680] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-01 23:12:50.243578-0500 SmilePile[78079:21057680] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Bundle/Application/023F921D-E6EC-482C-80BD-B045FCA9E778/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-01 23:12:50.255540-0500 SmilePile[78079:21057680] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-01 23:12:50.255880-0500 SmilePile[78079:21057680] GSFontRegisterCGFont(<CGFont (0x600002c08a00): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c08a00): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-01 23:12:50.439869-0500 SmilePile[78079:21057680] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Data/Application/3E7AE24F-F292-4DD0-AF8B-CF02EFCB8227/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-01 23:12:51.264490-0500 SmilePile[78079:21057680] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Data/Application/3E7AE24F-F292-4DD0-AF8B-CF02EFCB8227/Library/Application%20Support/SmilePile.sqlite
+2025-10-01 23:12:51.347464-0500 SmilePile[78079:21057680] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-01 23:12:51.347916-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Data/Application/3E7AE24F-F292-4DD0-AF8B-CF02EFCB8227/Documents/simple_photos
+2025-10-01 23:12:51.348119-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/70D6BBA1-54AE-418B-8F9F-48D5D4477509/data/Containers/Data/Application/3E7AE24F-F292-4DD0-AF8B-CF02EFCB8227/Documents/simple_thumbs
+2025-10-01 23:12:51.558703-0500 SmilePile[78079:21057680] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-01 23:12:53.437331-0500 SmilePile[78079:21061708] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-10-01 23:12:53.656448-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-01 23:12:53.670060-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-01 23:12:53.670271-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-01 23:12:53.673279-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-01 23:12:53.673485-0500 SmilePile[78079:21057680] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-01 23:12:53.673575-0500 SmilePile[78079:21057680] [OptimizedPhotoGalleryView] Starting to load categories...
+2025-10-01 23:12:53.689252-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 169MB
+2025-10-01 23:12:53.709776-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 170MB
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-01 23:12:53.728912-0500 SmilePile[78079:21057680] [OptimizedPhotoGalleryView] Loaded 1 categories
+2025-10-01 23:12:53.729171-0500 SmilePile[78079:21061708] [CategoryRepository] Categories already exist (1), skipping initialization
+2025-10-01 23:12:53.731072-0500 SmilePile[78079:21057680] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+SmilePileApp: Categories count: 1
+2025-10-01 23:12:54.174962-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] Loading photos from repository
+2025-10-01 23:12:54.175671-0500 SmilePile[78079:21061705] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-01 23:12:54.176572-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] Loaded 0 photos in 0.00s
+2025-10-01 23:12:54.224738-0500 SmilePile[78079:21061715] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+2025-10-01 23:12:54.560610-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 174MB
+2025-10-01 23:12:55.560051-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 173MB
+2025-10-01 23:12:56.560605-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 172MB
+Test Suite 'EnhancedPhotoViewerTests' started at 2025-10-01 23:12:56.790.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testDoubleTapZoomToggle]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testDoubleTapZoomToggle]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testGestureConflictResolution]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testGestureConflictResolution]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testHorizontalSwipeNavigation]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testHorizontalSwipeNavigation]' passed (0.003 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testIPadSpecificUI]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testIPadSpecificUI]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testLargePhotoHandling]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testLargePhotoHandling]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testMetadataDisplay]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testMetadataDisplay]' passed (0.015 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testMetadataToggle]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testMetadataToggle]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testNavigationPerformance]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Tests/EnhancedPhotoViewerTests.swift:274: Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testNavigationPerformance]' measured [Time, seconds] average: 0.000, relative standard deviation: 123.684%, values: [0.000178, 0.000030, 0.000023, 0.000021, 0.000021, 0.000021, 0.000020, 0.000021, 0.000021, 0.000022], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testNavigationPerformance]' passed (7.023 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testOrientationChangeHandling]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testOrientationChangeHandling]' passed (0.026 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testPhotoShareItem]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testPhotoShareItem]' passed (0.027 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testPinchToZoomScaleLimits]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testPinchToZoomScaleLimits]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testSafeArrayAccess]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testSafeArrayAccess]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testVoiceOverLabels]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testVoiceOverLabels]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testZoomPerformance]' started.
+2025-10-01 23:13:04.715565-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 169MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Tests/EnhancedPhotoViewerTests.swift:262: Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testZoomPerformance]' measured [Time, seconds] average: 0.000, relative standard deviation: 74.174%, values: [0.000102, 0.000029, 0.000024, 0.000023, 0.000023, 0.000024, 0.000022, 0.000023, 0.000024, 0.000023], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testZoomPerformance]' passed (0.775 seconds).
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testZoomPersistenceOnPhotoSwitch]' started.
+Test Case '-[SmilePileTests.EnhancedPhotoViewerTests testZoomPersistenceOnPhotoSwitch]' passed (0.003 seconds).
+Test Suite 'EnhancedPhotoViewerTests' passed at 2025-10-01 23:13:04.749.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 7.887 (7.959) seconds
+2025-10-01 23:13:04.777410-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 174MB
+Test Suite 'PhotoImportSafetyTests' started at 2025-10-01 23:13:04.928.
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testBatchImportWithMemoryLimit]' started.
+2025-10-01 23:13:05.043348-0500 SmilePile[78079:21057680] [StorageManager] Memory pressure detected - pausing import
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:293: error: -[SmilePileTests.PhotoImportSafetyTests testBatchImportWithMemoryLimit] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testBatchImportWithMemoryLimit]' failed (0.647 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testConcurrentThumbnailGeneration]' started.
+2025-10-01 23:13:05.576820-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 171MB
+2025-10-01 23:13:05.620571-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 193MB
+2025-10-01 23:13:05.620572-0500 SmilePile[78079:21061705] [SafeThumbnailGenerator] Memory usage high: 193MB
+2025-10-01 23:13:05.620572-0500 SmilePile[78079:21061715] [SafeThumbnailGenerator] Memory usage high: 193MB
+2025-10-01 23:13:05.620571-0500 SmilePile[78079:21062808] [SafeThumbnailGenerator] Memory usage high: 193MB
+2025-10-01 23:13:05.620572-0500 SmilePile[78079:21062693] [SafeThumbnailGenerator] Memory usage high: 193MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:225: error: -[SmilePileTests.PhotoImportSafetyTests testConcurrentThumbnailGeneration] : XCTAssertTrue failed
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testConcurrentThumbnailGeneration]' failed (0.792 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testGetImageMetadata]' started.
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testGetImageMetadata]' passed (0.060 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testImageIOThumbnailGeneration]' started.
+2025-10-01 23:13:06.438164-0500 SmilePile[78079:21061715] [SafeThumbnailGenerator] Memory usage high: 166MB
+2025-10-01 23:13:06.563248-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 166MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:35: error: -[SmilePileTests.PhotoImportSafetyTests testImageIOThumbnailGeneration] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testImageIOThumbnailGeneration]' failed (0.546 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testMemoryPressureHandling]' started.
+2025-10-01 23:13:07.083536-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 222MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:97: error: -[SmilePileTests.PhotoImportSafetyTests testMemoryPressureHandling] : XCTAssertTrue failed
+2025-10-01 23:13:07.562575-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 222MB
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testMemoryPressureHandling]' failed (0.634 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testProcessImageForStorage]' started.
+2025-10-01 23:13:07.732908-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 222MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:175: error: -[SmilePileTests.PhotoImportSafetyTests testProcessImageForStorage] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testProcessImageForStorage]' failed (0.662 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testProgressReporting]' started.
+2025-10-01 23:13:08.361195-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 199MB
+2025-10-01 23:13:08.560108-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 196MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:265: error: -[SmilePileTests.PhotoImportSafetyTests testProgressReporting] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testProgressReporting]' failed (0.689 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testSequentialThumbnailGeneration]' started.
+2025-10-01 23:13:09.123069-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 221MB
+2025-10-01 23:13:09.560928-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 144MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:67: error: -[SmilePileTests.PhotoImportSafetyTests testSequentialThumbnailGeneration] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testSequentialThumbnailGeneration]' failed (0.683 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testStoragePressureMonitoring]' started.
+Current storage pressure: Storage space is adequate
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testStoragePressureMonitoring]' passed (0.113 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationMemoryEfficiency]' started.
+2025-10-01 23:13:09.796311-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 164MB
+2025-10-01 23:13:10.353169-0500 SmilePile[78079:21061705] [SafeThumbnailGenerator] Memory usage high: 164MB
+2025-10-01 23:13:10.560727-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 164MB
+2025-10-01 23:13:10.919290-0500 SmilePile[78079:21061705] [SafeThumbnailGenerator] Memory usage high: 163MB
+2025-10-01 23:13:11.490809-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 160MB
+2025-10-01 23:13:11.560662-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 160MB
+2025-10-01 23:13:12.048393-0500 SmilePile[78079:21061705] [SafeThumbnailGenerator] Memory usage high: 157MB
+2025-10-01 23:13:12.560752-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 150MB
+2025-10-01 23:13:12.577934-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 156MB
+2025-10-01 23:13:13.122132-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 156MB
+2025-10-01 23:13:13.560721-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 156MB
+2025-10-01 23:13:13.683485-0500 SmilePile[78079:21062693] [SafeThumbnailGenerator] Memory usage high: 156MB
+2025-10-01 23:13:14.229693-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 154MB
+2025-10-01 23:13:14.560913-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 154MB
+2025-10-01 23:13:14.792936-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 156MB
+2025-10-01 23:13:15.560588-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 139MB
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationMemoryEfficiency]' passed (6.067 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithEmptyData]' started.
+2025-10-01 23:13:15.841483-0500 SmilePile[78079:21062692] [SafeThumbnailGenerator] Memory usage high: 140MB
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithEmptyData]' passed (0.533 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithInvalidData]' started.
+2025-10-01 23:13:16.376881-0500 SmilePile[78079:21061715] [SafeThumbnailGenerator] Memory usage high: 142MB
+2025-10-01 23:13:16.559817-0500 SmilePile[78079:21057680] [PhotoGalleryViewModel] High memory usage: 141MB
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithInvalidData]' passed (0.527 seconds).
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithVariousSizes]' started.
+2025-10-01 23:13:16.927181-0500 SmilePile[78079:21063946] [SafeThumbnailGenerator] Memory usage high: 157MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoImportSafetyTests.swift:125: error: -[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithVariousSizes] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.PhotoImportSafetyTests testThumbnailGenerationWithVariousSizes]' failed (0.566 seconds).
+Test Suite 'PhotoImportSafetyTests' failed at 2025-10-01 23:13:17.469.
+	 Executed 13 tests, with 8 failures (6 unexpected) in 12.519 (12.541) seconds

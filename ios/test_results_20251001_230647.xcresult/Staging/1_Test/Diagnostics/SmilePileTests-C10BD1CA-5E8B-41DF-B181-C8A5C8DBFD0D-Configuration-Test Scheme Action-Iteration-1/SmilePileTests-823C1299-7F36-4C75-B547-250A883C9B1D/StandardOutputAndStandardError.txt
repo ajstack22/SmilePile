@@ -1,0 +1,126 @@
+2025-10-01 23:13:07.499600-0500 SmilePile[78194:21062015] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.502239-0500 SmilePile[78194:21062015] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-Black.ttf"
+2025-10-01 23:13:07.502817-0500 SmilePile[78194:21062015] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.503356-0500 SmilePile[78194:21062015] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-Bold.ttf"
+2025-10-01 23:13:07.503839-0500 SmilePile[78194:21062015] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-01 23:13:07.504367-0500 SmilePile[78194:21062015] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Bundle/Application/F94DBE5B-0A48-4E87-B216-24BE19BE40BF/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-01 23:13:07.511288-0500 SmilePile[78194:21062015] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-01 23:13:07.511488-0500 SmilePile[78194:21062015] GSFontRegisterCGFont(<CGFont (0x600002c00300): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c00300): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-01 23:13:07.740131-0500 SmilePile[78194:21062015] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Data/Application/F576218D-2FE5-491E-80E3-8E12942E2ED2/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-01 23:13:07.894132-0500 SmilePile[78194:21062015] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Data/Application/F576218D-2FE5-491E-80E3-8E12942E2ED2/Library/Application%20Support/SmilePile.sqlite
+2025-10-01 23:13:07.948467-0500 SmilePile[78194:21062015] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-01 23:13:07.948841-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Data/Application/F576218D-2FE5-491E-80E3-8E12942E2ED2/Documents/simple_photos
+2025-10-01 23:13:07.948987-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/E9FF26FB-51BD-422E-B8C2-47E1029A3F9B/data/Containers/Data/Application/F576218D-2FE5-491E-80E3-8E12942E2ED2/Documents/simple_thumbs
+2025-10-01 23:13:08.014623-0500 SmilePile[78194:21062015] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-01 23:13:08.429935-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-01 23:13:08.433956-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-01 23:13:08.434232-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-01 23:13:08.435342-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-01 23:13:08.435570-0500 SmilePile[78194:21062015] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-01 23:13:08.435719-0500 SmilePile[78194:21062015] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-01 23:13:08.446047-0500 SmilePile[78194:21062015] [OptimizedPhotoGalleryView] Loaded 1 categories
+2025-10-01 23:13:08.446886-0500 SmilePile[78194:21063131] [CategoryRepository] Categories already exist (1), skipping initialization
+2025-10-01 23:13:08.448681-0500 SmilePile[78194:21062015] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+SmilePileApp: Categories count: 1
+2025-10-01 23:13:08.568943-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] Loading photos from repository
+2025-10-01 23:13:08.572325-0500 SmilePile[78194:21063164] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-01 23:13:08.576382-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] Loaded 0 photos in 0.01s
+2025-10-01 23:13:09.028550-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 168MB
+2025-10-01 23:13:10.019039-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 167MB
+2025-10-01 23:13:11.019041-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 167MB
+2025-10-01 23:13:12.019384-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 160MB
+2025-10-01 23:13:13.019511-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 158MB
+2025-10-01 23:13:14.019457-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 156MB
+Test Suite 'PINManagerTests' started at 2025-10-01 23:13:14.799.
+Test Case '-[SmilePileTests.PINManagerTests testAlphabeticPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testAlphabeticPIN]' passed (0.055 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testChangePIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testChangePIN]' passed (0.065 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testClearPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testClearPIN]' passed (0.019 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testClearPINResetsAttempts]' started.
+Test Case '-[SmilePileTests.PINManagerTests testClearPINResetsAttempts]' passed (0.043 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testConcurrentFailedAttempts]' started.
+2025-10-01 23:13:15.018271-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 168MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/PINManagerTests.swift:263: error: -[SmilePileTests.PINManagerTests testConcurrentFailedAttempts] : XCTAssertGreaterThanOrEqual failed: ("1") is less than ("3")
+Test Case '-[SmilePileTests.PINManagerTests testConcurrentFailedAttempts]' failed (0.721 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testConcurrentPINValidation]' started.
+Test Case '-[SmilePileTests.PINManagerTests testConcurrentPINValidation]' passed (0.029 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testCooldownAfterMaxAttempts]' started.
+Test Case '-[SmilePileTests.PINManagerTests testCooldownAfterMaxAttempts]' passed (0.065 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testCooldownTimerDecrement]' started.
+2025-10-01 23:13:16.019738-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 169MB
+2025-10-01 23:13:17.018587-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 167MB
+Test Case '-[SmilePileTests.PINManagerTests testCooldownTimerDecrement]' passed (2.093 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testEmptyPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testEmptyPIN]' passed (0.005 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testFailedAttemptsIncrement]' started.
+Test Case '-[SmilePileTests.PINManagerTests testFailedAttemptsIncrement]' passed (0.058 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testFailedAttemptsResetOnSuccess]' started.
+Test Case '-[SmilePileTests.PINManagerTests testFailedAttemptsResetOnSuccess]' passed (0.046 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testInvalidPINLength]' started.
+Test Case '-[SmilePileTests.PINManagerTests testInvalidPINLength]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testMinMaxPINLengths]' started.
+Test Case '-[SmilePileTests.PINManagerTests testMinMaxPINLengths]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testMismatchedPINLength]' started.
+Test Case '-[SmilePileTests.PINManagerTests testMismatchedPINLength]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testMixedAlphanumericPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testMixedAlphanumericPIN]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testNoCooldownBeforeMaxAttempts]' started.
+Test Case '-[SmilePileTests.PINManagerTests testNoCooldownBeforeMaxAttempts]' passed (0.102 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINHashingConsistency]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINHashingConsistency]' passed (0.084 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINLengthVariations]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINLengthVariations]' passed (0.058 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINNotStoredInPlainText]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINNotStoredInPlainText]' passed (0.019 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINPersistence]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINPersistence]' passed (0.025 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINWithAllSameDigit]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINWithAllSameDigit]' passed (0.021 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINWithAllZeros]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINWithAllZeros]' passed (0.031 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testPINWithLeadingZeros]' started.
+Test Case '-[SmilePileTests.PINManagerTests testPINWithLeadingZeros]' passed (0.052 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testResetFailedAttemptsAfterCooldown]' started.
+2025-10-01 23:13:18.422824-0500 SmilePile[78194:21062015] [PhotoGalleryViewModel] High memory usage: 165MB
+Test Case '-[SmilePileTests.PINManagerTests testResetFailedAttemptsAfterCooldown]' passed (0.094 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSequentialPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testSequentialPIN]' passed (0.022 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINTooLong]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/PINManagerTests.swift:44: error: -[SmilePileTests.PINManagerTests testSetInvalidPINTooLong] : XCTAssertThrowsError failed: did not throw an error
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINTooLong]' failed (0.022 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINTooShort]' started.
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINTooShort]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINWithLetters]' started.
+Test Case '-[SmilePileTests.PINManagerTests testSetInvalidPINWithLetters]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSetValidPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testSetValidPIN]' passed (0.022 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testSpecialCharactersInPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testSpecialCharactersInPIN]' passed (0.003 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testValidateCorrectPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testValidateCorrectPIN]' passed (0.022 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testValidateIncorrectPIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testValidateIncorrectPIN]' passed (0.032 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testValidatePINWhenNotSet]' started.
+Test Case '-[SmilePileTests.PINManagerTests testValidatePINWhenNotSet]' passed (0.005 seconds).
+Test Case '-[SmilePileTests.PINManagerTests testWhitespacePIN]' started.
+Test Case '-[SmilePileTests.PINManagerTests testWhitespacePIN]' passed (0.003 seconds).
+Test Suite 'PINManagerTests' failed at 2025-10-01 23:13:18.658.
+	 Executed 34 tests, with 2 failures (0 unexpected) in 3.845 (3.859) seconds
