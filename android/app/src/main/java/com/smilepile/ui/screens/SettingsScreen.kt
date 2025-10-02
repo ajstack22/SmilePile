@@ -39,6 +39,7 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -629,6 +630,11 @@ private fun SectionDivider() {
 private fun AboutDialog(
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
+    var showErrorDialog by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+    var isProcessingLink by remember { mutableStateOf(false) }
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -639,7 +645,7 @@ private fun AboutDialog(
         },
         text = {
             Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
                     text = stringResource(R.string.settings_about_description),
@@ -655,6 +661,115 @@ private fun AboutDialog(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary
                 )
+
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+                // Privacy & Support Links
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // Privacy Policy
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(
+                                enabled = !isProcessingLink,
+                                role = androidx.compose.ui.semantics.Role.Button,
+                                onClickLabel = "Open privacy policy in browser"
+                            ) {
+                                if (!isProcessingLink) {
+                                    isProcessingLink = true
+                                    val privacyUrl = context.getString(R.string.privacy_policy_url)
+                                    if (!com.smilepile.utils.BrowserHelper.openUrl(context, privacyUrl)) {
+                                        errorMessage = context.getString(R.string.error_browser_unavailable)
+                                        showErrorDialog = true
+                                    }
+                                    // Reset debounce after delay
+                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                                        isProcessingLink = false
+                                    }, 500)
+                                }
+                            }
+                            .padding(vertical = 8.dp)
+                            .semantics(mergeDescendants = true) {},
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.privacy_policy_label),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    // Terms of Service
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(
+                                enabled = !isProcessingLink,
+                                role = androidx.compose.ui.semantics.Role.Button,
+                                onClickLabel = "Open terms of service in browser"
+                            ) {
+                                if (!isProcessingLink) {
+                                    isProcessingLink = true
+                                    val termsUrl = context.getString(R.string.terms_of_service_url)
+                                    if (!com.smilepile.utils.BrowserHelper.openUrl(context, termsUrl)) {
+                                        errorMessage = context.getString(R.string.error_browser_unavailable)
+                                        showErrorDialog = true
+                                    }
+                                    // Reset debounce after delay
+                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                                        isProcessingLink = false
+                                    }, 500)
+                                }
+                            }
+                            .padding(vertical = 8.dp)
+                            .semantics(mergeDescendants = true) {},
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.terms_of_service_label),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
+                    // Support
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable(
+                                enabled = !isProcessingLink,
+                                role = androidx.compose.ui.semantics.Role.Button,
+                                onClickLabel = "Send support email"
+                            ) {
+                                if (!isProcessingLink) {
+                                    isProcessingLink = true
+                                    val supportEmail = context.getString(R.string.support_email)
+                                    if (!com.smilepile.utils.BrowserHelper.openEmailClient(context, supportEmail)) {
+                                        errorMessage = context.getString(R.string.error_email_unavailable, supportEmail)
+                                        showErrorDialog = true
+                                    }
+                                    // Reset debounce after delay
+                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                                        isProcessingLink = false
+                                    }, 500)
+                                }
+                            }
+                            .padding(vertical = 8.dp)
+                            .semantics(mergeDescendants = true) {},
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.support_label),
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
             }
         },
         confirmButton = {
@@ -663,6 +778,24 @@ private fun AboutDialog(
             }
         }
     )
+
+    // Error Dialog
+    if (showErrorDialog) {
+        AlertDialog(
+            onDismissRequest = { showErrorDialog = false },
+            title = {
+                Text("Error")
+            },
+            text = {
+                Text(errorMessage)
+            },
+            confirmButton = {
+                TextButton(onClick = { showErrorDialog = false }) {
+                    Text(stringResource(R.string.ok))
+                }
+            }
+        )
+    }
 }
 
 @Composable

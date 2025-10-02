@@ -54,6 +54,22 @@
     <string name="settings_about_description">A safe and fun photo gallery designed for children to explore and organize their favorite pictures.</string>
     <string name="settings_about_child_safety">Child-safe design with parental controls</string>
 
+    <!-- Privacy & Support URLs -->
+    <!-- Update these URLs to change privacy policy, terms, or support destinations -->
+    <!-- SECURITY: Always use HTTPS for web URLs -->
+    <string name="privacy_policy_url">https://smilepile.app/?privacy</string>
+    <string name="terms_of_service_url">https://smilepile.app/?tos</string>
+    <string name="support_email">support@stackmap.app</string>
+
+    <!-- Link Labels -->
+    <string name="privacy_policy_label">Privacy Policy</string>
+    <string name="terms_of_service_label">Terms of Service</string>
+    <string name="support_label">Support</string>
+
+    <!-- Error Messages -->
+    <string name="error_browser_unavailable">Unable to open link</string>
+    <string name="error_email_unavailable">No email client available. Please email us at %1$s</string>
+
     <!-- Settings Dialogs -->
     <string name="settings_clear_cache_dialog_title">Clear Cache?</string>
     <string name="settings_clear_cache_dialog_message">This will free up storage space but may slow down image loading temporarily.</string>

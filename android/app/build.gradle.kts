@@ -165,6 +165,9 @@ dependencies {
     implementation("androidx.security:security-crypto:1.1.0")
     implementation("androidx.biometric:biometric:1.1.0")
 
+    // Browser - Chrome Custom Tabs for in-app web browsing
+    implementation("androidx.browser:browser:1.7.0")
+
     // Permissions (Accompanist)
     implementation("com.google.accompanist:accompanist-permissions:0.32.0")
 

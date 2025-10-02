@@ -572,6 +572,12 @@ struct AboutDialog: View {
     @Binding var isPresented: Bool
     let appVersion: String
     @Environment(\.colorScheme) var colorScheme
+    @State private var showSafariView = false
+    @State private var safariURL: URL?
+    @State private var showMailComposer = false
+    @State private var showErrorAlert = false
+    @State private var errorMessage = ""
+    @State private var isProcessingLink = false
 
     var body: some View {
         NavigationView {
@@ -624,6 +630,80 @@ struct AboutDialog: View {
                     )
                     .padding(.horizontal)
                     .padding(.top, 16)
+
+                    // Privacy & Support Links
+                    VStack(spacing: 12) {
+                        Button(action: {
+                            openPrivacyPolicy()
+                        }) {
+                            HStack {
+                                Image(systemName: "hand.raised.fill")
+                                    .foregroundColor(.blue)
+                                Text("Privacy Policy")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                            )
+                        }
+                        .disabled(isProcessingLink)
+                        .accessibilityLabel("Privacy Policy")
+                        .accessibilityHint("Opens privacy policy in Safari")
+
+                        Button(action: {
+                            openTermsOfService()
+                        }) {
+                            HStack {
+                                Image(systemName: "doc.text.fill")
+                                    .foregroundColor(.blue)
+                                Text("Terms of Service")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                            )
+                        }
+                        .disabled(isProcessingLink)
+                        .accessibilityLabel("Terms of Service")
+                        .accessibilityHint("Opens terms of service in Safari")
+
+                        Button(action: {
+                            openSupport()
+                        }) {
+                            HStack {
+                                Image(systemName: "envelope.fill")
+                                    .foregroundColor(.blue)
+                                Text("Support")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color(UIColor.secondarySystemBackground))
+                            )
+                        }
+                        .disabled(isProcessingLink)
+                        .accessibilityLabel("Contact Support")
+                        .accessibilityHint("Opens email to support@stackmap.app")
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 16)
                 }
 
                 Spacer()
@@ -647,6 +727,85 @@ struct AboutDialog: View {
                 Color(colorScheme == .dark ? UIColor.systemBackground : UIColor.secondarySystemBackground)
                     .ignoresSafeArea()
             )
+        }
+        .sheet(isPresented: $showSafariView) {
+            if let url = safariURL {
+                SafariView(url: url)
+                    .ignoresSafeArea()
+            }
+        }
+        .alert("Unable to Open Link", isPresented: $showErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
+    }
+
+    private func openPrivacyPolicy() {
+        guard !isProcessingLink else { return }
+        isProcessingLink = true
+
+        guard AppConfig.isValidURL(AppConfig.privacyPolicyURL),
+              let url = URL(string: AppConfig.privacyPolicyURL) else {
+            errorMessage = "Unable to open link"
+            showErrorAlert = true
+            isProcessingLink = false
+            return
+        }
+
+        safariURL = url
+        showSafariView = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            isProcessingLink = false
+        }
+    }
+
+    private func openTermsOfService() {
+        guard !isProcessingLink else { return }
+        isProcessingLink = true
+
+        guard AppConfig.isValidURL(AppConfig.termsOfServiceURL),
+              let url = URL(string: AppConfig.termsOfServiceURL) else {
+            errorMessage = "Unable to open link"
+            showErrorAlert = true
+            isProcessingLink = false
+            return
+        }
+
+        safariURL = url
+        showSafariView = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            isProcessingLink = false
+        }
+    }
+
+    private func openSupport() {
+        guard !isProcessingLink else { return }
+        isProcessingLink = true
+
+        let mailtoString = "mailto:\(AppConfig.supportEmail)"
+        guard AppConfig.isValidURL(mailtoString),
+              let mailtoURL = URL(string: mailtoString) else {
+            errorMessage = "Unable to open link"
+            showErrorAlert = true
+            isProcessingLink = false
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(mailtoURL) {
+            UIApplication.shared.open(mailtoURL) { success in
+                if !success {
+                    errorMessage = "No email client available. Please email us at \(AppConfig.supportEmail)"
+                    showErrorAlert = true
+                }
+                isProcessingLink = false
+            }
+        } else {
+            errorMessage = "No email client available. Please email us at \(AppConfig.supportEmail)"
+            showErrorAlert = true
+            isProcessingLink = false
         }
     }
 }
