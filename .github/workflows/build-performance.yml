@@ -141,7 +141,7 @@ jobs:
           echo "MAIN_DURATION=${main_duration}" >> $GITHUB_ENV
 
       - name: Download PR performance report
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: performance-report-${{ github.run_number }}
 
