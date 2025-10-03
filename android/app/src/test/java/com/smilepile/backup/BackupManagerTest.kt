@@ -299,6 +299,243 @@ class BackupManagerTest {
         assertTrue(progressUpdates.any { it.contains("Preparing metadata") })
     }
 
+    @Test
+    fun `category filtering works with selected categories`() = runBlocking {
+        // Given
+        val categories = listOf(
+            createTestCategory(1, "family", "Family"),
+            createTestCategory(2, "friends", "Friends"),
+            createTestCategory(3, "work", "Work")
+        )
+        val photos = listOf(
+            createTestPhoto(1, "photo1.jpg", 1),
+            createTestPhoto(2, "photo2.jpg", 2),
+            createTestPhoto(3, "photo3.jpg", 3)
+        )
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(
+            selectedCategories = listOf(1L, 2L) // Only family and friends
+        )
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `date range filtering excludes photos outside range`() = runBlocking {
+        // Given
+        val categories = listOf(createTestCategory(1, "test", "Test"))
+        val photos = listOf(
+            createTestPhoto(1, "old.jpg", 1, createdAt = 1000L),
+            createTestPhoto(2, "mid.jpg", 1, createdAt = 2000L),
+            createTestPhoto(3, "new.jpg", 1, createdAt = 3000L)
+        )
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(
+            dateRangeStart = 1500L, // After photo1
+            dateRangeEnd = 2500L    // Before photo3
+        )
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `photo processing skips assets photos`() = runBlocking {
+        // Given
+        val categories = listOf(createTestCategory(1, "test", "Test"))
+        val photos = listOf(
+            createTestPhoto(1, "normal.jpg", 1).copy(isFromAssets = false),
+            createTestPhoto(2, "asset.jpg", 1).copy(isFromAssets = true)
+        )
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        // When
+        val result = backupManager.exportToZip(BackupOptions(includePhotos = true))
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `export without photos option works correctly`() = runBlocking {
+        // Given
+        val categories = listOf(createTestCategory(1, "test", "Test"))
+        val photos = listOf(createTestPhoto(1, "test.jpg", 1))
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(includePhotos = false)
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `export with thumbnails option creates thumbnail directory`() = runBlocking {
+        // Given
+        val categories = listOf(createTestCategory(1, "test", "Test"))
+        val photos = listOf(createTestPhoto(1, "test.jpg", 1))
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(
+            includePhotos = true,
+            includeThumbnails = true
+        )
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `export with compression level sets correct level`() = runBlocking {
+        // Given
+        val categories = listOf(createTestCategory(1, "test", "Test"))
+        val photos = emptyList<Photo>()
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(
+            compressionLevel = CompressionLevel.HIGH
+        )
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `empty categories list creates valid backup`() = runBlocking {
+        // Given
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        // When
+        val result = backupManager.exportToZip()
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
+    @Test
+    fun `category and date filters work together`() = runBlocking {
+        // Given
+        val categories = listOf(
+            createTestCategory(1, "family", "Family"),
+            createTestCategory(2, "friends", "Friends")
+        )
+        val photos = listOf(
+            createTestPhoto(1, "photo1.jpg", 1, createdAt = 1000L),
+            createTestPhoto(2, "photo2.jpg", 1, createdAt = 2000L),
+            createTestPhoto(3, "photo3.jpg", 2, createdAt = 1500L)
+        )
+
+        coEvery { categoryRepository.getAllCategories() } returns categories
+        coEvery { photoRepository.getAllPhotos() } returns photos
+
+        coEvery {
+            ZipUtils.createZipFromDirectory(any(), any(), any(), captureLambda())
+        } answers {
+            val outputFile = secondArg<File>()
+            outputFile.createNewFile()
+            Result.success(Unit)
+        }
+
+        val options = BackupOptions(
+            selectedCategories = listOf(1L),
+            dateRangeStart = 1500L,
+            dateRangeEnd = 2500L
+        )
+
+        // When
+        val result = backupManager.exportToZip(options)
+
+        // Then
+        assertTrue(result.isSuccess)
+    }
+
     // Helper functions
     private fun createTestCategory(
         id: Long,

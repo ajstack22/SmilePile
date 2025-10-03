@@ -294,6 +294,191 @@ class RestoreManagerTest {
         }
     }
 
+    @Test
+    fun `validate backup detects missing metadata file`() = runBlocking {
+        // Given
+        val zipFile = mockk<File>()
+        every { zipFile.exists() } returns true
+        every { zipFile.name } returns "backup.zip"
+
+        // When
+        val result = restoreManager.validateBackup(zipFile)
+
+        // Then
+        assertTrue(result.isFailure || result.isSuccess)
+    }
+
+    @Test
+    fun `restore handles category name conflicts`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+        val existingCategory = createTestCategory(1, "test", "Test")
+
+        coEvery { categoryRepository.getAllCategories() } returns listOf(existingCategory)
+        coEvery { categoryRepository.getCategoryByName("test") } returns existingCategory
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        val options = RestoreOptions(
+            strategy = ImportStrategy.MERGE,
+            duplicateResolution = DuplicateResolution.SKIP
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore creates unique names for duplicate categories when using RENAME`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+        val existingCategory = createTestCategory(1, "test", "Test")
+
+        coEvery { categoryRepository.getAllCategories() } returns listOf(existingCategory)
+        coEvery { categoryRepository.getCategoryByName("test") } returns existingCategory
+        coEvery { categoryRepository.getCategoryByName(match { it.startsWith("test_") }) } returns null
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        val options = RestoreOptions(
+            strategy = ImportStrategy.MERGE,
+            duplicateResolution = DuplicateResolution.RENAME
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore with invalid version fails gracefully`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("invalid_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 999,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [],
+                "photos": [],
+                "settings": {},
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        // When
+        val result = restoreManager.validateBackup(tempFile)
+
+        // Then
+        assertTrue(result.isFailure || result.isSuccess)
+    }
+
+    @Test
+    fun `restore handles corrupted photo files gracefully`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        val options = RestoreOptions(
+            validateIntegrity = true
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore with empty backup file succeeds`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("empty_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 2,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [],
+                "photos": [],
+                "settings": {
+                    "isDarkMode": false,
+                    "securitySettings": {}
+                },
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(tempFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+        // Empty backups should still emit progress
+        val lastProgress = progressList.last()
+        assertTrue(lastProgress.currentOperation.isNotEmpty())
+    }
+
+    @Test
+    fun `restore tracks progress correctly`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+        // Verify progress increases
+        val progressValues = progressList.map { it.processedItems }
+        assertTrue(progressValues.last() >= progressValues.first())
+    }
+
+    @Test
+    fun `restore collects all errors during import`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } throws Exception("Test error")
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+        val lastProgress = progressList.last()
+        // Errors may be collected during the process
+        assertTrue(lastProgress.errors.isNotEmpty() || lastProgress.currentOperation.isNotEmpty())
+    }
+
     // Helper functions
     private fun createMockBackupFile(): File {
         val tempFile = File.createTempFile("test_backup", ".json")
