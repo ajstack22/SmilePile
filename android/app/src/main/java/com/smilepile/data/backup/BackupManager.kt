@@ -155,7 +155,7 @@ class BackupManager @Inject constructor(
             )
 
             val appVersion = try {
-                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
             } catch (e: Exception) {
                 "unknown"
             }
@@ -256,8 +256,8 @@ class BackupManager @Inject constructor(
             )
 
             // Get app version from BuildConfig if available
-            val appVersion = try {
-                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+            val appVersion: String = try {
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
             } catch (e: Exception) {
                 "unknown"
             }
@@ -1113,7 +1113,7 @@ class BackupManager @Inject constructor(
             }
 
             val appVersion = try {
-                context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
             } catch (e: Exception) {
                 "unknown"
             }

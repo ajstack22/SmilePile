@@ -13,12 +13,12 @@ apply(from = "../jacoco.gradle")
 
 android {
     namespace = "com.smilepile"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.smilepile"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 251003001  // YYMMDDVVV format as integer
         versionName = "25.10.03.001"
 
