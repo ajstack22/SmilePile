@@ -13,6 +13,9 @@ updates:
           - "*"
         update-types:
           - "patch"
+      security-updates:
+        patterns:
+          - "*"
     labels:
       - "dependencies"
       - "website"
@@ -32,9 +35,34 @@ updates:
           - "*"
         update-types:
           - "patch"
+      security-updates:
+        patterns:
+          - "*"
     labels:
       - "dependencies"
       - "android"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # iOS Swift Package Manager dependencies
+  - package-ecosystem: "swift"
+    directory: "/ios"
+    schedule:
+      interval: "daily"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    groups:
+      patch-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+      security-updates:
+        patterns:
+          - "*"
+    labels:
+      - "dependencies"
+      - "ios"
     commit-message:
       prefix: "chore(deps)"
 
@@ -45,6 +73,10 @@ updates:
       interval: "daily"
       time: "09:00"
     open-pull-requests-limit: 3
+    groups:
+      security-updates:
+        patterns:
+          - "*"
     labels:
       - "dependencies"
       - "ci"
