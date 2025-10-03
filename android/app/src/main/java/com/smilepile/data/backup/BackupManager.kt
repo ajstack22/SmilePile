@@ -9,6 +9,7 @@ import android.util.Log
 import com.smilepile.data.repository.CategoryRepository
 import com.smilepile.data.repository.PhotoRepository
 import com.smilepile.security.SecurePreferencesManager
+import com.smilepile.security.SecuritySummary
 import com.smilepile.storage.ZipUtils
 import com.smilepile.theme.ThemeManager
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -983,7 +984,21 @@ class BackupManager @Inject constructor(
 
     /**
      * Calculate MD5 checksum for file integrity verification
+     *
+     * Note: MD5 is used here solely for non-cryptographic integrity checking of backup files,
+     * not for security purposes. While MD5 is cryptographically weak, it remains suitable for
+     * detecting accidental file corruption during backup/restore operations.
+     *
+     * Maintaining MD5 for backward compatibility with existing user backups. Changing to SHA-256
+     * would break all existing backup files, requiring users to re-export their data.
+     *
+     * SonarQube Warning Suppression Justification:
+     * - Use case: File integrity verification, not cryptographic security
+     * - Risk: Low - collision attacks not realistic for user backup files
+     * - Benefit: Backward compatibility with existing backups
+     * - Future: Plan v2 backup format with SHA-256 in next major release
      */
+    @Suppress("kotlin:S4790") // Weak hash algorithm - justified for non-security integrity check
     private fun calculateMD5(file: File): String {
         val digest = MessageDigest.getInstance("MD5")
         file.inputStream().use { inputStream ->
@@ -1005,185 +1020,25 @@ class BackupManager @Inject constructor(
         progressCallback: ((current: Int, total: Int, operation: String) -> Unit)? = null
     ): Result<File> {
         return try {
-            val workDir = tempDir ?: File(context.cacheDir, "backup_temp_${System.currentTimeMillis()}")
-            workDir.mkdirs()
+            val exportContext = initializeExportContext(options, tempDir)
 
             progressCallback?.invoke(0, 100, "Gathering app data")
-
-            // Filter data based on options
-            val categories = if (options.selectedCategories != null) {
-                categoryRepository.getAllCategories().filter { it.id in options.selectedCategories }
-            } else {
-                categoryRepository.getAllCategories()
-            }
-
-            var photos = photoRepository.getAllPhotos().filter { photo ->
-                // Filter by categories if specified
-                (options.selectedCategories == null || photo.categoryId in options.selectedCategories) &&
-                // Filter by date range if specified
-                (options.dateRangeStart == null || photo.createdAt >= options.dateRangeStart) &&
-                (options.dateRangeEnd == null || photo.createdAt <= options.dateRangeEnd)
-            }
-
-            val isDarkMode = themeManager.isDarkMode.first()
-            val securitySummary = securePreferencesManager.getSecuritySummary()
-
-            progressCallback?.invoke(20, 100, "Preparing metadata")
-
-            // Create directories
-            val photoManifest = mutableListOf<PhotoManifestEntry>()
-            val photosDir = if (options.includePhotos) File(workDir, "photos").apply { mkdirs() } else null
-            val thumbnailsDir = if (options.includeThumbnails) File(workDir, THUMBNAIL_DIR).apply { mkdirs() } else null
+            val dataContext = gatherBackupData(options, progressCallback)
 
             progressCallback?.invoke(30, 100, "Processing photos")
-
-            // Process photos with compression
-            if (options.includePhotos) {
-                var photosCopied = 0
-                photos.forEachIndexed { index, photo ->
-                    try {
-                        if (!photo.isFromAssets) {
-                            val sourceFile = File(photo.path)
-                            if (sourceFile.exists()) {
-                                val fileName = "${photo.id}_${sourceFile.name}"
-                                val destFile = File(photosDir!!, fileName)
-
-                                // Apply compression if needed
-                                when (options.compressionLevel) {
-                                    CompressionLevel.HIGH -> compressPhoto(sourceFile, destFile, 70)
-                                    CompressionLevel.MEDIUM -> compressPhoto(sourceFile, destFile, 85)
-                                    CompressionLevel.LOW -> sourceFile.copyTo(destFile, overwrite = true)
-                                }
-
-                                // Generate thumbnail if requested
-                                if (options.includeThumbnails) {
-                                    generateThumbnail(sourceFile, File(thumbnailsDir!!, "thumb_$fileName"))
-                                }
-
-                                val checksum = calculateMD5(destFile)
-
-                                photoManifest.add(
-                                    PhotoManifestEntry(
-                                        photoId = photo.id,
-                                        originalPath = photo.path,
-                                        zipEntryName = "photos/$fileName",
-                                        fileName = fileName,
-                                        fileSize = destFile.length(),
-                                        checksum = checksum
-                                    )
-                                )
-                                photosCopied++
-                            }
-                        }
-
-                        val progress = 30 + ((index + 1) * 40 / photos.size)
-                        progressCallback?.invoke(progress, 100, "Processing photos ($photosCopied/${photos.size})")
-                    } catch (e: Exception) {
-                        Log.w(TAG, "Failed to process photo: ${photo.path}", e)
-                    }
-                }
-            }
+            processPhotosForBackup(dataContext, options, exportContext, progressCallback)
 
             progressCallback?.invoke(70, 100, "Creating backup metadata")
-
-            // Prepare backup data
-            val backupCategories = categories.map { BackupCategory.fromCategory(it) }
-            val backupPhotos = photos.map { BackupPhoto.fromPhoto(it) }
-
-            val backupSettings = if (options.includeSettings) {
-                BackupSettings(
-                    isDarkMode = isDarkMode,
-                    securitySettings = BackupSecuritySettings(
-                        hasPIN = securitySummary.hasPIN,
-                        hasPattern = securitySummary.hasPattern,
-                        kidSafeModeEnabled = securitySummary.kidSafeModeEnabled,
-                        deleteProtectionEnabled = securitySummary.deleteProtectionEnabled
-                    )
-                )
-            } else {
-                BackupSettings(
-                    isDarkMode = false,
-                    securitySettings = BackupSecuritySettings(
-                        hasPIN = false,
-                        hasPattern = false,
-                        kidSafeModeEnabled = false,
-                        deleteProtectionEnabled = false
-                    )
-                )
-            }
-
-            val appVersion = try {
-                context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
-            } catch (e: Exception) {
-                "unknown"
-            }
-
-            val appBackup = AppBackup(
-                version = CURRENT_BACKUP_VERSION,
-                exportDate = System.currentTimeMillis(),
-                appVersion = appVersion,
-                format = BackupFormat.ZIP.name,
-                categories = backupCategories,
-                photos = backupPhotos,
-                settings = backupSettings,
-                photoManifest = photoManifest
-            )
-
-            // Write metadata.json
-            val metadataFile = File(workDir, ZipUtils.METADATA_FILE)
-            val jsonString = json.encodeToString(appBackup)
-            metadataFile.writeText(jsonString)
-
-            // Write categories.json for easier access
-            val categoriesFile = File(workDir, "categories.json")
-            categoriesFile.writeText(json.encodeToString(backupCategories))
+            val backup = createBackupMetadata(dataContext, options)
+            writeBackupMetadata(backup, exportContext.workDir)
 
             progressCallback?.invoke(80, 100, "Creating ZIP archive")
+            val zipFile = createFinalZipArchive(exportContext.workDir, options, progressCallback)
 
-            // Create ZIP file with appropriate compression
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-            val zipFile = File(context.cacheDir, "SmilePile_Backup_${timestamp}.zip")
+            cleanup(exportContext)
+            saveToHistory(zipFile, dataContext, options)
 
-            val compressionLevel = when (options.compressionLevel) {
-                CompressionLevel.HIGH -> Deflater.BEST_COMPRESSION
-                CompressionLevel.MEDIUM -> Deflater.DEFAULT_COMPRESSION
-                CompressionLevel.LOW -> Deflater.BEST_SPEED
-            }
-
-            val zipResult = ZipUtils.createZipFromDirectory(
-                sourceDir = workDir,
-                outputFile = zipFile,
-                compressionLevel = compressionLevel
-            ) { current, total ->
-                val progress = 80 + (current * 20 / total)
-                progressCallback?.invoke(progress, 100, "Archiving files ($current/$total)")
-            }
-
-            // Clean up temp directory
-            workDir.deleteRecursively()
-
-            if (zipResult.isSuccess) {
-                progressCallback?.invoke(100, 100, "Export completed")
-
-                // Save to backup history
-                saveBackupHistory(
-                    BackupHistoryEntry(
-                        timestamp = System.currentTimeMillis(),
-                        fileName = zipFile.name,
-                        filePath = zipFile.absolutePath,
-                        fileSize = zipFile.length(),
-                        format = BackupFormat.ZIP,
-                        photosCount = photos.size,
-                        categoriesCount = categories.size,
-                        compressionLevel = options.compressionLevel,
-                        success = true
-                    )
-                )
-
-                Result.success(zipFile)
-            } else {
-                Result.failure(zipResult.exceptionOrNull() ?: Exception("ZIP creation failed"))
-            }
+            Result.success(zipFile)
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -1507,6 +1362,279 @@ class BackupManager @Inject constructor(
         }
 
         return Triple(categoriesImported, photosImported, photosSkipped)
+    }
+
+    // MARK: - Helper Methods for exportToZipWithOptions Complexity Reduction
+
+    private data class ExportContext(
+        val workDir: File,
+        val photosDir: File?,
+        val thumbnailsDir: File?
+    )
+
+    private data class BackupDataContext(
+        val categories: List<com.smilepile.data.models.Category>,
+        val photos: List<com.smilepile.data.models.Photo>,
+        val isDarkMode: Boolean,
+        val securitySummary: SecuritySummary,
+        val photoManifest: MutableList<PhotoManifestEntry>
+    )
+
+    private fun initializeExportContext(
+        options: BackupOptions,
+        tempDir: File?
+    ): ExportContext {
+        val workDir = tempDir ?: File(context.cacheDir, "backup_temp_${System.currentTimeMillis()}")
+        workDir.mkdirs()
+
+        val photosDir = if (options.includePhotos) {
+            File(workDir, "photos").apply { mkdirs() }
+        } else null
+
+        val thumbnailsDir = if (options.includeThumbnails) {
+            File(workDir, THUMBNAIL_DIR).apply { mkdirs() }
+        } else null
+
+        return ExportContext(workDir, photosDir, thumbnailsDir)
+    }
+
+    private suspend fun gatherBackupData(
+        options: BackupOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): BackupDataContext {
+        val categories = filterCategories(options)
+        val photos = filterPhotos(options)
+        val isDarkMode = themeManager.isDarkMode.first()
+        val securitySummary = securePreferencesManager.getSecuritySummary()
+
+        progressCallback?.invoke(20, 100, "Preparing metadata")
+
+        return BackupDataContext(
+            categories, photos, isDarkMode, securitySummary,
+            mutableListOf()
+        )
+    }
+
+    private suspend fun filterCategories(options: BackupOptions): List<com.smilepile.data.models.Category> {
+        val allCategories = categoryRepository.getAllCategories()
+        return if (options.selectedCategories != null) {
+            allCategories.filter { it.id in options.selectedCategories }
+        } else {
+            allCategories
+        }
+    }
+
+    private suspend fun filterPhotos(options: BackupOptions): List<com.smilepile.data.models.Photo> {
+        val allPhotos = photoRepository.getAllPhotos()
+
+        return allPhotos.filter { photo ->
+            matchesCategoryFilter(photo, options) &&
+            matchesDateRangeFilter(photo, options)
+        }
+    }
+
+    private fun matchesCategoryFilter(photo: com.smilepile.data.models.Photo, options: BackupOptions): Boolean {
+        return options.selectedCategories == null || photo.categoryId in options.selectedCategories
+    }
+
+    private fun matchesDateRangeFilter(photo: com.smilepile.data.models.Photo, options: BackupOptions): Boolean {
+        val afterStart = options.dateRangeStart == null || photo.createdAt >= options.dateRangeStart
+        val beforeEnd = options.dateRangeEnd == null || photo.createdAt <= options.dateRangeEnd
+        return afterStart && beforeEnd
+    }
+
+    private suspend fun processPhotosForBackup(
+        dataContext: BackupDataContext,
+        options: BackupOptions,
+        exportContext: ExportContext,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        if (!options.includePhotos) return
+
+        var photosCopied = 0
+        dataContext.photos.forEachIndexed { index, photo ->
+            val result = processSinglePhoto(photo, exportContext, options)
+
+            if (result != null) {
+                dataContext.photoManifest.add(result)
+                photosCopied++
+            }
+
+            val progress = 30 + ((index + 1) * 40 / dataContext.photos.size)
+            progressCallback?.invoke(progress, 100, "Processing photos ($photosCopied/${dataContext.photos.size})")
+        }
+    }
+
+    private suspend fun processSinglePhoto(
+        photo: com.smilepile.data.models.Photo,
+        context: ExportContext,
+        options: BackupOptions
+    ): PhotoManifestEntry? {
+        if (photo.isFromAssets) return null
+
+        return try {
+            val sourceFile = File(photo.path)
+            if (!sourceFile.exists()) return null
+
+            val fileName = "${photo.id}_${sourceFile.name}"
+            val destFile = File(context.photosDir!!, fileName)
+
+            applyPhotoCompression(sourceFile, destFile, options.compressionLevel)
+
+            if (options.includeThumbnails) {
+                generateThumbnail(sourceFile, File(context.thumbnailsDir!!, "thumb_$fileName"))
+            }
+
+            val checksum = calculateMD5(destFile)
+
+            PhotoManifestEntry(
+                photoId = photo.id,
+                originalPath = photo.path,
+                zipEntryName = "photos/$fileName",
+                fileName = fileName,
+                fileSize = destFile.length(),
+                checksum = checksum
+            )
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to process photo: ${photo.path}", e)
+            null
+        }
+    }
+
+    private suspend fun applyPhotoCompression(
+        sourceFile: File,
+        destFile: File,
+        compressionLevel: CompressionLevel
+    ) {
+        when (compressionLevel) {
+            CompressionLevel.HIGH -> compressPhoto(sourceFile, destFile, 70)
+            CompressionLevel.MEDIUM -> compressPhoto(sourceFile, destFile, 85)
+            CompressionLevel.LOW -> sourceFile.copyTo(destFile, overwrite = true)
+        }
+    }
+
+    private suspend fun createBackupMetadata(
+        dataContext: BackupDataContext,
+        options: BackupOptions
+    ): AppBackup {
+        val backupCategories = dataContext.categories.map { BackupCategory.fromCategory(it) }
+        val backupPhotos = dataContext.photos.map { BackupPhoto.fromPhoto(it) }
+        val backupSettings = buildBackupSettings(dataContext, options)
+        val appVersion = getAppVersion()
+
+        return AppBackup(
+            version = CURRENT_BACKUP_VERSION,
+            exportDate = System.currentTimeMillis(),
+            appVersion = appVersion,
+            format = BackupFormat.ZIP.name,
+            categories = backupCategories,
+            photos = backupPhotos,
+            settings = backupSettings,
+            photoManifest = dataContext.photoManifest
+        )
+    }
+
+    private fun buildBackupSettings(
+        dataContext: BackupDataContext,
+        options: BackupOptions
+    ): BackupSettings {
+        if (!options.includeSettings) {
+            return BackupSettings(
+                isDarkMode = false,
+                securitySettings = BackupSecuritySettings(
+                    hasPIN = false,
+                    hasPattern = false,
+                    kidSafeModeEnabled = false,
+                    deleteProtectionEnabled = false
+                )
+            )
+        }
+
+        return BackupSettings(
+            isDarkMode = dataContext.isDarkMode,
+            securitySettings = BackupSecuritySettings(
+                hasPIN = dataContext.securitySummary.hasPIN,
+                hasPattern = dataContext.securitySummary.hasPattern,
+                kidSafeModeEnabled = dataContext.securitySummary.kidSafeModeEnabled,
+                deleteProtectionEnabled = dataContext.securitySummary.deleteProtectionEnabled
+            )
+        )
+    }
+
+    private fun getAppVersion(): String {
+        return try {
+            context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "unknown"
+        } catch (e: Exception) {
+            "unknown"
+        }
+    }
+
+    private suspend fun writeBackupMetadata(backup: AppBackup, workDir: File) {
+        val metadataFile = File(workDir, ZipUtils.METADATA_FILE)
+        val jsonString = json.encodeToString(backup)
+        metadataFile.writeText(jsonString)
+
+        val categoriesFile = File(workDir, "categories.json")
+        categoriesFile.writeText(json.encodeToString(backup.categories))
+    }
+
+    private suspend fun createFinalZipArchive(
+        workDir: File,
+        options: BackupOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): File {
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val zipFile = File(context.cacheDir, "SmilePile_Backup_${timestamp}.zip")
+
+        val compressionLevel = mapCompressionLevel(options.compressionLevel)
+
+        val zipResult = ZipUtils.createZipFromDirectory(
+            sourceDir = workDir,
+            outputFile = zipFile,
+            compressionLevel = compressionLevel
+        ) { current, total ->
+            val progress = 80 + (current * 20 / total)
+            progressCallback?.invoke(progress, 100, "Archiving files ($current/$total)")
+        }
+
+        if (zipResult.isFailure) {
+            throw zipResult.exceptionOrNull() ?: Exception("ZIP creation failed")
+        }
+
+        progressCallback?.invoke(100, 100, "Export completed")
+        return zipFile
+    }
+
+    private fun mapCompressionLevel(level: CompressionLevel): Int {
+        return when (level) {
+            CompressionLevel.HIGH -> Deflater.BEST_COMPRESSION
+            CompressionLevel.MEDIUM -> Deflater.DEFAULT_COMPRESSION
+            CompressionLevel.LOW -> Deflater.BEST_SPEED
+        }
+    }
+
+    private fun cleanup(context: ExportContext) {
+        context.workDir.deleteRecursively()
+    }
+
+    private suspend fun saveToHistory(
+        zipFile: File,
+        dataContext: BackupDataContext,
+        options: BackupOptions
+    ) {
+        saveBackupHistory(
+            BackupHistoryEntry(
+                timestamp = System.currentTimeMillis(),
+                fileName = zipFile.name,
+                filePath = zipFile.absolutePath,
+                fileSize = zipFile.length(),
+                format = BackupFormat.ZIP,
+                photosCount = dataContext.photos.size,
+                categoriesCount = dataContext.categories.size,
+                compressionLevel = options.compressionLevel,
+                success = true
+            )
+        )
     }
 }
 

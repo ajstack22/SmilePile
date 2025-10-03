@@ -631,146 +631,18 @@ private fun SectionDivider() {
 private fun AboutDialog(
     onDismiss: () -> Unit
 ) {
-    val context = LocalContext.current
-    var showErrorDialog by remember { mutableStateOf(false) }
-    var errorMessage by remember { mutableStateOf("") }
-    var isProcessingLink by remember { mutableStateOf(false) }
+    val linkHandler = rememberAboutLinkHandler()
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineSmall
-            )
-        },
+        title = { AboutDialogTitle() },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.settings_about_description),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Text(
-                    text = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Text(
-                    text = stringResource(R.string.settings_about_child_safety),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary
-                )
-
+                AboutDescriptionSection()
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
-                // Privacy & Support Links
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Privacy Policy
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable(
-                                enabled = !isProcessingLink,
-                                role = androidx.compose.ui.semantics.Role.Button,
-                                onClickLabel = "Open privacy policy in browser"
-                            ) {
-                                if (!isProcessingLink) {
-                                    isProcessingLink = true
-                                    val privacyUrl = context.getString(R.string.privacy_policy_url)
-                                    if (!com.smilepile.utils.BrowserHelper.openUrl(context, privacyUrl)) {
-                                        errorMessage = context.getString(R.string.error_browser_unavailable)
-                                        showErrorDialog = true
-                                    }
-                                    // Reset debounce after delay
-                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                                        isProcessingLink = false
-                                    }, 500)
-                                }
-                            }
-                            .padding(vertical = 8.dp)
-                            .semantics(mergeDescendants = true) {},
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.privacy_policy_label),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-
-                    // Terms of Service
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable(
-                                enabled = !isProcessingLink,
-                                role = androidx.compose.ui.semantics.Role.Button,
-                                onClickLabel = "Open terms of service in browser"
-                            ) {
-                                if (!isProcessingLink) {
-                                    isProcessingLink = true
-                                    val termsUrl = context.getString(R.string.terms_of_service_url)
-                                    if (!com.smilepile.utils.BrowserHelper.openUrl(context, termsUrl)) {
-                                        errorMessage = context.getString(R.string.error_browser_unavailable)
-                                        showErrorDialog = true
-                                    }
-                                    // Reset debounce after delay
-                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                                        isProcessingLink = false
-                                    }, 500)
-                                }
-                            }
-                            .padding(vertical = 8.dp)
-                            .semantics(mergeDescendants = true) {},
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.terms_of_service_label),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-
-                    // Support
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable(
-                                enabled = !isProcessingLink,
-                                role = androidx.compose.ui.semantics.Role.Button,
-                                onClickLabel = "Send support email"
-                            ) {
-                                if (!isProcessingLink) {
-                                    isProcessingLink = true
-                                    val supportEmail = context.getString(R.string.support_email)
-                                    if (!com.smilepile.utils.BrowserHelper.openEmailClient(context, supportEmail)) {
-                                        errorMessage = context.getString(R.string.error_email_unavailable, supportEmail)
-                                        showErrorDialog = true
-                                    }
-                                    // Reset debounce after delay
-                                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                                        isProcessingLink = false
-                                    }, 500)
-                                }
-                            }
-                            .padding(vertical = 8.dp)
-                            .semantics(mergeDescendants = true) {},
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.support_label),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
+                AboutLinksSection(linkHandler)
             }
         },
         confirmButton = {
@@ -780,22 +652,183 @@ private fun AboutDialog(
         }
     )
 
-    // Error Dialog
-    if (showErrorDialog) {
+    AboutErrorDialog(linkHandler)
+}
+
+@Composable
+private fun AboutDialogTitle() {
+    Text(
+        text = stringResource(R.string.app_name),
+        style = MaterialTheme.typography.headlineSmall
+    )
+}
+
+@Composable
+private fun AboutDescriptionSection() {
+    Text(
+        text = stringResource(R.string.settings_about_description),
+        style = MaterialTheme.typography.bodyMedium
+    )
+    Text(
+        text = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+    Text(
+        text = stringResource(R.string.settings_about_child_safety),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.primary
+    )
+}
+
+@Composable
+private fun AboutLinksSection(linkHandler: AboutLinkHandler) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        AboutLinkItem(
+            label = stringResource(R.string.privacy_policy_label),
+            onClickLabel = "Open privacy policy in browser",
+            onClick = { linkHandler.openPrivacyPolicy() },
+            enabled = !linkHandler.isProcessing
+        )
+        AboutLinkItem(
+            label = stringResource(R.string.terms_of_service_label),
+            onClickLabel = "Open terms of service in browser",
+            onClick = { linkHandler.openTermsOfService() },
+            enabled = !linkHandler.isProcessing
+        )
+        AboutLinkItem(
+            label = stringResource(R.string.support_label),
+            onClickLabel = "Send support email",
+            onClick = { linkHandler.openSupport() },
+            enabled = !linkHandler.isProcessing
+        )
+    }
+}
+
+@Composable
+private fun AboutLinkItem(
+    label: String,
+    onClickLabel: String,
+    onClick: () -> Unit,
+    enabled: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(
+                enabled = enabled,
+                role = androidx.compose.ui.semantics.Role.Button,
+                onClickLabel = onClickLabel,
+                onClick = onClick
+            )
+            .padding(vertical = 8.dp)
+            .semantics(mergeDescendants = true) {},
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+private fun AboutErrorDialog(linkHandler: AboutLinkHandler) {
+    if (linkHandler.showError) {
         AlertDialog(
-            onDismissRequest = { showErrorDialog = false },
-            title = {
-                Text("Error")
-            },
-            text = {
-                Text(errorMessage)
-            },
+            onDismissRequest = { linkHandler.dismissError() },
+            title = { Text("Error") },
+            text = { Text(linkHandler.errorMessage) },
             confirmButton = {
-                TextButton(onClick = { showErrorDialog = false }) {
+                TextButton(onClick = { linkHandler.dismissError() }) {
                     Text(stringResource(R.string.ok))
                 }
             }
         )
+    }
+}
+
+@Composable
+private fun rememberAboutLinkHandler(): AboutLinkHandler {
+    val context = LocalContext.current
+    var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+    var isProcessing by remember { mutableStateOf(false) }
+
+    return remember(showError, errorMessage, isProcessing) {
+        AboutLinkHandler(
+            context = context,
+            showError = showError,
+            errorMessage = errorMessage,
+            isProcessing = isProcessing,
+            onShowError = { message ->
+                errorMessage = message
+                showError = true
+            },
+            onDismissError = { showError = false },
+            onStartProcessing = { isProcessing = true },
+            onStopProcessing = { isProcessing = false }
+        )
+    }
+}
+
+private class AboutLinkHandler(
+    private val context: android.content.Context,
+    val showError: Boolean,
+    val errorMessage: String,
+    val isProcessing: Boolean,
+    private val onShowError: (String) -> Unit,
+    private val onDismissError: () -> Unit,
+    private val onStartProcessing: () -> Unit,
+    private val onStopProcessing: () -> Unit
+) {
+    private fun handleLink(action: () -> Boolean, errorMsg: String) {
+        if (isProcessing) return
+
+        onStartProcessing()
+        if (!action()) {
+            onShowError(errorMsg)
+        }
+
+        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+            onStopProcessing()
+        }, 500)
+    }
+
+    fun openPrivacyPolicy() {
+        handleLink(
+            action = {
+                BrowserHelper.openUrl(context, context.getString(R.string.privacy_policy_url))
+            },
+            errorMsg = context.getString(R.string.error_browser_unavailable)
+        )
+    }
+
+    fun openTermsOfService() {
+        handleLink(
+            action = {
+                BrowserHelper.openUrl(context, context.getString(R.string.terms_of_service_url))
+            },
+            errorMsg = context.getString(R.string.error_browser_unavailable)
+        )
+    }
+
+    fun openSupport() {
+        handleLink(
+            action = {
+                BrowserHelper.openEmailClient(context, context.getString(R.string.support_email))
+            },
+            errorMsg = context.getString(R.string.error_email_unavailable, context.getString(R.string.support_email))
+        )
+    }
+
+    fun dismissError() {
+        onDismissError()
     }
 }
 

@@ -128,8 +128,19 @@ object FileOperationHelpers {
     }
 
     /**
-     * Calculate MD5 hash of a file
+     * Calculate MD5 hash of a file for integrity verification
+     *
+     * Note: MD5 is used here solely for detecting file corruption during atomic move operations,
+     * not for cryptographic security. The hash verifies that source and destination files have
+     * identical content after a move operation completes.
+     *
+     * SonarQube Warning Suppression Justification:
+     * - Use case: Non-cryptographic integrity check during file operations
+     * - Risk: Low - collision attacks irrelevant for internal file move verification
+     * - Benefit: Fast, lightweight corruption detection
+     * - Context: Used by atomicMove to ensure copy succeeded before deleting source
      */
+    @Suppress("kotlin:S4790") // Weak hash algorithm - justified for non-security integrity check
     private suspend fun calculateFileHash(file: File): String {
         return withContext(Dispatchers.IO) {
             val digest = MessageDigest.getInstance("MD5")

@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material3.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.Stable
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -114,10 +115,6 @@ fun KidsModeGalleryScreen(
         }
     }
 
-    // Track category navigation state
-    val categoryIds = categories.map { it.id }
-    val currentCategoryIndex = categoryIds.indexOf(selectedCategoryId).takeIf { it >= 0 } ?: 0
-
     val listState = rememberLazyListState()
 
     // Scroll to top when photos change
@@ -128,57 +125,22 @@ fun KidsModeGalleryScreen(
     }
 
     // Handle horizontal swipe gestures for category navigation with debouncing
-    val swipeThreshold = 100f
-    var horizontalDragOffset by remember { mutableStateOf(0f) }
-    var lastSwipeTime by remember { mutableStateOf(0L) }
-    val swipeDebounceMs = 300L // Minimum time between swipes
+    val categorySwipeHandler = rememberCategorySwipeHandler(
+        categories = categories,
+        selectedCategoryId = selectedCategoryId,
+        onCategorySelected = galleryViewModel::selectCategory
+    )
 
     // Main layout with category filters at top and photo grid below
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            // Removed double-tap for "All Photos" - categories are mandatory
             .pointerInput(categories, selectedCategoryId) {
                 detectHorizontalDragGestures(
-                    onDragEnd = {
-                        val currentTime = System.currentTimeMillis()
-                        // Debounce rapid swipes
-                        if (currentTime - lastSwipeTime < swipeDebounceMs) {
-                            horizontalDragOffset = 0f
-                            return@detectHorizontalDragGestures
-                        }
-
-                        println("SmilePile Debug: Swipe detected. Current index: $currentCategoryIndex, CategoryIds: $categoryIds, Selected: $selectedCategoryId")
-
-                        when {
-                            // Swipe left - next category (cycle through categories only)
-                            horizontalDragOffset < -swipeThreshold && categoryIds.isNotEmpty() -> {
-                                val nextIndex = (currentCategoryIndex + 1) % categoryIds.size
-                                val nextCategoryId = categoryIds[nextIndex]
-                                println("SmilePile Debug: Swipe LEFT - Moving from index $currentCategoryIndex to $nextIndex (category $nextCategoryId)")
-                                galleryViewModel.selectCategory(nextCategoryId)
-                                lastSwipeTime = currentTime
-                                // Toast removed - only show in fullscreen mode
-                            }
-                            // Swipe right - previous category (cycle through categories only)
-                            horizontalDragOffset > swipeThreshold && categoryIds.isNotEmpty() -> {
-                                val prevIndex = if (currentCategoryIndex == 0) {
-                                    categoryIds.size - 1
-                                } else {
-                                    currentCategoryIndex - 1
-                                }
-                                val prevCategoryId = categoryIds[prevIndex]
-                                println("SmilePile Debug: Swipe RIGHT - Moving from index $currentCategoryIndex to $prevIndex (category $prevCategoryId)")
-                                galleryViewModel.selectCategory(prevCategoryId)
-                                lastSwipeTime = currentTime
-                                // Toast removed - only show in fullscreen mode
-                            }
-                        }
-                        horizontalDragOffset = 0f
-                    },
+                    onDragEnd = { categorySwipeHandler.handleDragEnd() },
                     onHorizontalDrag = { _, dragAmount ->
-                        horizontalDragOffset += dragAmount
+                        categorySwipeHandler.horizontalDragOffset += dragAmount
                     }
                 )
             }
@@ -505,5 +467,90 @@ private fun filterPhotosByCategory(
         allPhotos
     } else {
         allPhotos.filter { it.categoryId == selectedCategoryId }
+    }
+}
+
+@Stable
+private class CategorySwipeHandler(
+    private val categories: List<Category>,
+    private val selectedCategoryId: Long?,
+    private val onCategorySelected: (Long) -> Unit
+) {
+    private val swipeThreshold = 100f
+    private val swipeDebounceMs = 300L
+
+    var horizontalDragOffset by mutableStateOf(0f)
+    var lastSwipeTime by mutableStateOf(0L)
+
+    fun handleDragEnd() {
+        val currentTime = System.currentTimeMillis()
+
+        if (isDebounced(currentTime)) {
+            resetDrag()
+            return
+        }
+
+        val categoryIds = categories.map { it.id }
+        val currentCategoryIndex = categoryIds.indexOf(selectedCategoryId).takeIf { it >= 0 } ?: 0
+
+        println("SmilePile Debug: Swipe detected. Current index: $currentCategoryIndex, CategoryIds: $categoryIds, Selected: $selectedCategoryId")
+
+        when {
+            isSwipeLeft() && categoryIds.isNotEmpty() -> {
+                handleSwipeLeft(currentCategoryIndex, categoryIds, currentTime)
+            }
+            isSwipeRight() && categoryIds.isNotEmpty() -> {
+                handleSwipeRight(currentCategoryIndex, categoryIds, currentTime)
+            }
+        }
+
+        resetDrag()
+    }
+
+    private fun isDebounced(currentTime: Long): Boolean {
+        return currentTime - lastSwipeTime < swipeDebounceMs
+    }
+
+    private fun isSwipeLeft(): Boolean {
+        return horizontalDragOffset < -swipeThreshold
+    }
+
+    private fun isSwipeRight(): Boolean {
+        return horizontalDragOffset > swipeThreshold
+    }
+
+    private fun handleSwipeLeft(currentIndex: Int, categoryIds: List<Long>, currentTime: Long) {
+        val nextIndex = (currentIndex + 1) % categoryIds.size
+        val nextCategoryId = categoryIds[nextIndex]
+        println("SmilePile Debug: Swipe LEFT - Moving from index $currentIndex to $nextIndex (category $nextCategoryId)")
+        onCategorySelected(nextCategoryId)
+        lastSwipeTime = currentTime
+    }
+
+    private fun handleSwipeRight(currentIndex: Int, categoryIds: List<Long>, currentTime: Long) {
+        val prevIndex = if (currentIndex == 0) {
+            categoryIds.size - 1
+        } else {
+            currentIndex - 1
+        }
+        val prevCategoryId = categoryIds[prevIndex]
+        println("SmilePile Debug: Swipe RIGHT - Moving from index $currentIndex to $prevIndex (category $prevCategoryId)")
+        onCategorySelected(prevCategoryId)
+        lastSwipeTime = currentTime
+    }
+
+    private fun resetDrag() {
+        horizontalDragOffset = 0f
+    }
+}
+
+@Composable
+private fun rememberCategorySwipeHandler(
+    categories: List<Category>,
+    selectedCategoryId: Long?,
+    onCategorySelected: (Long) -> Unit
+): CategorySwipeHandler {
+    return remember(categories, selectedCategoryId) {
+        CategorySwipeHandler(categories, selectedCategoryId, onCategorySelected)
     }
 }

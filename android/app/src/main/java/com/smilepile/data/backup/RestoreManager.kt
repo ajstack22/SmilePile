@@ -14,6 +14,7 @@ import com.smilepile.theme.ThemeMode
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
@@ -324,128 +325,20 @@ class RestoreManager @Inject constructor(
         progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?,
         rollbackData: RollbackData?
     ): Flow<ImportProgress> = flow {
-        val errors = mutableListOf<String>()
-        val warnings = mutableListOf<String>()
-        var categoriesImported = 0
-        var photosImported = 0
-        var photosSkipped = 0
-        var photoFilesRestored = 0
-
         try {
-            emit(ImportProgress(1, 0, "Extracting backup"))
-            progressCallback?.invoke(20, 100, "Extracting backup")
+            val restoreContext = initializeRestoreContext(zipFile, options, progressCallback)
 
-            // Extract ZIP
-            val tempDir = File(context.cacheDir, "restore_temp_${System.currentTimeMillis()}")
-            tempDir.mkdirs()
+            executeStrategyPreparation(options, restoreContext, progressCallback)
 
-            val extractResult = ZipUtils.extractZip(zipFile, tempDir)
-            if (extractResult.isFailure) {
-                throw Exception("Failed to extract backup: ${extractResult.exceptionOrNull()?.message}")
-            }
+            val categoriesResult = restoreCategoriesFromZip(restoreContext, options, progressCallback)
 
-            // Read metadata
-            val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
-            val backupData = json.decodeFromString<AppBackup>(metadataFile.readText())
+            val photosResult = restorePhotosFromZip(restoreContext, options, progressCallback)
 
-            val totalItems = backupData.categories.size + backupData.photos.size
-            var processedItems = 0
+            restoreSettingsIfRequested(restoreContext, options, progressCallback)
 
-            // Handle strategy
-            if (options.strategy == ImportStrategy.REPLACE) {
-                emit(ImportProgress(totalItems, processedItems, "Clearing existing data"))
-                progressCallback?.invoke(30, 100, "Clearing existing data")
-                clearAllData()
-            }
+            cleanupRestoreTemp(restoreContext.tempDir)
 
-            // Restore categories
-            emit(ImportProgress(totalItems, processedItems, "Restoring categories"))
-            progressCallback?.invoke(40, 100, "Restoring categories")
-
-            for (categoryBackup in backupData.categories) {
-                try {
-                    val result = restoreCategory(categoryBackup, options)
-                    if (result.imported) {
-                        categoriesImported++
-                    } else if (result.warning != null) {
-                        warnings.add(result.warning)
-                    }
-                } catch (e: Exception) {
-                    errors.add("Failed to restore category '${categoryBackup.displayName}': ${e.message}")
-                }
-                processedItems++
-                val progress = 40 + ((processedItems * 30) / totalItems)
-                progressCallback?.invoke(progress, 100, "Restoring categories ($categoriesImported/${backupData.categories.size})")
-                emit(ImportProgress(totalItems, processedItems, "Restoring categories", errors))
-            }
-
-            // Restore photos
-            emit(ImportProgress(totalItems, processedItems, "Restoring photos"))
-            progressCallback?.invoke(70, 100, "Restoring photos")
-
-            val photosDir = File(tempDir, "photos")
-            val thumbnailsDir = File(tempDir, "thumbnails")
-            val internalPhotosDir = File(context.filesDir, "photos")
-            val internalThumbnailsDir = File(context.filesDir, "thumbnails")
-            internalPhotosDir.mkdirs()
-            if (options.restoreThumbnails) {
-                internalThumbnailsDir.mkdirs()
-            }
-
-            for (photoBackup in backupData.photos) {
-                try {
-                    val result = restorePhoto(
-                        photoBackup,
-                        backupData,
-                        photosDir,
-                        thumbnailsDir,
-                        internalPhotosDir,
-                        internalThumbnailsDir,
-                        options
-                    )
-
-                    when (result) {
-                        is PhotoRestoreResult.Imported -> {
-                            photosImported++
-                            if (result.fileRestored) photoFilesRestored++
-                        }
-                        is PhotoRestoreResult.Skipped -> {
-                            photosSkipped++
-                            if (result.reason != null) warnings.add(result.reason)
-                        }
-                        is PhotoRestoreResult.Failed -> {
-                            errors.add(result.error)
-                        }
-                    }
-                } catch (e: Exception) {
-                    errors.add("Failed to restore photo '${photoBackup.name}': ${e.message}")
-                }
-
-                processedItems++
-                val progress = 70 + ((processedItems * 25) / totalItems)
-                progressCallback?.invoke(progress, 100, "Restoring photos ($photosImported/${backupData.photos.size})")
-                emit(ImportProgress(totalItems, processedItems, "Restoring photos", errors))
-            }
-
-            // Restore settings if requested
-            if (options.restoreSettings && backupData.settings != null) {
-                emit(ImportProgress(totalItems, processedItems, "Restoring settings"))
-                progressCallback?.invoke(95, 100, "Restoring settings")
-                restoreSettings(backupData.settings)
-            }
-
-            // Clean up temp directory
-            tempDir.deleteRecursively()
-
-            progressCallback?.invoke(100, 100, "Restore completed")
-            emit(ImportProgress(
-                totalItems,
-                processedItems,
-                "Restore completed successfully",
-                errors
-            ))
-
-            Log.i(TAG, "Restore completed: $categoriesImported categories, $photosImported photos, $photoFilesRestored files restored")
+            emitRestoreCompletion(restoreContext, categoriesResult, photosResult, progressCallback)
 
         } catch (e: Exception) {
             throw e
@@ -795,8 +688,19 @@ class RestoreManager @Inject constructor(
     }
 
     /**
-     * Calculate MD5 checksum
+     * Calculate MD5 checksum for backup file integrity verification
+     *
+     * Note: MD5 is used here solely for verifying backup file integrity during restore,
+     * not for cryptographic security. This maintains compatibility with existing backup
+     * files created by BackupManager.
+     *
+     * SonarQube Warning Suppression Justification:
+     * - Use case: Non-cryptographic integrity verification of user backups
+     * - Risk: Low - collision attacks not applicable to backup restore scenario
+     * - Benefit: Backward compatibility with all existing user backup files
+     * - Future: Will migrate to SHA-256 in v2 backup format
      */
+    @Suppress("kotlin:S4790") // Weak hash algorithm - justified for non-security integrity check
     private fun calculateMD5(file: File): String {
         val digest = MessageDigest.getInstance("MD5")
         file.inputStream().use { inputStream ->
@@ -833,6 +737,329 @@ class RestoreManager @Inject constructor(
         val nameWithoutExtension = baseName.substringBeforeLast(".")
         val extension = baseName.substringAfterLast(".", "")
         return "${nameWithoutExtension}_${timestamp}${if (extension.isNotEmpty()) ".$extension" else ""}"
+    }
+
+    /**
+     * Context for restore operations
+     */
+    private data class RestoreContext(
+        val tempDir: File,
+        val backupData: AppBackup,
+        val totalItems: Int,
+        val errors: MutableList<String>,
+        val warnings: MutableList<String>,
+        var processedItems: Int = 0
+    )
+
+    /**
+     * Result of category restoration
+     */
+    private data class CategoriesRestoreResult(
+        val imported: Int,
+        val progress: ImportProgress
+    )
+
+    /**
+     * Result of photo restoration
+     */
+    private data class PhotosRestoreResult(
+        val imported: Int,
+        val skipped: Int,
+        val filesRestored: Int,
+        val progress: ImportProgress
+    )
+
+    /**
+     * Photo directories for restore
+     */
+    private data class PhotoDirectories(
+        val photosDir: File,
+        val thumbnailsDir: File,
+        val internalPhotosDir: File,
+        val internalThumbnailsDir: File
+    )
+
+    /**
+     * Initialize restore context
+     */
+    private suspend fun FlowCollector<ImportProgress>.initializeRestoreContext(
+        zipFile: File,
+        options: RestoreOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): RestoreContext {
+        emit(ImportProgress(1, 0, "Extracting backup"))
+        progressCallback?.invoke(20, 100, "Extracting backup")
+
+        val tempDir = createRestoreTempDirectory()
+        val backupData = extractAndParseBackup(zipFile, tempDir)
+        val totalItems = backupData.categories.size + backupData.photos.size
+
+        return RestoreContext(
+            tempDir = tempDir,
+            backupData = backupData,
+            totalItems = totalItems,
+            errors = mutableListOf(),
+            warnings = mutableListOf()
+        )
+    }
+
+    /**
+     * Create temp directory for restore
+     */
+    private fun createRestoreTempDirectory(): File {
+        val tempDir = File(context.cacheDir, "restore_temp_${System.currentTimeMillis()}")
+        tempDir.mkdirs()
+        return tempDir
+    }
+
+    /**
+     * Extract ZIP and parse backup metadata
+     */
+    private suspend fun extractAndParseBackup(zipFile: File, tempDir: File): AppBackup {
+        val extractResult = ZipUtils.extractZip(zipFile, tempDir)
+        if (extractResult.isFailure) {
+            throw Exception("Failed to extract backup: ${extractResult.exceptionOrNull()?.message}")
+        }
+
+        val metadataFile = File(tempDir, ZipUtils.METADATA_FILE)
+        return json.decodeFromString<AppBackup>(metadataFile.readText())
+    }
+
+    /**
+     * Execute strategy preparation
+     */
+    private suspend fun FlowCollector<ImportProgress>.executeStrategyPreparation(
+        options: RestoreOptions,
+        restoreContext: RestoreContext,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        if (options.strategy == ImportStrategy.REPLACE) {
+            emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Clearing existing data"))
+            progressCallback?.invoke(30, 100, "Clearing existing data")
+            clearAllData()
+        }
+    }
+
+    /**
+     * Restore all categories from ZIP
+     */
+    private suspend fun FlowCollector<ImportProgress>.restoreCategoriesFromZip(
+        restoreContext: RestoreContext,
+        options: RestoreOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): CategoriesRestoreResult {
+        emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring categories"))
+        progressCallback?.invoke(40, 100, "Restoring categories")
+
+        var categoriesImported = 0
+
+        for (categoryBackup in restoreContext.backupData.categories) {
+            processCategoryRestore(categoryBackup, options, restoreContext)?.let {
+                if (it.imported) {
+                    categoriesImported++
+                }
+            }
+
+            restoreContext.processedItems++
+            updateCategoryProgress(restoreContext, categoriesImported, progressCallback)
+        }
+
+        return CategoriesRestoreResult(
+            imported = categoriesImported,
+            progress = ImportProgress(
+                restoreContext.totalItems,
+                restoreContext.processedItems,
+                "Restoring categories",
+                restoreContext.errors
+            )
+        )
+    }
+
+    /**
+     * Process single category restore with error handling
+     */
+    private suspend fun processCategoryRestore(
+        categoryBackup: BackupCategory,
+        options: RestoreOptions,
+        restoreContext: RestoreContext
+    ): CategoryRestoreResult? {
+        return try {
+            val result = restoreCategory(categoryBackup, options)
+
+            if (!result.imported && result.warning != null) {
+                restoreContext.warnings.add(result.warning)
+            }
+
+            result
+        } catch (e: Exception) {
+            restoreContext.errors.add("Failed to restore category '${categoryBackup.displayName}': ${e.message}")
+            null
+        }
+    }
+
+    /**
+     * Update category restore progress
+     */
+    private suspend fun FlowCollector<ImportProgress>.updateCategoryProgress(
+        restoreContext: RestoreContext,
+        categoriesImported: Int,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        val progress = 40 + ((restoreContext.processedItems * 30) / restoreContext.totalItems)
+        progressCallback?.invoke(progress, 100, "Restoring categories ($categoriesImported/${restoreContext.backupData.categories.size})")
+        emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring categories", restoreContext.errors))
+    }
+
+    /**
+     * Restore all photos from ZIP
+     */
+    private suspend fun FlowCollector<ImportProgress>.restorePhotosFromZip(
+        restoreContext: RestoreContext,
+        options: RestoreOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ): PhotosRestoreResult {
+        emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring photos"))
+        progressCallback?.invoke(70, 100, "Restoring photos")
+
+        val directories = preparePhotoDirectories(restoreContext, options)
+
+        var photosImported = 0
+        var photosSkipped = 0
+        var photoFilesRestored = 0
+
+        for (photoBackup in restoreContext.backupData.photos) {
+            val result = processPhotoRestore(
+                photoBackup,
+                restoreContext.backupData,
+                directories,
+                options,
+                restoreContext
+            )
+
+            when (result) {
+                is PhotoRestoreResult.Imported -> {
+                    photosImported++
+                    if (result.fileRestored) photoFilesRestored++
+                }
+                is PhotoRestoreResult.Skipped -> {
+                    photosSkipped++
+                    if (result.reason != null) restoreContext.warnings.add(result.reason)
+                }
+                is PhotoRestoreResult.Failed -> {
+                    restoreContext.errors.add(result.error)
+                }
+            }
+
+            restoreContext.processedItems++
+            updatePhotoProgress(restoreContext, photosImported, progressCallback)
+        }
+
+        return PhotosRestoreResult(
+            imported = photosImported,
+            skipped = photosSkipped,
+            filesRestored = photoFilesRestored,
+            progress = ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring photos", restoreContext.errors)
+        )
+    }
+
+    /**
+     * Prepare photo directories
+     */
+    private fun preparePhotoDirectories(
+        restoreContext: RestoreContext,
+        options: RestoreOptions
+    ): PhotoDirectories {
+        val photosDir = File(restoreContext.tempDir, "photos")
+        val thumbnailsDir = File(restoreContext.tempDir, "thumbnails")
+        val internalPhotosDir = File(context.filesDir, "photos").apply { mkdirs() }
+        val internalThumbnailsDir = if (options.restoreThumbnails) {
+            File(context.filesDir, "thumbnails").apply { mkdirs() }
+        } else {
+            File(context.filesDir, "thumbnails")
+        }
+
+        return PhotoDirectories(photosDir, thumbnailsDir, internalPhotosDir, internalThumbnailsDir)
+    }
+
+    /**
+     * Process single photo restore
+     */
+    private suspend fun processPhotoRestore(
+        photoBackup: BackupPhoto,
+        backupData: AppBackup,
+        directories: PhotoDirectories,
+        options: RestoreOptions,
+        restoreContext: RestoreContext
+    ): PhotoRestoreResult {
+        return try {
+            restorePhoto(
+                photoBackup,
+                backupData,
+                directories.photosDir,
+                directories.thumbnailsDir,
+                directories.internalPhotosDir,
+                directories.internalThumbnailsDir,
+                options
+            )
+        } catch (e: Exception) {
+            restoreContext.errors.add("Failed to restore photo '${photoBackup.name}': ${e.message}")
+            PhotoRestoreResult.Failed(e.message ?: "Unknown error")
+        }
+    }
+
+    /**
+     * Update photo restore progress
+     */
+    private suspend fun FlowCollector<ImportProgress>.updatePhotoProgress(
+        restoreContext: RestoreContext,
+        photosImported: Int,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        val progress = 70 + ((restoreContext.processedItems * 25) / restoreContext.totalItems)
+        progressCallback?.invoke(progress, 100, "Restoring photos ($photosImported/${restoreContext.backupData.photos.size})")
+        emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring photos", restoreContext.errors))
+    }
+
+    /**
+     * Restore settings if requested
+     */
+    private suspend fun FlowCollector<ImportProgress>.restoreSettingsIfRequested(
+        restoreContext: RestoreContext,
+        options: RestoreOptions,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        if (options.restoreSettings && restoreContext.backupData.settings != null) {
+            emit(ImportProgress(restoreContext.totalItems, restoreContext.processedItems, "Restoring settings"))
+            progressCallback?.invoke(95, 100, "Restoring settings")
+            restoreSettings(restoreContext.backupData.settings)
+        }
+    }
+
+    /**
+     * Clean up temp directory
+     */
+    private fun cleanupRestoreTemp(tempDir: File) {
+        tempDir.deleteRecursively()
+    }
+
+    /**
+     * Emit restore completion
+     */
+    private suspend fun FlowCollector<ImportProgress>.emitRestoreCompletion(
+        restoreContext: RestoreContext,
+        categoriesResult: CategoriesRestoreResult,
+        photosResult: PhotosRestoreResult,
+        progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?
+    ) {
+        progressCallback?.invoke(100, 100, "Restore completed")
+        emit(ImportProgress(
+            restoreContext.totalItems,
+            restoreContext.processedItems,
+            "Restore completed successfully",
+            restoreContext.errors
+        ))
+
+        Log.i(TAG, "Restore completed: ${categoriesResult.imported} categories, ${photosResult.imported} photos, ${photosResult.filesRestored} files restored")
     }
 
     /**

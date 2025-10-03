@@ -115,16 +115,16 @@ fun PhotoGalleryOrchestrator(
 
     // Permission handling
     val storagePermission = rememberPermissionState(PermissionHandler.storagePermission) { isGranted ->
-        if (isGranted) {
-            // Only launch picker if we have a selected category (meaning we're in the add flow)
-            if (selectedImportCategoryId != null) {
+        handlePermissionResult(
+            isGranted = isGranted,
+            selectedCategoryId = selectedImportCategoryId,
+            onLaunchPicker = {
                 multiplePhotoLauncher.launch(
                     PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                 )
-            }
-        } else {
-            showPermissionDialog = true
-        }
+            },
+            onShowDialog = { showPermissionDialog = true }
+        )
     }
 
     // Handle messages and errors from ViewModels
@@ -166,32 +166,13 @@ fun PhotoGalleryOrchestrator(
 
         // Photo operations
         onPhotoClick = { photo ->
-            // IMPORTANT: Use the exact same photo list that's being displayed in the grid
-            val photoList = galleryState.photos
-
-            // NUCLEAR OPTION: Find the index here where we have the actual displayed list
-            val actualIndex = photoList.indexOfFirst { it.id == photo.id }
-
-            android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo clicked - ID: ${photo.id}, Name: ${photo.displayName}")
-            android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo list size: ${photoList.size}, Category: ${galleryState.selectedCategoryId}")
-            android.util.Log.e("SmilePile", "ORCHESTRATOR: First 3 in list: ${photoList.take(3).map { "${it.id}:${it.displayName}" }}")
-            android.util.Log.e("SmilePile", "ORCHESTRATOR: ACTUAL INDEX CALCULATED HERE: $actualIndex")
-
-            // Also use println for Samsung compatibility
-            println("SmilePile ORCHESTRATOR: Clicked ${photo.displayName} - Calculated index: $actualIndex of ${photoList.size} photos")
-
-            if (galleryState.isSelectionMode) {
-                galleryViewModel.togglePhotoSelection(photo.id)
-            } else {
-                // NUCLEAR OPTION: Store the state directly in companion object
-                PhotoGalleryOrchestratorState.navigationPhotoList = photoList
-                PhotoGalleryOrchestratorState.navigationPhotoIndex = actualIndex
-
-                android.util.Log.e("SmilePile", "ORCHESTRATOR: STORED INDEX IN COMPANION: $actualIndex")
-
-                // Pass the exact list being displayed
-                onPhotoClick(photo, photoList)
-            }
+            handlePhotoClick(
+                photo = photo,
+                photoList = galleryState.photos,
+                isSelectionMode = galleryState.isSelectionMode,
+                onToggleSelection = { galleryViewModel.togglePhotoSelection(photo.id) },
+                onNavigateToPhoto = { photoToView, list -> onPhotoClick(photoToView, list) }
+            )
         },
         onPhotoLongClick = { photo ->
             if (!galleryState.isSelectionMode) {
@@ -293,28 +274,25 @@ fun PhotoGalleryOrchestrator(
             }
         },
         onCategorySelectedForImport = { categoryId ->
-            if (isAddingPhotos) {
-                // Store the selected category for when photos are picked
-                selectedImportCategoryId = categoryId
-                showCategorySelection = false
-
-                // Now check permissions and launch photo picker
-                if (PermissionHandler.isStoragePermissionGranted(context)) {
+            handleCategorySelectionForImport(
+                categoryId = categoryId,
+                isAddingPhotos = isAddingPhotos,
+                pendingImportUris = pendingImportUris,
+                context = context,
+                onStoreCategoryId = { selectedImportCategoryId = categoryId },
+                onHideDialog = { showCategorySelection = false },
+                onLaunchPicker = {
                     multiplePhotoLauncher.launch(
                         PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                     )
-                } else {
-                    storagePermission.launchPermissionRequest()
-                }
-            } else if (pendingImportUris != null) {
-                // Legacy path for backward compatibility
-                pendingImportUris?.let { uris ->
+                },
+                onRequestPermission = { storagePermission.launchPermissionRequest() },
+                onNavigateWithUris = { uris ->
                     onNavigateToPhotoEditorWithUris(uris)
                     importViewModel.setPendingCategoryId(categoryId)
                     pendingImportUris = null
-                    showCategorySelection = false
                 }
-            }
+            )
         },
 
         // Permission operations
@@ -403,5 +381,74 @@ data class PhotoGalleryOrchestratorState(
         // Nuclear option: Store navigation state directly to bypass all navigation complexity
         var navigationPhotoList: List<Photo>? = null
         var navigationPhotoIndex: Int = -1
+    }
+}
+
+private fun handlePermissionResult(
+    isGranted: Boolean,
+    selectedCategoryId: Long?,
+    onLaunchPicker: () -> Unit,
+    onShowDialog: () -> Unit
+) {
+    if (isGranted && selectedCategoryId != null) {
+        onLaunchPicker()
+    } else if (!isGranted) {
+        onShowDialog()
+    }
+}
+
+private fun handlePhotoClick(
+    photo: Photo,
+    photoList: List<Photo>,
+    isSelectionMode: Boolean,
+    onToggleSelection: () -> Unit,
+    onNavigateToPhoto: (Photo, List<Photo>) -> Unit
+) {
+    if (isSelectionMode) {
+        onToggleSelection()
+    } else {
+        val actualIndex = photoList.indexOfFirst { it.id == photo.id }
+
+        logPhotoNavigation(photo, photoList, actualIndex)
+
+        PhotoGalleryOrchestratorState.navigationPhotoList = photoList
+        PhotoGalleryOrchestratorState.navigationPhotoIndex = actualIndex
+
+        onNavigateToPhoto(photo, photoList)
+    }
+}
+
+private fun logPhotoNavigation(photo: Photo, photoList: List<Photo>, index: Int) {
+    android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo clicked - ID: ${photo.id}, Name: ${photo.displayName}")
+    android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo list size: ${photoList.size}")
+    android.util.Log.e("SmilePile", "ORCHESTRATOR: First 3 in list: ${photoList.take(3).map { "${it.id}:${it.displayName}" }}")
+    android.util.Log.e("SmilePile", "ORCHESTRATOR: ACTUAL INDEX CALCULATED HERE: $index")
+    android.util.Log.e("SmilePile", "ORCHESTRATOR: STORED INDEX IN COMPANION: $index")
+    println("SmilePile ORCHESTRATOR: Clicked ${photo.displayName} - Calculated index: $index of ${photoList.size} photos")
+}
+
+private fun handleCategorySelectionForImport(
+    categoryId: Long,
+    isAddingPhotos: Boolean,
+    pendingImportUris: List<Uri>?,
+    context: android.content.Context,
+    onStoreCategoryId: () -> Unit,
+    onHideDialog: () -> Unit,
+    onLaunchPicker: () -> Unit,
+    onRequestPermission: () -> Unit,
+    onNavigateWithUris: (List<Uri>) -> Unit
+) {
+    if (isAddingPhotos) {
+        onStoreCategoryId()
+        onHideDialog()
+
+        if (PermissionHandler.isStoragePermissionGranted(context)) {
+            onLaunchPicker()
+        } else {
+            onRequestPermission()
+        }
+    } else if (pendingImportUris != null) {
+        onNavigateWithUris(pendingImportUris)
+        onHideDialog()
     }
 }
