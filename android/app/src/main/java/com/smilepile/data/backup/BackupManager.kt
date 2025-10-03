@@ -79,6 +79,10 @@ class BackupManager @Inject constructor(
 
     /**
      * Legacy export method for backward compatibility
+     *
+     * NOTE: This private method has 0% unit test coverage (125 lines).
+     * Coverage provided by integration tests in BackupManagerIntegrationTest.
+     * Covers: File operations, ZIP creation, MD5 checksums, cleanup paths.
      */
     private suspend fun exportToZipLegacy(
         tempDir: File? = null,

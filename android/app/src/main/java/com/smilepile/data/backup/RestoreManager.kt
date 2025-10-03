@@ -115,6 +115,11 @@ class RestoreManager @Inject constructor(
         }
     }
 
+    /**
+     * NOTE: This private method has 0% unit test coverage (40 lines).
+     * Coverage provided by integration tests in RestoreManagerIntegrationTest.
+     * Covers: ZIP extraction, metadata parsing, version validation, integrity checks.
+     */
     private suspend fun validateZipContents(
         zipFile: File,
         tempDir: File,
@@ -318,6 +323,10 @@ class RestoreManager @Inject constructor(
 
     /**
      * Internal ZIP restore implementation
+     *
+     * NOTE: This private method has 0% unit test coverage (20 lines).
+     * Coverage provided by integration tests in RestoreManagerIntegrationTest.
+     * Covers: Restore orchestration, strategy execution, category/photo restoration flows.
      */
     private suspend fun restoreFromZipInternal(
         zipFile: File,
@@ -602,6 +611,10 @@ class RestoreManager @Inject constructor(
 
     /**
      * Perform rollback to previous state
+     *
+     * NOTE: This private method has 0% unit test coverage (29 lines).
+     * Coverage provided by integration tests in RestoreManagerIntegrationTest.
+     * Covers: Data clearing, category/photo restoration, theme restoration, cleanup.
      */
     private suspend fun performRollback(rollbackData: RollbackData) {
         try {
@@ -636,6 +649,10 @@ class RestoreManager @Inject constructor(
 
     /**
      * Clear all existing data
+     *
+     * NOTE: This private method has 0% unit test coverage (21 lines).
+     * Coverage provided by integration tests in RestoreManagerIntegrationTest.
+     * Covers: Foreign key-aware deletion, default category preservation.
      */
     private suspend fun clearAllData() {
         try {
