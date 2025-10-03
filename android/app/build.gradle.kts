@@ -116,8 +116,8 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.5")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
@@ -141,7 +141,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
-    implementation("androidx.navigation:navigation-compose:2.7.6")
+    implementation("androidx.navigation:navigation-compose:2.9.5")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // Image Loading (using Coil for modern Kotlin-first approach)
