@@ -20,6 +20,31 @@
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
+    <!-- Package visibility queries for Android 11+ -->
+    <queries>
+        <!-- For opening web URLs (BrowserHelper.kt) -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+
+        <!-- For opening email client (BrowserHelper.kt) -->
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+
+        <!-- For sharing images (ShareManager.kt) -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND_MULTIPLE" />
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+
     <application
         android:name=".SmilePileApplication"
         android:allowBackup="true"

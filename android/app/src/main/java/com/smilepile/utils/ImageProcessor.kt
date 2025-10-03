@@ -3,8 +3,8 @@ package com.smilepile.utils
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.Rect
-import android.media.ExifInterface
 import android.util.Log
+import androidx.exifinterface.media.ExifInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
