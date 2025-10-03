@@ -172,8 +172,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-permissions:0.32.0")
 
     // Performance and Animation Libraries
-    implementation("androidx.compose.animation:animation:1.5.4")
-    implementation("androidx.compose.animation:animation-graphics:1.5.4")
+    implementation("androidx.compose.animation:animation:1.9.2")
+    implementation("androidx.compose.animation:animation-graphics:1.9.2")
 
     // Pull to Refresh
     implementation("androidx.compose.material:material:1.5.4")
