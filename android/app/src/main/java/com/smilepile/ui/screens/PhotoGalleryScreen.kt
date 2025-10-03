@@ -388,6 +388,7 @@ private fun GalleryScaffold(
     snackbarHostState: SnackbarHostState,
     paddingValues: PaddingValues
 ) {
+    @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
     Scaffold(
         modifier = modifier,
         contentWindowInsets = WindowInsets(0.dp),

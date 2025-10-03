@@ -61,6 +61,7 @@ fun CategoryManagementScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Main scaffold
+        @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
         Scaffold(
         modifier = Modifier,
         bottomBar = {
