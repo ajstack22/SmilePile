@@ -1,0 +1,17 @@
+{
+  "tier1": [],
+  "tier2": [],
+  "tier3": [
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testInitialState",
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testLoadPhotoMetadata",
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testSaveDescription",
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testSaveTags",
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testSaveFavorite",
+    "com.smilepile.ui.viewmodels.PhotoEditViewModelTest:testSaveLocation",
+    "com.smilepile.ui.viewmodels.SettingsViewModelTest:testInitialState",
+    "com.smilepile.ui.viewmodels.SettingsViewModelTest:testUpdatePinEnabled",
+    "com.smilepile.ui.viewmodels.SettingsViewModelTest:testUpdateEncryptionEnabled",
+    "com.smilepile.ui.viewmodels.SettingsViewModelTest:testUpdateTheme",
+    "com.smilepile.ui.viewmodels.SettingsViewModelTest:testVerifyPin"
+  ]
+}

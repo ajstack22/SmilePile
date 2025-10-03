@@ -168,12 +168,21 @@ run_tests() {
             if [[ "$DRY_RUN" == "true" ]]; then
                 log INFO "DRY RUN: Would run: ./gradlew app:testTier1Critical"
             else
-                ./gradlew app:testTier1Critical || {
+                local tier1_output="/tmp/tier1-android-output.txt"
+                ./gradlew app:testTier1Critical 2>&1 | tee "$tier1_output"
+                local tier1_exit=${PIPESTATUS[0]}
+
+                if [[ $tier1_exit -ne 0 ]]; then
                     log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
-                    log ERROR "These tests verify core security and data integrity."
-                    log ERROR "Deployment ABORTED."
+                    log ERROR "Analyzing failures..."
+
+                    # Track failures and trigger workflow if NEW failures detected
+                    "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier1 "$tier1_output" || {
+                        log ERROR "Deployment ABORTED."
+                        exit 1
+                    }
                     exit 1
-                }
+                fi
                 log SUCCESS "[TIER 1] PASSED - Critical tests successful"
             fi
 
@@ -187,12 +196,21 @@ run_tests() {
             if [[ "$DRY_RUN" == "true" ]]; then
                 log INFO "DRY RUN: Would run: ./gradlew app:testTier2Important"
             else
-                ./gradlew app:testTier2Important || {
+                local tier2_output="/tmp/tier2-android-output.txt"
+                ./gradlew app:testTier2Important 2>&1 | tee "$tier2_output"
+                local tier2_exit=${PIPESTATUS[0]}
+
+                if [[ $tier2_exit -ne 0 ]]; then
                     log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
-                    log ERROR "These tests verify business logic and data operations."
-                    log ERROR "Deployment ABORTED."
+                    log ERROR "Analyzing failures..."
+
+                    # Track failures and trigger workflow if NEW failures detected
+                    "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier2 "$tier2_output" || {
+                        log ERROR "Deployment ABORTED."
+                        exit 1
+                    }
                     exit 1
-                }
+                fi
                 log SUCCESS "[TIER 2] PASSED - Important tests successful"
             fi
 
@@ -207,10 +225,18 @@ run_tests() {
             if [[ "$DRY_RUN" == "true" ]]; then
                 log INFO "DRY RUN: Would run: ./gradlew app:testTier3UI"
             else
-                ./gradlew app:testTier3UI || tier3_failed=1
+                local tier3_output="/tmp/tier3-android-output.txt"
+                ./gradlew app:testTier3UI 2>&1 | tee "$tier3_output"
+                local tier3_exit=${PIPESTATUS[0]}
 
-                if [[ $tier3_failed -eq 1 ]]; then
+                if [[ $tier3_exit -ne 0 ]]; then
+                    tier3_failed=1
                     log WARN "WARNING: Tier 3 UI tests failed"
+                    log WARN "Analyzing failures..."
+
+                    # Track failures and create tech debt story if NEW failures detected
+                    "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier3 "$tier3_output" || true
+
                     log WARN "These tests verify UI components and user flows."
                     log WARN "Review failures but deployment will continue."
                 else
@@ -258,12 +284,21 @@ run_tests() {
                 if [[ "$DRY_RUN" == "true" ]]; then
                     log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier1"
                 else
-                    ./ios/scripts/run-tier-tests.sh tier1 || {
+                    local tier1_output="/tmp/tier1-ios-output.txt"
+                    ./ios/scripts/run-tier-tests.sh tier1 2>&1 | tee "$tier1_output"
+                    local tier1_exit=${PIPESTATUS[0]}
+
+                    if [[ $tier1_exit -ne 0 ]]; then
                         log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
-                        log ERROR "These tests verify core security and data integrity."
-                        log ERROR "Deployment ABORTED."
+                        log ERROR "Analyzing failures..."
+
+                        # Track failures and trigger workflow if NEW failures detected
+                        "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier1 "$tier1_output" || {
+                            log ERROR "Deployment ABORTED."
+                            exit 1
+                        }
                         exit 1
-                    }
+                    fi
                     log SUCCESS "[TIER 1] PASSED - Critical tests successful"
                 fi
 
@@ -277,12 +312,21 @@ run_tests() {
                 if [[ "$DRY_RUN" == "true" ]]; then
                     log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier2"
                 else
-                    ./ios/scripts/run-tier-tests.sh tier2 || {
+                    local tier2_output="/tmp/tier2-ios-output.txt"
+                    ./ios/scripts/run-tier-tests.sh tier2 2>&1 | tee "$tier2_output"
+                    local tier2_exit=${PIPESTATUS[0]}
+
+                    if [[ $tier2_exit -ne 0 ]]; then
                         log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
-                        log ERROR "These tests verify business logic and data operations."
-                        log ERROR "Deployment ABORTED."
+                        log ERROR "Analyzing failures..."
+
+                        # Track failures and trigger workflow if NEW failures detected
+                        "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier2 "$tier2_output" || {
+                            log ERROR "Deployment ABORTED."
+                            exit 1
+                        }
                         exit 1
-                    }
+                    fi
                     log SUCCESS "[TIER 2] PASSED - Important tests successful"
                 fi
 
@@ -297,10 +341,18 @@ run_tests() {
                 if [[ "$DRY_RUN" == "true" ]]; then
                     log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier3"
                 else
-                    ./ios/scripts/run-tier-tests.sh tier3 || tier3_failed=1
+                    local tier3_output="/tmp/tier3-ios-output.txt"
+                    ./ios/scripts/run-tier-tests.sh tier3 2>&1 | tee "$tier3_output"
+                    local tier3_exit=${PIPESTATUS[0]}
 
-                    if [[ $tier3_failed -eq 1 ]]; then
+                    if [[ $tier3_exit -ne 0 ]]; then
+                        tier3_failed=1
                         log WARN "WARNING: Tier 3 UI tests failed"
+                        log WARN "Analyzing failures..."
+
+                        # Track failures and create tech debt story if NEW failures detected
+                        "$PROJECT_ROOT/scripts/test-failure-tracker.sh" tier3 "$tier3_output" || true
+
                         log WARN "These tests verify UI components and user flows."
                         log WARN "Review failures but deployment will continue."
                     else
