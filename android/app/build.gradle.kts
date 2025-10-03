@@ -19,8 +19,8 @@ android {
         applicationId = "com.smilepile"
         minSdk = 24
         targetSdk = 34
-        versionCode = 251002005  // YYMMDDVVV format as integer
-        versionName = "25.10.02.005"
+        versionCode = 251002008  // YYMMDDVVV format as integer
+        versionName = "25.10.02.008"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -211,3 +211,6 @@ dependencies {
     kspAndroidTest("com.google.dagger:hilt-compiler:2.48")
     androidTestImplementation("androidx.room:room-testing:2.6.1")
 }
+
+// Apply tiered testing tasks
+apply(from = "tier-tests.gradle")

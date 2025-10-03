@@ -1,0 +1,108 @@
+// Tiered testing tasks for SmilePile
+// Phase 5 Implementation - ATLAS-TEST-001
+// Atlas Standard Workflow
+
+// Tier 1: Critical Tests (Security, Data Integrity)
+tasks.register('testTier1Critical', Exec) {
+    description = 'Run Tier 1 Critical Tests (Security, Data Integrity)'
+    group = 'verification'
+
+    commandLine './gradlew', 'testDebugUnitTest',
+        '--tests', 'com.smilepile.security.MetadataEncryptionTest',
+        '--tests', 'com.smilepile.security.SecurityValidationTest',
+        '--tests', 'com.smilepile.storage.PhotoImportSafetyTest',
+        '--tests', 'com.smilepile.data.repository.PhotoRepositoryImplTest',
+        '--tests', 'com.smilepile.backup.BackupManagerTest',
+        '--tests', 'com.smilepile.backup.RestoreManagerTest'
+
+    workingDir rootProject.projectDir
+
+    doFirst {
+        println ""
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println "TIER 1: Critical Tests (Security, Data Integrity)"
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println ""
+    }
+}
+
+// Tier 2: Important Tests (ViewModels, Repositories)
+tasks.register('testTier2Important', Exec) {
+    description = 'Run Tier 2 Important Tests (ViewModels, Repositories)'
+    group = 'verification'
+
+    commandLine './gradlew', 'testDebugUnitTest',
+        '--tests', 'com.smilepile.ui.viewmodels.PhotoGalleryViewModelTest',
+        '--tests', 'com.smilepile.ui.viewmodels.PhotoEditViewModelTest',
+        '--tests', 'com.smilepile.ui.viewmodels.BackupViewModelTest',
+        '--tests', 'com.smilepile.ui.viewmodels.SettingsViewModelTest',
+        '--tests', 'com.smilepile.ui.viewmodels.CategoryViewModelTest',
+        '--tests', 'com.smilepile.data.repository.CategoryRepositoryImplTest'
+
+    workingDir rootProject.projectDir
+
+    doFirst {
+        println ""
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println "TIER 2: Important Tests (ViewModels, Repositories)"
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println ""
+    }
+}
+
+// Tier 3: UI Tests (Components, Integration)
+tasks.register('testTier3UI', Exec) {
+    description = 'Run Tier 3 UI Tests (Components, Integration)'
+    group = 'verification'
+
+    commandLine './gradlew', 'testDebugUnitTest',
+        '--tests', 'com.smilepile.data.models.PhotoMetadataTest',
+        '--tests', 'com.smilepile.storage.PhotoImportManagerTest'
+
+    workingDir rootProject.projectDir
+
+    doFirst {
+        println ""
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println "TIER 3: UI Tests (Components, Integration)"
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println ""
+    }
+}
+
+// Smoke Tests (Quick validation subset)
+tasks.register('testSmoke', Exec) {
+    description = 'Run Smoke Tests (Quick validation subset)'
+    group = 'verification'
+
+    commandLine './gradlew', 'testDebugUnitTest',
+        '--tests', 'com.smilepile.security.MetadataEncryptionTest',
+        '--tests', 'com.smilepile.security.SecurityValidationTest',
+        '--tests', 'com.smilepile.storage.PhotoImportSafetyTest'
+
+    workingDir rootProject.projectDir
+
+    doFirst {
+        println ""
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println "SMOKE TESTS: Quick Validation"
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println ""
+    }
+}
+
+// Task to run all tiers sequentially
+tasks.register('testAllTiers') {
+    description = 'Run all test tiers in sequence'
+    group = 'verification'
+
+    dependsOn 'testTier1Critical', 'testTier2Important', 'testTier3UI'
+
+    doLast {
+        println ""
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println "All tiered tests completed successfully"
+        println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        println ""
+    }
+}

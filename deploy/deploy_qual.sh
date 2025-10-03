@@ -153,76 +153,174 @@ run_tests() {
         return 0
     fi
 
-    print_header "Running Tests - $platform"
+    print_header "Tiered Test Execution - $platform"
 
     case "$platform" in
         android)
-            log INFO "Running Android tests with coverage..."
             cd "$PROJECT_ROOT/android"
 
+            # Tier 1: Critical Tests (BLOCKING)
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 1: Critical Tests (Security, Data Integrity)"
+            log INFO "Status: BLOCKING - Deployment will abort on failure"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew testDebugUnitTest jacocoDebugTestReport"
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier1Critical"
             else
-                ./gradlew testDebugUnitTest jacocoDebugTestReport --continue || {
-                    log WARN "Some Android tests failed, but continuing with coverage report"
-                    # Don't fail deployment on test failures for now - coverage report still generated
+                ./gradlew app:testTier1Critical || {
+                    log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
+                    log ERROR "These tests verify core security and data integrity."
+                    log ERROR "Deployment ABORTED."
+                    exit 1
                 }
+                log SUCCESS "[TIER 1] PASSED - Critical tests successful"
+            fi
 
-                # Check if coverage report was generated
-                local coverage_report="$PROJECT_ROOT/android/app/build/reports/jacoco/jacocoDebugTestReport/html/index.html"
-                if [[ -f "$coverage_report" ]]; then
-                    log SUCCESS "Coverage report generated at: $coverage_report"
+            # Tier 2: Important Tests (BLOCKING)
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 2: Important Tests (ViewModels, Repositories)"
+            log INFO "Status: BLOCKING - Deployment will abort on failure"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-                    # Extract coverage percentage if possible
-                    if command -v grep >/dev/null 2>&1; then
-                        local coverage=$(grep -oP '\d+%' "$coverage_report" | head -1 || echo "unknown")
-                        log INFO "Android test coverage: $coverage"
-                    fi
+            if [[ "$DRY_RUN" == "true" ]]; then
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier2Important"
+            else
+                ./gradlew app:testTier2Important || {
+                    log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
+                    log ERROR "These tests verify business logic and data operations."
+                    log ERROR "Deployment ABORTED."
+                    exit 1
+                }
+                log SUCCESS "[TIER 2] PASSED - Important tests successful"
+            fi
+
+            # Tier 3: UI Tests (WARNING ONLY)
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 3: UI Tests (Components, Integration)"
+            log INFO "Status: WARNING - Deployment will continue with warning"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            local tier3_failed=0
+            if [[ "$DRY_RUN" == "true" ]]; then
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier3UI"
+            else
+                ./gradlew app:testTier3UI || tier3_failed=1
+
+                if [[ $tier3_failed -eq 1 ]]; then
+                    log WARN "WARNING: Tier 3 UI tests failed"
+                    log WARN "These tests verify UI components and user flows."
+                    log WARN "Review failures but deployment will continue."
                 else
-                    log WARN "Coverage report not found"
+                    log SUCCESS "[TIER 3] PASSED - UI tests successful"
                 fi
             fi
 
-            log SUCCESS "Android tests completed"
+            # Generate coverage report
+            log INFO ""
+            log INFO "Generating test coverage report..."
+            if [[ "$DRY_RUN" != "true" ]]; then
+                ./gradlew jacocoDebugTestReport --continue || log WARN "Coverage report generation failed"
+
+                local coverage_report="$PROJECT_ROOT/android/app/build/reports/jacoco/jacocoDebugTestReport/html/index.html"
+                if [[ -f "$coverage_report" ]]; then
+                    log SUCCESS "Coverage report: $coverage_report"
+                fi
+            fi
+
+            # Summary
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TEST EXECUTION SUMMARY - ANDROID"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log SUCCESS "Tier 1 Critical:  PASSED"
+            log SUCCESS "Tier 2 Important: PASSED"
+            if [[ $tier3_failed -eq 1 ]]; then
+                log WARN "Tier 3 UI:        FAILED (WARNING ONLY)"
+            else
+                log SUCCESS "Tier 3 UI:        PASSED"
+            fi
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             ;;
 
         ios)
             if [[ "$OS_TYPE" == "Darwin" ]]; then
-                log INFO "Running iOS tests with coverage..."
-                cd "$PROJECT_ROOT/ios"
+                cd "$PROJECT_ROOT"
 
-                local test_results_path="./test_results_$(date +%Y%m%d_%H%M%S).xcresult"
+                # Tier 1: Critical Tests (BLOCKING)
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                log INFO "TIER 1: Critical Tests (Security, Data Integrity)"
+                log INFO "Status: BLOCKING - Deployment will abort on failure"
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
                 if [[ "$DRY_RUN" == "true" ]]; then
-                    log INFO "DRY RUN: Would run: xcodebuild test with coverage"
+                    log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier1"
                 else
-                    xcodebuild test \
-                        -project SmilePile.xcodeproj \
-                        -scheme SmilePile \
-                        -destination 'platform=iOS Simulator,name=iPhone 16' \
-                        -enableCodeCoverage YES \
-                        -resultBundlePath "$test_results_path" \
-                        || {
-                        log WARN "Some iOS tests failed, but continuing with coverage report"
-                        # Don't fail deployment on test failures for now
+                    ./ios/scripts/run-tier-tests.sh tier1 || {
+                        log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
+                        log ERROR "These tests verify core security and data integrity."
+                        log ERROR "Deployment ABORTED."
+                        exit 1
                     }
+                    log SUCCESS "[TIER 1] PASSED - Critical tests successful"
+                fi
 
-                    # Check if results bundle was created
-                    if [[ -d "$test_results_path" ]]; then
-                        log SUCCESS "Test results saved to: $test_results_path"
+                # Tier 2: Important Tests (BLOCKING)
+                log INFO ""
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                log INFO "TIER 2: Important Tests (Repositories, DI)"
+                log INFO "Status: BLOCKING - Deployment will abort on failure"
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-                        # Try to extract coverage info using xcrun
-                        if command -v xcrun >/dev/null 2>&1; then
-                            log INFO "Extracting coverage report..."
-                            xcrun xccov view --report "$test_results_path" 2>/dev/null || \
-                                log WARN "Could not extract coverage details"
-                        fi
+                if [[ "$DRY_RUN" == "true" ]]; then
+                    log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier2"
+                else
+                    ./ios/scripts/run-tier-tests.sh tier2 || {
+                        log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
+                        log ERROR "These tests verify business logic and data operations."
+                        log ERROR "Deployment ABORTED."
+                        exit 1
+                    }
+                    log SUCCESS "[TIER 2] PASSED - Important tests successful"
+                fi
+
+                # Tier 3: UI Tests (WARNING ONLY)
+                log INFO ""
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                log INFO "TIER 3: UI Tests (Components, Integration)"
+                log INFO "Status: WARNING - Deployment will continue with warning"
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+                local tier3_failed=0
+                if [[ "$DRY_RUN" == "true" ]]; then
+                    log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier3"
+                else
+                    ./ios/scripts/run-tier-tests.sh tier3 || tier3_failed=1
+
+                    if [[ $tier3_failed -eq 1 ]]; then
+                        log WARN "WARNING: Tier 3 UI tests failed"
+                        log WARN "These tests verify UI components and user flows."
+                        log WARN "Review failures but deployment will continue."
                     else
-                        log WARN "Test results bundle not found"
+                        log SUCCESS "[TIER 3] PASSED - UI tests successful"
                     fi
                 fi
 
-                log SUCCESS "iOS tests completed"
+                # Summary
+                log INFO ""
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                log INFO "TEST EXECUTION SUMMARY - IOS"
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+                log SUCCESS "Tier 1 Critical:  PASSED"
+                log SUCCESS "Tier 2 Important: PASSED"
+                if [[ $tier3_failed -eq 1 ]]; then
+                    log WARN "Tier 3 UI:        FAILED (WARNING ONLY)"
+                else
+                    log SUCCESS "Tier 3 UI:        PASSED"
+                fi
+                log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             fi
             ;;
     esac
