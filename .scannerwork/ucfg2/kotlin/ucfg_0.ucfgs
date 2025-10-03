@@ -254,13 +254,462 @@ categoriesjava.util.List:0
 multiSelectModeboolean:%
 ) )(J
 titlejava.lang.StringB"
+com.smilepile.ui.componentsHè
+]com.smilepile.ui.components#DialogHeader(Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Vu
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktj j("0*∞
+0i j(ä
+á
+k k(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+titlejava.lang.StringY
+W
+k k(
+titlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0ú
+ô
+l l(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0k
+i
+l l(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:%
+k k(
+titlejava.lang.String:7
+l l(+
+	onDismisskotlin.jvm.functions.Function0B"
+com.smilepile.ui.componentsHû
+3com.smilepile.ui.components#SelectionInfoBanner(I)Vw
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktÉ É("0*¢
+0Ç É(à
+Ö
+
+É  É(3
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*3
+
+__unknown_file (
+
+selectionCountintW
+U
+
+É  É(3
+selectionCountint"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:#
+
+É  É(3
+selectionCountintB"
+com.smilepile.ui.componentsH™
+òcom.smilepile.ui.components#CategoryList(LColumnScope;Ljava/util/List;Ljava/util/Set;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Vw
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktì ì($"0*ﬁ
+
+0í ì(è
+å
+
+î î(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+î î(
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0î
+ë
+
+ï ï(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+currentSelectionjava.util.Setc
+a
+
+ï ï(!
+currentSelectionjava.util.Set"__annotation*"
+
+__unknown_file (
+
+%1ç
+ä
+
+ñ ñ(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*8
+
+__unknown_file (
+
+multiSelectModeboolean\
+Z
+
+ñ ñ(
+multiSelectModeboolean"__annotation*"
+
+__unknown_file (
+
+%2®
+•
+
+ó ó(&
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*S
+
+__unknown_file (7
+5
+onCreateNewCategorykotlin.jvm.functions.Function0w
+u
+
+ó ó(&5
+onCreateNewCategorykotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3¶
+£
+
+ò ò(*
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*Q
+
+__unknown_file (5
+3
+onSelectionChangekotlin.jvm.functions.Function1u
+s
+
+ò ò(*3
+onSelectionChangekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4"/
+
+__unknown_file (
+implicit return:*
+
+î î(
+
+categoriesjava.util.List:/
+
+ï ï(!
+currentSelectionjava.util.Set:(
+
+ñ ñ(
+multiSelectModeboolean:C
+
+ó ó(&5
+onCreateNewCategorykotlin.jvm.functions.Function0:A
+
+ò ò(*3
+onSelectionChangekotlin.jvm.functions.Function1B"
+com.smilepile.ui.componentsH˚
+Tcom.smilepile.ui.components#CreateNewCategoryCard(Lkotlin/jvm/functions/Function0;)Vw
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktπ π(!"0* 
+0∏ π(ú
+ô
+
+π" π(5
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0k
+i
+
+π" π(5)
+onClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:7
+
+π" π(5)
+onClickkotlin.jvm.functions.Function0B"
+com.smilepile.ui.componentsHô
+tcom.smilepile.ui.components#DialogActionButtons(ZZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vw
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.kt€ €("0*∏
+0⁄ €(ç
+ä
+
+‹ ‹(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*8
+
+__unknown_file (
+
+multiSelectModeboolean\
+Z
+
+‹ ‹(
+multiSelectModeboolean"__annotation*"
+
+__unknown_file (
+
+%0å
+â
+
+› ›(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+selectionEmptyboolean[
+Y
+
+› ›(
+selectionEmptyboolean"__annotation*"
+
+__unknown_file (
+
+%1û
+õ
+
+ﬁ ﬁ(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0m
+k
+
+ﬁ ﬁ(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2û
+õ
+
+ﬂ ﬂ(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onConfirmkotlin.jvm.functions.Function0m
+k
+
+ﬂ ﬂ(+
+	onConfirmkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3"/
+
+__unknown_file (
+implicit return:(
+
+‹ ‹(
+multiSelectModeboolean:'
+
+› ›(
+selectionEmptyboolean:9
+
+ﬁ ﬁ(+
+	onDismisskotlin.jvm.functions.Function0:9
+
+ﬂ ﬂ(+
+	onConfirmkotlin.jvm.functions.Function0B"
+com.smilepile.ui.componentsH±
+
+Ncom.smilepile.ui.components#updateSelection(Ljava/util/Set;JZZ)Ljava/util/Set;w
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktÙ Ù("4"5"8"9*b
+3
+ˇ	 Ä(L
+J
+
+__unknown_file (
+%0"__id*"
+
+__unknown_file (
+
+%1*
+1*Ÿ
+4
+˚ ˝(	u
+s
+
+¸ ¸()
+%2"__concat*1
+
+¸ ¸(#
+!
+currentSelectionjava.util.Set*"
+
+¸ ¸()
+
+
+categoryIdlongL
+J
+
+__unknown_file (
+%1"__id*"
+
+__unknown_file (
+
+%2*
+3*Û
+5
+˝ ˇ(	é
+ã
+
+˛ ˛()
+%3"__calculate*
+
+˛ ˛(
+-*1
+
+˛ ˛(#
+!
+currentSelectionjava.util.Set*"
+
+˛ ˛()
+
+
+categoryIdlongL
+J
+
+__unknown_file (
+%1"__id*"
+
+__unknown_file (
+
+%3*
+3*b
+7
+Ö	 Ü(L
+J
+
+__unknown_file (
+%0"__id*"
+
+__unknown_file (
+
+%4*
+1*i
+8
+Å É(	S
+Q
+
+__unknown_file (
+%4"__id*)
+
+__unknown_file (
+	<unknown>*
+7*i
+9
+É Ö(	S
+Q
+
+__unknown_file (
+%4"__id*)
+
+__unknown_file (
+	<unknown>*
+7*%
+1
+Ä Ü("
+
+˙ Ü(
+
+%0:/
+
+ı ı(!
+currentSelectionjava.util.Set: 
+
+ˆ ˆ(
+
+categoryIdlong:#
+
+˜ ˜(
+
+isSelectedboolean:(
+
+¯ ¯(
+multiSelectModebooleanB"
 com.smilepile.ui.componentsHª
 ycom.smilepile.ui.components#CategorySelectionItem(Lcom/smilepile/data/models/Category;ZLkotlin/jvm/functions/Function1;)Vw
-k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.kt   ("0*¯
-0» …(ù
+k/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/CategorySelectionDialog.ktã ã("0*¯
+0â ä(ù
 ö
 
-À À(
+å å(
 %0"
 __annotate*,
 
@@ -272,7 +721,7 @@ __annotate*,
 category"com.smilepile.data.models.Category°
 û
 
-À À(
+å å(
 %1"
 __annotate*0
 
@@ -284,7 +733,7 @@ __annotate*0
 category"com.smilepile.data.models.Categoryï
 í
 
-À À(.
+å å(.
 category"com.smilepile.data.models.Category"__annotation*"
 
 __unknown_file (
@@ -296,7 +745,7 @@ __annotate*0
 %1Ñ
 Å
 
-Ã Ã(
+ç ç(
 %2"
 __annotate*,
 
@@ -309,7 +758,7 @@ __annotate*,
 isSelectedbooleanà
 Ö
 
-Ã Ã(
+ç ç(
 %3"
 __annotate*0
 
@@ -322,7 +771,7 @@ __annotate*0
 isSelectedboolean{
 y
 
-Ã Ã(
+ç ç(
 
 isSelectedboolean"__annotation*"
 
@@ -335,7 +784,7 @@ isSelectedboolean"__annotation*"
 %3¢
 ü
 
-Õ Õ((
+é é((
 %4"
 __annotate*,
 
@@ -347,7 +796,7 @@ __annotate*,
 onSelectionChangekotlin.jvm.functions.Function1¶
 £
 
-Õ Õ((
+é é((
 %5"
 __annotate*0
 
@@ -359,7 +808,7 @@ __annotate*0
 onSelectionChangekotlin.jvm.functions.Function1ö
 ó
 
-Õ Õ((3
+é é((3
 onSelectionChangekotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -371,7 +820,7 @@ __annotate*0
 %5b
 `
 
-œ ’(!
+ê ñ(!
 categoryColorjava.lang.Object"__id*)
 
 __unknown_file (
@@ -380,13 +829,13 @@ __annotate*0
 __unknown_file (
 implicit return:<
 
-À À(.
+å å(.
 category"com.smilepile.data.models.Category:#
 
-Ã Ã(
+ç ç(
 
 isSelectedboolean:A
 
-Õ Õ((3
+é é((3
 onSelectionChangekotlin.jvm.functions.Function1B"
 com.smilepile.ui.componentsH

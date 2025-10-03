@@ -140,9 +140,37 @@ ycom.smilepile.ui.viewmodels.PhotoEditViewModel#setCategoryRepository(Lcom/smile
 implicit return:E
  (9
 value0com.smilepile.data.repository.CategoryRepositoryB20
-.com.smilepile.ui.viewmodels.PhotoEditViewModelH`ƒ(
-»com.smilepile.ui.viewmodels.PhotoEditViewModel#<init>(LContext;Lcom/smilepile/storage/StorageManager;Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/data/repository/CategoryRepository;)Vp
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt"! "(,"0*º#
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH`«
+gcom.smilepile.ui.viewmodels.PhotoEditViewModel#getImageProcessor()Lcom/smilepile/utils/IImageProcessor;
+__unknown_file ("0*Ü
+0 (∫
+∑
+ (,
+field#com.smilepile.utils.IImageProcessor"__id*w
+ (k*i0
+.com.smilepile.ui.viewmodels.PhotoEditViewModel"5
+imageProcessor#com.smilepile.utils.IImageProcessor":
+ (.
+,
+field#com.smilepile.utils.IImageProcessorB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH`Á
+hcom.smilepile.ui.viewmodels.PhotoEditViewModel#setImageProcessor(Lcom/smilepile/utils/IImageProcessor;)V
+__unknown_file ("0*Î
+0 (∫
+∑
+ (i0
+.com.smilepile.ui.viewmodels.PhotoEditViewModel"5
+imageProcessor#com.smilepile.utils.IImageProcessor"__id*:
+ (.
+,
+value#com.smilepile.utils.IImageProcessor"
+ (
+implicit return:8
+ (,
+value#com.smilepile.utils.IImageProcessorB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH`ò.
+Ìcom.smilepile.ui.viewmodels.PhotoEditViewModel#<init>(LContext;Lcom/smilepile/storage/StorageManager;Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/data/repository/CategoryRepository;Lcom/smilepile/utils/IImageProcessor;)Vp
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt"! "(,"0*®(
 0" "( å
 â
 # #(4
@@ -230,10 +258,28 @@ F
 
 __unknown_file (
 
-%4˜
+%4¶
+£
+' '(/
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*S
+
+__unknown_file (7
+5
+imageProcessor#com.smilepile.utils.IImageProcessoru
+s
+' '(/5
+imageProcessor#com.smilepile.utils.IImageProcessor"__annotation*"
+
+__unknown_file (
+
+%5˜
 Ù
 # #(4
-%5java.lang.Object"Ecom.smilepile.ui.viewmodels.PhotoEditViewModel#setContext(LContext;)V*N
+%6java.lang.Object"Ecom.smilepile.ui.viewmodels.PhotoEditViewModel#setContext(LContext;)V*N
 
 __unknown_file (20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*9
@@ -243,7 +289,7 @@ F
 contextjava.lang.Object 
 «
 $ $(.*
-%6$com.smilepile.storage.StorageManager"icom.smilepile.ui.viewmodels.PhotoEditViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V*N
+%7$com.smilepile.storage.StorageManager"icom.smilepile.ui.viewmodels.PhotoEditViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V*N
 
 __unknown_file (20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*T
@@ -253,7 +299,7 @@ F
 storageManager$com.smilepile.storage.StorageManagerÁ
 ‰
 % %(03
-%7-com.smilepile.data.repository.PhotoRepository"scom.smilepile.ui.viewmodels.PhotoEditViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*N
+%8-com.smilepile.data.repository.PhotoRepository"scom.smilepile.ui.viewmodels.PhotoEditViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*N
 
 __unknown_file (20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*^
@@ -263,65 +309,75 @@ F
 photoRepository-com.smilepile.data.repository.PhotoRepositoryˆ
 Û
 & &(66
-%80com.smilepile.data.repository.CategoryRepository"ycom.smilepile.ui.viewmodels.PhotoEditViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*N
+%90com.smilepile.data.repository.CategoryRepository"ycom.smilepile.ui.viewmodels.PhotoEditViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*N
 
 __unknown_file (20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*d
 
 __unknown_file (H
 F
-categoryRepository0com.smilepile.data.repository.CategoryRepositoryÁ
-‰
-) )(?
-%9java.lang.Object"Ucom.smilepile.ui.viewmodels.PhotoEditViewModel#set_uiState(Lerror/NonExistentClass;)V*>
-) )(?20
+categoryRepository0com.smilepile.data.repository.CategoryRepository»
+≈
+' '(/*
+%10#com.smilepile.utils.IImageProcessor"hcom.smilepile.ui.viewmodels.PhotoEditViewModel#setImageProcessor(Lcom/smilepile/utils/IImageProcessor;)V*N
+
+__unknown_file (20
+.com.smilepile.ui.viewmodels.PhotoEditViewModel*S
+
+__unknown_file (7
+5
+imageProcessor#com.smilepile.utils.IImageProcessorË
+Â
+* *(?
+%11java.lang.Object"Ucom.smilepile.ui.viewmodels.PhotoEditViewModel#set_uiState(Lerror/NonExistentClass;)V*>
+* *(?20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*)
 
 __unknown_file (
 	<unknown>º
 π
-*/ *(7
-%10java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*>
-*/ *(720
++/ +(7
+%12java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*>
++/ +(720
 .com.smilepile.ui.viewmodels.PhotoEditViewModel⁄
 ◊
-* *(E
-%11java.lang.Object"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setUiState(LStateFlow;)V*>
-* *(E20
++ +(E
+%13java.lang.Object"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setUiState(LStateFlow;)V*>
++ +(E20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*)
 
 __unknown_file (
 	<unknown>Ä
 ˝
-,0 ,(B7
-%120com.smilepile.data.repository.CategoryRepository"xcom.smilepile.ui.viewmodels.PhotoEditViewModel#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*>
-,0 ,(B20
+-0 -(B7
+%140com.smilepile.data.repository.CategoryRepository"xcom.smilepile.ui.viewmodels.PhotoEditViewModel#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*>
+-0 -(B20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel‘—
-,C ,(Y
-%13java.lang.Object"Mcom.smilepile.data.repository.CategoryRepository#getAllCategoriesFlow()LFlow;*E
-,0 ,(B9
+-C -(Y
+%15java.lang.Object"Mcom.smilepile.data.repository.CategoryRepository#getAllCategoriesFlow()LFlow;*E
+-0 -(B9
 7
-%120com.smilepile.data.repository.CategoryRepository2getAllCategoriesFlow()›
+%140com.smilepile.data.repository.CategoryRepository2getAllCategoriesFlow()›
 ⁄
-, 1(	
-%14java.lang.Object"Jcom.smilepile.ui.viewmodels.PhotoEditViewModel#setCategories(LStateFlow;)V*>
-, 1(	20
+- 2(	
+%16java.lang.Object"Jcom.smilepile.ui.viewmodels.PhotoEditViewModel#setCategories(LStateFlow;)V*>
+- 2(	20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*)
 
 __unknown_file (
 	<unknown>µ
 ≤
-3 3(@
-%15long"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setPendingCategoryId(J)V*>
-3 3(@20
+4 4(@
+%17long"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setPendingCategoryId(J)V*>
+4 4(@20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*
-3* 3(,2ù
+4* 4(,2ù
 ö
-4 4(4+
-%16$com.smilepile.ui.viewmodels.EditMode"ccom.smilepile.ui.viewmodels.PhotoEditViewModel#setEditMode(Lcom/smilepile/ui/viewmodels/EditMode;)V*>
-4 4(420
+5 5(4+
+%18$com.smilepile.ui.viewmodels.EditMode"ccom.smilepile.ui.viewmodels.PhotoEditViewModel#setEditMode(Lcom/smilepile/ui/viewmodels/EditMode;)V*>
+5 5(420
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*<
-4. 4(40
+5. 5(40
 .
 IMPORT$com.smilepile.ui.viewmodels.EditMode"/
 
@@ -334,7 +390,9 @@ F
 % %(0@
 photoRepository-com.smilepile.data.repository.PhotoRepository:R
 & &(6F
-categoryRepository0com.smilepile.data.repository.CategoryRepositoryB20
+categoryRepository0com.smilepile.data.repository.CategoryRepository:A
+' '(/5
+imageProcessor#com.smilepile.utils.IImageProcessorB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHı
 Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;
 __unknown_file ("0*«
@@ -480,49 +538,49 @@ ccom.smilepile.ui.viewmodels.PhotoEditViewModel#setEditMode(Lcom/smilepile/ui/vi
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH`ø
 
 ccom.smilepile.ui.viewmodels.PhotoEditViewModel#initializeEditor(Ljava/util/List;Ljava/util/List;J)Vp
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt< <("0*z
-2B* B(9f
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt= =("0*z
+2C* C(9f
 d
 
 __unknown_file (
 %2"__id*<
-B3 B(90
+C3 C(90
 .
 IMPORT$com.smilepile.ui.viewmodels.EditMode*
 1*{
-3B? B(Og
+3C? C(Og
 e
 
 __unknown_file (
 %2"__id*=
-BH B(O1
+CH C(O1
 /
 GALLERY$com.smilepile.ui.viewmodels.EditMode*
 1*˙
-06 ;(ƒ
+07 <(ƒ
 ¡
-A A(&
+B B(&
 
 %0long"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setPendingCategoryId(J)V*>
-A A(&20
+B B(&20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel* 
-A A(&
+B B(&
 
 
 categoryIdlongõò
-B B((
+C C((
 %1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*)
-B B( 
+C C( 
 
 	photoUrisjava.util.List*
-B$ B(( 2equals(Ljava/lang/Object;)*
+C$ C(( 2equals(Ljava/lang/Object;)*
 2
 3*√
-1B? B(OÇ
+1C? C(OÇ
 ˇ
-B B(O*
+C C(O*
 %3$com.smilepile.ui.viewmodels.EditMode"ccom.smilepile.ui.viewmodels.PhotoEditViewModel#setEditMode(Lcom/smilepile/ui/viewmodels/EditMode;)V*>
-B B(O20
+C C(O20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*"
 
 __unknown_file (
@@ -531,204 +589,428 @@ categoryIdlongõò
 
 __unknown_file (
 implicit return:'
-= =($
+> >($
 	photoUrisjava.util.List:(
-> >((
+? ?((
 
 photoPathsjava.util.List:
-? ?(
+@ @(
 
 categoryIdlongB20
-.com.smilepile.ui.viewmodels.PhotoEditViewModelH¥
+.com.smilepile.ui.viewmodels.PhotoEditViewModelHˆ
 Bcom.smilepile.ui.viewmodels.PhotoEditViewModel#loadCurrentPhoto()Vp
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktj j(("2"3*.
-2k2 k(8"
-k2 k(8
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktk k(("2"3*.
+2l2 l(8"
+l2 l(8
 explicit return*Ô
-3k k(.Ó
+3l l(.Ó
 Î
-k k(./
+l l(./
 %1)com.smilepile.ui.viewmodels.PhotoEditItem"ncom.smilepile.ui.viewmodels.PhotoEditViewModel#getCurrentEditItem()Lcom/smilepile/ui/viewmodels/PhotoEditItem;*>
-k k(.20
+l l(.20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelg
 e
 
 __unknown_file (
 %0"__id*=
-k k(.1
+l l(.1
 /
 %1)com.smilepile.ui.viewmodels.PhotoEditItem*
 2
-1*Æ
-4	m ö(	ª
+1*–
+4n w(	ª
 ∏
-n n(
+o o(
 %3java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*>
-n n(20
+o o(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelª
 ∏
-n n(%
+o o(%
 %4java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*>
-n n(%20
+o o(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelX
 V
-n n(P
+o o(P
 valuejava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>¶
-£
-r r(
-%6java.lang.Object"7com.smilepile.ui.viewmodels.PhotoEditItem#getUri()LUri;*F
-r r(:
+	<unknown>∑
+¥
+p p(8
+%5java.lang.Object"ácom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromItem(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Landroid.graphics.Bitmap;*>
+p p(820
+.com.smilepile.ui.viewmodels.PhotoEditViewModel*F
+p, p(7:
 8
-currentItem)com.smilepile.ui.viewmodels.PhotoEditItemñì
-r r('
-%7boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*$
-r r(
+currentItem)com.smilepile.ui.viewmodels.PhotoEditItemT
+R
+p p(8
+bitmapjava.lang.Object"__id*$
+p p(8
 
-%6java.lang.Object*
-r# r(' 2equals(Ljava/lang/Object;)*
-6
-7*¡
-5
-Å Å(Q
-O
-	q Å(
-bitmapjava.lang.Void"__id*"
-
-__unknown_file (
-
-%5S
+%5java.lang.ObjectS
 Q
 
 __unknown_file (
 %2"__id*)
 
 __unknown_file (
-	<unknown>*
-11
-12*È
-6z z((¥
-±
-z z( 
-%8java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*F
-z z(:
-8
-currentItem)com.smilepile.ui.viewmodels.PhotoEditItemôñ
-z z((
-%9boolean")kotlin.String#equals(Ljava/lang/Object;)Z*$
-z z( 
-
-%8java.lang.String*
-z$ z(( 2equals(Ljava/lang/Object;)*
-9
-10*g
-7r+ y(S
-Q
-
-__unknown_file (
-%5"__id*)
-
-__unknown_file (
-	<unknown>*
-5*g
-9z, (S
-Q
-
-__unknown_file (
-%5"__id*)
-
-__unknown_file (
-	<unknown>*
-5*Q
-10
-Ä Ä(:
-8
-
-__unknown_file (
-%5"__id*
-
-Ä Ä( *
-5*A
-11
-ü	 †("/
+	<unknown>*
+5
+6*>
+5y	 z("/
 
 __unknown_file (
-implicit return*Õ
-12
-ö ü(	¿
-Ω
-
-õ õ(
-%10java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
-
-õ õ(20
-.com.smilepile.ui.viewmodels.PhotoEditViewModel¿
-Ω
-
-õ õ(%
-%11java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
-
-õ õ(%20
-.com.smilepile.ui.viewmodels.PhotoEditViewModelZ
-X
-
-õ û(
-valuejava.lang.Object"__id*)
+implicit return*≈
+6w y(	Â
+‚
+x x(#
+%6kotlin.Unit"[com.smilepile.ui.viewmodels.PhotoEditViewModel#handleLoadPhotoError(Ljava/lang/Exception;)V*>
+x x(#20
+.com.smilepile.ui.viewmodels.PhotoEditViewModel*&
+x! x("
 
-__unknown_file (
-	<unknown>S
-Q
+ejava.lang.ExceptionI
+G
 
 __unknown_file (
-%2"__id*)
-
-õ õ(
-
-valuejava.lang.Object*
-11*Ñ
-1k2 k(8p
+%2"__id*
+x x(#
+
+%6kotlin.Unit*
+5*Ñ
+1l2 l(8p
 n
-k k(88
+l l(88
 currentItem)com.smilepile.ui.viewmodels.PhotoEditItem"__id*"
 
 __unknown_file (
 
 %0*
 4B20
-.com.smilepile.ui.viewmodels.PhotoEditViewModelH∂
-=com.smilepile.ui.viewmodels.PhotoEditViewModel#rotatePhoto()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt• •("2"3*2
-2
-¶< ¶(B"!
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH≠
+ácom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromItem(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Landroid.graphics.Bitmap;p
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt| |(*"0*·
+2 (≠
+™
+ (
+%5java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*?
+ (3
+1
+item)com.smilepile.ui.viewmodels.PhotoEditItemôñ
+ (
+%6boolean")kotlin.String#equals(Ljava/lang/Object;)Z*$
+ (
+
+%5java.lang.String*
+ ( 2equals(Ljava/lang/Object;)*
+5
+6*Ù
+3~  ~(;ü
+ú
+~7 ~(:
+%3java.lang.Object"7com.smilepile.ui.viewmodels.PhotoEditItem#getUri()LUri;*?
+~2 ~(63
+1
+item)com.smilepile.ui.viewmodels.PhotoEditItemÌ
+Í
+~  ~(;
+%4java.lang.Object"`com.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromUri(LUri;)Landroid.graphics.Bitmap;*>
+~  ~(;20
+.com.smilepile.ui.viewmodels.PhotoEditViewModel*$
+~7 ~(:
+
+%3java.lang.ObjectN
+L
+
+__unknown_file (
+%0"__id*$
+~  ~(;
+
+%4java.lang.Object*
+1*ê
+5! (>≠
+™
+9 (=
+%7java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*?
+4 (83
+1
+item)com.smilepile.ui.viewmodels.PhotoEditItem˚
+¯
+! (>
+%8java.lang.Object"ncom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromPath(Ljava/lang/String;)Landroid.graphics.Bitmap;*>
+! (>20
+.com.smilepile.ui.viewmodels.PhotoEditViewModel*$
+9 (=
+
+%7java.lang.StringN
+L
+
+__unknown_file (
+%0"__id*$
+! (>
+
+%8java.lang.Object*
+1*P
+6
+Ä Ä(:
+8
+
+__unknown_file (
+%0"__id*
 
-¶< ¶(B
-explicit return*∂
+Ä Ä( *
+1*–
+0| |(ü
+ú
+~ ~(
+%1java.lang.Object"7com.smilepile.ui.viewmodels.PhotoEditItem#getUri()LUri;*?
+~ ~(3
+1
+item)com.smilepile.ui.viewmodels.PhotoEditItemñì
+~ ~(
+%2boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*$
+~ ~(
+
+%1java.lang.Object*
+~ ~( 2equals(Ljava/lang/Object;)*
+2
+3*$
+1
+Å Å(	"
+	} Å(	
+
+%0:=
+|+ |(>1
+item)com.smilepile.ui.viewmodels.PhotoEditItemB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH‰
+`com.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromUri(LUri;)Landroid.graphics.Bitmap;r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÑ Ñ()"0*,
+0
+Ñ Ñ("
+
+Ö â(	
+	<unknown>:%
+
+Ñ* Ñ(2
+urijava.lang.ObjectB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelHÛ
+ncom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromPath(Ljava/lang/String;)Landroid.graphics.Bitmap;r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktå å(*"0*,
+0
+å å("
+
+ç è(	
+	<unknown>:&
+
+å+ å(7
+pathjava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH§
+Ücom.smilepile.ui.viewmodels.PhotoEditViewModel#applyExifRotation(Landroid.graphics.Bitmap;Ljava/lang/String;)Landroid.graphics.Bitmap;r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktí í()"2"3*P
+2
+ìO ì(P:
+8
+
+__unknown_file (
+%0"__id*
+
+ìO ì(P2 *
+1*l
 3
-¶ ¶(8ø
+ì ì(KS
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+1*%
+4
+ñ ò(	"
+
+î ò(	
+
+%2*æ
+5
+î& ñ(	Â
+‚
+
+ï ï()
+%3#com.smilepile.utils.IImageProcessor"gcom.smilepile.ui.viewmodels.PhotoEditViewModel#getImageProcessor()Lcom/smilepile/utils/IImageProcessor;*@
+
+ï ï(20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelb`
+
+ï= ï(F
+%4float"kotlin.Int#toFloat()F*#
+
+ï0 ï(<
+
+exifRotationint2	toFloat()âÜ
+
+ï ï(G
+%5java.lang.Object"Ccom.smilepile.utils.IImageProcessor#rotateBitmap(LBitmap;F)LBitmap;*9
+
+ï ï(+
+)
+%3#com.smilepile.utils.IImageProcessor**
+
+ï( ï(.
+
+bitmapjava.lang.Object*
+
+ï= ï(F
+
+%4float2rotateBitmap(LBitmap;F)P
+N
+
+__unknown_file (
+%2"__id*&
+
+ï ï(G
+
+%5java.lang.Object*
+4*j
+6
+ñ ò(	T
+R
+
+__unknown_file (
+%2"__id**
+
+ó ó(
+
+bitmapjava.lang.Object*
+4*Ç
+1
+ìO ì(PM
+K
+
+ì ì(P
+exifRotationint"__id*"
+
+__unknown_file (
+
+%0ôñ
+
+î î($
+%1boolean"&kotlin.Int#equals(Ljava/lang/Object;)Z*#
+
+î î(
+
+exifRotationint*
+
+î# î($2 2equals(Ljava/lang/Object;)*
+5
+6:(
+
+í* í(I
+bitmapjava.lang.Object:&
+
+íK í(X
+pathjava.lang.StringB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH•
+~com.smilepile.ui.viewmodels.PhotoEditViewModel#updateStateWithLoadedPhoto(Landroid.graphics.Bitmap;Landroid.graphics.Bitmap;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktõ õ(*"0*†
+0
+õ õ(ø
 º
 
-¶ ¶($
+ú ú(
+%0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+
+ú ú(20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelø
+º
+
+ú ú(!
 %1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-¶ ¶($20
+ú ú(!20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelZ
+X
+
+ú °(	
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:(
+
+õ+ õ(J
+bitmapjava.lang.Object:)
+
+õL õ(l
+previewjava.lang.ObjectB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH’
+[com.smilepile.ui.viewmodels.PhotoEditViewModel#handleLoadPhotoError(Ljava/lang/Exception;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt§ §($"0*†
+0
+§ §(ø
+º
+
+• •(
+%0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+
+• •(20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelø
+º
+
+• •(!
+%1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+
+• •(!20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelZ
+X
+
+• ®(	
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:&
+
+§% §(1
+ejava.lang.ExceptionB20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelH≠
+=com.smilepile.ui.viewmodels.PhotoEditViewModel#rotatePhoto()Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÆ Æ("2"3*2
+2
+Ø< Ø(B"!
+
+Ø< Ø(B
+explicit return*∂
+3
+Ø Ø(8ø
+º
+
+Ø Ø($
+%1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+
+Ø Ø($20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel[
 Y
 
 __unknown_file (
 %0"__id*1
 
-¶+ ¶(8#
+Ø+ Ø(8#
 !
 currentBitmapjava.lang.Object*
 2
-1*◊
+1*Œ
 1
-¶< ¶(B[
+Ø< Ø(B[
 Y
 
-¶ ¶(B!
+Ø Ø(B!
 currentBitmapjava.lang.Object"__id*"
 
 __unknown_file (
@@ -736,90 +1018,96 @@ Y
 %0ø
 º
 
-ß ß(&
+∞ ∞(&
 %2java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-ß ß(&20
+∞ ∞(&20
 .com.smilepile.ui.viewmodels.PhotoEditViewModeln
 l
 
-ß ß(<#
+∞ ∞(<#
 currentRotationjava.lang.Object"__id*3
 
-ß- ß(<%
+∞- ∞(<%
 #
 currentRotationjava.lang.Objectg
 e
 
-® ®(/
+± ±(/
 %3"__concat*3
 
-® ®(*%
+± ±(*%
 #
 currentRotationjava.lang.Object*
 
-®- ®(/2Zo
+±- ±(/2Zo
 m
 
-® ®(6
+± ±(6
 %4"__calculate*
 
-®1 ®(2
+±1 ±(2
 %*"
 
 __unknown_file (
 
 %3*
 
-®3 ®(62ËY
+±3 ±(62ËY
 W
 
-® ®(6
+± ±(6
 newRotationjava.lang.Object"__id*"
 
 __unknown_file (
 
-%4è
-å
+%4Â
+‚
 
-´+ ´(K
-%5java.lang.Object"Bcom.smilepile.utils.ImageProcessor#rotateBitmap(LBitmap;F)LBitmap;*D
+¥ ¥(*)
+%5#com.smilepile.utils.IImageProcessor"gcom.smilepile.ui.viewmodels.PhotoEditViewModel#getImageProcessor()Lcom/smilepile/utils/IImageProcessor;*@
 
-´ ´(*6
-4
-ImageProcessor"com.smilepile.utils.ImageProcessor*1
+¥ ¥(*20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelûõ
 
-´8 ´(E#
+¥+ ¥(K
+%6java.lang.Object"Ccom.smilepile.utils.IImageProcessor#rotateBitmap(LBitmap;F)LBitmap;*9
+
+¥ ¥(*+
+)
+%5#com.smilepile.utils.IImageProcessor*1
+
+¥8 ¥(E#
 !
 currentBitmapjava.lang.Object*)
 
 __unknown_file (
-	<unknown>_
+	<unknown>2rotateBitmap(LBitmap;F)_
 ]
 
-´ ´(K!
+¥ ¥(K!
 rotatedBitmapjava.lang.Object"__id*&
 
-´+ ´(K
+¥+ ¥(K
 
-%5java.lang.Objectø
+%6java.lang.Objectø
 º
 
-≠ ≠(
-%6java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+∂ ∂(
+%7java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-≠ ≠(20
+∂ ∂(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-≠ ≠(!
-%7java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+∂ ∂(!
+%8java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-≠ ≠(!20
+∂ ∂(!20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-≠ ±(	
+∂ ∫(	
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -829,33 +1117,33 @@ X
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHø
 ccom.smilepile.ui.viewmodels.PhotoEditViewModel#updateCropRect(Landroidx.compose.ui.geometry.Rect;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt∑ ∑("0*Ç
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt¿ ¿("0*Ç
 0
-¥ ∂(`
+Ω ø(`
 ^
 
-∏ Ω(	
+¡ ∆(	
 androidRectjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>ø
 º
 
-æ æ(
+« «(
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-æ æ(20
+« «(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-æ æ(!
+« «(!
 %1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-æ æ(!20
+« «(!20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-æ æ(K
+« «(K
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -864,165 +1152,170 @@ X
 __unknown_file (
 implicit return:&
 
-∑ ∑(>
+¿ ¿(>
 rectjava.lang.ObjectB20
-.com.smilepile.ui.viewmodels.PhotoEditViewModelHË
-rcom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/ImageProcessor$AspectRatio;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktƒ ƒ("2"3*2
+.com.smilepile.ui.viewmodels.PhotoEditViewModelHΩ
+scom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/IImageProcessor$AspectRatio;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÕ Õ("2"3*2
 2
-≈5 ≈(;"!
+Œ5 Œ(;"!
 
-≈5 ≈(;
+Œ5 Œ(;
 explicit return*∂
 3
-≈ ≈(1ø
+Œ Œ(1ø
 º
 
-≈ ≈(
+Œ Œ(
 %1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-≈ ≈(20
+Œ Œ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel[
 Y
 
 __unknown_file (
 %0"__id*1
 
-≈$ ≈(1#
+Œ$ Œ(1#
 !
 currentBitmapjava.lang.Object*
 2
-1*á
-
+1*⁄
 1
-≈5 ≈(;T
+Œ5 Œ(;T
 R
 
-≈ ≈(;
+Œ Œ(;
 bitmapjava.lang.Object"__id*"
 
 __unknown_file (
 
-%0ä
-á
+%0Â
+‚
 
-«& À(	
-%2java.lang.Object"ucom.smilepile.utils.ImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/ImageProcessor$AspectRatio;)LRect;*D
+– –(%)
+%2#com.smilepile.utils.IImageProcessor"gcom.smilepile.ui.viewmodels.PhotoEditViewModel#getImageProcessor()Lcom/smilepile/utils/IImageProcessor;*@
 
-« «(%6
-4
-ImageProcessor"com.smilepile.utils.ImageProcessor*)
+– –(%20
+.com.smilepile.ui.viewmodels.PhotoEditViewModelıÚ
 
-» »(
+–& ‘(	
+%3java.lang.Object"wcom.smilepile.utils.IImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/IImageProcessor$AspectRatio;)LRect;*9
+
+– –(%+
+)
+%2#com.smilepile.utils.IImageProcessor*)
+
+— —(
 
 widthjava.lang.Object**
 
-… …(
+“ “(
 
-heightjava.lang.Object*M
+heightjava.lang.Object*N
 
-   (?
-=
-aspectRatio.com.smilepile.utils.ImageProcessor$AspectRatioZ
+” ”(@
+>
+aspectRatio/com.smilepile.utils.IImageProcessor$AspectRatio2qcom.smilepile.utils.IImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/IImageProcessor$AspectRatio;)Z
 X
 
-« À(	
+– ‘(	
 cropRectjava.lang.Object"__id*&
 
-«& À(	
+–& ‘(	
 
-%2java.lang.Objectø
+%3java.lang.Objectø
 º
 
-Õ Õ(
-%3java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+÷ ÷(
+%4java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Õ Õ(20
+÷ ÷(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-Õ Õ(!
-%4java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
+÷ ÷(!
+%5java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Õ Õ(!20
+÷ ÷(!20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-Õ Õ(H
+÷ ÷(H
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>•
 ¢
 
-Œ Œ(
-%5kotlin.Unit"?com.smilepile.ui.viewmodels.PhotoEditViewModel#updatePreview()V*@
+◊ ◊(
+%6kotlin.Unit"?com.smilepile.ui.viewmodels.PhotoEditViewModel#updatePreview()V*@
 
-Œ Œ(20
+◊ ◊(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"/
 
 __unknown_file (
-implicit return:K
+implicit return:L
 
-ƒ ƒ(@=
-aspectRatio.com.smilepile.utils.ImageProcessor$AspectRatioB20
+Õ Õ(A>
+aspectRatio/com.smilepile.utils.IImageProcessor$AspectRatioB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH√
 Bcom.smilepile.ui.viewmodels.PhotoEditViewModel#skipCurrentPhoto()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt‘ ‘("0*œ
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt› ›("0*œ
 0
-— ”(‚
+⁄ ‹(‚
 ﬂ
 
-’ ’(.
+ﬁ ﬁ(.
 %0kotlin.Unit"Qcom.smilepile.ui.viewmodels.PhotoEditViewModel#markCurrentAsProcessed(ZLBitmap;)V*@
 
-’ ’(.20
+ﬁ ﬁ(.20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*
 
-’( ’(-	
+ﬁ( ﬁ(-	
 false*
 
-∆S ∆(W ß
+œS œ(W ß
 §
 
-÷ ÷(
+ﬂ ﬂ(
 %1kotlin.Unit"Acom.smilepile.ui.viewmodels.PhotoEditViewModel#moveToNextPhoto()V*@
 
-÷ ÷(20
+ﬂ ﬂ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH¥
 Ccom.smilepile.ui.viewmodels.PhotoEditViewModel#applyCurrentPhoto()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt‹ ‹("0*@
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÂ Â("0*@
 0
-Ÿ €("/
+‚ ‰("/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH˚
 <com.smilepile.ui.viewmodels.PhotoEditViewModel#applyToAll()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktˆ ˆ("0*…
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktˇ ˇ("0*…
 2
-˙ ˇ(	ø
+É à(	ø
 º
 
-˚ ˚(
+Ñ Ñ(
 %3java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-˚ ˚(20
+Ñ Ñ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-˚ ˚(%
+Ñ Ñ(%
 %4java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-˚ ˚(%20
+Ñ Ñ(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-˚ ˛(
+Ñ á(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1032,32 +1325,32 @@ Q
 __unknown_file (
 %2"__id*)
 
-˚ ˚(
+Ñ Ñ(
 
 valuejava.lang.Object*
 1*“
 0
-Û ı(ø
+¸ ˛(ø
 º
 
-˜ ˜(
+Ä Ä(
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-˜ ˜(20
+Ä Ä(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelg
 e
 
-˜ ˜(5
+Ä Ä(5
 rotationjava.lang.Object"__id*3
 
-˜& ˜(5%
+Ä& Ä(5%
 #
 currentRotationjava.lang.Objectª∏
 
-¯ ¯(-
+Å Å(-
 %1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*,
 
-¯ ¯('
+Å Å('
 
 rotationjava.lang.Object*)
 
@@ -1065,68 +1358,68 @@ e
 	<unknown>2equals(Ljava/lang/Object;)P
 N
 
-¯ ¯(T
+Å Å(T
 shouldApplyToAllboolean"__id*
 
-¯ ¯(-
+Å Å(-
 
 %1boolean*
 2
 1*Ï
 1
-ˇ	 Å(©
+à	 ä(©
 ¶
 
-Å Å(
+ä ä(
 %5kotlin.Unit"Ccom.smilepile.ui.viewmodels.PhotoEditViewModel#applyCurrentPhoto()V*@
 
-Å Å(20
+ä ä(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH˛
 Dcom.smilepile.ui.viewmodels.PhotoEditViewModel#deleteCurrentPhoto()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktá á("0*ı
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktê ê("0*ı
 2
-ã@ ∑(	Y
+î@ ¿(	Y
 W
 
-å å(.
+ï ï(.
 itemjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>b
 `
 
-¢ ¢(/"
+´ ´(/"
 newTotalPhotosjava.lang.Object"__id*(
 
-¢+ ¢(/
+´+ ´(/
 
 sizejava.lang.Objectú
 ô
 
-£& £(D
+¨& ¨(D
 %5"	__compare*
 
-£3 £(5
+¨3 ¨(5
 >=*0
 
-£& £(2"
+¨& ¨(2"
  
 currentIndexjava.lang.Object*2
 
-£6 £(D$
+¨6 ¨(D$
 "
 newTotalPhotosjava.lang.Object*
 4
 5*‡
 3
-• ß(c
+Æ ∞(c
 a
 
-£ ß()
+¨ ∞()
 newCurrentIndexerror.NonExistentClass"__id*"
 
 __unknown_file (
@@ -1134,68 +1427,68 @@ a
 %6ø
 º
 
-© ©(
+≤ ≤(
 %8java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-© ©(20
+≤ ≤(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-© ©(%
+≤ ≤(%
 %9java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-© ©(%20
+≤ ≤(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-© ≠(
+≤ ∂(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>{
 y
 
-∞ ∞("
+π π("
 %10"	__compare*
 
-∞ ∞( 
+π π( 
 >*2
 
-∞ ∞($
+π π($
 "
 newTotalPhotosjava.lang.Object*
 
-∞! ∞("2 Ñ
+π! π("2 Ñ
 Å
 
-∞& ∞(:
+π& π(:
 %11"	__compare*
 
-∞6 ∞(8
+π6 π(8
 >=*9
 
-∞& ∞(5+
+π& π(5+
 )
 newCurrentIndexerror.NonExistentClass*
 
-∞9 ∞(:2 *
+π9 π(:2 *
 7
 8*‚
 4
-£F •(~
+¨F Æ(~
 |
 
-§ §("
+≠ ≠("
 %7"__calculate*
 
-§ §( 
+≠ ≠( 
 -*2
 
-§ §($
+≠ ≠($
 "
 newTotalPhotosjava.lang.Object*
 
-§! §("2L
+≠! ≠("2L
 J
 
 __unknown_file (
@@ -1206,18 +1499,18 @@ J
 %7*
 3*p
 5
-• ß(Z
+Æ ∞(Z
 X
 
 __unknown_file (
 %6"__id*0
 
-¶ ¶("
+Ø Ø("
  
 currentIndexjava.lang.Object*
 3*c
 6
-∂ ∑(M
+ø ¿(M
 K
 
 __unknown_file (
@@ -1228,7 +1521,7 @@ K
 %12*
 1*j
 7
-∞< ¥(T
+π< Ω(T
 R
 
 __unknown_file (
@@ -1238,24 +1531,24 @@ R
 	<unknown>*
 6*Ã
 8
-¥ ∂(¿
+Ω ø(¿
 Ω
 
-µ µ(
+æ æ(
 %13java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-µ µ(20
+æ æ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel¿
 Ω
 
-µ! µ()
+æ! æ()
 %14java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-µ! µ()20
+æ! æ()20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-µ µ(G
+æ æ(G
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1265,91 +1558,91 @@ R
 __unknown_file (
 %12"__id*)
 
-µ µ(
+æ æ(
 
 valuejava.lang.Object*
 6*Ù
 0
-Ñ Ü(ø
+ç è(ø
 º
 
-à à(#
+ë ë(#
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-à à(#20
+ë ë(#20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelh
 f
 
-à à(6 
+ë ë(6 
 currentIndexjava.lang.Object"__id*0
 
-à* à(6"
+ë* ë(6"
  
 currentIndexjava.lang.Objectø
 º
 
-â â( 
+í í( 
 %1java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-â â( 20
+í í( 20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel^
 \
 
-â â(@
+í í(@
 	editQueuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>y
 w
 
-ã ã(
+î î(
 %2"	__compare*
 
-ã ã(
+î î(
 >=*0
 
-ã ã("
+î î("
  
 currentIndexjava.lang.Object*
 
-ã ã(2 ë
+î î(2 ë
 é
 
-ã! ã(>
+î! î(>
 %3"	__compare*
 
-ã. ã(/
+î. î(/
 <*0
 
-ã! ã(-"
+î! î(-"
  
 currentIndexjava.lang.Object*(
 
-ã: ã(>
+î: î(>
 
 sizejava.lang.Object*
 2
 1*@
 1
-∑	 ∏("/
+¿	 ¡("/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH©
 Hcom.smilepile.ui.viewmodels.PhotoEditViewModel#updatePendingCategory(J)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktΩ Ω("0*ç
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt∆ ∆("0*ç
 0
-∫ º( 
+√ ≈( 
 «
 
-æ æ(&
+« «(&
 
 %0long"Gcom.smilepile.ui.viewmodels.PhotoEditViewModel#setPendingCategoryId(J)V*@
 
-æ æ(&20
+« «(&20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*"
 
-æ æ(&
+« «(&
 
 
 categoryIdlong"/
@@ -1357,63 +1650,63 @@ categoryIdlong"/
 __unknown_file (
 implicit return: 
 
-Ω Ω(.
+∆ ∆(.
 
 categoryIdlongB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÀ
 Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()Jr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktƒ ƒ("0*”
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÕ Õ("0*”
 0
-¡ √(•
+  Ã(•
 ¢
 
-ƒ' ƒ(8
+Õ' Õ(8
 
 %0long"Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()J*@
 
-ƒ' ƒ(820
+Õ' Õ(820
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"
 
-ƒ' ƒ(8
+Õ' Õ(8
 
 
 %0longB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH»
 Qcom.smilepile.ui.viewmodels.PhotoEditViewModel#markCurrentAsProcessed(ZLBitmap;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt∆ ∆(&"0*Ó
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktœ œ(&"0*Ó
 2
-» –(	ø
+— Ÿ(	ø
 º
 
-… …('
+“ “('
 %3java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-… …('20
+“ “('20
 .com.smilepile.ui.viewmodels.PhotoEditViewModela
 _
 
-… …(G 
+“ “(G 
 updatedQueuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>ø
 º
 
-œ œ(
+ÿ ÿ(
 %4java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-œ œ(20
+ÿ ÿ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-œ œ(%
+ÿ ÿ(%
 %5java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-œ œ(%20
+ÿ ÿ(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-œ œ(J
+ÿ ÿ(J
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1423,75 +1716,75 @@ Q
 __unknown_file (
 %2"__id*)
 
-œ œ(
+ÿ ÿ(
 
 valuejava.lang.Object*
 1*æ
 0
-∆ ∆(ø
+œ œ(ø
 º
 
-« «(#
+– –(#
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-« «(#20
+– –(#20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelh
 f
 
-« «(6 
+– –(6 
 currentIndexjava.lang.Object"__id*0
 
-«* «(6"
+–* –(6"
  
 currentIndexjava.lang.Objecty
 w
 
-» »(
+— —(
 %1"	__compare*
 
-» »(
+— —(
 >=*0
 
-» »("
+— —("
  
 currentIndexjava.lang.Object*
 
-» »(2 *
+— —(2 *
 2
 1*@
 1
-–	 —("/
+Ÿ	 ⁄("/
 
 __unknown_file (
 implicit return:
 
-∆' ∆(6
+œ' œ(6
 editedboolean:1
 
-∆8 ∆(W#
+œ8 œ(W#
 processedBitmapjava.lang.ObjectB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHø
 Acom.smilepile.ui.viewmodels.PhotoEditViewModel#moveToNextPhoto()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt” ”("0*…
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt‹ ‹("0*…
 2
-÷4 €(	ø
+ﬂ4 ‰(	ø
 º
 
-◊ ◊(
+‡ ‡(
 %5java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-◊ ◊(20
+‡ ‡(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-◊ ◊(%
+‡ ‡(%
 %6java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-◊ ◊(%20
+‡ ‡(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-◊ ◊(J
+‡ ‡(J
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1505,24 +1798,24 @@ Q
 	<unknown>*
 1*…
 3
-€ ﬁ(	ø
+‰ Á(	ø
 º
 
-› ›(
+Ê Ê(
 %7java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-› ›(20
+Ê Ê(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-› ›(%
+Ê Ê(%
 %8java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-› ›(%20
+Ê Ê(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-› ›(C
+Ê Ê(C
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1532,32 +1825,32 @@ Q
 __unknown_file (
 %4"__id*)
 
-› ›(
+Ê Ê(
 
 valuejava.lang.Object*
 1*Ú
 0
-” ”(ø
+‹ ‹(ø
 º
 
-‘ ‘( 
+› ›( 
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-‘ ‘( 20
+› ›( 20
 .com.smilepile.ui.viewmodels.PhotoEditViewModeld
 b
 
-‘ ‘(7
+› ›(7
 %1"__concat*0
 
-‘' ‘(3"
+›' ›(3"
  
 currentIndexjava.lang.Object*
 
-‘6 ‘(72W
+›6 ›(72W
 U
 
-‘ ‘(7
+› ›(7
 	nextIndexjava.lang.String"__id*"
 
 __unknown_file (
@@ -1565,47 +1858,47 @@ U
 %1ø
 º
 
-÷ ÷( 
+ﬂ ﬂ( 
 %2java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-÷ ÷( 20
+ﬂ ﬂ( 20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelï
 í
 
-÷ ÷(2
+ﬂ ﬂ(2
 %3"	__compare*
 
-÷ ÷(
+ﬂ ﬂ(
 <*-
 
-÷ ÷(
+ﬂ ﬂ(
 
 	nextIndexjava.lang.String*/
 
-÷' ÷(2!
+ﬂ' ﬂ(2!
 
 totalPhotosjava.lang.Object*
 2
 3*@
 1
-ﬁ	 ﬂ("/
+Á	 Ë("/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH∞
 ?com.smilepile.ui.viewmodels.PhotoEditViewModel#updatePreview()Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt· ·("0*@
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÍ Í("0*@
 0
-· ·("/
+Í Í("/
 
 __unknown_file (
 implicit returnB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÉ
 
 ncom.smilepile.ui.viewmodels.PhotoEditViewModel#getCurrentEditItem()Lcom/smilepile/ui/viewmodels/PhotoEditItem;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÊ Ê(""0*i
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÔ Ô(""0*i
 2
-ËH Í(	S
+ÒH Û(	S
 Q
 
 __unknown_file (
@@ -1615,314 +1908,314 @@ Q
 	<unknown>*
 1*P
 3
-Í Í(:
+Û Û(:
 8
 
 __unknown_file (
 %4"__id*
 
-Í Í( *
+Û Û( *
 1*ˇ
 0
-Ê Ê(ø
+Ô Ô(ø
 º
 
-Á Á(
+ (
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Á Á(20
+ (20
 .com.smilepile.ui.viewmodels.PhotoEditViewModela
 _
 
-Á Á(/
+ (/
 indexjava.lang.Object"__id*0
 
-Á# Á(/"
+# (/"
  
 currentIndexjava.lang.Objectr
 p
 
-Ë Ë(
+Ò Ò(
 %1"	__compare*
 
-Ë Ë(
+Ò Ò(
 >=*)
 
-Ë Ë(
+Ò Ò(
 
 indexjava.lang.Object*
 
-Ë Ë(2 ø
+Ò Ò(2 ø
 º
 
-Ë) Ë(1
+Ò) Ò(1
 %2java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Ë) Ë(120
+Ò) Ò(120
 .com.smilepile.ui.viewmodels.PhotoEditViewModelä
 á
 
-Ë! Ë(F
+Ò! Ò(F
 %3"	__compare*
 
-Ë' Ë((
+Ò' Ò((
 <*)
 
-Ë! Ë(&
+Ò! Ò(&
 
 indexjava.lang.Object*(
 
-ËB Ë(F
+ÒB Ò(F
 
 sizejava.lang.Object*
 2
 3*%
 1
-Í Í("
+Û Û("
 
-Ë Í(
+Ò Û(
 
 %4B20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÙ
 Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#getProcessedResults()Ljava/util/List;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÌ Ì("0*Ó
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktˆ ˆ("0*Ó
 0
-Ì Ì(ø
+ˆ ˆ(ø
 º
 
-Ó Ó(
+˜ ˜(
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Ó Ó(20
+˜ ˜(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"
 
-Ó ¯(	
+˜ Å(	
 	<unknown>B20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÌ
 Wcom.smilepile.ui.viewmodels.PhotoEditViewModel#saveAllProcessedPhotos()Ljava/util/List;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt˛ ˛(&"0*‰
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktá á(&"0*‰
 0
-˚ ˝(`
+Ñ Ü(`
 ^
 
-ˇ ˇ(0
+à à(0
 savedPhotosjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>ø
 º
 
-Å Å(
+ä ä(
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-Å Å(20
+ä ä(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel"/
 
-î î(!
+ù ù(!
 
 savedPhotosjava.lang.ObjectB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH¢
 rcom.smilepile.ui.viewmodels.PhotoEditViewModel#shouldSaveEditedPhoto(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Zr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.któ ó(%"0*Ω
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt† †(%"0*Ω
 0
-ó ó(õ
+† †(õ
 ò
 
-ò ò(
+° °(
 %0boolean"8com.smilepile.ui.viewmodels.PhotoEditItem#isProcessed()Z*A
 
-ò ò(3
+° °(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemú
 ô
 
-ò( ò(1
+°( °(1
 %1boolean"9com.smilepile.ui.viewmodels.PhotoEditItem#getWasEdited()Z*A
 
-ò# ò('3
+°# °('3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem≤
 Ø
 
-ò: ò(I
+°: °(I
 %2java.lang.Object"Fcom.smilepile.ui.viewmodels.PhotoEditItem#getProcessedBitmap()LBitmap;*A
 
-ò5 ò(93
+°5 °(93
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemúô
 
-ò5 ò(Q
+°5 °(Q
 %3boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*&
 
-ò: ò(I
+°: °(I
 
 %2java.lang.Object*
 
-òM ò(Q 2equals(Ljava/lang/Object;)"
+°M °(Q 2equals(Ljava/lang/Object;)"
 
-ò ò(Q
+° °(Q
 	<unknown>:?
 
-ó& ó(91
+†& †(91
 item)com.smilepile.ui.viewmodels.PhotoEditItemB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH¥
 ucom.smilepile.ui.viewmodels.PhotoEditViewModel#shouldSaveUneditedImport(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Zr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktõ õ(("0*Ã	
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt§ §(("0*Ã	
 0
-õ õ(õ
+§ §(õ
 ò
 
-ú ú(
+• •(
 %0boolean"8com.smilepile.ui.viewmodels.PhotoEditItem#isProcessed()Z*A
 
-ú ú(3
+• •(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemú
 ô
 
-ú) ú(2
+•) •(2
 %1boolean"9com.smilepile.ui.viewmodels.PhotoEditItem#getWasEdited()Z*A
 
-ú$ ú((3
+•$ •((3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemr
 p
 
-ú# ú(2
+•# •(2
 %2boolean"kotlin.Boolean#not()Z*
 
-ú) ú(2
+•) •(2
 
 %1boolean*
 
-ú) ú(2
+•) •(2
 
 %1boolean·
 ﬁ
 
-ú6 ú(>*
+•6 •(>*
 %3$com.smilepile.ui.viewmodels.EditMode"bcom.smilepile.ui.viewmodels.PhotoEditViewModel#getEditMode()Lcom/smilepile/ui/viewmodels/EditMode;*@
 
-ú6 ú(>20
+•6 •(>20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel√
 ¿
 
-ú6 ú(Q
+•6 •(Q
 %4boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*:
 
-ú6 ú(>,
+•6 •(>,
 *
 %3$com.smilepile.ui.viewmodels.EditMode*>
 
-úK ú(Q0
+•K •(Q0
 .
 IMPORT$com.smilepile.ui.viewmodels.EditMode£
 †
 
-úZ ú(]
+•Z •(]
 %5java.lang.Object"7com.smilepile.ui.viewmodels.PhotoEditItem#getUri()LUri;*A
 
-úU ú(Y3
+•U •(Y3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemúô
 
-úU ú(e
+•U •(e
 %6boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*&
 
-úZ ú(]
+•Z •(]
 
 %5java.lang.Object*
 
-úa ú(e 2equals(Ljava/lang/Object;)"
+•a •(e 2equals(Ljava/lang/Object;)"
 
-ú ú(e
+• •(e
 	<unknown>:?
 
-õ) õ(<1
+§) §(<1
 item)com.smilepile.ui.viewmodels.PhotoEditItemB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH∆
 ucom.smilepile.ui.viewmodels.PhotoEditViewModel#shouldUpdateCategoryOnly(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Zr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktü ü(("0*ﬁ	
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt® ®(("0*ﬁ	
 0
-ü ü(õ
+® ®(õ
 ò
 
-† †(
+© ©(
 %0boolean"8com.smilepile.ui.viewmodels.PhotoEditItem#isProcessed()Z*A
 
-† †(3
+© ©(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemú
 ô
 
-†) †(2
+©) ©(2
 %1boolean"9com.smilepile.ui.viewmodels.PhotoEditItem#getWasEdited()Z*A
 
-†$ †((3
+©$ ©((3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemr
 p
 
-†# †(2
+©# ©(2
 %2boolean"kotlin.Boolean#not()Z*
 
-†) †(2
+©) ©(2
 
 %1boolean*
 
-†) †(2
+©) ©(2
 
 %1boolean·
 ﬁ
 
-†6 †(>*
+©6 ©(>*
 %3$com.smilepile.ui.viewmodels.EditMode"bcom.smilepile.ui.viewmodels.PhotoEditViewModel#getEditMode()Lcom/smilepile/ui/viewmodels/EditMode;*@
 
-†6 †(>20
+©6 ©(>20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelƒ
 ¡
 
-†6 †(R
+©6 ©(R
 %4boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*:
 
-†6 †(>,
+©6 ©(>,
 *
 %3$com.smilepile.ui.viewmodels.EditMode*?
 
-†K †(R1
+©K ©(R1
 /
 GALLERY$com.smilepile.ui.viewmodels.EditMode±
 Æ
 
-†[ †(_
+©[ ©(_
 %5java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*A
 
-†V †(Z3
+©V ©(Z3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemüú
 
-†V †(g
+©V ©(g
 %6boolean")kotlin.String#equals(Ljava/lang/Object;)Z*&
 
-†[ †(_
+©[ ©(_
 
 %5java.lang.String*
 
-†c †(g 2equals(Ljava/lang/Object;)"
+©c ©(g 2equals(Ljava/lang/Object;)"
 
-† †(g
+© ©(g
 	<unknown>:?
 
-ü) ü(<1
+®) ®(<1
 item)com.smilepile.ui.viewmodels.PhotoEditItemB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHΩ$
 ìcom.smilepile.ui.viewmodels.PhotoEditViewModel#saveEditedGalleryPhoto(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Lcom/smilepile/data/models/Photo;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt£ £(."1*l
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt¨ ¨(."1*l
 2
-© ©(S
+≤ ≤(S
 Q
 
-¶ ©(
+Ø ≤(
 	savedFilejava.io.File"__id*"
 
 __unknown_file (
@@ -1931,17 +2224,17 @@ Q
 6
 7*!
 3
-© ©("
+≤ ≤("
 
-© ©( *÷
+≤ ≤( *÷
 4
-¶ ©(Á
+Ø ≤(Á
 ‰
 
-¶ ¶(**
+Ø Ø(**
 %5$com.smilepile.storage.StorageManager"hcom.smilepile.ui.viewmodels.PhotoEditViewModel#getStorageManager()Lcom/smilepile/storage/StorageManager;*@
 
-¶ ¶(*20
+Ø Ø(*20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelS
 Q
 
@@ -1953,10 +2246,10 @@ Q
 2
 3*·
 5
-´M ´(Xj
+¥M ¥(Xj
 h
 
-´ ´(X0
+¥ ¥(X0
 existingPhotocom.smilepile.data.models.Photo"__id*"
 
 __unknown_file (
@@ -1964,47 +2257,47 @@ h
 %6¶
 £
 
-Æ Æ(.
+∑ ∑(.
 %10long"Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()J*@
 
-Æ Æ(.20
+∑ ∑(.20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel~|
 
-≤# ≤(6
+ª# ª(6
 %11long"%java.lang.System#currentTimeMillis()J*%
 
-≤ ≤("
+ª ª("
 
 Systemkotlin.Unit2currentTimeMillis()hf
 
-±% ±(-
+∫% ∫(-
 %12long"java.io.File#length()J*)
 
-± ±($
+∫ ∫($
 
 	savedFilejava.io.File2length()≥
 ∞
 
-Ø Ø(,
+∏ ∏(,
 %13java.lang.Object"Fcom.smilepile.ui.viewmodels.PhotoEditItem#getProcessedBitmap()LBitmap;*A
 
-Ø Ø(3
+∏ ∏(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem≥
 ∞
 
-∞ ∞(-
+π π(-
 %14java.lang.Object"Fcom.smilepile.ui.viewmodels.PhotoEditItem#getProcessedBitmap()LBitmap;*A
 
-∞ ∞(3
+π π(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem∏
 µ
 
-≠- ≥(&
+∂- º(&
 %15com.smilepile.data.models.Photo"rcom.smilepile.data.models.Photo#copy(JLjava/lang/String;JLjava/lang/String;ZJJII)Lcom/smilepile/data/models/Photo;*@
 
-≠ ≠(,2
+∂ ∂(,2
 0
 existingPhotocom.smilepile.data.models.Photo*
 
@@ -2013,7 +2306,7 @@ h
 __unknown_file (
 	<unknown>*
 
-Æ Æ(.
+∑ ∑(.
 
 %10long*)
 
@@ -2023,45 +2316,45 @@ h
 __unknown_file (	
 false*
 
-≤# ≤(6
+ª# ª(6
 
 %11long*
 
-±% ±(-
+∫% ∫(-
 
 %12long*)
 
-Ø- Ø(2
+∏- ∏(2
 
 widthjava.lang.Object**
 
-∞. ∞(4
+π. π(4
 
 heightjava.lang.Object}
 {
 
-≠ ≥(/
+∂ º(/
 updatedPhotocom.smilepile.data.models.Photo"__id*6
 
-≠- ≥((
+∂- º((
 &
 %15com.smilepile.data.models.Photo˚
 ¯
 
-¥ ¥(4
+Ω Ω(4
 %16-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-¥ ¥(20
+Ω Ω(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelπ∂
 
-¥ ¥(5
+Ω Ω(5
 %17kotlin.Unit"]com.smilepile.data.repository.PhotoRepository#updatePhoto(Lcom/smilepile/data/models/Photo;)V*D
 
-¥ ¥(6
+Ω Ω(6
 4
 %16-com.smilepile.data.repository.PhotoRepository*?
 
-¥( ¥(41
+Ω( Ω(41
 /
 updatedPhotocom.smilepile.data.models.Photo2.updatePhoto(Lcom/smilepile/data/models/Photo;)i
 g
@@ -2069,41 +2362,41 @@ g
 __unknown_file (
 %0"__id*?
 
-µ µ(1
+æ æ(1
 /
 updatedPhotocom.smilepile.data.models.Photo*
 8
 9*!
 6
-´M ´(X"
+¥M ¥(X"
 
-´M ´(X *Ê
+¥M ¥(X *Ê
 7
-´  ´(I˙
+¥  ¥(I˙
 ˜
 
-´  ´(/3
+¥  ¥(/3
 %7-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-´  ´(/20
+¥  ¥(/20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel±
 Æ
 
-´D ´(H
+¥D ¥(H
 %8java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*A
 
-´? ´(C3
+¥? ¥(C3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem∫∑
 
-´0 ´(I%
+¥0 ¥(I%
 %9com.smilepile.data.models.Photo"qcom.smilepile.data.repository.PhotoRepository#getPhotoByPath(Ljava/lang/String;)Lcom/smilepile/data/models/Photo;*C
 
-´  ´(/5
+¥  ¥(/5
 3
 %7-com.smilepile.data.repository.PhotoRepository*&
 
-´D ´(H
+¥D ¥(H
 
 %8java.lang.String2"getPhotoByPath(Ljava/lang/String;)_
 ]
@@ -2111,73 +2404,73 @@ g
 __unknown_file (
 %6"__id*5
 
-´0 ´(I'
+¥0 ¥(I'
 %
 %9com.smilepile.data.models.Photo*
 5
 6*%
 8
-∂
- π(	"
+ø
+ ¬(	"
 
-§ π(	
+≠ ¬(	
 
 %0*P
 9
-∂ π(	:
+ø ¬(	:
 8
 
 __unknown_file (
 %0"__id*
 
-∏ ∏( *
+¡ ¡( *
 8*„
 1
-§ ∂(	±
+≠ ø(	±
 Æ
 
-•) •(-
+Æ) Æ(-
 %1java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*A
 
-•$ •((3
+Æ$ Æ((3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem0.
 
-• •(0
+Æ Æ(0
 %2java.io.File"java.io.Fileã
 à
 
-• •(0
+Æ Æ(0
 %3"(java.io.File#<init>(Ljava/lang/String;)V*"
 
-• •(0
+Æ Æ(0
 
 %2java.io.File*&
 
-•) •(-
+Æ) Æ(-
 
 %1java.lang.StringV
 T
 
-• •(0
+Æ Æ(0
 existingFilejava.io.File"__id*"
 
-• •(0
+Æ Æ(0
 
 %2java.io.File*
 3
 4:?
 
-£/ £(B1
+¨/ ¨(B1
 item)com.smilepile.ui.viewmodels.PhotoEditItemB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÿ
 ícom.smilepile.ui.viewmodels.PhotoEditViewModel#saveNewImportedPhoto(Lcom/smilepile/ui/viewmodels/PhotoEditItem;I)Lcom/smilepile/data/models/Photo;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktº º(,"1*∫
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt≈ ≈(,"1*∫
 2
-¬ ¬(S
+À À(S
 Q
 
-ø ¬(
+» À(
 	savedFilejava.io.File"__id*"
 
 __unknown_file (
@@ -2185,96 +2478,96 @@ Q
 %3Ñ
 Å
 
-∆! ∆(-
+œ! œ(-
 %5java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*)
 
-∆ ∆( 
+œ œ( 
 
 	savedFilejava.io.File≤
 Ø
 
-« «(,
+– –(,
 %6java.lang.Object"Fcom.smilepile.ui.viewmodels.PhotoEditItem#getProcessedBitmap()LBitmap;*A
 
-« «(3
+– –(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem≤
 Ø
 
-» »(-
+— —(-
 %7java.lang.Object"Fcom.smilepile.ui.viewmodels.PhotoEditItem#getProcessedBitmap()LBitmap;*A
 
-» »(3
+— —(3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItemge
 
-…% …(-
+“% “(-
 
 %8long"java.io.File#length()J*)
 
-… …($
+“ “($
 
 	savedFilejava.io.File2length()Œ
 À
 
-ƒ  (%
+Õ ”(%
 %9com.smilepile.data.models.Photo"äcom.smilepile.ui.viewmodels.PhotoEditViewModel#createPhotoEntity(Ljava/lang/String;Ljava/lang/String;IIJ)Lcom/smilepile/data/models/Photo;*@
 
-ƒ  (20
+Õ ”(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*,
 
-≈ ≈(#
+Œ Œ(#
 
 filenamejava.lang.String*&
 
-∆! ∆(-
+œ! œ(-
 
 %5java.lang.String*)
 
-«- «(2
+–- –(2
 
 widthjava.lang.Object**
 
-». »(4
+—. —(4
 
 heightjava.lang.Object*
 
-…% …(-
+“% “(-
 
 
 %8longu
 s
 
-ƒ  ((
+Õ ”((
 photocom.smilepile.data.models.Photo"__id*5
 
-ƒ  ('
+Õ ”('
 %
 %9com.smilepile.data.models.Photo˚
 ¯
 
-Ã Ã()4
+’ ’()4
 %10-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-Ã Ã()20
+’ ’()20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel´®
 
-Ã* Ã(<
+’* ’(<
 %11long"]com.smilepile.data.repository.PhotoRepository#insertPhoto(Lcom/smilepile/data/models/Photo;)J*D
 
-Ã Ã()6
+’ ’()6
 4
 %10-com.smilepile.data.repository.PhotoRepository*8
 
-Ã6 Ã(;*
+’6 ’(;*
 (
 photocom.smilepile.data.models.Photo2.insertPhoto(Lcom/smilepile/data/models/Photo;)B
 @
 
-Ã Ã(<
+’ ’(<
 photoIdlong"__id*
 
-Ã* Ã(<
+’* ’(<
 
 %11longõò
 
@@ -2286,14 +2579,14 @@ s
 Systemkotlin.Unit2currentTimeMillis()π
 ∂
 
-Õ Õ($&
+÷ ÷($&
 %13com.smilepile.data.models.Photo"rcom.smilepile.data.models.Photo#copy(JLjava/lang/String;JLjava/lang/String;ZJJII)Lcom/smilepile/data/models/Photo;*8
 
-Õ Õ(*
+÷ ÷(*
 (
 photocom.smilepile.data.models.Photo*
 
-Õ Õ(#
+÷ ÷(#
 
 photoIdlong*)
 
@@ -2323,23 +2616,23 @@ s
 __unknown_file (
 %0"__id*6
 
-Õ Õ($(
+÷ ÷($(
 &
 %13com.smilepile.data.models.Photo*
 5
 6*!
 3
-¬ ¬("
+À À("
 
-¬ ¬( *÷
+À À( *÷
 4
-ø ¬(Á
+» À(Á
 ‰
 
-ø ø(**
+» »(**
 %4$com.smilepile.storage.StorageManager"hcom.smilepile.ui.viewmodels.PhotoEditViewModel#getStorageManager()Lcom/smilepile/storage/StorageManager;*@
 
-ø ø(*20
+» »(*20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelS
 Q
 
@@ -2351,77 +2644,77 @@ Q
 2
 3*%
 5
-Œ
- —(	"
+◊
+ ⁄(	"
 
-Ω —(	
+∆ ⁄(	
 
 %0*P
 6
-Œ —(	:
+◊ ⁄(	:
 8
 
 __unknown_file (
 %0"__id*
 
-– –( *
+Ÿ Ÿ( *
 5*Ñ
 1
-Ω Œ(	}{
+∆ ◊(	}{
 
-æ, æ(?
+«, «(?
 
 %1long"%java.lang.System#currentTimeMillis()J*%
 
-æ% æ(+
+«% «(+
 
 Systemkotlin.Unit2currentTimeMillis()°
 û
 
-æ æ(L
+« «(L
 %2"__concat*
 
-æ æ(#	
+« «(#	
 edited_*
 
-æ, æ(?
+«, «(?
 
 
 %1long*
 
-æ@ æ(A
+«@ «(A
 _*
 
-æB æ(G
+«B «(G
 
 indexint*
 
-æG æ(K
+«G «(K
 .jpgH
 F
 
-æ æ(L
+« «(L
 filenamejava.lang.String"__id*
 
-æ æ(L
+« «(L
 
 %2*
 3
 4:?
 
-º- º(@1
+≈- ≈(@1
 item)com.smilepile.ui.viewmodels.PhotoEditItem:
 
-ºB º(L
+≈B ≈(L
 indexintB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH˝!
 êcom.smilepile.ui.viewmodels.PhotoEditViewModel#saveUneditedImport(Lcom/smilepile/ui/viewmodels/PhotoEditItem;I)Lcom/smilepile/data/models/Photo;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt‘ ‘(*"1*–
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt› ›(*"1*–
 2
-‹[ ‹(fS
+Â[ Â(fS
 Q
 
-‹ ‹(f
+Â Â(f
 	savedFilejava.io.File"__id*"
 
 __unknown_file (
@@ -2429,80 +2722,80 @@ Q
 %4Ñ
 Å
 
-‡! ‡(-
+È! È(-
 %7java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*)
 
-‡ ‡( 
+È È( 
 
 	savedFilejava.io.Filege
 
-„% „(-
+Ï% Ï(-
 
 %8long"java.io.File#length()J*)
 
-„ „($
+Ï Ï($
 
 	savedFilejava.io.File2length()Œ
 À
 
-ﬁ ‰(%
+Á Ì(%
 %9com.smilepile.data.models.Photo"äcom.smilepile.ui.viewmodels.PhotoEditViewModel#createPhotoEntity(Ljava/lang/String;Ljava/lang/String;IIJ)Lcom/smilepile/data/models/Photo;*@
 
-ﬁ ‰(20
+Á Ì(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel*,
 
-ﬂ ﬂ(#
+Ë Ë(#
 
 filenamejava.lang.String*&
 
-‡! ‡(-
+È! È(-
 
 %7java.lang.String*)
 
-· ·($
+Í Í($
 
 widthjava.lang.Object**
 
-‚  ‚(&
+Î  Î(&
 
 heightjava.lang.Object*
 
-„% „(-
+Ï% Ï(-
 
 
 %8longu
 s
 
-ﬁ ‰((
+Á Ì((
 photocom.smilepile.data.models.Photo"__id*5
 
-ﬁ ‰('
+Á Ì('
 %
 %9com.smilepile.data.models.Photo˚
 ¯
 
-Ê Ê()4
+Ô Ô()4
 %10-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-Ê Ê()20
+Ô Ô()20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel´®
 
-Ê* Ê(<
+Ô* Ô(<
 %11long"]com.smilepile.data.repository.PhotoRepository#insertPhoto(Lcom/smilepile/data/models/Photo;)J*D
 
-Ê Ê()6
+Ô Ô()6
 4
 %10-com.smilepile.data.repository.PhotoRepository*8
 
-Ê6 Ê(;*
+Ô6 Ô(;*
 (
 photocom.smilepile.data.models.Photo2.insertPhoto(Lcom/smilepile/data/models/Photo;)B
 @
 
-Ê Ê(<
+Ô Ô(<
 photoIdlong"__id*
 
-Ê* Ê(<
+Ô* Ô(<
 
 %11longõò
 
@@ -2514,14 +2807,14 @@ s
 Systemkotlin.Unit2currentTimeMillis()π
 ∂
 
-Á Á($&
+ ($&
 %13com.smilepile.data.models.Photo"rcom.smilepile.data.models.Photo#copy(JLjava/lang/String;JLjava/lang/String;ZJJII)Lcom/smilepile/data/models/Photo;*8
 
-Á Á(*
+ (*
 (
 photocom.smilepile.data.models.Photo*
 
-Á Á(#
+ (#
 
 photoIdlong*)
 
@@ -2551,38 +2844,38 @@ s
 __unknown_file (
 %0"__id*6
 
-Á Á($(
+ ($(
 &
 %13com.smilepile.data.models.Photo*
 5
 6*!
 3
-‹[ ‹(f"
+Â[ Â(f"
 
-‹[ ‹(f *ˆ
+Â[ Â(f *ˆ
 4
-‹ ‹(WÁ
+Â Â(WÁ
 ‰
 
-‹ ‹(**
+Â Â(**
 %5$com.smilepile.storage.StorageManager"hcom.smilepile.ui.viewmodels.PhotoEditViewModel#getStorageManager()Lcom/smilepile/storage/StorageManager;*@
 
-‹ ‹(*20
+Â Â(*20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel§
 °
 
-‹+ ‹(W
+Â+ Â(W
 %6java.io.File"icom.smilepile.storage.StorageManager#savePhotoToInternalStorage(LBitmap;Ljava/lang/String;)Ljava/io/File;*:
 
-‹ ‹(*,
+Â Â(*,
 *
 %5$com.smilepile.storage.StorageManager**
 
-‹F ‹(L
+ÂF Â(L
 
 bitmapjava.lang.Object*,
 
-‹N ‹(V
+ÂN Â(V
 
 filenamejava.lang.StringL
 J
@@ -2590,84 +2883,84 @@ J
 __unknown_file (
 %4"__id*"
 
-‹+ ‹(W
+Â+ Â(W
 
 %6java.io.File*
 2
 3*%
 5
-Ë
- Î(	"
+Ò
+ Ù(	"
 
-’ Î(	
+ﬁ Ù(	
 
 %0*P
 6
-Ë Î(	:
+Ò Ù(	:
 8
 
 __unknown_file (
 %0"__id*
 
-Í Í( *
+Û Û( *
 5*ı
 1
-’ Ë(	}{
+ﬁ Ò(	}{
 
-÷, ÷(?
+ﬂ, ﬂ(?
 
 %1long"%java.lang.System#currentTimeMillis()J*%
 
-÷% ÷(+
+ﬂ% ﬂ(+
 
 Systemkotlin.Unit2currentTimeMillis()°
 û
 
-÷ ÷(L
+ﬂ ﬂ(L
 %2"__concat*
 
-÷ ÷(#	
+ﬂ ﬂ(#	
 import_*
 
-÷, ÷(?
+ﬂ, ﬂ(?
 
 
 %1long*
 
-÷@ ÷(A
+ﬂ@ ﬂ(A
 _*
 
-÷B ÷(G
+ﬂB ﬂ(G
 
 indexint*
 
-÷G ÷(K
+ﬂG ﬂ(K
 .jpgH
 F
 
-÷ ÷(L
+ﬂ ﬂ(L
 filenamejava.lang.String"__id*
 
-÷ ÷(L
+ﬂ ﬂ(L
 
 %2Ø
 ¨
 
-ÿ ÿ(%
+· ·(%
 %3java.lang.Object"Dcom.smilepile.ui.viewmodels.PhotoEditViewModel#getContext()LContext;*@
 
-ÿ ÿ(%20
+· ·(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel`
 ^
 
-ÿ ÿ(Q
+· ·(Q
 inputStreamjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>[
 Y
 
-Ÿ Ÿ(@
+‚ ‚(@
 bitmapjava.lang.Object"__id*)
 
 __unknown_file (
@@ -2675,19 +2968,19 @@ Y
 3
 4:?
 
-‘+ ‘(>1
+›+ ›(>1
 item)com.smilepile.ui.viewmodels.PhotoEditItem:
 
-‘@ ‘(J
+›@ ›(J
 indexintB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÜ
 êcom.smilepile.ui.viewmodels.PhotoEditViewModel#updatePhotoCategory(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Lcom/smilepile/data/models/Photo;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÓ Ó(+"3"4*€
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt˜ ˜(+"3"4*€
 2
-O (Zj
+˘O ˘(Zj
 h
 
- (Z0
+˘ ˘(Z0
 existingPhotocom.smilepile.data.models.Photo"__id*"
 
 __unknown_file (
@@ -2695,66 +2988,66 @@ h
 %1è
 å
 
-Ú Ú((
+˚ ˚((
 
 %5long"0com.smilepile.data.models.Photo#getCategoryId()J*@
 
-Ú Ú(2
+˚ ˚(2
 0
 existingPhotocom.smilepile.data.models.Photo•
 ¢
 
-Ú, Ú(=
+˚, ˚(=
 
 %6long"Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()J*@
 
-Ú, Ú(=20
+˚, ˚(=20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelõò
 
-Ú Ú(=
+˚ ˚(=
 %7boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*
 
-Ú Ú((
+˚ ˚((
 
 
 %5long*
 
-Ú, Ú(=
+˚, ˚(=
 
 
 %6long2equals(Ljava/lang/Object;)*
 6
 7*!
 3
-O (Z"
+˘O ˘(Z"
 
-O (Z *Ê
+˘O ˘(Z *Ê
 4
-  (K˙
+˘  ˘(K˙
 ˜
 
-  (/3
+˘  ˘(/3
 %2-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-  (/20
+˘  ˘(/20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel±
 Æ
 
-D (H
+˘D ˘(H
 %3java.lang.String"Ecom.smilepile.ui.viewmodels.PhotoEditItem#getPath()Ljava/lang/String;*A
 
-? (C3
+˘? ˘(C3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem∫∑
 
-0 (K%
+˘0 ˘(K%
 %4com.smilepile.data.models.Photo"qcom.smilepile.data.repository.PhotoRepository#getPhotoByPath(Ljava/lang/String;)Lcom/smilepile/data/models/Photo;*C
 
-  (/5
+˘  ˘(/5
 3
 %2-com.smilepile.data.repository.PhotoRepository*&
 
-D (H
+˘D ˘(H
 
 %3java.lang.String2"getPhotoByPath(Ljava/lang/String;)_
 ]
@@ -2762,13 +3055,13 @@ h
 __unknown_file (
 %1"__id*5
 
-0 (K'
+˘0 ˘(K'
 %
 %4com.smilepile.data.models.Photo*
 2
 3*e
 5
-¯ ˘(L
+Å Ç(L
 J
 
 __unknown_file (
@@ -2780,14 +3073,14 @@ J
 8
 9*≤
 6
-Ú? ˆ(•
+˚? ˇ(•
 ¢
 
-ÛC Û(T
+¸C ¸(T
 
 %9long"Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()J*@
 
-ÛC Û(T20
+¸C ¸(T20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelõò
 
 __unknown_file (
@@ -2798,10 +3091,10 @@ J
 Systemkotlin.Unit2currentTimeMillis()±
 Æ
 
-Û1 Û(U&
+¸1 ¸(U&
 %11com.smilepile.data.models.Photo"rcom.smilepile.data.models.Photo#copy(JLjava/lang/String;JLjava/lang/String;ZJJII)Lcom/smilepile/data/models/Photo;*@
 
-Û# Û(02
+¸# ¸(02
 0
 existingPhotocom.smilepile.data.models.Photo*
 
@@ -2810,7 +3103,7 @@ J
 __unknown_file (
 	<unknown>*
 
-ÛC Û(T
+¸C ¸(T
 
 
 %9long*)
@@ -2832,28 +3125,28 @@ J
 __unknown_file (2 }
 {
 
-Û Û(U/
+¸ ¸(U/
 updatedPhotocom.smilepile.data.models.Photo"__id*6
 
-Û1 Û(U(
+¸1 ¸(U(
 &
 %11com.smilepile.data.models.Photo˚
 ¯
 
-Ù Ù(4
+˝ ˝(4
 %12-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*@
 
-Ù Ù(20
+˝ ˝(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelπ∂
 
-Ù  Ù(9
+˝  ˝(9
 %13kotlin.Unit"]com.smilepile.data.repository.PhotoRepository#updatePhoto(Lcom/smilepile/data/models/Photo;)V*D
 
-Ù Ù(6
+˝ ˝(6
 4
 %12-com.smilepile.data.repository.PhotoRepository*?
 
-Ù, Ù(81
+˝, ˝(81
 /
 updatedPhotocom.smilepile.data.models.Photo2.updatePhoto(Lcom/smilepile/data/models/Photo;)i
 g
@@ -2861,188 +3154,188 @@ g
 __unknown_file (
 %8"__id*?
 
-ı ı(1
+˛ ˛(1
 /
 updatedPhotocom.smilepile.data.models.Photo*
 5*Ä
 7
-ˆ ¯(j
+ˇ Å(j
 h
 
 __unknown_file (
 %8"__id*@
 
-˜ ˜(2
+Ä Ä(2
 0
 existingPhotocom.smilepile.data.models.Photo*
 5*%
 8
-˘
- ¸(	"
+Ç
+ Ö(	"
 
-Ô ¸(	
+¯ Ö(	
 
 %0*P
 9
-˘ ¸(	:
+Ç Ö(	:
 8
 
 __unknown_file (
 %0"__id*
 
-˚ ˚( *
+Ñ Ñ( *
 8:?
 
-Ó, Ó(?1
+˜, ˜(?1
 item)com.smilepile.ui.viewmodels.PhotoEditItemB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelHÓ
 
 äcom.smilepile.ui.viewmodels.PhotoEditViewModel#createPhotoEntity(Ljava/lang/String;Ljava/lang/String;IIJ)Lcom/smilepile/data/models/Photo;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktˇ ˇ(!"0*Ñ
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktà à(!"0*Ñ
 0
-ˇ ˇ(•
+à à(•
 ¢
 
-Ñ Ñ(*
+ç ç(*
 
 %0long"Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()J*@
 
-Ñ Ñ(*20
+ç ç(*20
 .com.smilepile.ui.viewmodels.PhotoEditViewModel}{
 
-Ö Ö(2
+é é(2
 
 %1long"%java.lang.System#currentTimeMillis()J*%
 
-Ö Ö(
+é é(
 
 Systemkotlin.Unit2currentTimeMillis()VT
 
-Ä ä(	%
+â ì(	%
 %2com.smilepile.data.models.Photo"com.smilepile.data.models.Photoº
 π
 
-Ä ä(	
+â ì(	
 %3"Tcom.smilepile.data.models.Photo#<init>(JLjava/lang/String;JLjava/lang/String;ZJJII)V*5
 
-Ä ä(	'
+â ì(	'
 %
 %2com.smilepile.data.models.Photo*
 
-Å Å(2 *(
+ä ä(2 *(
 
-É É(
+å å(
 
 pathjava.lang.String*
 
-Ñ Ñ(*
+ç ç(*
 
 
 %0long*,
 
-Ç Ç(
+ã ã(
 
 filenamejava.lang.String*
 
-â â( 	
+í í( 	
 false*
 
-Ö Ö(2
+é é(2
 
 
 %1long* 
 
-à à(
+ë ë(
 
 fileSizelong*
 
-Ü Ü(
+è è(
 
 widthint*
 
-á á(
+ê ê(
 
 heightint"5
 
-Ä ä(	'
+â ì(	'
 %
 %2com.smilepile.data.models.Photo:*
 
-ˇ" ˇ(2
+à" à(2
 filenamejava.lang.String:&
 
-ˇ4 ˇ(@
+à4 à(@
 pathjava.lang.String:
 
-ˇB ˇ(L
+àB à(L
 widthint:
 
-ˇN ˇ(Y
+àN à(Y
 heightint:
 
-ˇ[ ˇ(i
+à[ à(i
 fileSizelongB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH≠
 Çcom.smilepile.ui.viewmodels.PhotoEditViewModel#updateQueueItemPath(Lcom/smilepile/ui/viewmodels/PhotoEditItem;Ljava/lang/String;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktç ç(#"0*ú
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktñ ñ(#"0*ú
 
 2
-è ì(	ø
+ò ú(	ø
 º
 
-ê ê('
+ô ô('
 %3java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-ê ê('20
+ô ô('20
 .com.smilepile.ui.viewmodels.PhotoEditViewModela
 _
 
-ê ê(G 
+ô ô(G 
 updatedQueuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>´
 ®
 
-ë' ë(B/
+ö' ö(B/
 %4)com.smilepile.ui.viewmodels.PhotoEditItem"écom.smilepile.ui.viewmodels.PhotoEditItem#copy(LUri;Ljava/lang/String;ZZLBitmap;Ljava/lang/String;)Lcom/smilepile/ui/viewmodels/PhotoEditItem;*A
 
-ë" ë(&3
+ö" ö(&3
 1
 item)com.smilepile.ui.viewmodels.PhotoEditItem*
 
-™ ™( *
+≥ ≥( *
 
-´ ´( *
+¥ ¥( *
 
-¨ ¨($	
+µ µ($	
 false*
 
-≠ ≠("	
+∂ ∂("	
 false*
 
-Æ# Æ(' *-
+∑# ∑(' *-
 
-ë8 ë(A
+ö8 ö(A
 
 	savedPathjava.lang.Stringø
 º
 
-í í(
+õ õ(
 %5java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-í í(20
+õ õ(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelø
 º
 
-í í(%
+õ õ(%
 %6java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-í í(%20
+õ õ(%20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-í í(J
+õ õ(J
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -3052,51 +3345,51 @@ Q
 __unknown_file (
 %2"__id*)
 
-í í(
+õ õ(
 
 valuejava.lang.Object*
 1*©
 0
-ç ç(ø
+ñ ñ(ø
 º
 
-é é(
+ó ó(
 %0java.lang.Object"Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#get_uiState()Lerror/NonExistentClass;*@
 
-é é(20
+ó ó(20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelZ
 X
 
-é é(:
+ó ó(:
 indexjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>r
 p
 
-è è(
+ò ò(
 %1"	__compare*
 
-è è(
+ò ò(
 >=*)
 
-è è(
+ò ò(
 
 indexjava.lang.Object*
 
-è è(2 *
+ò ò(2 *
 2
 1*@
 1
-ì	 î("/
+ú	 ù("/
 
 __unknown_file (
 implicit return:?
 
-ç$ ç(71
+ñ$ ñ(71
 item)com.smilepile.ui.viewmodels.PhotoEditItem:+
 
-ç9 ç(J
+ñ9 ñ(J
 	savedPathjava.lang.StringB20
 .com.smilepile.ui.viewmodels.PhotoEditViewModelH„
 Kcom.smilepile.ui.viewmodels.PhotoEditUiState#getEditQueue()Ljava/util/List;
@@ -3438,12 +3731,12 @@ x
 valuefloatB0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateH`®
 ucom.smilepile.ui.viewmodels.PhotoEditUiState#<init>(Ljava/util/List;IILBitmap;LBitmap;FLRect;ZLjava/lang/String;ZZF)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.któ ó("0*ë
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt† †("0*ë
 0
-ó §(¸
+† ≠(¸
 ˘
 
-ò ò(4
+° °(4
 %0java.util.List"Lcom.smilepile.ui.viewmodels.PhotoEditUiState#setEditQueue(Ljava/util/List;)V*L
 
 __unknown_file (0.
@@ -3454,7 +3747,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	editQueuejava.util.List›
 ⁄
 
-ô ô(	
+¢ ¢(	
 %1int"@com.smilepile.ui.viewmodels.PhotoEditUiState#setCurrentIndex(I)V*L
 
 __unknown_file (0.
@@ -3465,7 +3758,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 currentIndexint€
 ÿ
 
-ö ö(	
+£ £(	
 %2int"?com.smilepile.ui.viewmodels.PhotoEditUiState#setTotalPhotos(I)V*L
 
 __unknown_file (0.
@@ -3476,7 +3769,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 totalPhotosintÄ
 ˝
 
-õ õ(%
+§ §(%
 %3java.lang.Object"Hcom.smilepile.ui.viewmodels.PhotoEditUiState#setCurrentBitmap(LBitmap;)V*L
 
 __unknown_file (0.
@@ -3487,7 +3780,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 currentBitmapjava.lang.ObjectÄ
 ˝
 
-ú ú(%
+• •(%
 %4java.lang.Object"Hcom.smilepile.ui.viewmodels.PhotoEditUiState#setPreviewBitmap(LBitmap;)V*L
 
 __unknown_file (0.
@@ -3498,7 +3791,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 previewBitmapjava.lang.ObjectÁ
 ‰
 
-ù ù(#
+¶ ¶(#
 %5float"Ccom.smilepile.ui.viewmodels.PhotoEditUiState#setCurrentRotation(F)V*L
 
 __unknown_file (0.
@@ -3509,7 +3802,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 currentRotationfloatÇ
 ˇ
 
-û û(%
+ß ß(%
 %6java.lang.Object"Hcom.smilepile.ui.viewmodels.PhotoEditUiState#setCurrentCropRect(LRect;)V*L
 
 __unknown_file (0.
@@ -3520,7 +3813,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 currentCropRectjava.lang.Objectﬂ
 ‹
 
-ü ü("
+® ®("
 %7boolean"=com.smilepile.ui.viewmodels.PhotoEditUiState#setIsLoading(Z)V*L
 
 __unknown_file (0.
@@ -3531,7 +3824,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	isLoadingboolean˙
 ˜
 
-† †(
+© ©(
 %8java.lang.String"Jcom.smilepile.ui.viewmodels.PhotoEditUiState#setError(Ljava/lang/String;)V*L
 
 __unknown_file (0.
@@ -3542,7 +3835,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 errorjava.lang.String·
 ﬁ
 
-° °(#
+™ ™(#
 %9boolean">com.smilepile.ui.viewmodels.PhotoEditUiState#setIsComplete(Z)V*L
 
 __unknown_file (0.
@@ -3554,7 +3847,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isCompletebooleanÚ
 Ô
 
-¢ ¢(+
+´ ´(+
 %10boolean"Fcom.smilepile.ui.viewmodels.PhotoEditUiState#setApplyRotationToAll(Z)V*L
 
 __unknown_file (0.
@@ -3565,7 +3858,7 @@ isCompletebooleanÚ
 applyRotationToAllboolean‰
 ·
 
-£ £(!
+¨ ¨(!
 %11float"Acom.smilepile.ui.viewmodels.PhotoEditUiState#setBatchRotation(F)V*L
 
 __unknown_file (0.
@@ -3578,41 +3871,41 @@ isCompletebooleanÚ
 __unknown_file (
 implicit return:)
 
-ò ò(4
+° °(4
 	editQueuejava.util.List:!
 
-ô ô(
+¢ ¢(
 currentIndexint: 
 
-ö ö(
+£ £(
 totalPhotosint:/
 
-õ õ(%!
+§ §(%!
 currentBitmapjava.lang.Object:/
 
-ú ú(%!
+• •(%!
 previewBitmapjava.lang.Object:&
 
-ù ù(#
+¶ ¶(#
 currentRotationfloat:1
 
-û û(%#
+ß ß(%#
 currentCropRectjava.lang.Object:"
 
-ü ü("
+® ®("
 	isLoadingboolean:'
 
-† †(
+© ©(
 errorjava.lang.String:#
 
-° °(#
+™ ™(#
 
 isCompleteboolean:+
 
-¢ ¢(+
+´ ´(+
 applyRotationToAllboolean:$
 
-£ £(!
+¨ ¨(!
 batchRotationfloatB0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateHë
 Qcom.smilepile.ui.viewmodels.PhotoEditUiState#setProgressText(Ljava/lang/String;)V
@@ -3631,53 +3924,53 @@ Qcom.smilepile.ui.viewmodels.PhotoEditUiState#setProgressText(Ljava/lang/String;
 valuejava.lang.StringB0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateH`Ω
 Pcom.smilepile.ui.viewmodels.PhotoEditUiState#getProgressText()Ljava/lang/String;r
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt• •(I"0*Ω
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktÆ Æ(I"0*Ω
 0
-•  •("õ
+Æ  Æ("õ
 ò
 
-•( •(4	
+Æ( Æ(4	
 %0int"?com.smilepile.ui.viewmodels.PhotoEditUiState#getCurrentIndex()I*>
 
-•( •(40.
+Æ( Æ(40.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStatee
 c
 
-•( •(8
+Æ( Æ(8
 %1"__calculate*
 
-•5 •(6
+Æ5 Æ(6
 +*
 
-•( •(4
+Æ( Æ(4
 	
 %0int*
 
-•7 •(82ö
+Æ7 Æ(82ö
 ó
 
-•= •(H	
+Æ= Æ(H	
 %2int">com.smilepile.ui.viewmodels.PhotoEditUiState#getTotalPhotos()I*>
 
-•= •(H0.
+Æ= Æ(H0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStatet
 r
 
-•% •(I
+Æ% Æ(I
 %3"__concat*"
 
 __unknown_file (
 
 %1*
 
-•9 •(<
+Æ9 Æ(<
  / *
 
-•= •(H
+Æ= Æ(H
 	
 %2int"
 
-•% •(I
+Æ% Æ(I
 
 %3B0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateHÂ
@@ -3697,21 +3990,21 @@ Acom.smilepile.ui.viewmodels.PhotoEditUiState#setCanApplyToAll(Z)V
 valuebooleanB0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateH`ì	
 @com.smilepile.ui.viewmodels.PhotoEditUiState#getCanApplyToAll()Zr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt¶ ¶(^"0*£
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktØ Ø(^"0*£
 0
-¶" ¶($†
+Ø" Ø($†
 ù
 
-¶' ¶(6
+Ø' Ø(6
 %0float"Bcom.smilepile.ui.viewmodels.PhotoEditUiState#getCurrentRotation()F*>
 
-¶' ¶(60.
+Ø' Ø(60.
 ,com.smilepile.ui.viewmodels.PhotoEditUiState¨©
 
-¶' ¶(<
+Ø' Ø(<
 %1boolean"(kotlin.Float#equals(Ljava/lang/Object;)Z*
 
-¶' ¶(6
+Ø' Ø(6
 
 %0float*)
 
@@ -3719,40 +4012,40 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	<unknown>2equals(Ljava/lang/Object;)õ
 ò
 
-¶@ ¶(L	
+Ø@ Ø(L	
 %2int"?com.smilepile.ui.viewmodels.PhotoEditUiState#getCurrentIndex()I*>
 
-¶@ ¶(L0.
+Ø@ Ø(L0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStateö
 ó
 
-¶O ¶(Z	
+ØO Ø(Z	
 %3int">com.smilepile.ui.viewmodels.PhotoEditUiState#getTotalPhotos()I*>
 
-¶O ¶(Z0.
+ØO Ø(Z0.
 ,com.smilepile.ui.viewmodels.PhotoEditUiStatee
 c
 
-¶O ¶(^
+ØO Ø(^
 %4"__calculate*
 
-¶[ ¶(\
+Ø[ Ø(\
 -*
 
-¶O ¶(Z
+ØO Ø(Z
 	
 %3int*
 
-¶] ¶(^2s
+Ø] Ø(^2s
 q
 
-¶@ ¶(^
+Ø@ Ø(^
 %5"	__compare*
 
-¶M ¶(N
+ØM Ø(N
 <*
 
-¶@ ¶(L
+Ø@ Ø(L
 	
 %2int*"
 
@@ -3932,12 +4225,12 @@ Kcom.smilepile.ui.viewmodels.PhotoEditItem#setSavedPath(Ljava/lang/String;)V
 valuejava.lang.StringB-+
 )com.smilepile.ui.viewmodels.PhotoEditItemH`„
 fcom.smilepile.ui.viewmodels.PhotoEditItem#<init>(LUri;Ljava/lang/String;ZZLBitmap;Ljava/lang/String;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt© ©("0*◊
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt≤ ≤("0*◊
 0
-© ∞(„
+≤ π(„
 ‡
 
-™ ™(
+≥ ≥(
 %0java.lang.Object"8com.smilepile.ui.viewmodels.PhotoEditItem#setUri(LUri;)V*I
 
 __unknown_file (-+
@@ -3948,7 +4241,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 urijava.lang.ObjectÚ
 Ô
 
-´ ´(
+¥ ¥(
 %1java.lang.String"Fcom.smilepile.ui.viewmodels.PhotoEditItem#setPath(Ljava/lang/String;)V*I
 
 __unknown_file (-+
@@ -3959,7 +4252,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 pathjava.lang.String›
 ⁄
 
-¨ ¨($
+µ µ($
 %2boolean"<com.smilepile.ui.viewmodels.PhotoEditItem#setIsProcessed(Z)V*I
 
 __unknown_file (-+
@@ -3970,7 +4263,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isProcessedbooleanŸ
 ÷
 
-≠ ≠("
+∂ ∂("
 %3boolean":com.smilepile.ui.viewmodels.PhotoEditItem#setWasEdited(Z)V*I
 
 __unknown_file (-+
@@ -3981,7 +4274,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	wasEditedboolean˛
 ˚
 
-Æ Æ('
+∑ ∑('
 %4java.lang.Object"Gcom.smilepile.ui.viewmodels.PhotoEditItem#setProcessedBitmap(LBitmap;)V*I
 
 __unknown_file (-+
@@ -3992,7 +4285,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 processedBitmapjava.lang.Object¸
 ˘
 
-Ø Ø(!
+∏ ∏(!
 %5java.lang.String"Kcom.smilepile.ui.viewmodels.PhotoEditItem#setSavedPath(Ljava/lang/String;)V*I
 
 __unknown_file (-+
@@ -4005,22 +4298,22 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 __unknown_file (
 implicit return:%
 
-™ ™(
+≥ ≥(
 urijava.lang.Object:&
 
-´ ´(
+¥ ¥(
 pathjava.lang.String:$
 
-¨ ¨($
+µ µ($
 isProcessedboolean:"
 
-≠ ≠("
+∂ ∂("
 	wasEditedboolean:1
 
-Æ Æ('#
+∑ ∑('#
 processedBitmapjava.lang.Object:+
 
-Ø Ø(!
+∏ ∏(!
 	savedPathjava.lang.StringB-+
 )com.smilepile.ui.viewmodels.PhotoEditItemHﬂ
 Acom.smilepile.ui.viewmodels.PhotoEditResult#getOriginalUri()LUri;
@@ -4164,13 +4457,13 @@ Mcom.smilepile.ui.viewmodels.PhotoEditResult#setSavedPath(Ljava/lang/String;)V
 valuejava.lang.StringB/-
 +com.smilepile.ui.viewmodels.PhotoEditResultH`§
 gcom.smilepile.ui.viewmodels.PhotoEditResult#<init>(LUri;Ljava/lang/String;ZLBitmap;Ljava/lang/String;)Vr
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt≤ ≤("0*´
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.ktª ª("0*´
 
 0
-≤ ∏(˜
+ª ¡(˜
 Ù
 
-≥ ≥(
+º º(
 %0java.lang.Object"Bcom.smilepile.ui.viewmodels.PhotoEditResult#setOriginalUri(LUri;)V*K
 
 __unknown_file (/-
@@ -4181,7 +4474,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 originalUrijava.lang.ObjectÜ
 É
 
-¥ ¥(
+Ω Ω(
 %1java.lang.String"Pcom.smilepile.ui.viewmodels.PhotoEditResult#setOriginalPath(Ljava/lang/String;)V*K
 
 __unknown_file (/-
@@ -4192,7 +4485,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 originalPathjava.lang.String›
 ⁄
 
-µ µ(
+æ æ(
 %2boolean"<com.smilepile.ui.viewmodels.PhotoEditResult#setWasEdited(Z)V*K
 
 __unknown_file (/-
@@ -4203,7 +4496,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	wasEditedbooleanÇ
 ˇ
 
-∂ ∂( 
+ø ø( 
 %3java.lang.Object"Icom.smilepile.ui.viewmodels.PhotoEditResult#setProcessedBitmap(LBitmap;)V*K
 
 __unknown_file (/-
@@ -4214,7 +4507,7 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 processedBitmapjava.lang.ObjectÄ
 ˝
 
-∑ ∑(!
+¿ ¿(!
 %4java.lang.String"Mcom.smilepile.ui.viewmodels.PhotoEditResult#setSavedPath(Ljava/lang/String;)V*K
 
 __unknown_file (/-
@@ -4227,24 +4520,24 @@ f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 __unknown_file (
 implicit return:-
 
-≥ ≥(
+º º(
 originalUrijava.lang.Object:.
 
-¥ ¥( 
+Ω Ω( 
 originalPathjava.lang.String:"
 
-µ µ(
+æ æ(
 	wasEditedboolean:1
 
-∂ ∂( #
+ø ø( #
 processedBitmapjava.lang.Object:+
 
-∑ ∑(!
+¿ ¿(!
 	savedPathjava.lang.StringB/-
 +com.smilepile.ui.viewmodels.PhotoEditResultHì
 .com.smilepile.ui.viewmodels.EditMode#<init>()Vp
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt∫ Ω("0*>
-0∫ ∫("/
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoEditViewModel.kt√ ∆("0*>
+0√ √("/
 
 __unknown_file (
 implicit returnB(&

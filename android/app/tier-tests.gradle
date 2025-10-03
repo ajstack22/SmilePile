@@ -33,9 +33,7 @@ tasks.register('testTier2Important', Exec) {
 
     commandLine './gradlew', 'testDebugUnitTest',
         '--tests', 'com.smilepile.ui.viewmodels.PhotoGalleryViewModelTest',
-        '--tests', 'com.smilepile.ui.viewmodels.PhotoEditViewModelTest',
         '--tests', 'com.smilepile.ui.viewmodels.BackupViewModelTest',
-        '--tests', 'com.smilepile.ui.viewmodels.SettingsViewModelTest',
         '--tests', 'com.smilepile.ui.viewmodels.CategoryViewModelTest',
         '--tests', 'com.smilepile.data.repository.CategoryRepositoryImplTest'
 
@@ -57,7 +55,9 @@ tasks.register('testTier3UI', Exec) {
 
     commandLine './gradlew', 'testDebugUnitTest',
         '--tests', 'com.smilepile.data.models.PhotoMetadataTest',
-        '--tests', 'com.smilepile.storage.PhotoImportManagerTest'
+        '--tests', 'com.smilepile.storage.PhotoImportManagerTest',
+        '--tests', 'com.smilepile.ui.viewmodels.PhotoEditViewModelTest',
+        '--tests', 'com.smilepile.ui.viewmodels.SettingsViewModelTest'
 
     workingDir rootProject.projectDir
 

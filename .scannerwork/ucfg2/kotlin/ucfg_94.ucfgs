@@ -1,1414 +1,535 @@
-¯
-tcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
-__unknown_file ("0*®
-0 (“
-œ
+Â
+pcom.smilepile.security.MetadataEncryption#getSecureStorageManager()Lcom/smilepile/security/SecureStorageManager;
+__unknown_file ("0*†
+0 (Ã
+…
+ (4
+field+com.smilepile.security.SecureStorageManager"__id*Ä
+ (t*r+
+)com.smilepile.security.MetadataEncryption"C
+secureStorageManager+com.smilepile.security.SecureStorageManager"B
  (6
-field-com.smilepile.data.repository.PhotoRepository"__id*Ñ
- (x*v2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"@
-photoRepository-com.smilepile.data.repository.PhotoRepository"D
- (8
-6
-field-com.smilepile.data.repository.PhotoRepositoryB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`ó
-ucom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
-__unknown_file ("0*Ç
-0 (—
-Œ
- (v2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"@
-photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
- (8
-6
-value-com.smilepile.data.repository.PhotoRepository"
- (
-implicit return:B
- (6
-value-com.smilepile.data.repository.PhotoRepositoryB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`—
-jcom.smilepile.ui.viewmodels.PhotoImportViewModel#getStorageManager()Lcom/smilepile/storage/StorageManager;
-__unknown_file ("0*ã
-0 (æ
-ª
- (-
-field$com.smilepile.storage.StorageManager"__id*z
- (n*l2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"6
-storageManager$com.smilepile.storage.StorageManager";
- (/
--
-field$com.smilepile.storage.StorageManagerB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ò
-kcom.smilepile.ui.viewmodels.PhotoImportViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V
-__unknown_file ("0*Ô
-0 (æ
-ª
- (l2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"6
-storageManager$com.smilepile.storage.StorageManager"__id*;
- (/
--
-value$com.smilepile.storage.StorageManager"
- (
-implicit return:9
- (-
-value$com.smilepile.storage.StorageManagerB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Í
-rcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPhotoImportManager()Lcom/smilepile/storage/PhotoImportManager;
-__unknown_file ("0*ú
+4
+field+com.smilepile.security.SecureStorageManagerB-+
+)com.smilepile.security.MetadataEncryptionH`Ñ
+qcom.smilepile.security.MetadataEncryption#setSecureStorageManager(Lcom/smilepile/security/SecureStorageManager;)V
+__unknown_file ("0*¸
 0 (À
 »
- (1
-field(com.smilepile.storage.PhotoImportManager"__id*Ç
- (v*t2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel">
-photoImportManager(com.smilepile.storage.PhotoImportManager"?
- (3
-1
-field(com.smilepile.storage.PhotoImportManagerB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`â
-scom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoImportManager(Lcom/smilepile/storage/PhotoImportManager;)V
-__unknown_file ("0*˚
-0 ( 
-«
- (t2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel">
-photoImportManager(com.smilepile.storage.PhotoImportManager"__id*?
- (3
-1
-value(com.smilepile.storage.PhotoImportManager"
+ (r+
+)com.smilepile.security.MetadataEncryption"C
+secureStorageManager+com.smilepile.security.SecureStorageManager"__id*B
+ (6
+4
+value+com.smilepile.security.SecureStorageManager"
  (
-implicit return:=
- (1
-value(com.smilepile.storage.PhotoImportManagerB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ñ
-πcom.smilepile.ui.viewmodels.PhotoImportViewModel#<init>(Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/storage/StorageManager;Lcom/smilepile/storage/PhotoImportManager;)Vr
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt# (."0*∏
-0 ("±
-Æ
- (0
+implicit return:@
+ (4
+value+com.smilepile.security.SecureStorageManagerB-+
+)com.smilepile.security.MetadataEncryptionH`ì
+
+`com.smilepile.security.MetadataEncryption#<init>(Lcom/smilepile/security/SecureStorageManager;)Vk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kt! (,"0*º
+0 ( ¥
+±
+ (:
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*^
+java.lang.Object*a
 
-__unknown_file (B
-@
-photoRepository-com.smilepile.data.repository.PhotoRepositoryÄ
-~
- (0@
-photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
-
-__unknown_file (
-
-%0ß
-§
-   (.
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*T
-
-__unknown_file (8
-6
-storageManager$com.smilepile.storage.StorageManagerv
-t
-   (.6
-storageManager$com.smilepile.storage.StorageManager"__annotation*"
+__unknown_file (E
+C
+secureStorageManager+com.smilepile.security.SecureStorageManagerÑ
+Å
+ (:C
+secureStorageManager+com.smilepile.security.SecureStorageManager"__annotation*"
 
 __unknown_file (
 
-%1Ø
-¨
-! !(6
-%2"
-__annotate*0
+%0·
+ﬁ
+ (:1
+%1+com.smilepile.security.SecureStorageManager"qcom.smilepile.security.MetadataEncryption#setSecureStorageManager(Lcom/smilepile/security/SecureStorageManager;)V*I
 
-__unknown_file (
-java.lang.Object*\
+__unknown_file (-+
+)com.smilepile.security.MetadataEncryption*a
 
-__unknown_file (@
->
-photoImportManager(com.smilepile.storage.PhotoImportManager~
-|
-! !(6>
-photoImportManager(com.smilepile.storage.PhotoImportManager"__annotation*"
-
-__unknown_file (
-
-%2Î
-Ë
- (03
-%3-com.smilepile.data.repository.PhotoRepository"ucom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*P
-
-__unknown_file (42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*^
-
-__unknown_file (B
-@
-photoRepository-com.smilepile.data.repository.PhotoRepositoryŒ
-À
-   (.*
-%4$com.smilepile.storage.StorageManager"kcom.smilepile.ui.viewmodels.PhotoImportViewModel#setStorageManager(Lcom/smilepile/storage/StorageManager;)V*P
-
-__unknown_file (42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*T
-
-__unknown_file (8
-6
-storageManager$com.smilepile.storage.StorageManager‚
-ﬂ
-! !(6.
-%5(com.smilepile.storage.PhotoImportManager"scom.smilepile.ui.viewmodels.PhotoImportViewModel#setPhotoImportManager(Lcom/smilepile/storage/PhotoImportManager;)V*P
-
-__unknown_file (42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*\
-
-__unknown_file (@
->
-photoImportManager(com.smilepile.storage.PhotoImportManagerÎ
-Ë
-( ((A
-%6java.lang.Object"Wcom.smilepile.ui.viewmodels.PhotoImportViewModel#set_uiState(Lerror/NonExistentClass;)V*@
-( ((A42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*)
-
-__unknown_file (
-	<unknown>ø
-º
-)1 )(9
-%7java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*@
-)1 )(942
-0com.smilepile.ui.viewmodels.PhotoImportViewModel›
-⁄
-) )(G
-%8java.lang.Object"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setUiState(LStateFlow;)V*@
-) )(G42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*)
-
-__unknown_file (
-	<unknown>∏
-µ
-+ +(K
-
-%9long"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V*@
-+ +(K42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*
-+* +(,2"/
-
-__unknown_file (
-implicit return:L
- (0@
-photoRepository-com.smilepile.data.repository.PhotoRepository:B
-   (.6
-storageManager$com.smilepile.storage.StorageManager:J
-! !(6>
-photoImportManager(com.smilepile.storage.PhotoImportManagerB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHâ
-Ucom.smilepile.ui.viewmodels.PhotoImportViewModel$Companion#getTAG()Ljava/lang/String;
-__unknown_file ("0*Œ
-0 (ï
-í
- (
-fieldjava.lang.Object"__id*e
- (Y*W<
-:com.smilepile.ui.viewmodels.PhotoImportViewModel$Companion"
-TAGjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB><
-:com.smilepile.ui.viewmodels.PhotoImportViewModel$CompanionH`©
-Vcom.smilepile.ui.viewmodels.PhotoImportViewModel$Companion#setTAG(Ljava/lang/String;)V
-__unknown_file ("0*∆
-0 (ï
-í
- (W<
-:com.smilepile.ui.viewmodels.PhotoImportViewModel$Companion"
-TAGjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB><
-:com.smilepile.ui.viewmodels.PhotoImportViewModel$CompanionH`˚
-Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;
-__unknown_file ("0*…
-0 (ê
-ç
- (
-fieldjava.lang.Object"__id*`
- (T*R2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-_uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`õ
-Wcom.smilepile.ui.viewmodels.PhotoImportViewModel#set_uiState(Lerror/NonExistentClass;)V
-__unknown_file ("0*¡
-0 (ê
-ç
- (R2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-_uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ï
-Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getUiState()LStateFlow;
-__unknown_file ("0*»
-0 (è
-å
- (
-fieldjava.lang.Object"__id*_
- (S*Q2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`å
-Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setUiState(LStateFlow;)V
-__unknown_file ("0*¿
-0 (è
-å
- (Q2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`—
-Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()J
-__unknown_file ("0*≠
-0 (Ä
-~
- (
-fieldlong"__id*]
- (Q*O2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-pendingCategoryIdlong"
- (
-
-fieldlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`Ò
-Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V
-__unknown_file ("0*±
-0 (Ä
-~
- (O2
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-pendingCategoryIdlong"__id*
- (
-
-valuelong"
- (
-implicit return:
- (
-valuelongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH`˚
-Ecom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhoto(LUri;J)Vr
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt0 0("0*>
-0- /("/
-
-__unknown_file (
-implicit return:#
-0 0(
-urijava.lang.Object:
-0 0(.
-
-categoryIdlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH
-Qcom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhotos(Ljava/util/List;J)Vr
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktz z("0*.
-2{ {(""
-{ {("
-explicit return*@
-3
-É	 Ö("/
-
-__unknown_file (
-implicit return*ê
-4	~; É(	ø
-º
- (
-%6java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*@
- (42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelø
-º
- (%
-%7java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*@
- (%42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelY
-W
-	 Å(
-valuejava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>"!
-
-Ç Ç(
-explicit return*á
-0w y(pn
-{ {(
-%0boolean""kotlin.collections.List#isEmpty()Z*$
-{ {(
-
-urisjava.util.List2	isEmpty()*
-2
-1*ò
-1{" }(a
-_
-~ ~(	
-%2int""kotlin.collections.List#getSize()I*$
-~ ~(
-
-urisjava.util.Listπ
-∂
-~+ ~(9	
-%3int"Gcom.smilepile.storage.PhotoImportManager$Companion#getMAX_BATCH_SIZE()I*V
-~ ~(*J
-H
-PhotoImportManager2com.smilepile.storage.PhotoImportManager$Companionb
-`
-~ ~(9
-%4"	__compare*
-~ ~(
->*
-~ ~(
-	
-%2int*
-~+ ~(9
-	
-%3int*
-3
-4:"
-z z($
-urisjava.util.List:
-z& z(6
-
-categoryIdlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHü
-Acom.smilepile.ui.viewmodels.PhotoImportViewModel#clearMessages()Vt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktÏ Ï("0*®
-0
-È Î(√
-¿
-
-Ì Ì(
-%0java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
-
-Ì Ì(42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel√
-¿
-
-Ì Ì(!
-%1java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
-
-Ì Ì(!42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelZ
-X
-
-Ì (	
-valuejava.lang.Object"__id*)
+__unknown_file (E
+C
+secureStorageManager+com.smilepile.security.SecureStorageManagerŸ
+÷
+ (
+%2java.lang.Object"Lcom.smilepile.security.MetadataEncryption#setJson(Lerror/NonExistentClass;)V*9
+ (-+
+)com.smilepile.security.MetadataEncryption*)
 
 __unknown_file (
 	<unknown>"/
 
 __unknown_file (
-implicit returnB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH≤
-Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)Vt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktˆ ˆ("0*ë
-0
-Û ı(Œ
-À
-
-˜ ˜(&
-
-%0long"Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V*B
-
-˜ ˜(&42
-0com.smilepile.ui.viewmodels.PhotoImportViewModel*"
-
-˜ ˜(&
-
-
-categoryIdlong"/
-
-__unknown_file (
-implicit return: 
-
-ˆ ˆ(-
-
-categoryIdlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelH’
-Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()Jt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt˝ ˝("0*◊
-0
-˙ ¸(©
-¶
-
-˝' ˝(8
-
-%0long"Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()J*B
-
-˝' ˝(842
-0com.smilepile.ui.viewmodels.PhotoImportViewModel"
-
-˝' ˝(8
-
-
-%0longB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHÿ	
-Dcom.smilepile.ui.viewmodels.PhotoImportViewModel#resetImportState()Vt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktÇ Ç("0*ﬁ
-0
-ˇ Å(√
-¿
-
-É É(
-%0java.lang.Object"Vcom.smilepile.ui.viewmodels.PhotoImportViewModel#get_uiState()Lerror/NonExistentClass;*B
-
-É É(42
-0com.smilepile.ui.viewmodels.PhotoImportViewModeltr
-
-É É(-4
-%1.com.smilepile.ui.viewmodels.PhotoImportUiState".com.smilepile.ui.viewmodels.PhotoImportUiStateË
-Â
-
-É É(-
-%2"Ñcom.smilepile.ui.viewmodels.PhotoImportUiState#<init>(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;DDI)V*D
-
-É É(-6
-4
-%1.com.smilepile.ui.viewmodels.PhotoImportUiState*
-
-» »($	
-false*)
-
-__unknown_file (
-	<unknown>*
-
-    (!2 *
-
-À$ À(%2 *
-
-Ã$ Ã(( *
-
-Õ Õ( *
-
-Œ" Œ(& *)
-
-__unknown_file (
-	<unknown>*)
-
-__unknown_file (
-	<unknown>*
-
-— —(2 u
-s
-
-É É(-
-valuejava.lang.Object"__id*D
-
-É É(-6
-4
-%1.com.smilepile.ui.viewmodels.PhotoImportUiState"/
-
-__unknown_file (
-implicit returnB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHª
-Fcom.smilepile.ui.viewmodels.PhotoImportViewModel#refreshStorageInfo()Vt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktâ â("0*@
-0
-Ü à("/
-
-__unknown_file (
-implicit returnB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHÛ
-ñcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)Lcom/smilepile/data/models/Photo;t
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.ktö ö(,"0*¿	
-0
-ö ö(≥
-∞
-
-†! †(*
-%0java.lang.String"Dcom.smilepile.storage.StorageResult#getPhotoPath()Ljava/lang/String;*D
-
-† †( 6
-4
-storageResult#com.smilepile.storage.StorageResult≤
-Ø
-
-°! °()
-%1java.lang.String"Ccom.smilepile.storage.StorageResult#getFileName()Ljava/lang/String;*D
-
-° °( 6
-4
-storageResult#com.smilepile.storage.StorageResult}{
-
-§ §(2
-
-%2long"%java.lang.System#currentTimeMillis()J*%
-
-§ §(
-
-Systemkotlin.Unit2currentTimeMillis()ï
-í
-
-•% •(-
-
-%3long"2com.smilepile.storage.StorageResult#getFileSize()J*D
-
-• •($6
-4
-storageResult#com.smilepile.storage.StorageResultVT
-
-û ®(	%
-%4com.smilepile.data.models.Photo"com.smilepile.data.models.Photoù
-ö
-
-û ®(	
-%5"Tcom.smilepile.data.models.Photo#<init>(JLjava/lang/String;JLjava/lang/String;ZJJII)V*5
-
-û ®(	'
-%
-%4com.smilepile.data.models.Photo*
-
-ü ü(2 *&
-
-†! †(*
-
-%0java.lang.String*"
-
-¢ ¢(#
-
-
-categoryIdlong*&
-
-°! °()
-
-%1java.lang.String*
-
-£ £( 	
-false*
-
-§ §(2
-
-
-%2long*
-
-•% •(-
-
-
-%3long*
-
-¶ ¶(2 *
-
-ß ß(2 "5
-
-û ®(	'
-%
-%4com.smilepile.data.models.Photo:B
-
-õ õ($4
-storageResult#com.smilepile.storage.StorageResult: 
-
-ú ú(
-
-categoryIdlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHª
-úcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromImportResult(Lcom/smilepile/storage/ImportResult$Success;J)Lcom/smilepile/data/models/Photo;t
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt´ ´(+"0*Ÿ
-2
-º º(+}{
-
-º º(+
-
-%3long"%java.lang.System#currentTimeMillis()J*%
-
-º º(
-
-Systemkotlin.Unit2currentTimeMillis()D
-B
-
-__unknown_file (
-%2"__id*
-
-º º(+
-
-
-%3long*
-1*ˇ
-3
-µ º(Â
-‚
-
-µ% µ(-)
-%4#com.smilepile.storage.PhotoMetadata"]com.smilepile.storage.ImportResult$Success#getMetadata()Lcom/smilepile/storage/PhotoMetadata;*J
-
-µ µ($<
-:
-importResult*com.smilepile.storage.ImportResult$Success®
-•
-
-µ/ µ(8
-%5java.lang.String"Dcom.smilepile.storage.PhotoMetadata#getDateTaken()Ljava/lang/String;*9
-
-µ% µ(-+
-)
-%4#com.smilepile.storage.PhotoMetadataS
-Q
-
-__unknown_file (
-%2"__id*)
-
-__unknown_file (
-	<unknown>*
-2
-1*S
-5
-æ4 æ(5:
-8
-
-__unknown_file (
-%7"__id*
-
-æ4 æ(52 *
-8
-9*–
-6
-æ æ(0Â
-‚
-
-æ! æ())
-%8#com.smilepile.storage.PhotoMetadata"]com.smilepile.storage.ImportResult$Success#getMetadata()Lcom/smilepile/storage/PhotoMetadata;*J
-
-æ æ( <
-:
-importResult*com.smilepile.storage.ImportResult$SuccessÜ
-É
-
-æ+ æ(0	
-%9int"/com.smilepile.storage.PhotoMetadata#getWidth()I*9
-
-æ! æ()+
-)
-%8#com.smilepile.storage.PhotoMetadataC
-A
-
-__unknown_file (
-%7"__id*
-
-æ+ æ(0
-	
-%9int*	
-5
-8
-9*Ô
-7
-ø6 ø(7WU
-
-Ø ¿(	&
-%13com.smilepile.data.models.Photo"com.smilepile.data.models.PhotoÃ
-…
-
-Ø ¿(	
-%14"Tcom.smilepile.data.models.Photo#<init>(JLjava/lang/String;JLjava/lang/String;ZJJII)V*6
-
-Ø ¿(	(
-&
-%13com.smilepile.data.models.Photo*
-
-∞ ∞(2 *&
-
-±  ±()
-
-%0java.lang.String*"
-
-≥ ≥(#
-
-
-categoryIdlong*&
-
-≤  ≤((
-
-%1java.lang.String*
-
-¥ ¥( 	
-false*"
-
-__unknown_file (
-
-%2*
-
-Ω$ Ω(,
-
-
-%6long*"
-
-__unknown_file (
-
-%7*#
-
-__unknown_file (
-
-%10"6
-
-Ø ¿(	(
-&
-%13com.smilepile.data.models.Photo*Q
-8
-ø6 ø(7;
-9
-
-__unknown_file (
-%10"__id*
-
-ø6 ø(72 *
-7*”
-9
-ø ø(2Ê
-„
-
-ø" ø(**
-%11#com.smilepile.storage.PhotoMetadata"]com.smilepile.storage.ImportResult$Success#getMetadata()Lcom/smilepile/storage/PhotoMetadata;*J
-
-ø ø(!<
-:
-importResult*com.smilepile.storage.ImportResult$Successâ
-Ü
-
-ø, ø(2
-
-%12int"0com.smilepile.storage.PhotoMetadata#getHeight()I*:
-
-ø" ø(*,
-*
-%11#com.smilepile.storage.PhotoMetadataE
-C
-
-__unknown_file (
-%10"__id*
-
-ø, ø(2
-
-
-%12int*
-7
-8*ú
-0
-´ ´(¿
-Ω
-
-±  ±()
-%0java.lang.String"Kcom.smilepile.storage.ImportResult$Success#getPhotoPath()Ljava/lang/String;*J
-
-± ±(<
-:
-importResult*com.smilepile.storage.ImportResult$Successø
-º
-
-≤  ≤((
-%1java.lang.String"Jcom.smilepile.storage.ImportResult$Success#getFileName()Ljava/lang/String;*J
-
-≤ ≤(<
-:
-importResult*com.smilepile.storage.ImportResult$Success*
-2
-3*º
-1
-º º(+¢
-ü
-
-Ω$ Ω(,
-
-%6long"9com.smilepile.storage.ImportResult$Success#getFileSize()J*J
-
-Ω Ω(#<
-:
-importResult*com.smilepile.storage.ImportResult$Success*
-5
-6:H
-
-¨ ¨(*:
-importResult*com.smilepile.storage.ImportResult$Success: 
-
-≠ ≠(
-
-categoryIdlongB42
-0com.smilepile.ui.viewmodels.PhotoImportViewModelHƒ
-=com.smilepile.ui.viewmodels.PhotoImportUiState#isImporting()Z
-__unknown_file ("0*≠
-0 (~
-|
- (
-fieldboolean"__id*X
- (L*J0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-isImportingboolean"
- (
-
-fieldbooleanB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Á
-Acom.smilepile.ui.viewmodels.PhotoImportUiState#setIsImporting(Z)V
-__unknown_file ("0*Æ
-0 (~
-|
- (J0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-isImportingboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`«
-Ccom.smilepile.ui.viewmodels.PhotoImportUiState#getImportProgress()F
-__unknown_file ("0*™
-0 (}
-{
- (
-fieldfloat"__id*Y
- (M*K0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-importProgressfloat"
- (
-
-fieldfloatB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Á
-Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setImportProgress(F)V
-__unknown_file ("0*≠
-0 (}
-{
- (K0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-importProgressfloat"__id*
- (
-
-valuefloat"
- (
-implicit return:
- (
-valuefloatB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`≈
-Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I
-__unknown_file ("0*¶
-0 ({
-y
- (
-fieldint"__id*Y
- (M*K0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-batchImportTotalint"
- (
-
-fieldintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Â
-Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportTotal(I)V
-__unknown_file ("0*´
-0 ({
-y
- (K0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-batchImportTotalint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Õ
-Icom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportCompleted()I
-__unknown_file ("0*™
-0 (
-}
- (
-fieldint"__id*]
- (Q*O0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-batchImportCompletedint"
- (
-
-fieldintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ì
-Jcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportCompleted(I)V
-__unknown_file ("0*Ø
-0 (
-}
- (O0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-batchImportCompletedint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ω
-fcom.smilepile.ui.viewmodels.PhotoImportUiState#getLastImportedPhoto()Lcom/smilepile/data/models/Photo;
-__unknown_file ("0*˝
-0 (µ
-≤
- ((
-fieldcom.smilepile.data.models.Photo"__id*v
- (j*h0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"4
-lastImportedPhotocom.smilepile.data.models.Photo"6
- (*
-(
-fieldcom.smilepile.data.models.PhotoB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`›
-gcom.smilepile.ui.viewmodels.PhotoImportUiState#setLastImportedPhoto(Lcom/smilepile/data/models/Photo;)V
-__unknown_file ("0*Ê
-0 (µ
-≤
- (h0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"4
-lastImportedPhotocom.smilepile.data.models.Photo"__id*6
- (*
-(
-valuecom.smilepile.data.models.Photo"
- (
-implicit return:4
- ((
-valuecom.smilepile.data.models.PhotoB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`È
-Kcom.smilepile.ui.viewmodels.PhotoImportUiState#getError()Ljava/lang/String;
-__unknown_file ("0*ƒ
-0 (ã
-à
+implicit return:O
+ (:C
+secureStorageManager+com.smilepile.security.SecureStorageManagerB-+
+)com.smilepile.security.MetadataEncryptionHﬁ
+Kcom.smilepile.security.MetadataEncryption#getJson()Lerror/NonExistentClass;
+__unknown_file ("0*æ
+0 (Ö
+Ç
  (
-fieldjava.lang.String"__id*[
- (O*M0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-errorjava.lang.String"'
+fieldjava.lang.Object"__id*U
+ (I*G+
+)com.smilepile.security.MetadataEncryption"
+jsonjava.lang.Object"'
  (
 
-fieldjava.lang.StringB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`â
-Lcom.smilepile.ui.viewmodels.PhotoImportUiState#setError(Ljava/lang/String;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-errorjava.lang.String"__id*'
+fieldjava.lang.ObjectB-+
+)com.smilepile.security.MetadataEncryptionH`˛
+Lcom.smilepile.security.MetadataEncryption#setJson(Lerror/NonExistentClass;)V
+__unknown_file ("0*∂
+0 (Ö
+Ç
+ (G+
+)com.smilepile.security.MetadataEncryption"
+jsonjava.lang.Object"__id*'
  (
 
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`˚
-Tcom.smilepile.ui.viewmodels.PhotoImportUiState#getSuccessMessage()Ljava/lang/String;
+valuejava.lang.ObjectB-+
+)com.smilepile.security.MetadataEncryptionH`ò
+\com.smilepile.security.MetadataEncryption$EncryptedMetadata#getChildName()Ljava/lang/String;
+__unknown_file ("0*’
+0 (ú
+ô
+ (
+fieldjava.lang.String"__id*l
+ (`*^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+	childNamejava.lang.String"'
+ (
+
+fieldjava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`∏
+]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setChildName(Ljava/lang/String;)V
 __unknown_file ("0*Õ
-0 (î
-ë
- (
-fieldjava.lang.String"__id*d
- (X*V0
-.com.smilepile.ui.viewmodels.PhotoImportUiState""
-successMessagejava.lang.String"'
- (
-
-fieldjava.lang.StringB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`õ
-Ucom.smilepile.ui.viewmodels.PhotoImportUiState#setSuccessMessage(Ljava/lang/String;)V
-__unknown_file ("0*≈
-0 (î
-ë
- (V0
-.com.smilepile.ui.viewmodels.PhotoImportUiState""
-successMessagejava.lang.String"__id*'
+0 (ú
+ô
+ (^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+	childNamejava.lang.String"__id*'
  (
 
 valuejava.lang.String"
  (
 implicit return:%
  (
-valuejava.lang.StringB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH` 
-Ccom.smilepile.ui.viewmodels.PhotoImportUiState#getStorageUsageMB()D
-__unknown_file ("0*≠
-0 (
-}
- (
-fielddouble"__id*Z
- (N*L0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-storageUsageMBdouble"
- (
-
-fielddoubleB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Í
-Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setStorageUsageMB(D)V
-__unknown_file ("0*Ø
-0 (
-}
- (L0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-storageUsageMBdouble"__id*
- (
-
-valuedouble"
+valuejava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`ö
+\com.smilepile.security.MetadataEncryption$EncryptedMetadata#getChildAge()Ljava/lang/Integer;
+__unknown_file ("0*◊
+0 (ù
+ö
+ (
+fieldjava.lang.Integer"__id*l
+ (`*^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+childAgejava.lang.Integer"(
+ (
+
+fieldjava.lang.IntegerB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`∫
+]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setChildAge(Ljava/lang/Integer;)V
+__unknown_file ("0*Œ
+0 (ù
+ö
+ (^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+childAgejava.lang.Integer"__id*(
+ (
+
+valuejava.lang.Integer"
  (
-implicit return:
- (
-valuedoubleB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`œ
-Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getAvailableSpaceMB()D
-__unknown_file ("0*∞
-0 (Å
-
- (
-fielddouble"__id*\
- (P*N0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-availableSpaceMBdouble"
- (
-
-fielddoubleB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ô
-Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setAvailableSpaceMB(D)V
-__unknown_file ("0*≤
-0 (Å
-
- (N0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-availableSpaceMBdouble"__id*
- (
-
-valuedouble"
+implicit return:&
+ (
+valuejava.lang.IntegerB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`ê
+Xcom.smilepile.security.MetadataEncryption$EncryptedMetadata#getNotes()Ljava/lang/String;
+__unknown_file ("0*—
+0 (ò
+ï
+ (
+fieldjava.lang.String"__id*h
+ (\*Z=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+notesjava.lang.String"'
+ (
+
+fieldjava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`∞
+Ycom.smilepile.security.MetadataEncryption$EncryptedMetadata#setNotes(Ljava/lang/String;)V
+__unknown_file ("0*…
+0 (ò
+ï
+ (Z=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+notesjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
  (
-implicit return:
- (
-valuedoubleB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`π
-?com.smilepile.ui.viewmodels.PhotoImportUiState#getPhotoCount()I
-__unknown_file ("0*†
-0 (u
-s
- (
-fieldint"__id*S
- (G*E0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-
-photoCountint"
- (
-
-fieldintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ÿ
-@com.smilepile.ui.viewmodels.PhotoImportUiState#setPhotoCount(I)V
-__unknown_file ("0*•
-0 (u
-s
- (E0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-
-photoCountint"__id*
- (
-
-valueint"
+implicit return:%
+ (
+valuejava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`Ü
+Ucom.smilepile.security.MetadataEncryption$EncryptedMetadata#getTags()Ljava/util/List;
+__unknown_file ("0* 
+0 (ì
+ê
+ (
+fieldjava.util.List"__id*e
+ (Y*W=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+tagsjava.util.List"%
+ (
+
+fieldjava.util.ListB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`¶
+Vcom.smilepile.security.MetadataEncryption$EncryptedMetadata#setTags(Ljava/util/List;)V
+__unknown_file ("0*ƒ
+0 (ì
+ê
+ (W=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+tagsjava.util.List"__id*%
+ (
+
+valuejava.util.List"
  (
-implicit return:
- (
-valueintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`˙
-Ñcom.smilepile.ui.viewmodels.PhotoImportUiState#<init>(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;DDI)Vt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt« «("0*ê
-0
-« “(Á
-‰
-
-» »($
-%0boolean"Acom.smilepile.ui.viewmodels.PhotoImportUiState#setIsImporting(Z)V*N
-
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*4
-
-__unknown_file (
+implicit return:#
+ (
+valuejava.util.ListB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`ò
+\com.smilepile.security.MetadataEncryption$EncryptedMetadata#getMilestone()Ljava/lang/String;
+__unknown_file ("0*’
+0 (ú
+ô
+ (
+fieldjava.lang.String"__id*l
+ (`*^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+	milestonejava.lang.String"'
+ (
+
+fieldjava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`∏
+]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setMilestone(Ljava/lang/String;)V
+__unknown_file ("0*Õ
+0 (ú
+ô
+ (^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+	milestonejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`ñ
+[com.smilepile.security.MetadataEncryption$EncryptedMetadata#getLocation()Ljava/lang/String;
+__unknown_file ("0*‘
+0 (õ
+ò
+ (
+fieldjava.lang.String"__id*k
+ (_*]=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+locationjava.lang.String"'
+ (
+
+fieldjava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`∂
+\com.smilepile.security.MetadataEncryption$EncryptedMetadata#setLocation(Ljava/lang/String;)V
+__unknown_file ("0*Ã
+0 (õ
+ò
+ (]=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+locationjava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`í
+\com.smilepile.security.MetadataEncryption$EncryptedMetadata#getCustomFields()Ljava/util/Map;
+__unknown_file ("0*œ
+0 (ô
+ñ
+ (
+fieldjava.util.Map"__id*l
+ (`*^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+customFieldsjava.util.Map"$
+ (
 
-isImportingbooleanÈ
-Ê
-
-… …("
-%1float"Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setImportProgress(F)V*N
+fieldjava.util.MapB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`≤
+]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setCustomFields(Ljava/util/Map;)V
+__unknown_file ("0* 
+0 (ô
+ñ
+ (^=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata"
+customFieldsjava.util.Map"__id*$
+ (
+
+valuejava.util.Map"
+ (
+implicit return:"
+ (
+valuejava.util.MapB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH`¢
+øcom.smilepile.security.MetadataEncryption$EncryptedMetadata#<init>(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Vk
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kt ( "0*â
+0  '(û
+õ
+   (%
+%0java.lang.String"]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setChildName(Ljava/lang/String;)V*[
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*5
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*;
 
-__unknown_file (
-
-importProgressfloatÈ
-Ê
-
-   (!	
-%2int"Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportTotal(I)V*N
+__unknown_file (
+
+	childNamejava.lang.Stringü
+ú
+! !(!
+%1java.lang.Integer"]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setChildAge(Ljava/lang/Integer;)V*[
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*5
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*;
 
-__unknown_file (
-
-batchImportTotalintÒ
-Ó
-
-À À(%	
-%3int"Jcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchImportCompleted(I)V*N
+__unknown_file (
+
+childAgejava.lang.Integerñ
+ì
+" "(!
+%2java.lang.String"Ycom.smilepile.security.MetadataEncryption$EncryptedMetadata#setNotes(Ljava/lang/String;)V*[
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*9
-
-__unknown_file (
-
-batchImportCompletedint√
-¿
-
-Ã Ã((%
-%4com.smilepile.data.models.Photo"gcom.smilepile.ui.viewmodels.PhotoImportUiState#setLastImportedPhoto(Lcom/smilepile/data/models/Photo;)V*N
-
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*R
-
-__unknown_file (6
-4
-lastImportedPhotocom.smilepile.data.models.Photo˛
-˚
-
-Õ Õ(
-%5java.lang.String"Lcom.smilepile.ui.viewmodels.PhotoImportUiState#setError(Ljava/lang/String;)V*N
-
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*7
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*7
 
 __unknown_file (
 
-errorjava.lang.Stringê
-ç
-
-Œ Œ(&
-%6java.lang.String"Ucom.smilepile.ui.viewmodels.PhotoImportUiState#setSuccessMessage(Ljava/lang/String;)V*N
+notesjava.lang.Stringé
+ã
+# #(,
+%3java.util.List"Vcom.smilepile.security.MetadataEncryption$EncryptedMetadata#setTags(Ljava/util/List;)V*[
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*@
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*4
 
-__unknown_file ($
-"
-successMessagejava.lang.StringÎ
-Ë
-
-œ œ($
-%7double"Dcom.smilepile.ui.viewmodels.PhotoImportUiState#setStorageUsageMB(D)V*N
+__unknown_file (
+
+tagsjava.util.Listû
+õ
+$ $(%
+%4java.lang.String"]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setMilestone(Ljava/lang/String;)V*[
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*6
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*;
 
-__unknown_file (
+__unknown_file (
+
+	milestonejava.lang.Stringú
+ô
+% %($
+%5java.lang.String"\com.smilepile.security.MetadataEncryption$EncryptedMetadata#setLocation(Ljava/lang/String;)V*[
 
-storageUsageMBdoubleÔ
-Ï
-
-– –(&
-%8double"Fcom.smilepile.ui.viewmodels.PhotoImportUiState#setAvailableSpaceMB(D)V*N
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*:
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*8
+__unknown_file (
+
+locationjava.lang.Stringõ
+ò
+& &(:
+%6java.util.Map"]com.smilepile.security.MetadataEncryption$EncryptedMetadata#setCustomFields(Ljava/util/Map;)V*[
 
-__unknown_file (
-
-availableSpaceMBdouble›
-⁄
-
-— —(	
-%9int"@com.smilepile.ui.viewmodels.PhotoImportUiState#setPhotoCount(I)V*N
+__unknown_file (?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadata*;
 
-__unknown_file (20
-.com.smilepile.ui.viewmodels.PhotoImportUiState*/
-
-__unknown_file (
-
-
-photoCountint"/
+__unknown_file (
+
+customFieldsjava.util.Map"/
 
 __unknown_file (
-implicit return:$
+implicit return:)
+   (%
+	childNamejava.lang.String:)
+! !(!
+childAgejava.lang.Integer:%
+" "(!
+notesjava.lang.String:"
+# #(,
+tagsjava.util.List:)
+$ $(%
+	milestonejava.lang.String:(
+% %($
+locationjava.lang.String:)
+& &(:
+customFieldsjava.util.MapB?=
+;com.smilepile.security.MetadataEncryption$EncryptedMetadataH≠
+äcom.smilepile.security.MetadataEncryption#encryptMetadata(Lcom/smilepile/security/MetadataEncryption$EncryptedMetadata;)Ljava/lang/String;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kt. .("0*(
+0) -("
+.G .(b
+	<unknown>:S
+.  .(;G
+metadata;com.smilepile.security.MetadataEncryption$EncryptedMetadataB-+
+)com.smilepile.security.MetadataEncryptionHá
+äcom.smilepile.security.MetadataEncryption#decryptMetadata(Ljava/lang/String;)Lcom/smilepile/security/MetadataEncryption$EncryptedMetadata;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kt< <("0*(
+07 ;("
+<L <(g
+	<unknown>:-
+<  <(5!
+encryptedDatajava.lang.StringB-+
+)com.smilepile.security.MetadataEncryptionH—
+]com.smilepile.security.MetadataEncryption#encryptString(Ljava/lang/String;)Ljava/lang/String;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.ktK K("0*(
+0F J("
+K9 K(T
+	<unknown>:%
+K K(,
+valuejava.lang.StringB-+
+)com.smilepile.security.MetadataEncryptionH⁄
+]com.smilepile.security.MetadataEncryption#decryptString(Ljava/lang/String;)Ljava/lang/String;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.ktY Y("0*(
+0T X("
+YB Y(]
+	<unknown>:.
+Y Y(5"
+encryptedValuejava.lang.StringB-+
+)com.smilepile.security.MetadataEncryptionH 
+Ycom.smilepile.security.MetadataEncryption#encryptTags(Ljava/util/List;)Ljava/lang/String;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kth h("0*(
+0c g("
+h; h(V
+	<unknown>:"
+h h(.
+tagsjava.util.ListB-+
+)com.smilepile.security.MetadataEncryptionH’
+Ycom.smilepile.security.MetadataEncryption#decryptTags(Ljava/lang/String;)Ljava/util/List;k
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.ktw w("0*(
+0r v("
+wD w(_
+	<unknown>:-
+w w(2!
+encryptedTagsjava.lang.StringB-+
+)com.smilepile.security.MetadataEncryptionH€
+œcom.smilepile.security.MetadataEncryption#createEncryptedMetadata(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;m
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.ktç ç('"0*¥
 
-» »($
-isImportingboolean:%
-
-… …("
-importProgressfloat:%
-
-   (!
-batchImportTotalint:)
-
-À À(%
-batchImportCompletedint:B
-
-Ã Ã((4
-lastImportedPhotocom.smilepile.data.models.Photo:'
-
-Õ Õ(
-errorjava.lang.String:0
-
-Œ Œ(&"
-successMessagejava.lang.String:&
-
-œ œ($
-storageUsageMBdouble:(
-
-– –(&
-availableSpaceMBdouble:
-
-— —(
-
-photoCountintB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateHÈ
-Bcom.smilepile.ui.viewmodels.PhotoImportUiState#setIsInProgress(Z)V
-__unknown_file ("0*Ø
-0 (
-}
- (K0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-isInProgressboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`¬
->com.smilepile.ui.viewmodels.PhotoImportUiState#isInProgress()Zt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt” ”(1"0*–
 0
-”! ”(#ü
-ú
+Ç å(èå
 
-”& ”(1
-%0boolean"=com.smilepile.ui.viewmodels.PhotoImportUiState#isImporting()Z*@
+ñ û(	A
+%0;com.smilepile.security.MetadataEncryption$EncryptedMetadata";com.smilepile.security.MetadataEncryption$EncryptedMetadataÁ
+‰
 
-”& ”(120
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
+ñ û(	
+%1"øcom.smilepile.security.MetadataEncryption$EncryptedMetadata#<init>(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V*Q
 
-”& ”(1
+ñ û(	C
+A
+%0;com.smilepile.security.MetadataEncryption$EncryptedMetadata*-
 
-%0booleanB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateHÏ
-Ccom.smilepile.ui.viewmodels.PhotoImportUiState#setIsBatchImport(Z)V
-__unknown_file ("0*±
-0 (Ä
-~
- (L0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"
-isBatchImportboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`±
-?com.smilepile.ui.viewmodels.PhotoImportUiState#isBatchImport()Zt
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt‘ ‘(;"0*æ
-0
-‘" ‘($£
-†
+ó ó(!
+
+	childNamejava.lang.String*-
 
-‘' ‘(7	
-%0int"Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I*@
+ò ò(
+
+childAgejava.lang.Integer*)
 
-‘' ‘(720
-.com.smilepile.ui.viewmodels.PhotoImportUiStatec
-a
-
-‘' ‘(;
-%1"	__compare*
-
-‘8 ‘(9
->*
-
-‘' ‘(7
-	
-%0int*
-
-‘: ‘(;2""
-
-__unknown_file (
-
-%1B20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH°
-Xcom.smilepile.ui.viewmodels.PhotoImportUiState#setBatchProgressText(Ljava/lang/String;)V
-__unknown_file ("0*»
-0 (ó
-î
- (Y0
-.com.smilepile.ui.viewmodels.PhotoImportUiState"%
-batchProgressTextjava.lang.String"__id*'
- (
+ô ô(
 
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH`Ì
-Wcom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchProgressText()Ljava/lang/String;t
-h/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/PhotoImportViewModel.kt’" ’(U"0*‚
+notesjava.lang.String*&
+
+ö ö(
+
+tagsjava.util.List*-
+
+õ õ(!
+
+	milestonejava.lang.String*,
+
+ú ú(
+
+locationjava.lang.String*-
+
+ù ù('
+
+customFieldsjava.util.Map±
+Æ
+
+ñ û(	G
+metadata;com.smilepile.security.MetadataEncryption$EncryptedMetadata"__id*Q
+
+ñ û(	C
+A
+%0;com.smilepile.security.MetadataEncryption$EncryptedMetadata 
+«
+
+ü ü((
+%2java.lang.String"äcom.smilepile.security.MetadataEncryption#encryptMetadata(Lcom/smilepile/security/MetadataEncryption$EncryptedMetadata;)Ljava/lang/String;*;
+
+ü ü((-+
+)com.smilepile.security.MetadataEncryption*W
+
+ü ü('I
+G
+metadata;com.smilepile.security.MetadataEncryption$EncryptedMetadata"&
+
+ü ü((
+
+%2java.lang.String:+
+
+é é(!
+	childNamejava.lang.String:+
+
+è è(
+childAgejava.lang.Integer:'
+
+ê ê(
+notesjava.lang.String:$
+
+ë ë((
+tagsjava.util.List:+
+
+í í(!
+	milestonejava.lang.String:*
+
+ì ì( 
+locationjava.lang.String:+
+
+î î(6
+customFieldsjava.util.MapB-+
+)com.smilepile.security.MetadataEncryptionHí
+?com.smilepile.security.MetadataEncryption#validateEncryption()Zm
+a/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/MetadataEncryption.kt¶ ¶(""0*,
 0
-’% ’('ß
-§
+¢ •("
 
-’, ’(@	
-%0int"Icom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportCompleted()I*@
-
-’, ’(@20
-.com.smilepile.ui.viewmodels.PhotoImportUiState£
-†
-
-’D ’(T	
-%1int"Ecom.smilepile.ui.viewmodels.PhotoImportUiState#getBatchImportTotal()I*@
-
-’D ’(T20
-.com.smilepile.ui.viewmodels.PhotoImportUiStatek
-i
-
-’* ’(U
-%2"__concat*
-
-’, ’(@
-	
-%0int*
-
-’@ ’(C
- / *
-
-’D ’(T
-	
-%1int"
-
-’* ’(U
-
-%2B20
-.com.smilepile.ui.viewmodels.PhotoImportUiStateH
+¶0 ¶(K
+	<unknown>B-+
+)com.smilepile.security.MetadataEncryptionH

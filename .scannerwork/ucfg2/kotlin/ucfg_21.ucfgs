@@ -523,34 +523,34 @@ jcom.smilepile.ui.viewmodels.SettingsViewModel#setBackupManager(Lcom/smilepile/d
 implicit return:<
  (0
 value'com.smilepile.data.backup.BackupManagerB1/
--com.smilepile.ui.viewmodels.SettingsViewModelH`ä
-|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;
-__unknown_file ("0*µ
+-com.smilepile.ui.viewmodels.SettingsViewModelH`é
+}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;
+__unknown_file ("0*∏
+0 (ﬂ
+‹
+ (9
+field0com.smilepile.security.ISecurePreferencesManager"__id*é
+ (Å*/
+-com.smilepile.ui.viewmodels.SettingsViewModel"L
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManager"G
+ (;
+9
+field0com.smilepile.security.ISecurePreferencesManagerB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH`¨
+~com.smilepile.ui.viewmodels.SettingsViewModel#setSecurePreferencesManager(Lcom/smilepile/security/ISecurePreferencesManager;)V
+__unknown_file ("0*é
 0 (›
 ⁄
- (8
-field/com.smilepile.security.SecurePreferencesManager"__id*ç
- (Ä*~/
--com.smilepile.ui.viewmodels.SettingsViewModel"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"F
- (:
-8
-field/com.smilepile.security.SecurePreferencesManagerB1/
--com.smilepile.ui.viewmodels.SettingsViewModelH`®
-}com.smilepile.ui.viewmodels.SettingsViewModel#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V
-__unknown_file ("0*å
-0 (€
-ÿ
- (~/
--com.smilepile.ui.viewmodels.SettingsViewModel"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__id*F
- (:
-8
-value/com.smilepile.security.SecurePreferencesManager"
+ (/
+-com.smilepile.ui.viewmodels.SettingsViewModel"L
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManager"__id*G
+ (;
+9
+value0com.smilepile.security.ISecurePreferencesManager"
  (
-implicit return:D
- (8
-value/com.smilepile.security.SecurePreferencesManagerB1/
+implicit return:E
+ (9
+value0com.smilepile.security.ISecurePreferencesManagerB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH`ÿ
 lcom.smilepile.ui.viewmodels.SettingsViewModel#getBiometricManager()Lcom/smilepile/security/BiometricManager;
 __unknown_file ("0*ì
@@ -607,9 +607,9 @@ kcom.smilepile.ui.viewmodels.SettingsViewModel#setSettingsManager(Lcom/smilepile
 implicit return:;
  (/
 value&com.smilepile.settings.SettingsManagerB1/
--com.smilepile.ui.viewmodels.SettingsViewModelH`÷2
-çcom.smilepile.ui.viewmodels.SettingsViewModel#<init>(LContext;Lcom/smilepile/theme/ThemeManager;Lcom/smilepile/data/backup/BackupManager;Lcom/smilepile/security/SecurePreferencesManager;Lcom/smilepile/security/BiometricManager;Lcom/smilepile/settings/SettingsManager;)Vo
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt1  1(+"0*Ñ,
+-com.smilepile.ui.viewmodels.SettingsViewModelH`›2
+écom.smilepile.ui.viewmodels.SettingsViewModel#<init>(LContext;Lcom/smilepile/theme/ThemeManager;Lcom/smilepile/data/backup/BackupManager;Lcom/smilepile/security/ISecurePreferencesManager;Lcom/smilepile/security/BiometricManager;Lcom/smilepile/settings/SettingsManager;)Vo
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt1  1(+"0*â,
 01 1(å
 â
 2 2(4
@@ -679,21 +679,21 @@ v
 
 __unknown_file (
 
-%3º
-π
-5 5(B
+%3Ω
+∫
+5 5(C
 %4"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*i
+java.lang.Object*j
 
-__unknown_file (M
-K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManagerå
-â
-5 5(BK
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__annotation*"
+__unknown_file (N
+L
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManagerç
+ä
+5 5(CL
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManager"__annotation*"
 
 __unknown_file (
 
@@ -763,17 +763,17 @@ w
 
 __unknown_file (:
 8
-backupManager'com.smilepile.data.backup.BackupManager˛
-˚
-5 5(B6
-%10/com.smilepile.security.SecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V*M
+backupManager'com.smilepile.data.backup.BackupManagerÅ
+˛
+5 5(C7
+%100com.smilepile.security.ISecurePreferencesManager"~com.smilepile.ui.viewmodels.SettingsViewModel#setSecurePreferencesManager(Lcom/smilepile/security/ISecurePreferencesManager;)V*M
 
 __unknown_file (1/
--com.smilepile.ui.viewmodels.SettingsViewModel*i
+-com.smilepile.ui.viewmodels.SettingsViewModel*j
 
-__unknown_file (M
-K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager÷
+__unknown_file (N
+L
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManager÷
 ”
 6 6(2.
 %11'com.smilepile.security.BiometricManager"mcom.smilepile.ui.viewmodels.SettingsViewModel#setBiometricManager(Lcom/smilepile/security/BiometricManager;)V*M
@@ -854,9 +854,9 @@ K
 3 3(*0
 themeManager com.smilepile.theme.ThemeManager:D
 4 4(,8
-backupManager'com.smilepile.data.backup.BackupManager:W
-5 5(BK
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager:G
+backupManager'com.smilepile.data.backup.BackupManager:X
+5 5(CL
+securePreferencesManager0com.smilepile.security.ISecurePreferencesManager:G
 6 6(2;
 biometricManager'com.smilepile.security.BiometricManager:E
 7 7(09
@@ -1071,31 +1071,30 @@ e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 __unknown_file (
 implicit returnB1/
--com.smilepile.ui.viewmodels.SettingsViewModelH¶
+-com.smilepile.ui.viewmodels.SettingsViewModelH∆
 
 Icom.smilepile.ui.viewmodels.SettingsViewModel#setPIN(Ljava/lang/String;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktß ß("0*Ü
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktß ß("0*¶
 0
-§ ¶(Ö
-Ç
+§ ¶(á
+Ñ
 
-® ®( 5
-%0/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+® ®( 6
+%00com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
 ® ®( 1/
--com.smilepile.ui.viewmodels.SettingsViewModelﬂ
-‹
+-com.smilepile.ui.viewmodels.SettingsViewModel˝˙
 
 ®! ®(,
-%1kotlin.Unit"Kcom.smilepile.security.SecurePreferencesManager#setPIN(Ljava/lang/String;)V*E
+%1kotlin.Unit"Lcom.smilepile.security.ISecurePreferencesManager#setPIN(Ljava/lang/String;)V*F
 
-® ®( 7
-5
-%0/com.smilepile.security.SecurePreferencesManager*'
+® ®( 8
+6
+%00com.smilepile.security.ISecurePreferencesManager*'
 
 ®( ®(+
 
-pinjava.lang.StringΩ
+pinjava.lang.String2setPIN(Ljava/lang/String;)Ω
 ∫
 
 © ©(
@@ -1123,44 +1122,43 @@ X
 
 ß ß(
 pinjava.lang.StringB1/
--com.smilepile.ui.viewmodels.SettingsViewModelHç
+-com.smilepile.ui.viewmodels.SettingsViewModelHπ
 :com.smilepile.ui.viewmodels.SettingsViewModel#removePIN()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktØ Ø("0*£
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktØ Ø("0*œ
 0
-¨ Æ(Ö
-Ç
+¨ Æ(á
+Ñ
 
-∞ ∞( 5
-%0/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+∞ ∞( 6
+%00com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
 ∞ ∞( 1/
--com.smilepile.ui.viewmodels.SettingsViewModel¶
-£
+-com.smilepile.ui.viewmodels.SettingsViewModel¥±
 
 ∞! ∞(+
-%1kotlin.Unit";com.smilepile.security.SecurePreferencesManager#clearPIN()V*E
+%1kotlin.Unit"<com.smilepile.security.ISecurePreferencesManager#clearPIN()V*F
 
-∞ ∞( 7
-5
-%0/com.smilepile.security.SecurePreferencesManagerÖ
-Ç
+∞ ∞( 8
+6
+%00com.smilepile.security.ISecurePreferencesManager2
+clearPIN()á
+Ñ
 
-± ±( 5
-%2/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+± ±( 6
+%20com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
 ± ±( 1/
--com.smilepile.ui.viewmodels.SettingsViewModelÀ
-»
+-com.smilepile.ui.viewmodels.SettingsViewModelÂ‚
 
 ±! ±(;
-%3kotlin.Unit"Gcom.smilepile.security.SecurePreferencesManager#setBiometricEnabled(Z)V*E
+%3kotlin.Unit"Hcom.smilepile.security.ISecurePreferencesManager#setBiometricEnabled(Z)V*F
 
-± ±( 7
-5
-%2/com.smilepile.security.SecurePreferencesManager*
+± ±( 8
+6
+%20com.smilepile.security.ISecurePreferencesManager*
 
 ±5 ±(:	
-falseΩ
+false2setBiometricEnabled(Z)Ω
 ∫
 
 ≤ ≤(
@@ -1185,125 +1183,152 @@ X
 
 __unknown_file (
 implicit returnB1/
--com.smilepile.ui.viewmodels.SettingsViewModelH≠
+-com.smilepile.ui.viewmodels.SettingsViewModelH„
+Ncom.smilepile.ui.viewmodels.SettingsViewModel#validatePIN(Ljava/lang/String;)Zq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktª ª("0*æ
+0
+∏ ∫(á
+Ñ
+
+º º('6
+%00com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
+
+º º('1/
+-com.smilepile.ui.viewmodels.SettingsViewModelÉÄ
+
+º( º(8
+%1boolean"Qcom.smilepile.security.ISecurePreferencesManager#validatePIN(Ljava/lang/String;)Z*F
+
+º º('8
+6
+%00com.smilepile.security.ISecurePreferencesManager*'
+
+º4 º(7
+
+pinjava.lang.String2validatePIN(Ljava/lang/String;)"
+
+º º(8
+
+%1boolean:%
+
+ª ª(
+pinjava.lang.StringB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelHÚ
 ^com.smilepile.ui.viewmodels.SettingsViewModel#changePIN(Ljava/lang/String;Ljava/lang/String;)Zq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktª ª("0*√
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¬ ¬("0*„
 2
-ºA ø(	Ö
-Ç
+√A ∆(	á
+Ñ
 
-Ω Ω($5
-%3/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+ƒ ƒ($6
+%30com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
-Ω Ω($1/
--com.smilepile.ui.viewmodels.SettingsViewModel‚
-ﬂ
+ƒ ƒ($1/
+-com.smilepile.ui.viewmodels.SettingsViewModelÄ˝
 
-Ω% Ω(3
-%4kotlin.Unit"Kcom.smilepile.security.SecurePreferencesManager#setPIN(Ljava/lang/String;)V*E
+ƒ% ƒ(3
+%4kotlin.Unit"Lcom.smilepile.security.ISecurePreferencesManager#setPIN(Ljava/lang/String;)V*F
 
-Ω Ω($7
-5
-%3/com.smilepile.security.SecurePreferencesManager**
+ƒ ƒ($8
+6
+%30com.smilepile.security.ISecurePreferencesManager**
 
-Ω, Ω(2
+ƒ, ƒ(2
 
-newPinjava.lang.String@
+newPinjava.lang.String2setPIN(Ljava/lang/String;)@
 >
 
 __unknown_file (
 %2"__id*
 
-æ æ(
+≈ ≈(
 true*
 1*W
 3
-ø ¡(	A
+∆ »(	A
 ?
 
 __unknown_file (
 %2"__id*
 
-¿ ¿(	
+« «(	
 false*
-1*Ö
+1*™
 0
-∏ ∫(Ö
-Ç
+ø ¡(á
+Ñ
 
-º º(+5
-%0/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+√ √(+6
+%00com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
-º º(+1/
--com.smilepile.ui.viewmodels.SettingsViewModel„
-‡
+√ √(+1/
+-com.smilepile.ui.viewmodels.SettingsViewModelÜÉ
 
-º, º(?
-%1boolean"Pcom.smilepile.security.SecurePreferencesManager#validatePIN(Ljava/lang/String;)Z*E
+√, √(?
+%1boolean"Qcom.smilepile.security.ISecurePreferencesManager#validatePIN(Ljava/lang/String;)Z*F
 
-º º(+7
-5
-%0/com.smilepile.security.SecurePreferencesManager**
+√ √(+8
+6
+%00com.smilepile.security.ISecurePreferencesManager**
 
-º8 º(>
+√8 √(>
 
-oldPinjava.lang.String*
+oldPinjava.lang.String2validatePIN(Ljava/lang/String;)*
 2
 3*%
 1
-ø ¡(	"
+∆ »(	"
 
-º ¡(	
+√ »(	
 
 %2:(
 
-ª ª( 
+¬ ¬( 
 oldPinjava.lang.String:(
 
-ª" ª(0
+¬" ¬(0
 newPinjava.lang.StringB1/
--com.smilepile.ui.viewmodels.SettingsViewModelHî
+-com.smilepile.ui.viewmodels.SettingsViewModelH∞
 
 Ecom.smilepile.ui.viewmodels.SettingsViewModel#setBiometricEnabled(Z)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt« «("0*˝
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktŒ Œ("0*ô
 0
-ƒ ∆(Ö
-Ç
+À Õ(á
+Ñ
 
-» »( 5
-%0/com.smilepile.security.SecurePreferencesManager"|com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;*?
+œ œ( 6
+%00com.smilepile.security.ISecurePreferencesManager"}com.smilepile.ui.viewmodels.SettingsViewModel#getSecurePreferencesManager()Lcom/smilepile/security/ISecurePreferencesManager;*?
 
-» »( 1/
--com.smilepile.ui.viewmodels.SettingsViewModel÷
-”
+œ œ( 1/
+-com.smilepile.ui.viewmodels.SettingsViewModelÌ
 
-»! »(=
-%1kotlin.Unit"Gcom.smilepile.security.SecurePreferencesManager#setBiometricEnabled(Z)V*E
+œ! œ(=
+%1kotlin.Unit"Hcom.smilepile.security.ISecurePreferencesManager#setBiometricEnabled(Z)V*F
 
-» »( 7
-5
-%0/com.smilepile.security.SecurePreferencesManager*"
+œ œ( 8
+6
+%00com.smilepile.security.ISecurePreferencesManager*"
 
-»5 »(<
+œ5 œ(<
 
-enabledbooleanΩ
+enabledboolean2setBiometricEnabled(Z)Ω
 ∫
 
-… …(
+– –(
 %2java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-… …(1/
+– –(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-… …(!
+– –(!
 %3java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-… …(!1/
+– –(!1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-… …(H
+– –(H
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1312,49 +1337,49 @@ X
 __unknown_file (
 implicit return: 
 
-« «(,
+Œ Œ(,
 enabledbooleanB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHﬂ
 Ecom.smilepile.ui.viewmodels.SettingsViewModel#isBiometricAvailable()Zq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktœ œ("0*Í
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt÷ ÷("0*Í
 0
-Ã Œ(Ì
+” ’(Ì
 Í
 
-– –(-
+◊ ◊(-
 %0'com.smilepile.security.BiometricManager"lcom.smilepile.ui.viewmodels.SettingsViewModel#getBiometricManager()Lcom/smilepile/security/BiometricManager;*?
 
-– –(1/
+◊ ◊(1/
 -com.smilepile.ui.viewmodels.SettingsViewModel
 Ì
 
-–  –(62
+◊  ◊(62
 %1,com.smilepile.security.BiometricAvailability"lcom.smilepile.security.BiometricManager#isBiometricAvailable()Lcom/smilepile/security/BiometricAvailability;*=
 
-– –(/
+◊ ◊(/
 -
 %0'com.smilepile.security.BiometricManager÷
 ”
 
-– –(p
+◊ ◊(p
 %2boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*B
 
-–  –(64
+◊  ◊(64
 2
 %1,com.smilepile.security.BiometricAvailability*I
 
-–g –(p;
+◊g ◊(p;
 9
 	AVAILABLE,com.smilepile.security.BiometricAvailability"
 
-– –(p
+◊ ◊(p
 
 %2booleanB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHŸ&
 Ecom.smilepile.ui.viewmodels.SettingsViewModel#prepareExport()LIntent;q
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt◊ ◊("1*e
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktﬁ ﬁ("1*e
 2
-ı ˆ(L
+¸ ˝(L
 J
 
 __unknown_file (
@@ -1367,55 +1392,55 @@ J
 6*µ
 
 3
-Ê" Ó(Á
+Ì" ı(Á
 ‰
 
-Á Á(9
+Ó Ó(9
 %9java.io.File"Vcom.smilepile.ui.viewmodels.SettingsViewModel#setPendingExportZipFile(Ljava/io/File;)V*?
 
-Á Á(91/
+Ó Ó(91/
 -com.smilepile.ui.viewmodels.SettingsViewModel*)
 
 __unknown_file (
 	<unknown>æ
 ª
 
-Ë Ë(
+Ô Ô(
 %10java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ë Ë(1/
+Ô Ô(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelæ
 ª
 
-Ë! Ë()
+Ô! Ô()
 %11java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ë! Ë()1/
+Ô! Ô()1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-Ë Î(
+Ô Ú(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>Î
 Ë
 
-Ì Ì(.
+Ù Ù(.
 %12'com.smilepile.data.backup.BackupManager"icom.smilepile.ui.viewmodels.SettingsViewModel#getBackupManager()Lcom/smilepile/data/backup/BackupManager;*?
 
-Ì Ì(1/
+Ù Ù(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelï
 í
 
-Ì Ì(B
+Ù Ù(B
 %13java.lang.Object"lcom.smilepile.data.backup.BackupManager#createExportIntent(Lcom/smilepile/data/backup/BackupFormat;)LIntent;*>
 
-Ì Ì(0
+Ù Ù(0
 .
 %12'com.smilepile.data.backup.BackupManager*=
 
-Ì> Ì(A/
+Ù> Ù(A/
 -
 ZIP&com.smilepile.data.backup.BackupFormatQ
 O
@@ -1423,29 +1448,29 @@ O
 __unknown_file (
 %8"__id*'
 
-Ì Ì(B
+Ù Ù(B
 
 %13java.lang.Object*
 2*Æ
 4
-Ó ı(æ
+ı ¸(æ
 ª
 
-Ô Ô(
+ˆ ˆ(
 %14java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ô Ô(1/
+ˆ ˆ(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelæ
 ª
 
-Ô! Ô()
+ˆ! ˆ()
 %15java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ô! Ô()1/
+ˆ! ˆ()1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-Ô Û(
+ˆ ˙(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1455,34 +1480,34 @@ X
 __unknown_file (
 %8"__id*
 
-Ù Ù( *
+˚ ˚( *
 2*%
 5
-ˆ
- ˝(	"
+˝
+ Ñ(	"
 
-ÿ ˝(	
+ﬂ Ñ(	
 
 %0*Æ
 6
-ˆ ˝(	æ
+˝ Ñ(	æ
 ª
 
-˜ ˜(
+˛ ˛(
 %16java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-˜ ˜(1/
+˛ ˛(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelæ
 ª
 
-˜ ˜(%
+˛ ˛(%
 %17java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-˜ ˜(%1/
+˛ ˛(%1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-˜ ˚(
+˛ Ç(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1492,37 +1517,37 @@ X
 __unknown_file (
 %0"__id*
 
-¸ ¸( *
+É É( *
 5*º
 1
-ÿ ˆ(	Ω
+ﬂ ˝(	Ω
 ∫
 
-Ÿ Ÿ(
+‡ ‡(
 %1java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ÿ Ÿ(1/
+‡ ‡(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-Ÿ Ÿ(%
+‡ ‡(%
 %2java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-Ÿ Ÿ(%1/
+‡ ‡(%1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-Ÿ Ÿ(P
+‡ ‡(P
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>Í
 Á
 
-‹ ‹(&-
+„ „(&-
 %3'com.smilepile.data.backup.BackupManager"icom.smilepile.ui.viewmodels.SettingsViewModel#getBackupManager()Lcom/smilepile/data/backup/BackupManager;*?
 
-‹ ‹(&1/
+„ „(&1/
 -com.smilepile.ui.viewmodels.SettingsViewModeltr
 
 __unknown_file (-
@@ -1566,10 +1591,10 @@ X
 Mcom.smilepile.ui.viewmodels.SettingsViewModel#prepareExport()LIntent;$lambda0é
 ã
 
-‹' ‹(2
+„' „(2
 %7java.lang.Object"îcom.smilepile.data.backup.BackupManager#exportToZip(Lcom/smilepile/data/backup/BackupOptions;Ljava/io/File;Lkotlin/jvm/functions/Function3;)LResult;*=
 
-‹ ‹(&/
+„ „(&/
 -
 %3'com.smilepile.data.backup.BackupManager*K
 
@@ -1584,40 +1609,40 @@ Mcom.smilepile.ui.viewmodels.SettingsViewModel#prepareExport()LIntent;$lambda0é
 %6X
 V
 
-‹ ‰(
+„ Î(
 resultjava.lang.Object"__id*&
 
-‹' ‹(2
+„' „(2
 
 %7java.lang.Object*
 3
 4B1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH»
 Mcom.smilepile.ui.viewmodels.SettingsViewModel#prepareExport()LIntent;$lambda0q
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt‹3 ‰("0*‰
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt„3 Î("0*‰
 0
-‹3 ‰(hf
+„3 Î(hf
 
-› ‚(.
+‰ È(.
 %0(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress≈
 ¬
 
-› ‚(
+‰ È(
 %1"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*>
 
-› ‚(0
+‰ È(0
 .
 %0(com.smilepile.data.backup.ImportProgress*
 
-ﬁ! ﬁ(&
+Â! Â(&
 
 totalint*
 
-ﬂ% ﬂ(,
+Ê% Ê(,
 
 currentint*-
 
-‡' ‡(0
+Á' Á(0
 
 	operationjava.lang.String*)
 
@@ -1625,29 +1650,29 @@ e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 	<unknown>ã
 à
 
-› ‚(4
+‰ È(4
 progress(com.smilepile.data.backup.ImportProgress"__id*>
 
-› ‚(0
+‰ È(0
 .
 %0(com.smilepile.data.backup.ImportProgressΩ
 ∫
 
-„ „(
+Í Í(
 %2java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-„ „(1/
+Í Í(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-„! „()
+Í! Í()
 %3java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-„! „()1/
+Í! Í()1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-„ „(O
+Í Í(O
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1657,82 +1682,660 @@ X
 
 valuejava.lang.Object:
 
-‹5 ‹(<
+„5 „(<
 currentint:
 
-‹> ‹(C
+„> „(C
 totalint:+
 
-‹E ‹(N
+„E „(N
 	operationjava.lang.StringB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH⁄
 Dcom.smilepile.ui.viewmodels.SettingsViewModel#completeExport(LUri;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÑ Ñ("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktã ã("0*@
 0
-Ä É("/
+á ä("/
 
 __unknown_file (
 implicit return:%
 
-Ñ Ñ(
+ã ã(
 urijava.lang.ObjectB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHŸ
 Ccom.smilepile.ui.viewmodels.SettingsViewModel#importFromUri(LUri;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktƒ ƒ("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÀ À("0*@
 0
-¿ √("/
+«  ("/
 
 __unknown_file (
 implicit return:%
 
-ƒ ƒ(
+À À(
 urijava.lang.ObjectB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelHß
+Tcom.smilepile.ui.viewmodels.SettingsViewModel#copyUriToTempFile(LUri;)Ljava/io/File;q
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktﬂ ﬂ()"0*˝
+2
+·! Á(	Ω
+∫
+
+‚ ‚(
+%3java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+‚ ‚(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelΩ
+∫
+
+‚ ‚(%
+%4java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+‚ ‚(%1/
+-com.smilepile.ui.viewmodels.SettingsViewModelZ
+X
+
+‚ Â(
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"
+
+Ê Ê( *—
+0
+ﬂ ﬂ(≠
+™
+
+‡ ‡(!
+%0java.lang.Object"Ccom.smilepile.ui.viewmodels.SettingsViewModel#getContext()LContext;*?
+
+‡ ‡(!1/
+-com.smilepile.ui.viewmodels.SettingsViewModel`
+^
+
+‡ ‡(F
+inputStreamjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>•¢
+
+· ·(
+%1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
+
+· ·(!
+
+inputStreamjava.lang.Object*
+
+· ·( 2equals(Ljava/lang/Object;)*
+2
+1*®
+1
+Á	 È(c
+a
+
+È È(b"
+tempFileerror.NonExistentClass"__id*)
+
+__unknown_file (
+	<unknown>"2
+
+Ô Ô($
+"
+tempFileerror.NonExistentClass:%
+
+ﬂ* ﬂ(2
+urijava.lang.ObjectB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH‹
+Ncom.smilepile.ui.viewmodels.SettingsViewModel#detectZipFormat(Ljava/io/File;)Zq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÚ Ú("1*%
+2
+¸
+ ˛(	"
+
+Û ˛(	
+
+%0*W
+3
+¸ ˛(	A
+?
+
+__unknown_file (
+%0"__id*
+
+˝ ˝(	
+false*
+2*∂
+1
+Û ¸(	z
+x
+
+Ù Ù(
+%1java.lang.String"(java.io.File#getName()Ljava/lang/String;*(
+
+Ù Ù(
+
+tempFilejava.io.Filefd
+
+ı ı(
+
+%2long"java.io.File#length()J*(
+
+ı ı(
+
+tempFilejava.io.File2length()d
+b
+
+ı ı("
+%3"	__compare*
+
+ı ı( 
+>*
+
+ı ı(
+
+
+%2long*
+
+ı! ı("2S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+3:&
+
+Ú  Ú(6
+tempFilejava.io.FileB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelHñ
+Mcom.smilepile.ui.viewmodels.SettingsViewModel#executeImport(Ljava/io/File;Z)Vq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÅ Å(%"2"3*¬
+2
+Ç Ñ(	ﬁ
+€
+
+É É(&
+%1kotlin.Unit"Ocom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V*?
+
+É É(&1/
+-com.smilepile.ui.viewmodels.SettingsViewModel*(
+
+É É(%
+
+tempFilejava.io.FileK
+I
+
+__unknown_file (
+%0"__id*!
+
+É É(&
+
+%1kotlin.Unit*
+1*√
+3
+Ñ Ü(	ﬂ
+‹
+
+Ö Ö('
+%2kotlin.Unit"Pcom.smilepile.ui.viewmodels.SettingsViewModel#executeJsonImport(Ljava/io/File;)V*?
+
+Ö Ö('1/
+-com.smilepile.ui.viewmodels.SettingsViewModel*(
+
+Ö Ö(&
+
+tempFilejava.io.FileK
+I
+
+__unknown_file (
+%0"__id*!
+
+Ö Ö('
+
+%2kotlin.Unit*
+1*@
+1
+Ü	 á("/
+
+__unknown_file (
+implicit return:&
+
+Å& Å(<
+tempFilejava.io.File:"
+
+Å> Å(P
+	isZipFilebooleanB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH˙
+Ocom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)Vq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktâ â(("0*”
+0
+â â(Í
+Á
+
+ä ä(-
+%0'com.smilepile.data.backup.BackupManager"icom.smilepile.ui.viewmodels.SettingsViewModel#getBackupManager()Lcom/smilepile/data/backup/BackupManager;*?
+
+ä ä(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelØ
+¨
+
+__unknown_file (
+%1"__declareFunction*w
+
+__unknown_file ([Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0àÖ
+
+__unknown_file (Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0"__ScopeWrapper“
+œ
+
+__unknown_file (u
+Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0"
+tempFilejava.io.File"__id*6
+
+__unknown_file (
+
+tempFilejava.io.Fileˇ
+¸
+
+__unknown_file (a
+
+%1"Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0"__id*w
+
+__unknown_file ([
+Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0è
+å
+
+ä ç(	
+%2java.lang.Object"ïcom.smilepile.data.backup.BackupManager#importFromZip(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Lkotlin/jvm/functions/Function3;)LFlow;*=
+
+ä ä(/
+-
+%0'com.smilepile.data.backup.BackupManager*(
+
+ã ã(
+
+tempFilejava.io.File*A
+
+å& å(+3
+1
+MERGE(com.smilepile.data.backup.ImportStrategy*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:&
+
+â) â(?
+tempFilejava.io.FileB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH´
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0q
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktç
+ ï(	"0*Ω
+0
+ç
+ ï(	ÿ
+’
+
+__unknown_file (
+%0"__id*¨
+
+__unknown_file (è*å/
+-com.smilepile.ui.viewmodels.SettingsViewModel"Y
+Wcom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)V$lambda0|
+z
+
+__unknown_file (
+tempFilejava.io.File"__id*>
+
+__unknown_file ("* 
+
+%0"
+tempFilejava.io.Filehf
+
+é ì(.
+%1(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress≈
+¬
+
+é ì(
+%2"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*>
+
+é ì(0
+.
+%1(com.smilepile.data.backup.ImportProgress*
+
+è è("
+
+totalint*
+
+ê! ê((
+
+currentint*-
+
+ë# ë(,
+
+	operationjava.lang.String*)
+
+__unknown_file (
+	<unknown>ã
+à
+
+é ì(4
+progress(com.smilepile.data.backup.ImportProgress"__id*>
+
+é ì(0
+.
+%1(com.smilepile.data.backup.ImportProgressΩ
+∫
+
+î î(
+%3java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+î î(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelΩ
+∫
+
+î î(%
+%4java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+î î(%1/
+-com.smilepile.ui.viewmodels.SettingsViewModelZ
+X
+
+î î(K
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"7
+
+__unknown_file (
+
+valuejava.lang.Object:
+
+ç ç(
+currentint:
+
+ç ç(
+totalint:+
+
+ç ç(%
+	operationjava.lang.StringB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH£
+Pcom.smilepile.ui.viewmodels.SettingsViewModel#executeJsonImport(Ljava/io/File;)Vq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktö ö()"0*˚
+0
+ö ö(Í
+Á
+
+õ õ(-
+%0'com.smilepile.data.backup.BackupManager"icom.smilepile.ui.viewmodels.SettingsViewModel#getBackupManager()Lcom/smilepile/data/backup/BackupManager;*?
+
+õ õ(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelÀ
+»
+
+õ û(	
+%1java.lang.Object"vcom.smilepile.data.backup.BackupManager#importFromJson(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;)LFlow;*=
+
+õ õ(/
+-
+%0'com.smilepile.data.backup.BackupManager*(
+
+ú ú(!
+
+tempFilejava.io.File*A
+
+ù& ù(+3
+1
+MERGE(com.smilepile.data.backup.ImportStrategy"/
+
+__unknown_file (
+implicit return:&
+
+ö* ö(@
+tempFilejava.io.FileB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH’
+ocom.smilepile.ui.viewmodels.SettingsViewModel#handleImportProgress(Lcom/smilepile/data/backup/ImportProgress;)Vq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt£ £($"0*÷
+2
+Æ Æ(Nø
+º
+
+Æ Æ(%
+%6java.lang.String"Pcom.smilepile.data.backup.ImportProgress#getCurrentOperation()Ljava/lang/String;*D
+
+Æ Æ(6
+4
+progress(com.smilepile.data.backup.ImportProgress*
+4*≈
+3
+ß, ≠(Ω
+∫
+
+® ®(
+%4java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+® ®(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelΩ
+∫
+
+®! ®()
+%5java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+®! ®()1/
+-com.smilepile.ui.viewmodels.SettingsViewModelZ
+X
+
+® ¨(
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>S
+Q
+
+__unknown_file (
+%2"__id*)
+
+® ®(
+
+valuejava.lang.Object*
+1*Â
+4
+ÆR µ(Ω
+∫
+
+Ø Ø(
+%7java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+Ø Ø(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelΩ
+∫
+
+Ø! Ø()
+%8java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+Ø! Ø()1/
+-com.smilepile.ui.viewmodels.SettingsViewModelZ
+X
+
+Ø ≥(
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>•
+¢
+
+¥ ¥(!
+%9kotlin.Unit"@com.smilepile.ui.viewmodels.SettingsViewModel#loadBackupStats()V*?
+
+¥ ¥(!1/
+-com.smilepile.ui.viewmodels.SettingsViewModelK
+I
+
+__unknown_file (
+%2"__id*!
+
+¥ ¥(!
+
+%9kotlin.Unit*
+1*ß
+0
+£ £(Ω
+∫
+
+§ §(
+%0java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+§ §(1/
+-com.smilepile.ui.viewmodels.SettingsViewModelΩ
+∫
+
+§ §(!
+%1java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
+
+§ §(!1/
+-com.smilepile.ui.viewmodels.SettingsViewModelZ
+X
+
+§ §(G
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>±
+Æ
+
+ß ß(
+%3java.util.List"Dcom.smilepile.data.backup.ImportProgress#getErrors()Ljava/util/List;*D
+
+ß ß(6
+4
+progress(com.smilepile.data.backup.ImportProgress*
+2
+3*@
+1
+∂	 ∑("/
+
+__unknown_file (
+implicit return:B
+
+£% £(=4
+progress(com.smilepile.data.backup.ImportProgressB1/
+-com.smilepile.ui.viewmodels.SettingsViewModelH¢
+Ncom.smilepile.ui.viewmodels.SettingsViewModel#cleanupTempFile(Ljava/io/File;)Vq
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktπ π("1*l
+2
+Ω æ(S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+4
+5*i
+3
+ª$ Ω(S
+Q
+
+__unknown_file (
+%3"__id*)
+
+__unknown_file (
+	<unknown>*
+2*@
+4
+¿	 ¡("/
+
+__unknown_file (
+implicit return*i
+5
+æ' ¿(	S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+4*ˆ
+1
+∫ æ(	ig
+
+ª ª("
+%1boolean"java.io.File#delete()Z*(
+
+ª ª(
+
+tempFilejava.io.File2delete()r
+p
+
+ª ª("
+%2boolean"kotlin.Boolean#not()Z*
+
+ª ª("
+
+%1boolean*
+
+ª ª("
+
+%1boolean*
+2
+3:&
+
+π  π(6
+tempFilejava.io.FileB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH™
 ;com.smilepile.ui.viewmodels.SettingsViewModel#clearCache()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¡ ¡("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt∆ ∆("0*@
 0
-æ ¿("/
+√ ≈("/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHµ
 Fcom.smilepile.ui.viewmodels.SettingsViewModel#resetAppForOnboarding()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt⁄ ⁄("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktﬂ ﬂ("0*@
 0
-◊ Ÿ("/
+‹ ﬁ("/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHØ
 @com.smilepile.ui.viewmodels.SettingsViewModel#loadBackupStats()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÉ É("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktà à("0*@
 0
-Ä Ç("/
+Ö á("/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHá
 ;com.smilepile.ui.viewmodels.SettingsViewModel#clearError()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktô ô("0*ú
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktû û("0*ú
 0
-ñ ò(Ω
+õ ù(Ω
 ∫
 
-ö ö(
+ü ü(
 %0java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-ö ö(1/
+ü ü(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-ö ö(!
+ü ü(!
 %1java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-ö ö(!1/
+ü ü(!1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-ö ö(:
+ü ü(:
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1742,71 +2345,71 @@ X
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHû	
 Ccom.smilepile.ui.viewmodels.SettingsViewModel#clearExportContent()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt† †("0*´
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt• •("0*´
 0
-ù ü(Ω
+¢ §(Ω
 ∫
 
-° °(
+¶ ¶(
 %0java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-° °(1/
+¶ ¶(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-° °(!
+¶ ¶(!
 %1java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-° °(!1/
+¶ ¶(!1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-° £(	
+¶ ®(	
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>ª
 ∏
 
-§ §(
+© ©(
 %2java.io.File"Ucom.smilepile.ui.viewmodels.SettingsViewModel#getPendingExportZipFile()Ljava/io/File;*?
 
-§ §(1/
+© ©(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelŒ
 À
 
-Æ Æ(#
+≥ ≥(#
 %3java.io.File"Vcom.smilepile.ui.viewmodels.SettingsViewModel#setPendingExportZipFile(Ljava/io/File;)V*?
 
-Æ Æ(#1/
+≥ ≥(#1/
 -com.smilepile.ui.viewmodels.SettingsViewModel*
 
-Æ Æ(# "/
+≥ ≥(# "/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHê
 Dcom.smilepile.ui.viewmodels.SettingsViewModel#clearImportProgress()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¥ ¥("0*ú
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktπ π("0*ú
 0
-± ≥(Ω
+∂ ∏(Ω
 ∫
 
-µ µ(
+∫ ∫(
 %0java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-µ µ(1/
+∫ ∫(1/
 -com.smilepile.ui.viewmodels.SettingsViewModelΩ
 ∫
 
-µ µ(!
+∫ ∫(!
 %1java.lang.Object"Scom.smilepile.ui.viewmodels.SettingsViewModel#get_uiState()Lerror/NonExistentClass;*?
 
-µ µ(!1/
+∫ ∫(!1/
 -com.smilepile.ui.viewmodels.SettingsViewModelZ
 X
 
-µ µ(C
+∫ ∫(C
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -1816,143 +2419,143 @@ X
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHŒ
 Pcom.smilepile.ui.viewmodels.SettingsViewModel#exportAllSettings()Ljava/util/Map;q
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktª ª(!"0*Œ
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¿ ¿(!"0*Œ
 0
-∏ ∫(Í
+Ω ø(Í
 Á
 
-º º(,
+¡ ¡(,
 %0&com.smilepile.settings.SettingsManager"jcom.smilepile.ui.viewmodels.SettingsViewModel#getSettingsManager()Lcom/smilepile/settings/SettingsManager;*?
 
-º º(1/
+¡ ¡(1/
 -com.smilepile.ui.viewmodels.SettingsViewModel™
 ß
 
-º º(/
+¡ ¡(/
 %1java.util.Map"Fcom.smilepile.settings.SettingsManager#exportSettings()Ljava/util/Map;*<
 
-º º(.
+¡ ¡(.
 ,
 %0&com.smilepile.settings.SettingsManager"#
 
-º º(/
+¡ ¡(/
 
 %1java.util.MapB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHü
 Rcom.smilepile.ui.viewmodels.SettingsViewModel#importAllSettings(Ljava/util/Map;Z)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¬ ¬(!"0*–
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt« «(!"0*–
 0
-ø ¡(Í
+ƒ ∆(Í
 Á
 
-√ √(,
+» »(,
 %0&com.smilepile.settings.SettingsManager"jcom.smilepile.ui.viewmodels.SettingsViewModel#getSettingsManager()Lcom/smilepile/settings/SettingsManager;*?
 
-√ √(1/
+» »(1/
 -com.smilepile.ui.viewmodels.SettingsViewModel˚
 ¯
 
-√ √(;
+» »(;
 %1kotlin.Unit"Hcom.smilepile.settings.SettingsManager#importSettings(Ljava/util/Map;Z)V*<
 
-√ √(.
+» »(.
 ,
 %0&com.smilepile.settings.SettingsManager*)
 
-√' √(/
+»' »(/
 
 settingsjava.util.Map*$
 
-√1 √(:
+»1 »(:
 
 	overwriteboolean¢
 ü
 
-ƒ ƒ(
+… …(
 %2kotlin.Unit"=com.smilepile.ui.viewmodels.SettingsViewModel#loadSettings()V*?
 
-ƒ ƒ(1/
+… …(1/
 -com.smilepile.ui.viewmodels.SettingsViewModel"/
 
 __unknown_file (
 implicit return:'
 
-¬" ¬(<
+«" «(<
 settingsjava.util.Map:"
 
-¬> ¬(X
+«> «(X
 	overwritebooleanB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH∑
 Hcom.smilepile.ui.viewmodels.SettingsViewModel#resetSettingsToDefaults()Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt   ("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktœ œ("0*@
 0
-« …("/
+Ã Œ("/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHı
 ãcom.smilepile.ui.viewmodels.SettingsViewModel#updateGallerySettings(Ljava/lang/Integer;Lcom/smilepile/settings/SettingsManager$SortOrder;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt‘ ‘("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktŸ Ÿ("0*@
 0
-— ”("/
+÷ ÿ("/
 
 __unknown_file (
 implicit return:+
 
-‘ ‘(3
+Ÿ Ÿ(3
 gridSizejava.lang.Integer:K
 
-‘5 ‘(a=
+Ÿ5 Ÿ(a=
 	sortOrder0com.smilepile.settings.SettingsManager$SortOrderB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHù
 Ñcom.smilepile.ui.viewmodels.SettingsViewModel#updateNotificationSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktﬁ ﬁ(""0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt„ „(""0*@
 0
-€ ›("/
+‡ ‚("/
 
 __unknown_file (
 implicit return:7
 
-ﬂ ﬂ(-)
+‰ ‰(-)
 notificationsEnabledjava.lang.Boolean:6
 
-‡ ‡(,(
+Â Â(,(
 backupNotificationsjava.lang.Boolean:6
 
-· ·(,(
+Ê Ê(,(
 memoryNotificationsjava.lang.BooleanB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH…
 £com.smilepile.ui.viewmodels.SettingsViewModel#updateBackupSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/smilepile/settings/SettingsManager$BackupFrequency;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÌ Ì("0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÚ Ú("0*@
 0
-Í Ï("/
+Ô Ò("/
 
 __unknown_file (
 implicit return:4
 
-Ó Ó(*&
+Û Û(*&
 autoBackupEnabledjava.lang.Boolean:+
 
-Ô Ô(!
+Ù Ù(!
 wifiOnlyjava.lang.Boolean:Q
 
- (:C
+ı ı(:C
 	frequency6com.smilepile.settings.SettingsManager$BackupFrequencyB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelHî
 »com.smilepile.ui.viewmodels.SettingsViewModel#updatePhotoQualitySettings(Lcom/smilepile/settings/SettingsManager$PhotoQuality;Lcom/smilepile/settings/SettingsManager$PhotoQuality;Ljava/lang/Boolean;)Vq
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.kt¸ ¸(""0*@
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/SettingsViewModel.ktÅ Å(""0*@
 0
-˘ ˚("/
+˛ Ä("/
 
 __unknown_file (
 implicit return:R
 
-˝ ˝(;D
+Ç Ç(;D
 uploadQuality3com.smilepile.settings.SettingsManager$PhotoQuality:U
 
-˛ ˛(>G
+É É(>G
 thumbnailQuality3com.smilepile.settings.SettingsManager$PhotoQuality:/
 
-ˇ ˇ(%!
+Ñ Ñ(%!
 autoOptimizejava.lang.BooleanB1/
 -com.smilepile.ui.viewmodels.SettingsViewModelH

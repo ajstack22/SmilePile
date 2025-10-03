@@ -98,6 +98,9 @@ class PhotoEditViewModelTest {
         // Setup default mock responses - use MutableStateFlow for immediate emission
         every { categoryRepository.getAllCategoriesFlow() } returns MutableStateFlow(listOf(testCategory))
         coEvery { photoRepository.getPhotoByPath(any()) } returns testPhoto
+
+        // Setup static mocks once in @Before to avoid race conditions
+        setupStaticMocks()
     }
 
     private fun setupStaticMocks() {
@@ -116,7 +119,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `initial state is correct`() = runTest {
-        setupStaticMocks()
         // Given & When
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         advanceUntilIdle()
@@ -137,7 +139,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `initializes editor with URIs for import`() = runTest {
-        setupStaticMocks()
         // Given
         val uri1 = mockk<Uri>(relaxed = true)
         val uri2 = mockk<Uri>(relaxed = true)
@@ -161,7 +162,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `initializes editor with paths for gallery editing`() = runTest {
-        setupStaticMocks()
         // Given
         val path = "/test/photo.jpg"
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
@@ -180,7 +180,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `rotates photo correctly`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo.jpg"))
@@ -199,7 +198,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `updates crop rectangle`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo.jpg"))
@@ -222,7 +220,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `applies aspect ratio preset`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo.jpg"))
@@ -239,7 +236,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `skips current photo without editing`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg"))
@@ -259,7 +255,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `applies edits to current photo`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg"))
@@ -283,7 +278,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `applies rotation to all remaining photos`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg"))
@@ -326,7 +320,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `updates pending category`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         advanceUntilIdle()
@@ -340,7 +333,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `completes editing when all photos processed`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo.jpg"))
@@ -356,7 +348,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `saves processed photos correctly`() = runTest {
-        setupStaticMocks()
         // Given
         val savedFile = File("/saved/photo.jpg")
         coEvery { storageManager.savePhotoToInternalStorage(any(), any()) } returns savedFile
@@ -380,7 +371,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `handles error when loading photo fails`() = runTest {
-        setupStaticMocks()
         // Given
         every { BitmapFactory.decodeFile(any()) } returns null
 
@@ -398,7 +388,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `progress text shows correct format`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg", "/test/photo3.jpg"))
@@ -413,7 +402,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `can apply to all is enabled when rotation applied and more photos remain`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg"))
@@ -431,7 +419,6 @@ class PhotoEditViewModelTest {
 
     @Test
     fun `gets processed results correctly`() = runTest {
-        setupStaticMocks()
         // Given
         viewModel = PhotoEditViewModel(context, storageManager, photoRepository, categoryRepository, fakeImageProcessor)
         viewModel.initializeEditor(photoPaths = listOf("/test/photo1.jpg", "/test/photo2.jpg"))

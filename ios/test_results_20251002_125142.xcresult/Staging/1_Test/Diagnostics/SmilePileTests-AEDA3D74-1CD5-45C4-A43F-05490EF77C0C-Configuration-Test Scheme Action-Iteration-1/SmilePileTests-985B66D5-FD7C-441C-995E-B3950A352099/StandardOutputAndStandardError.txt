@@ -1,0 +1,941 @@
+2025-10-02 12:52:54.264788-0500 SmilePile[62457:21841850] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-02 12:52:54.265514-0500 SmilePile[62457:21841850] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf"
+2025-10-02 12:52:54.265832-0500 SmilePile[62457:21841850] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-02 12:52:54.266137-0500 SmilePile[62457:21841850] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf"
+2025-10-02 12:52:54.266419-0500 SmilePile[62457:21841850] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-02 12:52:54.266712-0500 SmilePile[62457:21841850] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-02 12:52:54.269435-0500 SmilePile[62457:21841850] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-02 12:52:54.269533-0500 SmilePile[62457:21841850] GSFontRegisterCGFont(<CGFont (0x600002c08500): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c08500): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-02 12:52:54.317180-0500 SmilePile[62457:21841850] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-02 12:52:54.398313-0500 SmilePile[62457:21841850] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Library/Application%20Support/SmilePile.sqlite
+2025-10-02 12:52:54.411743-0500 SmilePile[62457:21841850] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-02 12:52:54.412017-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_photos
+2025-10-02 12:52:54.412086-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_thumbs
+2025-10-02 12:52:54.429028-0500 SmilePile[62457:21841850] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-02 12:52:54.531423-0500 SmilePile[62457:21842052] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-10-02 12:52:54.550937-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-02 12:52:54.551170-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-02 12:52:54.551229-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-02 12:52:54.551724-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-02 12:52:54.551914-0500 SmilePile[62457:21841850] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-02 12:52:54.552069-0500 SmilePile[62457:21841850] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-02 12:52:54.561364-0500 SmilePile[62457:21841850] [OptimizedPhotoGalleryView] Loaded 1 categories
+2025-10-02 12:52:54.561468-0500 SmilePile[62457:21841850] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-02 12:52:54.561766-0500 SmilePile[62457:21842052] [CategoryRepository] Categories already exist (1), skipping initialization
+2025-10-02 12:52:54.595540-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] Loading photos from repository
+SmilePileApp: Categories count: 1
+2025-10-02 12:52:54.596138-0500 SmilePile[62457:21842050] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-02 12:52:54.597288-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] Loaded 0 photos in 0.00s
+2025-10-02 12:52:54.638225-0500 SmilePile[62457:21842050] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'PhotoRepositoryTests' started at 2025-10-02 12:52:55.284.
+Test Case '-[SmilePileTests.PhotoRepositoryTests testDeletePhotosByCategory]' started.
+2025-10-02 12:52:55.287639-0500 SmilePile[62457:21842050] [PhotoRepository] Inserted 3 photos successfully
+2025-10-02 12:52:55.291561-0500 SmilePile[62457:21842051] [PhotoRepository] Retrieved 1 total photos from database
+Test Case '-[SmilePileTests.PhotoRepositoryTests testDeletePhotosByCategory]' passed (0.011 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testDeletePhoto]' started.
+2025-10-02 12:52:55.296874-0500 SmilePile[62457:21842051] [PhotoRepository] Photo inserted successfully with ID: 1, path: /photos/test.jpg, categoryId: 1
+Test Case '-[SmilePileTests.PhotoRepositoryTests testDeletePhoto]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetAllPhotosFlow]' started.
+2025-10-02 12:52:55.301911-0500 SmilePile[62457:21842053] [PhotoRepository] Inserted 2 photos successfully
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:162: error: -[SmilePileTests.PhotoRepositoryTests testGetAllPhotosFlow] : XCTAssertEqual failed: ("3") is not equal to ("2")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetAllPhotosFlow]' failed (0.529 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoByPath]' started.
+2025-10-02 12:52:55.830495-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 257MB
+2025-10-02 12:52:55.831187-0500 SmilePile[62457:21842050] [PhotoRepository] Photo inserted successfully with ID: 1, path: /photos/unique.jpg, categoryId: 1
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoByPath]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoCategoryCount]' started.
+2025-10-02 12:52:55.837878-0500 SmilePile[62457:21842051] [PhotoRepository] Inserted 3 photos successfully
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:264: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotoCategoryCount] : XCTAssertEqual failed: ("5") is not equal to ("2")
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:265: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotoCategoryCount] : XCTAssertEqual failed: ("2") is not equal to ("1")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoCategoryCount]' failed (0.005 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoCount]' started.
+2025-10-02 12:52:55.843198-0500 SmilePile[62457:21842060] [PhotoRepository] Inserted 3 photos successfully
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:246: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotoCount] : XCTAssertEqual failed: ("10") is not equal to ("3")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotoCount]' failed (0.010 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotosByCategory]' started.
+2025-10-02 12:52:55.852558-0500 SmilePile[62457:21842050] [PhotoRepository] Inserted 3 photos successfully
+2025-10-02 12:52:55.852976-0500 SmilePile[62457:21842053] [PhotoRepository] Retrieved 9 photos for category 1
+2025-10-02 12:52:55.853189-0500 SmilePile[62457:21842053] [PhotoRepository] Retrieved 4 photos for category 2
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:181: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotosByCategory] : XCTAssertEqual failed: ("9") is not equal to ("2")
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:182: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotosByCategory] : XCTAssertEqual failed: ("4") is not equal to ("1")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotosByCategory]' failed (0.003 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotosByDateRange]' started.
+2025-10-02 12:52:55.856218-0500 SmilePile[62457:21842050] [PhotoRepository] Inserted 3 photos successfully
+2025-10-02 12:52:55.858476-0500 SmilePile[62457:21842053] [PhotoRepository] Retrieved 16 total photos from database
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:225: error: -[SmilePileTests.PhotoRepositoryTests testGetPhotosByDateRange] : XCTAssertEqual failed: ("15") is not equal to ("2")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testGetPhotosByDateRange]' failed (0.005 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertMultiplePhotos]' started.
+2025-10-02 12:52:55.860598-0500 SmilePile[62457:21842053] [PhotoRepository] Inserted 3 photos successfully
+2025-10-02 12:52:55.860923-0500 SmilePile[62457:21842060] [PhotoRepository] Retrieved 19 total photos from database
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:85: error: -[SmilePileTests.PhotoRepositoryTests testInsertMultiplePhotos] : XCTAssertEqual failed: ("19") is not equal to ("3")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertMultiplePhotos]' failed (0.002 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertPhoto]' started.
+2025-10-02 12:52:55.863058-0500 SmilePile[62457:21842053] [PhotoRepository] Photo inserted successfully with ID: 1, path: /photos/test.jpg, categoryId: 1
+/Users/adamstack/SmilePile/ios/SmilePileTests/PhotoRepositoryTests.swift:45: error: -[SmilePileTests.PhotoRepositoryTests testInsertPhoto] : XCTAssertEqual failed: ("Optional("/photos/test1.jpg")") is not equal to ("Optional("/photos/test.jpg")")
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertPhoto]' failed (0.005 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertPhotoWithInvalidCategory]' started.
+Test Case '-[SmilePileTests.PhotoRepositoryTests testInsertPhotoWithInvalidCategory]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.PhotoRepositoryTests testUpdatePhoto]' started.
+2025-10-02 12:52:55.871008-0500 SmilePile[62457:21842053] [PhotoRepository] Photo inserted successfully with ID: 1, path: /photos/test.jpg, categoryId: 1
+📝 PhotoRepository: updatePhoto called with id: 1, categoryId: 2, path: /photos/updated.jpg
+✅ PhotoRepository: Photo updated successfully - id: 1, categoryId changed from 1 to 2
+Test Case '-[SmilePileTests.PhotoRepositoryTests testUpdatePhoto]' passed (0.003 seconds).
+Test Suite 'PhotoRepositoryTests' failed at 2025-10-02 12:52:55.873.
+	 Executed 12 tests, with 9 failures (0 unexpected) in 0.588 (0.590) seconds
+Test Suite 'StorageManagerTests' started at 2025-10-02 12:52:55.878.
+Test Case '-[SmilePileTests.StorageManagerTests testBatchImportPerformance]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testBatchImportPerformance]' passed (0.009 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testCleanupOrphanedThumbnails]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:143: error: -[SmilePileTests.StorageManagerTests testCleanupOrphanedThumbnails] : failed: caught error: "saveFailed("Failed to save photo: The file “IMG_20251002_125255_EDB4E908.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testCleanupOrphanedThumbnails]' failed (0.006 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testConcurrentSaves]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testConcurrentSaves]' passed (0.003 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testCopyPhotoToInternalStorage]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:410: error: -[SmilePileTests.StorageManagerTests testCopyPhotoToInternalStorage] : failed: caught error: "memoryPressure("System memory pressure detected")"
+Test Case '-[SmilePileTests.StorageManagerTests testCopyPhotoToInternalStorage]' failed (0.003 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testDeletePhoto]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:106: error: -[SmilePileTests.StorageManagerTests testDeletePhoto] : failed: caught error: "saveFailed("Failed to save photo: The file “IMG_20251002_125255_3A9AA07F.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testDeletePhoto]' failed (0.002 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testDirectoryCreation]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testDirectoryCreation]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testDirectoryProtection]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testDirectoryProtection]' passed (0.005 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testGetStoragePressure]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testGetStoragePressure]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testGetThumbnailPath]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:389: error: -[SmilePileTests.StorageManagerTests testGetThumbnailPath] : failed: caught error: "saveFailed("Failed to save photo: The file “test.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testGetThumbnailPath]' failed (0.002 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testHasEnoughSpace]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testHasEnoughSpace]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testImportPhotosInBatches]' started.
+2025-10-02 12:52:55.917132-0500 SmilePile[62457:21841850] [StorageManager] Memory pressure detected - pausing import
+2025-10-02 12:52:56.429679-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 262MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:243: error: -[SmilePileTests.StorageManagerTests testImportPhotosInBatches] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.StorageManagerTests testImportPhotosInBatches]' failed (0.520 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testImportPhotosWithMemoryPressure]' started.
+2025-10-02 12:52:56.534609-0500 SmilePile[62457:21841850] [StorageManager] Memory pressure detected - pausing import
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:272: error: -[SmilePileTests.StorageManagerTests testImportPhotosWithMemoryPressure] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.StorageManagerTests testImportPhotosWithMemoryPressure]' failed (0.637 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testImportWithInsufficientSpace]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testImportWithInsufficientSpace]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testImportWithPartialFailure]' started.
+2025-10-02 12:52:57.074108-0500 SmilePile[62457:21841850] [StorageManager] Memory pressure detected - pausing import
+2025-10-02 12:52:57.430301-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 255MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:450: error: -[SmilePileTests.StorageManagerTests testImportWithPartialFailure] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.StorageManagerTests testImportWithPartialFailure]' failed (0.638 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testInsufficientSpaceError]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testInsufficientSpaceError]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testInvalidImageDataError]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testInvalidImageDataError]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testIsInternalStoragePath]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testIsInternalStoragePath]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testMemoryEfficientProcessing]' started.
+Test Case '-[SmilePileTests.StorageManagerTests testMemoryEfficientProcessing]' passed (0.013 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testMigrateExternalPhotosToInternal]' started.
+2025-10-02 12:52:57.831870-0500 SmilePile[62457:21841850] [StorageManager] Memory pressure detected - pausing import
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:428: error: -[SmilePileTests.StorageManagerTests testMigrateExternalPhotosToInternal] : failed: caught error: "memoryPressure("Persistent memory pressure")"
+Test Case '-[SmilePileTests.StorageManagerTests testMigrateExternalPhotosToInternal]' failed (0.612 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testRecoverFromMemoryPressure]' started.
+2025-10-02 12:52:58.430245-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 252MB
+2025-10-02 12:52:59.430258-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 246MB
+2025-10-02 12:53:00.430140-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 234MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:484: error: -[SmilePileTests.StorageManagerTests testRecoverFromMemoryPressure] : XCTAssertGreaterThan failed: ("0") is not greater than ("0")
+Test Case '-[SmilePileTests.StorageManagerTests testRecoverFromMemoryPressure]' failed (2.647 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testSaveMultipleImages]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:89: error: -[SmilePileTests.StorageManagerTests testSaveMultipleImages] : failed: caught error: "saveFailed("Failed to save photo: The file “test0.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testSaveMultipleImages]' failed (0.003 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testSaveUIImage]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:70: error: -[SmilePileTests.StorageManagerTests testSaveUIImage] : failed: caught error: "saveFailed("Failed to save photo: The file “test.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testSaveUIImage]' failed (0.002 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testSequentialThumbnailGeneration]' started.
+2025-10-02 12:53:00.995240-0500 SmilePile[62457:21842052] [SafeThumbnailGenerator] Memory usage high: 235MB
+2025-10-02 12:53:01.429961-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 235MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:332: error: -[SmilePileTests.StorageManagerTests testSequentialThumbnailGeneration] : failed: caught error: "memoryPressure"
+Test Case '-[SmilePileTests.StorageManagerTests testSequentialThumbnailGeneration]' failed (0.536 seconds).
+Test Case '-[SmilePileTests.StorageManagerTests testStorageUsageCalculation]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Storage/StorageManagerTests.swift:125: error: -[SmilePileTests.StorageManagerTests testStorageUsageCalculation] : failed: caught error: "saveFailed("Failed to save photo: The file “test0.jpg” doesn’t exist.")"
+Test Case '-[SmilePileTests.StorageManagerTests testStorageUsageCalculation]' failed (0.003 seconds).
+Test Suite 'StorageManagerTests' failed at 2025-10-02 12:53:01.531.
+	 Executed 24 tests, with 13 failures (12 unexpected) in 5.650 (5.653) seconds
+Test Suite 'CoreDataStackTests' started at 2025-10-02 12:53:01.535.
+Test Case '-[SmilePileTests.CoreDataStackTests testBackgroundContextCreation]' started.
+Test Case '-[SmilePileTests.CoreDataStackTests testBackgroundContextCreation]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testBatchInsertPerformance]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:202: Test Case '-[SmilePileTests.CoreDataStackTests testBatchInsertPerformance]' measured [Time, seconds] average: 0.020, relative standard deviation: 16.711%, values: [0.018347, 0.019820, 0.016498, 0.016126, 0.017075, 0.020507, 0.018120, 0.027533, 0.019564, 0.023136], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.CoreDataStackTests testBatchInsertPerformance]' passed (0.467 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testCategoryValidation]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:312: error: -[SmilePileTests.CoreDataStackTests testCategoryValidation] : XCTAssertNil failed: "gray" - Invalid hex should not create a valid color
+Test Case '-[SmilePileTests.CoreDataStackTests testCategoryValidation]' failed (0.014 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testConcurrentSaves]' started.
+CoreData: debug: PostSaveMaintenance: incremental_vacuum with freelist_count - 204 and pages_to_free 193
+CoreData: debug: PostSaveMaintenance: incremental_vacuum with freelist_count - 11 and pages_to_free 2
+CoreData: debug: PostSaveMaintenance: incremental_vacuum with freelist_count - 9 and pages_to_free 1
+Test Case '-[SmilePileTests.CoreDataStackTests testConcurrentSaves]' passed (0.012 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testCoreDataStackInitialization]' started.
+Test Case '-[SmilePileTests.CoreDataStackTests testCoreDataStackInitialization]' passed (0.005 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testCreateCustomCategory]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:0: error: -[SmilePileTests.CoreDataStackTests testCreateCustomCategory] : failed: caught error: "Error Domain=NSCocoaErrorDomain Code=1570 "name is a required value." UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000210a350> (entity: CategoryEntity; id: 0x600000213780 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC437>; data: {
+    colorHex = "#00FF00";
+    createdAt = 1759427582044;
+    displayName = Vacation;
+    iconName = nil;
+    id = 1759427582044;
+    isDefault = 0;
+    name = nil;
+    photos =     (
+    );
+    position = 0;
+}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}"
+Test Case '-[SmilePileTests.CoreDataStackTests testCreateCustomCategory]' failed (0.035 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testCreateDefaultCategories]' started.
+2025-10-02 12:53:02.088519-0500 SmilePile[62457:21841850] [Default] Exception attempting to serialize sanitized error of issue. All userInfo with be discarded except localized description: NSInvalidUnarchiveOperationException: The data couldn’t be read because it isn’t in the correct format.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:0: error: -[SmilePileTests.CoreDataStackTests testCreateDefaultCategories] : failed: caught error: "Error Domain=NSCocoaErrorDomain Code=1560 "Multiple validation errors occurred." UserInfo={NSDetailedErrors=(
+    "Error Domain=NSCocoaErrorDomain Code=1570 \"name is a required value.\" UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000216c320> (entity: CategoryEntity; id: 0x6000006ac2e0 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC441>; data: {\n    colorHex = \"#4CAF50\";\n    createdAt = 1759427582079;\n    displayName = Sports;\n    iconName = nil;\n    id = 4;\n    isDefault = 1;\n    name = nil;\n    photos =     (\n    );\n    position = 3;\n}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}",
+    "Error Domain=NSCocoaErrorDomain Code=1570 \"name is a required value.\" UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000216c410> (entity: CategoryEntity; id: 0x6000006ad280 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC438>; data: {\n    colorHex = \"#E91E63\";\n    createdAt = 1759427582079;\n    displayName = Family;\n    iconName = nil;\n    id = 1;\n    isDefault = 1;\n    name = nil;\n    photos =     (\n    );\n    position = 0;\n}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}",
+    "Error Domain=NSCocoaErrorDomain Code=1570 \"name is a required value.\" UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000216c370> (entity: CategoryEntity; id: 0x6000006ac3e0 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC440>; data: {\n    colorHex = \"#9C27B0\";\n    createdAt = 1759427582079;\n    displayName = Games;\n    iconName = nil;\n    id = 3;\n    isDefault = 1;\n    name = nil;\n    photos =     (\n    );\n    position = 2;\n}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}",
+    "Error Domain=NSCocoaErrorDomain Code=1570 \"name is a required value.\" UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000216c3c0> (entity: CategoryEntity; id: 0x6000006acb00 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC439>; data: {\n    colorHex = \"#F44336\";\n    createdAt = 1759427582079;\n    displayName = Cars;\n    iconName = nil;\n    id = 2;\n    isDefault = 1;\n    name = nil;\n    photos =     (\n    );\n    position = 1;\n}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}"
+)}"
+Test Case '-[SmilePileTests.CoreDataStackTests testCreateDefaultCategories]' failed (0.017 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testCreatePhoto]' started.
+CoreData: debug: PostSaveMaintenance: incremental_vacuum with freelist_count - 8 and pages_to_free 1
+Test Case '-[SmilePileTests.CoreDataStackTests testCreatePhoto]' passed (0.007 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testFetchPerformance]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:237: Test Case '-[SmilePileTests.CoreDataStackTests testFetchPerformance]' measured [Time, seconds] average: 0.000, relative standard deviation: 30.475%, values: [0.000401, 0.000192, 0.000152, 0.000196, 0.000221, 0.000219, 0.000271, 0.000141, 0.000232, 0.000262], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.CoreDataStackTests testFetchPerformance]' passed (0.272 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testFetchPhotosByCategory]' started.
+Test Case '-[SmilePileTests.CoreDataStackTests testFetchPhotosByCategory]' passed (0.004 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testPhotoValidation]' started.
+Test Case '-[SmilePileTests.CoreDataStackTests testPhotoValidation]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testPreventDuplicateCategories]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:0: error: -[SmilePileTests.CoreDataStackTests testPreventDuplicateCategories] : failed: caught error: "Error Domain=NSCocoaErrorDomain Code=1570 "name is a required value." UserInfo={NSValidationErrorObject=<CategoryEntity: 0x60000215ac60> (entity: CategoryEntity; id: 0x6000006bd2c0 <x-coredata:///CategoryEntity/t43F3D5D6-768C-4E34-BB52-4F46761A6EC41050>; data: {
+    colorHex = "#FF0000";
+    createdAt = 1759427582381;
+    displayName = Duplicate;
+    iconName = nil;
+    id = 1759427582381;
+    isDefault = 0;
+    name = nil;
+    photos =     (
+    );
+    position = 0;
+}), NSLocalizedDescription=name is a required value., NSValidationErrorKey=name, NSValidationErrorValue=null}"
+Test Case '-[SmilePileTests.CoreDataStackTests testPreventDuplicateCategories]' failed (0.005 seconds).
+Test Case '-[SmilePileTests.CoreDataStackTests testPreventDuplicatePhotos]' started.
+CoreData: debug: PostSaveMaintenance: incremental_vacuum with freelist_count - 21 and pages_to_free 10
+/Users/adamstack/SmilePile/ios/SmilePileTests/Core/Data/CoreDataStackTests.swift:87: error: -[SmilePileTests.CoreDataStackTests testPreventDuplicatePhotos] : XCTAssertEqual failed: ("2") is not equal to ("1") - Should not allow duplicate URIs
+Test Case '-[SmilePileTests.CoreDataStackTests testPreventDuplicatePhotos]' failed (0.007 seconds).
+Test Suite 'CoreDataStackTests' failed at 2025-10-02 12:53:02.394.
+	 Executed 13 tests, with 5 failures (3 unexpected) in 0.852 (0.858) seconds
+Test Suite 'CategoryRepositoryTests' started at 2025-10-02 12:53:02.398.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testBulkInsertPerformance]' started.
+2025-10-02 12:53:02.429648-0500 SmilePile[62457:21841850] [PhotoGalleryViewModel] High memory usage: 220MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:588: Test Case '-[SmilePileTests.CategoryRepositoryTests testBulkInsertPerformance]' measured [Time, seconds] average: 0.003, relative standard deviation: 19.940%, values: [0.003585, 0.003054, 0.002502, 0.002653, 0.002911, 0.002362, 0.004406, 0.002983, 0.003002, 0.002345], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.CategoryRepositoryTests testBulkInsertPerformance]' passed (0.284 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryBatchOperations]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryBatchOperations]' passed (0.003 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryCaseInsensitiveSearch]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryCaseInsensitiveSearch]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryColorHexValidation]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryColorHexValidation]' passed (0.003 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryPositionOrdering]' started.
+Swift/arm64-apple-ios-simulator.swiftinterface:16934: Fatal error: Range requires lowerBound <= upperBound
+2025-10-02 12:53:02.701142-0500 SmilePile[62457:21842050] Swift/arm64-apple-ios-simulator.swiftinterface:16934: Fatal error: Range requires lowerBound <= upperBound
+2025-10-02 12:53:25.115443-0500 SmilePile[62561:21843624] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-02 12:53:25.117316-0500 SmilePile[62561:21843624] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf"
+2025-10-02 12:53:25.117874-0500 SmilePile[62561:21843624] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-02 12:53:25.118249-0500 SmilePile[62561:21843624] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf"
+2025-10-02 12:53:25.146603-0500 SmilePile[62561:21843624] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-02 12:53:25.147031-0500 SmilePile[62561:21843624] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-02 12:53:25.150222-0500 SmilePile[62561:21843624] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-02 12:53:25.150364-0500 SmilePile[62561:21843624] GSFontRegisterCGFont(<CGFont (0x600002c18000): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c18000): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-02 12:53:25.222901-0500 SmilePile[62561:21843624] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-02 12:53:25.614705-0500 SmilePile[62561:21843624] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Library/Application%20Support/SmilePile.sqlite
+2025-10-02 12:53:25.684373-0500 SmilePile[62561:21843624] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-02 12:53:25.684485-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_photos
+2025-10-02 12:53:25.684535-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_thumbs
+2025-10-02 12:53:25.765028-0500 SmilePile[62561:21843624] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-02 12:53:26.171746-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-02 12:53:26.172606-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-02 12:53:26.172696-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-02 12:53:26.174175-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-02 12:53:26.174334-0500 SmilePile[62561:21843624] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-02 12:53:26.174377-0500 SmilePile[62561:21843624] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-02 12:53:26.179569-0500 SmilePile[62561:21843865] [CategoryRepository] Categories already exist (1058), skipping initialization
+2025-10-02 12:53:26.182628-0500 SmilePile[62561:21843624] [OptimizedPhotoGalleryView] Loaded 1058 categories
+2025-10-02 12:53:26.183437-0500 SmilePile[62561:21843624] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-02 12:53:26.238320-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10000 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.240741-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10001 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.242581-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10002 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.244679-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10003 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.246419-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10004 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.247987-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10005 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.249741-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10006 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.251615-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10007 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.253288-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10008 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.254898-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10009 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.256479-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10010 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.258222-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10011 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.259797-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10012 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.261413-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10013 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.263125-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10014 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.264880-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10015 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.266620-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10016 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.268359-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10017 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.269982-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10018 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.271779-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10019 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.273435-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10020 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.275077-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10021 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.276705-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10022 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.279628-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10023 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.281846-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10024 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.283662-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10025 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.285613-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10026 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.287342-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10027 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.288980-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10028 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.290718-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10029 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.292438-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10030 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.294032-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10031 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.295739-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10032 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.297340-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10033 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.299111-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10034 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.300769-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10035 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.302463-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10036 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.304092-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10037 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.305769-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10038 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.307413-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10039 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.309027-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10040 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.310801-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10041 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.312400-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10042 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.314033-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10043 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.315855-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10044 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.317593-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10045 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.319236-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10046 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.320840-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10047 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.322477-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10048 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.324141-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10049 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.325924-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10050 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.327570-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10051 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.329088-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10052 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.330646-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10053 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.332148-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10054 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.333627-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10055 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.335297-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10056 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.336868-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10057 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.338373-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10058 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.339914-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10059 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.341403-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10060 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.343651-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10061 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.345303-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10062 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.346956-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10063 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.348581-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10064 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.350171-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10065 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.351774-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10066 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.353231-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10067 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.354787-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10068 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.356275-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10069 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.357735-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10070 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.359290-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10071 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.360713-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10072 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.362286-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10073 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.363860-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10074 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.365369-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10075 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.366919-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10076 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.369381-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10077 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.370922-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10078 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.372393-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10079 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.373833-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10080 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.375429-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10081 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.376965-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10082 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.378466-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10083 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.380151-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10084 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.381809-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10085 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.383366-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10086 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.384921-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10087 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.386371-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10088 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.387951-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10089 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.389549-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10090 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.391067-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10091 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.392664-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10092 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.394203-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10093 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.395669-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10094 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.397235-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10095 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.398705-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10096 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.400262-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10097 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.401778-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10098 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:26.403348-0500 SmilePile[62561:21843624] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10099 occurs multiple times within the collection, this will give undefined results!
+Test Suite 'CategoryRepositoryTests' started at 2025-10-02 12:53:28.162.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryColorHexValidation]' started.
+SmilePileApp: Categories count: 1058
+2025-10-02 12:53:28.175139-0500 SmilePile[62561:21843624] [PhotoGalleryViewModel] Loading photos from repository
+2025-10-02 12:53:28.178945-0500 SmilePile[62561:21843624] [PhotoGalleryViewModel] High memory usage: 364MB
+2025-10-02 12:53:28.252129-0500 SmilePile[62561:21843900] [PhotoRepository] Retrieved 0 total photos from database
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryColorHexValidation]' passed (0.131 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testCategoryPositionOrdering]' started.
+2025-10-02 12:53:28.295598-0500 SmilePile[62561:21843624] [PhotoGalleryViewModel] Loaded 0 photos in 0.12s
+Swift/arm64-apple-ios-simulator.swiftinterface:16934: Fatal error: Range requires lowerBound <= upperBound
+2025-10-02 12:53:28.300122-0500 SmilePile[62561:21843900] Swift/arm64-apple-ios-simulator.swiftinterface:16934: Fatal error: Range requires lowerBound <= upperBound
+2025-10-02 12:53:52.069723-0500 SmilePile[62849:21847299] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-02 12:53:52.070726-0500 SmilePile[62849:21847299] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf"
+2025-10-02 12:53:52.071100-0500 SmilePile[62849:21847299] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-02 12:53:52.071475-0500 SmilePile[62849:21847299] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf"
+2025-10-02 12:53:52.071850-0500 SmilePile[62849:21847299] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-02 12:53:55.588266-0500 SmilePile[62849:21847299] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-02 12:53:55.593054-0500 SmilePile[62849:21847299] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-02 12:53:55.593243-0500 SmilePile[62849:21847299] GSFontRegisterCGFont(<CGFont (0x600002c00680): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c00680): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-02 12:53:55.656037-0500 SmilePile[62849:21847299] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-02 12:53:55.729305-0500 SmilePile[62849:21847299] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Library/Application%20Support/SmilePile.sqlite
+2025-10-02 12:53:55.744752-0500 SmilePile[62849:21847299] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-02 12:53:55.745038-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_photos
+2025-10-02 12:53:55.745112-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_thumbs
+2025-10-02 12:53:55.772202-0500 SmilePile[62849:21847299] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-02 12:53:55.999948-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-02 12:53:56.000207-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-02 12:53:56.000311-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-02 12:53:56.000889-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-02 12:53:56.001045-0500 SmilePile[62849:21847299] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-02 12:53:56.001120-0500 SmilePile[62849:21847299] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-02 12:53:56.012598-0500 SmilePile[62849:21847828] [CategoryRepository] Categories already exist (1065), skipping initialization
+2025-10-02 12:53:56.014632-0500 SmilePile[62849:21847299] [OptimizedPhotoGalleryView] Loaded 1065 categories
+2025-10-02 12:53:56.015649-0500 SmilePile[62849:21847299] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-02 12:53:56.057373-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10000 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.061253-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 501 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.062120-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 304 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.063039-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10001 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.064841-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 502 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.065610-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 302 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.066554-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10002 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.068397-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 503 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.069201-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 303 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.071215-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10003 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.073482-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 301 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.074401-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10004 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.077697-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10005 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.079579-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10006 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.081380-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10007 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.083079-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10008 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.084680-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10009 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.087326-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10010 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.089389-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10011 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.091051-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10012 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.092670-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10013 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.094366-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10014 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.095979-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10015 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.097713-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10016 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.099664-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10017 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.101410-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10018 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.103111-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10019 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.105180-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10020 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.106880-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10021 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.108759-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10022 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.110536-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10023 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.112291-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10024 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.114016-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10025 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.115613-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10026 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.117353-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10027 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.119500-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10028 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.121476-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10029 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.124939-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10030 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.126875-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10031 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.128570-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10032 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.130166-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10033 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.133352-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10034 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.135232-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10035 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.137079-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10036 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.139210-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10037 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.141134-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10038 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.142988-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10039 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.145102-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10040 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.147036-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10041 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.148842-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10042 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.150563-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10043 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.152195-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10044 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.153949-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10045 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.155601-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10046 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.157396-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10047 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.159162-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10048 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.160909-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10049 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.162770-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10050 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.164559-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10051 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.166255-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10052 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.168781-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10053 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.170701-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10054 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.172639-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10055 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.174272-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10056 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.175748-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10057 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.177437-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10058 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.179016-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10059 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.180670-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10060 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.182197-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10061 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.183832-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10062 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.185557-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10063 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.187209-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10064 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.189040-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10065 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.191206-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10066 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.193026-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10067 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.195146-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10068 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.196856-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10069 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.198438-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10070 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.200032-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10071 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.201644-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10072 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.203303-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10073 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.205089-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10074 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.206627-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10075 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.208092-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10076 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.209805-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10077 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.211398-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10078 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.212964-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10079 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.214768-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10080 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.216387-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10081 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.218123-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10082 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.219749-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10083 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.221396-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10084 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.223218-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10085 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.224987-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10086 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.228209-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10087 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.230285-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10088 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.231954-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10089 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.234765-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10090 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.236500-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10091 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.238253-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10092 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.239958-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10093 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.241552-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10094 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.243192-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10095 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.244762-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10096 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.246320-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10097 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.247909-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10098 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:53:56.249615-0500 SmilePile[62849:21847299] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10099 occurs multiple times within the collection, this will give undefined results!
+Test Suite 'CategoryRepositoryTests' started at 2025-10-02 12:53:58.065.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testConcurrentCategoryOperations]' started.
+2025-10-02 12:53:58.068596-0500 SmilePile[62849:21847299] [PhotoGalleryViewModel] Loading photos from repository
+SmilePileApp: Categories count: 1065
+2025-10-02 12:53:58.069603-0500 SmilePile[62849:21847299] [PhotoGalleryViewModel] High memory usage: 372MB
+2025-10-02 12:53:58.070905-0500 SmilePile[62849:21848144] [PhotoRepository] Retrieved 0 total photos from database
+Test Case '-[SmilePileTests.CategoryRepositoryTests testConcurrentCategoryOperations]' passed (0.115 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testConcurrentReadPerformance]' started.
+2025-10-02 12:53:58.201285-0500 SmilePile[62849:21847299] [PhotoGalleryViewModel] Loaded 0 photos in 0.13s
+2025-10-02 12:53:58.773064-0500 SmilePile[62849:21847299] [PhotoGalleryViewModel] High memory usage: 384MB
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:610: Test Case '-[SmilePileTests.CategoryRepositoryTests testConcurrentReadPerformance]' measured [Time, seconds] average: 0.129, relative standard deviation: 12.450%, values: [0.121170, 0.122096, 0.161768, 0.117048, 0.146026, 0.120693, 0.115726, 0.150230, 0.126198, 0.112420], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[SmilePileTests.CategoryRepositoryTests testConcurrentReadPerformance]' passed (1.719 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testDefaultCategoryProtection]' started.
+2025-10-02 12:53:59.901069-0500 SmilePile[62849:21847828] [CategoryRepository] Categories already exist (1075), skipping initialization
+SmilePileTests/CategoryRepositoryTests.swift:528: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+2025-10-02 12:53:59.901616-0500 SmilePile[62849:21847828] SmilePileTests/CategoryRepositoryTests.swift:528: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+2025-10-02 12:54:29.523950-0500 SmilePile[63254:21850970] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-02 12:54:29.525070-0500 SmilePile[63254:21850970] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf"
+2025-10-02 12:54:29.525525-0500 SmilePile[63254:21850970] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-02 12:54:29.525938-0500 SmilePile[63254:21850970] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf"
+2025-10-02 12:54:29.526353-0500 SmilePile[63254:21850970] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-02 12:54:32.550391-0500 SmilePile[63254:21850970] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-02 12:54:32.555542-0500 SmilePile[63254:21850970] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-02 12:54:32.555766-0500 SmilePile[63254:21850970] GSFontRegisterCGFont(<CGFont (0x600002c10c80): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c10c80): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-02 12:54:32.650024-0500 SmilePile[63254:21850970] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-02 12:54:32.726923-0500 SmilePile[63254:21850970] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Library/Application%20Support/SmilePile.sqlite
+2025-10-02 12:54:32.743636-0500 SmilePile[63254:21850970] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-02 12:54:32.743898-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_photos
+2025-10-02 12:54:32.743949-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_thumbs
+2025-10-02 12:54:32.772477-0500 SmilePile[63254:21850970] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-02 12:54:32.951657-0500 SmilePile[63254:21851795] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2025-10-02 12:54:32.972294-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-02 12:54:32.972443-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-02 12:54:32.972516-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-02 12:54:32.972979-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-02 12:54:32.973129-0500 SmilePile[63254:21850970] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-02 12:54:32.973172-0500 SmilePile[63254:21850970] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-02 12:54:32.977166-0500 SmilePile[63254:21851795] [CategoryRepository] Categories already exist (1075), skipping initialization
+2025-10-02 12:54:32.980682-0500 SmilePile[63254:21850970] [OptimizedPhotoGalleryView] Loaded 1075 categories
+2025-10-02 12:54:32.981655-0500 SmilePile[63254:21850970] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-02 12:54:33.064116-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10000 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.070780-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 501 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.071589-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 304 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.072636-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10001 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.074798-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 502 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.075798-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 302 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.077034-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10002 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.078894-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 503 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.080403-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 303 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.082069-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10003 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.085058-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 301 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.086780-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10004 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.088860-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10005 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.090705-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10006 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.093326-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10007 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.095325-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10008 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.097175-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10009 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.098917-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10010 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.100523-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10011 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.102217-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10012 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.104572-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10013 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.106233-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10014 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.107936-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10015 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.109649-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10016 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.111330-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10017 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.112982-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10018 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.114765-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10019 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.116524-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10020 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.118232-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10021 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.119873-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10022 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.121499-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10023 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.123207-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10024 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.124876-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10025 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.126468-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10026 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.128983-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10027 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.130728-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10028 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.132342-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10029 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.134093-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10030 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.135805-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10031 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.137425-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10032 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.139040-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10033 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.140713-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10034 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.142460-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10035 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.144088-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10036 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.145737-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10037 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.147387-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10038 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.148992-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10039 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.150601-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10040 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.152173-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10041 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.153887-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10042 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.155504-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10043 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.157193-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10044 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.158880-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10045 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.160606-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10046 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.162405-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10047 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.164053-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10048 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.165718-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10049 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.167416-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10050 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.168935-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10051 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.170515-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10052 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.172014-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10053 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.173621-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10054 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.175604-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10055 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.177204-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10056 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.178791-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10057 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.180266-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10058 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.181681-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10059 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.183088-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10060 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.184595-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10061 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.186046-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10062 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.187597-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10063 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.189128-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10064 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.190691-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10065 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.192183-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10066 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.193761-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10067 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.195244-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10068 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.196701-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10069 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.198211-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10070 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.199743-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10071 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.201317-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10072 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.202834-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10073 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.204387-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10074 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.206036-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10075 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.208750-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10076 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.210329-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10077 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.211892-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10078 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.213331-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10079 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.214825-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10080 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.216446-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10081 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.218005-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10082 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.219474-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10083 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.221046-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10084 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.222556-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10085 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.224102-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10086 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.225645-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10087 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.227487-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10088 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.229016-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10089 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.230518-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10090 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.232034-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10091 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.233515-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10092 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.235008-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10093 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.236565-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10094 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.238091-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10095 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.239625-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10096 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.241057-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10097 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.242526-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10098 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:33.244080-0500 SmilePile[63254:21850970] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10099 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:54:35.359008-0500 SmilePile[63254:21850970] [PhotoGalleryViewModel] Loading photos from repository
+SmilePileApp: Categories count: 1075
+2025-10-02 12:54:35.360557-0500 SmilePile[63254:21850970] [PhotoGalleryViewModel] High memory usage: 386MB
+2025-10-02 12:54:35.360708-0500 SmilePile[63254:21851795] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-02 12:54:35.484043-0500 SmilePile[63254:21850970] [PhotoGalleryViewModel] Loaded 0 photos in 0.12s
+Test Suite 'CategoryRepositoryTests' started at 2025-10-02 12:54:35.656.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testDeleteCategory]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testDeleteCategory]' passed (0.046 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testDeleteDefaultCategory]' started.
+2025-10-02 12:54:35.711363-0500 SmilePile[63254:21852047] [CategoryRepository] Categories already exist (1075), skipping initialization
+SmilePileTests/CategoryRepositoryTests.swift:198: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+2025-10-02 12:54:35.712963-0500 SmilePile[63254:21851795] SmilePileTests/CategoryRepositoryTests.swift:198: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+2025-10-02 12:55:06.880337-0500 SmilePile[63510:21855100] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf: [2: No such file or directory]
+2025-10-02 12:55:06.880864-0500 SmilePile[63510:21855100] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Black.ttf"
+2025-10-02 12:55:06.881269-0500 SmilePile[63510:21855100] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf: [2: No such file or directory]
+2025-10-02 12:55:06.881683-0500 SmilePile[63510:21855100] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-Bold.ttf"
+2025-10-02 12:55:06.882086-0500 SmilePile[63510:21855100] FontParser could not open filePath /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf: [2: No such file or directory]
+2025-10-02 12:55:06.882481-0500 SmilePile[63510:21855100] GSFont: file doesn't exist - "file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Bundle/Application/D63A9A49-782B-4EC2-ADFC-11E2D49E0B04/SmilePile.app/Nunito-ExtraBold.ttf"
+2025-10-02 12:55:06.885596-0500 SmilePile[63510:21855100] GSFont: "Nunito-ExtraLight" already exists.
+2025-10-02 12:55:06.885899-0500 SmilePile[63510:21855100] GSFontRegisterCGFont(<CGFont (0x600002c10000): Nunito-ExtraLight>) failed 305
+❌ Failed to register font Nunito-Variable: The operation couldn’t be completed. (com.apple.CoreText.CTFontManagerErrorDomain error 305 - Could not register the CGFont '<CGFont (0x600002c10000): Nunito-ExtraLight>')
+
+📱 Available Nunito fonts:
+  Family: Nunito
+    - Nunito-Regular
+    - Nunito-ExtraLight
+    - Nunito-Light
+    - Nunito-Medium
+    - Nunito-SemiBold
+    - Nunito-Bold
+    - Nunito-ExtraBold
+    - Nunito-Black
+2025-10-02 12:55:06.935996-0500 SmilePile[63510:21855100] [library] load_eligibility_plist: Failed to open /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/private/var/db/eligibilityd/eligibility.plist: No such file or directory(2)
+2025-10-02 12:55:07.007378-0500 SmilePile[63510:21855100] [CoreData] Core Data stack loaded successfully at: file:///Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Library/Application%20Support/SmilePile.sqlite
+2025-10-02 12:55:07.021494-0500 SmilePile[63510:21855100] [SimplePhotoStorage] ✅ Storage directories created
+2025-10-02 12:55:07.021608-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 📁 Photos: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_photos
+2025-10-02 12:55:07.021677-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 📁 Thumbs: /Users/adamstack/Library/Developer/XCTestDevices/5FBE3D58-CDC7-4F38-9A81-B014B3338187/data/Containers/Data/Application/34A2DE12-FC35-4731-A99B-1B29D166473F/Documents/simple_thumbs
+2025-10-02 12:55:07.039582-0500 SmilePile[63510:21855100] [StorageManager] Storage directories created/verified
+🔍 checkFirstLaunch called
+🔍 onboardingCompleted = true
+⏭️ Onboarding already completed - skipping
+2025-10-02 12:55:07.148655-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 🔍 Storage Health Check:
+2025-10-02 12:55:07.148986-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 📁 Photos dir exists: true
+2025-10-02 12:55:07.149116-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 📁 Thumbs dir exists: true
+2025-10-02 12:55:07.149686-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 📸 Photos stored: 0
+2025-10-02 12:55:07.149851-0500 SmilePile[63510:21855100] [SimplePhotoStorage] 🖼 Thumbnails stored: 0
+2025-10-02 12:55:07.149917-0500 SmilePile[63510:21855100] [OptimizedPhotoGalleryView] Starting to load categories...
+SmilePileApp: Onboarding completed, initializing default categories if needed...
+2025-10-02 12:55:07.159478-0500 SmilePile[63510:21855100] [OptimizedPhotoGalleryView] Loaded 1075 categories
+2025-10-02 12:55:07.159925-0500 SmilePile[63510:21855304] [CategoryRepository] Categories already exist (1075), skipping initialization
+2025-10-02 12:55:07.160359-0500 SmilePile[63510:21855100] [OptimizedPhotoGalleryView] Categories loaded, no auto-selection to ensure user picks category
+2025-10-02 12:55:07.172665-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10000 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.175079-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 501 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.175873-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 304 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.177139-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10001 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.179111-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 502 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.180027-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 302 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.182803-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10002 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.185208-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 503 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.186190-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 303 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.187457-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10003 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.190423-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 301 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.191757-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10004 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.194016-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10005 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.196061-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10006 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.198269-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10007 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.200560-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10008 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.202547-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10009 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.204650-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10010 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.206481-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10011 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.208473-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10012 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.210314-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10013 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.212278-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10014 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.214141-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10015 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.216089-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10016 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.217945-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10017 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.219728-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10018 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.221544-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10019 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.223304-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10020 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.225340-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10021 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.227874-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10022 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.229868-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10023 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.231757-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10024 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.233575-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10025 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.235425-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10026 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.237374-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10027 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.239233-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10028 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.241113-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10029 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.242940-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10030 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.244797-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10031 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.246845-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10032 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.248969-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10033 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.251027-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10034 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.252937-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10035 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.255579-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10036 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.257511-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10037 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.260438-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10038 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.262544-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10039 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.264779-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10040 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.266940-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10041 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.268844-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10042 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.271421-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10043 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.273544-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10044 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.275370-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10045 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.277395-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10046 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.279299-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10047 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.281325-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10048 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.283264-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10049 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.285213-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10050 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.286985-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10051 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.288791-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10052 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.290551-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10053 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.292318-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10054 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.294209-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10055 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.295909-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10056 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.297756-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10057 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.299597-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10058 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.301302-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10059 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.303012-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10060 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.304832-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10061 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.306549-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10062 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.308306-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10063 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.311248-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10064 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.313543-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10065 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.315569-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10066 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.317429-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10067 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.319163-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10068 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.321637-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10069 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.323487-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10070 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.325426-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10071 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.327390-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10072 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.329414-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10073 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.331198-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10074 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.332973-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10075 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.334842-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10076 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.336910-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10077 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.338664-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10078 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.340544-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10079 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.342564-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10080 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.345123-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10081 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.347272-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10082 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.349279-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10083 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.351150-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10084 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.352937-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10085 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.355638-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10086 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.357673-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10087 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.359533-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10088 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.362328-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10089 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.364377-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10090 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.366387-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10091 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.368459-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10092 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.370399-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10093 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.372273-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10094 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.374111-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10095 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.376088-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10096 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.377914-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10097 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.379738-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10098 occurs multiple times within the collection, this will give undefined results!
+2025-10-02 12:55:07.381507-0500 SmilePile[63510:21855100] [Invalid Configuration] ForEach<Array<Category>, Int64, CategoryChip>: the ID 10099 occurs multiple times within the collection, this will give undefined results!
+Test Suite 'CategoryRepositoryTests' started at 2025-10-02 12:55:09.154.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetAllCategoriesFlowUpdates]' started.
+2025-10-02 12:55:09.159170-0500 SmilePile[63510:21855100] [PhotoGalleryViewModel] Loading photos from repository
+SmilePileApp: Categories count: 1075
+2025-10-02 12:55:09.159585-0500 SmilePile[63510:21855100] [PhotoGalleryViewModel] High memory usage: 350MB
+2025-10-02 12:55:09.159742-0500 SmilePile[63510:21855298] [PhotoRepository] Retrieved 0 total photos from database
+2025-10-02 12:55:09.285162-0500 SmilePile[63510:21855100] [PhotoGalleryViewModel] Loaded 0 photos in 0.13s
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetAllCategoriesFlowUpdates]' passed (0.202 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetAllCategoriesFlow]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:256: error: -[SmilePileTests.CategoryRepositoryTests testGetAllCategoriesFlow] : XCTAssertEqual failed: ("1078") is not equal to ("2")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetAllCategoriesFlow]' failed (0.313 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetCategoryByName]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:229: error: -[SmilePileTests.CategoryRepositoryTests testGetCategoryByName] : XCTAssertEqual failed: ("Optional("unique_category")") is not equal to ("Optional("unique")")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetCategoryByName]' failed (0.012 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetCategoryCount]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:274: error: -[SmilePileTests.CategoryRepositoryTests testGetCategoryCount] : XCTAssertEqual failed: ("1082") is not equal to ("3")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testGetCategoryCount]' failed (0.029 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategoriesIdempotent]' started.
+2025-10-02 12:55:09.713420-0500 SmilePile[63510:21855304] [CategoryRepository] Categories already exist (1082), skipping initialization
+2025-10-02 12:55:09.714163-0500 SmilePile[63510:21855289] [CategoryRepository] Categories already exist (1082), skipping initialization
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:69: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategoriesIdempotent] : XCTAssertEqual failed: ("1082") is not equal to ("4")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategoriesIdempotent]' failed (0.003 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories]' started.
+2025-10-02 12:55:09.717234-0500 SmilePile[63510:21855298] [CategoryRepository] Categories already exist (1082), skipping initialization
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:33: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertEqual failed: ("1082") is not equal to ("4")
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:37: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertNotNil failed
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:38: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("Family")")
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:39: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("#E91E63")")
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:40: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertTrue failed
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:43: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertNotNil failed
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:44: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("Cars")")
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:45: error: -[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("#F44336")")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInitializeDefaultCategories]' failed (0.018 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategory]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:92: error: -[SmilePileTests.CategoryRepositoryTests testInsertCategory] : XCTAssertEqual failed: ("Optional("Pets")") is not equal to ("Optional("Test Category")")
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:93: error: -[SmilePileTests.CategoryRepositoryTests testInsertCategory] : XCTAssertEqual failed: ("Optional("#4CAF50")") is not equal to ("Optional("#FF5722")")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategory]' failed (0.006 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategoryWithDuplicateName]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategoryWithDuplicateName]' passed (0.008 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategoryWithEmptyName]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertCategoryWithEmptyName]' passed (0.001 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertMultipleCategories]' started.
+/Users/adamstack/SmilePile/ios/SmilePileTests/CategoryRepositoryTests.swift:141: error: -[SmilePileTests.CategoryRepositoryTests testInsertMultipleCategories] : XCTAssertEqual failed: ("1087") is not equal to ("3")
+Test Case '-[SmilePileTests.CategoryRepositoryTests testInsertMultipleCategories]' failed (0.009 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testTransactionRollback]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testTransactionRollback]' passed (0.010 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateCategoryColorRetention]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateCategoryColorRetention]' passed (0.006 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateCategory]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateCategory]' passed (0.005 seconds).
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateNonExistentCategory]' started.
+Test Case '-[SmilePileTests.CategoryRepositoryTests testUpdateNonExistentCategory]' passed (0.001 seconds).
+Test Suite 'CategoryRepositoryTests' failed at 2025-10-02 12:55:09.781.
+	 Executed 14 tests, with 15 failures (0 unexpected) in 0.623 (0.627) seconds
+◇ Test run started.
+↳ Testing Library Version: 124.4
+↳ Target Platform: arm64-apple-ios13.0-simulator
+◇ Suite SmilePileTests started.
+◇ Test example() started.
+✔ Test example() passed after 0.001 seconds.
+✔ Suite SmilePileTests passed after 0.001 seconds.
+✔ Test run with 1 test passed after 0.001 seconds.
+Test Suite 'DIContainerTests' started at 2025-10-02 12:55:09.792.
+Test Case '-[SmilePileTests.DIContainerTests testIsRegistered]' started.
+Test Case '-[SmilePileTests.DIContainerTests testIsRegistered]' passed (0.002 seconds).
+Test Case '-[SmilePileTests.DIContainerTests testPropertyWrapper]' started.

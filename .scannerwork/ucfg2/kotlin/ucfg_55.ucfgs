@@ -1,246 +1,8 @@
-
-1com.smilepile.data.dao.PhotoCategoryDao#<init>()Vh
-_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/dao/PhotoCategoryDao.kt	 ("0*<
-0	 ("/
+¢
+7com.smilepile.data.repository.PhotoRepository#<init>()Vm
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/repository/PhotoRepository.kt ("0*>
+0 ("/
 
 __unknown_file (
-implicit returnB+)
-'com.smilepile.data.dao.PhotoCategoryDaoH`¶	
-Rcom.smilepile.data.dao.PhotoCategoryDao#assignPhotosToCategory(Ljava/util/List;J)Vk
-_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/dao/PhotoCategoryDao.ktÙ Ù(&"0*ô
-0
-Ó ×(
-Š
-
-Ù' Ù(=
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*8
-
-__unknown_file (
-
-photoIdsjava.util.List\
-Z
-
-Ù' Ù(=
-photoIdsjava.util.List"__annotation*"
-
-__unknown_file (
-
-%0…
-‚
-
-Ù? Ù(O
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*0
-
-__unknown_file (
-
-
-categoryIdlongT
-R
-
-Ù? Ù(O
-
-categoryIdlong"__annotation*"
-
-__unknown_file (
-
-%1Z
-X
-
-Ú à(	
-joinsjava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>‰†
-
-á á('
-%2kotlin.Unit"Scom.smilepile.data.dao.PhotoCategoryDao#insertPhotoCategoryJoins(Ljava/util/List;)V*9
-
-á á('+)
-'com.smilepile.data.dao.PhotoCategoryDao*)
-
-á! á(&
-
-joinsjava.lang.Object2*insertPhotoCategoryJoins(Ljava/util/List;)"/
-
-__unknown_file (
-implicit return:(
-
-Ù' Ù(=
-photoIdsjava.util.List: 
-
-Ù? Ù(O
-
-categoryIdlongB+)
-'com.smilepile.data.dao.PhotoCategoryDaoHì	
-dcom.smilepile.data.dao.PhotoCategoryDao#assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)Vk
-_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/dao/PhotoCategoryDao.ktê ê('"0*Œ
-0
-ä è(
-‹
-
-ê( ê(7
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*9
-
-__unknown_file (
-
-photoIdjava.lang.String]
-[
-
-ê( ê(7
-photoIdjava.lang.String"__annotation*"
-
-__unknown_file (
-
-%0
-
-
-ê9 ê(P
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*;
-
-__unknown_file (
-
-categoryIdsjava.util.List_
-]
-
-ê9 ê(P
-categoryIdsjava.util.List"__annotation*"
-
-__unknown_file (
-
-%1Z
-X
-
-ë ñ(	
-joinsjava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>‰†
-
-ò ò('
-%2kotlin.Unit"Scom.smilepile.data.dao.PhotoCategoryDao#insertPhotoCategoryJoins(Ljava/util/List;)V*9
-
-ò ò('+)
-'com.smilepile.data.dao.PhotoCategoryDao*)
-
-ò! ò(&
-
-joinsjava.lang.Object2*insertPhotoCategoryJoins(Ljava/util/List;)"/
-
-__unknown_file (
-implicit return:)
-
-ê( ê(7
-photoIdjava.lang.String:+
-
-ê9 ê(P
-categoryIdsjava.util.ListB+)
-'com.smilepile.data.dao.PhotoCategoryDaoHø
-bcom.smilepile.data.dao.PhotoCategoryDao#updatePhotoCategories(Ljava/lang/String;Ljava/util/List;)Vk
-_/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/dao/PhotoCategoryDao.ktû û(%"0*À
-2
-ı& ÿ(	ÜÙ
-
-ş ş(9
-%4kotlin.Unit"dcom.smilepile.data.dao.PhotoCategoryDao#assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)V*9
-
-ş ş(9+)
-'com.smilepile.data.dao.PhotoCategoryDao*+
-
-ş$ ş(+
-
-photoIdjava.lang.String*-
-
-ş- ş(8
-
-categoryIdsjava.util.List2;assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)K
-I
-
-__unknown_file (
-%3"__id*!
-
-ş ş(9
-
-%4kotlin.Unit*
-1*•
-0
-õ ù(
-‹
-
-û& û(5
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*9
-
-__unknown_file (
-
-photoIdjava.lang.String]
-[
-
-û& û(5
-photoIdjava.lang.String"__annotation*"
-
-__unknown_file (
-
-%0
-
-
-û7 û(N
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*;
-
-__unknown_file (
-
-categoryIdsjava.util.List_
-]
-
-û7 û(N
-categoryIdsjava.util.List"__annotation*"
-
-__unknown_file (
-
-%1—”
-
-ü ü(-
-%2kotlin.Unit"Ycom.smilepile.data.dao.PhotoCategoryDao#removePhotoFromAllCategories(Ljava/lang/String;)V*9
-
-ü ü(-+)
-'com.smilepile.data.dao.PhotoCategoryDao*+
-
-ü% ü(,
-
-photoIdjava.lang.String20removePhotoFromAllCategories(Ljava/lang/String;)*
-2
-1*@
-1
-ÿ	 €("/
-
-__unknown_file (
-implicit return:)
-
-û& û(5
-photoIdjava.lang.String:+
-
-û7 û(N
-categoryIdsjava.util.ListB+)
-'com.smilepile.data.dao.PhotoCategoryDaoH
+implicit returnB1/
+-com.smilepile.data.repository.PhotoRepositoryH`

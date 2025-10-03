@@ -210,7 +210,17 @@ hashCode()kotlin.Boolean#hashCode()I
 or(Z)kotlin.Boolean#or(Z)Z9
 
 toString()+kotlin.Boolean#toString()Ljava/lang/String; 
-xor(Z)kotlin.Boolean#xor(Z)ZÂ
+xor(Z)kotlin.Boolean#xor(Z)Z7
+#com.smilepile.utils.IImageProcessorjava.lang.Object°
+"com.smilepile.utils.ImageProcessor#com.smilepile.utils.IImageProcessorÍ
+pcom.smilepile.utils.ImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/IImageProcessor$AspectRatio;)vcom.smilepile.utils.ImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/IImageProcessor$AspectRatio;)LRect;k
+createPreviewBitmap(LBitmap;I)Icom.smilepile.utils.ImageProcessor#createPreviewBitmap(LBitmap;I)LBitmap;c
+cropBitmap(LBitmap;LRect;)Ecom.smilepile.utils.ImageProcessor#cropBitmap(LBitmap;LRect;)LBitmap;n
+#getExifRotation(Ljava/lang/String;)Gcom.smilepile.utils.ImageProcessor#getExifRotation(Ljava/lang/String;)Ii
+processImage(LBitmap;FLRect;)Hcom.smilepile.utils.ImageProcessor#processImage(LBitmap;FLRect;)LBitmap;]
+rotateBitmap(LBitmap;F)Bcom.smilepile.utils.ImageProcessor#rotateBitmap(LBitmap;F)LBitmap;n
+#saveBitmap(LBitmap;Ljava/io/File;I)Gcom.smilepile.utils.ImageProcessor#saveBitmap(LBitmap;Ljava/io/File;I)Zm
+ validateCropRect(LBitmap;LRect;)Icom.smilepile.utils.ImageProcessor#validateCropRect(LBitmap;LRect;)LRect;Â
 kotlin.Floatjava.io.Serializablejava.lang.Comparablejava.lang.Number*
 compareTo(B)kotlin.Float#compareTo(B)I*
 compareTo(D)kotlin.Float#compareTo(D)I*
@@ -262,25 +272,8 @@ toDouble()kotlin.Float#toDouble()D$
 
 toString())kotlin.Float#toString()Ljava/lang/String;*
 unaryMinus()kotlin.Float#unaryMinus()F(
-unaryPlus()kotlin.Float#unaryPlus()Få
-"com.smilepile.utils.ImageProcessorjava.lang.ObjectË
-ocom.smilepile.utils.ImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/ImageProcessor$AspectRatio;)ucom.smilepile.utils.ImageProcessor#calculateAspectRatioCrop(IILcom/smilepile/utils/ImageProcessor$AspectRatio;)LRect;k
-createPreviewBitmap(LBitmap;I)Icom.smilepile.utils.ImageProcessor#createPreviewBitmap(LBitmap;I)LBitmap;c
-cropBitmap(LBitmap;LRect;)Ecom.smilepile.utils.ImageProcessor#cropBitmap(LBitmap;LRect;)LBitmap;n
-#getExifRotation(Ljava/lang/String;)Gcom.smilepile.utils.ImageProcessor#getExifRotation(Ljava/lang/String;)Ii
-processImage(LBitmap;FLRect;)Hcom.smilepile.utils.ImageProcessor#processImage(LBitmap;FLRect;)LBitmap;]
-rotateBitmap(LBitmap;F)Bcom.smilepile.utils.ImageProcessor#rotateBitmap(LBitmap;F)LBitmap;n
-#saveBitmap(LBitmap;Ljava/io/File;I)Gcom.smilepile.utils.ImageProcessor#saveBitmap(LBitmap;Ljava/io/File;I)Zm
- validateCropRect(LBitmap;LRect;)Icom.smilepile.utils.ImageProcessor#validateCropRect(LBitmap;LRect;)LRect;⁄
-kotlin.Enumjava.io.Serializablejava.lang.Comparable0
-clone()%kotlin.Enum#clone()Ljava/lang/Object;G
-compareTo(Ljava/lang/Enum;)(kotlin.Enum#compareTo(Ljava/lang/Enum;)IE
-equals(Ljava/lang/Object;)'kotlin.Enum#equals(Ljava/lang/Object;)Z%
-
-hashCode()kotlin.Enum#hashCode()I6
-
-toString()(kotlin.Enum#toString()Ljava/lang/String;@
-.com.smilepile.utils.ImageProcessor$AspectRatiojava.lang.Enum6
+unaryPlus()kotlin.Float#unaryPlus()F@
+,com.smilepile.utils.ImageProcessor$Companionjava.lang.Object6
 "com.smilepile.data.dao.CategoryDaojava.lang.Object∏
 -com.smilepile.ui.screens.BottomNavigationItemjava.lang.Object\
 component1()Lcom.smilepile.ui.screens.BottomNavigationItem#component1()Ljava/lang/String;W
@@ -392,17 +385,22 @@ onCreate().com.smilepile.SmilePileApplication#onCreate()V≥
 8saveThemeModePreference(Lcom/smilepile/theme/ThemeMode;)Zcom.smilepile.theme.ThemeManager#saveThemeModePreference(Lcom/smilepile/theme/ThemeMode;)VÄ
 -setThemeMode(Lcom/smilepile/theme/ThemeMode;)Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V@
 toggleTheme()/com.smilepile.theme.ThemeManager#toggleTheme()VA
--com.smilepile.data.database.SmilePileDatabasejava.lang.Objectö
-.com.smilepile.ui.viewmodels.PhotoEditViewModeljava.lang.ObjectÁ
-qcom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/ImageProcessor$AspectRatio;)rcom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/ImageProcessor$AspectRatio;)VZ
-applyCurrentPhoto()Ccom.smilepile.ui.viewmodels.PhotoEditViewModel#applyCurrentPhoto()VL
+-com.smilepile.data.database.SmilePileDatabasejava.lang.ObjectØ&
+.com.smilepile.ui.viewmodels.PhotoEditViewModeljava.lang.ObjectÈ
+rcom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/IImageProcessor$AspectRatio;)scom.smilepile.ui.viewmodels.PhotoEditViewModel#applyAspectRatio(Lcom/smilepile/utils/IImageProcessor$AspectRatio;)VZ
+applyCurrentPhoto()Ccom.smilepile.ui.viewmodels.PhotoEditViewModel#applyCurrentPhoto()V…
+>applyExifRotation(Landroid.graphics.Bitmap;Ljava/lang/String;)Ücom.smilepile.ui.viewmodels.PhotoEditViewModel#applyExifRotation(Landroid.graphics.Bitmap;Ljava/lang/String;)Landroid.graphics.Bitmap;L
 applyToAll()<com.smilepile.ui.viewmodels.PhotoEditViewModel#applyToAll()V…
 :createPhotoEntity(Ljava/lang/String;Ljava/lang/String;IIJ)äcom.smilepile.ui.viewmodels.PhotoEditViewModel#createPhotoEntity(Ljava/lang/String;Ljava/lang/String;IIJ)Lcom/smilepile/data/models/Photo;\
 deleteCurrentPhoto()Dcom.smilepile.ui.viewmodels.PhotoEditViewModel#deleteCurrentPhoto()VÜ
 getCurrentEditItem()ncom.smilepile.ui.viewmodels.PhotoEditViewModel#getCurrentEditItem()Lcom/smilepile/ui/viewmodels/PhotoEditItem;`
 getPendingCategoryId()Fcom.smilepile.ui.viewmodels.PhotoEditViewModel#getPendingCategoryId()Jm
-getProcessedResults()Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#getProcessedResults()Ljava/util/List;ö
-3initializeEditor(Ljava/util/List;Ljava/util/List;J)ccom.smilepile.ui.viewmodels.PhotoEditViewModel#initializeEditor(Ljava/util/List;Ljava/util/List;J)VX
+getProcessedResults()Tcom.smilepile.ui.viewmodels.PhotoEditViewModel#getProcessedResults()Ljava/util/List;ä
++handleLoadPhotoError(Ljava/lang/Exception;)[com.smilepile.ui.viewmodels.PhotoEditViewModel#handleLoadPhotoError(Ljava/lang/Exception;)Vö
+3initializeEditor(Ljava/util/List;Ljava/util/List;J)ccom.smilepile.ui.viewmodels.PhotoEditViewModel#initializeEditor(Ljava/util/List;Ljava/util/List;J)VÀ
+?loadBitmapFromItem(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)ácom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromItem(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Landroid.graphics.Bitmap;ò
+&loadBitmapFromPath(Ljava/lang/String;)ncom.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromPath(Ljava/lang/String;)Landroid.graphics.Bitmap;|
+loadBitmapFromUri(LUri;)`com.smilepile.ui.viewmodels.PhotoEditViewModel#loadBitmapFromUri(LUri;)Landroid.graphics.Bitmap;X
 loadCurrentPhoto()Bcom.smilepile.ui.viewmodels.PhotoEditViewModel#loadCurrentPhoto()Vv
 !markCurrentAsProcessed(ZLBitmap;)Qcom.smilepile.ui.viewmodels.PhotoEditViewModel#markCurrentAsProcessed(ZLBitmap;)VV
 moveToNextPhoto()Acom.smilepile.ui.viewmodels.PhotoEditViewModel#moveToNextPhoto()VN
@@ -419,7 +417,8 @@ EshouldUpdateCategoryOnly(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)ucom.smil
 updatePendingCategory(J)Hcom.smilepile.ui.viewmodels.PhotoEditViewModel#updatePendingCategory(J)V’
 @updatePhotoCategory(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)êcom.smilepile.ui.viewmodels.PhotoEditViewModel#updatePhotoCategory(Lcom/smilepile/ui/viewmodels/PhotoEditItem;)Lcom/smilepile/data/models/Photo;R
 updatePreview()?com.smilepile.ui.viewmodels.PhotoEditViewModel#updatePreview()VŸ
-RupdateQueueItemPath(Lcom/smilepile/ui/viewmodels/PhotoEditItem;Ljava/lang/String;)Çcom.smilepile.ui.viewmodels.PhotoEditViewModel#updateQueueItemPath(Lcom/smilepile/ui/viewmodels/PhotoEditItem;Ljava/lang/String;)Vﬁ
+RupdateQueueItemPath(Lcom/smilepile/ui/viewmodels/PhotoEditItem;Ljava/lang/String;)Çcom.smilepile.ui.viewmodels.PhotoEditViewModel#updateQueueItemPath(Lcom/smilepile/ui/viewmodels/PhotoEditItem;Ljava/lang/String;)V–
+NupdateStateWithLoadedPhoto(Landroid.graphics.Bitmap;Landroid.graphics.Bitmap;)~com.smilepile.ui.viewmodels.PhotoEditViewModel#updateStateWithLoadedPhoto(Landroid.graphics.Bitmap;Landroid.graphics.Bitmap;)Vﬁ
 $com.smilepile.storage.StorageManagerjava.lang.ObjectZ
 calculateSampleSize(III)>com.smilepile.storage.StorageManager#calculateSampleSize(III)I{
 calculateStorageUsage()`com.smilepile.storage.StorageManager#calculateStorageUsage()Lcom/smilepile/storage/StorageUsage;`
@@ -439,7 +438,15 @@ $getThumbnailPath(Ljava/lang/String;)[com.smilepile.storage.StorageManager#getT
 1migrateExternalPhotosToInternal(Ljava/util/List;)fcom.smilepile.storage.StorageManager#migrateExternalPhotosToInternal(Ljava/util/List;)Ljava/util/List;£
 6savePhotoToInternalStorage(LBitmap;Ljava/lang/String;)icom.smilepile.storage.StorageManager#savePhotoToInternalStorage(LBitmap;Ljava/lang/String;)Ljava/io/File;A
 -com.smilepile.data.repository.PhotoRepositoryjava.lang.ObjectD
-0com.smilepile.data.repository.CategoryRepositoryjava.lang.Object6
+0com.smilepile.data.repository.CategoryRepositoryjava.lang.Object⁄
+kotlin.Enumjava.io.Serializablejava.lang.Comparable0
+clone()%kotlin.Enum#clone()Ljava/lang/Object;G
+compareTo(Ljava/lang/Enum;)(kotlin.Enum#compareTo(Ljava/lang/Enum;)IE
+equals(Ljava/lang/Object;)'kotlin.Enum#equals(Ljava/lang/Object;)Z%
+
+hashCode()kotlin.Enum#hashCode()I6
+
+toString()(kotlin.Enum#toString()Ljava/lang/String;6
 $com.smilepile.ui.viewmodels.EditModejava.lang.EnumÔ
 )com.smilepile.ui.viewmodels.PhotoEditItemjava.lang.ObjectK
 component1();com.smilepile.ui.viewmodels.PhotoEditItem#component1()LUri;X
@@ -566,21 +573,27 @@ EexecuteInHalfOpen(Ljava/lang/String;Lkotlin/jvm/functions/Function1;)}com.smil
 copy(JJJI)Qcom.smilepile.storage.StorageUsage#copy(JJJI)Lcom/smilepile/storage/StorageUsage;@
 getPhotoMB()0com.smilepile.storage.StorageUsage#getPhotoMB()DH
 getThumbnailMB()4com.smilepile.storage.StorageUsage#getThumbnailMB()D@
-getTotalMB()0com.smilepile.storage.StorageUsage#getTotalMB()DÉ
-1com.smilepile.ui.viewmodels.PhotoGalleryViewModeljava.lang.Objectõ
+getTotalMB()0com.smilepile.storage.StorageUsage#getTotalMB()Dº
+1com.smilepile.ui.viewmodels.PhotoGalleryViewModeljava.lang.Object•
+7applyInitialSelection(Ljava/util/List;Ljava/util/List;)jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#applyInitialSelection(Ljava/util/List;Ljava/util/List;)Võ
 2assignSelectedPhotosToCategories(Ljava/util/List;)ecom.smilepile.ui.viewmodels.PhotoGalleryViewModel#assignSelectedPhotosToCategories(Ljava/util/List;)Vc
 clearCategoryFilters()Icom.smilepile.ui.viewmodels.PhotoGalleryViewModel#clearCategoryFilters()VO
 clearError()?com.smilepile.ui.viewmodels.PhotoGalleryViewModel#clearError()V]
 deselectAllPhotos()Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#deselectAllPhotos()V_
 enterSelectionMode()Gcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#enterSelectionMode()V]
-exitSelectionMode()Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#exitSelectionMode()V•
+exitSelectionMode()Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#exitSelectionMode()V]
+initializeGallery()Fcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#initializeGallery()V•
 7movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)Vu
-moveSelectedPhotosToCategory(J)Rcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#moveSelectedPhotosToCategory(J)V©
+moveSelectedPhotosToCategory(J)Rcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#moveSelectedPhotosToCategory(J)Vy
+!observeInitialCategorySelection()Tcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#observeInitialCategorySelection()V©
 9removePhotoFromLibrary(Lcom/smilepile/data/models/Photo;)lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#removePhotoFromLibrary(Lcom/smilepile/data/models/Photo;)Vy
 !removeSelectedPhotosFromLibrary()Tcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#removeSelectedPhotosFromLibrary()Va
 selectAllCategories()Hcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectAllCategories()VY
 selectAllPhotos()Dcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectAllPhotos()Vw
- selectCategory(Ljava/lang/Long;)Scom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectCategory(Ljava/lang/Long;)Ve
+ selectCategory(Ljava/lang/Long;)Scom.smilepile.ui.viewmodels.PhotoGalleryViewModel#selectCategory(Ljava/lang/Long;)Vπ
+AsetInitialCategorySelection(Lcom/smilepile/data/models/Category;)tcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setInitialCategorySelection(Lcom/smilepile/data/models/Category;)Vi
+setInitialViewAllPhotos()Lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#setInitialViewAllPhotos()Vç
++shouldInitializeSelection(Ljava/util/List;)^com.smilepile.ui.viewmodels.PhotoGalleryViewModel#shouldInitializeSelection(Ljava/util/List;)Ze
 toggleCategoryFilter(J)Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#toggleCategoryFilter(J)Ve
 togglePhotoSelection(J)Jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#togglePhotoSelection(J)VZ
 Fcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState$Companionjava.lang.Object#
@@ -633,15 +646,22 @@ Rcopy(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;D
 component2()6com.smilepile.data.backup.ImportProgress#component2()IW
 component3()Gcom.smilepile.data.backup.ImportProgress#component3()Ljava/lang/String;U
 component4()Ecom.smilepile.data.backup.ImportProgress#component4()Ljava/util/List;´
-*copy(IILjava/lang/String;Ljava/util/List;)}com.smilepile.data.backup.ImportProgress#copy(IILjava/lang/String;Ljava/util/List;)Lcom/smilepile/data/backup/ImportProgress;Ÿ
+*copy(IILjava/lang/String;Ljava/util/List;)}com.smilepile.data.backup.ImportProgress#copy(IILjava/lang/String;Ljava/util/List;)Lcom/smilepile/data/backup/ImportProgress;∑$
 -com.smilepile.ui.viewmodels.SettingsViewModeljava.lang.Objectë
-/changePIN(Ljava/lang/String;Ljava/lang/String;)^com.smilepile.ui.viewmodels.SettingsViewModel#changePIN(Ljava/lang/String;Ljava/lang/String;)ZK
+/changePIN(Ljava/lang/String;Ljava/lang/String;)^com.smilepile.ui.viewmodels.SettingsViewModel#changePIN(Ljava/lang/String;Ljava/lang/String;)Zq
+cleanupTempFile(Ljava/io/File;)Ncom.smilepile.ui.viewmodels.SettingsViewModel#cleanupTempFile(Ljava/io/File;)VK
 clearCache();com.smilepile.ui.viewmodels.SettingsViewModel#clearCache()VK
 clearError();com.smilepile.ui.viewmodels.SettingsViewModel#clearError()V[
 clearExportContent()Ccom.smilepile.ui.viewmodels.SettingsViewModel#clearExportContent()V]
 clearImportProgress()Dcom.smilepile.ui.viewmodels.SettingsViewModel#clearImportProgress()V]
-completeExport(LUri;)Dcom.smilepile.ui.viewmodels.SettingsViewModel#completeExport(LUri;)Vg
-exportAllSettings()Pcom.smilepile.ui.viewmodels.SettingsViewModel#exportAllSettings()Ljava/util/Map;y
+completeExport(LUri;)Dcom.smilepile.ui.viewmodels.SettingsViewModel#completeExport(LUri;)Vp
+copyUriToTempFile(LUri;)Tcom.smilepile.ui.viewmodels.SettingsViewModel#copyUriToTempFile(LUri;)Ljava/io/File;q
+detectZipFormat(Ljava/io/File;)Ncom.smilepile.ui.viewmodels.SettingsViewModel#detectZipFormat(Ljava/io/File;)Zo
+executeImport(Ljava/io/File;Z)Mcom.smilepile.ui.viewmodels.SettingsViewModel#executeImport(Ljava/io/File;Z)Vu
+!executeJsonImport(Ljava/io/File;)Pcom.smilepile.ui.viewmodels.SettingsViewModel#executeJsonImport(Ljava/io/File;)Vs
+ executeZipImport(Ljava/io/File;)Ocom.smilepile.ui.viewmodels.SettingsViewModel#executeZipImport(Ljava/io/File;)Vg
+exportAllSettings()Pcom.smilepile.ui.viewmodels.SettingsViewModel#exportAllSettings()Ljava/util/Map;≥
+@handleImportProgress(Lcom/smilepile/data/backup/ImportProgress;)ocom.smilepile.ui.viewmodels.SettingsViewModel#handleImportProgress(Lcom/smilepile/data/backup/ImportProgress;)Vy
 #importAllSettings(Ljava/util/Map;Z)Rcom.smilepile.ui.viewmodels.SettingsViewModel#importAllSettings(Ljava/util/Map;Z)V[
 importFromUri(LUri;)Ccom.smilepile.ui.viewmodels.SettingsViewModel#importFromUri(LUri;)V_
 isBiometricAvailable()Ecom.smilepile.ui.viewmodels.SettingsViewModel#isBiometricAvailable()ZU
@@ -662,13 +682,16 @@ Rcopy(ZFIILcom/smilepile/data/models/Photo;Ljava/lang/String;Ljava/lang/String;D
 ¢com.smilepile.ui.viewmodels.SettingsViewModel#updateBackupSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/smilepile/settings/SettingsManager$BackupFrequency;)£com.smilepile.ui.viewmodels.SettingsViewModel#updateBackupSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/smilepile/settings/SettingsManager$BackupFrequency;)Võ
 äcom.smilepile.ui.viewmodels.SettingsViewModel#updateGallerySettings(Ljava/lang/Integer;Lcom/smilepile/settings/SettingsManager$SortOrder;)ãcom.smilepile.ui.viewmodels.SettingsViewModel#updateGallerySettings(Ljava/lang/Integer;Lcom/smilepile/settings/SettingsManager$SortOrder;)Vﬁ
 UupdateNotificationSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;)Ñcom.smilepile.ui.viewmodels.SettingsViewModel#updateNotificationSettings(Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;)Vï
-«com.smilepile.ui.viewmodels.SettingsViewModel#updatePhotoQualitySettings(Lcom/smilepile/settings/SettingsManager$PhotoQuality;Lcom/smilepile/settings/SettingsManager$PhotoQuality;Ljava/lang/Boolean;)»com.smilepile.ui.viewmodels.SettingsViewModel#updatePhotoQualitySettings(Lcom/smilepile/settings/SettingsManager$PhotoQuality;Lcom/smilepile/settings/SettingsManager$PhotoQuality;Ljava/lang/Boolean;)Vü@
+«com.smilepile.ui.viewmodels.SettingsViewModel#updatePhotoQualitySettings(Lcom/smilepile/settings/SettingsManager$PhotoQuality;Lcom/smilepile/settings/SettingsManager$PhotoQuality;Ljava/lang/Boolean;)»com.smilepile.ui.viewmodels.SettingsViewModel#updatePhotoQualitySettings(Lcom/smilepile/settings/SettingsManager$PhotoQuality;Lcom/smilepile/settings/SettingsManager$PhotoQuality;Ljava/lang/Boolean;)Vq
+validatePIN(Ljava/lang/String;)Ncom.smilepile.ui.viewmodels.SettingsViewModel#validatePIN(Ljava/lang/String;)ZœL
 'com.smilepile.data.backup.BackupManagerjava.lang.Objectv
 calculateMD5(Ljava/io/File;)Vcom.smilepile.data.backup.BackupManager#calculateMD5(Ljava/io/File;)Ljava/lang/String;W
 checkBackupVersion(I)>com.smilepile.data.backup.BackupManager#checkBackupVersion(I)VI
 clearAllData()7com.smilepile.data.backup.BackupManager#clearAllData()Vú
 ,compressPhoto(Ljava/io/File;Ljava/io/File;I)lcom.smilepile.data.backup.BackupManager#compressPhoto(Ljava/io/File;Ljava/io/File;I)Lerror/NonExistentClass;¨
-<createExportIntent(Lcom/smilepile/data/backup/BackupFormat;)lcom.smilepile.data.backup.BackupManager#createExportIntent(Lcom/smilepile/data/backup/BackupFormat;)LIntent;P
+<createExportIntent(Lcom/smilepile/data/backup/BackupFormat;)lcom.smilepile.data.backup.BackupManager#createExportIntent(Lcom/smilepile/data/backup/BackupFormat;)LIntent;¯
+vcom.smilepile.data.backup.BackupManager#executeJsonImport(Lcom/smilepile/data/backup/BackupManager$JsonImportContext;)~com.smilepile.data.backup.BackupManager#executeJsonImport(Lcom/smilepile/data/backup/BackupManager$JsonImportContext;)LTriple;†
+Õcom.smilepile.data.backup.BackupManager#executeZipImport(Lcom/smilepile/data/backup/BackupManager$ZipImportContext;Lkotlin/jvm/functions/Function3;)Lcom/smilepile/data/backup/BackupManager$ZipImportResult;Õcom.smilepile.data.backup.BackupManager#executeZipImport(Lcom/smilepile/data/backup/BackupManager$ZipImportContext;Lkotlin/jvm/functions/Function3;)Lcom/smilepile/data/backup/BackupManager$ZipImportResult;P
 exportToJson()>com.smilepile.data.backup.BackupManager#exportToJson()LResult;˝
 dexportToZip(Lcom/smilepile/data/backup/BackupOptions;Ljava/io/File;Lkotlin/jvm/functions/Function3;)îcom.smilepile.data.backup.BackupManager#exportToZip(Lcom/smilepile/data/backup/BackupOptions;Ljava/io/File;Lkotlin/jvm/functions/Function3;)LResult;∂
 AexportToZipLegacy(Ljava/io/File;Lkotlin/jvm/functions/Function3;)qcom.smilepile.data.backup.BackupManager#exportToZipLegacy(Ljava/io/File;Lkotlin/jvm/functions/Function3;)LResult;ì
@@ -685,7 +708,9 @@ HimportFromJson(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;)vcom.s
 gimportFromZip(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Lkotlin/jvm/functions/Function3;)ïcom.smilepile.data.backup.BackupManager#importFromZip(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Lkotlin/jvm/functions/Function3;)LFlow;Ú
 üimportPhotos(Lcom/smilepile/data/backup/AppBackup;Lcom/smilepile/data/backup/ImportStrategy;IILjava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function2;)Õcom.smilepile.data.backup.BackupManager#importPhotos(Lcom/smilepile/data/backup/AppBackup;Lcom/smilepile/data/backup/ImportStrategy;IILjava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function2;)LPair;û
 ¥importPhotosFromZip(Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;IILjava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function2;)‰com.smilepile.data.backup.BackupManager#importPhotosFromZip(Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;IILjava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function2;)LTriple;¢
-zimportSingleCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)£com.smilepile.data.backup.BackupManager#importSingleCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)Vu
+zimportSingleCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)£com.smilepile.data.backup.BackupManager#importSingleCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)V®
+—com.smilepile.data.backup.BackupManager#initializeJsonImport(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$JsonImportContext;—com.smilepile.data.backup.BackupManager#initializeJsonImport(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$JsonImportContext;‰
+Ôcom.smilepile.data.backup.BackupManager#initializeZipImport(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Lkotlin/jvm/functions/Function3;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipImportContext;Ôcom.smilepile.data.backup.BackupManager#initializeZipImport(Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Lkotlin/jvm/functions/Function3;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipImportContext;u
 $isDuplicatePhoto(Ljava/lang/String;)Mcom.smilepile.data.backup.BackupManager#isDuplicatePhoto(Ljava/lang/String;)Zü
 uperformIncrementalBackup(Ljava/lang/String;Lcom/smilepile/data/backup/BackupOptions;Lkotlin/jvm/functions/Function3;)•com.smilepile.data.backup.BackupManager#performIncrementalBackup(Ljava/lang/String;Lcom/smilepile/data/backup/BackupOptions;Lkotlin/jvm/functions/Function3;)LResult;¿
 ùcom.smilepile.data.backup.BackupManager#processPhotoFromZip(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult;ùcom.smilepile.data.backup.BackupManager#processPhotoFromZip(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult;†
@@ -701,36 +726,16 @@ AsaveBackupHistory(Lcom/smilepile/data/backup/BackupHistoryEntry;)jcom.smilepil
 yvalidatePhotoForImport(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)¢com.smilepile.data.backup.BackupManager#validatePhotoForImport(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;)Z~
 %validateZipBackupFile(Ljava/io/File;)Ucom.smilepile.data.backup.BackupManager#validateZipBackupFile(Ljava/io/File;)LResult;ú
 4writeJsonToFile(Ljava/lang/String;Landroid.net.Uri;)dcom.smilepile.data.backup.BackupManager#writeJsonToFile(Ljava/lang/String;Landroid.net.Uri;)LResult;í
-/writeZipToFile(Ljava/io/File;Landroid.net.Uri;)_com.smilepile.data.backup.BackupManager#writeZipToFile(Ljava/io/File;Landroid.net.Uri;)LResult;ﬂ
-/com.smilepile.security.SecurePreferencesManagerjava.lang.ObjectY
-clearAllSettings()Ccom.smilepile.security.SecurePreferencesManager#clearAllSettings()VI
-
-clearPIN();com.smilepile.security.SecurePreferencesManager#clearPIN()VQ
-clearPattern()?com.smilepile.security.SecurePreferencesManager#clearPattern()V_
-getBiometricEnabled()Fcom.smilepile.security.SecurePreferencesManager#getBiometricEnabled()Zm
-getDeleteProtectionEnabled()Mcom.smilepile.security.SecurePreferencesManager#getDeleteProtectionEnabled()Z[
-getFailedAttempts()Dcom.smilepile.security.SecurePreferencesManager#getFailedAttempts()Ic
-getKidSafeModeEnabled()Hcom.smilepile.security.SecurePreferencesManager#getKidSafeModeEnabled()Zi
-getRemainingCooldownTime()Kcom.smilepile.security.SecurePreferencesManager#getRemainingCooldownTime()JÑ
-getSecuritySummary()lcom.smilepile.security.SecurePreferencesManager#getSecuritySummary()Lcom/smilepile/security/SecuritySummary;W
-hasParentalLock()Bcom.smilepile.security.SecurePreferencesManager#hasParentalLock()ZQ
-isInCooldown()?com.smilepile.security.SecurePreferencesManager#isInCooldown()ZQ
-isPINEnabled()?com.smilepile.security.SecurePreferencesManager#isPINEnabled()ZY
-isPatternEnabled()Ccom.smilepile.security.SecurePreferencesManager#isPatternEnabled()Z_
-recordFailedAttempt()Fcom.smilepile.security.SecurePreferencesManager#recordFailedAttempt()V_
-resetFailedAttempts()Fcom.smilepile.security.SecurePreferencesManager#resetFailedAttempts()Va
-setBiometricEnabled(Z)Gcom.smilepile.security.SecurePreferencesManager#setBiometricEnabled(Z)Vo
-setDeleteProtectionEnabled(Z)Ncom.smilepile.security.SecurePreferencesManager#setDeleteProtectionEnabled(Z)Ve
-setKidSafeModeEnabled(Z)Icom.smilepile.security.SecurePreferencesManager#setKidSafeModeEnabled(Z)Vi
-setPIN(Ljava/lang/String;)Kcom.smilepile.security.SecurePreferencesManager#setPIN(Ljava/lang/String;)Vm
-setPattern(Ljava/util/List;)Mcom.smilepile.security.SecurePreferencesManager#setPattern(Ljava/util/List;)Vs
-validatePIN(Ljava/lang/String;)Pcom.smilepile.security.SecurePreferencesManager#validatePIN(Ljava/lang/String;)Zw
-!validatePattern(Ljava/util/List;)Rcom.smilepile.security.SecurePreferencesManager#validatePattern(Ljava/util/List;)ZÒ
+/writeZipToFile(Ljava/io/File;Landroid.net.Uri;)_com.smilepile.data.backup.BackupManager#writeZipToFile(Ljava/io/File;Landroid.net.Uri;)LResult;D
+0com.smilepile.security.ISecurePreferencesManagerjava.lang.Objectò
 'com.smilepile.security.BiometricManagerjava.lang.Objectù
-dauthenticateWithBiometrics(LFragmentActivity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)¥com.smilepile.security.BiometricManager#authenticateWithBiometrics(LFragmentActivity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/security/BiometricResult;t
+dauthenticateWithBiometrics(LFragmentActivity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)¥com.smilepile.security.BiometricManager#authenticateWithBiometrics(LFragmentActivity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/security/BiometricResult;√
+7createAuthenticationCallback(LCancellableContinuation;)ácom.smilepile.security.BiometricManager#createAuthenticationCallback(LCancellableContinuation;)LBiometricPrompt.AuthenticationCallback;Ÿ
+HcreatePromptInfo(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)åcom.smilepile.security.BiometricManager#createPromptInfo(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)LBiometricPrompt.PromptInfo;t
 getBiometricStatusMessage()Ucom.smilepile.security.BiometricManager#getBiometricStatusMessage()Ljava/lang/String;Ü
 isBiometricAvailable()lcom.smilepile.security.BiometricManager#isBiometricAvailable()Lcom/smilepile/security/BiometricAvailability;U
-isBiometricEnabled()=com.smilepile.security.BiometricManager#isBiometricEnabled()ZY
+isBiometricEnabled()=com.smilepile.security.BiometricManager#isBiometricEnabled()ZÇ
+mapErrorCodeToResult(I)gcom.smilepile.security.BiometricManager#mapErrorCodeToResult(I)Lcom/smilepile/security/BiometricResult;Y
 setBiometricEnabled(Z)?com.smilepile.security.BiometricManager#setBiometricEnabled(Z)Vc
 shouldOfferBiometricFirst()Dcom.smilepile.security.BiometricManager#shouldOfferBiometricFirst()Z£6
 &com.smilepile.settings.SettingsManagerjava.lang.ObjectP
@@ -1036,11 +1041,13 @@ Dcopy(JLjava/lang/String;JJLcom/smilepile/data/backup/PhotoMetadata;)ëcom.smil
 component4()Dcom.smilepile.data.backup.GalleryItem#component4()Ljava/lang/String;T
 component5()Dcom.smilepile.data.backup.GalleryItem#component5()Ljava/lang/String;T
 component6()Dcom.smilepile.data.backup.GalleryItem#component6()Ljava/lang/String;∂
-rcopy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)øcom.smilepile.data.backup.GalleryItem#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/data/backup/GalleryItem;‘
+rcopy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)øcom.smilepile.data.backup.GalleryItem#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/data/backup/GalleryItem;ê
 /com.smilepile.operations.PhotoOperationsManagerjava.lang.Objectü
 3copyAssetToCache(Lcom/smilepile/data/models/Photo;)hcom.smilepile.operations.PhotoOperationsManager#copyAssetToCache(Lcom/smilepile/data/models/Photo;)LUri;ë
-.deletePhoto(Lcom/smilepile/data/models/Photo;)_com.smilepile.operations.PhotoOperationsManager#deletePhoto(Lcom/smilepile/data/models/Photo;)Zü
-deletePhotos(Ljava/util/List;)}com.smilepile.operations.PhotoOperationsManager#deletePhotos(Ljava/util/List;)Lcom/smilepile/operations/BatchOperationResult;£
+.deletePhoto(Lcom/smilepile/data/models/Photo;)_com.smilepile.operations.PhotoOperationsManager#deletePhoto(Lcom/smilepile/data/models/Photo;)Zô
+2deletePhotoFile(Lcom/smilepile/data/models/Photo;)ccom.smilepile.operations.PhotoOperationsManager#deletePhotoFile(Lcom/smilepile/data/models/Photo;)Vü
+deletePhotos(Ljava/util/List;)}com.smilepile.operations.PhotoOperationsManager#deletePhotos(Ljava/util/List;)Lcom/smilepile/operations/BatchOperationResult;ù
+4deleteSinglePhoto(Lcom/smilepile/data/models/Photo;)ecom.smilepile.operations.PhotoOperationsManager#deleteSinglePhoto(Lcom/smilepile/data/models/Photo;)Z£
 7movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)hcom.smilepile.operations.PhotoOperationsManager#movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)Z≤
 'movePhotosToCategory(Ljava/util/List;J)Ücom.smilepile.operations.PhotoOperationsManager#movePhotosToCategory(Ljava/util/List;J)Lcom/smilepile/operations/BatchOperationResult;ù
 4removeFromLibrary(Lcom/smilepile/data/models/Photo;)ecom.smilepile.operations.PhotoOperationsManager#removeFromLibrary(Lcom/smilepile/data/models/Photo;)Z™
@@ -1059,38 +1066,51 @@ rcopy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lj
 component1()Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#component1()Zl
 component2()\com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#component2()Ljava/util/Set;^
 component3()Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#component3()Z∫
-öcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#copy(ZLjava/util/Set;Z)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$SelectionState;öcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#copy(ZLjava/util/Set;Z)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$SelectionState; 
+öcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#copy(ZLjava/util/Set;Z)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$SelectionState;öcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#copy(ZLjava/util/Set;Z)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$SelectionState;‹
 +com.smilepile.ui.viewmodels.BackupViewModeljava.lang.Object_
 cancelScheduledBackup()Dcom.smilepile.ui.viewmodels.BackupViewModel#cancelScheduledBackup()VI
 clearError()9com.smilepile.ui.viewmodels.BackupViewModel#clearError()V©
 <createBackup(Lcom/smilepile/data/backup/BackupOptions;LUri;)icom.smilepile.ui.viewmodels.BackupViewModel#createBackup(Lcom/smilepile/data/backup/BackupOptions;LUri;)Vá
 +createIncrementalBackup(Ljava/lang/String;)Xcom.smilepile.ui.viewmodels.BackupViewModel#createIncrementalBackup(Ljava/lang/String;)Vq
- deleteBackup(Ljava/lang/String;)Mcom.smilepile.ui.viewmodels.BackupViewModel#deleteBackup(Ljava/lang/String;)Vˆ
-bexportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)ècom.smilepile.ui.viewmodels.BackupViewModel#exportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)VW
+ deleteBackup(Ljava/lang/String;)Mcom.smilepile.ui.viewmodels.BackupViewModel#deleteBackup(Ljava/lang/String;)V”
+QexecuteRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)~com.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Vˆ
+bexportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)ècom.smilepile.ui.viewmodels.BackupViewModel#exportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)VÉ
+)handleRestoreError(Ljava/lang/Exception;)Vcom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreError(Ljava/lang/Exception;)V≥
+AhandleRestoreProgress(Lcom/smilepile/data/backup/ImportProgress;)ncom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreProgress(Lcom/smilepile/data/backup/ImportProgress;)VW
 loadBackupHistory()@com.smilepile.ui.viewmodels.BackupViewModel#loadBackupHistory()VY
 loadBackupSchedule()Acom.smilepile.ui.viewmodels.BackupViewModel#loadBackupSchedule()VS
 loadBackupStats()>com.smilepile.ui.viewmodels.BackupViewModel#loadBackupStats()VY
 resetSuccessStates()Acom.smilepile.ui.viewmodels.BackupViewModel#resetSuccessStates()Vø
 GrestoreBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)tcom.smilepile.ui.viewmodels.BackupViewModel#restoreBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V•
 :scheduleBackup(Lcom/smilepile/data/backup/BackupSchedule;)gcom.smilepile.ui.viewmodels.BackupViewModel#scheduleBackup(Lcom/smilepile/data/backup/BackupSchedule;)Vm
-validateBackup(Ljava/io/File;)Kcom.smilepile.ui.viewmodels.BackupViewModel#validateBackup(Ljava/io/File;)Vå
+validateBackup(Ljava/io/File;)Kcom.smilepile.ui.viewmodels.BackupViewModel#validateBackup(Ljava/io/File;)V˙6
 (com.smilepile.data.backup.RestoreManagerjava.lang.Objectw
 calculateMD5(Ljava/io/File;)Wcom.smilepile.data.backup.RestoreManager#calculateMD5(Ljava/io/File;)Ljava/lang/String;J
-clearAllData()8com.smilepile.data.backup.RestoreManager#clearAllData()VÙ
+clearAllData()8com.smilepile.data.backup.RestoreManager#clearAllData()V∞
+(createInvalidZipResult(Ljava/util/List;)Écom.smilepile.data.backup.RestoreManager#createInvalidZipResult(Ljava/util/List;)Lcom/smilepile/data/backup/BackupValidationResult;Ù
 xcom.smilepile.data.backup.RestoreManager#createRollbackSnapshot()Lcom/smilepile/data/backup/RestoreManager$RollbackData;xcom.smilepile.data.backup.RestoreManager#createRollbackSnapshot()Lcom/smilepile/data/backup/RestoreManager$RollbackData;õ
 .generateUniqueCategoryName(Ljava/lang/String;)icom.smilepile.data.backup.RestoreManager#generateUniqueCategoryName(Ljava/lang/String;)Ljava/lang/String;ï
-+generateUniquePhotoName(Ljava/lang/String;)fcom.smilepile.data.backup.RestoreManager#generateUniquePhotoName(Ljava/lang/String;)Ljava/lang/String;Á
++generateUniquePhotoName(Ljava/lang/String;)fcom.smilepile.data.backup.RestoreManager#generateUniquePhotoName(Ljava/lang/String;)Ljava/lang/String;˙
+˙com.smilepile.data.backup.RestoreManager#handleDuplicateCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/models/Category;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;˙com.smilepile.data.backup.RestoreManager#handleDuplicateCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/models/Category;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;§
+rhandlePhotoDuplicate(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)≠com.smilepile.data.backup.RestoreManager#handlePhotoDuplicate(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Ljava/lang/String;“
+¶com.smilepile.data.backup.RestoreManager#insertNewCategory(Lcom/smilepile/data/backup/BackupCategory;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;¶com.smilepile.data.backup.RestoreManager#insertNewCategory(Lcom/smilepile/data/backup/BackupCategory;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;Á
+\performIntegrityChecks(Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;ZLjava/util/List;)Ücom.smilepile.data.backup.RestoreManager#performIntegrityChecks(Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;ZLjava/util/List;)ZÁ
 qcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)rcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)V¢
 Œcom.smilepile.data.backup.RestoreManager#restoreCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;Œcom.smilepile.data.backup.RestoreManager#restoreCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;ä
 krestoreFromBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)öcom.smilepile.data.backup.RestoreManager#restoreFromBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)LFlow;Æ
 —com.smilepile.data.backup.RestoreManager#restoreFromJsonInternal(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;Lcom/smilepile/data/backup/RestoreManager$RollbackData;)◊com.smilepile.data.backup.RestoreManager#restoreFromJsonInternal(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;Lcom/smilepile/data/backup/RestoreManager$RollbackData;)LFlow;¨
 –com.smilepile.data.backup.RestoreManager#restoreFromZipInternal(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;Lcom/smilepile/data/backup/RestoreManager$RollbackData;)÷com.smilepile.data.backup.RestoreManager#restoreFromZipInternal(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;Lcom/smilepile/data/backup/RestoreManager$RollbackData;)LFlow; 
-¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;§
+¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;º
+õcom.smilepile.data.backup.RestoreManager#restorePhotoFile(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/lang/String;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;õcom.smilepile.data.backup.RestoreManager#restorePhotoFile(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/lang/String;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;∆
+ãrestorePhotoThumbnail(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)µcom.smilepile.data.backup.RestoreManager#restorePhotoThumbnail(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V§
 ;restoreSettings(Lcom/smilepile/data/backup/BackupSettings;)ecom.smilepile.data.backup.RestoreManager#restoreSettings(Lcom/smilepile/data/backup/BackupSettings;)Vs
-validateBackup(Ljava/io/File;Z)Pcom.smilepile.data.backup.RestoreManager#validateBackup(Ljava/io/File;Z)LResult;y
+validateBackup(Ljava/io/File;Z)Pcom.smilepile.data.backup.RestoreManager#validateBackup(Ljava/io/File;Z)LResult;∆
+LvalidateBackupVersion(Lcom/smilepile/data/backup/AppBackup;Ljava/util/List;)vcom.smilepile.data.backup.RestoreManager#validateBackupVersion(Lcom/smilepile/data/backup/AppBackup;Ljava/util/List;)Vy
 "validateJsonBackup(Ljava/io/File;)Scom.smilepile.data.backup.RestoreManager#validateJsonBackup(Ljava/io/File;)LResult;Ä
 )validateMediaStoreUri(Ljava/lang/String;)Scom.smilepile.data.backup.RestoreManager#validateMediaStoreUri(Ljava/lang/String;)Zy
-"validateZipBackup(Ljava/io/File;Z)Scom.smilepile.data.backup.RestoreManager#validateZipBackup(Ljava/io/File;Z)LResult;¸
+"validateZipBackup(Ljava/io/File;Z)Scom.smilepile.data.backup.RestoreManager#validateZipBackup(Ljava/io/File;Z)LResult;⁄
+RvalidateZipContents(Ljava/io/File;Ljava/io/File;ZLjava/util/List;Ljava/util/List;)Écom.smilepile.data.backup.RestoreManager#validateZipContents(Ljava/io/File;Ljava/io/File;ZLjava/util/List;Ljava/util/List;)LResult;ß
+|verifyPhotoIntegrity(Ljava/io/File;Lcom/smilepile/data/backup/PhotoManifestEntry;Lcom/smilepile/data/backup/RestoreOptions;)¶com.smilepile.data.backup.RestoreManager#verifyPhotoIntegrity(Ljava/io/File;Lcom/smilepile/data/backup/PhotoManifestEntry;Lcom/smilepile/data/backup/RestoreOptions;)V¸
 )com.smilepile.ui.viewmodels.BackupUiStatejava.lang.ObjectG
 component1()7com.smilepile.ui.viewmodels.BackupUiState#component1()ZX
 component10()Gcom.smilepile.ui.viewmodels.BackupUiState#component10()Ljava/lang/Long;Z
@@ -1488,7 +1508,35 @@ read([BII))java.util.zip.GZIPInputStream#read([BII)Ie
 loadMode()Ecom.smilepile.mode.ModeManager#loadMode()Lcom/smilepile/mode/AppMode;p
 &saveMode(Lcom/smilepile/mode/AppMode;)Fcom.smilepile.mode.ModeManager#saveMode(Lcom/smilepile/mode/AppMode;)Vn
 %setMode(Lcom/smilepile/mode/AppMode;)Ecom.smilepile.mode.ModeManager#setMode(Lcom/smilepile/mode/AppMode;)V<
-toggleMode(),com.smilepile.mode.ModeManager#toggleMode()V8
+toggleMode(),com.smilepile.mode.ModeManager#toggleMode()Vˇ
+/com.smilepile.security.SecurePreferencesManager0com.smilepile.security.ISecurePreferencesManagerY
+clearAllSettings()Ccom.smilepile.security.SecurePreferencesManager#clearAllSettings()VI
+
+clearPIN();com.smilepile.security.SecurePreferencesManager#clearPIN()VQ
+clearPattern()?com.smilepile.security.SecurePreferencesManager#clearPattern()V_
+getBiometricEnabled()Fcom.smilepile.security.SecurePreferencesManager#getBiometricEnabled()Zm
+getDeleteProtectionEnabled()Mcom.smilepile.security.SecurePreferencesManager#getDeleteProtectionEnabled()Z[
+getFailedAttempts()Dcom.smilepile.security.SecurePreferencesManager#getFailedAttempts()Ic
+getKidSafeModeEnabled()Hcom.smilepile.security.SecurePreferencesManager#getKidSafeModeEnabled()Zi
+getRemainingCooldownTime()Kcom.smilepile.security.SecurePreferencesManager#getRemainingCooldownTime()JÑ
+getSecuritySummary()lcom.smilepile.security.SecurePreferencesManager#getSecuritySummary()Lcom/smilepile/security/SecuritySummary;W
+hasParentalLock()Bcom.smilepile.security.SecurePreferencesManager#hasParentalLock()ZQ
+isInCooldown()?com.smilepile.security.SecurePreferencesManager#isInCooldown()ZQ
+isPINEnabled()?com.smilepile.security.SecurePreferencesManager#isPINEnabled()ZY
+isPatternEnabled()Ccom.smilepile.security.SecurePreferencesManager#isPatternEnabled()Z_
+recordFailedAttempt()Fcom.smilepile.security.SecurePreferencesManager#recordFailedAttempt()V_
+resetFailedAttempts()Fcom.smilepile.security.SecurePreferencesManager#resetFailedAttempts()Va
+setBiometricEnabled(Z)Gcom.smilepile.security.SecurePreferencesManager#setBiometricEnabled(Z)Vo
+setDeleteProtectionEnabled(Z)Ncom.smilepile.security.SecurePreferencesManager#setDeleteProtectionEnabled(Z)Ve
+setKidSafeModeEnabled(Z)Icom.smilepile.security.SecurePreferencesManager#setKidSafeModeEnabled(Z)Vi
+setPIN(Ljava/lang/String;)Kcom.smilepile.security.SecurePreferencesManager#setPIN(Ljava/lang/String;)Vm
+setPattern(Ljava/util/List;)Mcom.smilepile.security.SecurePreferencesManager#setPattern(Ljava/util/List;)Vs
+validatePIN(Ljava/lang/String;)Pcom.smilepile.security.SecurePreferencesManager#validatePIN(Ljava/lang/String;)Zw
+!validatePattern(Ljava/util/List;)Rcom.smilepile.security.SecurePreferencesManager#validatePattern(Ljava/util/List;)Z˝
+écom.smilepile.security.BiometricManager#createAuthenticationCallback(LCancellableContinuation;)LBiometricPrompt.AuthenticationCallback;$class0java.lang.Objectı
+0onAuthenticationError(ILjava/lang/CharSequence;)¿com.smilepile.security.BiometricManager#createAuthenticationCallback(LCancellableContinuation;)LBiometricPrompt.AuthenticationCallback;$class0#onAuthenticationError(ILjava/lang/CharSequence;)V≈
+onAuthenticationFailed()®com.smilepile.security.BiometricManager#createAuthenticationCallback(LCancellableContinuation;)LBiometricPrompt.AuthenticationCallback;$class0#onAuthenticationFailed()Vó
+AonAuthenticationSucceeded(LBiometricPrompt.AuthenticationResult;)—com.smilepile.security.BiometricManager#createAuthenticationCallback(LCancellableContinuation;)LBiometricPrompt.AuthenticationCallback;$class0#onAuthenticationSucceeded(LBiometricPrompt.AuthenticationResult;)V8
 &com.smilepile.security.BiometricResultjava.lang.EnumÊ
  com.smilepile.ui.toast.ToastDatajava.lang.ObjectO
 component1()?com.smilepile.ui.toast.ToastData#component1()Ljava/lang/String;>
@@ -1535,16 +1583,18 @@ onResume()&com.smilepile.MainActivity#onResume()VN
 onWindowFocusChanged(Z)3com.smilepile.MainActivity#onWindowFocusChanged(Z)V:
 setupMainUI())com.smilepile.MainActivity#setupMainUI()Vx
 ,setupSystemUI(ZLcom/smilepile/mode/AppMode;)Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)VL
-shouldShowOnboarding()2com.smilepile.MainActivity#shouldShowOnboarding()Zà
+shouldShowOnboarding()2com.smilepile.MainActivity#shouldShowOnboarding()Z‡	
 ,com.smilepile.ui.viewmodels.AppModeViewModeljava.lang.ObjectP
 cancelPinAuth()=com.smilepile.ui.viewmodels.AppModeViewModel#cancelPinAuth()VJ
 clearError():com.smilepile.ui.viewmodels.AppModeViewModel#clearError()VP
 forceKidsMode()=com.smilepile.ui.viewmodels.AppModeViewModel#forceKidsMode()VT
-forceParentMode()?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()VZ
+forceParentMode()?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()Vz
+$handleInvalidPin(Ljava/lang/String;)Rcom.smilepile.ui.viewmodels.AppModeViewModel#handleInvalidPin(Ljava/lang/String;)VZ
 observeModeChanges()Bcom.smilepile.ui.viewmodels.AppModeViewModel#observeModeChanges()VX
 performModeToggle()Acom.smilepile.ui.viewmodels.AppModeViewModel#performModeToggle()VX
 requestModeToggle()Acom.smilepile.ui.viewmodels.AppModeViewModel#requestModeToggle()VZ
-setKidsFullscreen(Z)Bcom.smilepile.ui.viewmodels.AppModeViewModel#setKidsFullscreen(Z)VÇ
+setKidsFullscreen(Z)Bcom.smilepile.ui.viewmodels.AppModeViewModel#setKidsFullscreen(Z)VZ
+switchToParentMode()Bcom.smilepile.ui.viewmodels.AppModeViewModel#switchToParentMode()VÇ
 (validatePinAndToggle(Ljava/lang/String;)Vcom.smilepile.ui.viewmodels.AppModeViewModel#validatePinAndToggle(Ljava/lang/String;)Zé
 .validatePinForKidsModeExit(Ljava/lang/String;)\com.smilepile.ui.viewmodels.AppModeViewModel#validatePinForKidsModeExit(Ljava/lang/String;)Zó
 *com.smilepile.ui.viewmodels.ThemeViewModeljava.lang.Objectä
@@ -1558,7 +1608,22 @@ onResume()&com.smilepile.MainActivity#onResume()VN
 component5()4com.smilepile.security.SecuritySummary#component5()ZD
 component6()4com.smilepile.security.SecuritySummary#component6()ID
 component7()4com.smilepile.security.SecuritySummary#component7()Zm
-copy(ZZZZZIZ)\com.smilepile.security.SecuritySummary#copy(ZZZZZIZ)Lcom/smilepile/security/SecuritySummary;∆
+copy(ZZZZZIZ)\com.smilepile.security.SecuritySummary#copy(ZZZZZIZ)Lcom/smilepile/security/SecuritySummary;ø
+$com.smilepile.ui.screens.DialogStatejava.lang.Objecth
+component1()Xcom.smilepile.ui.screens.DialogState#component1()Landroidx.compose.runtime.MutableState;h
+component2()Xcom.smilepile.ui.screens.DialogState#component2()Landroidx.compose.runtime.MutableState;h
+component3()Xcom.smilepile.ui.screens.DialogState#component3()Landroidx.compose.runtime.MutableState;∆
+{copy(Landroidx.compose.runtime.MutableState;Landroidx.compose.runtime.MutableState;Landroidx.compose.runtime.MutableState;)∆com.smilepile.ui.screens.DialogState#copy(Landroidx.compose.runtime.MutableState;Landroidx.compose.runtime.MutableState;Landroidx.compose.runtime.MutableState;)Lcom/smilepile/ui/screens/DialogState;◊
+(com.smilepile.ui.screens.BackupLaunchersjava.lang.Objectv
+component1()fcom.smilepile.ui.screens.BackupLaunchers#component1()Landroidx.activity.result.ActivityResultLauncher;v
+component2()fcom.smilepile.ui.screens.BackupLaunchers#component2()Landroidx.activity.result.ActivityResultLauncher;®
+hcopy(Landroidx.activity.result.ActivityResultLauncher;Landroidx.activity.result.ActivityResultLauncher;)ªcom.smilepile.ui.screens.BackupLaunchers#copy(Landroidx.activity.result.ActivityResultLauncher;Landroidx.activity.result.ActivityResultLauncher;)Lcom/smilepile/ui/screens/BackupLaunchers;£
+*com.smilepile.ui.screens.PinDialogHandlersjava.lang.Objectg
+component1()Wcom.smilepile.ui.screens.PinDialogHandlers#component1()Lkotlin/jvm/functions/Function1;g
+component2()Wcom.smilepile.ui.screens.PinDialogHandlers#component2()Lkotlin/jvm/functions/Function2;Y
+component3()Icom.smilepile.ui.screens.PinDialogHandlers#component3()Ljava/lang/String;g
+component4()Wcom.smilepile.ui.screens.PinDialogHandlers#component4()Lkotlin/jvm/functions/Function0;Ã
+xcopy(Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)œcom.smilepile.ui.screens.PinDialogHandlers#copy(Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/screens/PinDialogHandlers;∆
 7com.smilepile.data.database.SmilePileDatabase$Companionjava.lang.Object_
 destroyInstance()Jcom.smilepile.data.database.SmilePileDatabase$Companion#destroyInstance()Vó
 getDatabase(LContext;)}com.smilepile.data.database.SmilePileDatabase$Companion#getDatabase(LContext;)Lcom/smilepile/data/database/SmilePileDatabase;ü
@@ -1568,27 +1633,55 @@ onResume()&com.smilepile.MainActivity#onResume()VN
 getUriForFile(Ljava/io/File;)Ecom.smilepile.sharing.ShareManager#getUriForFile(Ljava/io/File;)LUri;P
 isSharingAvailable()8com.smilepile.sharing.ShareManager#isSharingAvailable()Zî
 6sharePhoto(LContext;Lcom/smilepile/data/models/Photo;)Zcom.smilepile.sharing.ShareManager#sharePhoto(LContext;Lcom/smilepile/data/models/Photo;)Vt
-&sharePhotos(LContext;Ljava/util/List;)Jcom.smilepile.sharing.ShareManager#sharePhotos(LContext;Ljava/util/List;)Vÿ
+&sharePhotos(LContext;Ljava/util/List;)Jcom.smilepile.sharing.ShareManager#sharePhotos(LContext;Ljava/util/List;)VÏ
+com.smilepile.storage.ZipUtilsjava.lang.ObjectË
+^addFilesToZip(Ljava/util/zip/ZipOutputStream;Ljava/util/List;Lkotlin/jvm/functions/Function2;)Öcom.smilepile.storage.ZipUtils#addFilesToZip(Ljava/util/zip/ZipOutputStream;Ljava/util/List;Lkotlin/jvm/functions/Function2;)LResult;å
+4createZipDirectory(Ljava/io/File;Ljava/lang/String;)Tcom.smilepile.storage.ZipUtils#createZipDirectory(Ljava/io/File;Ljava/lang/String;)V’
+UcreateZipFromDirectory(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)|com.smilepile.storage.ZipUtils#createZipFromDirectory(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)LResult;ª
+HextractZip(Ljava/io/File;Ljava/io/File;Lkotlin/jvm/functions/Function2;)ocom.smilepile.storage.ZipUtils#extractZip(Ljava/io/File;Ljava/io/File;Lkotlin/jvm/functions/Function2;)LResult;⁄
+TextractZipFile(Ljava/util/zip/ZipInputStream;Ljava/io/File;Ljava/util/zip/ZipEntry;)Åcom.smilepile.storage.ZipUtils#extractZipFile(Ljava/util/zip/ZipInputStream;Ljava/io/File;Ljava/util/zip/ZipEntry;)Ljava/io/File;—
+SextractZipSecondPass(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)zcom.smilepile.storage.ZipUtils#extractZipSecondPass(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)LResult;_
+getZipInfo(Ljava/io/File;)Acom.smilepile.storage.ZipUtils#getZipInfo(Ljava/io/File;)LResult;
+%sanitizeEntryName(Ljava/lang/String;)Vcom.smilepile.storage.ZipUtils#sanitizeEntryName(Ljava/lang/String;)Ljava/lang/String;ô
+7validateZipEntryForSecurity(Ljava/util/zip/ZipEntry;IJ)^com.smilepile.storage.ZipUtils#validateZipEntryForSecurity(Ljava/util/zip/ZipEntry;IJ)LResult;É
+,validateZipSecurityFirstPass(Ljava/io/File;)Scom.smilepile.storage.ZipUtils#validateZipSecurityFirstPass(Ljava/io/File;)LResult;s
+$validateZipStructure(Ljava/io/File;)Kcom.smilepile.storage.ZipUtils#validateZipStructure(Ljava/io/File;)LResult;8
+"kotlin.collections.MutableIterablejava.lang.IterableP
+$kotlin.collections.MutableCollectionjava.lang.Iterablejava.util.CollectionF
+kotlin.collections.MutableListjava.util.Collectionjava.util.ListF
+2com.smilepile.data.backup.RestoreManager$Companionjava.lang.Objectÿ
 >com.smilepile.data.backup.RestoreManager$CategoryRestoreResultjava.lang.Object\
 component1()Lcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#component1()Zm
 component2()]com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#component2()Ljava/lang/String;∂
-òcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#copy(ZLjava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;òcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#copy(ZLjava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;O
-;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultjava.lang.Objectª
-Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultq
-component1()acom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#component1()Ljava/lang/String;ƒ
-ücom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Failed;ücom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Failed;¡
+òcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#copy(ZLjava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;òcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#copy(ZLjava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult; 
+<com.smilepile.data.backup.RestoreManager$PhotoRestoreContextjava.lang.Objectk
+component1()[com.smilepile.data.backup.RestoreManager$PhotoRestoreContext#component1()Ljava/lang/String;Z
+component2()Jcom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#component2()ZÆ
+îcom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#copy(Ljava/lang/String;Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;îcom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#copy(Ljava/lang/String;Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;O
+;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultjava.lang.Object¡
 Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultr
 component1()bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#component1()Ljava/lang/String;»
 °com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Skipped;°com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Skipped;î
 Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultb
 component1()Rcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#component1()Z™
-ícom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#copy(Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Imported;ícom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#copy(Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Imported;ï
+ícom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#copy(Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Imported;ícom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#copy(Z)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Imported;ª
+Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed;com.smilepile.data.backup.RestoreManager$PhotoRestoreResultq
+component1()acom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#component1()Ljava/lang/String;ƒ
+ücom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Failed;ücom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#copy(Ljava/lang/String;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult$Failed;1
+java.lang.RuntimeExceptionjava.lang.Exception9
+java.lang.SecurityExceptionjava.lang.RuntimeException=
+java.lang.IllegalStateExceptionjava.lang.RuntimeExceptionï
 5com.smilepile.data.backup.RestoreManager$RollbackDatajava.lang.Objectb
 component1()Rcom.smilepile.data.backup.RestoreManager$RollbackData#component1()Ljava/util/List;b
 component2()Rcom.smilepile.data.backup.RestoreManager$RollbackData#component2()Ljava/util/List;S
 component3()Ccom.smilepile.data.backup.RestoreManager$RollbackData#component3()Z`
 component4()Pcom.smilepile.data.backup.RestoreManager$RollbackData#component4()Ljava/io/File; 
-¢com.smilepile.data.backup.RestoreManager$RollbackData#copy(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)Lcom/smilepile/data/backup/RestoreManager$RollbackData;¢com.smilepile.data.backup.RestoreManager$RollbackData#copy(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)Lcom/smilepile/data/backup/RestoreManager$RollbackData;Ñ
+¢com.smilepile.data.backup.RestoreManager$RollbackData#copy(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)Lcom/smilepile/data/backup/RestoreManager$RollbackData;¢com.smilepile.data.backup.RestoreManager$RollbackData#copy(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)Lcom/smilepile/data/backup/RestoreManager$RollbackData;º
+.com.smilepile.onboarding.screens.PhotoHandlersjava.lang.Objectk
+component1()[com.smilepile.onboarding.screens.PhotoHandlers#component1()Lkotlin/jvm/functions/Function0;k
+component2()[com.smilepile.onboarding.screens.PhotoHandlers#component2()Lkotlin/jvm/functions/Function2;k
+component3()[com.smilepile.onboarding.screens.PhotoHandlers#component3()Lkotlin/jvm/functions/Function1;∞
+fcopy(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;)≈com.smilepile.onboarding.screens.PhotoHandlers#copy(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;)Lcom/smilepile/onboarding/screens/PhotoHandlers;Ñ
 8com.smilepile.ui.components.PerformanceConfig$GridLayoutjava.lang.Objectf
 getColumnCount(LDp;)Ncom.smilepile.ui.components.PerformanceConfig$GridLayout#getColumnCount(LDp;)Iz
 getContentPadding(LDp;)_com.smilepile.ui.components.PerformanceConfig$GridLayout#getContentPadding(LDp;)LPaddingValues;d
@@ -1604,14 +1697,39 @@ $enableScrollPerformanceMonitoring(Z)Tcom.smilepile.ui.components.PerformanceMo
 -com.smilepile.ui.viewmodels.CategoryWithCountjava.lang.Objectn
 component1()^com.smilepile.ui.viewmodels.CategoryWithCount#component1()Lcom/smilepile/data/models/Category;K
 component2();com.smilepile.ui.viewmodels.CategoryWithCount#component2()I∏
-+copy(Lcom/smilepile/data/models/Category;I)àcom.smilepile.ui.viewmodels.CategoryWithCount#copy(Lcom/smilepile/data/models/Category;I)Lcom/smilepile/ui/viewmodels/CategoryWithCount;«
++copy(Lcom/smilepile/data/models/Category;I)àcom.smilepile.ui.viewmodels.CategoryWithCount#copy(Lcom/smilepile/data/models/Category;I)Lcom/smilepile/ui/viewmodels/CategoryWithCount;÷
+-com.smilepile.ui.viewmodels.CategoryViewModeljava.lang.Objectï
+1addCategory(Ljava/lang/String;Ljava/lang/String;)`com.smilepile.ui.viewmodels.CategoryViewModel#addCategory(Ljava/lang/String;Ljava/lang/String;)V¶
+7canDeleteCategory(Lcom/smilepile/data/models/Category;)kcom.smilepile.ui.viewmodels.CategoryViewModel#canDeleteCategory(Lcom/smilepile/data/models/Category;)LPair;•
+9checkForDuplicateName(Ljava/lang/String;Ljava/lang/Long;)hcom.smilepile.ui.viewmodels.CategoryViewModel#checkForDuplicateName(Ljava/lang/String;Ljava/lang/Long;)ZK
+clearError();com.smilepile.ui.viewmodels.CategoryViewModel#clearError()V≈
+7createNewCategory(Ljava/lang/String;Ljava/lang/String;)âcom.smilepile.ui.viewmodels.CategoryViewModel#createNewCategory(Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/data/models/Category;ù
+5deleteCategory(Lcom/smilepile/data/models/Category;Z)dcom.smilepile.ui.viewmodels.CategoryViewModel#deleteCategory(Lcom/smilepile/data/models/Category;Z)V£
+8getCategoryPhotoCount(JLkotlin/jvm/functions/Function1;)gcom.smilepile.ui.viewmodels.CategoryViewModel#getCategoryPhotoCount(JLkotlin/jvm/functions/Function1;)VK
+hideDialog();com.smilepile.ui.viewmodels.CategoryViewModel#hideDialog()Vî
+(normalizeDisplayName(Ljava/lang/String;)hcom.smilepile.ui.viewmodels.CategoryViewModel#normalizeDisplayName(Ljava/lang/String;)Ljava/lang/String;m
+refreshCategoriesWithCounts()Lcom.smilepile.ui.viewmodels.CategoryViewModel#refreshCategoriesWithCounts()Va
+showAddCategoryDialog()Fcom.smilepile.ui.viewmodels.CategoryViewModel#showAddCategoryDialog()V´
+<showEditCategoryDialog(Lcom/smilepile/data/models/Category;)kcom.smilepile.ui.viewmodels.CategoryViewModel#showEditCategoryDialog(Lcom/smilepile/data/models/Category;)V‰
+XupdateCategory(Lcom/smilepile/data/models/Category;Ljava/lang/String;Ljava/lang/String;)ácom.smilepile.ui.viewmodels.CategoryViewModel#updateCategory(Lcom/smilepile/data/models/Category;Ljava/lang/String;Ljava/lang/String;)VÉ
+(validateCategoryName(Ljava/lang/String;)Wcom.smilepile.ui.viewmodels.CategoryViewModel#validateCategoryName(Ljava/lang/String;)ZA
+/com.smilepile.utils.IImageProcessor$AspectRatiojava.lang.Enum¢
 (com.smilepile.storage.PhotoImportManagerjava.lang.ObjectX
-clearDuplicateCache()?com.smilepile.storage.PhotoImportManager#clearDuplicateCache()Vg
+clearDuplicateCache()?com.smilepile.storage.PhotoImportManager#clearDuplicateCache()Và
+extractMetadataFromData([B)icom.smilepile.storage.PhotoImportManager#extractMetadataFromData([B)Lcom/smilepile/storage/PhotoMetadata;Ì
+_finalizeSaveWithMetadata(Ljava/io/File;Lcom/smilepile/storage/PhotoMetadata;Ljava/lang/String;)âcom.smilepile.storage.PhotoImportManager#finalizeSaveWithMetadata(Ljava/io/File;Lcom/smilepile/storage/PhotoMetadata;Ljava/lang/String;)Vo
+generateUniqueFileName()Scom.smilepile.storage.PhotoImportManager#generateUniqueFileName()Ljava/lang/String;g
 getFileFormat(LUri;)Ocom.smilepile.storage.PhotoImportManager#getFileFormat(LUri;)Ljava/lang/String;
 getImportStatistics()fcom.smilepile.storage.PhotoImportManager#getImportStatistics()Lcom/smilepile/storage/ImportStatistics;u
 importPhoto(LUri;)_com.smilepile.storage.PhotoImportManager#importPhoto(LUri;)Lcom/smilepile/storage/ImportResult;«
-JimportPhotosWithProgress(Ljava/util/List;Lkotlin/jvm/functions/Function1;)ycom.smilepile.storage.PhotoImportManager#importPhotosWithProgress(Ljava/util/List;Lkotlin/jvm/functions/Function1;)LFlow;É
-processPhotoImport(LUri;)fcom.smilepile.storage.PhotoImportManager#processPhotoImport(LUri;)Lcom/smilepile/storage/ImportResult;F
+JimportPhotosWithProgress(Ljava/util/List;Lkotlin/jvm/functions/Function1;)ycom.smilepile.storage.PhotoImportManager#importPhotosWithProgress(Ljava/util/List;Lkotlin/jvm/functions/Function1;)LFlow;i
+optimizeBitmapFromData([B)Kcom.smilepile.storage.PhotoImportManager#optimizeBitmapFromData([B)LBitmap;É
+processPhotoImport(LUri;)fcom.smilepile.storage.PhotoImportManager#processPhotoImport(LUri;)Lcom/smilepile/storage/ImportResult;W
+readPhotoData(LUri;)?com.smilepile.storage.PhotoImportManager#readPhotoData(LUri;)[Bï
+1savePhotoAndThumbnail(LBitmap;Ljava/lang/String;)`com.smilepile.storage.PhotoImportManager#savePhotoAndThumbnail(LBitmap;Ljava/lang/String;)LPair;ç
+)savePhotoFile(LBitmap;Ljava/lang/String;)`com.smilepile.storage.PhotoImportManager#savePhotoFile(LBitmap;Ljava/lang/String;)Ljava/io/File;ï
+-saveThumbnailFile(LBitmap;Ljava/lang/String;)dcom.smilepile.storage.PhotoImportManager#saveThumbnailFile(LBitmap;Ljava/lang/String;)Ljava/io/File;i
+validateFormat(LUri;)Pcom.smilepile.storage.PhotoImportManager#validateFormat(LUri;)Ljava/lang/String;F
 2com.smilepile.storage.PhotoImportManager$Companionjava.lang.Object≈
 ,com.smilepile.storage.PhotoMetadataExtractorjava.lang.Objectñ
  extractLocation(LExifInterface;)rcom.smilepile.storage.PhotoMetadataExtractor#extractLocation(LExifInterface;)Lcom/smilepile/storage/PhotoLocation;¢
@@ -1651,9 +1769,7 @@ $com.smilepile.storage.PhotoOptimizerjava.lang.ObjectZ
 #com.smilepile.storage.PhotoLocationjava.lang.ObjectA
 component1()1com.smilepile.storage.PhotoLocation#component1()DA
 component2()1com.smilepile.storage.PhotoLocation#component2()D]
-copy(DD)Qcom.smilepile.storage.PhotoLocation#copy(DD)Lcom/smilepile/storage/PhotoLocation;1
-java.lang.RuntimeExceptionjava.lang.Exception=
-java.lang.IllegalStateExceptionjava.lang.RuntimeException6
+copy(DD)Qcom.smilepile.storage.PhotoLocation#copy(DD)Lcom/smilepile/storage/PhotoLocation;6
 "com.smilepile.storage.ImportResultjava.lang.Objectì
 *com.smilepile.storage.ImportResult$Success"com.smilepile.storage.ImportResultY
 component1()Icom.smilepile.storage.ImportResult$Success#component1()Ljava/lang/String;Y
@@ -1759,19 +1875,7 @@ toString()*kotlin.Double#toString()Ljava/lang/String;+
 gcom.smilepile.error.ErrorHandler#showErrorToast(LContext;Lcom/smilepile/error/ErrorHandler$ErrorState;)hcom.smilepile.error.ErrorHandler#showErrorToast(LContext;Lcom/smilepile/error/ErrorHandler$ErrorState;)V&
 java.lang.Errorjava.lang.Throwable0
 java.lang.VirtualMachineErrorjava.lang.Error;
-java.lang.OutOfMemoryErrorjava.lang.VirtualMachineErrorÏ
-com.smilepile.storage.ZipUtilsjava.lang.ObjectË
-^addFilesToZip(Ljava/util/zip/ZipOutputStream;Ljava/util/List;Lkotlin/jvm/functions/Function2;)Öcom.smilepile.storage.ZipUtils#addFilesToZip(Ljava/util/zip/ZipOutputStream;Ljava/util/List;Lkotlin/jvm/functions/Function2;)LResult;å
-4createZipDirectory(Ljava/io/File;Ljava/lang/String;)Tcom.smilepile.storage.ZipUtils#createZipDirectory(Ljava/io/File;Ljava/lang/String;)V’
-UcreateZipFromDirectory(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)|com.smilepile.storage.ZipUtils#createZipFromDirectory(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)LResult;ª
-HextractZip(Ljava/io/File;Ljava/io/File;Lkotlin/jvm/functions/Function2;)ocom.smilepile.storage.ZipUtils#extractZip(Ljava/io/File;Ljava/io/File;Lkotlin/jvm/functions/Function2;)LResult;⁄
-TextractZipFile(Ljava/util/zip/ZipInputStream;Ljava/io/File;Ljava/util/zip/ZipEntry;)Åcom.smilepile.storage.ZipUtils#extractZipFile(Ljava/util/zip/ZipInputStream;Ljava/io/File;Ljava/util/zip/ZipEntry;)Ljava/io/File;—
-SextractZipSecondPass(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)zcom.smilepile.storage.ZipUtils#extractZipSecondPass(Ljava/io/File;Ljava/io/File;ILkotlin/jvm/functions/Function2;)LResult;_
-getZipInfo(Ljava/io/File;)Acom.smilepile.storage.ZipUtils#getZipInfo(Ljava/io/File;)LResult;
-%sanitizeEntryName(Ljava/lang/String;)Vcom.smilepile.storage.ZipUtils#sanitizeEntryName(Ljava/lang/String;)Ljava/lang/String;ô
-7validateZipEntryForSecurity(Ljava/util/zip/ZipEntry;IJ)^com.smilepile.storage.ZipUtils#validateZipEntryForSecurity(Ljava/util/zip/ZipEntry;IJ)LResult;É
-,validateZipSecurityFirstPass(Ljava/io/File;)Scom.smilepile.storage.ZipUtils#validateZipSecurityFirstPass(Ljava/io/File;)LResult;s
-$validateZipStructure(Ljava/io/File;)Kcom.smilepile.storage.ZipUtils#validateZipStructure(Ljava/io/File;)LResult;.
+java.lang.OutOfMemoryErrorjava.lang.VirtualMachineError.
 java.util.zip.ZipConstantsjava.lang.ObjectØ
 java.util.zip.ZipEntryjava.lang.Cloneablejava.lang.Objectjava.util.zip.ZipConstants;
 clone()0java.util.zip.ZipEntry#clone()Ljava/lang/Object;E
@@ -1878,18 +1982,7 @@ dshowToast(Ljava/lang/String;JLcom/smilepile/ui/toast/ToastType;Lcom/smilepile/u
 !com.smilepile.ui.toast.ToastEventjava.lang.Object?
 component1()/com.smilepile.ui.toast.ToastEvent#component1()J`
 component2()Pcom.smilepile.ui.toast.ToastEvent#component2()Lcom/smilepile/ui/toast/ToastData;õ
-)copy(JLcom/smilepile/ui/toast/ToastData;)ncom.smilepile.ui.toast.ToastEvent#copy(JLcom/smilepile/ui/toast/ToastData;)Lcom/smilepile/ui/toast/ToastEvent;…
--com.smilepile.ui.viewmodels.CategoryViewModeljava.lang.Objectï
-1addCategory(Ljava/lang/String;Ljava/lang/String;)`com.smilepile.ui.viewmodels.CategoryViewModel#addCategory(Ljava/lang/String;Ljava/lang/String;)V¶
-7canDeleteCategory(Lcom/smilepile/data/models/Category;)kcom.smilepile.ui.viewmodels.CategoryViewModel#canDeleteCategory(Lcom/smilepile/data/models/Category;)LPair;K
-clearError();com.smilepile.ui.viewmodels.CategoryViewModel#clearError()Vù
-5deleteCategory(Lcom/smilepile/data/models/Category;Z)dcom.smilepile.ui.viewmodels.CategoryViewModel#deleteCategory(Lcom/smilepile/data/models/Category;Z)V£
-8getCategoryPhotoCount(JLkotlin/jvm/functions/Function1;)gcom.smilepile.ui.viewmodels.CategoryViewModel#getCategoryPhotoCount(JLkotlin/jvm/functions/Function1;)VK
-hideDialog();com.smilepile.ui.viewmodels.CategoryViewModel#hideDialog()Vm
-refreshCategoriesWithCounts()Lcom.smilepile.ui.viewmodels.CategoryViewModel#refreshCategoriesWithCounts()Va
-showAddCategoryDialog()Fcom.smilepile.ui.viewmodels.CategoryViewModel#showAddCategoryDialog()V´
-<showEditCategoryDialog(Lcom/smilepile/data/models/Category;)kcom.smilepile.ui.viewmodels.CategoryViewModel#showEditCategoryDialog(Lcom/smilepile/data/models/Category;)V‰
-XupdateCategory(Lcom/smilepile/data/models/Category;Ljava/lang/String;Ljava/lang/String;)ácom.smilepile.ui.viewmodels.CategoryViewModel#updateCategory(Lcom/smilepile/data/models/Category;Ljava/lang/String;Ljava/lang/String;)V9
+)copy(JLcom/smilepile/ui/toast/ToastData;)ncom.smilepile.ui.toast.ToastEvent#copy(JLcom/smilepile/ui/toast/ToastData;)Lcom/smilepile/ui/toast/ToastEvent;9
 'com.smilepile.onboarding.OnboardingStepjava.lang.EnumÇ
 %com.smilepile.onboarding.TempCategoryjava.lang.ObjectT
 component1()Dcom.smilepile.onboarding.TempCategory#component1()Ljava/lang/String;T
@@ -1910,14 +2003,21 @@ Ncopy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)
 component6()8com.smilepile.onboarding.OnboardingUiState#component6()ZH
 component7()8com.smilepile.onboarding.OnboardingUiState#component7()ZY
 component8()Icom.smilepile.onboarding.OnboardingUiState#component8()Ljava/lang/String;Á
-Öcopy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;)‹com.smilepile.onboarding.OnboardingUiState#copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;)Lcom/smilepile/onboarding/OnboardingUiState;–
+Öcopy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;)‹com.smilepile.onboarding.OnboardingUiState#copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;)Lcom/smilepile/onboarding/OnboardingUiState;ı
 ,com.smilepile.onboarding.OnboardingViewModeljava.lang.Objectö
 4addCategory(Lcom/smilepile/onboarding/TempCategory;)bcom.smilepile.onboarding.OnboardingViewModel#addCategory(Lcom/smilepile/onboarding/TempCategory;)VJ
 clearError():com.smilepile.onboarding.OnboardingViewModel#clearError()VZ
-completeOnboarding()Bcom.smilepile.onboarding.OnboardingViewModel#completeOnboarding()VN
+completeOnboarding()Bcom.smilepile.onboarding.OnboardingViewModel#completeOnboarding()V÷
+@createCategoryFromTemp(Lcom/smilepile/onboarding/TempCategory;I)ëcom.smilepile.onboarding.OnboardingViewModel#createCategoryFromTemp(Lcom/smilepile/onboarding/TempCategory;I)Lcom/smilepile/data/models/Category;€
+DcreatePhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)ícom.smilepile.onboarding.OnboardingViewModel#createPhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)Lcom/smilepile/data/models/Photo;ä
+,handleOnboardingError(Ljava/lang/Exception;)Zcom.smilepile.onboarding.OnboardingViewModel#handleOnboardingError(Ljava/lang/Exception;)Vå
+-importPhotos(Ljava/util/List;Ljava/util/Map;)[com.smilepile.onboarding.OnboardingViewModel#importPhotos(Ljava/util/List;Ljava/util/Map;)VŒ
+NimportSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)|com.smilepile.onboarding.OnboardingViewModel#importSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)VN
 navigateBack()<com.smilepile.onboarding.OnboardingViewModel#navigateBack()VN
 navigateNext()<com.smilepile.onboarding.OnboardingViewModel#navigateNext()V†
-7removeCategory(Lcom/smilepile/onboarding/TempCategory;)ecom.smilepile.onboarding.OnboardingViewModel#removeCategory(Lcom/smilepile/onboarding/TempCategory;)Vx
+7removeCategory(Lcom/smilepile/onboarding/TempCategory;)ecom.smilepile.onboarding.OnboardingViewModel#removeCategory(Lcom/smilepile/onboarding/TempCategory;)VÄ
+ saveCategories(Ljava/util/List;)\com.smilepile.onboarding.OnboardingViewModel#saveCategories(Ljava/util/List;)Ljava/util/Map;|
+%savePinIfProvided(Ljava/lang/String;)Scom.smilepile.onboarding.OnboardingViewModel#savePinIfProvided(Ljava/lang/String;)Vx
 #setImportedPhotos(Ljava/util/List;)Qcom.smilepile.onboarding.OnboardingViewModel#setImportedPhotos(Ljava/util/List;)Vn
 setPinCode(Ljava/lang/String;)Lcom.smilepile.onboarding.OnboardingViewModel#setPinCode(Ljava/lang/String;)V>
 skip()4com.smilepile.onboarding.OnboardingViewModel#skip()V\
@@ -2046,8 +2146,10 @@ bjava.util.concurrent.ConcurrentHashMap#treeifyBin([Ljava/util/concurrent/Concur
 component2();com.smilepile.data.entities.PhotoCategoryJoin#component2()JK
 component3();com.smilepile.data.entities.PhotoCategoryJoin#component3()JK
 component4();com.smilepile.data.entities.PhotoCategoryJoin#component4()Zó
-copy(Ljava/lang/String;JJZ)xcom.smilepile.data.entities.PhotoCategoryJoin#copy(Ljava/lang/String;JJZ)Lcom/smilepile/data/entities/PhotoCategoryJoin;∆
-1com.smilepile.data.repository.PhotoRepositoryImpl-com.smilepile.data.repository.PhotoRepositoryì
+copy(Ljava/lang/String;JJZ)xcom.smilepile.data.entities.PhotoCategoryJoin#copy(Ljava/lang/String;JJZ)Lcom/smilepile/data/entities/PhotoCategoryJoin;Ò
+1com.smilepile.data.repository.PhotoRepositoryImpl-com.smilepile.data.repository.PhotoRepositoryü
+ createDeterministicPhotoEntity(){com.smilepile.data.repository.PhotoRepositoryImpl#createDeterministicPhotoEntity()Lcom/smilepile/data/entities/PhotoEntity;ã
+createNewPhotoEntity()qcom.smilepile.data.repository.PhotoRepositoryImpl#createNewPhotoEntity()Lcom/smilepile/data/entities/PhotoEntity;ì
 .deletePhoto(Lcom/smilepile/data/models/Photo;)acom.smilepile.data.repository.PhotoRepositoryImpl#deletePhoto(Lcom/smilepile/data/models/Photo;)V[
 deletePhotoById(J)Ecom.smilepile.data.repository.PhotoRepositoryImpl#deletePhotoById(J)Vi
 deletePhotosByCategory(J)Lcom.smilepile.data.repository.PhotoRepositoryImpl#deletePhotosByCategory(J)V∞
@@ -2066,17 +2168,16 @@ bjava.util.concurrent.ConcurrentHashMap#treeifyBin([Ljava/util/concurrent/Concur
 .insertPhoto(Lcom/smilepile/data/models/Photo;)acom.smilepile.data.repository.PhotoRepositoryImpl#insertPhoto(Lcom/smilepile/data/models/Photo;)Js
 insertPhotos(Ljava/util/List;)Qcom.smilepile.data.repository.PhotoRepositoryImpl#insertPhotos(Ljava/util/List;)Vü
 4removeFromLibrary(Lcom/smilepile/data/models/Photo;)gcom.smilepile.data.repository.PhotoRepositoryImpl#removeFromLibrary(Lcom/smilepile/data/models/Photo;)Vg
-removeFromLibraryById(J)Kcom.smilepile.data.repository.PhotoRepositoryImpl#removeFromLibraryById(J)Vi
+removeFromLibraryById(J)Kcom.smilepile.data.repository.PhotoRepositoryImpl#removeFromLibraryById(J)Vó
+resolveExistingPhotoEntity()wcom.smilepile.data.repository.PhotoRepositoryImpl#resolveExistingPhotoEntity()Lcom/smilepile/data/entities/PhotoEntity;i
 	toPhoto()\com.smilepile.data.repository.PhotoRepositoryImpl#toPhoto()Lcom/smilepile/data/models/Photo;}
-toPhotoEntity()jcom.smilepile.data.repository.PhotoRepositoryImpl#toPhotoEntity()Lcom/smilepile/data/entities/PhotoEntity;ì
+toPhotoEntity()jcom.smilepile.data.repository.PhotoRepositoryImpl#toPhotoEntity()Lcom/smilepile/data/entities/PhotoEntity;ﬁ
+?updateExistingEntity(Lcom/smilepile/data/entities/PhotoEntity;)öcom.smilepile.data.repository.PhotoRepositoryImpl#updateExistingEntity(Lcom/smilepile/data/entities/PhotoEntity;)Lcom/smilepile/data/entities/PhotoEntity;ì
 .updatePhoto(Lcom/smilepile/data/models/Photo;)acom.smilepile.data.repository.PhotoRepositoryImpl#updatePhoto(Lcom/smilepile/data/models/Photo;)VM
 6com.smilepile.data.repository.PhotoRepositoryExceptionjava.lang.Exception#
 kotlin.Function3kotlin.FunctionE
 1com.smilepile.data.backup.BackupManager$Companionjava.lang.Object@
-"java.lang.IllegalArgumentExceptionjava.lang.RuntimeException8
-"kotlin.collections.MutableIterablejava.lang.IterableP
-$kotlin.collections.MutableCollectionjava.lang.Iterablejava.util.CollectionF
-kotlin.collections.MutableListjava.util.Collectionjava.util.List5
+"java.lang.IllegalArgumentExceptionjava.lang.RuntimeException5
 "kotlin.coroutines.SuspendFunction1kotlin.FunctionM
 9com.smilepile.data.backup.BackupManager$PhotoImportResultjava.lang.Object*
 java.io.IOExceptionjava.lang.Exception4
@@ -2088,7 +2189,28 @@ Ecom.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Imported<com.smil
 Ccom.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed<com.smilepile.data.backup.BackupManager$ZipPhotoImportResultr
 component1()bcom.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#component1()Ljava/lang/String;u
 component2()ecom.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#component2()Ljava/lang/Exception;Ú
-∂com.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#copy(Ljava/lang/String;Ljava/lang/Exception;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult$Failed;∂com.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#copy(Ljava/lang/String;Ljava/lang/Exception;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult$Failed;«
+∂com.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#copy(Ljava/lang/String;Ljava/lang/Exception;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult$Failed;∂com.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed#copy(Ljava/lang/String;Ljava/lang/Exception;)Lcom/smilepile/data/backup/BackupManager$ZipPhotoImportResult$Failed;À	
+8com.smilepile.data.backup.BackupManager$ZipImportContextjava.lang.Objectc
+component1()Scom.smilepile.data.backup.BackupManager$ZipImportContext#component1()Ljava/io/File;z
+component2()jcom.smilepile.data.backup.BackupManager$ZipImportContext#component2()Lcom/smilepile/data/backup/AppBackup;V
+component3()Fcom.smilepile.data.backup.BackupManager$ZipImportContext#component3()I
+component4()ocom.smilepile.data.backup.BackupManager$ZipImportContext#component4()Lcom/smilepile/data/backup/ImportStrategy;e
+component5()Ucom.smilepile.data.backup.BackupManager$ZipImportContext#component5()Ljava/util/List;e
+component6()Ucom.smilepile.data.backup.BackupManager$ZipImportContext#component6()Ljava/util/List;Ù
+˜com.smilepile.data.backup.BackupManager$ZipImportContext#copy(Ljava/io/File;Lcom/smilepile/data/backup/AppBackup;ILcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipImportContext;˜com.smilepile.data.backup.BackupManager$ZipImportContext#copy(Ljava/io/File;Lcom/smilepile/data/backup/AppBackup;ILcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$ZipImportContext;§
+7com.smilepile.data.backup.BackupManager$ZipImportResultjava.lang.ObjectU
+component1()Ecom.smilepile.data.backup.BackupManager$ZipImportResult#component1()IU
+component2()Ecom.smilepile.data.backup.BackupManager$ZipImportResult#component2()IU
+component3()Ecom.smilepile.data.backup.BackupManager$ZipImportResult#component3()IU
+component4()Ecom.smilepile.data.backup.BackupManager$ZipImportResult#component4()I˙
+{com.smilepile.data.backup.BackupManager$ZipImportResult#copy(IIII)Lcom/smilepile/data/backup/BackupManager$ZipImportResult;{com.smilepile.data.backup.BackupManager$ZipImportResult#copy(IIII)Lcom/smilepile/data/backup/BackupManager$ZipImportResult;’
+9com.smilepile.data.backup.BackupManager$JsonImportContextjava.lang.Object{
+component1()kcom.smilepile.data.backup.BackupManager$JsonImportContext#component1()Lcom/smilepile/data/backup/AppBackup;W
+component2()Gcom.smilepile.data.backup.BackupManager$JsonImportContext#component2()IÄ
+component3()pcom.smilepile.data.backup.BackupManager$JsonImportContext#component3()Lcom/smilepile/data/backup/ImportStrategy;f
+component4()Vcom.smilepile.data.backup.BackupManager$JsonImportContext#component4()Ljava/util/List;f
+component5()Vcom.smilepile.data.backup.BackupManager$JsonImportContext#component5()Ljava/util/List;‹
+Îcom.smilepile.data.backup.BackupManager$JsonImportContext#copy(Lcom/smilepile/data/backup/AppBackup;ILcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$JsonImportContext;Îcom.smilepile.data.backup.BackupManager$JsonImportContext#copy(Lcom/smilepile/data/backup/AppBackup;ILcom/smilepile/data/backup/ImportStrategy;Ljava/util/List;Ljava/util/List;)Lcom/smilepile/data/backup/BackupManager$JsonImportContext;«
 'com.smilepile.data.backup.BackupPreviewjava.lang.ObjectE
 component1()5com.smilepile.data.backup.BackupPreview#component1()IE
 component2()5com.smilepile.data.backup.BackupPreview#component2()JV
@@ -2098,7 +2220,13 @@ Ccom.smilepile.data.backup.BackupManager$ZipPhotoImportResult$Failed<com.smilep
 component6()5com.smilepile.data.backup.BackupPreview#component6()IT
 component7()Dcom.smilepile.data.backup.BackupPreview#component7()Ljava/util/List;E
 component8()5com.smilepile.data.backup.BackupPreview#component8()Z±
-.copy(IJLjava/lang/String;IIILjava/util/List;Z)com.smilepile.data.backup.BackupPreview#copy(IJLjava/lang/String;IIILjava/util/List;Z)Lcom/smilepile/data/backup/BackupPreview;∫
+.copy(IJLjava/lang/String;IIILjava/util/List;Z)com.smilepile.data.backup.BackupPreview#copy(IJLjava/lang/String;IIILjava/util/List;Z)Lcom/smilepile/data/backup/BackupPreview;˝
+!com.smilepile.utils.BrowserHelperjava.lang.Object~
+#getCustomTabsPackageName(LContext;)Wcom.smilepile.utils.BrowserHelper#getCustomTabsPackageName(LContext;)Ljava/lang/String;o
+$isValidMailtoUrl(Ljava/lang/String;)Gcom.smilepile.utils.BrowserHelper#isValidMailtoUrl(Ljava/lang/String;)Zc
+isValidUrl(Ljava/lang/String;)Acom.smilepile.utils.BrowserHelper#isValidUrl(Ljava/lang/String;)Z
+,openEmailClient(LContext;Ljava/lang/String;)Ocom.smilepile.utils.BrowserHelper#openEmailClient(LContext;Ljava/lang/String;)Zo
+$openUrl(LContext;Ljava/lang/String;)Gcom.smilepile.utils.BrowserHelper#openUrl(LContext;Ljava/lang/String;)Z∫
 
 ;com.smilepile.security.MetadataEncryption$EncryptedMetadatajava.lang.Objectj
 component1()Zcom.smilepile.security.MetadataEncryption$EncryptedMetadata#component1()Ljava/lang/String;k
@@ -2237,18 +2365,32 @@ toString()7java.security.SecureRandom#toString()Ljava/lang/String;.
 getIterationCount()1javax.crypto.spec.PBEKeySpec#getIterationCount()I>
 getKeyLength(),javax.crypto.spec.PBEKeySpec#getKeyLength()I=
 getPassword(),javax.crypto.spec.PBEKeySpec#getPassword()[C5
-	getSalt()(javax.crypto.spec.PBEKeySpec#getSalt()[B9
-java.lang.SecurityExceptionjava.lang.RuntimeExceptionı	
-0com.smilepile.ui.viewmodels.PhotoImportViewModeljava.lang.ObjectT
+	getSalt()(javax.crypto.spec.PBEKeySpec#getSalt()[Bà
+0com.smilepile.ui.viewmodels.PhotoImportViewModeljava.lang.Object≤
+çcom.smilepile.ui.viewmodels.PhotoImportViewModel#buildBatchErrorMessage(Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;I)ücom.smilepile.ui.viewmodels.PhotoImportViewModel#buildBatchErrorMessage(Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;I)Ljava/lang/String;¥
+écom.smilepile.ui.viewmodels.PhotoImportViewModel#buildBatchSuccessMessage(Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;)†com.smilepile.ui.viewmodels.PhotoImportViewModel#buildBatchSuccessMessage(Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;)Ljava/lang/String;d
+checkStorageForBatch(I)Icom.smilepile.ui.viewmodels.PhotoImportViewModel#checkStorageForBatch(I)ZT
 clearMessages()Acom.smilepile.ui.viewmodels.PhotoImportViewModel#clearMessages()Vú
 {com.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromImportResult(Lcom/smilepile/storage/ImportResult$Success;J)úcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromImportResult(Lcom/smilepile/storage/ImportResult$Success;J)Lcom/smilepile/data/models/Photo;ﬂ
-DcreatePhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)ñcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)Lcom/smilepile/data/models/Photo;b
-getPendingCategoryId()Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()J\
+DcreatePhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)ñcom.smilepile.ui.viewmodels.PhotoImportViewModel#createPhotoFromStorageResult(Lcom/smilepile/storage/StorageResult;J)Lcom/smilepile/data/models/Photo;∏
+ôcom.smilepile.ui.viewmodels.PhotoImportViewModel#executeBatchImport(Ljava/util/List;J)Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;ôcom.smilepile.ui.viewmodels.PhotoImportViewModel#executeBatchImport(Ljava/util/List;J)Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;b
+getPendingCategoryId()Hcom.smilepile.ui.viewmodels.PhotoImportViewModel#getPendingCategoryId()Jì
+Ücom.smilepile.ui.viewmodels.PhotoImportViewModel#handleDuplicateImport(Lcom/smilepile/storage/ImportResult$Duplicate;Ljava/util/List;)ácom.smilepile.ui.viewmodels.PhotoImportViewModel#handleDuplicateImport(Lcom/smilepile/storage/ImportResult$Duplicate;Ljava/util/List;)Vá
+Äcom.smilepile.ui.viewmodels.PhotoImportViewModel#handleFailedImport(Lcom/smilepile/storage/ImportResult$Error;ILjava/util/List;)Åcom.smilepile.ui.viewmodels.PhotoImportViewModel#handleFailedImport(Lcom/smilepile/storage/ImportResult$Error;ILjava/util/List;)V∑
+òcom.smilepile.ui.viewmodels.PhotoImportViewModel#handleSuccessfulImport(Lcom/smilepile/storage/ImportResult$Success;JIILjava/util/List;Ljava/util/List;)ôcom.smilepile.ui.viewmodels.PhotoImportViewModel#handleSuccessfulImport(Lcom/smilepile/storage/ImportResult$Success;JIILjava/util/List;Ljava/util/List;)V\
 importPhoto(LUri;J)Ecom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhoto(LUri;J)Vt
-importPhotos(Ljava/util/List;J)Qcom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhotos(Ljava/util/List;J)V^
+importPhotos(Ljava/util/List;J)Qcom.smilepile.ui.viewmodels.PhotoImportViewModel#importPhotos(Ljava/util/List;J)VÑ
+'initializeBatchImport(Ljava/util/List;)Ycom.smilepile.ui.viewmodels.PhotoImportViewModel#initializeBatchImport(Ljava/util/List;)V^
 refreshStorageInfo()Fcom.smilepile.ui.viewmodels.PhotoImportViewModel#refreshStorageInfo()VZ
 resetImportState()Dcom.smilepile.ui.viewmodels.PhotoImportViewModel#resetImportState()Vd
-setPendingCategoryId(J)Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)V¿
+setPendingCategoryId(J)Icom.smilepile.ui.viewmodels.PhotoImportViewModel#setPendingCategoryId(J)Vü
+åcom.smilepile.ui.viewmodels.PhotoImportViewModel#updateFinalBatchState(ILcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;)çcom.smilepile.ui.viewmodels.PhotoImportViewModel#updateFinalBatchState(ILcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;)VÄ
+%validateBatchImport(Ljava/util/List;)Wcom.smilepile.ui.viewmodels.PhotoImportViewModel#validateBatchImport(Ljava/util/List;)Zù
+Acom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStatsjava.lang.Object_
+component1()Ocom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStats#component1()I_
+component2()Ocom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStats#component2()I_
+component3()Ocom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStats#component3()I¢
+écom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStats#copy(III)Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;écom.smilepile.ui.viewmodels.PhotoImportViewModel$BatchImportStats#copy(III)Lcom/smilepile/ui/viewmodels/PhotoImportViewModel$BatchImportStats;¿
 )java.util.concurrent.atomic.AtomicIntegerjava.io.Serializablejava.lang.Number°
 9accumulateAndGet(ILjava/util/function/IntBinaryOperator;)djava.util.concurrent.atomic.AtomicInteger#accumulateAndGet(ILjava/util/function/IntBinaryOperator;)IG
 addAndGet(I)7java.util.concurrent.atomic.AtomicInteger#addAndGet(I)I[

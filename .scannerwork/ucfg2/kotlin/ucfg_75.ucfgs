@@ -1,1408 +1,999 @@
-ì
-1com.smilepile.onboarding.OnboardingStep#<init>()Vl
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt ("0*<
-0 ("/
-
-__unknown_file (
-implicit returnB+)
-'com.smilepile.onboarding.OnboardingStepH`∆
-?com.smilepile.onboarding.TempCategory#getId()Ljava/lang/String;
-__unknown_file ("0*∂
-0 (~
-|
- (
-fieldjava.lang.String"__id*O
- (C*A'
-%com.smilepile.onboarding.TempCategory"
-idjava.lang.String"'
- (
-
-fieldjava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`Ê
-@com.smilepile.onboarding.TempCategory#setId(Ljava/lang/String;)V
-__unknown_file ("0*Æ
-0 (~
-|
- (A'
-%com.smilepile.onboarding.TempCategory"
-idjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`À
-Acom.smilepile.onboarding.TempCategory#getName()Ljava/lang/String;
-__unknown_file ("0*π
-0 (Ä
-~
- (
-fieldjava.lang.String"__id*Q
- (E*C'
-%com.smilepile.onboarding.TempCategory"
-namejava.lang.String"'
- (
-
-fieldjava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`Î
-Bcom.smilepile.onboarding.TempCategory#setName(Ljava/lang/String;)V
-__unknown_file ("0*±
-0 (Ä
-~
- (C'
-%com.smilepile.onboarding.TempCategory"
-namejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`‘
-Ecom.smilepile.onboarding.TempCategory#getColorHex()Ljava/lang/String;
-__unknown_file ("0*æ
-0 (Ö
-Ç
- (
-fieldjava.lang.String"__id*U
- (I*G'
-%com.smilepile.onboarding.TempCategory"
-colorHexjava.lang.String"'
- (
-
-fieldjava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`Ù
-Fcom.smilepile.onboarding.TempCategory#setColorHex(Ljava/lang/String;)V
-__unknown_file ("0*∂
-0 (Ö
-Ç
- (G'
-%com.smilepile.onboarding.TempCategory"
-colorHexjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`À
-Acom.smilepile.onboarding.TempCategory#getIcon()Ljava/lang/String;
-__unknown_file ("0*π
-0 (Ä
-~
- (
-fieldjava.lang.String"__id*Q
- (E*C'
-%com.smilepile.onboarding.TempCategory"
-iconjava.lang.String"'
- (
-
-fieldjava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`Î
-Bcom.smilepile.onboarding.TempCategory#setIcon(Ljava/lang/String;)V
-__unknown_file ("0*±
-0 (Ä
-~
- (C'
-%com.smilepile.onboarding.TempCategory"
-iconjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryH`§
-wcom.smilepile.onboarding.TempCategory#<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt   ("0*Ó
-0  %(‰
-·
-! !(1
-%0java.lang.String"@com.smilepile.onboarding.TempCategory#setId(Ljava/lang/String;)V*E
-
-__unknown_file ()'
-%com.smilepile.onboarding.TempCategory*4
-
-__unknown_file (
-
-idjava.lang.StringË
-Â
-" "(
-%1java.lang.String"Bcom.smilepile.onboarding.TempCategory#setName(Ljava/lang/String;)V*E
-
-__unknown_file ()'
-%com.smilepile.onboarding.TempCategory*6
-
-__unknown_file (
-
-namejava.lang.String
-Ì
-# #(
-%2java.lang.String"Fcom.smilepile.onboarding.TempCategory#setColorHex(Ljava/lang/String;)V*E
-
-__unknown_file ()'
-%com.smilepile.onboarding.TempCategory*:
-
-__unknown_file (
-
-colorHexjava.lang.StringË
-Â
-$ $(
-%3java.lang.String"Bcom.smilepile.onboarding.TempCategory#setIcon(Ljava/lang/String;)V*E
-
-__unknown_file ()'
-%com.smilepile.onboarding.TempCategory*6
-
-__unknown_file (
-
-iconjava.lang.String"/
-
-__unknown_file (
-implicit return:"
-! !(1
-idjava.lang.String:$
-" "(
-namejava.lang.String:(
-# #(
-colorHexjava.lang.String:$
-$ $(
-iconjava.lang.StringB)'
-%com.smilepile.onboarding.TempCategoryHÃ
-8com.smilepile.onboarding.ImportedPhotoData#getUri()LUri;
-__unknown_file ("0*æ
-0 (Ö
-Ç
- (
-fieldjava.lang.Object"__id*U
- (I*G,
-*com.smilepile.onboarding.ImportedPhotoData"
-urijava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB.,
-*com.smilepile.onboarding.ImportedPhotoDataH`Ï
-9com.smilepile.onboarding.ImportedPhotoData#setUri(LUri;)V
-__unknown_file ("0*∂
-0 (Ö
-Ç
- (G,
-*com.smilepile.onboarding.ImportedPhotoData"
-urijava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB.,
-*com.smilepile.onboarding.ImportedPhotoDataH`Á
-Lcom.smilepile.onboarding.ImportedPhotoData#getCategoryId()Ljava/lang/String;
-__unknown_file ("0*≈
-0 (å
-â
- (
-fieldjava.lang.String"__id*\
- (P*N,
-*com.smilepile.onboarding.ImportedPhotoData"
+È
+ßcom.smilepile.onboarding.screens#CategorySetupScreen(Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.kt ("0*µ
 
-categoryIdjava.lang.String"'
- (
-
-fieldjava.lang.StringB.,
-*com.smilepile.onboarding.ImportedPhotoDataH`á
-Mcom.smilepile.onboarding.ImportedPhotoData#setCategoryId(Ljava/lang/String;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (N,
-*com.smilepile.onboarding.ImportedPhotoData"
-
-categoryIdjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB.,
-*com.smilepile.onboarding.ImportedPhotoDataH`Î
-Kcom.smilepile.onboarding.ImportedPhotoData#<init>(LUri;Ljava/lang/String;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt' '("0*•
-0' *(„
-‡
-( ((
-%0java.lang.Object"9com.smilepile.onboarding.ImportedPhotoData#setUri(LUri;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.ImportedPhotoData*5
-
-__unknown_file (
-
-urijava.lang.Object˛
-˚
-) )("
-%1java.lang.String"Mcom.smilepile.onboarding.ImportedPhotoData#setCategoryId(Ljava/lang/String;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.ImportedPhotoData*<
-
-__unknown_file ( 
-
-
-categoryIdjava.lang.String"/
-
-__unknown_file (
-implicit return:#
-( ((
-urijava.lang.Object:*
-) )("
-
-categoryIdjava.lang.StringB.,
-*com.smilepile.onboarding.ImportedPhotoDataH≈
-dcom.smilepile.onboarding.OnboardingUiState#getCurrentStep()Lcom/smilepile/onboarding/OnboardingStep;
-__unknown_file ("0*ã
-0 (ª
-∏
- (0
-field'com.smilepile.onboarding.OnboardingStep"__id*t
- (h*f,
-*com.smilepile.onboarding.OnboardingUiState"6
-currentStep'com.smilepile.onboarding.OnboardingStep">
- (2
-0
-field'com.smilepile.onboarding.OnboardingStepB.,
-*com.smilepile.onboarding.OnboardingUiStateH`Â
-ecom.smilepile.onboarding.OnboardingUiState#setCurrentStep(Lcom/smilepile/onboarding/OnboardingStep;)V
-__unknown_file ("0*Ï
-0 (ª
-∏
- (f,
-*com.smilepile.onboarding.OnboardingUiState"6
-currentStep'com.smilepile.onboarding.OnboardingStep"__id*>
- (2
-0
-value'com.smilepile.onboarding.OnboardingStep"
- (
-implicit return:<
- (0
-value'com.smilepile.onboarding.OnboardingStepB.,
-*com.smilepile.onboarding.OnboardingUiStateH`Ì
-Qcom.smilepile.onboarding.OnboardingUiState#getNavigationHistory()Ljava/util/List;
-__unknown_file ("0*∆
-0 (è
-å
- (
-fieldjava.util.List"__id*a
- (U*S,
-*com.smilepile.onboarding.OnboardingUiState"#
-navigationHistoryjava.util.List"%
- (
-
-fieldjava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`ç
-Rcom.smilepile.onboarding.OnboardingUiState#setNavigationHistory(Ljava/util/List;)V
-__unknown_file ("0*¿
-0 (è
-å
- (S,
-*com.smilepile.onboarding.OnboardingUiState"#
-navigationHistoryjava.util.List"__id*%
- (
-
-valuejava.util.List"
- (
-implicit return:#
- (
-valuejava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`ﬂ
-Jcom.smilepile.onboarding.OnboardingUiState#getCategories()Ljava/util/List;
-__unknown_file ("0*ø
-0 (à
-Ö
- (
-fieldjava.util.List"__id*Z
- (N*L,
-*com.smilepile.onboarding.OnboardingUiState"
-
-categoriesjava.util.List"%
- (
-
-fieldjava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`ˇ
-Kcom.smilepile.onboarding.OnboardingUiState#setCategories(Ljava/util/List;)V
-__unknown_file ("0*π
-0 (à
-Ö
- (L,
-*com.smilepile.onboarding.OnboardingUiState"
-
-categoriesjava.util.List"__id*%
- (
-
-valuejava.util.List"
- (
-implicit return:#
- (
-valuejava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`Á
-Ncom.smilepile.onboarding.OnboardingUiState#getImportedPhotos()Ljava/util/List;
-__unknown_file ("0*√
-0 (å
-â
- (
-fieldjava.util.List"__id*^
- (R*P,
-*com.smilepile.onboarding.OnboardingUiState" 
-importedPhotosjava.util.List"%
- (
-
-fieldjava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`á
-Ocom.smilepile.onboarding.OnboardingUiState#setImportedPhotos(Ljava/util/List;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (P,
-*com.smilepile.onboarding.OnboardingUiState" 
-importedPhotosjava.util.List"__id*%
- (
-
-valuejava.util.List"
- (
-implicit return:#
- (
-valuejava.util.ListB.,
-*com.smilepile.onboarding.OnboardingUiStateH`·
-Icom.smilepile.onboarding.OnboardingUiState#getPinCode()Ljava/lang/String;
-__unknown_file ("0*¬
-0 (â
-Ü
- (
-fieldjava.lang.String"__id*Y
- (M*K,
-*com.smilepile.onboarding.OnboardingUiState"
-pinCodejava.lang.String"'
- (
-
-fieldjava.lang.StringB.,
-*com.smilepile.onboarding.OnboardingUiStateH`Å
-Jcom.smilepile.onboarding.OnboardingUiState#setPinCode(Ljava/lang/String;)V
-__unknown_file ("0*∫
-0 (â
-Ü
- (K,
-*com.smilepile.onboarding.OnboardingUiState"
-pinCodejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB.,
-*com.smilepile.onboarding.OnboardingUiStateH`≥
-8com.smilepile.onboarding.OnboardingUiState#getSkipPin()Z
-__unknown_file ("0*•
-0 (v
-t
- (
-fieldboolean"__id*P
- (D*B,
-*com.smilepile.onboarding.OnboardingUiState"
-skipPinboolean"
- (
-
-fieldbooleanB.,
-*com.smilepile.onboarding.OnboardingUiStateH`”
-9com.smilepile.onboarding.OnboardingUiState#setSkipPin(Z)V
-__unknown_file ("0*¶
-0 (v
-t
- (B,
-*com.smilepile.onboarding.OnboardingUiState"
-skipPinboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB.,
-*com.smilepile.onboarding.OnboardingUiStateH`¥
-7com.smilepile.onboarding.OnboardingUiState#isLoading()Z
-__unknown_file ("0*ß
-0 (x
-v
- (
-fieldboolean"__id*R
- (F*D,
-*com.smilepile.onboarding.OnboardingUiState"
-	isLoadingboolean"
- (
-
-fieldbooleanB.,
-*com.smilepile.onboarding.OnboardingUiStateH`◊
-;com.smilepile.onboarding.OnboardingUiState#setIsLoading(Z)V
-__unknown_file ("0*®
-0 (x
-v
- (D,
-*com.smilepile.onboarding.OnboardingUiState"
-	isLoadingboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB.,
-*com.smilepile.onboarding.OnboardingUiStateH`›
-Gcom.smilepile.onboarding.OnboardingUiState#getError()Ljava/lang/String;
-__unknown_file ("0*¿
-0 (á
-Ñ
- (
-fieldjava.lang.String"__id*W
- (K*I,
-*com.smilepile.onboarding.OnboardingUiState"
-errorjava.lang.String"'
- (
-
-fieldjava.lang.StringB.,
-*com.smilepile.onboarding.OnboardingUiStateH`˝
-Hcom.smilepile.onboarding.OnboardingUiState#setError(Ljava/lang/String;)V
-__unknown_file ("0*∏
-0 (á
-Ñ
- (I,
-*com.smilepile.onboarding.OnboardingUiState"
-errorjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB.,
-*com.smilepile.onboarding.OnboardingUiStateH`
-≥com.smilepile.onboarding.OnboardingUiState#<init>(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt, ,("0*≥
-0, 5(≈
-¬
-- -(<-
-%0'com.smilepile.onboarding.OnboardingStep"ecom.smilepile.onboarding.OnboardingUiState#setCurrentStep(Lcom/smilepile/onboarding/OnboardingStep;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*T
-
-__unknown_file (8
-6
-currentStep'com.smilepile.onboarding.OnboardingStepÜ
-É
-. .(=
-%1java.util.List"Rcom.smilepile.onboarding.OnboardingUiState#setNavigationHistory(Ljava/util/List;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*A
-
-__unknown_file (%
-#
-navigationHistoryjava.util.List¯
-ı
-/ /(4
-%2java.util.List"Kcom.smilepile.onboarding.OnboardingUiState#setCategories(Ljava/util/List;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*:
-
-__unknown_file (
-
-
-categoriesjava.util.ListÄ
-˝
-0 0(=
-%3java.util.List"Ocom.smilepile.onboarding.OnboardingUiState#setImportedPhotos(Ljava/util/List;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*>
-
-__unknown_file ("
- 
-importedPhotosjava.util.List¯
-ı
-1 1(
-%4java.lang.String"Jcom.smilepile.onboarding.OnboardingUiState#setPinCode(Ljava/lang/String;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*9
-
-__unknown_file (
-
-pinCodejava.lang.String’
-“
-2 2( 
-%5boolean"9com.smilepile.onboarding.OnboardingUiState#setSkipPin(Z)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*0
-
-__unknown_file (
-
-skipPinbooleanŸ
-÷
-3 3("
-%6boolean";com.smilepile.onboarding.OnboardingUiState#setIsLoading(Z)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*2
-
-__unknown_file (
-
-	isLoadingbooleanÙ
-Ò
-4 4(
-%7java.lang.String"Hcom.smilepile.onboarding.OnboardingUiState#setError(Ljava/lang/String;)V*J
-
-__unknown_file (.,
-*com.smilepile.onboarding.OnboardingUiState*7
-
-__unknown_file (
-
-errorjava.lang.String"/
-
-__unknown_file (
-implicit return:B
-- -(<6
-currentStep'com.smilepile.onboarding.OnboardingStep:/
-. .(=#
-navigationHistoryjava.util.List:(
-/ /(4
-
-categoriesjava.util.List:,
-0 0(= 
-importedPhotosjava.util.List:'
-1 1(
-pinCodejava.lang.String:
-2 2( 
-skipPinboolean: 
-3 3("
-	isLoadingboolean:%
-4 4(
-errorjava.lang.StringB.,
-*com.smilepile.onboarding.OnboardingUiStateH˛
-vcom.smilepile.onboarding.OnboardingViewModel#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;
-__unknown_file ("0*∞
-0 (◊
-‘
- (9
-field0com.smilepile.data.repository.CategoryRepository"__id*Ü
- (z*x.
-,com.smilepile.onboarding.OnboardingViewModel"F
-categoryRepository0com.smilepile.data.repository.CategoryRepository"G
- (;
-9
-field0com.smilepile.data.repository.CategoryRepositoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH`ù
-wcom.smilepile.onboarding.OnboardingViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V
-__unknown_file ("0*á
-0 (÷
-”
- (x.
-,com.smilepile.onboarding.OnboardingViewModel"F
-categoryRepository0com.smilepile.data.repository.CategoryRepository"__id*G
- (;
-9
-value0com.smilepile.data.repository.CategoryRepository"
- (
-implicit return:E
- (9
-value0com.smilepile.data.repository.CategoryRepositoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH`Ï
-pcom.smilepile.onboarding.OnboardingViewModel#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
-__unknown_file ("0*§
-0 (Œ
-À
- (6
-field-com.smilepile.data.repository.PhotoRepository"__id*Ä
- (t*r.
-,com.smilepile.onboarding.OnboardingViewModel"@
-photoRepository-com.smilepile.data.repository.PhotoRepository"D
- (8
-6
-field-com.smilepile.data.repository.PhotoRepositoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH`ã
-qcom.smilepile.onboarding.OnboardingViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
-__unknown_file ("0*˛
-0 (Õ
- 
- (r.
-,com.smilepile.onboarding.OnboardingViewModel"@
-photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
- (8
-6
-value-com.smilepile.data.repository.PhotoRepository"
- (
-implicit return:B
- (6
-value-com.smilepile.data.repository.PhotoRepositoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH`Ü
-{com.smilepile.onboarding.OnboardingViewModel#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;
-__unknown_file ("0*≥
-0 (€
-ÿ
- (8
-field/com.smilepile.security.SecurePreferencesManager"__id*ã
- (*}.
-,com.smilepile.onboarding.OnboardingViewModel"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"F
- (:
-8
-field/com.smilepile.security.SecurePreferencesManagerB0.
-,com.smilepile.onboarding.OnboardingViewModelH`•
-|com.smilepile.onboarding.OnboardingViewModel#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V
-__unknown_file ("0*ã
-0 (⁄
-◊
- (}.
-,com.smilepile.onboarding.OnboardingViewModel"K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__id*F
- (:
-8
-value/com.smilepile.security.SecurePreferencesManager"
- (
-implicit return:D
- (8
-value/com.smilepile.security.SecurePreferencesManagerB0.
-,com.smilepile.onboarding.OnboardingViewModelH`œ
-icom.smilepile.onboarding.OnboardingViewModel#getSettingsManager()Lcom/smilepile/settings/SettingsManager;
-__unknown_file ("0*é
-0 (ø
-º
- (/
-field&com.smilepile.settings.SettingsManager"__id*y
- (m*k.
-,com.smilepile.onboarding.OnboardingViewModel"9
-settingsManager&com.smilepile.settings.SettingsManager"=
- (1
-/
-field&com.smilepile.settings.SettingsManagerB0.
-,com.smilepile.onboarding.OnboardingViewModelH`Ô
-jcom.smilepile.onboarding.OnboardingViewModel#setSettingsManager(Lcom/smilepile/settings/SettingsManager;)V
-__unknown_file ("0*
-0 (ø
-º
- (k.
-,com.smilepile.onboarding.OnboardingViewModel"9
-settingsManager&com.smilepile.settings.SettingsManager"__id*=
- (1
-/
-value&com.smilepile.settings.SettingsManager"
- (
-implicit return:;
- (/
-value&com.smilepile.settings.SettingsManagerB0.
-,com.smilepile.onboarding.OnboardingViewModelH`± 
-com.smilepile.onboarding.OnboardingViewModel#<init>(Lcom/smilepile/data/repository/CategoryRepository;Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/security/SecurePreferencesManager;Lcom/smilepile/settings/SettingsManager;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt8" 8(-"0*“
-08 8(!∑
-¥
-9 9(6
+0 (ç
+ä
+   ("
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*d
+java.lang.Object*:
 
-__unknown_file (H
-F
-categoryRepository0com.smilepile.data.repository.CategoryRepositoryá
-Ñ
-9 9(6F
-categoryRepository0com.smilepile.data.repository.CategoryRepository"__annotation*"
+__unknown_file (
+
+
+categoriesjava.util.List\
+Z
+   ("
+
+categoriesjava.util.List"__annotation*"
 
 __unknown_file (
 
-%0±
-Æ
-: :(0
+%0¢
+ü
+! !(+
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*^
+java.lang.Object*O
 
-__unknown_file (B
-@
-photoRepository-com.smilepile.data.repository.PhotoRepositoryÄ
-~
-: :(0@
-photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
+__unknown_file (3
+1
+onCategoryAddedkotlin.jvm.functions.Function1q
+o
+! !(+1
+onCategoryAddedkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%1º
-π
-; ;(B
+%1§
+°
+" "(-
 %2"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*i
+java.lang.Object*Q
 
-__unknown_file (M
-K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManagerå
-â
-; ;(BK
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager"__annotation*"
+__unknown_file (5
+3
+onCategoryRemovedkotlin.jvm.functions.Function1s
+q
+" "(-3
+onCategoryRemovedkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%2™
-ß
-< <(0
+%2ù
+ö
+# #(
 %3"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*W
+java.lang.Object*J
 
-__unknown_file (;
-9
-settingsManager&com.smilepile.settings.SettingsManagery
-w
-< <(09
-settingsManager&com.smilepile.settings.SettingsManager"__annotation*"
+__unknown_file (.
+,
+
+onContinuekotlin.jvm.functions.Function0l
+j
+# #(,
+
+onContinuekotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%3Ú
-Ô
-9 9(66
-%40com.smilepile.data.repository.CategoryRepository"wcom.smilepile.onboarding.OnboardingViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*L
-
-__unknown_file (0.
-,com.smilepile.onboarding.OnboardingViewModel*d
-
-__unknown_file (H
-F
-categoryRepository0com.smilepile.data.repository.CategoryRepository„
-‡
-: :(03
-%5-com.smilepile.data.repository.PhotoRepository"qcom.smilepile.onboarding.OnboardingViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*L
-
-__unknown_file (0.
-,com.smilepile.onboarding.OnboardingViewModel*^
-
-__unknown_file (B
-@
-photoRepository-com.smilepile.data.repository.PhotoRepository˚
-¯
-; ;(B5
-%6/com.smilepile.security.SecurePreferencesManager"|com.smilepile.onboarding.OnboardingViewModel#setSecurePreferencesManager(Lcom/smilepile/security/SecurePreferencesManager;)V*L
-
-__unknown_file (0.
-,com.smilepile.onboarding.OnboardingViewModel*i
-
-__unknown_file (M
-K
-securePreferencesManager/com.smilepile.security.SecurePreferencesManagerŒ
-À
-< <(0,
-%7&com.smilepile.settings.SettingsManager"jcom.smilepile.onboarding.OnboardingViewModel#setSettingsManager(Lcom/smilepile/settings/SettingsManager;)V*L
-
-__unknown_file (0.
-,com.smilepile.onboarding.OnboardingViewModel*W
-
-__unknown_file (;
-9
-settingsManager&com.smilepile.settings.SettingsManager„
-‡
-? ?(@
-%8java.lang.Object"Scom.smilepile.onboarding.OnboardingViewModel#set_uiState(Lerror/NonExistentClass;)V*<
-? ?(@0.
-,com.smilepile.onboarding.OnboardingViewModel*)
+%3f
+d
+( .('
+suggestedCategoriesjava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>∑
-¥
-@0 @(8
-%9java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-@0 @(80.
-,com.smilepile.onboarding.OnboardingViewModel÷
-”
-@ @(F
-%10java.lang.Object"Ecom.smilepile.onboarding.OnboardingViewModel#setUiState(LStateFlow;)V*<
-@ @(F0.
-,com.smilepile.onboarding.OnboardingViewModel*)
+	<unknown>_
+]
+0 6( 
+colorOptionsjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>"/
 
 __unknown_file (
-implicit return:R
-9 9(6F
-categoryRepository0com.smilepile.data.repository.CategoryRepository:L
-: :(0@
-photoRepository-com.smilepile.data.repository.PhotoRepository:W
-; ;(BK
-securePreferencesManager/com.smilepile.security.SecurePreferencesManager:E
-< <(09
-settingsManager&com.smilepile.settings.SettingsManagerB0.
-,com.smilepile.onboarding.OnboardingViewModelHÔ
-Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;
-__unknown_file ("0*≈
-0 (å
-â
- (
-fieldjava.lang.Object"__id*\
- (P*N.
-,com.smilepile.onboarding.OnboardingViewModel"
-_uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB0.
-,com.smilepile.onboarding.OnboardingViewModelH`è
-Scom.smilepile.onboarding.OnboardingViewModel#set_uiState(Lerror/NonExistentClass;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (N.
-,com.smilepile.onboarding.OnboardingViewModel"
-_uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB0.
-,com.smilepile.onboarding.OnboardingViewModelH`‡
-Dcom.smilepile.onboarding.OnboardingViewModel#getUiState()LStateFlow;
-__unknown_file ("0*ƒ
-0 (ã
-à
- (
-fieldjava.lang.Object"__id*[
- (O*M.
-,com.smilepile.onboarding.OnboardingViewModel"
-uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB0.
-,com.smilepile.onboarding.OnboardingViewModelH`Ä
-Ecom.smilepile.onboarding.OnboardingViewModel#setUiState(LStateFlow;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M.
-,com.smilepile.onboarding.OnboardingViewModel"
-uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB0.
-,com.smilepile.onboarding.OnboardingViewModelH`’
-<com.smilepile.onboarding.OnboardingViewModel#setProgress(F)V
-__unknown_file ("0*•
-0 (u
+implicit return:(
+   ("
+
+categoriesjava.util.List:=
+! !(+1
+onCategoryAddedkotlin.jvm.functions.Function1:?
+" "(-3
+onCategoryRemovedkotlin.jvm.functions.Function1:8
+# #(,
+
+onContinuekotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensHö
+7com.smilepile.onboarding.screens#CategorySetupHeader()Vv
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktk k("0*<
+0j k("/
+
+__unknown_file (
+implicit returnB$""
+ com.smilepile.onboarding.screensH’
+lcom.smilepile.onboarding.screens#CreatedCategoriesSection(Ljava/util/List;Lkotlin/jvm/functions/Function1;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktÇ Ç($"0*–
+0Å Ç(è
+å
+
+É É("
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+É É("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0¶
+£
+
+Ñ Ñ(-
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*Q
+
+__unknown_file (5
+3
+onCategoryRemovedkotlin.jvm.functions.Function1u
 s
- (C.
-,com.smilepile.onboarding.OnboardingViewModel"
-progressfloat"__id*
- (
-
-valuefloat"
- (
-implicit return:
- (
-valuefloatB0.
-,com.smilepile.onboarding.OnboardingViewModelH`ì
-;com.smilepile.onboarding.OnboardingViewModel#getProgress()Fn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktC H(	"0*g
-3D& D((S
-Q
-
-__unknown_file (
-%1"__id*)
-
-__unknown_file (
-	<unknown>*
-1*g
-5E) E(.S
-Q
-
-__unknown_file (
-%1"__id*)
-
-__unknown_file (
-	<unknown>*
-1*g
-7F( F(-S
-Q
-
-__unknown_file (
-%1"__id*)
-
-__unknown_file (
-	<unknown>*
-1*g
-8G' G()S
-Q
-
-__unknown_file (
-%1"__id*)
-
-__unknown_file (
-	<unknown>*
-1*’
-0C C(∑
-¥
-C C(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-C C(0.
-,com.smilepile.onboarding.OnboardingViewModel*
-3
-5
-7
-8*1
-1H H(	""
+
+Ñ Ñ(-3
+onCategoryRemovedkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%1B0.
-,com.smilepile.onboarding.OnboardingViewModelH√
-<com.smilepile.onboarding.OnboardingViewModel#navigateNext()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktJ J("0*.
-2N$ N(*"
-N$ N(*
-explicit return*Â
-3Y Y(	k
-i
-T Y(	3
-nextStep'com.smilepile.onboarding.OnboardingStep"__id*"
+%1"/
+
+__unknown_file (
+implicit return:*
+
+É É("
+
+categoriesjava.util.List:A
+
+Ñ Ñ(-3
+onCategoryRemovedkotlin.jvm.functions.Function1B$""
+ com.smilepile.onboarding.screensHà
+›com.smilepile.onboarding.screens#CustomCategorySection(Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktß ß(!"0*¸
+0¶ ß(ñ
+ì
+
+® ®(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*A
+
+__unknown_file (%
+#
+newCategoryNamejava.lang.Stringe
+c
+
+® ®(#
+newCategoryNamejava.lang.String"__annotation*"
 
 __unknown_file (
 
-%5∑
-¥
-[ [(
-%6java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-[ [(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
-
-__unknown_file (
-implicit return*Å
-5U& U(?m
-k
-
-__unknown_file (
-%5"__id*C
-U5 U(?7
-5
+%0©
+¶
 
-CATEGORIES'com.smilepile.onboarding.OnboardingStep*
-3*Ä
-7V) V(Al
-j
+© ©(*
+%1"
+__annotate*0
 
-__unknown_file (
-%5"__id*B
-V8 V(A6
-4
-	PIN_SETUP'com.smilepile.onboarding.OnboardingStep*
-3*
-9W( W(?k
-i
+__unknown_file (
+java.lang.Object*T
 
-__unknown_file (
-%5"__id*A
-W7 W(?5
-3
-COMPLETE'com.smilepile.onboarding.OnboardingStep*
-3*Ä
-10X' X(>k
-i
-
-__unknown_file (
-%5"__id*A
-X6 X(>5
-3
-COMPLETE'com.smilepile.onboarding.OnboardingStep*
-3*æ
-0J J(∑
-¥
-K K(#
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-K K(#0.
-,com.smilepile.onboarding.OnboardingViewModel]
-[
-K K() 
-currentStatejava.lang.Object"__id*'
-K$ K()
-
-valuejava.lang.Objectü
-ú
-N N("
-%1boolean"Ccom.smilepile.onboarding.OnboardingViewModel#validateCurrentStep()Z*<
-N N("0.
-,com.smilepile.onboarding.OnboardingViewModell
-j
-N N("
-%2boolean"kotlin.Boolean#not()Z*
-N N("
+__unknown_file (8
+6
+onCategoryNameChangekotlin.jvm.functions.Function1x
+v
 
-%1boolean*
-N N("
-
-%1boolean*
-2
-1*˜
-1N* P(Ä
-~
-Q Q(R
-%4"__concat*3
-Q& Q(7'
-%
-navigationHistoryjava.lang.Object*-
-QG Q(R!
-
-currentStepjava.lang.ObjectV
-T
-Q Q(R
-
-newHistoryjava.lang.String"__id*"
+© ©(*6
+onCategoryNameChangekotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%4*
-5
-7
-9
-10B0.
-,com.smilepile.onboarding.OnboardingViewModelHÅ
-<com.smilepile.onboarding.OnboardingViewModel#navigateBack()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kta a("0*.
-2c6 c(<"
-c6 c(<
-explicit return*Æ
-0a a(∑
-¥
-b b(#
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-b b(#0.
-,com.smilepile.onboarding.OnboardingViewModel]
-[
-b b() 
-currentStatejava.lang.Object"__id*'
-b$ b()
-
-valuejava.lang.Object*
-2
-1*∏
-1c< e(]
-[
-e e(C
+%1î
+ë
 
-newHistoryjava.lang.Object"__id*)
+™ ™(
+%2"
+__annotate*0
 
-__unknown_file (
-	<unknown>_
-]
-f f(@ 
-previousStepjava.lang.Object"__id*)
+__unknown_file (
+java.lang.Object*?
 
-__unknown_file (
-	<unknown>∑
-¥
-h h(
-%2java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-h h(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
+__unknown_file (#
+!
+selectedColorjava.lang.Stringc
+a
+
+™ ™(!
+selectedColorjava.lang.String"__annotation*"
 
-__unknown_file (
-implicit returnB0.
-,com.smilepile.onboarding.OnboardingViewModelH€
-4com.smilepile.onboarding.OnboardingViewModel#skip()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktn n("0*°
-3r( w(∑
-¥
-s s(
-%2java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-s s(0.
-,com.smilepile.onboarding.OnboardingViewModelS
-Q
+__unknown_file (
+
+%2¢
+ü
+
+´ ´(#
+%3"
+__annotate*0
 
-__unknown_file (
-%1"__id*)
+__unknown_file (
+java.lang.Object*M
 
-__unknown_file (
-	<unknown>*
-1*g
-4x x(S
-Q
+__unknown_file (1
+/
+onColorChangekotlin.jvm.functions.Function1q
+o
+
+´ ´(#/
+onColorChangekotlin.jvm.functions.Function1"__annotation*"
 
-__unknown_file (
-%1"__id*)
+__unknown_file (
+
+%3ë
+é
+
+¨ ¨(
+%4"
+__annotate*0
 
-__unknown_file (
-	<unknown>*
-1*Æ
-0n n(∑
-¥
-o o(#
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-o o(#0.
-,com.smilepile.onboarding.OnboardingViewModel]
-[
-o o() 
-currentStatejava.lang.Object"__id*'
-o$ o()
-
-valuejava.lang.Object*
-3
-4*>
-1y	 z("/
+__unknown_file (
+java.lang.Object*<
 
-__unknown_file (
-implicit returnB0.
-,com.smilepile.onboarding.OnboardingViewModelHÿ
-bcom.smilepile.onboarding.OnboardingViewModel#addCategory(Lcom/smilepile/onboarding/TempCategory;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt| |("0*¢
-2	~_ Ä(	∑
-¥
- (
-%3java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
- (0.
-,com.smilepile.onboarding.OnboardingViewModelS
-Q
-
-__unknown_file (
-%2"__id*)
-
-__unknown_file (
-	<unknown>*
-1*§
-0| |(+∑
-¥
-}  }((
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*<
-}  }((0.
-,com.smilepile.onboarding.OnboardingViewModelg
-e
-} }(9%
-currentCategoriesjava.lang.Object"__id*,
-}/ }(9 
+__unknown_file ( 
 
+colorOptionsjava.util.List`
+^
 
-categoriesjava.lang.Objectj
-h
-~ ~(&
-%1"	__compare*
-~# ~($
-<*&
-~ ~("
+¨ ¨(
+colorOptionsjava.util.List"__annotation*"
 
-sizejava.lang.Object*
-~% ~(&2*
-2
-1*@
-1
-Ä	 Å("/
+__unknown_file (
+
+%4è
+å
+
+≠ ≠("
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+≠ ≠("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%5§
+°
+
+Æ Æ(+
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+onCategoryAddedkotlin.jvm.functions.Function1s
+q
+
+Æ Æ(+1
+onCategoryAddedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%6"/
 
 __unknown_file (
-implicit return:=
-| |(*1
-category%com.smilepile.onboarding.TempCategoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH“
-ecom.smilepile.onboarding.OnboardingViewModel#removeCategory(Lcom/smilepile/onboarding/TempCategory;)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktÉ É("0*˛
-0
-É É(.ª
-∏
+implicit return:1
 
-Ñ Ñ(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
+® ®(#
+newCategoryNamejava.lang.String:D
 
-Ñ Ñ(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
+© ©(*6
+onCategoryNameChangekotlin.jvm.functions.Function1:/
+
+™ ™(!
+selectedColorjava.lang.String:=
+
+´ ´(#/
+onColorChangekotlin.jvm.functions.Function1:,
+
+¨ ¨(
+colorOptionsjava.util.List:*
+
+≠ ≠("
+
+categoriesjava.util.List:?
+
+Æ Æ(+1
+onCategoryAddedkotlin.jvm.functions.Function1B$""
+ com.smilepile.onboarding.screensHŸ
+©com.smilepile.onboarding.screens#CategoryNameInput(Ljava/lang/String;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/functions/Function1;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.kt… …("0*Ó
+
+0» …(ñ
+ì
+
+   (
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*A
+
+__unknown_file (%
+#
+newCategoryNamejava.lang.Stringe
+c
+
+   (#
+newCategoryNamejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0©
+¶
+
+À À(*
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*T
+
+__unknown_file (8
+6
+onCategoryNameChangekotlin.jvm.functions.Function1x
+v
+
+À À(*6
+onCategoryNameChangekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%1î
+ë
+
+Ã Ã(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+selectedColorjava.lang.Stringc
+a
+
+Ã Ã(!
+selectedColorjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%2è
+å
+
+Õ Õ("
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+Õ Õ("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%3§
+°
+
+Œ Œ(+
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+onCategoryAddedkotlin.jvm.functions.Function1s
+q
+
+Œ Œ(+1
+onCategoryAddedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4"/
 
 __unknown_file (
-implicit return:?
+implicit return:1
 
-É É(-1
-category%com.smilepile.onboarding.TempCategoryB0.
-,com.smilepile.onboarding.OnboardingViewModelH•
-Qcom.smilepile.onboarding.OnboardingViewModel#setImportedPhotos(Ljava/util/List;)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktâ â("0*˛
-0
-â â(:ª
-∏
+   (#
+newCategoryNamejava.lang.String:D
 
-ä ä(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
+À À(*6
+onCategoryNameChangekotlin.jvm.functions.Function1:/
 
-ä ä(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
+Ã Ã(!
+selectedColorjava.lang.String:*
+
+Õ Õ("
+
+categoriesjava.util.List:?
+
+Œ Œ(+1
+onCategoryAddedkotlin.jvm.functions.Function1B$""
+ com.smilepile.onboarding.screensHû
+wcom.smilepile.onboarding.screens#AddCategoryButton(Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/functions/Function0;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktÈ È("0*Â
+0Ë È(ñ
+ì
+
+Í Í(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*A
+
+__unknown_file (%
+#
+newCategoryNamejava.lang.Stringe
+c
+
+Í Í(#
+newCategoryNamejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+Î Î("
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+Î Î("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%1ú
+ô
+
+Ï Ï(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0k
+i
+
+Ï Ï()
+onClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2k
+i
+
+Ó? Ó(C	
+%3int""kotlin.collections.List#getSize()I*,
+
+Ó4 Ó(>
+
+
+categoriesjava.util.Listc
+a
+
+Ó4 Ó(G
+%4"	__compare*
+
+ÓD Ó(E
+<*
+
+Ó? Ó(C
+	
+%3int*
+
+ÓF Ó(G2U
+S
+
+Ó Ó(G
+	isEnabledboolean"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:1
+
+Í Í(#
+newCategoryNamejava.lang.String:*
+
+Î Î("
+
+categoriesjava.util.List:7
+
+Ï Ï()
+onClickkotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensHÑ
+
+tcom.smilepile.onboarding.screens#ColorPickerRow(Ljava/util/List;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktÄ Ä("0*»
+0ˇ Ä(ë
+é
+
+Å Å(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*<
+
+__unknown_file ( 
+
+colorOptionsjava.util.List`
+^
+
+Å Å(
+colorOptionsjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0î
+ë
+
+Ç Ç(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+selectedColorjava.lang.Stringc
+a
+
+Ç Ç(!
+selectedColorjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%1¢
+ü
+
+É É(#
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*M
+
+__unknown_file (1
+/
+onColorChangekotlin.jvm.functions.Function1q
+o
+
+É É(#/
+onColorChangekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:,
+
+Å Å(
+colorOptionsjava.util.List:/
+
+Ç Ç(!
+selectedColorjava.lang.String:=
+
+É É(#/
+onColorChangekotlin.jvm.functions.Function1B$""
+ com.smilepile.onboarding.screensH≠	
+bcom.smilepile.onboarding.screens#ColorOption(Ljava/lang/String;ZLkotlin/jvm/functions/Function0;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktì ì("0*ö
+0í ì(å
+â
+
+î î(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+colorjava.lang.String[
+Y
+
+î î(
+colorjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0à
+Ö
+
+ï ï(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*3
+
+__unknown_file (
+
+
+isSelectedbooleanW
+U
+
+ï ï(
+
+isSelectedboolean"__annotation*"
+
+__unknown_file (
+
+%1ú
+ô
+
+ñ ñ(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0k
+i
+
+ñ ñ()
+onClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:'
+
+î î(
+colorjava.lang.String:#
+
+ï ï(
+
+isSelectedboolean:7
+
+ñ ñ()
+onClickkotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensHö
+
+~com.smilepile.onboarding.screens#SuggestedCategoriesSection(Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.kt± ±(&"0*–
+0∞ ±(ò
+ï
+
+≤ ≤(3
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*C
+
+__unknown_file ('
+%
+suggestedCategoriesjava.util.Listg
+e
+
+≤ ≤(3%
+suggestedCategoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+≥ ≥("
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+≥ ≥("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%1§
+°
+
+¥ ¥(+
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+onCategoryAddedkotlin.jvm.functions.Function1s
+q
+
+¥ ¥(+1
+onCategoryAddedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:3
+
+≤ ≤(3%
+suggestedCategoriesjava.util.List:*
+
+≥ ≥("
+
+categoriesjava.util.List:?
+
+¥ ¥(+1
+onCategoryAddedkotlin.jvm.functions.Function1B$""
+ com.smilepile.onboarding.screensHΩ
+icom.smilepile.onboarding.screens#ContinueButtonSection(Ljava/util/List;Lkotlin/jvm/functions/Function0;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.kt’ ’(!"0*¬
+0‘ ’(è
+å
+
+÷ ÷("
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+÷ ÷("
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0ü
+ú
+
+◊ ◊(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*J
+
+__unknown_file (.
+,
+
+onContinuekotlin.jvm.functions.Function0n
+l
+
+◊ ◊(,
+
+onContinuekotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:*
+
+÷ ÷("
+
+categoriesjava.util.List::
+
+◊ ◊(,
+
+onContinuekotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensH‘	
+}com.smilepile.onboarding.screens#SuggestedCategoryCard(Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.kt˚ ˚(!"0*¢
+0˙ ˚(ã
+à
+
+¸ ¸(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+namejava.lang.StringZ
+X
+
+¸ ¸(
+namejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+˝ ˝(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+colorHexjava.lang.String^
+\
+
+˝ ˝(
+colorHexjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%1ö
+ó
+
+˛ ˛(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*E
+
+__unknown_file ()
+'
+onAddkotlin.jvm.functions.Function0i
+g
+
+˛ ˛('
+onAddkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2"/
 
 __unknown_file (
 implicit return:&
 
-â â(9
-photosjava.util.ListB0.
-,com.smilepile.onboarding.OnboardingViewModelHü
-Lcom.smilepile.onboarding.OnboardingViewModel#setPinCode(Ljava/lang/String;)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktç ç("0*˛
-0
-ç ç(ª
-∏
+¸ ¸(
+namejava.lang.String:*
 
-é é(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
+˝ ˝(
+colorHexjava.lang.String:5
 
-é é(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
+˛ ˛('
+onAddkotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensHä
+}com.smilepile.onboarding.screens#CreatedCategoryRow(Lcom/smilepile/onboarding/TempCategory;Lkotlin/jvm/functions/Function0;)Vx
+l/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CategorySetupScreen.ktÆ Æ("0*Ë
+0≠ Æ(§
+°
+
+Ø Ø(
+%0"
+__annotate*0
 
-__unknown_file (
-implicit return:%
-
-ç ç(
-pinjava.lang.StringB0.
-,com.smilepile.onboarding.OnboardingViewModelHÿ
-Ccom.smilepile.onboarding.OnboardingViewModel#validateCurrentStep()Zp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktë ë(#"0*’
-3
-ì) ô(ª
-∏
-
-î î(
-%2java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
-
-î î(0.
-,com.smilepile.onboarding.OnboardingViewModel*
-4
-5*V
-4
-ó ò(@
->
+__unknown_file (
+java.lang.Object*O
 
-__unknown_file (
-%1"__id*
+__unknown_file (3
+1
+category%com.smilepile.onboarding.TempCategorys
+q
 
-ò ò(
-true*
-1*Ê
-5
-î9 ó(ª
-∏
-
-ï ï(
-%4java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
-
-ï ï(0.
-,com.smilepile.onboarding.OnboardingViewModel"
-
-ñ ñ( 	
-false*±
-7
-ö( °(ª
-∏
-
-õ õ($
-%5java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
-
-õ õ($0.
-,com.smilepile.onboarding.OnboardingViewModelZ
-X
-
-õ õ(*
-statejava.lang.Object"__id*)
-
-õ% õ(*
-
-valuejava.lang.Object*
-8
-9*V
-8
-ü †(@
->
+Ø Ø(1
+category%com.smilepile.onboarding.TempCategory"__annotation*"
 
-__unknown_file (
-%1"__id*
-
-† †(
-true*
-1*Ê
-9
-úE ü(ª
-∏
-
-ù ù(
-%7java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
-
-ù ù(0.
-,com.smilepile.onboarding.OnboardingViewModel"
-
-û û( 	
-false*W
-10
-¢ ¢(@
->
-
-__unknown_file (
-%1"__id*
-
-¢ ¢(
-true*
-1*Ÿ
-0
-ë ë(ª
-∏
-
-í í(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
-
-í í(0.
-,com.smilepile.onboarding.OnboardingViewModel*
-
-3
-7
-10*%
-1
-£ £(	"
-
-í £(	
+__unknown_file (
 
-%1B0.
-,com.smilepile.onboarding.OnboardingViewModelHØ
-Bcom.smilepile.onboarding.OnboardingViewModel#completeOnboarding()Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.kt¶ ¶("0*@
-0
-¶ ¶("/
+%0ù
+ö
+
+∞ ∞(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*H
+
+__unknown_file (,
+*
+onRemovekotlin.jvm.functions.Function0l
+j
+
+∞ ∞(*
+onRemovekotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%1"/
 
 __unknown_file (
-implicit returnB0.
-,com.smilepile.onboarding.OnboardingViewModelHÊ
-:com.smilepile.onboarding.OnboardingViewModel#clearError()Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingViewModel.ktÍ Í("0*˛
-0
-Í Í(ª
-∏
+implicit return:?
 
-Î Î(
-%0java.lang.Object"Rcom.smilepile.onboarding.OnboardingViewModel#get_uiState()Lerror/NonExistentClass;*>
+Ø Ø(1
+category%com.smilepile.onboarding.TempCategory:8
 
-Î Î(0.
-,com.smilepile.onboarding.OnboardingViewModel"/
-
-__unknown_file (
-implicit returnB0.
-,com.smilepile.onboarding.OnboardingViewModelH
+∞ ∞(*
+onRemovekotlin.jvm.functions.Function0B$""
+ com.smilepile.onboarding.screensH

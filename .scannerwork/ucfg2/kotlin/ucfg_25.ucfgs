@@ -544,103 +544,362 @@ backupFilejava.io.File:A
 
 µ µ(23
 options(com.smilepile.data.backup.RestoreOptionsB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHØ
-ècom.smilepile.ui.viewmodels.BackupViewModel#exportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktË Ë("0*@
++com.smilepile.ui.viewmodels.BackupViewModelHØ
+~com.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktƒ ƒ(/"0*ò
 0
-Â Á("/
+ƒ ƒ(È
+Ê
+
+≈ ≈(.
+%0(com.smilepile.data.backup.RestoreManager"icom.smilepile.ui.viewmodels.BackupViewModel#getRestoreManager()Lcom/smilepile/data/backup/RestoreManager;*=
+
+≈ ≈(/-
++com.smilepile.ui.viewmodels.BackupViewModel‚
+ﬂ
+
+__unknown_file (
+%1"__declareFunction*©
+
+__unknown_file (åâ
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0π∂
+
+__unknown_file (â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"__ScopeWrapperà
+Ö
+
+__unknown_file (®
+â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"
+
+backupFilejava.io.File"__id*8
+
+__unknown_file (
+
+
+backupFilejava.io.File∫
+∑
+
+__unknown_file (¡
+â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"3
+options(com.smilepile.data.backup.RestoreOptions"__id*Q
+
+__unknown_file (5
+3
+options(com.smilepile.data.backup.RestoreOptions‰
+·
+
+__unknown_file (í
+
+%1"â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"__id*©
+
+__unknown_file (å
+â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0ô
+ñ
+
+≈ À(	
+%2java.lang.Object"öcom.smilepile.data.backup.RestoreManager#restoreFromBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)LFlow;*>
+
+≈ ≈(0
+.
+%0(com.smilepile.data.backup.RestoreManager**
+
+∆ ∆(#
+
+
+backupFilejava.io.File*C
+
+« «(5
+3
+options(com.smilepile.data.backup.RestoreOptions*"
+
+__unknown_file (
+
+%1"/
 
 __unknown_file (
-implicit return:>
+implicit return:(
 
-È È(0
-format&com.smilepile.data.backup.ExportFormat:@
+ƒ0 ƒ(@
 
-Í Í(02
-options'com.smilepile.data.backup.ExportOptions:0
+backupFilejava.io.File:A
 
-Î Î(#"
-destinationUrijava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHñ
-gcom.smilepile.ui.viewmodels.BackupViewModel#scheduleBackup(Lcom/smilepile/data/backup/BackupSchedule;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktû û("0*@
+ƒB ƒ(Y3
+options(com.smilepile.data.backup.RestoreOptionsB/-
++com.smilepile.ui.viewmodels.BackupViewModelHå
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0o
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt»  ("0*Ú
+
 0
-õ ù("/
+»  (á
+Ñ
+
+__unknown_file (
+%0"__id*€
+
+__unknown_file (æ*ª-
++com.smilepile.ui.viewmodels.BackupViewModel"â
+Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0Ä
+~
+
+__unknown_file (
+
+backupFilejava.io.File"__id*@
+
+__unknown_file ($*"
+
+%0"
+
+backupFilejava.io.File≥
+∞
+
+__unknown_file (3
+options(com.smilepile.data.backup.RestoreOptions"__id*Y
+
+__unknown_file (=*;
+
+%0"3
+options(com.smilepile.data.backup.RestoreOptions¡
+æ
+
+… …( 
+%1java.lang.Object"Ycom.smilepile.ui.viewmodels.BackupViewModel#get_restoreProgress()Lerror/NonExistentClass;*=
+
+… …( /-
++com.smilepile.ui.viewmodels.BackupViewModelhf
+
+…) …(R.
+%2(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress≈
+¬
+
+…) …(R
+%3"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*>
+
+…) …(R0
+.
+%2(com.smilepile.data.backup.ImportProgress*
+
+…8 …(=
+
+totalint*
+
+…? …(F
+
+currentint*-
+
+…H …(Q
+
+	operationjava.lang.String*)
+
+__unknown_file (
+	<unknown>o
+m
+
+… …(R
+valuejava.lang.Object"__id*>
+
+…) …(R0
+.
+%2(com.smilepile.data.backup.ImportProgress"7
+
+__unknown_file (
+
+valuejava.lang.Object:
+
+»! »((
+currentint:
+
+»* »(/
+totalint:+
+
+»1 »(:
+	operationjava.lang.StringB/-
++com.smilepile.ui.viewmodels.BackupViewModelH¢
+ncom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreProgress(Lcom/smilepile/data/backup/ImportProgress;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt— —(%"0*÷
+2
+‹ ‹(Kø
+º
+
+‹ ‹(%
+%3java.lang.String"Pcom.smilepile.data.backup.ImportProgress#getCurrentOperation()Ljava/lang/String;*D
+
+‹ ‹(6
+4
+progress(com.smilepile.data.backup.ImportProgress*
+4*•
+3
+”R €(π
+∂
+
+‘ ‘(
+%2java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+‘ ‘(/-
++com.smilepile.ui.viewmodels.BackupViewModelS
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+1*•
+4
+‹O ‰(π
+∂
+
+› ›(
+%4java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+› ›(/-
++com.smilepile.ui.viewmodels.BackupViewModelS
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+1*Ÿ
+0
+— —(ø
+º
+
+” ”(%
+%1java.lang.String"Pcom.smilepile.data.backup.ImportProgress#getCurrentOperation()Ljava/lang/String;*D
+
+” ”(6
+4
+progress(com.smilepile.data.backup.ImportProgress*
+2
+3*@
+1
+Â	 Ê("/
 
 __unknown_file (
 implicit return:B
 
-û û(/4
+—& —(>4
+progress(com.smilepile.data.backup.ImportProgressB/-
++com.smilepile.ui.viewmodels.BackupViewModelH¶
+Vcom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreError(Ljava/lang/Exception;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktË Ë(""0*¸
+0
+Ë Ë(π
+∂
+
+È È(
+%0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
+
+È È(/-
++com.smilepile.ui.viewmodels.BackupViewModel"/
+
+__unknown_file (
+implicit return:&
+
+Ë# Ë(/
+ejava.lang.ExceptionB/-
++com.smilepile.ui.viewmodels.BackupViewModelHØ
+ècom.smilepile.ui.viewmodels.BackupViewModel#exportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktı ı("0*@
+0
+Ú Ù("/
+
+__unknown_file (
+implicit return:>
+
+ˆ ˆ(0
+format&com.smilepile.data.backup.ExportFormat:@
+
+˜ ˜(02
+options'com.smilepile.data.backup.ExportOptions:0
+
+¯ ¯(#"
+destinationUrijava.lang.ObjectB/-
++com.smilepile.ui.viewmodels.BackupViewModelHñ
+gcom.smilepile.ui.viewmodels.BackupViewModel#scheduleBackup(Lcom/smilepile/data/backup/BackupSchedule;)Vo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt´ ´("0*@
+0
+® ™("/
+
+__unknown_file (
+implicit return:B
+
+´ ´(/4
 schedule(com.smilepile.data.backup.BackupScheduleB/-
 +com.smilepile.ui.viewmodels.BackupViewModelHØ
 Dcom.smilepile.ui.viewmodels.BackupViewModel#cancelScheduledBackup()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt∞ ∞("0*@
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktΩ Ω("0*@
 0
-≠ Ø("/
+∫ º("/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.ui.viewmodels.BackupViewModelH´
 @com.smilepile.ui.viewmodels.BackupViewModel#loadBackupHistory()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt√ √(!"0*@
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt– –(!"0*@
 0
-¿ ¬("/
+Õ œ("/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.ui.viewmodels.BackupViewModelH¨
 Acom.smilepile.ui.viewmodels.BackupViewModel#loadBackupSchedule()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt” ”(""0*@
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt‡ ‡(""0*@
 0
-– “("/
+› ﬂ("/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.ui.viewmodels.BackupViewModelH©
 >com.smilepile.ui.viewmodels.BackupViewModel#loadBackupStats()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktÂ Â("0*@
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktÚ Ú("0*@
 0
-‚ ‰("/
+Ô Ò("/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.ui.viewmodels.BackupViewModelH‰
 Mcom.smilepile.ui.viewmodels.BackupViewModel#deleteBackup(Ljava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt˙ ˙("0*@
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktá á("0*@
 0
-˜ ˘("/
+Ñ Ü("/
 
 __unknown_file (
 implicit return:*
 
-˙ ˙(%
+á á(%
 backupIdjava.lang.StringB/-
 +com.smilepile.ui.viewmodels.BackupViewModelH·
 9com.smilepile.ui.viewmodels.BackupViewModel#clearError()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktí í("0*¸
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktü ü("0*¸
 0
-è ë(π
+ú û(π
 ∂
 
-ì ì(
+† †(
 %0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
 
-ì ì(/-
+† †(/-
 +com.smilepile.ui.viewmodels.BackupViewModel"/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.ui.viewmodels.BackupViewModelHÈ
 Acom.smilepile.ui.viewmodels.BackupViewModel#resetSuccessStates()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktô ô("0*¸
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt¶ ¶("0*¸
 0
-ñ ò(π
+£ •(π
 ∂
 
-ö ö(
+ß ß(
 %0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
 
-ö ö(/-
+ß ß(/-
 +com.smilepile.ui.viewmodels.BackupViewModel"/
 
 __unknown_file (
@@ -1153,12 +1412,12 @@ Kcom.smilepile.ui.viewmodels.BackupUiState#setLastError(Ljava/lang/String;)V
 valuejava.lang.StringB-+
 )com.smilepile.ui.viewmodels.BackupUiStateH`å0
 ƒcom.smilepile.ui.viewmodels.BackupUiState#<init>(ZLjava/lang/Boolean;Ljava/lang/Long;Ljava/lang/String;ZLjava/lang/Boolean;Ljava/lang/Long;ZLjava/lang/Boolean;Ljava/lang/Long;Ljava/lang/String;ZLcom/smilepile/data/backup/BackupValidationResult;Lcom/smilepile/data/backup/BackupSchedule;Ljava/util/List;IILjava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktß ß("0*£%
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt¥ ¥("0*£%
 0
-ß …(Î
+¥ ÷(Î
 Ë
 
-© ©(+
+∂ ∂(+
 %0boolean"Ccom.smilepile.ui.viewmodels.BackupUiState#setIsBackupInProgress(Z)V*I
 
 __unknown_file (-+
@@ -1169,7 +1428,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isBackupInProgressbooleaná
 Ñ
 
-™ ™(&
+∑ ∑(&
 %1java.lang.Boolean"Pcom.smilepile.ui.viewmodels.BackupUiState#setBackupSuccess(Ljava/lang/Boolean;)V*I
 
 __unknown_file (-+
@@ -1180,7 +1439,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 backupSuccessjava.lang.BooleanÄ
 ˝
 
-´ ´($
+∏ ∏($
 %2java.lang.Long"Ncom.smilepile.ui.viewmodels.BackupUiState#setLastBackupTime(Ljava/lang/Long;)V*I
 
 __unknown_file (-+
@@ -1191,7 +1450,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 lastBackupTimejava.lang.LongÜ
 É
 
-¨ ¨(&
+π π(&
 %3java.lang.String"Pcom.smilepile.ui.viewmodels.BackupUiState#setLastBackupFile(Ljava/lang/String;)V*I
 
 __unknown_file (-+
@@ -1202,7 +1461,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 lastBackupFilejava.lang.StringÌ
 Í
 
-Ø Ø(,
+º º(,
 %4boolean"Dcom.smilepile.ui.viewmodels.BackupUiState#setIsRestoreInProgress(Z)V*I
 
 __unknown_file (-+
@@ -1213,7 +1472,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isRestoreInProgressbooleanâ
 Ü
 
-∞ ∞('
+Ω Ω('
 %5java.lang.Boolean"Qcom.smilepile.ui.viewmodels.BackupUiState#setRestoreSuccess(Ljava/lang/Boolean;)V*I
 
 __unknown_file (-+
@@ -1224,7 +1483,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 restoreSuccessjava.lang.BooleanÇ
 ˇ
 
-± ±(%
+æ æ(%
 %6java.lang.Long"Ocom.smilepile.ui.viewmodels.BackupUiState#setLastRestoreTime(Ljava/lang/Long;)V*I
 
 __unknown_file (-+
@@ -1235,7 +1494,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 lastRestoreTimejava.lang.LongÎ
 Ë
 
-¥ ¥(+
+¡ ¡(+
 %7boolean"Ccom.smilepile.ui.viewmodels.BackupUiState#setIsExportInProgress(Z)V*I
 
 __unknown_file (-+
@@ -1246,7 +1505,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isExportInProgressbooleaná
 Ñ
 
-µ µ(&
+¬ ¬(&
 %8java.lang.Boolean"Pcom.smilepile.ui.viewmodels.BackupUiState#setExportSuccess(Ljava/lang/Boolean;)V*I
 
 __unknown_file (-+
@@ -1257,7 +1516,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 exportSuccessjava.lang.BooleanÄ
 ˝
 
-∂ ∂($
+√ √($
 %9java.lang.Long"Ncom.smilepile.ui.viewmodels.BackupUiState#setLastExportTime(Ljava/lang/Long;)V*I
 
 __unknown_file (-+
@@ -1268,7 +1527,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 lastExportTimejava.lang.Longá
 Ñ
 
-∑ ∑(&
+ƒ ƒ(&
 %10java.lang.String"Pcom.smilepile.ui.viewmodels.BackupUiState#setLastExportFile(Ljava/lang/String;)V*I
 
 __unknown_file (-+
@@ -1279,7 +1538,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 lastExportFilejava.lang.String‡
 ›
 
-∫ ∫(%
+« «(%
 %11boolean"=com.smilepile.ui.viewmodels.BackupUiState#setIsValidating(Z)V*I
 
 __unknown_file (-+
@@ -1290,7 +1549,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 isValidatingbooleanÎ
 Ë
 
-ª ª(87
+» »(87
 %120com.smilepile.data.backup.BackupValidationResult"rcom.smilepile.ui.viewmodels.BackupUiState#setValidationResult(Lcom/smilepile/data/backup/BackupValidationResult;)V*I
 
 __unknown_file (-+
@@ -1301,7 +1560,7 @@ D
 validationResult0com.smilepile.data.backup.BackupValidationResultœ
 Ã
 
-æ æ(./
+À À(./
 %13(com.smilepile.data.backup.BackupSchedule"hcom.smilepile.ui.viewmodels.BackupUiState#setBackupSchedule(Lcom/smilepile/data/backup/BackupSchedule;)V*I
 
 __unknown_file (-+
@@ -1312,7 +1571,7 @@ D
 backupSchedule(com.smilepile.data.backup.BackupScheduleˇ
 ¸
 
-¡ ¡(=
+Œ Œ(=
 %14java.util.List"Mcom.smilepile.ui.viewmodels.BackupUiState#setBackupHistory(Ljava/util/List;)V*I
 
 __unknown_file (-+
@@ -1323,7 +1582,7 @@ D
 backupHistoryjava.util.List⁄
 ◊
 
-ƒ ƒ(
+— —(
 
 %15int">com.smilepile.ui.viewmodels.BackupUiState#setCategoryCount(I)V*I
 
@@ -1335,7 +1594,7 @@ D
 categoryCountint‘
 —
 
-≈ ≈(
+“ “(
 
 %16int";com.smilepile.ui.viewmodels.BackupUiState#setPhotoCount(I)V*I
 
@@ -1348,7 +1607,7 @@ D
 photoCountint˝
 ˙
 
-» »(!
+’ ’(!
 %17java.lang.String"Kcom.smilepile.ui.viewmodels.BackupUiState#setLastError(Ljava/lang/String;)V*I
 
 __unknown_file (-+
@@ -1361,59 +1620,59 @@ photoCountint˝
 __unknown_file (
 implicit return:+
 
-© ©(+
+∂ ∂(+
 isBackupInProgressboolean:0
 
-™ ™(&"
+∑ ∑(&"
 backupSuccessjava.lang.Boolean:.
 
-´ ´($ 
+∏ ∏($ 
 lastBackupTimejava.lang.Long:0
 
-¨ ¨(&"
+π π(&"
 lastBackupFilejava.lang.String:,
 
-Ø Ø(,
+º º(,
 isRestoreInProgressboolean:1
 
-∞ ∞('#
+Ω Ω('#
 restoreSuccessjava.lang.Boolean:/
 
-± ±(%!
+æ æ(%!
 lastRestoreTimejava.lang.Long:+
 
-¥ ¥(+
+¡ ¡(+
 isExportInProgressboolean:0
 
-µ µ(&"
+¬ ¬(&"
 exportSuccessjava.lang.Boolean:.
 
-∂ ∂($ 
+√ √($ 
 lastExportTimejava.lang.Long:0
 
-∑ ∑(&"
+ƒ ƒ(&"
 lastExportFilejava.lang.String:%
 
-∫ ∫(%
+« «(%
 isValidatingboolean:R
 
-ª ª(8D
+» »(8D
 validationResult0com.smilepile.data.backup.BackupValidationResult:H
 
-æ æ(.:
+À À(.:
 backupSchedule(com.smilepile.data.backup.BackupSchedule:-
 
-¡ ¡(=
+Œ Œ(=
 backupHistoryjava.util.List:"
 
-ƒ ƒ(
+— —(
 categoryCountint:
 
-≈ ≈(
+“ “(
 
 photoCountint:+
 
-» »(!
+’ ’(!
 	lastErrorjava.lang.StringB-+
 )com.smilepile.ui.viewmodels.BackupUiStateHß
 8com.smilepile.ui.viewmodels.BackupProgress#getCurrent()I
@@ -1501,12 +1760,12 @@ Lcom.smilepile.ui.viewmodels.BackupProgress#setOperation(Ljava/lang/String;)V
 valuejava.lang.StringB.,
 *com.smilepile.ui.viewmodels.BackupProgressH`ª
 Hcom.smilepile.ui.viewmodels.BackupProgress#<init>(IILjava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktŒ Œ("0*·
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt€ €("0*·
 0
-Œ “(œ
+€ ﬂ(œ
 Ã
 
-œ œ(	
+‹ ‹(	
 %0int"9com.smilepile.ui.viewmodels.BackupProgress#setCurrent(I)V*J
 
 __unknown_file (.,
@@ -1517,7 +1776,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 currentintÀ
 »
 
-– –(	
+› ›(	
 %1int"7com.smilepile.ui.viewmodels.BackupProgress#setTotal(I)V*J
 
 __unknown_file (.,
@@ -1528,7 +1787,7 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 totalint˛
 ˚
 
-— —(
+ﬁ ﬁ(
 %2java.lang.String"Lcom.smilepile.ui.viewmodels.BackupProgress#setOperation(Ljava/lang/String;)V*J
 
 __unknown_file (.,
@@ -1541,13 +1800,13 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 __unknown_file (
 implicit return:
 
-œ œ(
+‹ ‹(
 currentint:
 
-– –(
+› ›(
 totalint:+
 
-— —(
+ﬁ ﬁ(
 	operationjava.lang.StringB.,
 *com.smilepile.ui.viewmodels.BackupProgressHÕ
 <com.smilepile.ui.viewmodels.BackupProgress#setPercentage(I)V
@@ -1567,49 +1826,49 @@ percentageint"__id*
 valueintB.,
 *com.smilepile.ui.viewmodels.BackupProgressH`Â	
 ;com.smilepile.ui.viewmodels.BackupProgress#getPercentage()Io
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt‘ ‘(="0*Ë
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt· ·(="0*Ë
 2
-‘ ‘(6í
+· ·(6í
 è
 
-‘  ‘('	
+·  ·('	
 %3int"8com.smilepile.ui.viewmodels.BackupProgress#getCurrent()I*<
 
-‘  ‘('.,
+·  ·('.,
 *com.smilepile.ui.viewmodels.BackupProgresse
 c
 
-‘  ‘(-
+·  ·(-
 %4"__calculate*
 
-‘( ‘()
+·( ·()
 **
 
-‘  ‘('
+·  ·('
 	
 %3int*
 
-‘* ‘(-2dê
+·* ·(-2dê
 ç
 
-‘1 ‘(6	
+·1 ·(6	
 %5int"6com.smilepile.ui.viewmodels.BackupProgress#getTotal()I*<
 
-‘1 ‘(6.,
+·1 ·(6.,
 *com.smilepile.ui.viewmodels.BackupProgressu
 s
 
-‘ ‘(6
+· ·(6
 %6"__calculate*
 
-‘/ ‘(0
+·/ ·(0
 /*"
 
 __unknown_file (
 
 %4*
 
-‘1 ‘(6
+·1 ·(6
 	
 %5intL
 J
@@ -1622,40 +1881,40 @@ J
 %6*
 1*P
 3
-‘< ‘(=:
+·< ·(=:
 8
 
 __unknown_file (
 %2"__id*
 
-‘< ‘(=2 *
+·< ·(=2 *
 1*ç
 0
-‘ ‘(ê
+· ·(ê
 ç
 
-‘ ‘(	
+· ·(	
 %0int"6com.smilepile.ui.viewmodels.BackupProgress#getTotal()I*<
 
-‘ ‘(.,
+· ·(.,
 *com.smilepile.ui.viewmodels.BackupProgressa
 _
 
-‘ ‘(
+· ·(
 %1"	__compare*
 
-‘ ‘(
+· ·(
 >*
 
-‘ ‘(
+· ·(
 	
 %0int*
 
-‘ ‘(2 *
+· ·(2 *
 2
 3*3
 1
-‘< ‘(=""
+·< ·(=""
 
 __unknown_file (
 

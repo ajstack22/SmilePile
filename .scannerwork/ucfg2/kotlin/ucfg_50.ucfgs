@@ -1,154 +1,700 @@
-á
-ócom.smilepile.ui.components.settings#SettingsSection(Ljava/lang/String;LModifier;Landroidx.compose.ui.graphics.Color;Lkotlin/jvm/functions/Function0;)Vy
-o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.kt$ $("0*å
-0  "(ä
-á
-% %(
+¯
+≤com.smilepile.ui.screens#CategoryManagementScreen(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lcom/smilepile/ui/viewmodels/CategoryViewModel;LPaddingValues;)Vs
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.kt/ /("0*Ø
+0) ,(ù
+ö
+0 0(
 %0"
-__annotate*0
+__annotate*,
 
-__unknown_file (
-java.lang.Object*7
+__unknown_file (
+kotlin.OptIn*N
 
-__unknown_file (
-
-titlejava.lang.StringY
-W
-% %(
-titlejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%0ç
-ä
-& &(!
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0°
+û
+0 0(
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*:
+java.lang.Object*N
 
-__unknown_file (
-
-modifierjava.lang.Object\
-Z
-& &(!
-modifierjava.lang.Object"__annotation*"
+__unknown_file (2
+0
+onNavigateBackkotlin.jvm.functions.Function0ï
+í
+0 0(0
+onNavigateBackkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%1è
-å
-' '(_
+%0*"
+
+__unknown_file (
+
+%1£
+†
+1 1($
 %2"
-__annotate*0
+__annotate*,
 
-__unknown_file (
-java.lang.Object*<
+__unknown_file (
+kotlin.OptIn*T
 
-__unknown_file ( 
-
-
-titleColorjava.lang.Object^
-\
-' '(_
-
-titleColorjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%2ö
-ó
-( ((#
+__unknown_file (8
+6
+onNavigateToKidsModekotlin.jvm.functions.Function0ß
+§
+1 1($
 %3"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*G
+java.lang.Object*T
 
-__unknown_file (+
-)
-contentkotlin.jvm.functions.Function0i
-g
-( ((#)
-contentkotlin.jvm.functions.Function0"__annotation*"
+__unknown_file (8
+6
+onNavigateToKidsModekotlin.jvm.functions.Function0õ
+ò
+1 1($6
+onNavigateToKidsModekotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%3"/
+%2*"
+
+__unknown_file (
+
+%3ß
+§
+2 2(2
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*X
+
+__unknown_file (<
+:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel´
+®
+2 2(2
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*X
+
+__unknown_file (<
+:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModelü
+ú
+2 2(2:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5é
+ã
+3 3(6
+%6"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.Objectí
+è
+3 3(6
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*?
+
+__unknown_file (#
+!
+paddingValuesjava.lang.ObjectÜ
+É
+3 3(6!
+paddingValuesjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6*"
+
+__unknown_file (
+
+%7"/
 
 __unknown_file (
-implicit return:%
-% %(
-titlejava.lang.String:(
-& &(!
-modifierjava.lang.Object:*
-' '(_
+implicit return:<
+0 0(0
+onNavigateBackkotlin.jvm.functions.Function0:B
+1 1($6
+onNavigateToKidsModekotlin.jvm.functions.Function0:F
+2 2(2:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel:-
+3 3(6!
+paddingValuesjava.lang.ObjectB"
+com.smilepile.ui.screensHÂ
+°com.smilepile.ui.screens#CategoryManagementItem(Lcom/smilepile/ui/viewmodels/CategoryWithCount;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.ktŸ Ÿ("0*‡
+0ÿ ÿ(µ
+≤
 
-titleColorjava.lang.Object:5
-( ((#)
-contentkotlin.jvm.functions.Function0B("&
-$com.smilepile.ui.components.settingsHô
-ócom.smilepile.ui.components.settings#SettingsToggleItem(Ljava/lang/String;Ljava/lang/String;LImageVector;ZLkotlin/jvm/functions/Function1;ZLModifier;)Vy
-o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.ktD D("0*≤
-0@ B(ä
-á
-E E(
+⁄ ⁄(D
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*7
+java.lang.Object*`
 
-__unknown_file (
-
-titlejava.lang.StringY
-W
-E E(
-titlejava.lang.String"__annotation*"
+__unknown_file (D
+B
+categoryWithCount-com.smilepile.ui.viewmodels.CategoryWithCountÖ
+Ç
+
+⁄ ⁄(DB
+categoryWithCount-com.smilepile.ui.viewmodels.CategoryWithCount"__annotation*"
 
 __unknown_file (
 
-%0ç
-ä
-F F(
+%0õ
+ò
+
+€ €(
 %1"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*:
+java.lang.Object*F
 
-__unknown_file (
-
-subtitlejava.lang.String\
-Z
-F F(
-subtitlejava.lang.String"__annotation*"
+__unknown_file (*
+(
+onEditkotlin.jvm.functions.Function0j
+h
+
+€ €((
+onEditkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%1â
-Ü
-G G(
+%1ù
+ö
+
+‹ ‹(
 %2"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*6
+java.lang.Object*H
 
-__unknown_file (
-
-iconjava.lang.ObjectX
-V
-G G(
-iconjava.lang.Object"__annotation*"
+__unknown_file (,
+*
+onDeletekotlin.jvm.functions.Function0l
+j
+
+‹ ‹(*
+onDeletekotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%2É
-Ä
-H H(
+%2Ó
+Î
+
+ﬁ% ﬁ(-(
+%3"com.smilepile.data.models.Category"_com.smilepile.ui.viewmodels.CategoryWithCount#getCategory()Lcom/smilepile/data/models/Category;*R
+
+ﬁ ﬁ($D
+B
+categoryWithCount-com.smilepile.ui.viewmodels.CategoryWithCount~
+|
+
+ﬁ ﬁ(-.
+category"com.smilepile.data.models.Category"__id*8
+
+ﬁ% ﬁ(-*
+(
+%3"com.smilepile.data.models.CategoryÆ
+´
+
+ﬂ' ﬂ(1	
+%4int">com.smilepile.ui.viewmodels.CategoryWithCount#getPhotoCount()I*R
+
+ﬂ ﬂ(&D
+B
+categoryWithCount-com.smilepile.ui.viewmodels.CategoryWithCountB
+@
+
+ﬂ ﬂ(1
+
+photoCountint"__id*
+
+ﬂ' ﬂ(1
+	
+%4intb
+`
+
+· Á(!
+categoryColorjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:P
+
+⁄ ⁄(DB
+categoryWithCount-com.smilepile.ui.viewmodels.CategoryWithCount:6
+
+€ €((
+onEditkotlin.jvm.functions.Function0:8
+
+‹ ‹(*
+onDeletekotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensH˚
+ícom.smilepile.ui.screens#CategoryEditDialog(Lcom/smilepile/data/models/Category;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.kt® ®("0*ò
+0¶ ß(ù
+ö
+
+© ©(
+%0"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*L
+
+__unknown_file (0
+.
+category"com.smilepile.data.models.Category°
+û
+
+© ©(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+category"com.smilepile.data.models.Categoryï
+í
+
+© ©(.
+category"com.smilepile.data.models.Category"__annotation*"
+
+__unknown_file (
+
+%0*"
+
+__unknown_file (
+
+%1ö
+ó
+
+™ ™(
+%2"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0û
+õ
+
+™ ™(
 %3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0í
+è
+
+™ ™(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3ó
+î
+
+´ ´(-
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*F
+
+__unknown_file (*
+(
+onSavekotlin.jvm.functions.Function3õ
+ò
+
+´ ´(-
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*F
+
+__unknown_file (*
+(
+onSavekotlin.jvm.functions.Function3è
+å
+
+´ ´(-(
+onSavekotlin.jvm.functions.Function3"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5_
+]
+
+± ±(P
+
+sheetStatejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:<
+
+© ©(.
+category"com.smilepile.data.models.Category:9
+
+™ ™(+
+	onDismisskotlin.jvm.functions.Function0:6
+
+´ ´(-(
+onSavekotlin.jvm.functions.Function3B"
+com.smilepile.ui.screensHÉ
+√com.smilepile.ui.screens#DeleteCategoryDialog(Lcom/smilepile/data/models/Category;Lcom/smilepile/ui/viewmodels/CategoryViewModel;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.kt… …( "0*¢
+0» …(°
+û
+
+   (
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+category"com.smilepile.data.models.Categoryp
+n
+
+   (.
+category"com.smilepile.data.models.Category"__annotation*"
+
+__unknown_file (
+
+%0≠
+™
+
+À À( 
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*X
+
+__unknown_file (<
+:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel|
+z
+
+À À( :
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__annotation*"
+
+__unknown_file (
+
+%1û
+õ
+
+Ã Ã(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0m
+k
+
+Ã Ã(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%2û
+õ
+
+Õ Õ( 
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onConfirmkotlin.jvm.functions.Function1m
+k
+
+Õ Õ( +
+	onConfirmkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%3†
+ù
+
+–( –(C
+%4java.lang.Object"kcom.smilepile.ui.viewmodels.CategoryViewModel#canDeleteCategory(Lcom/smilepile/data/models/Category;)LPair;*J
+
+– –('<
+:
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel*>
+
+–: –(B0
+.
+category"com.smilepile.data.models.CategoryT
+R
+
+– –(C
+%5java.lang.Object"__id*&
+
+–( –(C
+
+%4java.lang.ObjectÅ
+
+
+–	 –(
+	canDeletejava.lang.Object"
+__arrayGet*4
+
+__unknown_file (
+
+%5java.lang.Object*
+
+– –(C2 Ä
+~
+
+– –(
+reasonjava.lang.Object"
+__arrayGet*4
+
+__unknown_file (
+
+%5java.lang.Object*
+
+– –(C2"/
+
+__unknown_file (
+implicit return:<
+
+   (.
+category"com.smilepile.data.models.Category:H
+
+À À( :
+	viewModel-com.smilepile.ui.viewmodels.CategoryViewModel:9
+
+Ã Ã(+
+	onDismisskotlin.jvm.functions.Function0:9
+
+Õ Õ( +
+	onConfirmkotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensH“
+ácom.smilepile.ui.screens#DeleteDialogContent(Lcom/smilepile/data/models/Category;ZLjava/lang/String;ZLkotlin/jvm/functions/Function1;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.ktÓ Ó("0*≤
+
+0Ì Ó(°
+û
+
+Ô Ô(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*L
+
+__unknown_file (0
+.
+category"com.smilepile.data.models.Categoryp
+n
+
+Ô Ô(.
+category"com.smilepile.data.models.Category"__annotation*"
+
+__unknown_file (
+
+%0á
+Ñ
+
+ (
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*2
+
+__unknown_file (
+
+	canDeletebooleanV
+T
+
+ (
+	canDeleteboolean"__annotation*"
+
+__unknown_file (
+
+%1ç
+ä
+
+Ò Ò(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*8
+
+__unknown_file (
+
+reasonjava.lang.String\
+Z
+
+Ò Ò(
+reasonjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%2ä
+á
+
+Ú Ú(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*5
+
+__unknown_file (
+
+deletePhotosbooleanY
+W
+
+Ú Ú(
+deletePhotosboolean"__annotation*"
+
+__unknown_file (
+
+%3©
+¶
+
+Û Û(+
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*T
+
+__unknown_file (8
+6
+onDeletePhotosChangekotlin.jvm.functions.Function1x
+v
+
+Û Û(+6
+onDeletePhotosChangekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4"/
+
+__unknown_file (
+implicit return:<
+
+Ô Ô(.
+category"com.smilepile.data.models.Category:"
+
+ (
+	canDeleteboolean:(
+
+Ò Ò(
+reasonjava.lang.String:%
+
+Ú Ú(
+deletePhotosboolean:D
+
+Û Û(+6
+onDeletePhotosChangekotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensHµ
+@com.smilepile.ui.screens#DeleteErrorMessage(Ljava/lang/String;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.ktÑ Ñ("0*¨
+0É Ñ(ç
+ä
+
+Ñ Ñ(.
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*8
+
+__unknown_file (
+
+reasonjava.lang.String\
+Z
+
+Ñ Ñ(.
+reasonjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0"/
+
+__unknown_file (
+implicit return:(
+
+Ñ Ñ(.
+reasonjava.lang.StringB"
+com.smilepile.ui.screensHã
+Qcom.smilepile.ui.screens#DeletePhotosCheckbox(ZLkotlin/jvm/functions/Function1;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.kté é( "0*∏
+0ç é(Ö
+Ç
+
+è è(
+%0"
 __annotate*0
 
 __unknown_file (
@@ -156,17 +702,19 @@ __annotate*0
 
 __unknown_file (
 
-checkedbooleanR
-P
-H H(
+checkedbooleanT
+R
+
+è è(
 checkedboolean"__annotation*"
 
 __unknown_file (
 
-%3¢
-ü
-I I(&
-%4"
+%0§
+°
+
+ê ê(&
+%1"
 __annotate*0
 
 __unknown_file (
@@ -174,210 +722,52 @@ __annotate*0
 
 __unknown_file (3
 1
-onCheckedChangekotlin.jvm.functions.Function1q
-o
-I I(&1
+onCheckedChangekotlin.jvm.functions.Function1s
+q
+
+ê ê(&1
 onCheckedChangekotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
 
-%4É
-Ä
-J J(
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*0
-
-__unknown_file (
-
-enabledbooleanR
-P
-J J(
-enabledboolean"__annotation*"
-
-__unknown_file (
-
-%5ç
-ä
-K K(!
-%6"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object\
-Z
-K K(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%6"/
+%1"/
 
 __unknown_file (
-implicit return:%
-E E(
-titlejava.lang.String:(
-F F(
-subtitlejava.lang.String:$
-G G(
-iconjava.lang.Object:
-H H(
-checkedboolean:=
-I I(&1
-onCheckedChangekotlin.jvm.functions.Function1:
-J J(
-enabledboolean:(
-K K(!
-modifierjava.lang.ObjectB("&
-$com.smilepile.ui.components.settingsHÆ
-ñcom.smilepile.ui.components.settings#SettingsActionItem(Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;ZLModifier;)V{
-o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.ktÖ Ö("0*‚
-0Å É(å
-â
+implicit return: 
 
-Ü Ü(
+è è(
+checkedboolean:?
+
+ê ê(&1
+onCheckedChangekotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensH˜
+Ocom.smilepile.ui.screens#DeleteConfirmButton(Lkotlin/jvm/functions/Function0;)Vu
+i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/CategoryManagementScreen.ktû û("0*Œ
+0ù û(û
+õ
+
+û  û(5
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*7
+java.lang.Object*I
 
-__unknown_file (
-
-titlejava.lang.String[
-Y
+__unknown_file (-
++
+	onConfirmkotlin.jvm.functions.Function0m
+k
 
-Ü Ü(
-titlejava.lang.String"__annotation*"
+û  û(5+
+	onConfirmkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%0è
-å
-
-á á(
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-subtitlejava.lang.String^
-\
-
-á á(
-subtitlejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%1ã
-à
-
-à à(
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*6
-
-__unknown_file (
-
-iconjava.lang.ObjectZ
-X
-
-à à(
-iconjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%2ú
-ô
-
-â â(
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*G
-
-__unknown_file (+
-)
-onClickkotlin.jvm.functions.Function0k
-i
-
-â â()
-onClickkotlin.jvm.functions.Function0"__annotation*"
-
-__unknown_file (
-
-%3Ö
-Ç
-
-ä ä(
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*0
-
-__unknown_file (
-
-enabledbooleanT
-R
-
-ä ä(
-enabledboolean"__annotation*"
-
-__unknown_file (
-
-%4è
-å
-
-ã ã(!
-%5"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object^
-\
-
-ã ã(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%5"/
+%0"/
 
 __unknown_file (
-implicit return:'
+implicit return:9
 
-Ü Ü(
-titlejava.lang.String:*
-
-á á(
-subtitlejava.lang.String:&
-
-à à(
-iconjava.lang.Object:7
-
-â â()
-onClickkotlin.jvm.functions.Function0: 
-
-ä ä(
-enabledboolean:*
-
-ã ã(!
-modifierjava.lang.ObjectB("&
-$com.smilepile.ui.components.settingsH
+û  û(5+
+	onConfirmkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensH

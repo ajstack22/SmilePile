@@ -1,25 +1,25 @@
 ªÉ
  com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktV V("0*Õ©
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktW W("0*Õ©
 2
-–* ⁄(Ã…
+¡* À(Ã…
 
-“ “(6&
+√ √(6&
 %22com.smilepile.data.models.Photo"0kotlin.collections.List#get(I)Ljava/lang/Object;*(
 
-“ “(
+√ √(
 
 photosjava.util.List*/
 
-“* “(5!
+√* √(5!
 
 currentPagejava.lang.Object2get(I)§
 °
 
-“7 “(B
+√7 √(B
 %23java.lang.String"Bcom.smilepile.data.models.Photo#getDisplayName()Ljava/lang/String;*6
 
-“ “(6(
+√ √(6(
 &
 %22com.smilepile.data.models.PhotoØ
 ¨
@@ -428,12 +428,12 @@ $
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda1 
 «
 
-— Ÿ(	
+¬  (	
 %26kotlin.Unit"ëcom.smilepile.ui.screens#RemoveFromLibraryConfirmationDialog(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V*
 
 __unknown_file ( *'
 
-“7 “(B
+√7 √(B
 
 %23java.lang.String*#
 
@@ -449,34 +449,34 @@ K
 __unknown_file (
 %21"__id*"
 
-— Ÿ(	
+¬  (	
 
 %26kotlin.Unit*
 3
 4*>
-3Á Ë"/
+3ÿ Ÿ"/
 
 __unknown_file (
 implicit return*¿©
 4
-›( Á(Ã…
+Œ( ÿ(Ã…
 
-‡  ‡(>&
+—  —(>&
 %28com.smilepile.data.models.Photo"0kotlin.collections.List#get(I)Ljava/lang/Object;*(
 
-‡  ‡(&
+—  —(&
 
 photosjava.util.List*/
 
-‡2 ‡(=!
+—2 —(=!
 
 currentPagejava.lang.Object2get(I)Ü
 É
 
-‡? ‡(I
+—? —(I
 %29long"0com.smilepile.data.models.Photo#getCategoryId()J*6
 
-‡  ‡(>(
+—  —(>(
 &
 %28com.smilepile.data.models.PhotoØ
 ¨
@@ -885,17 +885,17 @@ $
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda3ﬁ
 €
 
-ﬁ Ê(	
+œ ◊(	
 %32kotlin.Unit"Åcom.smilepile.ui.screens#MoveToCategoryDialog(Ljava/util/List;JLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V*
 
 __unknown_file ( *.
 
-ﬂ! ﬂ(+ 
+–! –(+ 
 
 
 categoriesjava.lang.Object*
 
-‡? ‡(I
+—? —(I
 
 %29long*#
 
@@ -911,13 +911,13 @@ K
 __unknown_file (
 %27"__id*"
 
-ﬁ Ê(	
+œ ◊(	
 
 %32kotlin.Unit*
 3*’'
-0T U(ï
+0U V(ï
 í
-W W(
+X X(
 %0"
 __annotate*,
 
@@ -928,7 +928,7 @@ __annotate*,
 (
 photocom.smilepile.data.models.Photoô
 ñ
-W W(
+X X(
 %1"
 __annotate*0
 
@@ -939,7 +939,7 @@ __annotate*0
 (
 photocom.smilepile.data.models.Photoç
 ä
-W W((
+X X((
 photocom.smilepile.data.models.Photo"__annotation*"
 
 __unknown_file (
@@ -950,7 +950,7 @@ __annotate*0
 
 %1Ö
 Ç
-X X(
+Y Y(
 %2"
 __annotate*,
 
@@ -961,7 +961,7 @@ __annotate*,
 
 photosjava.util.Listâ
 Ü
-X X(
+Y Y(
 %3"
 __annotate*0
 
@@ -972,7 +972,7 @@ __annotate*0
 
 photosjava.util.List|
 z
-X X(
+Y Y(
 photosjava.util.List"__annotation*"
 
 __unknown_file (
@@ -983,7 +983,7 @@ z
 
 %3
 }
-Y Y(
+Z Z(
 %4"
 __annotate*,
 
@@ -994,7 +994,7 @@ __annotate*,
 
 initialIndexintÑ
 Å
-Y Y(
+Z Z(
 %5"
 __annotate*0
 
@@ -1005,7 +1005,7 @@ __annotate*0
 
 initialIndexintw
 u
-Y Y(
+Z Z(
 initialIndexint"__annotation*"
 
 __unknown_file (
@@ -1016,7 +1016,7 @@ u
 
 %5ù
 ö
-Z Z(
+[ [(
 %6"
 __annotate*,
 
@@ -1027,7 +1027,7 @@ __annotate*,
 0
 onNavigateBackkotlin.jvm.functions.Function0°
 û
-Z Z(
+[ [(
 %7"
 __annotate*0
 
@@ -1038,7 +1038,7 @@ __annotate*0
 0
 onNavigateBackkotlin.jvm.functions.Function0ï
 í
-Z Z(0
+[ [(0
 onNavigateBackkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
@@ -1049,7 +1049,7 @@ __annotate*0
 
 %7õ
 ò
-[ [(!
+\ \(!
 %8"
 __annotate*,
 
@@ -1060,7 +1060,7 @@ __annotate*,
 .
 onSharePhotokotlin.jvm.functions.Function1ü
 ú
-[ [(!
+\ \(!
 %9"
 __annotate*0
 
@@ -1071,7 +1071,7 @@ __annotate*0
 .
 onSharePhotokotlin.jvm.functions.Function1ì
 ê
-[ [(!.
+\ \(!.
 onSharePhotokotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -1082,7 +1082,7 @@ __annotate*0
 
 %9ù
 ö
-\ \("
+] ]("
 %10"
 __annotate*,
 
@@ -1093,7 +1093,7 @@ __annotate*,
 /
 onDeletePhotokotlin.jvm.functions.Function1°
 û
-\ \("
+] ]("
 %11"
 __annotate*0
 
@@ -1104,7 +1104,7 @@ __annotate*0
 /
 onDeletePhotokotlin.jvm.functions.Function1ñ
 ì
-\ \("/
+] ]("/
 onDeletePhotokotlin.jvm.functions.Function1"__annotation*#
 
 __unknown_file (
@@ -1115,7 +1115,7 @@ __annotate*0
 
 %11õ
 ò
-] ](%
+^ ^(%
 %12"
 __annotate*,
 
@@ -1126,7 +1126,7 @@ __annotate*,
 -
 onEditPhotokotlin.jvm.functions.Function1ü
 ú
-] ](%
+^ ^(%
 %13"
 __annotate*0
 
@@ -1137,7 +1137,7 @@ __annotate*0
 -
 onEditPhotokotlin.jvm.functions.Function1î
 ë
-] ](%-
+^ ^(%-
 onEditPhotokotlin.jvm.functions.Function1"__annotation*#
 
 __unknown_file (
@@ -1148,7 +1148,7 @@ __annotate*0
 
 %13ä
 á
-^ ^(!
+_ _(!
 %14"
 __annotate*,
 
@@ -1159,7 +1159,7 @@ __annotate*,
 
 modifierjava.lang.Objecté
 ã
-^ ^(!
+_ _(!
 %15"
 __annotate*0
 
@@ -1170,7 +1170,7 @@ __annotate*0
 
 modifierjava.lang.ObjectÉ
 Ä
-^ ^(!
+_ _(!
 modifierjava.lang.Object"__annotation*#
 
 __unknown_file (
@@ -1181,7 +1181,7 @@ __annotate*0
 
 %15¨
 ©
-_ _(6
+` `(6
 %16"
 __annotate*,
 
@@ -1192,7 +1192,7 @@ __annotate*,
 >
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel∞
 ≠
-_ _(6
+` `(6
 %17"
 __annotate*0
 
@@ -1203,7 +1203,7 @@ __annotate*0
 >
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel•
 ¢
-_ _(6>
+` `(6>
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__annotation*#
 
 __unknown_file (
@@ -1214,7 +1214,7 @@ __annotate*0
 
 %17´
 ®
-` `(5
+a a(5
 %18"
 __annotate*,
 
@@ -1225,7 +1225,7 @@ __annotate*,
 =
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelØ
 ¨
-` `(5
+a a(5
 %19"
 __annotate*0
 
@@ -1236,7 +1236,7 @@ __annotate*0
 =
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel§
 °
-` `(5=
+a a(5=
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__annotation*#
 
 __unknown_file (
@@ -1247,60 +1247,60 @@ __annotate*0
 
 %19]
 [
-h k(
+i l(
 
 pagerStatejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>Z
 X
-o o(&
+p p(&
 contextjava.lang.Object"__id*)
-o o(&
+p p(&
 
 currentjava.lang.Objectƒ¡
-r r(>
+s s(>
 %20boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*-
-r! r(,!
+s! s(,!
 
 currentModejava.lang.Object*2
-r8 r(>&
+s8 s(>&
 $
 PARENTcom.smilepile.mode.AppMode2equals(Ljava/lang/Object;)I
 G
-r r(>
+s s(>
 isParentModeboolean"__id*
-r r(>
+s s(>
 
 %20boolean*	
 2
 3
 4:4
-W W((
+X X((
 photocom.smilepile.data.models.Photo:$
-X X(
+Y Y(
 photosjava.util.List:
-Y Y(
+Z Z(
 initialIndexint:<
-Z Z(0
+[ [(0
 onNavigateBackkotlin.jvm.functions.Function0::
-[ [(!.
+\ \(!.
 onSharePhotokotlin.jvm.functions.Function1:;
-\ \("/
+] ]("/
 onDeletePhotokotlin.jvm.functions.Function1:9
-] ](%-
+^ ^(%-
 onEditPhotokotlin.jvm.functions.Function1:(
-^ ^(!
+_ _(!
 modifierjava.lang.Object:J
-_ _(6>
+` `(6>
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel:I
-` `(5=
+a a(5=
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelB"
 com.smilepile.ui.screensHÖ#
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda0n
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt” ◊("0*ö
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktƒ »("0*ö
 0
-” ◊(¿
+ƒ »(¿
 Ω
 
 __unknown_file (
@@ -1474,40 +1474,40 @@ p
 %0"=
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelÀ»
 
-‘1 ‘(O%
+≈1 ≈(O%
 %1com.smilepile.data.models.Photo"0kotlin.collections.List#get(I)Ljava/lang/Object;*(
 
-‘1 ‘(7
+≈1 ≈(7
 
 photosjava.util.List*/
 
-‘C ‘(N!
+≈C ≈(N!
 
 currentPagejava.lang.Object2get(I)ó
 î
 
-‘ ‘(P
+≈ ≈(P
 %2kotlin.Unit"lcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#removePhotoFromLibrary(Lcom/smilepile/data/models/Photo;)V*N
 
-‘ ‘(@
+≈ ≈(@
 >
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*5
 
-‘1 ‘(O'
+≈1 ≈(O'
 %
 %1com.smilepile.data.models.PhotoS
 Q
 
-’ ’(($
+∆ ∆(($
 showDeleteDialogjava.lang.Object"__id*
 
-’# ’((	
+∆# ∆((	
 falseõò
 
-÷ ÷( 
+« «( 
 %3kotlin.Unit"+kotlin.Function0#invoke()Ljava/lang/Object;*@
 
-÷ ÷(2
+« «(2
 0
 onNavigateBackkotlin.jvm.functions.Function02invoke()"/
 
@@ -1516,9 +1516,9 @@ Q
 %3kotlin.UnitB
 com.smilepile.ui.screensHí
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda1n
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktÿ ÿ(4"0*ß
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt… …(4"0*ß
 0
-ÿ ÿ(4¿
+… …(4¿
 Ω
 
 __unknown_file (
@@ -1693,10 +1693,10 @@ p
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelS
 Q
 
-ÿ ÿ(2$
+… …(2$
 showDeleteDialogjava.lang.Object"__id*
 
-ÿ- ÿ(2	
+…- …(2	
 false"B
 
 __unknown_file (&
@@ -1704,9 +1704,9 @@ $
 showDeleteDialogjava.lang.ObjectB
 com.smilepile.ui.screensH∫"
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda2n
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt·! ‰("0*≠
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt“! ’("0*≠
 0
-·! ‰(¿
+“! ’(¿
 Ω
 
 __unknown_file (
@@ -1880,53 +1880,53 @@ p
 %0"=
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelÀ»
 
-‚. ‚(L%
+”. ”(L%
 %1com.smilepile.data.models.Photo"0kotlin.collections.List#get(I)Ljava/lang/Object;*(
 
-‚. ‚(4
+”. ”(4
 
 photosjava.util.List*/
 
-‚@ ‚(K!
+”@ ”(K!
 
 currentPagejava.lang.Object2get(I)π
 ∂
 
-‚ ‚(Y
+” ”(Y
 %2kotlin.Unit"jcom.smilepile.ui.viewmodels.PhotoGalleryViewModel#movePhotoToCategory(Lcom/smilepile/data/models/Photo;J)V*N
 
-‚ ‚(@
+” ”(@
 >
 	viewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*5
 
-‚. ‚(L'
+”. ”(L'
 %
 %1com.smilepile.data.models.Photo*"
 
-‚N ‚(X
+”N ”(X
 
 
 categoryIdlongQ
 O
 
-„ „(&"
+‘ ‘(&"
 showMoveDialogjava.lang.Object"__id*
 
-„! „(&	
+‘! ‘(&	
 false"@
 
 __unknown_file ($
 "
 showMoveDialogjava.lang.Object: 
 
-·# ·(-
+“# “(-
 
 categoryIdlongB
 com.smilepile.ui.screensHé
 “com.smilepile.ui.screens#PhotoViewerScreen(Lcom/smilepile/data/models/Photo;Ljava/util/List;ILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;)V$lambda3n
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktÂ Â(2"0*£
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt÷ ÷(2"0*£
 0
-Â Â(2¿
+÷ ÷(2¿
 Ω
 
 __unknown_file (
@@ -2101,10 +2101,10 @@ p
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModelQ
 O
 
-Â Â(0"
+÷ ÷(0"
 showMoveDialogjava.lang.Object"__id*
 
-Â+ Â(0	
+÷+ ÷(0	
 false"@
 
 __unknown_file ($
@@ -2113,11 +2113,11 @@ O
 com.smilepile.ui.screensH‘
 
 tcom.smilepile.ui.screens#ZoomableImage(Lcom/smilepile/data/models/Photo;Lkotlin/jvm/functions/Function0;LModifier;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktÎ Î("0*®
-0Í Î(õ
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt‹ ‹("0*®
+0€ ‹(õ
 ò
 
-Ï Ï(
+› ›(
 %0"
 __annotate*0
 
@@ -2129,7 +2129,7 @@ __annotate*0
 photocom.smilepile.data.models.Photoj
 h
 
-Ï Ï((
+› ›((
 photocom.smilepile.data.models.Photo"__annotation*"
 
 __unknown_file (
@@ -2137,7 +2137,7 @@ h
 %0ü
 ú
 
-Ì Ì(
+ﬁ ﬁ(
 %1"
 __annotate*0
 
@@ -2150,7 +2150,7 @@ __annotate*0
 onImageTapkotlin.jvm.functions.Function0n
 l
 
-Ì Ì(,
+ﬁ ﬁ(,
 
 onImageTapkotlin.jvm.functions.Function0"__annotation*"
 
@@ -2159,7 +2159,7 @@ onImageTapkotlin.jvm.functions.Function0"__annotation*"
 %1è
 å
 
-Ó Ó(!
+ﬂ ﬂ(!
 %2"
 __annotate*0
 
@@ -2171,7 +2171,7 @@ __annotate*0
 modifierjava.lang.Object^
 \
 
-Ó Ó(!
+ﬂ ﬂ(!
 modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -2179,7 +2179,7 @@ __annotate*0
 %2Z
 X
 
-Ù ¯(
+Â È(
 statejava.lang.Object"__id*)
 
 __unknown_file (
@@ -2188,22 +2188,22 @@ X
 __unknown_file (
 implicit return:6
 
-Ï Ï((
+› ›((
 photocom.smilepile.data.models.Photo::
 
-Ì Ì(,
+ﬁ ﬁ(,
 
 onImageTapkotlin.jvm.functions.Function0:*
 
-Ó Ó(!
+ﬂ ﬂ(!
 modifierjava.lang.ObjectB"
 com.smilepile.ui.screensHÎ
 ¯com.smilepile.ui.screens#PhotoControlsBar(Lcom/smilepile/data/models/Photo;ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;LModifier;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt¢ ¢("0*ñ
-0° ¢(õ
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktì ì("0*ñ
+0í ì(õ
 ò
 
-£ £(
+î î(
 %0"
 __annotate*0
 
@@ -2215,7 +2215,7 @@ __annotate*0
 photocom.smilepile.data.models.Photoj
 h
 
-£ £((
+î î((
 photocom.smilepile.data.models.Photo"__annotation*"
 
 __unknown_file (
@@ -2223,7 +2223,7 @@ h
 %0ä
 á
 
-§ §(
+ï ï(
 %1"
 __annotate*0
 
@@ -2235,7 +2235,7 @@ __annotate*0
 isParentModebooleanY
 W
 
-§ §(
+ï ï(
 isParentModeboolean"__annotation*"
 
 __unknown_file (
@@ -2243,7 +2243,7 @@ W
 %1•
 ¢
 
-• •(%
+ñ ñ(%
 %2"
 __annotate*0
 
@@ -2255,7 +2255,7 @@ __annotate*0
 onFavoriteTogglekotlin.jvm.functions.Function1t
 r
 
-• •(%2
+ñ ñ(%2
 onFavoriteTogglekotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2263,7 +2263,7 @@ r
 %2°
 û
 
-¶ ¶(!
+ó ó(!
 %3"
 __annotate*0
 
@@ -2275,7 +2275,7 @@ __annotate*0
 onSharePhotokotlin.jvm.functions.Function1p
 n
 
-¶ ¶(!.
+ó ó(!.
 onSharePhotokotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2283,7 +2283,7 @@ n
 %3†
 ù
 
-ß ß( 
+ò ò( 
 %4"
 __annotate*0
 
@@ -2295,7 +2295,7 @@ __annotate*0
 onEditPhotokotlin.jvm.functions.Function1o
 m
 
-ß ß( -
+ò ò( -
 onEditPhotokotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2303,7 +2303,7 @@ m
 %4¢
 ü
 
-® ®("
+ô ô("
 %5"
 __annotate*0
 
@@ -2315,7 +2315,7 @@ __annotate*0
 onDeletePhotokotlin.jvm.functions.Function1q
 o
 
-® ®("/
+ô ô("/
 onDeletePhotokotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2323,7 +2323,7 @@ o
 %5†
 ù
 
-© ©( 
+ö ö( 
 %6"
 __annotate*0
 
@@ -2335,7 +2335,7 @@ __annotate*0
 onMovePhotokotlin.jvm.functions.Function1o
 m
 
-© ©( -
+ö ö( -
 onMovePhotokotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2343,7 +2343,7 @@ m
 %6è
 å
 
-™ ™(!
+õ õ(!
 %7"
 __annotate*0
 
@@ -2355,7 +2355,7 @@ __annotate*0
 modifierjava.lang.Object^
 \
 
-™ ™(!
+õ õ(!
 modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -2365,36 +2365,36 @@ __annotate*0
 __unknown_file (
 implicit return:6
 
-£ £((
+î î((
 photocom.smilepile.data.models.Photo:%
 
-§ §(
+ï ï(
 isParentModeboolean:@
 
-• •(%2
+ñ ñ(%2
 onFavoriteTogglekotlin.jvm.functions.Function1:<
 
-¶ ¶(!.
+ó ó(!.
 onSharePhotokotlin.jvm.functions.Function1:;
 
-ß ß( -
+ò ò( -
 onEditPhotokotlin.jvm.functions.Function1:=
 
-® ®("/
+ô ô("/
 onDeletePhotokotlin.jvm.functions.Function1:;
 
-© ©( -
+ö ö( -
 onMovePhotokotlin.jvm.functions.Function1:*
 
-™ ™(!
+õ õ(!
 modifierjava.lang.ObjectB"
 com.smilepile.ui.screensHœ
 Tcom.smilepile.ui.screens#PhotoMetadata(Lcom/smilepile/data/models/Photo;LModifier;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktò ò("0*ˇ
-0ó ò(õ
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktâ â("0*ˇ
+0à â(õ
 ò
 
-ô ô(
+ä ä(
 %0"
 __annotate*0
 
@@ -2406,7 +2406,7 @@ __annotate*0
 photocom.smilepile.data.models.Photoj
 h
 
-ô ô((
+ä ä((
 photocom.smilepile.data.models.Photo"__annotation*"
 
 __unknown_file (
@@ -2414,7 +2414,7 @@ h
 %0è
 å
 
-ö ö(!
+ã ã(!
 %1"
 __annotate*0
 
@@ -2426,7 +2426,7 @@ __annotate*0
 modifierjava.lang.Object^
 \
 
-ö ö(!
+ã ã(!
 modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -2434,7 +2434,7 @@ __annotate*0
 %1_
 ]
 
-ú ú(c
+ç ç(c
 
 dateFormatjava.lang.Object"__id*)
 
@@ -2442,7 +2442,7 @@ dateFormatjava.lang.Object"__id*)
 	<unknown>b
 `
 
-ù ü(!
+é ê(!
 formattedDatejava.lang.Object"__id*)
 
 __unknown_file (
@@ -2451,35 +2451,35 @@ dateFormatjava.lang.Object"__id*)
 __unknown_file (
 implicit return:6
 
-ô ô((
+ä ä((
 photocom.smilepile.data.models.Photo:*
 
-ö ö(!
+ã ã(!
 modifierjava.lang.ObjectB"
 com.smilepile.ui.screensHœ
 <com.smilepile.ui.screens#formatFileSize(J)Ljava/lang/String;n
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt» »("0*é
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktπ π("0*é
 2
-œ œ(u
+¿ ¿(u
 s
 
-œ œ(
+¿ ¿(
 %4"	__compare*
 
-œ œ(
+¿ ¿(
 >=*#
 
-œ œ(
+¿ ¿(
 
 sizeInByteslong*
 
-œ œ(
+¿ ¿(
 	
 mbint*
 4
 5*i
 3
-Œ Œ(RS
+ø ø(RS
 Q
 
 __unknown_file (
@@ -2489,26 +2489,26 @@ Q
 	<unknown>*
 1*é
 4
-– –(u
+¡ ¡(u
 s
 
-– –(
+¡ ¡(
 %5"	__compare*
 
-– –(
+¡ ¡(
 >=*#
 
-– –(
+¡ ¡(
 
 sizeInByteslong*
 
-– –(
+¡ ¡(
 	
 kbint*
 7
 8*i
 5
-œ œ(RS
+¿ ¿(RS
 Q
 
 __unknown_file (
@@ -2518,7 +2518,7 @@ Q
 	<unknown>*
 1*i
 7
-– –(RS
+¡ ¡(RS
 Q
 
 __unknown_file (
@@ -2528,50 +2528,50 @@ Q
 	<unknown>*
 1*Ø
 8
-— —( Y
+¬ ¬( Y
 W
 
-— —( 
+¬ ¬( 
 %6"__concat*#
 
-— —(
+¬ ¬(
 
 sizeInByteslong*
 
-— —(
+¬ ¬(
  B>
 <
 
 __unknown_file (
 %2"__id*
 
-— —( 
+¬ ¬( 
 
 %6*
 1*ú
-0» »(4
+0π π(4
 2
 
-… …(	
+∫ ∫(	
 kbint"__id*
 
-… …(2Äf
+∫ ∫(2Äf
 d
 
-   (
+ª ª(
 %0"__calculate*
 
-   (
+ª ª(
 **
 
-   (
+ª ª(
 	
 kbint*
 
-   (2ÄC
+ª ª(2ÄC
 A
 
-   (	
+ª ª(	
 mbint"__id*"
 
 __unknown_file (
@@ -2579,20 +2579,20 @@ A
 %0f
 d
 
-À À(
+º º(
 %1"__calculate*
 
-À À(
+º º(
 **
 
-À À(
+º º(
 	
 mbint*
 
-À À(2ÄC
+º º(2ÄC
 A
 
-À À(	
+º º(	
 gbint"__id*"
 
 __unknown_file (
@@ -2600,38 +2600,38 @@ A
 %1u
 s
 
-Œ Œ(
+ø ø(
 %3"	__compare*
 
-Œ Œ(
+ø ø(
 >=*#
 
-Œ Œ(
+ø ø(
 
 sizeInByteslong*
 
-Œ Œ(
+ø ø(
 	
 gbint*
 2
 3*%
 1
-“ “("
+√ √("
 
-Õ “(
+æ √(
 
 %2:!
 
-» »(,
+π π(,
 sizeInByteslongB"
 com.smilepile.ui.screensHü
 
 ëcom.smilepile.ui.screens#RemoveFromLibraryConfirmationDialog(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt÷ ÷(/"0*“
-0’ ÷(ê
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt« «(/"0*“
+0∆ «(ê
 ç
 
-◊ ◊(
+» »(
 %0"
 __annotate*0
 
@@ -2643,7 +2643,7 @@ __annotate*0
 	photoNamejava.lang.String_
 ]
 
-◊ ◊(
+» »(
 	photoNamejava.lang.String"__annotation*"
 
 __unknown_file (
@@ -2651,7 +2651,7 @@ __annotate*0
 %0û
 õ
 
-ÿ ÿ(
+… …(
 %1"
 __annotate*0
 
@@ -2663,7 +2663,7 @@ __annotate*0
 	onConfirmkotlin.jvm.functions.Function0m
 k
 
-ÿ ÿ(+
+… …(+
 	onConfirmkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
@@ -2671,7 +2671,7 @@ k
 %1û
 õ
 
-Ÿ Ÿ(
+   (
 %2"
 __annotate*0
 
@@ -2683,7 +2683,7 @@ __annotate*0
 	onDismisskotlin.jvm.functions.Function0m
 k
 
-Ÿ Ÿ(+
+   (+
 	onDismisskotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
@@ -2693,21 +2693,21 @@ k
 __unknown_file (
 implicit return:+
 
-◊ ◊(
+» »(
 	photoNamejava.lang.String:9
 
-ÿ ÿ(+
+… …(+
 	onConfirmkotlin.jvm.functions.Function0:9
 
-Ÿ Ÿ(+
+   (+
 	onDismisskotlin.jvm.functions.Function0B"
 com.smilepile.ui.screensHº
 Åcom.smilepile.ui.screens#MoveToCategoryDialog(Ljava/util/List;JLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktÎ Î( "0*Œ
-0Í Î(è
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt‹ ‹( "0*Œ
+0€ ‹(è
 å
 
-Ï Ï(
+› ›(
 %0"
 __annotate*0
 
@@ -2720,7 +2720,7 @@ __annotate*0
 categoriesjava.util.List^
 \
 
-Ï Ï(
+› ›(
 
 categoriesjava.util.List"__annotation*"
 
@@ -2729,7 +2729,7 @@ categoriesjava.util.List"__annotation*"
 %0å
 â
 
-Ì Ì(
+ﬁ ﬁ(
 %1"
 __annotate*0
 
@@ -2741,7 +2741,7 @@ __annotate*0
 currentCategoryIdlong[
 Y
 
-Ì Ì(
+ﬁ ﬁ(
 currentCategoryIdlong"__annotation*"
 
 __unknown_file (
@@ -2749,7 +2749,7 @@ Y
 %1ß
 §
 
-Ó Ó(&
+ﬂ ﬂ(&
 %2"
 __annotate*0
 
@@ -2761,7 +2761,7 @@ __annotate*0
 onCategorySelectedkotlin.jvm.functions.Function1v
 t
 
-Ó Ó(&4
+ﬂ ﬂ(&4
 onCategorySelectedkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -2769,7 +2769,7 @@ t
 %2û
 õ
 
-Ô Ô(
+‡ ‡(
 %3"
 __annotate*0
 
@@ -2781,7 +2781,7 @@ __annotate*0
 	onDismisskotlin.jvm.functions.Function0m
 k
 
-Ô Ô(+
+‡ ‡(+
 	onDismisskotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
@@ -2791,16 +2791,36 @@ k
 __unknown_file (
 implicit return:*
 
-Ï Ï(
+› ›(
 
 categoriesjava.util.List:'
 
-Ì Ì(
+ﬁ ﬁ(
 currentCategoryIdlong:B
 
-Ó Ó(&4
+ﬂ ﬂ(&4
 onCategorySelectedkotlin.jvm.functions.Function1:9
 
-Ô Ô(+
+‡ ‡(+
 	onDismisskotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHÎ
+Pcom.smilepile.ui.screens#sharePhoto(LContext;Lcom/smilepile/data/models/Photo;)Vn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.ktì ì("0*†
+0ì ì(`
+^
+
+î †(
+shareIntentjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit return:)
+
+ì ì('
+contextjava.lang.Object:6
+
+ì) ì(5(
+photocom.smilepile.data.models.PhotoB"
 com.smilepile.ui.screensH

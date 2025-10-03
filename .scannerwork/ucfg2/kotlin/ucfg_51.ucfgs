@@ -1,10 +1,28 @@
-≠
-fcom.smilepile.onboarding.screens#CompletionScreen(Ljava/util/List;IZLkotlin/jvm/functions/Function0;)Vs
-i/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/screens/CompletionScreen.kt ("0*¯
-0 (ç
-ä
- ("
+á
+ócom.smilepile.ui.components.settings#SettingsSection(Ljava/lang/String;LModifier;Landroidx.compose.ui.graphics.Color;Lkotlin/jvm/functions/Function0;)Vy
+o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.kt$ $("0*å
+0  "(ä
+á
+% %(
 %0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+titlejava.lang.StringY
+W
+% %(
+titlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0ç
+ä
+& &(!
+%1"
 __annotate*0
 
 __unknown_file (
@@ -12,86 +30,377 @@ __annotate*0
 
 __unknown_file (
 
-
-categoriesjava.util.List\
+modifierjava.lang.Object\
 Z
- ("
-
-categoriesjava.util.List"__annotation*"
+& &(!
+modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%0Ü
-É
- (
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*3
-
-__unknown_file (
-
-photosImportedintU
-S
- (
-photosImportedint"__annotation*"
-
-__unknown_file (
-
-%1Ü
-É
- (
+%1è
+å
+' '(_
 %2"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*3
+java.lang.Object*<
 
-__unknown_file (
-
+__unknown_file ( 
+
 
-pinEnabledbooleanU
-S
- (
+titleColorjava.lang.Object^
+\
+' '(_
 
-pinEnabledboolean"__annotation*"
+titleColorjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%2ù
-ö
- (
+%2ö
+ó
+( ((#
 %3"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*J
+java.lang.Object*G
 
-__unknown_file (.
-,
-
-onCompletekotlin.jvm.functions.Function0l
-j
- (,
-
-onCompletekotlin.jvm.functions.Function0"__annotation*"
+__unknown_file (+
+)
+contentkotlin.jvm.functions.Function0i
+g
+( ((#)
+contentkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
 %3"/
 
 __unknown_file (
-implicit return:(
- ("
+implicit return:%
+% %(
+titlejava.lang.String:(
+& &(!
+modifierjava.lang.Object:*
+' '(_
 
-categoriesjava.util.List:!
- (
-photosImportedint:!
- (
+titleColorjava.lang.Object:5
+( ((#)
+contentkotlin.jvm.functions.Function0B("&
+$com.smilepile.ui.components.settingsHô
+ócom.smilepile.ui.components.settings#SettingsToggleItem(Ljava/lang/String;Ljava/lang/String;LImageVector;ZLkotlin/jvm/functions/Function1;ZLModifier;)Vy
+o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.ktD D("0*≤
+0@ B(ä
+á
+E E(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+titlejava.lang.StringY
+W
+E E(
+titlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0ç
+ä
+F F(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+subtitlejava.lang.String\
+Z
+F F(
+subtitlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%1â
+Ü
+G G(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+iconjava.lang.ObjectX
+V
+G G(
+iconjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%2É
+Ä
+H H(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+checkedbooleanR
+P
+H H(
+checkedboolean"__annotation*"
+
+__unknown_file (
+
+%3¢
+ü
+I I(&
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*O
+
+__unknown_file (3
+1
+onCheckedChangekotlin.jvm.functions.Function1q
+o
+I I(&1
+onCheckedChangekotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%4É
+Ä
+J J(
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+enabledbooleanR
+P
+J J(
+enabledboolean"__annotation*"
+
+__unknown_file (
+
+%5ç
+ä
+K K(!
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+K K(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6"/
+
+__unknown_file (
+implicit return:%
+E E(
+titlejava.lang.String:(
+F F(
+subtitlejava.lang.String:$
+G G(
+iconjava.lang.Object:
+H H(
+checkedboolean:=
+I I(&1
+onCheckedChangekotlin.jvm.functions.Function1:
+J J(
+enabledboolean:(
+K K(!
+modifierjava.lang.ObjectB("&
+$com.smilepile.ui.components.settingsH
+∫com.smilepile.ui.components.settings#SettingsActionItem(Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;ZLandroidx.compose.ui.graphics.Color;LModifier;)V{
+o/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/settings/SettingsComponents.ktÖ Ö("0*‘
+0Å É(å
+â
 
-pinEnabledboolean:8
- (,
+Ü Ü(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+titlejava.lang.String[
+Y
 
-onCompletekotlin.jvm.functions.Function0B$""
- com.smilepile.onboarding.screensH
+Ü Ü(
+titlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%0è
+å
+
+á á(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+subtitlejava.lang.String^
+\
+
+á á(
+subtitlejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%1ã
+à
+
+à à(
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+iconjava.lang.ObjectZ
+X
+
+à à(
+iconjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%2ú
+ô
+
+â â(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*G
+
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0k
+i
+
+â â()
+onClickkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%3Ö
+Ç
+
+ä ä(
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*0
+
+__unknown_file (
+
+enabledbooleanT
+R
+
+ä ä(
+enabledboolean"__annotation*"
+
+__unknown_file (
+
+%4è
+å
+
+ã ã(8
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+iconTintjava.lang.Object^
+\
+
+ã ã(8
+iconTintjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%5è
+å
+
+å å(!
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+modifierjava.lang.Object^
+\
+
+å å(!
+modifierjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%6"/
+
+__unknown_file (
+implicit return:'
+
+Ü Ü(
+titlejava.lang.String:*
+
+á á(
+subtitlejava.lang.String:&
+
+à à(
+iconjava.lang.Object:7
+
+â â()
+onClickkotlin.jvm.functions.Function0: 
+
+ä ä(
+enabledboolean:*
+
+ã ã(8
+iconTintjava.lang.Object:*
+
+å å(!
+modifierjava.lang.ObjectB("&
+$com.smilepile.ui.components.settingsH
