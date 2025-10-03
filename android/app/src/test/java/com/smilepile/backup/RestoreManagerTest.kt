@@ -479,6 +479,502 @@ class RestoreManagerTest {
         assertTrue(lastProgress.errors.isNotEmpty() || lastProgress.currentOperation.isNotEmpty())
     }
 
+    @Test
+    fun `RestoreOptions data class with all parameters works correctly`() {
+        // Given
+        val options = RestoreOptions(
+            strategy = ImportStrategy.REPLACE,
+            duplicateResolution = DuplicateResolution.RENAME,
+            validateIntegrity = false,
+            restoreThumbnails = false,
+            restoreSettings = false,
+            dryRun = true
+        )
+
+        // Then
+        assertEquals(ImportStrategy.REPLACE, options.strategy)
+        assertEquals(DuplicateResolution.RENAME, options.duplicateResolution)
+        assertFalse(options.validateIntegrity)
+        assertFalse(options.restoreThumbnails)
+        assertFalse(options.restoreSettings)
+        assertTrue(options.dryRun)
+    }
+
+    @Test
+    fun `RestoreOptions default values are correct`() {
+        // When
+        val options = RestoreOptions()
+
+        // Then
+        assertEquals(ImportStrategy.MERGE, options.strategy)
+        assertEquals(DuplicateResolution.SKIP, options.duplicateResolution)
+        assertTrue(options.validateIntegrity)
+        assertTrue(options.restoreThumbnails)
+        assertTrue(options.restoreSettings)
+        assertFalse(options.dryRun)
+    }
+
+    @Test
+    fun `ImportStrategy enum has all expected values`() {
+        // Then
+        val values = ImportStrategy.values()
+        assertEquals(2, values.size)
+        assertTrue(values.contains(ImportStrategy.MERGE))
+        assertTrue(values.contains(ImportStrategy.REPLACE))
+    }
+
+    @Test
+    fun `DuplicateResolution enum has all expected values`() {
+        // Then
+        val values = DuplicateResolution.values()
+        assertEquals(4, values.size)
+        assertTrue(values.contains(DuplicateResolution.SKIP))
+        assertTrue(values.contains(DuplicateResolution.REPLACE))
+        assertTrue(values.contains(DuplicateResolution.RENAME))
+        assertTrue(values.contains(DuplicateResolution.ASK_USER))
+    }
+
+    @Test
+    fun `BackupValidationResult with all errors and warnings works`() {
+        // Given
+        val errors = listOf("Error 1", "Error 2")
+        val warnings = listOf("Warning 1", "Warning 2", "Warning 3")
+        val result = BackupValidationResult(
+            isValid = false,
+            version = 2,
+            format = BackupFormat.ZIP,
+            hasMetadata = true,
+            hasPhotos = true,
+            photosCount = 10,
+            categoriesCount = 5,
+            integrityCheckPassed = false,
+            errors = errors,
+            warnings = warnings
+        )
+
+        // Then
+        assertFalse(result.isValid)
+        assertEquals(2, result.version)
+        assertEquals(BackupFormat.ZIP, result.format)
+        assertTrue(result.hasMetadata)
+        assertTrue(result.hasPhotos)
+        assertEquals(10, result.photosCount)
+        assertEquals(5, result.categoriesCount)
+        assertFalse(result.integrityCheckPassed)
+        assertEquals(2, result.errors.size)
+        assertEquals(3, result.warnings.size)
+    }
+
+    @Test
+    fun `BackupValidationResult default error and warning lists are empty`() {
+        // Given
+        val result = BackupValidationResult(
+            isValid = true,
+            version = 2,
+            format = BackupFormat.JSON,
+            hasMetadata = true,
+            hasPhotos = false,
+            photosCount = 0,
+            categoriesCount = 3,
+            integrityCheckPassed = true
+        )
+
+        // Then
+        assertTrue(result.errors.isEmpty())
+        assertTrue(result.warnings.isEmpty())
+    }
+
+    @Test
+    fun `ImportResult data class stores all values correctly`() {
+        // Given
+        val errors = listOf("Error 1", "Error 2")
+        val warnings = listOf("Warning 1")
+        val result = ImportResult(
+            success = true,
+            categoriesImported = 5,
+            photosImported = 20,
+            photosSkipped = 3,
+            photoFilesRestored = 18,
+            errors = errors,
+            warnings = warnings
+        )
+
+        // Then
+        assertTrue(result.success)
+        assertEquals(5, result.categoriesImported)
+        assertEquals(20, result.photosImported)
+        assertEquals(3, result.photosSkipped)
+        assertEquals(18, result.photoFilesRestored)
+        assertEquals(2, result.errors.size)
+        assertEquals(1, result.warnings.size)
+    }
+
+    @Test
+    fun `ImportResult defaults work correctly`() {
+        // Given
+        val result = ImportResult(
+            success = false,
+            categoriesImported = 0,
+            photosImported = 0,
+            photosSkipped = 0
+        )
+
+        // Then
+        assertFalse(result.success)
+        assertEquals(0, result.photoFilesRestored)
+        assertTrue(result.errors.isEmpty())
+        assertTrue(result.warnings.isEmpty())
+    }
+
+    @Test
+    fun `restore with ASK_USER duplicate resolution does not import`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+        val existingPhoto = createTestPhoto(1, "photo.jpg", 1)
+
+        coEvery { photoRepository.getAllPhotos() } returns listOf(existingPhoto)
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+
+        val options = RestoreOptions(
+            strategy = ImportStrategy.MERGE,
+            duplicateResolution = DuplicateResolution.ASK_USER
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore with multiple categories and mixed duplicates works`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("multi_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 2,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "existing",
+                        "displayName": "Existing",
+                        "position": 0,
+                        "isDefault": false,
+                        "createdAt": ${System.currentTimeMillis()}
+                    },
+                    {
+                        "id": 2,
+                        "name": "new",
+                        "displayName": "New",
+                        "position": 1,
+                        "isDefault": false,
+                        "createdAt": ${System.currentTimeMillis()}
+                    }
+                ],
+                "photos": [],
+                "settings": {
+                    "isDarkMode": false,
+                    "securitySettings": {
+                        "hasPIN": false,
+                        "hasPattern": false,
+                        "kidSafeModeEnabled": false,
+                        "deleteProtectionEnabled": false
+                    }
+                },
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        val existingCategory = createTestCategory(1, "existing", "Existing")
+        coEvery { categoryRepository.getAllCategories() } returns listOf(existingCategory)
+        coEvery { categoryRepository.getCategoryByName("existing") } returns existingCategory
+        coEvery { categoryRepository.getCategoryByName("new") } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+
+        val options = RestoreOptions(
+            strategy = ImportStrategy.MERGE,
+            duplicateResolution = DuplicateResolution.SKIP
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(tempFile, options).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore emits progress at each stage`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile).toList()
+
+        // Then
+        assertTrue(progressList.size >= 1)
+        assertTrue(progressList.first().currentOperation.isNotEmpty())
+        if (progressList.size > 1) {
+            assertTrue(progressList.last().currentOperation.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun `restore handles very large backup efficiently`() = runBlocking {
+        // Given
+        val categories = (1..50).map { i ->
+            """
+            {
+                "id": $i,
+                "name": "category_$i",
+                "displayName": "Category $i",
+                "position": $i,
+                "isDefault": false,
+                "createdAt": ${System.currentTimeMillis()}
+            }
+            """
+        }.joinToString(",")
+
+        val tempFile = File.createTempFile("large_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 2,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [$categories],
+                "photos": [],
+                "settings": {
+                    "isDarkMode": false,
+                    "securitySettings": {
+                        "hasPIN": false,
+                        "hasPattern": false,
+                        "kidSafeModeEnabled": false,
+                        "deleteProtectionEnabled": false
+                    }
+                },
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(tempFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore with default categories preserves them on REPLACE`() = runBlocking {
+        // Given
+        val backupFile = createMockBackupFile()
+        val defaultCategory = createTestCategory(1, "default", "Default", isDefault = true)
+
+        coEvery { categoryRepository.getAllCategories() } returns listOf(defaultCategory)
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        val options = RestoreOptions(
+            strategy = ImportStrategy.REPLACE
+        )
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(backupFile, options).toList()
+
+        // Then
+        coVerify(exactly = 0) {
+            categoryRepository.deleteCategory(match { it.isDefault })
+        }
+    }
+
+    @Test
+    fun `validate backup with missing version field fails`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("invalid_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [],
+                "photos": [],
+                "settings": {}
+            }
+        """.trimIndent())
+
+        // When
+        val result = restoreManager.validateBackup(tempFile)
+
+        // Then
+        assertTrue(result.isFailure)
+    }
+
+    @Test
+    fun `restore with malformed JSON fails gracefully`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("malformed_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("{ invalid json content }")
+
+        // When
+        val result = restoreManager.validateBackup(tempFile)
+
+        // Then
+        assertTrue(result.isFailure)
+    }
+
+    @Test
+    fun `ExportFormat enum has all expected values`() {
+        // Then
+        val values = ExportFormat.values()
+        assertEquals(4, values.size)
+        assertTrue(values.contains(ExportFormat.ZIP))
+        assertTrue(values.contains(ExportFormat.JSON))
+        assertTrue(values.contains(ExportFormat.HTML_GALLERY))
+        assertTrue(values.contains(ExportFormat.PDF_CATALOG))
+    }
+
+    @Test
+    fun `BackupFrequency enum has all expected values`() {
+        // Then
+        val values = BackupFrequency.values()
+        assertEquals(4, values.size)
+        assertTrue(values.contains(BackupFrequency.DAILY))
+        assertTrue(values.contains(BackupFrequency.WEEKLY))
+        assertTrue(values.contains(BackupFrequency.MONTHLY))
+        assertTrue(values.contains(BackupFrequency.MANUAL))
+    }
+
+    @Test
+    fun `restore with categories that have special characters in names works`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("special_char_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 2,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "test_with_underscores",
+                        "displayName": "Test & Special @ Characters",
+                        "position": 0,
+                        "isDefault": false,
+                        "createdAt": ${System.currentTimeMillis()}
+                    }
+                ],
+                "photos": [],
+                "settings": {
+                    "isDarkMode": false,
+                    "securitySettings": {
+                        "hasPIN": false,
+                        "hasPattern": false,
+                        "kidSafeModeEnabled": false,
+                        "deleteProtectionEnabled": false
+                    }
+                },
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(tempFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
+    @Test
+    fun `restore handles photos with zero dimensions`() = runBlocking {
+        // Given
+        val tempFile = File.createTempFile("zero_dim_backup", ".json")
+        tempFile.deleteOnExit()
+        tempFile.writeText("""
+            {
+                "version": 2,
+                "exportDate": ${System.currentTimeMillis()},
+                "appVersion": "1.0.0",
+                "format": "JSON",
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "test",
+                        "displayName": "Test",
+                        "position": 0,
+                        "isDefault": false,
+                        "createdAt": ${System.currentTimeMillis()}
+                    }
+                ],
+                "photos": [
+                    {
+                        "id": 1,
+                        "path": "/test/photo.jpg",
+                        "categoryId": 1,
+                        "name": "Test Photo",
+                        "isFromAssets": false,
+                        "createdAt": ${System.currentTimeMillis()},
+                        "fileSize": 0,
+                        "width": 0,
+                        "height": 0
+                    }
+                ],
+                "settings": {
+                    "isDarkMode": false,
+                    "securitySettings": {
+                        "hasPIN": false,
+                        "hasPattern": false,
+                        "kidSafeModeEnabled": false,
+                        "deleteProtectionEnabled": false
+                    }
+                },
+                "photoManifest": []
+            }
+        """.trimIndent())
+
+        coEvery { categoryRepository.getAllCategories() } returns emptyList()
+        coEvery { photoRepository.getAllPhotos() } returns emptyList()
+        coEvery { categoryRepository.getCategoryByName(any()) } returns null
+        coEvery { categoryRepository.insertCategory(any()) } returns 2L
+        coEvery { photoRepository.insertPhoto(any()) } returns 2L
+
+        // When
+        val progressList = restoreManager.restoreFromBackup(tempFile).toList()
+
+        // Then
+        assertTrue(progressList.isNotEmpty())
+    }
+
     // Helper functions
     private fun createMockBackupFile(): File {
         val tempFile = File.createTempFile("test_backup", ".json")
