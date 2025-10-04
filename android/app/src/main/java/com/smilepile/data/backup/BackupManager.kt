@@ -674,8 +674,12 @@ class BackupManager @Inject constructor(
                     try {
                         val file = File(photo.path)
                         if (file.exists()) {
-                            file.delete()
-                            Log.d(TAG, "Deleted photo file: ${photo.path}")
+                            val deleted = file.delete()
+                            if (deleted) {
+                                Log.d(TAG, "Deleted photo file: ${photo.path}")
+                            } else {
+                                Log.w(TAG, "Failed to delete photo file: ${photo.path}")
+                            }
                         }
                     } catch (e: Exception) {
                         Log.e(TAG, "Failed to delete photo file: ${photo.path}", e)
