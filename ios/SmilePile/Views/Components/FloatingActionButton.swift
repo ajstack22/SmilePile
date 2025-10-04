@@ -17,7 +17,7 @@ struct FloatingActionButton: View {
     init(
         action: @escaping () -> Void,
         isPulsing: Bool = false,
-        backgroundColor: Color = Color(red: 255/255, green: 102/255, blue: 0/255), // Default orange
+        backgroundColor: Color = Color(red: 1.0, green: 102/255, blue: 0.0), // Default orange
         iconName: String = "plus"
     ) {
         self.action = action
@@ -98,7 +98,7 @@ struct FloatingActionButtonContainer: View {
         action: @escaping () -> Void,
         isPulsing: Bool = false,
         bottomPadding: CGFloat = 83, // Default tab bar height
-        backgroundColor: Color = Color(red: 255/255, green: 102/255, blue: 0/255), // Default orange
+        backgroundColor: Color = Color(red: 1.0, green: 102/255, blue: 0.0), // Default orange
         iconName: String = "plus"
     ) {
         self.action = action

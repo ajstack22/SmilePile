@@ -37,17 +37,10 @@ struct OnboardingView: View {
 
                         Spacer()
 
-                        // Skip button only for PIN
-                        if coordinator.currentStep == .pinSetup {
-                            // Skip handled within PIN screen
-                            Color.clear
-                                .frame(width: 44, height: 44)
-                                .padding()
-                        } else {
-                            Color.clear
-                                .frame(width: 44, height: 44)
-                                .padding()
-                        }
+                        // Spacer for layout balance
+                        Color.clear
+                            .frame(width: 44, height: 44)
+                            .padding()
                     }
                 }
 

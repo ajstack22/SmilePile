@@ -34,7 +34,7 @@ struct CategoryManagementView: View {
                     viewModel.showAddCategoryDialog()
                 },
                 isPulsing: viewModel.hasPulseFAB,
-                backgroundColor: Color(red: 255/255, green: 102/255, blue: 0/255), // Keep orange for categories
+                backgroundColor: Color(red: 1.0, green: 102/255, blue: 0.0), // Keep orange for categories
                 iconName: "square.stack.badge.plus"
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
