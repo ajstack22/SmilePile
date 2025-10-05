@@ -213,23 +213,42 @@ fun AppNavHost(
                 ?.get<List<String>>("editPaths")
 
             LaunchedEffect(Unit) {
-                when (mode) {
-                    "import" -> {
-                        val categoryId = photoImportViewModel.getPendingCategoryId()
-                        photoEditViewModel.initializeEditor(
-                            photoUris = savedUris,
-                            categoryId = categoryId
-                        )
+                try {
+                    when (mode) {
+                        "import" -> {
+                            val categoryId = photoImportViewModel.getPendingCategoryId()
+                            if (categoryId <= 0) {
+                                android.util.Log.e("AppNavigation", "Invalid categoryId from import: $categoryId, using default")
+                            }
+                            photoEditViewModel.initializeEditor(
+                                photoUris = savedUris,
+                                categoryId = categoryId.takeIf { it > 0 } ?: 1L
+                            )
+                        }
+                        "gallery" -> {
+                            val categoryId = navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.get<Long>("categoryId") ?: 1L
+                            if (categoryId <= 0) {
+                                android.util.Log.e("AppNavigation", "Invalid categoryId from gallery: $categoryId, using default")
+                            }
+                            photoEditViewModel.initializeEditor(
+                                photoPaths = savedPaths,
+                                categoryId = categoryId.takeIf { it > 0 } ?: 1L
+                            )
+                        }
+                        else -> {
+                            android.util.Log.e("AppNavigation", "Unknown photo editor mode: $mode")
+                        }
                     }
-                    "gallery" -> {
-                        val categoryId = navController.previousBackStackEntry
-                            ?.savedStateHandle
-                            ?.get<Long>("categoryId") ?: 1L
-                        photoEditViewModel.initializeEditor(
-                            photoPaths = savedPaths,
-                            categoryId = categoryId
-                        )
-                    }
+                } catch (e: Exception) {
+                    android.util.Log.e("AppNavigation", "Error initializing photo editor", e)
+                    // Initialize with defaults on error
+                    photoEditViewModel.initializeEditor(
+                        photoUris = savedUris,
+                        photoPaths = savedPaths,
+                        categoryId = 1L
+                    )
                 }
             }
 
@@ -259,21 +278,10 @@ fun AppNavHost(
             val photoId = backStackEntry.arguments?.getLong("photoId") ?: 0L
             val photoIndex = backStackEntry.arguments?.getInt("photoIndex") ?: 0
 
-            android.util.Log.e("SmilePile", "==== PHOTO VIEWER ENTRY ====")
-            android.util.Log.e("SmilePile", "PhotoViewer Nav - Photo ID: $photoId, Passed Index: $photoIndex")
-
-            // NUCLEAR OPTION: Use the companion object state first
-            val companionPhotos = com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState.navigationPhotoList
-            val companionIndex = com.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState.navigationPhotoIndex
-
-            android.util.Log.e("SmilePile", "COMPANION INDEX: $companionIndex, COMPANION LIST SIZE: ${companionPhotos?.size ?: 0}")
-
-            // Get the saved photo list from the previous navigation entry as backup
+            // Get the saved photo list from the previous navigation entry
             val savedPhotoDataList = navController.previousBackStackEntry
                 ?.savedStateHandle
                 ?.get<List<PhotoData>>("photoDataList")
-
-            android.util.Log.e("SmilePile", "Retrieved ${savedPhotoDataList?.size ?: 0} photos from savedStateHandle")
 
             // Fallback to getting from ViewModel if saved list is not available
             val photoGalleryViewModel: com.smilepile.ui.viewmodels.PhotoGalleryViewModel = hiltViewModel()
@@ -284,40 +292,22 @@ fun AppNavHost(
                 ShareManager(navController.context)
             }
 
-            // NUCLEAR OPTION: Use companion object first, then fallbacks
-            val photos = if (companionPhotos != null && companionPhotos.isNotEmpty()) {
-                android.util.Log.e("SmilePile", "USING COMPANION OBJECT PHOTO LIST!")
-                companionPhotos
-            } else if (savedPhotoDataList != null && savedPhotoDataList.isNotEmpty()) {
-                android.util.Log.e("SmilePile", "Using SAVED photo list from navigation")
+            // Use saved photo list if available, otherwise use ViewModel
+            val photos = if (savedPhotoDataList != null && savedPhotoDataList.isNotEmpty()) {
                 savedPhotoDataList.map { it.toPhoto() }
             } else {
-                android.util.Log.e("SmilePile", "WARNING: Using VIEWMODEL fallback - this may cause index mismatch!")
                 galleryUiState.photos
-            }
-
-            android.util.Log.e("SmilePile", "Photos list size: ${photos.size}")
-            if (photos.isNotEmpty()) {
-                android.util.Log.e("SmilePile", "First 3 photos: ${photos.take(3).map { "${it.id}:${it.displayName}" }}")
-                android.util.Log.e("SmilePile", "Photo at index $photoIndex: ${photos.getOrNull(photoIndex)?.let { "${it.id}:${it.displayName}" } ?: "INDEX OUT OF BOUNDS"}")
             }
 
             // Find the current photo by ID
             val currentPhoto = photos.find { it.id == photoId }
 
-            // NUCLEAR OPTION: Use companion index if available
-            val actualIndex = if (companionIndex >= 0 && companionIndex < photos.size) {
-                android.util.Log.e("SmilePile", "USING COMPANION INDEX: $companionIndex")
-                companionIndex
-            } else if (photoIndex >= 0 && photoIndex < photos.size) {
+            // Calculate the actual index, handling out of bounds
+            val actualIndex = if (photoIndex >= 0 && photoIndex < photos.size) {
                 photoIndex
             } else {
-                android.util.Log.e("SmilePile", "ERROR: Index $photoIndex is out of bounds for list size ${photos.size}")
                 photos.indexOfFirst { it.id == photoId }.takeIf { it != -1 } ?: 0
             }
-
-            android.util.Log.e("SmilePile", "Current photo: ${currentPhoto?.displayName}, Using Index: $actualIndex")
-            android.util.Log.e("SmilePile", "==== END PHOTO VIEWER ENTRY ====")
 
             if (currentPhoto != null) {
                 PhotoViewerScreen(

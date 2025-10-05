@@ -221,21 +221,27 @@ class MainActivity : SecureActivity() {
     }
 
     private suspend fun shouldShowOnboarding(): Boolean {
-        // Check if onboarding has been completed
-        val hasCompletedOnboarding = settingsManager.hasCompletedOnboarding().first()
+        try {
+            // Check if onboarding has been completed
+            val hasCompletedOnboarding = settingsManager.hasCompletedOnboarding().first()
 
-        if (!hasCompletedOnboarding) {
-            // Check if we have existing data (migrating user)
-            val categories = categoryRepository.getAllCategories()
-            if (categories.isEmpty()) {
-                // First time launch, show onboarding
+            if (!hasCompletedOnboarding) {
+                // Check if we have existing data (migrating user)
+                val categories = categoryRepository.getAllCategories()
+                if (categories.isNotEmpty()) {
+                    // Has data but no onboarding flag - mark as complete (migrating user)
+                    settingsManager.setOnboardingCompleted(true)
+                    return false
+                }
+                // First time launch with no categories, show onboarding
                 return true
-            } else {
-                // Has data but no onboarding flag - mark as complete (migrating user)
-                settingsManager.setOnboardingCompleted(true)
             }
-        }
 
-        return false
+            return false
+        } catch (e: Exception) {
+            android.util.Log.e("MainActivity", "Error checking onboarding status", e)
+            // On error, assume onboarding needed to be safe
+            return true
+        }
     }
 }

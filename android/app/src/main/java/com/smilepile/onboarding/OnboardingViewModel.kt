@@ -145,10 +145,7 @@ class OnboardingViewModel @Inject constructor(
     private fun validateCurrentStep(): Boolean {
         return when (_uiState.value.currentStep) {
             OnboardingStep.CATEGORIES -> {
-                if (_uiState.value.categories.isEmpty()) {
-                    _uiState.update { it.copy(error = "Please create at least one category") }
-                    return false
-                }
+                // Allow proceeding even with no categories - we'll create defaults
                 true
             }
             OnboardingStep.PIN_SETUP -> {
@@ -163,13 +160,30 @@ class OnboardingViewModel @Inject constructor(
         }
     }
 
+    private fun createDefaultTempCategories(): List<TempCategory> {
+        return listOf(
+            TempCategory(name = "Family", colorHex = "#FF6B9D", icon = "family"),
+            TempCategory(name = "Cars", colorHex = "#4A90E2", icon = "car"),
+            TempCategory(name = "Games", colorHex = "#7ED321", icon = "game"),
+            TempCategory(name = "Sports", colorHex = "#F5A623", icon = "sports")
+        )
+    }
+
     fun completeOnboarding() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
 
             try {
                 val state = _uiState.value
-                val categoryIdMap = saveCategories(state.categories)
+
+                // If user hasn't created any categories, create default ones
+                val categoriesToSave = if (state.categories.isEmpty()) {
+                    createDefaultTempCategories()
+                } else {
+                    state.categories
+                }
+
+                val categoryIdMap = saveCategories(categoriesToSave)
                 importPhotos(state.importedPhotos, categoryIdMap)
                 savePinIfProvided(state.pinCode)
                 settingsManager.setOnboardingCompleted(true)

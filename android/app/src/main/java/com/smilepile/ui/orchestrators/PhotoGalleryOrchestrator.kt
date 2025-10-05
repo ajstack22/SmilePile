@@ -77,6 +77,7 @@ fun PhotoGalleryOrchestrator(
     var showCategorySelection by remember { mutableStateOf(false) }
     var isAddingPhotos by remember { mutableStateOf(false) }
     var selectedImportCategoryId by remember { mutableStateOf<Long?>(null) }
+    var lastAddPhotoClickTime by remember { mutableStateOf(0L) }
 
     // Photo picker launchers
     val singlePhotoLauncher = rememberLauncherForActivityResult(
@@ -86,8 +87,16 @@ fun PhotoGalleryOrchestrator(
             pendingImportUris = listOf(it)
             // Navigate directly to editor with the pre-selected category
             selectedImportCategoryId?.let { categoryId ->
-                onNavigateToPhotoEditorWithUris(listOf(uri))
-                importViewModel.setPendingCategoryId(categoryId)
+                if (categoryId > 0) {
+                    // CRITICAL: Set category ID BEFORE navigation so it's available during initialization
+                    importViewModel.setPendingCategoryId(categoryId)
+                    onNavigateToPhotoEditorWithUris(listOf(uri))
+                } else {
+                    android.util.Log.e("PhotoGalleryOrchestrator", "Invalid categoryId for single photo: $categoryId")
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Invalid category selected")
+                    }
+                }
                 // Reset states
                 pendingImportUris = null
                 selectedImportCategoryId = null
@@ -103,8 +112,16 @@ fun PhotoGalleryOrchestrator(
             pendingImportUris = uris
             // Navigate directly to editor with the pre-selected category
             selectedImportCategoryId?.let { categoryId ->
-                onNavigateToPhotoEditorWithUris(uris)
-                importViewModel.setPendingCategoryId(categoryId)
+                if (categoryId > 0) {
+                    // CRITICAL: Set category ID BEFORE navigation so it's available during initialization
+                    importViewModel.setPendingCategoryId(categoryId)
+                    onNavigateToPhotoEditorWithUris(uris)
+                } else {
+                    android.util.Log.e("PhotoGalleryOrchestrator", "Invalid categoryId for multiple photos: $categoryId")
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar("Invalid category selected")
+                    }
+                }
                 // Reset states
                 pendingImportUris = null
                 selectedImportCategoryId = null
@@ -226,8 +243,18 @@ fun PhotoGalleryOrchestrator(
             )
         },
         onAddPhotoClick = {
+            val currentTime = System.currentTimeMillis()
+
+            // Debounce rapid clicks (500ms threshold)
+            if (currentTime - lastAddPhotoClickTime < 500) {
+                android.util.Log.d("PhotoGalleryOrchestrator", "Add photo click debounced")
+                return@PhotoGalleryOrchestratorState
+            }
+            lastAddPhotoClickTime = currentTime
+
             // Prevent rapid taps by checking if flow is already in progress
             if (isAddingPhotos || showCategorySelection) {
+                android.util.Log.d("PhotoGalleryOrchestrator", "Add photo flow already in progress")
                 return@PhotoGalleryOrchestratorState
             }
 
@@ -376,12 +403,6 @@ data class PhotoGalleryOrchestratorState(
 
     // Batch operation availability
     val canPerformBatchOperations: Boolean get() = galleryState.isSelectionMode && galleryState.hasSelectedPhotos
-
-    companion object {
-        // Nuclear option: Store navigation state directly to bypass all navigation complexity
-        var navigationPhotoList: List<Photo>? = null
-        var navigationPhotoIndex: Int = -1
-    }
 }
 
 private fun handlePermissionResult(
@@ -407,24 +428,8 @@ private fun handlePhotoClick(
     if (isSelectionMode) {
         onToggleSelection()
     } else {
-        val actualIndex = photoList.indexOfFirst { it.id == photo.id }
-
-        logPhotoNavigation(photo, photoList, actualIndex)
-
-        PhotoGalleryOrchestratorState.navigationPhotoList = photoList
-        PhotoGalleryOrchestratorState.navigationPhotoIndex = actualIndex
-
         onNavigateToPhoto(photo, photoList)
     }
-}
-
-private fun logPhotoNavigation(photo: Photo, photoList: List<Photo>, index: Int) {
-    android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo clicked - ID: ${photo.id}, Name: ${photo.displayName}")
-    android.util.Log.e("SmilePile", "ORCHESTRATOR: Photo list size: ${photoList.size}")
-    android.util.Log.e("SmilePile", "ORCHESTRATOR: First 3 in list: ${photoList.take(3).map { "${it.id}:${it.displayName}" }}")
-    android.util.Log.e("SmilePile", "ORCHESTRATOR: ACTUAL INDEX CALCULATED HERE: $index")
-    android.util.Log.e("SmilePile", "ORCHESTRATOR: STORED INDEX IN COMPANION: $index")
-    println("SmilePile ORCHESTRATOR: Clicked ${photo.displayName} - Calculated index: $index of ${photoList.size} photos")
 }
 
 private fun handleCategorySelectionForImport(

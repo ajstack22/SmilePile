@@ -30,24 +30,6 @@ class SmilePileApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
-        // Initialize database and default categories
-        initializeDatabase()
-    }
-
-    /**
-     * Initialize database and create default categories if needed
-     */
-    private fun initializeDatabase() {
-        applicationScope.launch {
-            try {
-                // Initialize default categories on first launch
-                categoryRepository.initializeDefaultCategories()
-            } catch (e: Exception) {
-                // Log error but don't crash the app
-                android.util.Log.e("SmilePileApp", "Failed to initialize database", e)
-            }
-        }
     }
 
     companion object {
