@@ -201,11 +201,14 @@ class OnboardingViewModel @Inject constructor(
 
     private suspend fun saveCategories(categories: List<TempCategory>): Map<String, Long> {
         val categoryIdMap = mutableMapOf<String, Long>()
+        android.util.Log.d("OnboardingVM", "📦 Saving ${categories.size} categories...")
         categories.forEachIndexed { index, tempCategory ->
             val category = createCategoryFromTemp(tempCategory, index)
             val newCategoryId = categoryRepository.insertCategory(category)
             categoryIdMap[tempCategory.id] = newCategoryId
+            android.util.Log.d("OnboardingVM", "  ✓ Category '${tempCategory.name}' tempId=${tempCategory.id} → dbId=$newCategoryId")
         }
+        android.util.Log.d("OnboardingVM", "📦 Category mapping complete: $categoryIdMap")
         return categoryIdMap
     }
 
@@ -226,7 +229,9 @@ class OnboardingViewModel @Inject constructor(
         importedPhotos: List<ImportedPhotoData>,
         categoryIdMap: Map<String, Long>
     ) {
-        importedPhotos.forEach { photoData ->
+        android.util.Log.d("OnboardingVM", "📸 Importing ${importedPhotos.size} photos...")
+        importedPhotos.forEachIndexed { index, photoData ->
+            android.util.Log.d("OnboardingVM", "  Photo $index: uri=${photoData.uri}, categoryId=${photoData.categoryId}")
             importSinglePhoto(photoData, categoryIdMap)
         }
     }
@@ -235,11 +240,17 @@ class OnboardingViewModel @Inject constructor(
         photoData: ImportedPhotoData,
         categoryIdMap: Map<String, Long>
     ) {
-        photoData.categoryId?.let { tempCategoryId ->
-            categoryIdMap[tempCategoryId]?.let { actualCategoryId ->
-                val photo = createPhotoFromImport(photoData, actualCategoryId)
-                photoRepository.insertPhoto(photo)
-            }
+        // Determine the category ID: use mapped ID, or fall back to first category
+        val actualCategoryId = photoData.categoryId?.let { tempCategoryId ->
+            categoryIdMap[tempCategoryId]
+        } ?: categoryIdMap.values.firstOrNull()
+
+        if (actualCategoryId != null && actualCategoryId > 0) {
+            val photo = createPhotoFromImport(photoData, actualCategoryId)
+            photoRepository.insertPhoto(photo)
+            android.util.Log.d("OnboardingVM", "✅ Imported photo to category $actualCategoryId")
+        } else {
+            android.util.Log.e("OnboardingVM", "❌ Failed to import photo: no valid category ID (photoData.categoryId=${photoData.categoryId}, mapped=$actualCategoryId)")
         }
     }
 
