@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
@@ -48,16 +49,21 @@ class PhotoGalleryViewModel @Inject constructor(
     }
 
     private suspend fun observeInitialCategorySelection() {
+        // Wait for first emission where categories are available, then initialize ONCE
         combine(
             categoryRepository.getAllCategoriesFlow(),
             photoRepository.getAllPhotosFlow()
         ) { categoriesList, photosList ->
             Pair(categoriesList, photosList)
-        }.collect { (categoriesList, photosList) ->
-            if (shouldInitializeSelection(categoriesList)) {
+        }
+            .first { (categoriesList: List<Category>, _: List<Photo>) ->
+                // Wait until categories are loaded
+                categoriesList.isNotEmpty() && _selectedCategoryIds.value.isEmpty()
+            }
+            .let { (categoriesList: List<Category>, photosList: List<Photo>) ->
+                android.util.Log.d("PhotoGalleryVM", "Applying initial category selection (categories=${categoriesList.size}, photos=${photosList.size})")
                 applyInitialSelection(categoriesList, photosList)
             }
-        }
     }
 
     private fun shouldInitializeSelection(categoriesList: List<Category>): Boolean {
