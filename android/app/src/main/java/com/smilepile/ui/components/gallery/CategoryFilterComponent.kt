@@ -35,6 +35,73 @@ import com.smilepile.data.models.Category
 import com.smilepile.ui.components.CategoryColorIndicator
 
 /**
+ * "All Photos" chip for showing all photos without category filter
+ */
+@Composable
+fun AllPhotosChip(
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val isDarkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5f
+
+    val selectionColor = if (isDarkTheme) {
+        Color.White.copy(alpha = 0.1f)
+    } else {
+        Color.Black.copy(alpha = 0.1f)
+    }
+
+    val borderColor = if (isDarkTheme) {
+        if (isSelected) Color.White else Color.White.copy(alpha = 0.3f)
+    } else {
+        if (isSelected) Color.Black else Color.Black.copy(alpha = 0.3f)
+    }
+
+    Card(
+        modifier = modifier
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = if (isSelected) {
+                selectionColor
+            } else {
+                Color.Transparent
+            }
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = borderColor
+        ),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "All",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 14.sp,
+                    fontWeight = when {
+                        isDarkTheme -> androidx.compose.ui.text.font.FontWeight.Bold
+                        isSelected -> androidx.compose.ui.text.font.FontWeight.Medium
+                        else -> androidx.compose.ui.text.font.FontWeight.Normal
+                    }
+                ),
+                color = if (isSelected) {
+                    MaterialTheme.colorScheme.onSurface
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                }
+            )
+        }
+    }
+}
+
+/**
  * Custom category chip that matches the iOS design
  */
 @Composable
@@ -148,6 +215,14 @@ fun CategoryFilterComponent(
         horizontalArrangement = horizontalArrangement,
         contentPadding = contentPadding
     ) {
+        // "All" filter chip
+        item {
+            AllPhotosChip(
+                isSelected = selectedCategoryId == null,
+                onClick = { onCategorySelected(null) }
+            )
+        }
+
         // Category filter chips
         items(categories) { category ->
             CategoryChip(
