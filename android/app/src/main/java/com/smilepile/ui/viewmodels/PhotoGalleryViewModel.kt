@@ -1,5 +1,6 @@
 package com.smilepile.ui.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.smilepile.data.models.Category
@@ -26,11 +27,23 @@ import javax.inject.Inject
 class PhotoGalleryViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     private val categoryRepository: CategoryRepository,
-    private val photoOperationsManager: PhotoOperationsManager
+    private val photoOperationsManager: PhotoOperationsManager,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    companion object {
+        private const val KEY_SELECTED_CATEGORY_IDS = "selectedCategoryIds"
+        private const val KEY_HAS_EXPLICIT_FILTER = "hasExplicitFilter"
+    }
+
+    private var hasExplicitlySetFilter: Boolean
+        get() = savedStateHandle[KEY_HAS_EXPLICIT_FILTER] ?: false
+        set(value) { savedStateHandle[KEY_HAS_EXPLICIT_FILTER] = value }
+
     // Support multiple category filtering
-    private val _selectedCategoryIds = MutableStateFlow<Set<Long>>(emptySet())
+    private val _selectedCategoryIds = MutableStateFlow<Set<Long>>(
+        savedStateHandle.get<Set<Long>>(KEY_SELECTED_CATEGORY_IDS) ?: emptySet()
+    )
     val selectedCategoryIds: StateFlow<Set<Long>> = _selectedCategoryIds.asStateFlow()
 
     // Legacy single category support (for backward compatibility)
@@ -38,6 +51,23 @@ class PhotoGalleryViewModel @Inject constructor(
     val selectedCategoryId: StateFlow<Long?> = _selectedCategoryId.asStateFlow()
 
     init {
+        // Validate restored category IDs
+        viewModelScope.launch {
+            val savedCategoryIds = savedStateHandle.get<Set<Long>>(KEY_SELECTED_CATEGORY_IDS)
+            if (savedCategoryIds != null && savedCategoryIds.isNotEmpty()) {
+                // Verify categories still exist
+                val validCategories = categoryRepository.getAllCategories()
+                val validIds = savedCategoryIds.filter { id ->
+                    validCategories.any { it.id == id }
+                }
+                if (validIds.isEmpty() && savedCategoryIds.isNotEmpty()) {
+                    // Saved categories no longer exist, clear filter
+                    updateSelectedCategories(emptySet())
+                    hasExplicitlySetFilter = false
+                }
+            }
+        }
+
         initializeGallery()
     }
 
@@ -48,7 +78,18 @@ class PhotoGalleryViewModel @Inject constructor(
         }
     }
 
+    private fun updateSelectedCategories(categoryIds: Set<Long>) {
+        _selectedCategoryIds.value = categoryIds
+        savedStateHandle[KEY_SELECTED_CATEGORY_IDS] = categoryIds
+    }
+
     private suspend fun observeInitialCategorySelection() {
+        // Skip initialization if user has explicitly set a filter
+        if (hasExplicitlySetFilter) {
+            android.util.Log.d("PhotoGalleryVM", "Skipping initial selection - user has explicit filter")
+            return
+        }
+
         // Wait for first emission where categories are available, then initialize ONCE
         combine(
             categoryRepository.getAllCategoriesFlow(),
@@ -73,20 +114,17 @@ class PhotoGalleryViewModel @Inject constructor(
     private fun applyInitialSelection(categoriesList: List<Category>, photosList: List<Photo>) {
         if (photosList.isEmpty()) {
             setInitialCategorySelection(categoriesList.first())
-        } else {
-            setInitialViewAllPhotos()
         }
+        // When photos exist, keep the current filter (don't reset)
     }
 
     private fun setInitialCategorySelection(category: Category) {
-        _selectedCategoryIds.value = setOf(category.id)
+        updateSelectedCategories(setOf(category.id))
         _selectedCategoryId.value = category.id
-        println("SmilePile Debug: Gallery empty - auto-selected first category (${category.displayName})")
     }
 
     private fun setInitialViewAllPhotos() {
-        _selectedCategoryIds.value = emptySet()
-        println("SmilePile Debug: Initialized with no category filter (showing all photos)")
+        updateSelectedCategories(emptySet())
     }
 
     private val _isLoading = MutableStateFlow(false)
@@ -116,7 +154,7 @@ class PhotoGalleryViewModel @Inject constructor(
     // Get ALL photos (unfiltered) for fullscreen navigation
     val allPhotos: StateFlow<List<Photo>> = photoRepository.getAllPhotosFlow()
         .catch { e ->
-            println("SmilePile Error: Failed to load all photos: ${e.message}")
+            android.util.Log.e("PhotoGalleryVM", "Failed to load all photos", e)
             emit(emptyList())
         }
         .stateIn(
@@ -146,7 +184,7 @@ class PhotoGalleryViewModel @Inject constructor(
         }
         .catch { e ->
             _error.value = "Failed to load photos: ${e.message}"
-            println("SmilePile Error: Failed to load photos: ${e.message}")
+            android.util.Log.e("PhotoGalleryVM", "Failed to load photos", e)
             emit(emptyList())
         }
         .stateIn(
@@ -212,22 +250,19 @@ class PhotoGalleryViewModel @Inject constructor(
     fun selectCategory(categoryId: Long?) {
         viewModelScope.launch {
             try {
+                hasExplicitlySetFilter = true
                 if (categoryId == null) {
                     // Clear all filters
-                    _selectedCategoryIds.value = emptySet()
+                    updateSelectedCategories(emptySet())
                     _selectedCategoryId.value = null
                 } else {
                     // Single category selection
-                    _selectedCategoryIds.value = setOf(categoryId)
+                    updateSelectedCategories(setOf(categoryId))
                     _selectedCategoryId.value = categoryId
                 }
                 _error.value = null
-
-                // Log category change for debugging
-                println("SmilePile Debug: Selected category changed to: $categoryId")
             } catch (e: Exception) {
                 _error.value = "Failed to select category: ${e.message}"
-                println("SmilePile Error: Failed to select category: ${e.message}")
             }
         }
     }
@@ -235,19 +270,19 @@ class PhotoGalleryViewModel @Inject constructor(
     fun toggleCategoryFilter(categoryId: Long) {
         viewModelScope.launch {
             try {
+                hasExplicitlySetFilter = true
                 val currentSelection = _selectedCategoryIds.value.toMutableSet()
                 if (currentSelection.contains(categoryId)) {
                     currentSelection.remove(categoryId)
                 } else {
                     currentSelection.add(categoryId)
                 }
-                _selectedCategoryIds.value = currentSelection
+                updateSelectedCategories(currentSelection)
 
                 // Update single category for backward compatibility
                 _selectedCategoryId.value = currentSelection.firstOrNull()
 
                 _error.value = null
-                println("SmilePile Debug: Category filters updated to: $currentSelection")
             } catch (e: Exception) {
                 _error.value = "Failed to toggle category filter: ${e.message}"
             }
@@ -255,14 +290,14 @@ class PhotoGalleryViewModel @Inject constructor(
     }
 
     fun clearCategoryFilters() {
-        _selectedCategoryIds.value = emptySet()
+        updateSelectedCategories(emptySet())
         _selectedCategoryId.value = null
     }
 
     fun selectAllCategories() {
         viewModelScope.launch {
             val allCategoryIds = categories.value.map { it.id }.toSet()
-            _selectedCategoryIds.value = allCategoryIds
+            updateSelectedCategories(allCategoryIds)
             _selectedCategoryId.value = allCategoryIds.firstOrNull()
         }
     }

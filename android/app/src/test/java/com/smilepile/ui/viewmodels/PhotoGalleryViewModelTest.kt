@@ -1,6 +1,7 @@
 package com.smilepile.ui.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.SavedStateHandle
 import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.data.repository.CategoryRepository
@@ -86,6 +87,10 @@ class PhotoGalleryViewModelTest {
         isFromAssets = false
     )
 
+    private fun createSavedStateHandle(): SavedStateHandle {
+        return SavedStateHandle()
+    }
+
     @Before
     fun setup() {
         // Initialize mocks
@@ -101,6 +106,7 @@ class PhotoGalleryViewModelTest {
         every { photoRepository.getPhotosInCategoriesFlow(any()) } returns MutableStateFlow(listOf(testPhoto1, testPhoto2))
 
         coEvery { categoryRepository.initializeDefaultCategories() } just Runs
+        coEvery { categoryRepository.getAllCategories() } returns listOf(testCategory1, testCategory2)
     }
 
     @After
@@ -111,7 +117,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `initial state is correct`() = runViewModelTest {
         // Given & When
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // Then
@@ -127,7 +133,7 @@ class PhotoGalleryViewModelTest {
     @org.junit.Ignore("Skipping due to stateIn collection issue")
     fun `loads categories on initialization`() = runViewModelTest {
         // Given & When
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // Then
@@ -141,7 +147,7 @@ class PhotoGalleryViewModelTest {
     @org.junit.Ignore("Skipping due to stateIn collection issue")
     fun `selects category and filters photos`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When
@@ -161,7 +167,7 @@ class PhotoGalleryViewModelTest {
     @org.junit.Ignore("Skipping due to stateIn collection issue")
     fun `clears category filter shows all photos`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.selectCategory(1L)
@@ -182,7 +188,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `toggle category filter adds and removes categories`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When - Add first category
@@ -210,7 +216,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `enters and exits selection mode`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When - Enter selection mode
@@ -232,7 +238,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `toggles photo selection`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.enterSelectionMode()
@@ -257,7 +263,7 @@ class PhotoGalleryViewModelTest {
     @org.junit.Ignore("Skipping due to stateIn collection issue")
     fun `selects all photos`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.enterSelectionMode()
@@ -276,7 +282,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `removes photo from library`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When
@@ -290,7 +296,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `moves photo to category`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When
@@ -316,7 +322,7 @@ class PhotoGalleryViewModelTest {
         )
         coEvery { photoOperationsManager.removeFromLibrary(any<List<Photo>>()) } returns batchResult
 
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.enterSelectionMode()
@@ -344,7 +350,7 @@ class PhotoGalleryViewModelTest {
         )
         coEvery { photoOperationsManager.movePhotosToCategory(any(), any()) } returns batchResult
 
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.enterSelectionMode()
@@ -367,7 +373,7 @@ class PhotoGalleryViewModelTest {
         // Given
         coEvery { categoryRepository.assignPhotoToCategories(any(), any()) } just Runs
 
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         viewModel.enterSelectionMode()
@@ -388,7 +394,7 @@ class PhotoGalleryViewModelTest {
         val errorFlow = MutableStateFlow<List<Photo>>(emptyList())
         every { photoRepository.getAllPhotosFlow() } returns errorFlow
 
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When - Simulate error
@@ -402,7 +408,7 @@ class PhotoGalleryViewModelTest {
     @Test
     fun `clears error state`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // Simulate an error
@@ -421,7 +427,7 @@ class PhotoGalleryViewModelTest {
     @org.junit.Ignore("Skipping due to stateIn collection issue")
     fun `ui state combines all state flows correctly`() = runViewModelTest {
         // Given
-        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager)
+        viewModel = PhotoGalleryViewModel(photoRepository, categoryRepository, photoOperationsManager, createSavedStateHandle())
         advanceUntilIdle()
 
         // When
