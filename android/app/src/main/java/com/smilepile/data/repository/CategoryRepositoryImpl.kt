@@ -219,6 +219,19 @@ class CategoryRepositoryImpl @Inject constructor(
             throw CategoryRepositoryException("Failed to get photo count in category: ${e.message}", e)
         }
     }
+
+    override suspend fun reorderCategories(categoryIds: List<Long>) = withContext(ioDispatcher) {
+        try {
+            categoryIds.forEachIndexed { index, categoryId ->
+                val category = categoryDao.getById(categoryId)
+                category?.let {
+                    categoryDao.update(it.copy(position = index))
+                }
+            }
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to reorder categories: ${e.message}", e)
+        }
+    }
 }
 
 /**

@@ -24,6 +24,7 @@ struct CategoryFilterView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
         }
+        .padding(.top, 50) // Push content below Dynamic Island/status bar
         .frame(height: 56) // Consistent height for the filter bar
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Category filters")

@@ -88,6 +88,41 @@ struct SelectableCategoryChip: View {
     }
 }
 
+struct AllPhotosChip: View {
+    let isSelected: Bool
+    let onTap: () -> Void
+    @Environment(\.colorScheme) var colorScheme
+
+    private var textWeight: Font.Weight {
+        if colorScheme == .dark {
+            return .bold
+        } else if isSelected {
+            return .medium
+        } else {
+            return .regular
+        }
+    }
+
+    var body: some View {
+        Button(action: onTap) {
+            HStack(spacing: 8) {
+                Text("All")
+                    .font(.system(size: 14, weight: textWeight))
+                    .foregroundColor(isSelected ? .primary : .secondary)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(isSelected ? Color.primary.opacity(0.1) : Color.clear)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(isSelected ? Color.primary : Color.primary.opacity(0.3), lineWidth: 1)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
 struct CategoryColorIndicator: View {
     let colorHex: String
     let size: CGFloat

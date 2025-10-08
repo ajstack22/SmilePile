@@ -82,22 +82,26 @@ struct CategoryManagementView: View {
 
     @ViewBuilder
     private var categoryList: some View {
-        ScrollView {
-            LazyVStack(spacing: 12) {
-                ForEach(viewModel.categoriesWithCounts, id: \.category.id) { categoryWithCount in
-                    CategoryManagementCard(
-                        categoryWithCount: categoryWithCount,
-                        onEdit: { category in
-                            viewModel.showEditCategoryDialog(category)
-                        },
-                        onDelete: { category in
-                            viewModel.requestDeleteCategory(category)
-                        }
-                    )
-                }
+        List {
+            ForEach(viewModel.categoriesWithCounts, id: \.category.id) { categoryWithCount in
+                CategoryManagementCard(
+                    categoryWithCount: categoryWithCount,
+                    onEdit: { category in
+                        viewModel.showEditCategoryDialog(category)
+                    },
+                    onDelete: { category in
+                        viewModel.requestDeleteCategory(category)
+                    }
+                )
+                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                .listRowSeparator(.hidden)
             }
-            .padding()
+            .onMove { source, destination in
+                viewModel.moveCategory(from: source, to: destination)
+            }
         }
+        .listStyle(.plain)
+        .environment(\.editMode, .constant(.active))
     }
 
     @ViewBuilder

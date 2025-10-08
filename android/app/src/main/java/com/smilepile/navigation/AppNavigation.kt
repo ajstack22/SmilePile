@@ -137,9 +137,10 @@ fun AppNavHost(
                     navController.currentBackStackEntry?.savedStateHandle?.set("editPaths", photoPaths)
                     navController.navigate(NavigationRoutes.photoEditorRoute("gallery"))
                 },
-                onNavigateToPhotoEditorWithUris = { uris ->
-                    // Navigate to photo editor with imported URIs
+                onNavigateToPhotoEditorWithUris = { uris, categoryId ->
+                    // Navigate to photo editor with imported URIs and category
                     navController.currentBackStackEntry?.savedStateHandle?.set("editUris", uris)
+                    navController.currentBackStackEntry?.savedStateHandle?.set("importCategoryId", categoryId)
                     navController.navigate(NavigationRoutes.photoEditorRoute("import"))
                 },
                 paddingValues = paddingValues
@@ -216,13 +217,20 @@ fun AppNavHost(
                 try {
                     when (mode) {
                         "import" -> {
-                            val categoryId = photoImportViewModel.getPendingCategoryId()
+                            // First check savedStateHandle, then fall back to ViewModel
+                            val savedCategoryId = navController.previousBackStackEntry
+                                ?.savedStateHandle
+                                ?.get<Long>("importCategoryId")
+                            val categoryId = savedCategoryId ?: photoImportViewModel.getPendingCategoryId()
+                            android.util.Log.d("AppNavigation", "PhotoEditor IMPORT mode - categoryId from savedState: $savedCategoryId, from ViewModel: ${photoImportViewModel.getPendingCategoryId()}, using: $categoryId")
                             if (categoryId <= 0) {
                                 android.util.Log.e("AppNavigation", "Invalid categoryId from import: $categoryId, using default")
                             }
+                            val finalCategoryId = categoryId.takeIf { it > 0 } ?: 1L
+                            android.util.Log.d("AppNavigation", "Initializing editor with categoryId: $finalCategoryId")
                             photoEditViewModel.initializeEditor(
                                 photoUris = savedUris,
-                                categoryId = categoryId.takeIf { it > 0 } ?: 1L
+                                categoryId = finalCategoryId
                             )
                         }
                         "gallery" -> {

@@ -178,7 +178,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
 
     func getAllCategoriesFlow() -> AnyPublisher<[Category], Error> {
         let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.createdAt, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.position, ascending: true)]
 
         return coreDataStack.viewContext.publisher(for: request)
             .map { entities in

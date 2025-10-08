@@ -232,6 +232,32 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
+    fun reorderCategories(reorderedCategories: List<Category>) {
+        viewModelScope.launch {
+            try {
+                // Optimistically update UI immediately
+                val reorderedWithCounts = reorderedCategories.mapIndexed { index, category ->
+                    val existingItem = _categoriesWithCountsInternal.value.find { it.category.id == category.id }
+                    CategoryWithCount(
+                        category = category.copy(position = index),
+                        photoCount = existingItem?.photoCount ?: 0
+                    )
+                }
+                _categoriesWithCountsInternal.value = reorderedWithCounts
+
+                // Update positions in database
+                reorderedCategories.forEachIndexed { index, category ->
+                    val updatedCategory = category.copy(position = index)
+                    categoryRepository.updateCategory(updatedCategory)
+                }
+            } catch (e: Exception) {
+                _error.value = "Failed to reorder categories: ${e.message}"
+                // Reload on error to restore correct state
+                refreshCategoriesWithCounts()
+            }
+        }
+    }
+
     fun clearError() {
         _error.value = null
     }

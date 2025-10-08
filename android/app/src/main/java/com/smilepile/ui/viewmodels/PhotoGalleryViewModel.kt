@@ -442,6 +442,21 @@ class PhotoGalleryViewModel @Inject constructor(
     fun clearError() {
         _error.value = null
     }
+
+    /**
+     * Reorder categories based on user drag-and-drop
+     */
+    fun reorderCategories(reorderedCategories: List<Category>) {
+        viewModelScope.launch {
+            try {
+                val categoryIds = reorderedCategories.map { it.id }
+                categoryRepository.reorderCategories(categoryIds)
+            } catch (e: Exception) {
+                android.util.Log.e("PhotoGalleryViewModel", "Failed to reorder categories", e)
+                _error.value = "Failed to reorder categories: ${e.message}"
+            }
+        }
+    }
 }
 
 data class PhotoGalleryUiState(

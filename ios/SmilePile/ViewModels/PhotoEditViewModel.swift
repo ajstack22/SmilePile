@@ -406,7 +406,16 @@ class PhotoEditViewModel: ObservableObject {
 
         for result in processedResults {
             // Check if we're editing an existing photo or importing a new one
-            if let photoId = result.sourcePhotoId, editMode == .gallery {
+            // Try to get existing photo from database if we have a sourcePhotoId
+            var existingPhoto: Photo? = nil
+            if let photoId = result.sourcePhotoId {
+                existingPhoto = try? await photoRepository.getPhotoById(photoId)
+            }
+
+            if let existingPhoto = existingPhoto {
+                // Existing photo found in database - update it
+                print("📝 PhotoEdit: Found existing photo ID \(existingPhoto.id) with categoryId: \(existingPhoto.categoryId), updating to: \(result.categoryId)")
+
                 // Save edited image back to the same path if image was edited
                 if result.wasEdited, let sourcePath = result.sourcePath {
                     if let imageData = result.image.jpegData(compressionQuality: 0.9) {
@@ -420,70 +429,83 @@ class PhotoEditViewModel: ObservableObject {
 
                 // Always update photo in database (category might have changed even if image wasn't edited)
                 do {
-                    if let existingPhoto = try await photoRepository.getPhotoById(photoId) {
-                        print("📝 PhotoEdit: Found existing photo ID \(photoId) with categoryId: \(existingPhoto.categoryId), updating to: \(result.categoryId)")
-
-                        // Create a new photo with updated values (since Photo uses let)
-                        let updatedPhoto = Photo(
-                            id: existingPhoto.id,
-                            path: existingPhoto.path,
-                            categoryId: result.categoryId,  // Always use the new categoryId
-                            name: existingPhoto.name,
-                            isFromAssets: existingPhoto.isFromAssets,
-                            createdAt: result.wasEdited ? Date().timeIntervalSince1970.toInt64() : existingPhoto.createdAt,
-                            fileSize: result.wasEdited ? Int64(result.image.jpegData(compressionQuality: 0.9)?.count ?? 0) : existingPhoto.fileSize,
-                            width: result.wasEdited ? Int(result.image.size.width * result.image.scale) : existingPhoto.width,
-                            height: result.wasEdited ? Int(result.image.size.height * result.image.scale) : existingPhoto.height
-                        )
-                        try await photoRepository.updatePhoto(updatedPhoto)
-                        savedPhotos.append(updatedPhoto)
-                        print("✅ PhotoEdit: Successfully updated photo in database with categoryId: \(updatedPhoto.categoryId)")
-                    } else {
-                        print("❌ PhotoEdit: Could not find photo with ID \(photoId)")
-                    }
+                    let updatedPhoto = Photo(
+                        id: existingPhoto.id,
+                        path: existingPhoto.path,
+                        categoryId: result.categoryId,  // Always use the new categoryId
+                        name: existingPhoto.name,
+                        isFromAssets: existingPhoto.isFromAssets,
+                        createdAt: result.wasEdited ? Date().timeIntervalSince1970.toInt64() : existingPhoto.createdAt,
+                        fileSize: result.wasEdited ? Int64(result.image.jpegData(compressionQuality: 0.9)?.count ?? 0) : existingPhoto.fileSize,
+                        width: result.wasEdited ? Int(result.image.size.width * result.image.scale) : existingPhoto.width,
+                        height: result.wasEdited ? Int(result.image.size.height * result.image.scale) : existingPhoto.height
+                    )
+                    try await photoRepository.updatePhoto(updatedPhoto)
+                    savedPhotos.append(updatedPhoto)
+                    print("✅ PhotoEdit: Successfully updated photo in database with categoryId: \(updatedPhoto.categoryId)")
                 } catch {
                     print("❌ PhotoEdit: Failed to update photo in repository: \(error)")
                 }
             } else {
-                // New import - create a new file
-                let fileName = "edited_\(Date().timeIntervalSince1970)_\(savedPhotos.count).jpg"
-                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let photosDirectory = documentsDirectory.appendingPathComponent("photos")
-                try? FileManager.default.createDirectory(at: photosDirectory, withIntermediateDirectories: true)
-                let savedPath = photosDirectory.appendingPathComponent(fileName).path
+                // New import - photo doesn't exist in database yet
+                print("📝 PhotoEdit: New import, saving to database")
 
-                // Save to internal storage
-                if let imageData = result.image.jpegData(compressionQuality: 0.9) {
-                    do {
-                        try imageData.write(to: URL(fileURLWithPath: savedPath))
+                // Determine the path to use
+                let savedPath: String
+                if let sourcePath = result.sourcePath, FileManager.default.fileExists(atPath: sourcePath) {
+                    // Use existing file from SimplePhotoStorage
+                    savedPath = sourcePath
+                    print("📝 PhotoEdit: Using existing file at \(sourcePath)")
 
-                        // Create photo record
-                        let photo = Photo(
-                            path: savedPath,
-                            categoryId: result.categoryId,
-                            fileSize: Int64(imageData.count),
-                            width: Int(result.image.size.width * result.image.scale),
-                            height: Int(result.image.size.height * result.image.scale)
-                        )
-
-                        // Save to repository
-                        let photoId = try await photoRepository.insertPhoto(photo)
-                        var savedPhoto = photo
-                        savedPhoto = Photo(
-                            id: photoId,
-                            path: photo.path,
-                            categoryId: photo.categoryId,
-                            name: photo.name,
-                            isFromAssets: photo.isFromAssets,
-                            createdAt: photo.createdAt,
-                            fileSize: photo.fileSize,
-                            width: photo.width,
-                            height: photo.height
-                        )
-                        savedPhotos.append(savedPhoto)
-                    } catch {
-                        print("Failed to save new photo: \(error)")
+                    // If image was edited, overwrite the file
+                    if result.wasEdited {
+                        if let imageData = result.image.jpegData(compressionQuality: 0.9) {
+                            try? imageData.write(to: URL(fileURLWithPath: savedPath))
+                            print("📝 PhotoEdit: Overwrote edited image at \(savedPath)")
+                        }
                     }
+                } else {
+                    // Create new file (fallback - shouldn't normally happen with SimplePhotoStorage)
+                    let fileName = "photo_\(Date().timeIntervalSince1970)_\(savedPhotos.count).jpg"
+                    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    let photosDirectory = documentsDirectory.appendingPathComponent("simple_photos")
+                    try? FileManager.default.createDirectory(at: photosDirectory, withIntermediateDirectories: true)
+                    savedPath = photosDirectory.appendingPathComponent(fileName).path
+
+                    if let imageData = result.image.jpegData(compressionQuality: 0.9) {
+                        try? imageData.write(to: URL(fileURLWithPath: savedPath))
+                    }
+                    print("📝 PhotoEdit: Created new file at \(savedPath)")
+                }
+
+                // Create photo record and save to database
+                do {
+                    let imageData = result.image.jpegData(compressionQuality: 0.9)
+                    let photo = Photo(
+                        path: savedPath,
+                        categoryId: result.categoryId,
+                        fileSize: Int64(imageData?.count ?? 0),
+                        width: Int(result.image.size.width * result.image.scale),
+                        height: Int(result.image.size.height * result.image.scale)
+                    )
+
+                    // Save to repository
+                    let photoId = try await photoRepository.insertPhoto(photo)
+                    let savedPhoto = Photo(
+                        id: photoId,
+                        path: photo.path,
+                        categoryId: photo.categoryId,
+                        name: photo.name,
+                        isFromAssets: photo.isFromAssets,
+                        createdAt: photo.createdAt,
+                        fileSize: photo.fileSize,
+                        width: photo.width,
+                        height: photo.height
+                    )
+                    savedPhotos.append(savedPhoto)
+                    print("✅ PhotoEdit: Successfully inserted new photo with ID \(photoId), path: \(savedPath), categoryId: \(result.categoryId)")
+                } catch {
+                    print("❌ PhotoEdit: Failed to save new photo: \(error)")
                 }
             }
         }

@@ -1,12 +1,12 @@
-¶
-+com.smilepile.data.models.Category#getId()J
-__unknown_file ("0*≠
-0 (c
-a
+±
+3com.smilepile.data.entities.CategoryEntity#getId()J
+__unknown_file ("0*®
+0 (k
+i
  (
-fieldlong"__id*@
- (4*2$
-"com.smilepile.data.models.Category"
+fieldlong"__id*H
+ (<*:,
+*com.smilepile.data.entities.CategoryEntity"
 
 idlong]
 [
@@ -17,19 +17,31 @@ __annotate*
 java.lang.Object*
  (
 
-fieldlong=
-;
+fieldlong]
+[
+ (
+%1"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldlongQ
+O
  (
 fieldlong"__annotation*
  (
 
-%0"
+%0*
+ (
+
+%1"
  (
 
-fieldlongB&$
-"com.smilepile.data.models.CategoryH`∆
-,com.smilepile.data.models.Category#setId(J)V
-__unknown_file ("0*±
+fieldlongB.,
+*com.smilepile.data.entities.CategoryEntityH`—
+4com.smilepile.data.entities.CategoryEntity#setId(J)V
+__unknown_file ("0*¨
 0 (]
 [
  (
@@ -39,16 +51,28 @@ __annotate*
 java.lang.Object*
  (
 
-valuelong=
-;
+valuelong]
+[
+ (
+%1"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valuelongQ
+O
  (
 valuelong"__annotation*
  (
 
-%0c
-a
- (2$
-"com.smilepile.data.models.Category"
+%0*
+ (
+
+%1k
+i
+ (:,
+*com.smilepile.data.entities.CategoryEntity"
 
 idlong"__id*
  (
@@ -57,74 +81,16 @@ a
  (
 implicit return:
  (
-valuelongB&$
-"com.smilepile.data.models.CategoryH`˜
->com.smilepile.data.models.Category#getName()Ljava/lang/String;
-__unknown_file ("0*Î
-0 (}
-{
+valuelongB.,
+*com.smilepile.data.entities.CategoryEntityH`ü
+Mcom.smilepile.data.entities.CategoryEntity#getDisplayName()Ljava/lang/String;
+__unknown_file ("0*¸
+0 (ç
+ä
  (
-fieldjava.lang.String"__id*N
- (B*@$
-"com.smilepile.data.models.Category"
-namejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`ó
-?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V
-__unknown_file ("0*„
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0}
-{
- (@$
-"com.smilepile.data.models.Category"
-namejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`á
-Ecom.smilepile.data.models.Category#getDisplayName()Ljava/lang/String;
-__unknown_file ("0*Ù
-0 (Ö
-Ç
- (
-fieldjava.lang.String"__id*U
- (I*G$
-"com.smilepile.data.models.Category"
+fieldjava.lang.String"__id*]
+ (Q*O,
+*com.smilepile.data.entities.CategoryEntity"
 displayNamejava.lang.Stringi
 g
  (
@@ -143,10 +109,10 @@ G
 %0"'
  (
 
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`ß
-Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V
-__unknown_file ("0*Ï
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ø
+Ncom.smilepile.data.entities.CategoryEntity#setDisplayName(Ljava/lang/String;)V
+__unknown_file ("0*Ù
 0 (i
 g
  (
@@ -162,10 +128,10 @@ G
 valuejava.lang.String"__annotation*
  (
 
-%0Ö
-Ç
- (G$
-"com.smilepile.data.models.Category"
+%0ç
+ä
+ (O,
+*com.smilepile.data.entities.CategoryEntity"
 displayNamejava.lang.String"__id*'
  (
 
@@ -173,132 +139,16 @@ G
  (
 implicit return:%
  (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`≠
-1com.smilepile.data.models.Category#getPosition()I
-__unknown_file ("0*Æ
-0 (g
-e
- (
-fieldint"__id*E
- (9*7$
-"com.smilepile.data.models.Category"
-positionint\
-Z
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-fieldint<
-:
- (
-fieldint"__annotation*
- (
-
-%0"
- (
-
-fieldintB&$
-"com.smilepile.data.models.CategoryH`Õ
-2com.smilepile.data.models.Category#setPosition(I)V
-__unknown_file ("0*≥
-0 (\
-Z
- (
-%0"
-__annotate* 
- (
-java.lang.Object*
- (
-
-valueint<
-:
- (
-valueint"__annotation*
- (
-
-%0g
-e
- (7$
-"com.smilepile.data.models.Category"
-positionint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB&$
-"com.smilepile.data.models.CategoryH`â
-Fcom.smilepile.data.models.Category#getIconResource()Ljava/lang/String;
-__unknown_file ("0*ı
-0 (Ü
-É
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ô
+Jcom.smilepile.data.entities.CategoryEntity#getColorHex()Ljava/lang/String;
+__unknown_file ("0*˘
+0 (ä
+á
  (
-fieldjava.lang.String"__id*V
- (J*H$
-"com.smilepile.data.models.Category" 
-iconResourcejava.lang.Stringi
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-fieldjava.lang.StringI
-G
- (
-fieldjava.lang.String"__annotation*
- (
-
-%0"'
- (
-
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`©
-Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V
-__unknown_file ("0*Ì
-0 (i
-g
- (
-%0"
-__annotate* 
- (
-java.lang.Object*'
- (
-
-valuejava.lang.StringI
-G
- (
-valuejava.lang.String"__annotation*
- (
-
-%0Ü
-É
- (H$
-"com.smilepile.data.models.Category" 
-iconResourcejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`Ä
-Bcom.smilepile.data.models.Category#getColorHex()Ljava/lang/String;
-__unknown_file ("0*
-0 (Å
-
- (
-fieldjava.lang.String"__id*R
- (F*D$
-"com.smilepile.data.models.Category"
+fieldjava.lang.String"__id*Z
+ (N*L,
+*com.smilepile.data.entities.CategoryEntity"
 colorHexjava.lang.Stringi
 g
  (
@@ -317,10 +167,10 @@ G
 %0"'
  (
 
-fieldjava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`†
-Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V
-__unknown_file ("0*Ë
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`π
+Kcom.smilepile.data.entities.CategoryEntity#setColorHex(Ljava/lang/String;)V
+__unknown_file ("0*Ò
 0 (i
 g
  (
@@ -336,10 +186,10 @@ G
 valuejava.lang.String"__annotation*
  (
 
-%0Å
-
- (D$
-"com.smilepile.data.models.Category"
+%0ä
+á
+ (L,
+*com.smilepile.data.entities.CategoryEntity"
 colorHexjava.lang.String"__id*'
  (
 
@@ -347,16 +197,132 @@ G
  (
 implicit return:%
  (
-valuejava.lang.StringB&$
-"com.smilepile.data.models.CategoryH`¿
-/com.smilepile.data.models.Category#isDefault()Z
-__unknown_file ("0*√
-0 (p
-n
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`ô
+Jcom.smilepile.data.entities.CategoryEntity#getIconName()Ljava/lang/String;
+__unknown_file ("0*˘
+0 (ä
+á
+ (
+fieldjava.lang.String"__id*Z
+ (N*L,
+*com.smilepile.data.entities.CategoryEntity"
+iconNamejava.lang.Stringi
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+fieldjava.lang.StringI
+G
+ (
+fieldjava.lang.String"__annotation*
+ (
+
+%0"'
+ (
+
+fieldjava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`π
+Kcom.smilepile.data.entities.CategoryEntity#setIconName(Ljava/lang/String;)V
+__unknown_file ("0*Ò
+0 (i
+g
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*'
+ (
+
+valuejava.lang.StringI
+G
+ (
+valuejava.lang.String"__annotation*
+ (
+
+%0ä
+á
+ (L,
+*com.smilepile.data.entities.CategoryEntity"
+iconNamejava.lang.String"__id*'
+ (
+
+valuejava.lang.String"
+ (
+implicit return:%
+ (
+valuejava.lang.StringB.,
+*com.smilepile.data.entities.CategoryEntityH`≈
+9com.smilepile.data.entities.CategoryEntity#getPosition()I
+__unknown_file ("0*∂
+0 (o
+m
+ (
+fieldint"__id*M
+ (A*?,
+*com.smilepile.data.entities.CategoryEntity"
+positionint\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldint<
+:
+ (
+fieldint"__annotation*
+ (
+
+%0"
+ (
+
+fieldintB.,
+*com.smilepile.data.entities.CategoryEntityH`Â
+:com.smilepile.data.entities.CategoryEntity#setPosition(I)V
+__unknown_file ("0*ª
+0 (\
+Z
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueint<
+:
+ (
+valueint"__annotation*
+ (
+
+%0o
+m
+ (?,
+*com.smilepile.data.entities.CategoryEntity"
+positionint"__id*
+ (
+
+valueint"
+ (
+implicit return:
+ (
+valueintB.,
+*com.smilepile.data.entities.CategoryEntityH`ÿ
+7com.smilepile.data.entities.CategoryEntity#isDefault()Z
+__unknown_file ("0*À
+0 (x
+v
  (
-fieldboolean"__id*J
- (>*<$
-"com.smilepile.data.models.Category"
+fieldboolean"__id*R
+ (F*D,
+*com.smilepile.data.entities.CategoryEntity"
 	isDefaultboolean`
 ^
  (
@@ -375,10 +341,10 @@ __annotate*
 %0"
  (
 
-fieldbooleanB&$
-"com.smilepile.data.models.CategoryH`„
-3com.smilepile.data.models.Category#setIsDefault(Z)V
-__unknown_file ("0*ƒ
+fieldbooleanB.,
+*com.smilepile.data.entities.CategoryEntityH`˚
+;com.smilepile.data.entities.CategoryEntity#setIsDefault(Z)V
+__unknown_file ("0*Ã
 0 (`
 ^
  (
@@ -394,10 +360,10 @@ __annotate*
 valueboolean"__annotation*
  (
 
-%0p
-n
- (<$
-"com.smilepile.data.models.Category"
+%0x
+v
+ (D,
+*com.smilepile.data.entities.CategoryEntity"
 	isDefaultboolean"__id*
  (
 
@@ -405,16 +371,16 @@ n
  (
 implicit return:
  (
-valuebooleanB&$
-"com.smilepile.data.models.CategoryH`¥
-2com.smilepile.data.models.Category#getCreatedAt()J
-__unknown_file ("0*¥
-0 (j
-h
+valuebooleanB.,
+*com.smilepile.data.entities.CategoryEntityH`Ã
+:com.smilepile.data.entities.CategoryEntity#getCreatedAt()J
+__unknown_file ("0*º
+0 (r
+p
  (
-fieldlong"__id*G
- (;*9$
-"com.smilepile.data.models.Category"
+fieldlong"__id*O
+ (C*A,
+*com.smilepile.data.entities.CategoryEntity"
 	createdAtlong]
 [
  (
@@ -433,10 +399,10 @@ __annotate*
 %0"
  (
 
-fieldlongB&$
-"com.smilepile.data.models.CategoryH`‘
-3com.smilepile.data.models.Category#setCreatedAt(J)V
-__unknown_file ("0*∏
+fieldlongB.,
+*com.smilepile.data.entities.CategoryEntityH`Ï
+;com.smilepile.data.entities.CategoryEntity#setCreatedAt(J)V
+__unknown_file ("0*¿
 0 (]
 [
  (
@@ -452,10 +418,10 @@ __annotate*
 valuelong"__annotation*
  (
 
-%0j
-h
- (9$
-"com.smilepile.data.models.Category"
+%0r
+p
+ (A,
+*com.smilepile.data.entities.CategoryEntity"
 	createdAtlong"__id*
  (
 
@@ -463,13 +429,13 @@ h
  (
 implicit return:
  (
-valuelongB&$
-"com.smilepile.data.models.CategoryH`» 
-xcom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)Vd
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt ("0*ó
-0 '(z
+valuelongB.,
+*com.smilepile.data.entities.CategoryEntityH`ÿ
+ncom.smilepile.data.entities.CategoryEntity#<init>(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)Vl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/entities/CategoryEntity.kt ("0*À
+0 "(z
 x
- (
+ (
 %0"
 __annotate*0
 
@@ -479,35 +445,33 @@ __annotate*0
 __unknown_file (
 
 
-idlongJ
-H
- (
+idlongz
+x
+ (
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*(
+
+__unknown_file (
+
+
+idlongn
+l
+ (
 
 idlong"__annotation*"
 
 __unknown_file (
 
-%0â
-Ü
- (
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*6
-
-__unknown_file (
-
-namejava.lang.StringX
-V
- (
-namejava.lang.String"__annotation*"
+%0*"
 
 __unknown_file (
 
 %1ê
 ç
- (
+ (
 %2"
 __annotate*0
 
@@ -518,51 +482,15 @@ __annotate*0
 
 displayNamejava.lang.String_
 ]
- (
+ (
 displayNamejava.lang.String"__annotation*"
 
 __unknown_file (
 
-%2
-}
- (
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*-
-
-__unknown_file (
-
-positionintO
-M
- (
-positionint"__annotation*"
-
-__unknown_file (
-
-%3ë
-é
- ($
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*>
-
-__unknown_file ("
- 
-iconResourcejava.lang.String`
-^
- ($ 
-iconResourcejava.lang.String"__annotation*"
-
-__unknown_file (
-
-%4ç
+%2ç
 ä
-  ( 
-%5"
+ (
+%3"
 __annotate*0
 
 __unknown_file (
@@ -572,14 +500,50 @@ __annotate*0
 
 colorHexjava.lang.String\
 Z
-  ( 
+ (
 colorHexjava.lang.String"__annotation*"
+
+__unknown_file (
+
+%3ç
+ä
+ ( 
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+iconNamejava.lang.String\
+Z
+ ( 
+iconNamejava.lang.String"__annotation*"
+
+__unknown_file (
+
+%4
+}
+ (
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*-
+
+__unknown_file (
+
+positionintO
+M
+ (
+positionint"__annotation*"
 
 __unknown_file (
 
 %5Ö
 Ç
-" #("
+ ("
 %6"
 __annotate*0
 
@@ -590,14 +554,14 @@ __annotate*0
 
 	isDefaultbooleanT
 R
-" #("
+ ("
 	isDefaultboolean"__annotation*"
 
 __unknown_file (
 
 %6Å
 
-% &(4
+  !(4
 %7"
 __annotate*0
 
@@ -608,91 +572,81 @@ __annotate*0
 
 	createdAtlongQ
 O
-% &(4
+  !(4
 	createdAtlong"__annotation*"
 
 __unknown_file (
 
-%7µ
-≤
- (
+%7≈
+¬
+ (
 
-%8long",com.smilepile.data.models.Category#setId(J)V*B
+%8long"4com.smilepile.data.entities.CategoryEntity#setId(J)V*J
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*(
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*(
 
 __unknown_file (
 
 
-idlong‚
-ﬂ
- (
-%9java.lang.String"?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V*B
+idlongÄ
+˝
+ (
+%9java.lang.String"Ncom.smilepile.data.entities.CategoryEntity#setDisplayName(Ljava/lang/String;)V*J
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*6
-
-__unknown_file (
-
-namejava.lang.StringÒ
-Ó
- (
-%10java.lang.String"Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*=
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*=
 
 __unknown_file (!
 
-displayNamejava.lang.String¿
-Ω
- (
-
-%11int"2com.smilepile.data.models.Category#setPosition(I)V*B
+displayNamejava.lang.String˚
+¯
+ (
+%10java.lang.String"Kcom.smilepile.data.entities.CategoryEntity#setColorHex(Ljava/lang/String;)V*J
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*-
-
-__unknown_file (
-
-positionintÛ
-
- ($
-%12java.lang.String"Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*>
-
-__unknown_file ("
- 
-iconResourcejava.lang.StringÎ
-Ë
-  ( 
-%13java.lang.String"Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V*B
-
-__unknown_file (&$
-"com.smilepile.data.models.Category*:
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*:
 
 __unknown_file (
 
-colorHexjava.lang.String 
-«
-" #("
-%14boolean"3com.smilepile.data.models.Category#setIsDefault(Z)V*B
+colorHexjava.lang.String˚
+¯
+ ( 
+%11java.lang.String"Kcom.smilepile.data.entities.CategoryEntity#setIconName(Ljava/lang/String;)V*J
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*2
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*:
+
+__unknown_file (
+
+iconNamejava.lang.String–
+Õ
+ (
+
+%12int":com.smilepile.data.entities.CategoryEntity#setPosition(I)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*-
+
+__unknown_file (
+
+positionint⁄
+◊
+ ("
+%13boolean";com.smilepile.data.entities.CategoryEntity#setIsDefault(Z)V*J
+
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*2
 
 __unknown_file (
 
-	isDefaultbooleanƒ
-¡
-% &(4
-%15long"3com.smilepile.data.models.Category#setCreatedAt(J)V*B
+	isDefaultboolean‘
+—
+  !(4
+%14long";com.smilepile.data.entities.CategoryEntity#setCreatedAt(J)V*J
 
-__unknown_file (&$
-"com.smilepile.data.models.Category*/
+__unknown_file (.,
+*com.smilepile.data.entities.CategoryEntity*/
 
 __unknown_file (
 
@@ -700,27 +654,19 @@ O
 
 __unknown_file (
 implicit return:
- (
+ (
 
-idlong:$
- (
-namejava.lang.String:+
- (
-displayNamejava.lang.String:
- (
-positionint:,
- ($ 
-iconResourcejava.lang.String:(
-  ( 
-colorHexjava.lang.String: 
-" #("
+idlong:+
+ (
+displayNamejava.lang.String:(
+ (
+colorHexjava.lang.String:(
+ ( 
+iconNamejava.lang.String:
+ (
+positionint: 
+ ("
 	isDefaultboolean:
-% &(4
-	createdAtlongB&$
-"com.smilepile.data.models.CategoryHú
-Scom.smilepile.data.models.Category$Companion#getDefaultCategories()Ljava/util/List;d
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt* *( "0*(
-0*  *(""
-*5 K(	
-	<unknown>B0".
-,com.smilepile.data.models.Category$CompanionH
+  !(4
+	createdAtlongB.,
+*com.smilepile.data.entities.CategoryEntityH

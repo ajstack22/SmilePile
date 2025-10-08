@@ -30,7 +30,8 @@ import javax.inject.Inject
 class PhotoImportViewModel @Inject constructor(
     private val photoRepository: PhotoRepository,
     private val storageManager: StorageManager,
-    private val photoImportManager: PhotoImportManager
+    private val photoImportManager: PhotoImportManager,
+    private val savedStateHandle: androidx.lifecycle.SavedStateHandle
 ) : ViewModel() {
 
     companion object {
@@ -40,7 +41,12 @@ class PhotoImportViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(PhotoImportUiState())
     val uiState: StateFlow<PhotoImportUiState> = _uiState.asStateFlow()
 
-    private var pendingCategoryId: Long = 1L // Default category for editor
+    // Use SavedStateHandle to persist category ID across ViewModel recreation
+    private var _pendingCategoryId: Long
+        get() = savedStateHandle.get<Long>("pendingCategoryId") ?: 1L
+        set(value) {
+            savedStateHandle.set("pendingCategoryId", value)
+        }
 
     /**
      * Import a single photo from the device gallery using enhanced PhotoImportManager
@@ -155,13 +161,18 @@ class PhotoImportViewModel @Inject constructor(
      * Set the category ID for photos being imported through the editor
      */
     fun setPendingCategoryId(categoryId: Long) {
-        pendingCategoryId = categoryId
+        Log.d(TAG, "setPendingCategoryId called with: $categoryId")
+        _pendingCategoryId = categoryId
+        Log.d(TAG, "pendingCategoryId now set to: $_pendingCategoryId")
     }
 
     /**
      * Get the pending category ID for the editor
      */
-    fun getPendingCategoryId(): Long = pendingCategoryId
+    fun getPendingCategoryId(): Long {
+        Log.d(TAG, "getPendingCategoryId called, returning: $_pendingCategoryId")
+        return _pendingCategoryId
+    }
 
     /**
      * Reset import state

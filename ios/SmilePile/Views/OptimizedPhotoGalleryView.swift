@@ -276,20 +276,29 @@ struct OptimizedPhotoGalleryView: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        // Category chips - a category must always be selected
                         ForEach(categories) { category in
-                    CategoryChip(
-                        displayName: category.displayName,
-                        colorHex: category.colorHex ?? "#4CAF50",
-                        isSelected: viewModel.selectedCategory?.id == category.id,
-                        onTap: {
-                            logger.info("Category tapped: \(category.displayName, privacy: .public)")
-                            viewModel.selectedCategory = category
-                            logger.info("Selected category is now: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                            CategoryChip(
+                                displayName: category.displayName,
+                                colorHex: category.colorHex ?? "#4CAF50",
+                                isSelected: viewModel.selectedCategory?.id == category.id,
+                                onTap: {
+                                    logger.info("Category tapped: \(category.displayName, privacy: .public)")
+                                    viewModel.selectedCategory = category
+                                    logger.info("Selected category is now: \(viewModel.selectedCategory?.displayName ?? "None", privacy: .public)")
+                                }
+                            )
                         }
+
+                        // "All" chip at the end (matches Android implementation)
+                        AllPhotosChip(
+                            isSelected: viewModel.selectedCategory == nil,
+                            onTap: {
+                                logger.info("All photos tapped")
+                                viewModel.selectedCategory = nil
+                                logger.info("Selected category is now: None (showing all)")
+                            }
                         )
                     }
-                }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                 }
@@ -417,11 +426,9 @@ struct OptimizedPhotoGalleryView: View {
     private func handleAddPhotosButtonTap() {
         logAddPhotosAttempt()
 
-        if viewModel.selectedCategory == nil {
-            showCategorySelection()
-        } else {
-            proceedWithPhotoSelection()
-        }
+        // Always show category selection dialog (matches Android behavior)
+        // This ensures users explicitly choose which category to add photos to
+        showCategorySelection()
     }
 
     private func logAddPhotosAttempt() {

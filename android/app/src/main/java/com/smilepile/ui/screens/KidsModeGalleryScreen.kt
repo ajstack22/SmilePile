@@ -148,7 +148,9 @@ fun KidsModeGalleryScreen(
         // Category filter chips at top - floating bar
         if (categories.isNotEmpty()) {
             Surface(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .statusBarsPadding(), // Push content below status bar/notch
                 shadowElevation = 8.dp,
                 color = MaterialTheme.colorScheme.surface
             ) {

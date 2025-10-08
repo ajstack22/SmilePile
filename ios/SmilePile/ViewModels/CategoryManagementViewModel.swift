@@ -228,6 +228,39 @@ class CategoryManagementViewModel: ObservableObject {
         categoryToDelete = nil
     }
 
+    func moveCategory(from source: IndexSet, to destination: Int) {
+        Task { @MainActor in
+            var mutableCategories = categoriesWithCounts
+            mutableCategories.move(fromOffsets: source, toOffset: destination)
+
+            // Update positions and save to repository
+            for (index, categoryWithCount) in mutableCategories.enumerated() {
+                let category = categoryWithCount.category
+                let updatedCategory = Category(
+                    id: category.id,
+                    name: category.name,
+                    displayName: category.displayName,
+                    position: index,
+                    colorHex: category.colorHex,
+                    isDefault: category.isDefault,
+                    createdAt: category.createdAt
+                )
+
+                do {
+                    try await repository.updateCategory(updatedCategory)
+                } catch {
+                    errorMessage = "Failed to reorder categories: \(error.localizedDescription)"
+                    // Reload to restore correct order
+                    loadCategoriesWithCounts()
+                    return
+                }
+            }
+
+            // Update local state
+            categoriesWithCounts = mutableCategories
+        }
+    }
+
     var hasPulseFAB: Bool {
         categoriesWithCounts.isEmpty
     }

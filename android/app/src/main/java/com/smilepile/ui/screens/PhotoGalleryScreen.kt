@@ -84,7 +84,7 @@ import com.smilepile.utils.PermissionRationale
 fun PhotoGalleryScreen(
     onPhotoClick: (Photo, List<Photo>) -> Unit,
     onNavigateToPhotoEditor: (List<String>) -> Unit = {},
-    onNavigateToPhotoEditorWithUris: (List<android.net.Uri>) -> Unit = {},
+    onNavigateToPhotoEditorWithUris: (List<android.net.Uri>, Long) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(0.dp)
 ) {

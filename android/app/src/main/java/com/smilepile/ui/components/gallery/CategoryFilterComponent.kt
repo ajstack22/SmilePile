@@ -6,16 +6,18 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -24,15 +26,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.smilepile.data.models.Category
 import com.smilepile.ui.components.CategoryColorIndicator
+import kotlin.math.roundToInt
 
 /**
  * "All Photos" chip for showing all photos without category filter
@@ -208,28 +220,36 @@ fun CategoryFilterComponent(
     onCategorySelected: (Long?) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(8.dp)
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(8.dp),
+    showAllChip: Boolean = true
 ) {
     LazyRow(
         modifier = modifier,
         horizontalArrangement = horizontalArrangement,
         contentPadding = contentPadding
     ) {
-        // "All" filter chip
-        item {
-            AllPhotosChip(
-                isSelected = selectedCategoryId == null,
-                onClick = { onCategorySelected(null) }
-            )
-        }
-
         // Category filter chips
-        items(categories) { category ->
+        itemsIndexed(
+            items = categories,
+            key = { _, category -> category.id }
+        ) { index, category ->
             CategoryChip(
                 category = category,
                 isSelected = selectedCategoryId == category.id,
-                onClick = { onCategorySelected(category.id) }
+                onClick = {
+                    onCategorySelected(category.id)
+                }
             )
+        }
+
+        // "All" filter chip at the end (hidden in Kids Mode)
+        if (showAllChip) {
+            item {
+                AllPhotosChip(
+                    isSelected = selectedCategoryId == null,
+                    onClick = { onCategorySelected(null) }
+                )
+            }
         }
     }
 }
@@ -257,6 +277,7 @@ fun CategoryFilterComponentKidsMode(
         },
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        showAllChip = false  // Hide "All" chip in Kids Mode
     )
 }

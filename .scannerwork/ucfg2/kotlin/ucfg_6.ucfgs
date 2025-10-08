@@ -1,118 +1,177 @@
-ª
-ccom.smilepile.ui.components.editor#CropOverlay(FFLkotlin/jvm/functions/Function1;LModifier;LRect;)Vp
-f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/components/editor/CropOverlay.kt ("0*÷
-
-0 (Ñ
-Å
-   (
-%0"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*1
-
-__unknown_file (
-
-
-imageWidthfloatS
-Q
-   (
-
-imageWidthfloat"__annotation*"
-
-__unknown_file (
-
-%0Ö
-Ç
-! !(
-%1"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*2
-
-__unknown_file (
-
-imageHeightfloatT
-R
-! !(
-imageHeightfloat"__annotation*"
-
-__unknown_file (
-
-%1£
-†
-" "($
-%2"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*P
-
-__unknown_file (4
-2
-onCropRectChangekotlin.jvm.functions.Function1r
-p
-" "($2
-onCropRectChangekotlin.jvm.functions.Function1"__annotation*"
-
-__unknown_file (
-
-%2ç
-ä
-# #(!
-%3"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*:
-
-__unknown_file (
-
-modifierjava.lang.Object\
-Z
-# #(!
-modifierjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%3î
-ë
-$ $(!
-%4"
-__annotate*0
-
-__unknown_file (
-java.lang.Object*A
-
-__unknown_file (%
-#
-initialCropRectjava.lang.Objectc
-a
-$ $(!#
-initialCropRectjava.lang.Object"__annotation*"
-
-__unknown_file (
-
-%4Z
-X
-& &(&
-densityjava.lang.Object"__id*)
-& &(&
-
-currentjava.lang.Object"/
-
-__unknown_file (
-implicit return:
-   (
-
-imageWidthfloat: 
-! !(
-imageHeightfloat:>
-" "($2
-onCropRectChangekotlin.jvm.functions.Function1:(
-# #(!
-modifierjava.lang.Object:/
-$ $(!#
-initialCropRectjava.lang.ObjectB&"$
-"com.smilepile.ui.components.editorH
+·
+acom.smilepile.performance.PerformanceOptimizer#createOptimizedImageLoader(LContext;)LImageLoader;p
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/performance/PerformanceOptimizer.kt (""0*(
+0 ("
+ !(
+	<unknown>:'
+# (3
+contextjava.lang.ObjectB20
+.com.smilepile.performance.PerformanceOptimizerH£
+Vcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getTHUMBNAIL_SIZE()I
+__unknown_file ("0*‡
+0 (ß
+§
+ (
+fieldjava.lang.Object"__id*w
+ (k*iC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig""
+THUMBNAIL_SIZEjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`√
+Wcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setTHUMBNAIL_SIZE(I)V
+__unknown_file ("0*ÿ
+0 (ß
+§
+ (iC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig""
+THUMBNAIL_SIZEjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`•
+Wcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getFULL_IMAGE_SIZE()I
+__unknown_file ("0*·
+0 (®
+•
+ (
+fieldjava.lang.Object"__id*x
+ (l*jC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"#
+FULL_IMAGE_SIZEjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`≈
+Xcom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setFULL_IMAGE_SIZE(I)V
+__unknown_file ("0*Ÿ
+0 (®
+•
+ (jC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"#
+FULL_IMAGE_SIZEjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`≠
+[com.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#getCACHE_DURATION_DAYS()I
+__unknown_file ("0*Â
+0 (¨
+©
+ (
+fieldjava.lang.Object"__id*|
+ (p*nC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"'
+CACHE_DURATION_DAYSjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`Õ
+\com.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig#setCACHE_DURATION_DAYS(I)V
+__unknown_file ("0*›
+0 (¨
+©
+ (nC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfig"'
+CACHE_DURATION_DAYSjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectBEC
+Acom.smilepile.performance.PerformanceOptimizer$ImageLoadingConfigH`ë
+Qcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_IMAGE_LOADING()Z
+__unknown_file ("0*€
+0 (¢
+ü
+ (
+fieldjava.lang.Object"__id*r
+ (f*d;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"%
+LOG_IMAGE_LOADINGjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`±
+Rcom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_IMAGE_LOADING(Z)V
+__unknown_file ("0*”
+0 (¢
+ü
+ (d;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"%
+LOG_IMAGE_LOADINGjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`ó
+Tcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_DATABASE_QUERIES()Z
+__unknown_file ("0*ﬁ
+0 (•
+¢
+ (
+fieldjava.lang.Object"__id*u
+ (i*g;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"(
+LOG_DATABASE_QUERIESjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`∑
+Ucom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_DATABASE_QUERIES(Z)V
+__unknown_file ("0*÷
+0 (•
+¢
+ (g;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"(
+LOG_DATABASE_QUERIESjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`è
+Pcom.smilepile.performance.PerformanceOptimizer$Monitoring#getLOG_MEMORY_USAGE()Z
+__unknown_file ("0*⁄
+0 (°
+û
+ (
+fieldjava.lang.Object"__id*q
+ (e*c;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"$
+LOG_MEMORY_USAGEjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`Ø
+Qcom.smilepile.performance.PerformanceOptimizer$Monitoring#setLOG_MEMORY_USAGE(Z)V
+__unknown_file ("0*“
+0 (°
+û
+ (c;
+9com.smilepile.performance.PerformanceOptimizer$Monitoring"$
+LOG_MEMORY_USAGEjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB=;
+9com.smilepile.performance.PerformanceOptimizer$MonitoringH`

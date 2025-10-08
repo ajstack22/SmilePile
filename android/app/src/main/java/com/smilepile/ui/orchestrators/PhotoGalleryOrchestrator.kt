@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import com.smilepile.data.models.Category
 import com.smilepile.data.models.Photo
 import com.smilepile.mode.AppMode
 import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
@@ -48,7 +49,7 @@ import com.smilepile.utils.PermissionHandler
 fun PhotoGalleryOrchestrator(
     onPhotoClick: (Photo, List<Photo>) -> Unit,
     onNavigateToPhotoEditor: (List<String>) -> Unit = {},
-    onNavigateToPhotoEditorWithUris: (List<Uri>) -> Unit = {},
+    onNavigateToPhotoEditorWithUris: (List<Uri>, Long) -> Unit = { _, _ -> },
     snackbarHostState: SnackbarHostState,
     galleryViewModel: PhotoGalleryViewModel = hiltViewModel(),
     importViewModel: PhotoImportViewModel = hiltViewModel(),
@@ -90,7 +91,7 @@ fun PhotoGalleryOrchestrator(
                 if (categoryId > 0) {
                     // CRITICAL: Set category ID BEFORE navigation so it's available during initialization
                     importViewModel.setPendingCategoryId(categoryId)
-                    onNavigateToPhotoEditorWithUris(listOf(uri))
+                    onNavigateToPhotoEditorWithUris(listOf(uri), categoryId)
                 } else {
                     android.util.Log.e("PhotoGalleryOrchestrator", "Invalid categoryId for single photo: $categoryId")
                     coroutineScope.launch {
@@ -115,7 +116,7 @@ fun PhotoGalleryOrchestrator(
                 if (categoryId > 0) {
                     // CRITICAL: Set category ID BEFORE navigation so it's available during initialization
                     importViewModel.setPendingCategoryId(categoryId)
-                    onNavigateToPhotoEditorWithUris(uris)
+                    onNavigateToPhotoEditorWithUris(uris, categoryId)
                 } else {
                     android.util.Log.e("PhotoGalleryOrchestrator", "Invalid categoryId for multiple photos: $categoryId")
                     coroutineScope.launch {
@@ -228,7 +229,6 @@ fun PhotoGalleryOrchestrator(
         // Category operations
         onCategorySelected = galleryViewModel::selectCategory,
 
-
         // Import operations
         onImportSinglePhoto = {
             showImportOptions = false
@@ -315,8 +315,8 @@ fun PhotoGalleryOrchestrator(
                 },
                 onRequestPermission = { storagePermission.launchPermissionRequest() },
                 onNavigateWithUris = { uris ->
-                    onNavigateToPhotoEditorWithUris(uris)
                     importViewModel.setPendingCategoryId(categoryId)
+                    onNavigateToPhotoEditorWithUris(uris, categoryId)
                     pendingImportUris = null
                 }
             )
@@ -367,7 +367,6 @@ data class PhotoGalleryOrchestratorState(
 
     // Category operations
     val onCategorySelected: (Long?) -> Unit,
-
 
     // Import operations
     val onImportSinglePhoto: () -> Unit,

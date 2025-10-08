@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLog
 import java.util.UUID
 
@@ -24,6 +25,7 @@ import java.util.UUID
  */
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [33])
 class PhotoRepositoryImplTest {
 
     private lateinit var photoDao: PhotoDao

@@ -282,7 +282,6 @@ struct KidsModeView: View {
 // MARK: - Parent Mode View
 struct ParentModeView: View {
     @State private var selectedTab = 0
-    @AppStorage("useOptimizedGallery") private var useOptimizedGallery = true
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
     @EnvironmentObject var settingsManager: SettingsManager
 
@@ -292,11 +291,7 @@ struct ParentModeView: View {
             Group {
                 switch selectedTab {
                 case 0:
-                    if useOptimizedGallery {
-                        OptimizedPhotoGalleryView()
-                    } else {
-                        PhotoGalleryView()
-                    }
+                    OptimizedPhotoGalleryView()
                 case 1:
                     CategoryManagementView()
                 case 2:

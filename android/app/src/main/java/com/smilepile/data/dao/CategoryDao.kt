@@ -53,9 +53,9 @@ interface CategoryDao {
 
     /**
      * Get all categories from the database as a reactive Flow
-     * @return Flow of list of all categories, ordered by creation time ascending
+     * @return Flow of list of all categories, ordered by position ascending
      */
-    @Query("SELECT * FROM category_entities ORDER BY created_at ASC")
+    @Query("SELECT * FROM category_entities ORDER BY position ASC")
     fun getAll(): Flow<List<CategoryEntity>>
 
     /**

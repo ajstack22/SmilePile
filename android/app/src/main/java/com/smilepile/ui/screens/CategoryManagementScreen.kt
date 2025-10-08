@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -22,9 +23,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.util.VelocityTracker
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -128,16 +134,27 @@ fun CategoryManagementScreen(
                     }
                 }
             } else {
-                // Category list
+                // Category list with drag-to-reorder
+                var draggedItem by remember { mutableStateOf<com.smilepile.ui.viewmodels.CategoryWithCount?>(null) }
+                var draggedOverItem by remember { mutableStateOf<com.smilepile.ui.viewmodels.CategoryWithCount?>(null) }
+                var dragOffset by remember { mutableStateOf(0f) }
+                val listState = rememberLazyListState()
+                val density = LocalDensity.current
+                val itemHeightPx = with(density) { 88.dp.toPx() }
+
                 LazyColumn(
+                    state = listState,
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    itemsIndexed(
+                    items(
                         items = categories,
-                        key = { _, item -> item.category.id }
-                    ) { index, categoryWithCount ->
+                        key = { it.category.id }
+                    ) { categoryWithCount ->
+                        val isDragging = draggedItem?.category?.id == categoryWithCount.category.id
+                        val isDraggedOver = draggedOverItem?.category?.id == categoryWithCount.category.id
+
                         CategoryManagementItem(
                             categoryWithCount = categoryWithCount,
                             onEdit = {
@@ -146,6 +163,47 @@ fun CategoryManagementScreen(
                             },
                             onDelete = {
                                 showDeleteDialog = categoryWithCount.category
+                            },
+                            isDragging = isDragging,
+                            isDraggedOver = isDraggedOver,
+                            onDragStart = {
+                                draggedItem = categoryWithCount
+                                dragOffset = 0f
+                            },
+                            onDrag = { delta ->
+                                if (draggedItem != null) {
+                                    dragOffset += delta.y
+
+                                    // Calculate which item we're hovering over based on drag offset
+                                    val draggedIndex = categories.indexOfFirst { it.category.id == draggedItem!!.category.id }
+                                    if (draggedIndex != -1) {
+                                        // Each item is approximately 88dp (card height + spacing)
+                                        val offsetInItems = (dragOffset / itemHeightPx).toInt()
+                                        val targetIndex = (draggedIndex + offsetInItems).coerceIn(0, categories.size - 1)
+
+                                        if (targetIndex != draggedIndex) {
+                                            draggedOverItem = categories[targetIndex]
+                                        } else {
+                                            draggedOverItem = null
+                                        }
+                                    }
+                                }
+                            },
+                            onDragEnd = {
+                                if (draggedItem != null && draggedOverItem != null && draggedItem != draggedOverItem) {
+                                    val fromIndex = categories.indexOfFirst { it.category.id == draggedItem!!.category.id }
+                                    val toIndex = categories.indexOfFirst { it.category.id == draggedOverItem!!.category.id }
+
+                                    if (fromIndex != -1 && toIndex != -1) {
+                                        val reordered = categories.toMutableList()
+                                        val item = reordered.removeAt(fromIndex)
+                                        reordered.add(toIndex, item)
+                                        viewModel.reorderCategories(reordered.map { it.category })
+                                    }
+                                }
+                                draggedItem = null
+                                draggedOverItem = null
+                                dragOffset = 0f
                             }
                         )
                     }
@@ -218,7 +276,13 @@ fun CategoryManagementScreen(
 fun CategoryManagementItem(
     categoryWithCount: com.smilepile.ui.viewmodels.CategoryWithCount,
     onEdit: () -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    isDragging: Boolean = false,
+    isDraggedOver: Boolean = false,
+    onDragStart: () -> Unit = {},
+    onDrag: (androidx.compose.ui.geometry.Offset) -> Unit = {},
+    onDragEnd: () -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     val category = categoryWithCount.category
     val photoCount = categoryWithCount.photoCount
@@ -232,12 +296,31 @@ fun CategoryManagementItem(
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .graphicsLayer(
+                alpha = if (isDragging) 0.5f else 1f,
+                scaleX = if (isDragging) 1.05f else 1f,
+                scaleY = if (isDragging) 1.05f else 1f
+            )
+            .pointerInput(Unit) {
+                detectDragGesturesAfterLongPress(
+                    onDragStart = { onDragStart() },
+                    onDrag = { _, dragAmount -> onDrag(dragAmount) },
+                    onDragEnd = { onDragEnd() },
+                    onDragCancel = { onDragEnd() }
+                )
+            },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = if (isDraggedOver)
+                MaterialTheme.colorScheme.surfaceVariant
+            else
+                MaterialTheme.colorScheme.surface
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = if (isDragging) 8.dp else 2.dp
+        )
     ) {
         Row(
             modifier = Modifier
@@ -245,6 +328,16 @@ fun CategoryManagementItem(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Drag handle
+            Icon(
+                imageVector = Icons.Default.DragHandle,
+                contentDescription = "Drag to reorder",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.size(24.dp)
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
             // Category color
             Box(
                 modifier = Modifier

@@ -63,7 +63,9 @@ class PhotoEditViewModel @Inject constructor(
         photoPaths: List<String>? = null,
         categoryId: Long = 1L
     ) {
+        android.util.Log.d("PhotoEditViewModel", "initializeEditor called with categoryId: $categoryId")
         pendingCategoryId = categoryId
+        android.util.Log.d("PhotoEditViewModel", "pendingCategoryId set to: $pendingCategoryId")
         editMode = if (photoUris != null) EditMode.IMPORT else EditMode.GALLERY
         viewModelScope.launch {
             val editQueue = mutableListOf<PhotoEditItem>()
@@ -518,6 +520,7 @@ class PhotoEditViewModel @Inject constructor(
     }
 
     private fun createPhotoEntity(filename: String, path: String, width: Int, height: Int, fileSize: Long): Photo {
+        android.util.Log.d("PhotoEditViewModel", "createPhotoEntity called - using pendingCategoryId: $pendingCategoryId")
         return Photo(
             id = 0,
             name = filename,
