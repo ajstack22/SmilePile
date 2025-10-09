@@ -73,6 +73,13 @@ struct ContentView: View {
         .onAppear {
             checkFirstLaunch()
         }
+        .onChange(of: settingsManager.onboardingCompleted) { completed in
+            // If onboarding flag is cleared (e.g., after Clear All Data), show onboarding
+            if !completed {
+                print("🔄 onboardingCompleted changed to false - triggering onboarding check")
+                checkFirstLaunch()
+            }
+        }
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView()
         }
