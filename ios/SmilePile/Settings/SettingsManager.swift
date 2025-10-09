@@ -462,19 +462,76 @@ class SettingsManager: ObservableObject {
     }
 
     func resetToDefaults() {
-        // Get the registered defaults
-        registerDefaults()
+        // DO NOT use removePersistentDomain - causes freeze/crash with @AppStorage on iOS 18
+        // Instead, manually set each property to its default value
 
-        // Remove all stored values to revert to defaults
-        let domain = Bundle.main.bundleIdentifier!
-        userDefaults.removePersistentDomain(forName: domain)
-        userDefaults.synchronize()
+        // App State (match defaults in registerDefaults)
+        kidsModeEnabled = true
+        kidsModePINEnabled = false
+        firstLaunch = true
+        onboardingCompleted = false
+        appVersion = 0
+        migrationVersion = 0
 
-        // Re-register defaults
-        registerDefaults()
+        // Gallery
+        gridSize = 3
+        showHiddenPhotos = false
+        showPhotoDates = true
+        sortOrder = .dateNewest
+
+        // Theme
+        themeMode = .system
+        dynamicColorsEnabled = true
+        accentColor = .blue
+
+        // Photo Quality
+        uploadQuality = .high
+        thumbnailQuality = .medium
+        autoOptimizeStorage = false
+
+        // Backup
+        autoBackupEnabled = false
+        backupWifiOnly = true
+        backupFrequency = .daily
+        iCloudBackupEnabled = false
+        lastBackupTime = nil
+
+        // Import/Export
+        defaultCategory = nil
+        autoCategorizeImports = false
+        preserveMetadata = true
+
+        // Notifications
+        notificationsEnabled = true
+        backupNotifications = true
+        memoryNotifications = false
+
+        // Security
+        biometricEnabled = false
+        appLockEnabled = false
+        lockTimeoutMinutes = 5
+        faceIDEnabled = false
+        touchIDEnabled = false
+
+        // Performance
+        cacheSizeMB = 100
+        preloadAdjacentImages = true
+        animationSpeed = 1.0
+        lowPowerModeOptimization = true
+
+        // iOS Specific
+        hapticFeedbackEnabled = true
+        swipeGesturesEnabled = true
+        photoLibraryPermissionGranted = false
+
+        // Clear review prompt
+        lastReviewPrompt = nil
 
         // Clear secure storage
         try? PINManager.shared.clearPIN()
+
+        // Synchronize
+        userDefaults.synchronize()
 
         // Notify observers
         objectWillChange.send()

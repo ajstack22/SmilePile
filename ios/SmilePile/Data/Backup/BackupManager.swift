@@ -377,28 +377,12 @@ class BackupManager {
             try await photoRepository.deletePhoto(photo)
         }
 
-        // 4. Clear UserDefaults (selective removal to avoid iOS freeze)
-        // Remove only app-specific keys, not the entire domain
-        let keysToRemove = [
-            "theme_mode",
-            "onboarding_completed",
-            "kids_mode_enabled",
-            "selected_category_filter"
-        ]
-        for key in keysToRemove {
-            UserDefaults.standard.removeObject(forKey: key)
-        }
-        UserDefaults.standard.synchronize()
-
-        // 5. Clear PIN using PINManager
-        try? PINManager.shared.clearPIN()
-
-        // 6. Reset SettingsManager flags
+        // 4. Reset all settings to defaults (includes PIN clearing)
+        // This properly sets all @AppStorage properties to default values
+        // instead of removing keys, which prevents iOS 18 freeze/crash
         settingsManager.resetToDefaults()
-        settingsManager.onboardingCompleted = false
 
-        // 7. Clear keychain data if it has deleteAll
-        // Note: KeychainManager may not have deleteAll, so we'll just clear known keys
+        // 5. Clear keychain data
         try? keychainManager.delete(for: "pin")
         try? keychainManager.delete(for: "biometric_enabled")
     }
