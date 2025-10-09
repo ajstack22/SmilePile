@@ -14,6 +14,7 @@ struct SettingsViewCustom: View {
 
     // Clear All Data state
     @State private var showClearConfirmation = false
+    @State private var showClearPINValidation = false
     @State private var isClearing = false
     @State private var clearError: String?
     @State private var showErrorAlert = false
@@ -132,8 +133,14 @@ struct SettingsViewCustom: View {
                                         return
                                     }
 
-                                    // Show confirmation dialog directly (no biometric auth needed)
-                                    showClearConfirmation = true
+                                    // Require PIN authentication if PIN is set
+                                    if securityViewModel.hasPIN {
+                                        // Show PIN validation sheet
+                                        showClearPINValidation = true
+                                    } else {
+                                        // No PIN set, show confirmation directly
+                                        showClearConfirmation = true
+                                    }
                                 }
                             )
                             .disabled(isClearing)
@@ -179,6 +186,20 @@ struct SettingsViewCustom: View {
                     securityViewModel.refreshSecurityStatus()
                 },
                 onCancel: {}
+            )
+        }
+        .sheet(isPresented: $showClearPINValidation) {
+            PINEntryView(
+                isPresented: $showClearPINValidation,
+                mode: .validate,
+                pinLength: PINManager.shared.getPINLength(),
+                onSuccess: { _ in
+                    // PIN validated successfully, show confirmation dialog
+                    showClearConfirmation = true
+                },
+                onCancel: {
+                    // User cancelled PIN entry
+                }
             )
         }
         .sheet(isPresented: $backupViewModel.isExporting) {
@@ -316,7 +337,7 @@ struct SettingsViewCustom: View {
     }
 
     /// Performs complete app data clearing and restart
-    /// Security: Requires biometric authentication + final confirmation
+    /// Security: Requires PIN authentication (if set) + final confirmation
     /// Safety: Checks for concurrent operations before clearing
     private func performClearAllData() {
         Task { @MainActor in
@@ -329,24 +350,22 @@ struct SettingsViewCustom: View {
                     throw ClearDataError.concurrentOperation
                 }
 
-                // Clear all data using BackupManager
-                // This handles:
-                // - Photo file deletion from filesystem
-                // - Category deletion from CoreData
-                // - Photo deletion from CoreData
-                // - Selective UserDefaults key removal
-                // - PIN clearing via PINManager
-                // - Settings reset via SettingsManager
-                // - Onboarding flag reset
-                // - Keychain cleanup
-                try await BackupManager.shared.clearAllData()
+                // PHASE 1: Clear data only (not settings)
+                // This prevents SwiftUI re-render issues while the Settings view is still active
+                try await BackupManager.shared.clearDataOnly()
+
+                // PHASE 2: Signal app restart coordination
+                // This tells the app to reset settings AFTER the view dismisses
+                settingsManager.shouldRestartApp = true
 
                 // Brief delay to ensure persistence completes
                 try await Task.sleep(nanoseconds: 100_000_000) // 100ms
 
-                // Reset loading state and show success
+                // Reset loading state
                 isClearing = false
-                showClearSuccess = true
+
+                // The app will now handle the restart and settings reset
+                // ContentView will detect shouldRestartApp and complete the process
 
             } catch ClearDataError.concurrentOperation {
                 // Reset loading state

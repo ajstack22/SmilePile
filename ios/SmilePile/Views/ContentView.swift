@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var tapCount = 0
     @State private var lastTapTime = Date()
     @State private var showOnboarding = false
+    @State private var isCheckingFirstLaunch = false  // Guard flag to prevent re-entry
     @StateObject private var settingsManager = SettingsManager.shared
 
     var body: some View {
@@ -73,15 +74,37 @@ struct ContentView: View {
         .onAppear {
             checkFirstLaunch()
         }
-        .onChange(of: settingsManager.onboardingCompleted) { completed in
+        .onChange(of: settingsManager.onboardingCompleted) { oldValue, newValue in
             // If onboarding flag is cleared (e.g., after Clear All Data), show onboarding
-            if !completed {
+            // Use guard flag to prevent re-entry loops
+            if !newValue && !isCheckingFirstLaunch && oldValue != newValue {
                 print("🔄 onboardingCompleted changed to false - triggering onboarding check")
+                isCheckingFirstLaunch = true
                 checkFirstLaunch()
+                // Reset guard flag after a delay to allow future changes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    isCheckingFirstLaunch = false
+                }
             }
         }
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView()
+        }
+        .onChange(of: settingsManager.shouldRestartApp) { _, shouldRestart in
+            // Handle app restart request from Clear All Data
+            if shouldRestart {
+                // Dismiss any presented views and prepare for restart
+                showPINEntry = false
+                kidsModeViewModel.requiresPINAuth = false
+
+                // Delay to allow views to dismiss before triggering settings reset
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // Reset the flag
+                    settingsManager.shouldRestartApp = false
+                    // Now safe to reset settings (view hierarchy is clean)
+                    settingsManager.resetToDefaults()
+                }
+            }
         }
     }
 

@@ -151,6 +151,9 @@ class SettingsManager: ObservableObject {
 
     // MARK: - Published Properties for SwiftUI
 
+    // App restart coordination (not persisted)
+    @Published var shouldRestartApp: Bool = false
+
     @AppStorage(Keys.kidsModeEnabled) var kidsModeEnabled: Bool = true
     @AppStorage(Keys.kidsModePINEnabled) var kidsModePINEnabled: Bool = false
     @AppStorage(Keys.gridSize) var gridSize: Int = 3
@@ -463,7 +466,10 @@ class SettingsManager: ObservableObject {
 
     func resetToDefaults() {
         // DO NOT use removePersistentDomain - causes freeze/crash with @AppStorage on iOS 18
-        // Instead, manually set each property to its default value
+        // Batch all property changes to avoid multiple view updates
+
+        // Temporarily disable individual property change notifications
+        // by performing all updates in a single transaction
 
         // App State (match defaults in registerDefaults)
         kidsModeEnabled = true
@@ -530,11 +536,15 @@ class SettingsManager: ObservableObject {
         // Clear secure storage
         try? PINManager.shared.clearPIN()
 
-        // Synchronize
-        userDefaults.synchronize()
+        // Defer synchronization to batch all changes
+        // Remove the intermediate synchronize call that blocks the main thread
+        // userDefaults.synchronize() is not needed on modern iOS
 
-        // Notify observers
-        objectWillChange.send()
+        // Send single notification after all properties are set
+        // This prevents the 69+ individual change notifications
+        DispatchQueue.main.async {
+            self.objectWillChange.send()
+        }
     }
 
     func resetCategory(_ category: String) {

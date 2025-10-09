@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 class BackupManager {
     static let shared = BackupManager()
@@ -354,37 +355,60 @@ class BackupManager {
 
     // MARK: - Clear All Data
 
-    func clearAllData() async throws {
+    /// Clears only data (photos, categories) without touching settings
+    /// This prevents SwiftUI re-render issues while the Settings view is still active
+    func clearDataOnly() async throws {
         // 1. Delete all photos from filesystem
         let photos = try await photoRepository.getAllPhotos()
         let documentsDir = getDocumentsDirectory()
 
-        for photo in photos {
-            let photoPath = documentsDir.appendingPathComponent(photo.path)
-            if fileManager.fileExists(atPath: photoPath.path) {
-                try? fileManager.removeItem(at: photoPath)
+        // Batch delete photo files in parallel
+        await withTaskGroup(of: Void.self) { group in
+            for photo in photos {
+                group.addTask {
+                    let photoPath = documentsDir.appendingPathComponent(photo.path)
+                    if self.fileManager.fileExists(atPath: photoPath.path) {
+                        try? self.fileManager.removeItem(at: photoPath)
+                    }
+                }
             }
         }
 
-        // 2. Delete all categories from CoreData
-        let categories = try await categoryRepository.getAllCategories()
-        for category in categories {
-            try await categoryRepository.deleteCategory(category)
+        // 2. Batch delete all categories from CoreData
+        let context = PersistenceController.shared.container.viewContext
+        let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryEntity")
+        let categoryBatchDelete = NSBatchDeleteRequest(fetchRequest: categoryRequest)
+        categoryBatchDelete.resultType = .resultTypeCount
+
+        try await context.perform {
+            _ = try context.execute(categoryBatchDelete)
+            try context.save()
         }
 
-        // 3. Delete all photos from CoreData
-        for photo in photos {
-            try await photoRepository.deletePhoto(photo)
+        // 3. Batch delete all photos from CoreData
+        let photoRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoEntity")
+        let photoBatchDelete = NSBatchDeleteRequest(fetchRequest: photoRequest)
+        photoBatchDelete.resultType = .resultTypeCount
+
+        try await context.perform {
+            _ = try context.execute(photoBatchDelete)
+            try context.save()
         }
 
-        // 4. Reset all settings to defaults (includes PIN clearing)
-        // This properly sets all @AppStorage properties to default values
-        // instead of removing keys, which prevents iOS 18 freeze/crash
-        settingsManager.resetToDefaults()
-
-        // 5. Clear keychain data
+        // 4. Clear keychain data
         try? keychainManager.delete(for: "pin")
         try? keychainManager.delete(for: "biometric_enabled")
+    }
+
+    /// Complete clear including settings reset
+    /// Should only be called after the Settings view has been dismissed
+    func clearAllData() async throws {
+        // First clear the data
+        try await clearDataOnly()
+
+        // Then reset settings (this will trigger @AppStorage updates)
+        // This should only happen after the Settings view is gone
+        settingsManager.resetToDefaults()
     }
 
     // MARK: - Utilities
