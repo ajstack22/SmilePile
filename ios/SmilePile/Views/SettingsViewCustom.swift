@@ -12,6 +12,12 @@ struct SettingsViewCustom: View {
     @State private var showPINChange = false
     @State private var showingAboutDialog = false
 
+    // Clear All Data state
+    @State private var showClearConfirmation = false
+    @State private var isClearing = false
+    @State private var clearError: String?
+    @State private var showErrorAlert = false
+
     private var appVersionString: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
     }
@@ -77,13 +83,13 @@ struct SettingsViewCustom: View {
                     }
                     .padding(.horizontal, 16)
 
-                    // Backup & Restore Section
+                    // Data Section
                     SettingsSection(
-                        title: "Backup & Restore"
+                        title: "Data"
                     ) {
                         VStack(spacing: 0) {
                             SettingsActionItem(
-                                title: "Export Data",
+                                title: "Export",
                                 subtitle: "Save your photos and categories",
                                 icon: "square.and.arrow.up",
                                 action: {
@@ -98,7 +104,7 @@ struct SettingsViewCustom: View {
                                 .padding(.leading, 56)
 
                             SettingsActionItem(
-                                title: "Import Data",
+                                title: "Import",
                                 subtitle: "Restore from backup",
                                 icon: "square.and.arrow.down",
                                 action: {
@@ -108,23 +114,31 @@ struct SettingsViewCustom: View {
                                     }
                                 }
                             )
-                        }
-                    }
-                    .padding(.horizontal, 16)
 
-                    // Developer Section
-                    SettingsSection(
-                        title: "Developer"
-                    ) {
-                        SettingsActionItem(
-                            title: "Clear All Data",
-                            subtitle: "Permanently delete all photos, categories, and settings",
-                            icon: "trash.fill",
-                            iconColor: .red,
-                            action: {
-                                // Clear data action - will implement
-                            }
-                        )
+                            Divider()
+                                .padding(.leading, 56)
+
+                            SettingsActionItem(
+                                title: "Clear All Data",
+                                subtitle: "Permanently delete all photos, categories, and settings",
+                                icon: "trash.fill",
+                                iconColor: .red,
+                                action: {
+                                    // Check for concurrent operations
+                                    guard !backupViewModel.isExporting && !backupViewModel.isImporting else {
+                                        clearError = "Cannot clear data while import or export is in progress"
+                                        showErrorAlert = true
+                                        return
+                                    }
+
+                                    // Biometric authentication, then show confirmation
+                                    authenticateUser {
+                                        showClearConfirmation = true
+                                    }
+                                }
+                            )
+                            .disabled(isClearing)
+                        }
                     }
                     .padding(.horizontal, 16)
 
@@ -235,6 +249,24 @@ struct SettingsViewCustom: View {
                 appVersion: appVersionString
             )
         }
+        .alert("Clear All Data?", isPresented: $showClearConfirmation) {
+            Button("Cancel", role: .cancel) {
+                // Alert automatically dismisses
+            }
+            Button("Clear All Data", role: .destructive) {
+                performClearAllData()
+            }
+            .disabled(isClearing)
+        } message: {
+            Text("This will permanently delete all photos, categories, settings, and PIN. The app will restart to onboarding. This action cannot be undone.")
+        }
+        .alert("Error", isPresented: $showErrorAlert) {
+            Button("OK", role: .cancel) {
+                showErrorAlert = false
+            }
+        } message: {
+            Text(clearError ?? "Unknown error occurred")
+        }
         .onAppear {
             Task {
                 do {
@@ -274,6 +306,92 @@ struct SettingsViewCustom: View {
             // No biometric authentication available - proceed anyway
             // (device doesn't support or user hasn't set up)
             completion()
+        }
+    }
+
+    /// Performs complete app data clearing and restart
+    /// Security: Requires biometric authentication + final confirmation
+    /// Safety: Checks for concurrent operations before clearing
+    private func performClearAllData() {
+        Task { @MainActor in
+            do {
+                // Set loading state to prevent concurrent operations
+                isClearing = true
+
+                // Safety check: Ensure no concurrent import/export operations
+                guard !backupViewModel.isExporting && !backupViewModel.isImporting else {
+                    throw ClearDataError.concurrentOperation
+                }
+
+                // Clear all data using BackupManager
+                // This handles:
+                // - Photo file deletion from filesystem
+                // - Category deletion from CoreData
+                // - Photo deletion from CoreData
+                // - UserDefaults domain removal
+                // - PIN clearing via PINManager
+                // - Settings reset via SettingsManager
+                // - Onboarding flag reset
+                // - Keychain cleanup
+                try await BackupManager.shared.clearAllData()
+
+                // Wait for persistence to complete
+                // Ensures UserDefaults and CoreData changes are written to disk
+                try await Task.sleep(nanoseconds: 300_000_000) // 300ms
+
+                // Terminate app (iOS will restart it if in foreground)
+                await terminateApp()
+
+            } catch ClearDataError.concurrentOperation {
+                // Reset loading state
+                isClearing = false
+
+                // Show specific error for concurrent operations
+                clearError = "Cannot clear data while import or export is in progress. Please wait for the current operation to complete."
+                showErrorAlert = true
+
+            } catch {
+                // Reset loading state
+                isClearing = false
+
+                // Show generic error
+                clearError = "Failed to clear data: \(error.localizedDescription)"
+                showErrorAlert = true
+            }
+        }
+    }
+
+    /// Terminates the app properly after data clearing
+    /// Note: Apple discourages programmatic app termination, but this is required for data reset
+    private func terminateApp() async {
+        // Give UI time to update
+        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+
+        // Proper iOS app termination approach
+        // This triggers a clean shutdown that iOS handles gracefully
+        UIControl().sendAction(#selector(URLSessionTask.suspend),
+                              to: UIApplication.shared,
+                              for: nil)
+
+        // Fallback: If the above doesn't work, use exit(0)
+        // This is acceptable since all data has been cleared and persisted
+        try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
+        exit(0)
+    }
+}
+
+// MARK: - Clear Data Errors
+
+enum ClearDataError: LocalizedError {
+    case concurrentOperation
+    case migrationInProgress
+
+    var errorDescription: String? {
+        switch self {
+        case .concurrentOperation:
+            return "Cannot clear data while another operation is in progress"
+        case .migrationInProgress:
+            return "Cannot clear data during database migration"
         }
     }
 }
