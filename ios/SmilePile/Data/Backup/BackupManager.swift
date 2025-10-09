@@ -377,11 +377,18 @@ class BackupManager {
             try await photoRepository.deletePhoto(photo)
         }
 
-        // 4. Clear UserDefaults
-        if let bundleIdentifier = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleIdentifier)
-            UserDefaults.standard.synchronize()
+        // 4. Clear UserDefaults (selective removal to avoid iOS freeze)
+        // Remove only app-specific keys, not the entire domain
+        let keysToRemove = [
+            "theme_mode",
+            "onboarding_completed",
+            "kids_mode_enabled",
+            "selected_category_filter"
+        ]
+        for key in keysToRemove {
+            UserDefaults.standard.removeObject(forKey: key)
         }
+        UserDefaults.standard.synchronize()
 
         // 5. Clear PIN using PINManager
         try? PINManager.shared.clearPIN()

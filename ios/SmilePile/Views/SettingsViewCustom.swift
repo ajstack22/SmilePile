@@ -132,10 +132,8 @@ struct SettingsViewCustom: View {
                                         return
                                     }
 
-                                    // Biometric authentication, then show confirmation
-                                    authenticateUser {
-                                        showClearConfirmation = true
-                                    }
+                                    // Show confirmation dialog directly (no biometric auth needed)
+                                    showClearConfirmation = true
                                 }
                             )
                             .disabled(isClearing)
@@ -336,16 +334,15 @@ struct SettingsViewCustom: View {
                 // - Photo file deletion from filesystem
                 // - Category deletion from CoreData
                 // - Photo deletion from CoreData
-                // - UserDefaults domain removal
+                // - Selective UserDefaults key removal
                 // - PIN clearing via PINManager
                 // - Settings reset via SettingsManager
                 // - Onboarding flag reset
                 // - Keychain cleanup
                 try await BackupManager.shared.clearAllData()
 
-                // Wait for persistence to complete
-                // Ensures UserDefaults and CoreData changes are written to disk
-                try await Task.sleep(nanoseconds: 300_000_000) // 300ms
+                // Brief delay to ensure persistence completes
+                try await Task.sleep(nanoseconds: 100_000_000) // 100ms
 
                 // Reset loading state and show success
                 isClearing = false
