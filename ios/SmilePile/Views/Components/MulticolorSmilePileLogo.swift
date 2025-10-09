@@ -13,23 +13,23 @@ struct MulticolorSmilePileLogo: View {
         HStack(spacing: 0) {
             Text("Smile")
                 .foregroundColor(.smilePileYellow)
-                .font(.custom("Nunito-ExtraBold", size: fontSize))
+                .font(.custom("Nunito", size: fontSize).weight(.heavy))
 
             Text("P")
                 .foregroundColor(.smilePileGreen)
-                .font(.custom("Nunito-ExtraBold", size: fontSize))
+                .font(.custom("Nunito", size: fontSize).weight(.heavy))
 
             Text("i")
                 .foregroundColor(.smilePileBlue)
-                .font(.custom("Nunito-ExtraBold", size: fontSize))
+                .font(.custom("Nunito", size: fontSize).weight(.heavy))
 
             Text("l")
                 .foregroundColor(.smilePileOrange)
-                .font(.custom("Nunito-ExtraBold", size: fontSize))
+                .font(.custom("Nunito", size: fontSize).weight(.heavy))
 
             Text("e")
                 .foregroundColor(.smilePilePink)
-                .font(.custom("Nunito-ExtraBold", size: fontSize))
+                .font(.custom("Nunito", size: fontSize).weight(.heavy))
         }
         .if(showShadow) { view in
             view.shadow(

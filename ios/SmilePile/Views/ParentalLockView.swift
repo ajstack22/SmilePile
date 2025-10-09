@@ -11,6 +11,7 @@ struct ParentalLockView: View {
     @State private var showPatternEntry = false
     @State private var showBiometricOption = false
     @State private var unlockAnimationScale: CGFloat = 1.0
+    @Environment(\.typography) var typography
 
     var body: some View {
         NavigationView {
@@ -59,11 +60,11 @@ struct ParentalLockView: View {
                 .animation(.spring(), value: viewModel.isUnlocked)
 
             Text("Parental Controls")
-                .font(.largeTitle)
+                .font(typography.displayMedium)
                 .fontWeight(.bold)
 
             Text("Authentication required to access settings")
-                .font(.subheadline)
+                .font(typography.bodySmall)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -97,6 +98,7 @@ struct ParentalLockView: View {
                 Image(systemName: "number.square.fill")
                     .font(.title2)
                 Text("Enter PIN")
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -113,6 +115,7 @@ struct ParentalLockView: View {
                 Image(systemName: "circle.grid.3x3.fill")
                     .font(.title2)
                 Text("Enter Pattern")
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -129,6 +132,7 @@ struct ParentalLockView: View {
                 Image(systemName: biometricIcon)
                     .font(.title2)
                 Text(biometricText)
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -142,7 +146,7 @@ struct ParentalLockView: View {
     private var securitySetupOptions: some View {
         VStack(spacing: 12) {
             Text("No security configured")
-                .font(.caption)
+                .font(typography.labelSmall)
                 .foregroundColor(.secondary)
 
             setupPINButton
@@ -156,6 +160,7 @@ struct ParentalLockView: View {
                 Image(systemName: "plus.circle.fill")
                     .font(.title2)
                 Text("Set Up PIN")
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -172,6 +177,7 @@ struct ParentalLockView: View {
                 Image(systemName: "circle.grid.3x3")
                     .font(.title2)
                 Text("Set Up Pattern")
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -197,17 +203,17 @@ struct ParentalLockView: View {
     private var attemptsWarning: some View {
         Text("⚠️ \(viewModel.attemptsRemaining) attempts remaining")
             .foregroundColor(.orange)
-            .font(.caption)
+            .font(typography.labelSmall)
     }
 
     private var cooldownTimer: some View {
         VStack(spacing: 8) {
             ProgressView()
             Text("Too many failed attempts")
-                .font(.caption)
+                .font(typography.labelSmall)
                 .foregroundColor(.red)
             Text("Please wait \(Int(viewModel.cooldownTimeRemaining)) seconds")
-                .font(.caption2)
+                .font(typography.labelSmall)
                 .foregroundColor(.secondary)
         }
         .padding()

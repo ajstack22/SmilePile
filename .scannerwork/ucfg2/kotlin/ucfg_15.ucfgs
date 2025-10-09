@@ -1,99 +1,99 @@
 ◊
 $com.smilepile.MainActivity#<init>()V[
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt* ˜("0*™
-0* *(
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt/ ∑("0*™
+0/ /(
 }
-+ +(%
+0 0(%
 %0"/com.smilepile.security.SecureActivity#<init>()V*:
 
 __unknown_file (
 com.smilepile.MainActivitylj
->* I(1
+E* P(1
 %1+com.smilepile.MainActivity#<init>()V$class0"+com.smilepile.MainActivity#<init>()V$class0ã
 à
->* I(
+E* P(
 %2"5com.smilepile.MainActivity#<init>()V$class0#<init>()V*?
->* I(3
+E* P(3
 1
 %1+com.smilepile.MainActivity#<init>()V$class0ﬁ
 €
-> I(
+E P(
 %3java.lang.Object"Jcom.smilepile.MainActivity#setKidsBackPressedCallback(Ljava/lang/Object;)V**
-> I(
+E P(
 com.smilepile.MainActivity*?
->* I(3
+E* P(3
 1
 %1+com.smilepile.MainActivity#<init>()V$class0ç
 ä
-K K("
+R R("
 %4boolean",com.smilepile.MainActivity#setHasSetupUI(Z)V**
-K K("
+R R("
 com.smilepile.MainActivity*
-K K("	
+R R("	
 false"/
 
 __unknown_file (
 implicit returnB
 com.smilepile.MainActivityH`ç
 5com.smilepile.MainActivity#<init>()V$class0#<init>()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt>* I("0*>
-0>3 >(O"/
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktE* P("0*>
+0E3 E(O"/
 
 __unknown_file (
 implicit returnB/-
 +com.smilepile.MainActivity#<init>()V$class0H`∂
 Bcom.smilepile.MainActivity#<init>()V$class0#handleOnBackPressed()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt? ?(("0*ù
-2A9 D(∏
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktF F(("0*ù
+2H9 K(∏
 µ
-C C(-
+J J(-
 %3java.lang.Object"Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V**
-C C(-
+J J(-
 com.smilepile.MainActivity*
-C) C(-
+J) J(-
 trueN
 L
 
 __unknown_file (
 %2"__id*$
-C C(-
+J J(-
 
 %3java.lang.Object*
 1*–
-3D G( 
+3K N( 
 «
-F F(2
+M M(2
 %4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;**
-F F(
+M M(
 com.smilepile.MainActivity£
 †
-F F(/
+M M(/
 %5kotlin.Unit"?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()V*@
-F F(4
+M M(4
 2
 %4,com.smilepile.ui.viewmodels.AppModeViewModelI
 G
 
 __unknown_file (
 %2"__id*
-F F(/
+M M(/
 
 %5kotlin.Unit*
 1*®
-0? ?(€
+0F F(€
 ÿ
-A A((5
+H H((5
 %0/com.smilepile.security.SecurePreferencesManager"icom.smilepile.MainActivity#getSecurePreferencesManager()Lcom/smilepile/security/SecurePreferencesManager;**
-A A((
+H H((
 com.smilepile.MainActivity≤Ø
-A) A(7
+H) H(7
 %1boolean"?com.smilepile.security.SecurePreferencesManager#isPINEnabled()Z*C
-A A((7
+H H((7
 5
 %0/com.smilepile.security.SecurePreferencesManager2isPINEnabled()*
 2
 3*>
-1G H("/
+1N O("/
 
 __unknown_file (
 implicit returnB/-
@@ -413,6 +413,62 @@ Ocom.smilepile.MainActivity#setShowKidsModeExitDialog(Lerror/NonExistentClass;)V
 implicit return:%
  (
 valuejava.lang.ObjectB
+com.smilepile.MainActivityH`∆
+Gcom.smilepile.MainActivity#getSharedPhotoUris()Lerror/NonExistentClass;
+__unknown_file ("0*π
+0 (Ä
+~
+ (
+fieldjava.lang.Object"__id*Q
+ (E*C
+com.smilepile.MainActivity"#
+sharedPhotoUrisjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB
+com.smilepile.MainActivityH`Ê
+Hcom.smilepile.MainActivity#setSharedPhotoUris(Lerror/NonExistentClass;)V
+__unknown_file ("0*±
+0 (Ä
+~
+ (C
+com.smilepile.MainActivity"#
+sharedPhotoUrisjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB
+com.smilepile.MainActivityH`„
+Ucom.smilepile.MainActivity#getShowSharedPhotoCategoryDialog()Lerror/NonExistentClass;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q
+com.smilepile.MainActivity"1
+showSharedPhotoCategoryDialogjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB
+com.smilepile.MainActivityH`É
+Vcom.smilepile.MainActivity#setShowSharedPhotoCategoryDialog(Lerror/NonExistentClass;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q
+com.smilepile.MainActivity"1
+showSharedPhotoCategoryDialogjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB
 com.smilepile.MainActivityH`—
 Icom.smilepile.MainActivity#getKidsBackPressedCallback()Ljava/lang/Object;
 __unknown_file ("0*¬
@@ -471,33 +527,47 @@ hasSetupUIjava.lang.Object"__id*'
 implicit return:%
  (
 valuejava.lang.ObjectB
-com.smilepile.MainActivityH`ì
+com.smilepile.MainActivityH`à
 .com.smilepile.MainActivity#onCreate(LBundle;)V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktM M("0*©
-0M M(v
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktT T("0*.
+2[' ](	"
+\ \(
+explicit return*Æ
+0T T(v
 t
-N N(+
+U U(+
 %0%com.smilepile.security.SecureActivity"__id*5
-N N()'
+U U()'
 %com.smilepile.security.SecureActivityÌ
-N N(*
+U U(*
 %1kotlin.Unit"9com.smilepile.security.SecureActivity#onCreate(LBundle;)V*I
 
 __unknown_file (-
 +
 %0%com.smilepile.security.SecureActivity*4
-N N()(
+U U()(
 &
-savedInstanceStatejava.lang.Object2onCreate(LBundle;)"/
+savedInstanceStatejava.lang.Object2onCreate(LBundle;)´
+®
+[ [(%
+%2boolean"7com.smilepile.MainActivity#handleShareIntent(LIntent;)Z**
+[ [(%
+com.smilepile.MainActivity*(
+[ [($
+
+intentjava.lang.Object*
+2
+1*>
+1]	 _("/
 
 __unknown_file (
 implicit return:2
-M M(5&
+T T(5&
 savedInstanceStatejava.lang.ObjectB
 com.smilepile.MainActivityHı
 &com.smilepile.MainActivity#onResume()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktf f("0*g
-2j r(	S
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktr r("0*g
+2v ~(	S
 Q
 
 __unknown_file (
@@ -506,13 +576,13 @@ Q
 __unknown_file (
 	<unknown>*
 1*û
-0f f(v
+0r r(v
 t
-g g(+
+s s(+
 %0%com.smilepile.security.SecureActivity"__id*5
-g g()'
+s s()'
 %com.smilepile.security.SecureActivity™ß
-g g(
+s s(
 %1kotlin.Unit"1com.smilepile.security.SecureActivity#onResume()V*I
 
 __unknown_file (-
@@ -520,76 +590,837 @@ t
 %0%com.smilepile.security.SecureActivity2
 onResume()t
 r
-j j(
+v v(
 %2boolean"+com.smilepile.MainActivity#getHasSetupUI()Z**
-j j(
+v v(
 com.smilepile.MainActivityl
 j
-j j(
+v v(
 %3boolean"kotlin.Boolean#not()Z*
-j j(
+v v(
 
 %2boolean*
-j j(
+v v(
 
 %2boolean*
 2
 1*>
-1r	 s("/
+1~	 ("/
 
 __unknown_file (
 implicit returnB
-com.smilepile.MainActivityHÓ
-)com.smilepile.MainActivity#setupMainUI()V\
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktu u("0*Ω
-0u u(}
-{
-w w(
-%0kotlin.Unit"0com.smilepile.MainActivity#initializeSettings()V**
-w w(
+com.smilepile.MainActivityH°
+1com.smilepile.MainActivity#onNewIntent(LIntent;)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktÅ Å("0*º
+0
+Å Å(z
+x
+
+Ç Ç(+
+%0%com.smilepile.security.SecureActivity"__id*7
+
+Ç Ç()'
+%com.smilepile.security.SecureActivity"/
+
+__unknown_file (
+implicit return:(
+
+Å Å(,
+intentjava.lang.ObjectB
+com.smilepile.MainActivityH∏
+
+7com.smilepile.MainActivity#handleShareIntent(LIntent;)Z^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktê ê(!"3"6*ø
+3
+í" ó(•¢
+
+ì ì(=
+%1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*)
+
+__unknown_file (
+	<unknown>*
+
+ì9 ì(=
+true2equals(Ljava/lang/Object;)*
+4
+5*i
+4
+ñ ó(S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+1*›
+5
+ì? ñ(≥
+∞
+
+î î(+
+%3kotlin.Unit"5com.smilepile.MainActivity#handleSendImage(LIntent;)V*,
+
+î î(+
+com.smilepile.MainActivity**
+
+î$ î(*
+
+intentjava.lang.Object"
+
+ï ï(
+true*ø
+6
+ò+ ù(•¢
+
+ô ô(=
+%4boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*)
+
+__unknown_file (
+	<unknown>*
+
+ô9 ô(=
+true2equals(Ljava/lang/Object;)*
+7
+8*i
+7
+ú ù(S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+1*Ê
+8
+ô? ú(º
+π
+
+ö ö(4
+%6kotlin.Unit">com.smilepile.MainActivity#handleSendMultipleImages(LIntent;)V*,
+
+ö ö(4
+com.smilepile.MainActivity**
+
+ö- ö(3
+
+intentjava.lang.Object"
+
+õ õ(
+true*(
+1
+û	 ü("
+
+ü ü(	
+false:(
+
+ê" ê(0
+intentjava.lang.ObjectB
+com.smilepile.MainActivityHã
+5com.smilepile.MainActivity#handleSendImage(LIntent;)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt¢ ¢("0*i
+2
+£R •(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*i
+3
+• ®(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*´
+0
+¢ ¢(ë
+é
+
+£ £(P
+%0"	__compare*
+
+£1 £(3
+>=*+
+
+£) £(0
+
+SDK_INTjava.lang.Object*,
+
+£H £(P
+
+TIRAMISUjava.lang.Object*
+2
+3*û
+1
+• ®(	\
+Z
+
+£ ®(	"
+imageUrierror.NonExistentClass"__id*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:(
+
+¢  ¢(.
+intentjava.lang.ObjectB
+com.smilepile.MainActivityHï
+>com.smilepile.MainActivity#handleSendMultipleImages(LIntent;)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt≥ ≥(("0*i
+2
+¥S ∂(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*i
+3
+∂ π(	S
+Q
+
+__unknown_file (
+%1"__id*)
+
+__unknown_file (
+	<unknown>*
+1*´
+0
+≥ ≥(ë
+é
+
+¥ ¥(Q
+%0"	__compare*
+
+¥2 ¥(4
+>=*+
+
+¥* ¥(1
+
+SDK_INTjava.lang.Object*,
+
+¥I ¥(Q
+
+TIRAMISUjava.lang.Object*
+2
+3*ü
+1
+∂ π(	]
+[
+
+¥ π(	#
+	imageUriserror.NonExistentClass"__id*"
+
+__unknown_file (
+
+%1"/
+
+__unknown_file (
+implicit return:(
+
+≥) ≥(7
+intentjava.lang.ObjectB
+com.smilepile.MainActivityH•
+4com.smilepile.MainActivity#isValidContentUri(LUri;)Z^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt… …(!"1*%
+2
+Õ
+ –(	"
+
+  –(	
+
+%0*W
+3
+Õ –(	A
+?
+
+__unknown_file (
+%0"__id*
+
+œ œ(	
+false*
+2*¿
+1
+  Õ(	©¶
+
+À À(#
+%1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z**
+
+À À(
+
+schemejava.lang.Object*
+
+À À("	
+content2equals(Ljava/lang/Object;)•¢
+
+Ã Ã(F
+%2boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*)
+
+__unknown_file (
+	<unknown>*
+
+ÃB Ã(F
+true2equals(Ljava/lang/Object;)S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+3:%
+
+…" …(*
+urijava.lang.ObjectB
+com.smilepile.MainActivityH¡
+Rcom.smilepile.MainActivity#showCategorySelectionForSharedPhotos(Ljava/util/List;)V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt” ”(4"0*@
+0
+” ”("/
+
+__unknown_file (
+implicit return:$
+
+”5 ”(D
+urisjava.util.ListB
+com.smilepile.MainActivityH˜
+)com.smilepile.MainActivity#setupMainUI()V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktÍ Í("0*ƒ
+0
+Í Í(Å
+
+
+Ï Ï(
+%0kotlin.Unit"0com.smilepile.MainActivity#initializeSettings()V*,
+
+Ï Ï(
 com.smilepile.MainActivity"/
 
 __unknown_file (
 implicit returnB
+com.smilepile.MainActivityHÄ(
+0com.smilepile.MainActivity#SharedPhotoHandler()V^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktí í(""0*ã
+2
+ìF ÷(	ê
+ç
+
+__unknown_file (
+%4"__declareFunction*X
+
+__unknown_file (<:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0hf
+
+__unknown_file (:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"__ScopeWrapperà
+Ö
+
+__unknown_file (Ä
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__id*`
+
+__unknown_file (D
+B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModelä
+á
+
+__unknown_file (Å
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModel"__id*a
+
+__unknown_file (E
+C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModelø
+º
+
+__unknown_file (\
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"
+
+categoriesjava.lang.Object"__id*<
+
+__unknown_file ( 
+
+
+categoriesjava.lang.Object¡
+æ
+
+__unknown_file (]
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"
+importStatejava.lang.Object"__id*=
+
+__unknown_file (!
+
+importStatejava.lang.Object¡
+æ
+
+__unknown_file (B
+
+%4":
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0"__id*X
+
+__unknown_file (<
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0ê
+ç
+
+__unknown_file (
+%5"__declareFunction*X
+
+__unknown_file (<:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1hf
+
+__unknown_file (:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"__ScopeWrapperà
+Ö
+
+__unknown_file (Ä
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__id*`
+
+__unknown_file (D
+B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModelä
+á
+
+__unknown_file (Å
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModel"__id*a
+
+__unknown_file (E
+C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModelø
+º
+
+__unknown_file (\
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"
+
+categoriesjava.lang.Object"__id*<
+
+__unknown_file ( 
+
+
+categoriesjava.lang.Object¡
+æ
+
+__unknown_file (]
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"
+importStatejava.lang.Object"__id*=
+
+__unknown_file (!
+
+importStatejava.lang.Object¡
+æ
+
+__unknown_file (B
+
+%5":
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1"__id*X
+
+__unknown_file (<
+:
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1û
+õ
+
+£ £(.
+%6java.lang.Object"Gcom.smilepile.MainActivity#getSharedPhotoUris()Lerror/NonExistentClass;*,
+
+£ £(.
+com.smilepile.MainActivityû
+õ
+
+£B £(Q
+%7java.lang.Object"Gcom.smilepile.MainActivity#getSharedPhotoUris()Lerror/NonExistentClass;*,
+
+£B £(Q
+com.smilepile.MainActivityr
+p
+
+£B £(\
+%8"	__compare*
+
+£Y £(Z
+>*(
+
+£T £(X
+
+sizejava.lang.Object*
+
+£[ £(\2*
+4
+5*·
+3
+£i £(j√
+¿
+
+£ £(z
+%10"__concat*
+
+£ £(
+Add *(
+
+£1 £(5
+
+sizejava.lang.Object*
+
+£6 £(<
+
+ photo*"
+
+__unknown_file (
+
+%9*!
+
+£j £(y
+ to which pile?Å
+˛
+
+ü( ∞(
+%11kotlin.Unit"»com.smilepile.ui.components#CategorySelectionDialog(Ljava/util/List;Ljava/util/Set;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ZLjava/lang/String;)V*
+
+__unknown_file ( *.
+
+† †(' 
+
+
+categoriesjava.lang.Object*)
+
+__unknown_file (
+	<unknown>*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5*
+
+__unknown_file ( *
+
+¢" ¢('	
+false*
+
+£ £(z
+
+%10*
+6
+7*S
+4
+£^ £(a=
+;
+
+__unknown_file (
+%9"__id*
+
+£_ £(`
+s*
+3*^
+5
+£g £(iH
+F
+
+__unknown_file (
+%9"__id*
+
+__unknown_file ( *
+3*i
+6
+« …(S
+Q
+
+__unknown_file (
+%3"__id*)
+
+__unknown_file (
+	<unknown>*
+1*j
+7
+≥) «(T
+R
+
+__unknown_file (
+%12"__id*)
+
+__unknown_file (
+	<unknown>*
+6*Ü
+0
+ë í(¨
+©
+
+ì ì()
+%0java.lang.Object"Ucom.smilepile.MainActivity#getShowSharedPhotoCategoryDialog()Lerror/NonExistentClass;*,
+
+ì ì()
+com.smilepile.MainActivityû
+õ
+
+ì- ì(<
+%1java.lang.Object"Gcom.smilepile.MainActivity#getSharedPhotoUris()Lerror/NonExistentClass;*,
+
+ì- ì(<
+com.smilepile.MainActivityúô
+
+ì- ì(D
+%2boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*&
+
+ì- ì(<
+
+%1java.lang.Object*
+
+ì@ ì(D 2equals(Ljava/lang/Object;)*
+2
+1*@
+1
+÷	 ◊("/
+
+__unknown_file (
+implicit returnB
+com.smilepile.MainActivityHß
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt§% ´("0*i
+2
+¶, ®(S
+Q
+
+__unknown_file (
+%2"__id*)
+
+__unknown_file (
+	<unknown>*
+1*â	
+0
+§% ´(£
+†
+
+__unknown_file (
+%0"__id*x
+
+__unknown_file (\*Z
+com.smilepile.MainActivity":
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda0—
+Œ
+
+__unknown_file (B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__id*h
+
+__unknown_file (L*J
+
+%0"B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel”
+–
+
+__unknown_file (C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModel"__id*i
+
+__unknown_file (M*K
+
+%0"C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModelâ
+Ü
+
+__unknown_file (
+
+categoriesjava.lang.Object"__id*D
+
+__unknown_file ((*&
+
+%0"
+
+categoriesjava.lang.Objectã
+à
+
+__unknown_file (
+importStatejava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+importStatejava.lang.Object_
+]
+
+• •(>
+
+categoryIdjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>§°
+
+¶ ¶(*
+%1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*.
+
+¶ ¶(" 
+
+
+categoryIdjava.lang.Object*
+
+¶& ¶(* 2equals(Ljava/lang/Object;)*
+2
+1*¬
+1
+® ©(∆
+√
+
+© ©(9
+%3java.lang.Object"Vcom.smilepile.MainActivity#setShowSharedPhotoCategoryDialog(Lerror/NonExistentClass;)V*,
+
+© ©(9
+com.smilepile.MainActivity*
+
+©4 ©(9	
+false±
+Æ
+
+™ ™(*
+%4java.lang.Object"Hcom.smilepile.MainActivity#setSharedPhotoUris(Lerror/NonExistentClass;)V*,
+
+™ ™(*
+com.smilepile.MainActivity*
+
+™& ™(* "4
+
+__unknown_file (
+
+%4java.lang.Object:*
+
+§' §(2
+categoryIdsjava.util.SetB
+com.smilepile.MainActivityHÓ
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1^
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt¨ Ø("0*¨
+
+0
+¨ Ø(£
+†
+
+__unknown_file (
+%0"__id*x
+
+__unknown_file (\*Z
+com.smilepile.MainActivity":
+8com.smilepile.MainActivity#SharedPhotoHandler()V$lambda1—
+Œ
+
+__unknown_file (B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel"__id*h
+
+__unknown_file (L*J
+
+%0"B
+categoryViewModel-com.smilepile.ui.viewmodels.CategoryViewModel”
+–
+
+__unknown_file (C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModel"__id*i
+
+__unknown_file (M*K
+
+%0"C
+importViewModel0com.smilepile.ui.viewmodels.PhotoImportViewModelâ
+Ü
+
+__unknown_file (
+
+categoriesjava.lang.Object"__id*D
+
+__unknown_file ((*&
+
+%0"
+
+categoriesjava.lang.Objectã
+à
+
+__unknown_file (
+importStatejava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+importStatejava.lang.Object∆
+√
+
+≠ ≠(9
+%1java.lang.Object"Vcom.smilepile.MainActivity#setShowSharedPhotoCategoryDialog(Lerror/NonExistentClass;)V*,
+
+≠ ≠(9
+com.smilepile.MainActivity*
+
+≠4 ≠(9	
+false±
+Æ
+
+Æ Æ(*
+%2java.lang.Object"Hcom.smilepile.MainActivity#setSharedPhotoUris(Lerror/NonExistentClass;)V*,
+
+Æ Æ(*
+com.smilepile.MainActivity*
+
+Æ& Æ(* "4
+
+__unknown_file (
+
+%2java.lang.ObjectB
 com.smilepile.MainActivityHñ
 Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktô ô("0*Ω
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktŸ Ÿ("0*Ω
 2
-û] §(	c
+ﬁ] ‰(	c
 a
 
-ü ü(>"
+ﬂ ﬂ(>"
 statusBarColorjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>k
 i
 
-¢ ¢(_*
+‚ ‚(_*
 windowInsetsControllerjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>É
 Ä
 
-£A £(L
+„A „(L
 %3boolean"kotlin.Boolean#not()Z*%
 
-£B £(L
+„B „(L
 
 
 isDarkModeboolean*%
 
-£B £(L
+„B „(L
 
 
 isDarkModebooleand
 b
 
-£ £(L/
+„ „(L/
 isAppearanceLightStatusBarsjava.lang.Object"__id*
 
-£A £(L
+„A „(L
 
 %3booleani
 g
@@ -597,20 +1428,20 @@ g
 __unknown_file (
 %2"__id*?
 
-£# £(>1
+„# „(>1
 /
 isAppearanceLightStatusBarsjava.lang.Object*
 1*@
 3
-≥	 ¥("/
+Û	 Ù("/
 
 __unknown_file (
 implicit return*÷
 4
-ß) Ø(	k
+Á) Ô(	k
 i
 
-® ®(_*
+Ë Ë(_*
 windowInsetsControllerjava.lang.Object"__id*)
 
 __unknown_file (
@@ -624,10 +1455,10 @@ Q
 	<unknown>*
 3*÷
 5
-Ø ≥(	k
+Ô Û(	k
 i
 
-± ±(_*
+Ò Ò(_*
 windowInsetsControllerjava.lang.Object"__id*)
 
 __unknown_file (
@@ -641,126 +1472,126 @@ Q
 	<unknown>*
 3*ﬂ
 0
-ô ô(∏
+Ÿ Ÿ(∏
 µ
 
-û û()
+ﬁ ﬁ()
 %0boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*9
 
-û û(+
+ﬁ ﬁ(+
 )
 currentModecom.smilepile.mode.AppMode*4
 
-û# û()&
+ﬁ# ﬁ()&
 $
 PARENTcom.smilepile.mode.AppModeä
 á
 
-û- û([
+ﬁ- ﬁ([
 %1"	__compare*
 
-ûC û(E
+ﬁC ﬁ(E
 >=*+
 
-û; û(B
+ﬁ; ﬁ(B
 
 SDK_INTjava.lang.Object*%
 
-ûZ û([
+ﬁZ ﬁ([
 
 Mjava.lang.Object*
 2
 1*–
 1
-§	 ¶(∂
+‰	 Ê(∂
 ≥
 
-ß ß('
+Á Á('
 %4boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*9
 
-ß ß(+
+Á Á(+
 )
 currentModecom.smilepile.mode.AppMode*2
 
-ß# ß('$
+Á# Á('$
 "
 KIDScom.smilepile.mode.AppMode*
 4
 5:#
 
-ô ô(1
+Ÿ Ÿ(1
 
 isDarkModeboolean:7
 
-ô3 ô(G)
+Ÿ3 Ÿ(G)
 currentModecom.smilepile.mode.AppModeB
 com.smilepile.MainActivityH„
 3com.smilepile.MainActivity#onWindowFocusChanged(Z)V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt∑ ∑(%"0*´
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt˜ ˜(%"0*´
 
 2
-π æ(	À
+˘ ˛(	À
 »
 
-ª ª(+0
+˚ ˚(+0
 %2*com.smilepile.ui.viewmodels.ThemeViewModel"Zcom.smilepile.MainActivity#getThemeViewModel()Lcom/smilepile/ui/viewmodels/ThemeViewModel;*,
 
-ª ª(+
+˚ ˚(+
 com.smilepile.MainActivity≠
 ™
 
-ª, ª(6
+˚, ˚(6
 %3java.lang.Object"Bcom.smilepile.ui.viewmodels.ThemeViewModel#isDarkMode()LStateFlow;*@
 
-ª ª(+2
+˚ ˚(+2
 0
 %2*com.smilepile.ui.viewmodels.ThemeViewModel_
 ]
 
-ª ª(<
+˚ ˚(<
 
 isDarkModejava.lang.Object"__id*)
 
-ª7 ª(<
+˚7 ˚(<
 
 valuejava.lang.ObjectŒ
 À
 
-º º(+2
+¸ ¸(+2
 %4,com.smilepile.ui.viewmodels.AppModeViewModel"[com.smilepile.MainActivity#getModeViewModel()Lcom/smilepile/ui/viewmodels/AppModeViewModel;*,
 
-º º(+
+¸ ¸(+
 com.smilepile.MainActivity±
 Æ
 
-º, º(3
+¸, ¸(3
 %5java.lang.Object"Dcom.smilepile.ui.viewmodels.AppModeViewModel#getUiState()LStateFlow;*B
 
-º º(+4
+¸ ¸(+4
 2
 %4,com.smilepile.ui.viewmodels.AppModeViewModelf
 d
 
-º º(E
+¸ ¸(E
 currentModejava.lang.Object"__id*/
 
-º: º(E!
+¸: ¸(E!
 
 currentModejava.lang.Object˚
 ¯
 
-Ω Ω(2
+˝ ˝(2
 %6kotlin.Unit"Hcom.smilepile.MainActivity#setupSystemUI(ZLcom/smilepile/mode/AppMode;)V*,
 
-Ω Ω(2
+˝ ˝(2
 com.smilepile.MainActivity*.
 
-Ω Ω($ 
+˝ ˝($ 
 
 
 isDarkModejava.lang.Object*/
 
-Ω& Ω(1!
+˝& ˝(1!
 
 currentModejava.lang.ObjectK
 I
@@ -768,162 +1599,162 @@ I
 __unknown_file (
 %1"__id*!
 
-Ω Ω(2
+˝ ˝(2
 
 %6kotlin.Unit*
 1*ì
 0
-∑ ∑(z
+˜ ˜(z
 x
 
-∏ ∏(+
+¯ ¯(+
 %0%com.smilepile.security.SecureActivity"__id*7
 
-∏ ∏()'
+¯ ¯()'
 %com.smilepile.security.SecureActivity*
 2
 1*@
 1
-æ	 ø("/
+˛	 ˇ("/
 
 __unknown_file (
 implicit return:!
 
-∑& ∑(7
+˜& ˜(7
 hasFocusbooleanB
 com.smilepile.MainActivityH≈
 Ccom.smilepile.MainActivity#onConfigurationChanged(LConfiguration;)V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt¡ ¡('"0*À
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktÅ Å('"0*À
 0
-¡ ¡(z
+Å Å(z
 x
 
-¬ ¬(+
+Ç Ç(+
 %0%com.smilepile.security.SecureActivity"__id*7
 
-¬ ¬()'
+Ç Ç()'
 %com.smilepile.security.SecureActivityµ
 ≤
 
-ƒ ƒ(&
+Ñ Ñ(&
 %1 com.smilepile.theme.ThemeManager"Ncom.smilepile.MainActivity#getThemeManager()Lcom/smilepile/theme/ThemeManager;*,
 
-ƒ ƒ(
+Ñ Ñ(
 com.smilepile.MainActivity‘
 —
 
-ƒ ƒ(6
+Ñ Ñ(6
 %2kotlin.Unit"Icom.smilepile.theme.ThemeManager#onConfigurationChanged(LConfiguration;)V*6
 
-ƒ ƒ((
+Ñ Ñ((
 &
 %1 com.smilepile.theme.ThemeManager*-
 
-ƒ, ƒ(5
+Ñ, Ñ(5
 
 	newConfigjava.lang.Object"/
 
 __unknown_file (
 implicit return:+
 
-¡( ¡(@
+Å( Å(@
 	newConfigjava.lang.ObjectB
 com.smilepile.MainActivityH˘
 0com.smilepile.MainActivity#initializeSettings()V^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.kt« «(""0*@
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktá á(""0*@
 0
-« «("/
+á á("/
 
 __unknown_file (
 implicit returnB
 com.smilepile.MainActivityHê
 2com.smilepile.MainActivity#shouldShowOnboarding()Z^
-R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktﬂ ﬂ(,"1"7*(
+R/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/MainActivity.ktü ü(,"1"7*(
 2
-Ó ("
+Æ ∞("
 
- (	
+∞ ∞(	
 false*®
 3
-‰) Ó(€
+§) Æ(€
 ÿ
 
-Ê! Ê(36
+¶! ¶(36
 %40com.smilepile.data.repository.CategoryRepository"dcom.smilepile.MainActivity#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*,
 
-Ê! Ê(3
+¶! ¶(3
 com.smilepile.MainActivity÷”
 
-Ê4 Ê(F
+¶4 ¶(F
 %5java.util.List"Scom.smilepile.data.repository.CategoryRepository#getAllCategories()Ljava/util/List;*F
 
-Ê! Ê(38
+¶! ¶(38
 6
 %40com.smilepile.data.repository.CategoryRepository2getAllCategories()X
 V
 
-Ê Ê(F
+¶ ¶(F
 
 categoriesjava.util.List"__id*$
 
-Ê4 Ê(F
+¶4 ¶(F
 
 %5java.util.List*
 4
 5*'
 4
-Î Ï("
+´ ¨("
 
-Ì Ì(
+≠ ≠(
 true*≠
 5
-Á- Î(ƒ
+ß- ´(ƒ
 ¡
 
-È È(#,
+© ©(#,
 %7&com.smilepile.settings.SettingsManager"Wcom.smilepile.MainActivity#getSettingsManager()Lcom/smilepile/settings/SettingsManager;*,
 
-È È(#
+© ©(#
 com.smilepile.MainActivityª
 ∏
 
-È$ È(@
+©$ ©(@
 %8kotlin.Unit"Acom.smilepile.settings.SettingsManager#setOnboardingCompleted(Z)V*<
 
-È È(#.
+© ©(#.
 ,
 %7&com.smilepile.settings.SettingsManager*
 
-È; È(?
+©; ©(?
 true"
 
-Í Í( 	
+™ ™( 	
 false*'
 7
-Ò ı(	"
+± µ(	"
 
-Ù Ù(
+¥ ¥(
 true*˙
 1
-‡ Ò(	ƒ
+† ±(	ƒ
 ¡
 
-‚) ‚(8,
+¢) ¢(8,
 %1&com.smilepile.settings.SettingsManager"Wcom.smilepile.MainActivity#getSettingsManager()Lcom/smilepile/settings/SettingsManager;*,
 
-‚) ‚(8
+¢) ¢(8
 com.smilepile.MainActivity¨
 ©
 
-‚9 ‚(Q
+¢9 ¢(Q
 %2java.lang.Object"Ecom.smilepile.settings.SettingsManager#hasCompletedOnboarding()LFlow;*<
 
-‚) ‚(8.
+¢) ¢(8.
 ,
 %1&com.smilepile.settings.SettingsManagerk
 i
 
-‚ ‚(Y*
+¢ ¢(Y*
 hasCompletedOnboardingjava.lang.Object"__id*)
 
 __unknown_file (

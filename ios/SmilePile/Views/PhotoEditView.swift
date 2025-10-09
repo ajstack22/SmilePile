@@ -3,6 +3,7 @@ import SwiftUI
 struct PhotoEditView: View {
     @StateObject private var viewModel = PhotoEditViewModel()
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.typography) var typography
     @State private var showCategoryPicker = false
     @State private var showDeleteAlert = false
     @State private var cropRect = CGRect.zero
@@ -73,15 +74,17 @@ struct PhotoEditView: View {
                 if let error = viewModel.errorMessage {
                     VStack {
                         Text("Error")
-                            .font(.title2)
+                            .font(typography.titleMedium)
                             .foregroundColor(.white)
                         Text(error)
+                            .font(typography.bodyMedium)
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
                             .padding()
                         Button("Skip") {
                             viewModel.skipCurrentPhoto()
                         }
+                        .font(typography.bodyMedium)
                         .foregroundColor(.orange)
                     }
                     .padding()
@@ -161,7 +164,7 @@ struct PhotoEditView: View {
 
             // Match Android's "Edit Photo • X / Y" format
             Text("Edit Photo • \(viewModel.progressText)")
-                .font(.headline)
+                .font(typography.headlineSmall)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
 
@@ -190,7 +193,7 @@ struct PhotoEditView: View {
                         Image(systemName: "square.stack")
                             .font(.system(size: 24))
                         Text("Pile")
-                            .font(.caption2)
+                            .font(typography.labelSmall)
                     }
                     .foregroundColor(Color.smilePileBlue)
                     .frame(width: 56, height: 56)
@@ -204,7 +207,7 @@ struct PhotoEditView: View {
                         Image(systemName: "rotate.right")
                             .font(.system(size: 24))
                         Text("Rotate")
-                            .font(.caption2)
+                            .font(typography.labelSmall)
                     }
                     .foregroundColor(.white)
                     .frame(width: 56, height: 56)
@@ -231,7 +234,7 @@ struct PhotoEditView: View {
                         Image(systemName: "crop")
                             .font(.system(size: 24))
                         Text("Crop")
-                            .font(.caption2)
+                            .font(typography.labelSmall)
                     }
                     .foregroundColor(viewModel.showCropOverlay ? .orange : .white)
                     .frame(width: 56, height: 56)
@@ -245,7 +248,7 @@ struct PhotoEditView: View {
                         Image(systemName: "trash")
                             .font(.system(size: 24))
                         Text("Delete")
-                            .font(.caption2)
+                            .font(typography.labelSmall)
                     }
                     .foregroundColor(.red)
                     .frame(width: 56, height: 56)
@@ -270,7 +273,7 @@ struct PhotoEditView: View {
                     }
                 }) {
                     Text(viewModel.editQueue.count == 1 ? "Cancel" : "Skip")
-                        .font(.body)
+                        .font(typography.bodyMedium)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .overlay(
@@ -287,7 +290,7 @@ struct PhotoEditView: View {
                         Image(systemName: "checkmark")
                             .font(.system(size: 18))
                         Text("Apply")
-                            .font(.body)
+                            .font(typography.bodyMedium)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
@@ -304,7 +307,7 @@ struct PhotoEditView: View {
             if viewModel.canApplyToAll {
                 Button(action: { viewModel.applyToAll() }) {
                     Text("Apply rotation to all remaining photos")
-                        .font(.body)
+                        .font(typography.bodyMedium)
                         .foregroundColor(Color.white.opacity(0.7))
                 }
                 .padding(.top, 8)
@@ -324,6 +327,7 @@ struct CategoryPickerView: View {
     let selectedCategory: Category?
     let onSelect: (Category) -> Void
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.typography) var typography
 
     var body: some View {
         NavigationView {
@@ -335,7 +339,7 @@ struct CategoryPickerView: View {
                         .font(.system(size: 20))
 
                     Text(category.displayName)
-                        .font(.body)
+                        .font(typography.bodyMedium)
                         .foregroundColor(.primary)
 
                     Spacer()
@@ -361,6 +365,7 @@ struct CategoryPickerView: View {
 struct AspectRatioSelector: View {
     @Binding var selectedRatio: ImageProcessor.AspectRatio
     let onSelect: (ImageProcessor.AspectRatio) -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         // Match Android's FilterChip style
@@ -376,7 +381,8 @@ struct AspectRatioSelector: View {
                     onSelect(ratio)
                 }) {
                     Text(label)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(typography.labelMedium)
+                        .fontWeight(.medium)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                         .background(selectedRatio == ratio ? Color.white : Color.clear)

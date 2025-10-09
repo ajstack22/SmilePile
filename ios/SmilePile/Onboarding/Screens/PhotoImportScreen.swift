@@ -7,6 +7,7 @@ struct PhotoImportScreen: View {
     @State private var importedImages: [ImportedImageData] = []
     @State private var isLoadingPhotos = false
     @State private var showPhotoPicker = false
+    @Environment(\.typography) var typography
 
     struct ImportedImageData: Identifiable {
         let id: String
@@ -21,15 +22,15 @@ struct PhotoImportScreen: View {
             // Instructions
             VStack(spacing: 8) {
                 Text("Add Your First Photos")
-                    .font(.title2)
+                    .font(typography.headlineSmall)
                     .fontWeight(.bold)
 
                 Text("Select up to \(maxPhotos) photos to get started")
-                    .font(.subheadline)
+                    .font(typography.bodySmall)
                     .foregroundColor(.secondary)
 
                 Text("You can always add more later")
-                    .font(.caption)
+                    .font(typography.labelSmall)
                     .foregroundColor(.secondary)
             }
             .padding()
@@ -44,7 +45,7 @@ struct PhotoImportScreen: View {
                         .foregroundColor(.gray.opacity(0.3))
 
                     Text("No photos selected yet")
-                        .font(.headline)
+                        .font(typography.headlineSmall)
                         .foregroundColor(.secondary)
 
                     PhotosPicker(
@@ -54,7 +55,8 @@ struct PhotoImportScreen: View {
                         matching: .images
                     ) {
                         Label("Select Photos", systemImage: "photo.fill")
-                            .font(.headline)
+                            .font(typography.bodyMedium)
+                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .padding()
                             .frame(width: 200)
@@ -102,7 +104,7 @@ struct PhotoImportScreen: View {
                                     Image(systemName: "plus.circle")
                                     Text("Add More Photos")
                                 }
-                                .font(.subheadline)
+                                .font(typography.bodySmall)
                                 .foregroundColor(Color(red: 0.3, green: 0.7, blue: 1.0))
                             }
                             .onChange(of: selectedPhotos) { items in
@@ -121,7 +123,7 @@ struct PhotoImportScreen: View {
                             .foregroundColor(.blue)
 
                         Text("Tap photos to assign categories")
-                            .font(.caption)
+                            .font(typography.labelSmall)
                             .foregroundColor(.secondary)
                     }
                     .padding()
@@ -140,7 +142,8 @@ struct PhotoImportScreen: View {
                     coordinator.navigateToNext()
                 }) {
                     Text(importedImages.isEmpty ? "Skip for Now" : "Continue")
-                        .font(.headline)
+                        .font(typography.bodyMedium)
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -211,6 +214,7 @@ struct PhotoThumbnail: View {
     let onCategoryChanged: (UUID?) -> Void
     let onRemove: () -> Void
     @State private var showCategoryPicker = false
+    @Environment(\.typography) var typography
 
     var assignedCategory: TempCategory? {
         categories.first { $0.id == imageData.categoryId }
@@ -257,7 +261,7 @@ struct PhotoThumbnail: View {
                         .frame(width: 8, height: 8)
 
                     Text(category.name)
-                        .font(.caption2)
+                        .font(typography.labelSmall)
                         .lineLimit(1)
                 }
                 .padding(.horizontal, 6)
@@ -268,7 +272,7 @@ struct PhotoThumbnail: View {
                 )
             } else {
                 Text("Tap to assign")
-                    .font(.caption2)
+                    .font(typography.labelSmall)
                     .foregroundColor(.secondary)
             }
         }

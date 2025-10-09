@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WelcomeScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
+    @Environment(\.typography) var typography: Typography
 
     var body: some View {
         VStack(spacing: 20) {
@@ -23,7 +24,7 @@ struct WelcomeScreen: View {
 
                 // Tagline
                 Text("A safe and fun photo gallery for EVERYONE")
-                    .font(.nunito(18, weight: .regular))
+                    .font(typography.bodyLarge)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
@@ -63,7 +64,8 @@ struct WelcomeScreen: View {
                 coordinator.navigateToNext()
             }) {
                 Text("Get Started")
-                    .font(.nunito(18, weight: .bold))
+                    .font(typography.bodyLarge)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 56)
@@ -81,6 +83,7 @@ struct FeatureRow: View {
     let iconColor: Color
     let title: String
     let description: String
+    @Environment(\.typography) var typography: Typography
 
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
@@ -91,11 +94,12 @@ struct FeatureRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.nunito(16, weight: .semibold))
+                    .font(typography.bodyMedium)
+                    .fontWeight(.semibold)
                     .foregroundColor(.primary)
 
                 Text(description)
-                    .font(.nunito(14, weight: .regular))
+                    .font(typography.bodySmall)
                     .foregroundColor(.secondary)
             }
         }

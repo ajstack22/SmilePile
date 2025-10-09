@@ -4,6 +4,7 @@ struct CategorySetupScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
     @State private var newCategoryName = ""
     @State private var selectedColor = "#4CAF50"
+    @Environment(\.typography) var typography
 
     // Predefined categories for quick setup (only 3 to match Android)
     let suggestedCategories: [(String, String, String?)] = [
@@ -30,7 +31,7 @@ struct CategorySetupScreen: View {
                 Spacer().frame(height: 8)
 
                 Text("Organize your photos into colorful piles")
-                    .font(.custom("Nunito-Regular", size: 14))
+                    .font(typography.bodySmall)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
@@ -44,12 +45,13 @@ struct CategorySetupScreen: View {
                         VStack(alignment: .leading, spacing: 12) {
                             HStack {
                                 Text("Your Piles")
-                                    .font(.custom("Nunito-SemiBold", size: 18))
+                                    .font(typography.bodyLarge)
+                                    .fontWeight(.semibold)
 
                                 Spacer()
 
                                 Text("\(coordinator.onboardingData.categories.count)/5")
-                                    .font(.custom("Nunito-Regular", size: 14))
+                                    .font(typography.bodySmall)
                                     .foregroundColor(.secondary)
                             }
 
@@ -70,7 +72,8 @@ struct CategorySetupScreen: View {
                     // SECTION 2: Create Your Own
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Create Your Own")
-                            .font(.custom("Nunito-Medium", size: 16))
+                            .font(typography.bodyMedium)
+                            .fontWeight(.medium)
                             .foregroundColor(.secondary)
 
                         // Text field with inline + button
@@ -134,7 +137,8 @@ struct CategorySetupScreen: View {
                     if !suggestedCategories.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Or Quick Add")
-                                .font(.custom("Nunito-Medium", size: 16))
+                                .font(typography.bodyMedium)
+                                .fontWeight(.medium)
                                 .foregroundColor(.secondary)
 
                             VStack(spacing: 8) {
@@ -162,7 +166,7 @@ struct CategorySetupScreen: View {
             VStack(spacing: 8) {
                 if coordinator.onboardingData.categories.isEmpty {
                     Text("Add at least one pile to continue")
-                        .font(.custom("Nunito-Regular", size: 12))
+                        .font(typography.labelSmall)
                         .foregroundColor(.secondary)
                 }
 
@@ -170,7 +174,8 @@ struct CategorySetupScreen: View {
                     coordinator.navigateToNext()
                 }) {
                     Text("Continue")
-                        .font(.custom("Nunito-Bold", size: 18))
+                        .font(typography.bodyLarge)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
@@ -220,6 +225,7 @@ struct SuggestedCategoryCard: View {
     let name: String
     let colorHex: String
     let onAdd: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: onAdd) {
@@ -231,7 +237,8 @@ struct SuggestedCategoryCard: View {
                         .frame(width: 16, height: 16)
 
                     Text(name)
-                        .font(.custom("Nunito-Medium", size: 14))
+                        .font(typography.bodySmall)
+                        .fontWeight(.medium)
                         .foregroundColor(.primary)
                 }
 
@@ -258,6 +265,7 @@ struct SuggestedCategoryCard: View {
 struct CreatedCategoryRow: View {
     let category: TempCategory
     let onRemove: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         HStack(spacing: 12) {
@@ -267,11 +275,11 @@ struct CreatedCategoryRow: View {
 
             if let icon = category.icon {
                 Text(icon)
-                    .font(.custom("Nunito-Regular", size: 20))
+                    .font(typography.titleMedium)
             }
 
             Text(category.name)
-                .font(.custom("Nunito-Regular", size: 16))
+                .font(typography.bodyMedium)
                 .foregroundColor(.primary)
 
             Spacer()

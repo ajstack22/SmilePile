@@ -1,7 +1,7 @@
 à
 /com.smilepile.security.SecureActivity#<init>()Ve
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt h("0*<
-0 ("/
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt i("0*<
+0 ("/
 
 __unknown_file (
 implicit returnB)'
@@ -93,82 +93,82 @@ jcom.smilepile.security.SecureActivity#setAppModeViewModel(Lcom/smilepile/ui/vie
 value,com.smilepile.ui.viewmodels.AppModeViewModelB)'
 %com.smilepile.security.SecureActivityH`Æ
 9com.smilepile.security.SecureActivity#onCreate(LBundle;)Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt ("0*£
-0 (L
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt ("0*£
+0 (L
 J
- (
+ (
 %0java.lang.Object"__id* 
- (
+ (
 java.lang.Objectî
 ë
- (
+   (
 %1kotlin.Unit";com.smilepile.security.SecureActivity#observeModeChanges()V*5
- ()'
+   ()'
 %com.smilepile.security.SecureActivity"/
 
 __unknown_file (
 implicit return:2
- (5&
+ (5&
 savedInstanceStatejava.lang.ObjectB)'
 %com.smilepile.security.SecureActivityH€
 1com.smilepile.security.SecureActivity#onResume()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt" "("0*å
-0" "(L
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt# #("0*å
+0# #(L
 J
-# #(
+$ $(
 %0java.lang.Object"__id* 
-# #(
+$ $(
 java.lang.Object"/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityH‰
 :com.smilepile.security.SecureActivity#onUserInteraction()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt' '(""0*å
-0' '(L
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt( ((""0*å
+0( ((L
 J
-( ((
+) )(
 %0java.lang.Object"__id* 
-( ((
+) )(
 java.lang.Object"/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityH⁄
 0com.smilepile.security.SecureActivity#onPause()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt, ,("0*å
-0, ,(L
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt- -("0*å
+0- -(L
 J
-- -(
+. .(
 %0java.lang.Object"__id* 
-- -(
+. .(
 java.lang.Object"/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityH‹
 2com.smilepile.security.SecureActivity#onDestroy()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt1 1("0*å
-01 1(L
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt2 2("0*å
+02 2(L
 J
-2 2(
+3 3(
 %0java.lang.Object"__id* 
-2 2(
+3 3(
 java.lang.Object"/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityHñ
 ;com.smilepile.security.SecureActivity#observeModeChanges()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt9 9(""0*>
-06 8("/
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt: :(""0*>
+07 9("/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityHπ
 Ycom.smilepile.security.SecureActivity#applySecurityForMode(Lcom/smilepile/mode/AppMode;)Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.ktF F($"3"4*g
-3I K(S
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.ktG G($"3"4*g
+3J L(S
 Q
 
 __unknown_file (
@@ -177,7 +177,7 @@ Q
 __unknown_file (
 	<unknown>*
 1*g
-4L N(S
+4M O(S
 Q
 
 __unknown_file (
@@ -186,43 +186,43 @@ Q
 __unknown_file (
 	<unknown>*
 1*>
-1O	 P("/
+1P	 Q("/
 
 __unknown_file (
 implicit return:.
-F% F(2"
+G% G(2"
 modecom.smilepile.mode.AppModeB)'
 %com.smilepile.security.SecureActivityHÂ
 Zcom.smilepile.security.SecureActivity#onSecurityModeChanged(Lcom/smilepile/mode/AppMode;)Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.ktW W(,"0*>
-0T V("/
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.ktX X(,"0*>
+0U W("/
 
 __unknown_file (
 implicit return:.
-W- W(:"
+X- X(:"
 modecom.smilepile.mode.AppModeB)'
 %com.smilepile.security.SecureActivityHó
 <com.smilepile.security.SecureActivity#onInactivityTimeout()Vg
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt^ ^(*"0*>
-0[ ]("/
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kt_ _(*"0*>
+0\ ^("/
 
 __unknown_file (
 implicit returnB)'
 %com.smilepile.security.SecureActivityHΩ
 bcom.smilepile.security.SecureActivity#getSecuritySummary()Lcom/smilepile/security/SecuritySummary;g
-]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.kte e($"0*Ω
-0b d(Í
+]/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/security/SecureActivity.ktf f($"0*Ω
+0c e(Í
 Á
-f f( 5
+g g( 5
 %0/com.smilepile.security.SecurePreferencesManager"mcom.smilepile.security.SecureActivity#getSecurePreferences()Lcom/smilepile/security/SecurePreferencesManager;*5
-f f( )'
+g g( )'
 %com.smilepile.security.SecureActivityÑÅ
-f! f(5,
+g! g(5,
 %1&com.smilepile.security.SecuritySummary"lcom.smilepile.security.SecurePreferencesManager#getSecuritySummary()Lcom/smilepile/security/SecuritySummary;*C
-f f( 7
+g g( 7
 5
 %0/com.smilepile.security.SecurePreferencesManager2getSecuritySummary()":
-f f(5.
+g g(5.
 ,
 %1&com.smilepile.security.SecuritySummaryB)'
 %com.smilepile.security.SecureActivityH

@@ -71,6 +71,7 @@ struct SmilePileApp: App {
             ContentView()
                 .environment(\.managedObjectContext, coreDataStack.viewContext)
                 .environmentObject(settingsManager)
+                .typography(settingsManager.kidsModeEnabled ? .nunitoKids : .nunito)
                 .ignoresSafeArea()
                 // Home indicator is now controlled in ContentView based on Kids Mode
                 .statusBar(hidden: false) // Keep status bar visible but allow content underneath

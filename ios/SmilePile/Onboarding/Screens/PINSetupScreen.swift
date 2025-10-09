@@ -8,6 +8,7 @@ struct PINSetupScreen: View {
     @State private var showError = false
     @State private var errorMessage = ""
     @FocusState private var pinFieldFocused: Bool
+    @Environment(\.typography) var typography
 
     let pinLength = 4
 
@@ -21,15 +22,16 @@ struct PINSetupScreen: View {
                     .padding(.bottom, 20)
 
                 Text(isConfirming ? "Confirm Your PIN" : "Set Up PIN Protection")
-                    .font(.custom("Nunito-Bold", size: 22))
+                    .font(typography.headlineSmall)
+                    .fontWeight(.bold)
 
                 if isConfirming {
                     Text("Please enter your PIN again")
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(typography.bodySmall)
                         .foregroundColor(.secondary)
                 } else {
                     Text("Create a \(pinLength)-digit PIN to protect Parent Mode")
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(typography.bodySmall)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
@@ -118,7 +120,8 @@ struct PINSetupScreen: View {
                         coordinator.navigateToNext()
                     }) {
                         Text("Skip")
-                            .font(.custom("Nunito-Medium", size: 18))
+                            .font(typography.bodyLarge)
+                            .fontWeight(.medium)
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -138,7 +141,8 @@ struct PINSetupScreen: View {
                     }
                 }) {
                     Text(isConfirming ? "Confirm PIN" : "Continue")
-                        .font(.custom("Nunito-Medium", size: 18))
+                        .font(typography.bodyLarge)
+                        .fontWeight(.medium)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
@@ -233,11 +237,13 @@ struct PINSetupScreen: View {
 struct NumberButton: View {
     let number: String
     let action: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: action) {
             Text(number)
-                .font(.custom("Nunito-Medium", size: 24))
+                .font(typography.titleLarge)
+                .fontWeight(.medium)
                 .foregroundColor(.primary)
                 .frame(width: 70, height: 70)
                 .background(

@@ -9,6 +9,7 @@ struct CategorySelectionView: View {
     @State private var showCreateCategory = false
     @State private var newCategoryName = ""
     @State private var newCategoryColor = "#4CAF50"
+    @Environment(\.typography) var typography
 
     // Configuration
     private let columns = [
@@ -147,7 +148,7 @@ struct CategorySelectionView: View {
             ProgressView()
                 .scaleEffect(1.5)
             Text("Loading categories...")
-                .font(.subheadline)
+                .font(typography.bodySmall)
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -161,18 +162,18 @@ struct CategorySelectionView: View {
 
             VStack(spacing: 8) {
                 Text("No Piles")
-                    .font(.title2)
+                    .font(typography.titleMedium)
                     .fontWeight(.semibold)
 
                 Text("Create your first category to organize photos")
-                    .font(.subheadline)
+                    .font(typography.bodySmall)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
 
             Button(action: { showCreateCategory = true }) {
                 Label("Create Pile", systemImage: "plus.circle.fill")
-                    .font(.headline)
+                    .font(typography.headlineSmall)
                     .foregroundColor(.white)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
@@ -215,6 +216,7 @@ struct CategorySelectionCard: View {
     let photoCount: Int
     let isSelected: Bool
     let onTap: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: onTap) {
@@ -251,14 +253,14 @@ struct CategorySelectionCard: View {
 
                 // Category name
                 Text(category.displayName)
-                    .font(.caption)
+                    .font(typography.labelSmall)
                     .fontWeight(.medium)
                     .lineLimit(1)
                     .foregroundColor(.primary)
 
                 // Photo count
                 Text("\(photoCount) photos")
-                    .font(.caption2)
+                    .font(typography.labelSmall)
                     .foregroundColor(.secondary)
             }
             .padding(8)
@@ -281,11 +283,12 @@ struct QuickActionChip: View {
     let icon: String
     let color: Color
     let action: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: action) {
             Label(title, systemImage: icon)
-                .font(.footnote)
+                .font(typography.labelMedium)
                 .fontWeight(.medium)
                 .foregroundColor(color)
                 .padding(.horizontal, 12)
@@ -308,6 +311,7 @@ struct CreateCategorySheet: View {
     @State private var selectedIcon: String? = nil
     @State private var isCreating = false
     @State private var errorMessage: String?
+    @Environment(\.typography) var typography
 
     private let colorColumns = [
         GridItem(.adaptive(minimum: 50), spacing: 12)
@@ -374,7 +378,7 @@ struct CreateCategorySheet: View {
                     Section {
                         Text(errorMessage)
                             .foregroundColor(.red)
-                            .font(.caption)
+                            .font(typography.labelSmall)
                     }
                 }
             }
@@ -440,6 +444,7 @@ struct ColorSelectionCircle: View {
     let colorHex: String
     let isSelected: Bool
     let onTap: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: onTap) {
@@ -452,7 +457,7 @@ struct ColorSelectionCircle: View {
                 )
                 .overlay(
                     Image(systemName: "checkmark")
-                        .font(.caption)
+                        .font(typography.labelSmall)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .opacity(isSelected ? 1 : 0)

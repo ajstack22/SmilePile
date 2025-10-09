@@ -3,6 +3,7 @@ import SwiftUI
 struct OnboardingView: View {
     @StateObject private var coordinator = OnboardingCoordinator()
     @Environment(\.dismiss) var dismiss
+    @Environment(\.typography) var typography
 
     var body: some View {
         ZStack {
@@ -33,7 +34,8 @@ struct OnboardingView: View {
                         Spacer()
 
                         Text(coordinator.currentStep == .categories ? "Create Piles" : "PIN Setup")
-                            .font(.nunito(18, weight: .semibold))
+                            .font(typography.bodyLarge)
+                            .fontWeight(.semibold)
 
                         Spacer()
 

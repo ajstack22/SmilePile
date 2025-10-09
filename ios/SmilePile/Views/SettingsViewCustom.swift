@@ -2,6 +2,7 @@ import SwiftUI
 import LocalAuthentication
 
 struct SettingsViewCustom: View {
+    @Environment(\.typography) var typography
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @StateObject private var securityViewModel = SecuritySettingsViewModel()
     @StateObject private var backupViewModel = BackupViewModel()
@@ -134,12 +135,18 @@ struct SettingsViewCustom: View {
                                     }
 
                                     // Require PIN authentication if PIN is set
-                                    if securityViewModel.hasPIN {
-                                        // Show PIN validation sheet
-                                        showClearPINValidation = true
-                                    } else {
-                                        // No PIN set, show confirmation directly
-                                        showClearConfirmation = true
+                                    // Refresh security status to ensure we have the latest PIN state
+                                    securityViewModel.refreshSecurityStatus()
+
+                                    // Use DispatchQueue to ensure state updates are processed properly
+                                    DispatchQueue.main.async {
+                                        if securityViewModel.hasPIN {
+                                            // Show PIN validation sheet
+                                            showClearPINValidation = true
+                                        } else {
+                                            // No PIN set, show confirmation directly
+                                            showClearConfirmation = true
+                                        }
                                     }
                                 }
                             )
@@ -407,6 +414,7 @@ enum ClearDataError: LocalizedError {
 // MARK: - Progress Dialogs
 
 struct ExportProgressDialog: View {
+    @Environment(\.typography) var typography
     @ObservedObject var viewModel: BackupViewModel
 
     var body: some View {
@@ -415,21 +423,21 @@ struct ExportProgressDialog: View {
                 .scaleEffect(1.5)
 
             Text("Exporting Data")
-                .font(.headline)
+                .font(typography.headlineSmall)
 
             Text("Creating backup with photos. This may take a moment...")
-                .font(.subheadline)
+                .font(typography.bodyMedium)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
             Text(viewModel.exportMessage)
-                .font(.caption)
+                .font(typography.labelMedium)
                 .foregroundColor(.secondary)
 
             if viewModel.exportProgress > 0 {
                 Text("Progress: \(Int(viewModel.exportProgress * 100))%")
-                    .font(.caption)
+                    .font(typography.labelMedium)
                     .foregroundColor(.secondary)
             }
         }
@@ -441,6 +449,7 @@ struct ExportProgressDialog: View {
 }
 
 struct ImportProgressDialog: View {
+    @Environment(\.typography) var typography
     @ObservedObject var viewModel: BackupViewModel
 
     var body: some View {
@@ -449,15 +458,15 @@ struct ImportProgressDialog: View {
                 .scaleEffect(1.5)
 
             Text("Importing Data")
-                .font(.headline)
+                .font(typography.headlineSmall)
 
             Text(viewModel.importMessage)
-                .font(.caption)
+                .font(typography.labelMedium)
                 .foregroundColor(.secondary)
 
             if viewModel.importProgress > 0 {
                 Text("Progress: \(Int(viewModel.importProgress * 100))%")
-                    .font(.caption)
+                    .font(typography.labelMedium)
                     .foregroundColor(.secondary)
             }
         }

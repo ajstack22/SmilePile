@@ -4,6 +4,7 @@ struct CategoryManagementView: View {
     @StateObject private var viewModel = CategoryManagementViewModel()
     @State private var pulseAnimation = false
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
+    @Environment(\.typography) var typography
 
     var body: some View {
         ZStack {
@@ -34,13 +35,13 @@ struct CategoryManagementView: View {
                     viewModel.showAddCategoryDialog()
                 },
                 isPulsing: viewModel.hasPulseFAB,
-                backgroundColor: Color(red: 1.0, green: 102/255, blue: 0.0), // Keep orange for categories
-                iconName: "square.stack.badge.plus"
+                backgroundColor: Color.smilePileOrange,
+                iconName: "plus"
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             .padding(.trailing, 16)
-            .padding(.bottom, 16) // Position at bottom right corner
-            .zIndex(9999) // Maximum z-index to ensure FAB appears above all other views
+            .padding(.bottom, 16)
+            .zIndex(9999)
         }
             .sheet(isPresented: $viewModel.showAddDialog) {
                 AddCategorySheet(
@@ -112,11 +113,10 @@ struct CategoryManagementView: View {
                 .foregroundColor(.gray)
 
             Text("No Categories")
-                .font(.title2)
-                .fontWeight(.semibold)
+                .font(typography.headlineMedium)
 
             Text("Tap the + button to create your first category")
-                .font(.subheadline)
+                .font(typography.bodyMedium)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -125,7 +125,7 @@ struct CategoryManagementView: View {
                 viewModel.showAddCategoryDialog()
             }) {
                 Text("Create First Category")
-                    .fontWeight(.medium)
+                    .font(typography.labelLarge)
             }
             .buttonStyle(.borderedProminent)
             .padding(.top, 8)

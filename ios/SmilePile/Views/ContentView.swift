@@ -347,21 +347,21 @@ struct BackupStatsCard: View {
     let photoCount: Int
     let categoryCount: Int
     let accentColor: Color
+    @Environment(\.typography) var typography
 
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: "externaldrive")
-                .font(.title2)
+                .font(typography.headlineMedium)
                 .foregroundColor(accentColor)
                 .frame(width: 30)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("Library Contents")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
+                    .font(typography.labelLarge)
 
                 Text("\(photoCount) photos in \(categoryCount) categories")
-                    .font(.caption)
+                    .font(typography.labelMedium)
                     .foregroundColor(.secondary)
             }
 
@@ -391,6 +391,8 @@ struct PhotoCard: View {
 }
 
 struct EmptyGalleryView: View {
+    @Environment(\.typography) var typography
+
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "camera")
@@ -398,8 +400,7 @@ struct EmptyGalleryView: View {
                 .foregroundColor(.gray)
 
             Text("No photos yet!")
-                .font(.title2)
-                .fontWeight(.semibold)
+                .font(typography.headlineMedium)
 
             Text("Ask a parent to add some photos")
                 .foregroundColor(.secondary)
@@ -597,6 +598,7 @@ struct AboutDialog: View {
     @Binding var isPresented: Bool
     let appVersion: String
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.typography) var typography
     @State private var showSafariView = false
     @State private var safariURL: URL?
     @State private var showMailComposer = false
@@ -612,17 +614,13 @@ struct AboutDialog: View {
                     // SmilePile logo
                     SmilePileLogo(iconSize: 80, fontSize: 32, showIcon: true)
                         .padding(.top, 32)
-
-                    Text("SmilePile")
-                        .font(.title)
-                        .fontWeight(.bold)
                 }
                 .padding(.bottom, 24)
 
                 // App description
                 VStack(alignment: .leading, spacing: 16) {
                     Text("A safe and fun photo gallery designed for children to explore and organize their favorite pictures.")
-                        .font(.body)
+                        .font(typography.bodyLarge)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.primary)
                         .padding(.horizontal)
@@ -631,7 +629,7 @@ struct AboutDialog: View {
                     HStack {
                         Spacer()
                         Text("Version \(appVersion)")
-                            .font(.caption)
+                            .font(typography.labelMedium)
                             .foregroundColor(.secondary)
                         Spacer()
                     }
@@ -644,7 +642,7 @@ struct AboutDialog: View {
                             .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
 
                         Text("Child-safe design with parental controls")
-                            .font(.subheadline)
+                            .font(typography.bodyMedium)
                             .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
                     }
                     .padding()
@@ -665,11 +663,12 @@ struct AboutDialog: View {
                                 Image(systemName: "hand.raised.fill")
                                     .foregroundColor(.blue)
                                 Text("Privacy Policy")
+                                    .font(typography.bodyLarge)
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.secondary)
-                                    .font(.caption)
+                                    .font(typography.labelSmall)
                             }
                             .padding()
                             .background(
@@ -688,11 +687,12 @@ struct AboutDialog: View {
                                 Image(systemName: "doc.text.fill")
                                     .foregroundColor(.blue)
                                 Text("Terms of Service")
+                                    .font(typography.bodyLarge)
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.secondary)
-                                    .font(.caption)
+                                    .font(typography.labelSmall)
                             }
                             .padding()
                             .background(
@@ -711,11 +711,12 @@ struct AboutDialog: View {
                                 Image(systemName: "envelope.fill")
                                     .foregroundColor(.blue)
                                 Text("Support")
+                                    .font(typography.bodyLarge)
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.secondary)
-                                    .font(.caption)
+                                    .font(typography.labelSmall)
                             }
                             .padding()
                             .background(
@@ -738,11 +739,12 @@ struct AboutDialog: View {
                     isPresented = false
                 }) {
                     Text("OK")
-                        .font(.headline)
+                        .font(typography.bodyMedium)
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(red: 1.0, green: 0.42, blue: 0.42)) // Pink accent
+                        .background(Color.smilePileBlue)
                         .cornerRadius(12)
                 }
                 .padding()

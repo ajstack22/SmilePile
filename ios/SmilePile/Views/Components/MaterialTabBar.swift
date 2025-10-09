@@ -6,10 +6,10 @@ struct MaterialTabBar: View {
     @Namespace private var namespace
     @State private var tabPositions: [Int: CGRect] = [:]
 
-    private let tabs: [(icon: String, selectedIcon: String, label: String)] = [
-        ("photo.on.rectangle", "photo.on.rectangle.fill", "Gallery"),
-        ("square.stack", "square.stack", "Piles"),
-        ("gearshape", "gearshape.fill", "Settings")
+    private let tabs: [(icon: String, selectedIcon: String, label: String, selectedColor: Color)] = [
+        ("photo.on.rectangle", "photo.on.rectangle.fill", "Gallery", .smilePileBlue),
+        ("square.stack", "square.stack", "Piles", .smilePileOrange),
+        ("gearshape", "gearshape.fill", "Settings", .smilePilePink)
     ]
 
     var body: some View {
@@ -26,6 +26,7 @@ struct MaterialTabBar: View {
                         icon: selection == index ? tabs[index].selectedIcon : tabs[index].icon,
                         label: tabs[index].label,
                         isSelected: selection == index,
+                        selectedColor: tabs[index].selectedColor,
                         namespace: namespace,
                         onTap: {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
@@ -66,24 +67,26 @@ struct TabBarItem: View {
     let icon: String
     let label: String
     let isSelected: Bool
+    let selectedColor: Color
     let namespace: Namespace.ID
     let onTap: () -> Void
 
     @State private var isPressed = false
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: onTap) {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 24))
-                    .foregroundColor(isSelected ? Color.smilePilePink : Color(UIColor.secondaryLabel))
+                    .foregroundColor(isSelected ? selectedColor : Color(UIColor.secondaryLabel))
                     .scaleEffect(isPressed ? 0.92 : (isSelected ? 1.15 : 1.0))
                     .animation(.easeOut(duration: 0.2), value: isSelected)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
 
                 Text(label)
-                    .font(.system(size: 12, weight: isSelected ? .semibold : .regular))
-                    .foregroundColor(isSelected ? Color.smilePilePink : Color(UIColor.secondaryLabel))
+                    .font(isSelected ? typography.labelLarge : typography.labelMedium)
+                    .foregroundColor(isSelected ? selectedColor : Color(UIColor.secondaryLabel))
                     .scaleEffect(isPressed ? 0.92 : 1.0)
                     .animation(.easeOut(duration: 0.1), value: isPressed)
             }

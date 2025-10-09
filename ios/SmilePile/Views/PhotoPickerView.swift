@@ -186,6 +186,7 @@ struct EnhancedPhotoPickerView: View {
 /// Processing overlay view
 private struct ProcessingOverlay: View {
     let progress: Double
+    @Environment(\.typography) var typography
 
     var body: some View {
         ZStack {
@@ -199,16 +200,16 @@ private struct ProcessingOverlay: View {
 
                 VStack(spacing: 8) {
                     Text("Importing Photos")
-                        .font(.headline)
+                        .font(typography.headlineSmall)
                         .foregroundColor(.white)
 
                     if progress > 0 {
                         Text("Optimizing and saving...")
-                            .font(.caption)
+                            .font(typography.labelSmall)
                             .foregroundColor(.white.opacity(0.8))
                     } else {
                         Text("Preparing...")
-                            .font(.caption)
+                            .font(typography.labelSmall)
                             .foregroundColor(.white.opacity(0.8))
                     }
                 }
@@ -219,7 +220,7 @@ private struct ProcessingOverlay: View {
                         .frame(width: 200)
 
                     Text("\(Int(progress * 100))%")
-                        .font(.title3)
+                        .font(typography.titleSmall)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                 }
@@ -236,6 +237,7 @@ private struct ProcessingOverlay: View {
 /// Limited library selection prompt
 struct LimitedLibraryPrompt: View {
     @StateObject private var permissionManager = PhotoLibraryPermissionManager.shared
+    @Environment(\.typography) var typography
 
     var body: some View {
         VStack(spacing: 16) {
@@ -244,10 +246,10 @@ struct LimitedLibraryPrompt: View {
                 .foregroundColor(.orange)
 
             Text("Limited Photo Access")
-                .font(.headline)
+                .font(typography.headlineSmall)
 
             Text("You've granted limited access to photos. You can select more photos or grant full access.")
-                .font(.caption)
+                .font(typography.labelSmall)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)

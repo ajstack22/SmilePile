@@ -7,6 +7,7 @@ struct CategoryChip: View {
     let photoCount: Int?
     let onTap: (() -> Void)?
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.typography) var typography
 
     init(
         displayName: String,
@@ -44,12 +45,13 @@ struct CategoryChip: View {
                     )
 
                 Text(displayName)
-                    .font(.system(size: 14, weight: textWeight))
+                    .font(typography.bodyMedium)
+                    .fontWeight(textWeight)
                     .foregroundColor(isSelected ? .primary : .secondary)
 
                 if let count = photoCount, count > 0 {
                     Text("\(count)")
-                        .font(.system(size: 12))
+                        .font(typography.labelMedium)
                         .foregroundColor(.secondary)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -92,6 +94,7 @@ struct AllPhotosChip: View {
     let isSelected: Bool
     let onTap: () -> Void
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.typography) var typography
 
     private var textWeight: Font.Weight {
         if colorScheme == .dark {
@@ -107,7 +110,8 @@ struct AllPhotosChip: View {
         Button(action: onTap) {
             HStack(spacing: 8) {
                 Text("All")
-                    .font(.system(size: 14, weight: textWeight))
+                    .font(typography.bodyMedium)
+                    .fontWeight(textWeight)
                     .foregroundColor(isSelected ? .primary : .secondary)
             }
             .padding(.horizontal, 12)

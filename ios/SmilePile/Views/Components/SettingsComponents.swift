@@ -4,6 +4,7 @@ import SwiftUI
 struct SettingsSection<Content: View>: View {
     let title: String
     @ViewBuilder let content: Content
+    @Environment(\.typography) var typography
 
     init(
         title: String,
@@ -17,8 +18,7 @@ struct SettingsSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.caption)
-                .fontWeight(.semibold)
+                .font(typography.labelLarge)
                 .foregroundColor(.secondary)
                 .textCase(.uppercase)
                 .padding(.horizontal, 4)
@@ -39,6 +39,7 @@ struct SettingsActionItem: View {
     let icon: String
     let iconColor: Color
     let action: () -> Void
+    @Environment(\.typography) var typography
 
     init(
         title: String,
@@ -64,12 +65,12 @@ struct SettingsActionItem: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
-                        .font(.body)
+                        .font(typography.bodyLarge)
                         .foregroundColor(.primary)
 
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .font(.caption)
+                            .font(typography.labelMedium)
                             .foregroundColor(.secondary)
                     }
                 }
@@ -77,7 +78,7 @@ struct SettingsActionItem: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(typography.labelLarge)
                     .foregroundColor(Color(UIColor.tertiaryLabel))
             }
             .padding(.horizontal, 16)
@@ -94,6 +95,7 @@ struct SettingsSwitchItem: View {
     let icon: String
     @Binding var isOn: Bool
     let isEnabled: Bool
+    @Environment(\.typography) var typography
 
     init(
         title: String,
@@ -119,12 +121,12 @@ struct SettingsSwitchItem: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.body)
+                    .font(typography.bodyLarge)
                     .foregroundColor(.primary.opacity(isEnabled ? 1 : 0.5))
 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .font(.caption)
+                        .font(typography.labelMedium)
                         .foregroundColor(.secondary.opacity(isEnabled ? 1 : 0.5))
                 }
             }

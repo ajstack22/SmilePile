@@ -1,7 +1,7 @@
-š
-5com.smilepile.onboarding.OnboardingActivity#<init>()Vk
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt 6("0*<
-0 ("/
+›
+5com.smilepile.onboarding.OnboardingActivity#<init>()Vl
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt —("0*<
+0 ("/
 
 __unknown_file (
 implicit returnB/-
@@ -33,18 +33,375 @@ icom.smilepile.onboarding.OnboardingActivity#setViewModel(Lcom/smilepile/onboard
 implicit return:A
  (5
 value,com.smilepile.onboarding.OnboardingViewModelB/-
++com.smilepile.onboarding.OnboardingActivityH`±
+gcom.smilepile.onboarding.OnboardingActivity#getBackupManager()Lcom/smilepile/data/backup/BackupManager;
+__unknown_file ("0*ó
+0 (¾
+»
+ (0
+field'com.smilepile.data.backup.BackupManager"__id*w
+ (k*i-
++com.smilepile.onboarding.OnboardingActivity"8
+backupManager'com.smilepile.data.backup.BackupManager€
+~
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*>
+ (2
+0
+field'com.smilepile.data.backup.BackupManager`
+^
+ (0
+field'com.smilepile.data.backup.BackupManager"__annotation*
+ (
+
+%0">
+ (2
+0
+field'com.smilepile.data.backup.BackupManagerB/-
++com.smilepile.onboarding.OnboardingActivityH`Ñ
+hcom.smilepile.onboarding.OnboardingActivity#setBackupManager(Lcom/smilepile/data/backup/BackupManager;)V
+__unknown_file ("0*Ô
+0 (€
+~
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*>
+ (2
+0
+value'com.smilepile.data.backup.BackupManager`
+^
+ (0
+value'com.smilepile.data.backup.BackupManager"__annotation*
+ (
+
+%0¾
+»
+ (i-
++com.smilepile.onboarding.OnboardingActivity"8
+backupManager'com.smilepile.data.backup.BackupManager"__id*>
+ (2
+0
+value'com.smilepile.data.backup.BackupManager"
+ (
+implicit return:<
+ (0
+value'com.smilepile.data.backup.BackupManagerB/-
++com.smilepile.onboarding.OnboardingActivityH`ó
+ucom.smilepile.onboarding.OnboardingActivity#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;
+__unknown_file ("0*§
+0 (Ö
+Ó
+ (9
+field0com.smilepile.data.repository.CategoryRepository"__id*…
+ (y*w-
++com.smilepile.onboarding.OnboardingActivity"F
+categoryRepository0com.smilepile.data.repository.CategoryRepositoryŠ
+‡
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*G
+ (;
+9
+field0com.smilepile.data.repository.CategoryRepositoryi
+g
+ (9
+field0com.smilepile.data.repository.CategoryRepository"__annotation*
+ (
+
+%0"G
+ (;
+9
+field0com.smilepile.data.repository.CategoryRepositoryB/-
++com.smilepile.onboarding.OnboardingActivityH`’
+vcom.smilepile.onboarding.OnboardingActivity#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V
+__unknown_file ("0*þ
+0 (Š
+‡
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*G
+ (;
+9
+value0com.smilepile.data.repository.CategoryRepositoryi
+g
+ (9
+value0com.smilepile.data.repository.CategoryRepository"__annotation*
+ (
+
+%0Õ
+Ò
+ (w-
++com.smilepile.onboarding.OnboardingActivity"F
+categoryRepository0com.smilepile.data.repository.CategoryRepository"__id*G
+ (;
+9
+value0com.smilepile.data.repository.CategoryRepository"
+ (
+implicit return:E
+ (9
+value0com.smilepile.data.repository.CategoryRepositoryB/-
++com.smilepile.onboarding.OnboardingActivityH`Ú
+ocom.smilepile.onboarding.OnboardingActivity#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;
+__unknown_file ("0*”
+0 (Ì
+É
+ (6
+field-com.smilepile.data.repository.PhotoRepository"__id*
+ (s*q-
++com.smilepile.onboarding.OnboardingActivity"@
+photoRepository-com.smilepile.data.repository.PhotoRepository‡
+„
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*D
+ (8
+6
+field-com.smilepile.data.repository.PhotoRepositoryf
+d
+ (6
+field-com.smilepile.data.repository.PhotoRepository"__annotation*
+ (
+
+%0"D
+ (8
+6
+field-com.smilepile.data.repository.PhotoRepositoryB/-
++com.smilepile.onboarding.OnboardingActivityH`ú
+pcom.smilepile.onboarding.OnboardingActivity#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V
+__unknown_file ("0*ï
+0 (‡
+„
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*D
+ (8
+6
+value-com.smilepile.data.repository.PhotoRepositoryf
+d
+ (6
+value-com.smilepile.data.repository.PhotoRepository"__annotation*
+ (
+
+%0Ì
+É
+ (q-
++com.smilepile.onboarding.OnboardingActivity"@
+photoRepository-com.smilepile.data.repository.PhotoRepository"__id*D
+ (8
+6
+value-com.smilepile.data.repository.PhotoRepository"
+ (
+implicit return:B
+ (6
+value-com.smilepile.data.repository.PhotoRepositoryB/-
++com.smilepile.onboarding.OnboardingActivityH`·
+jcom.smilepile.onboarding.OnboardingActivity#getBiometricManager()Lcom/smilepile/security/BiometricManager;
+__unknown_file ("0*ö
+0 (Á
+¾
+ (0
+field'com.smilepile.security.BiometricManager"__id*z
+ (n*l-
++com.smilepile.onboarding.OnboardingActivity";
+biometricManager'com.smilepile.security.BiometricManager€
+~
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*>
+ (2
+0
+field'com.smilepile.security.BiometricManager`
+^
+ (0
+field'com.smilepile.security.BiometricManager"__annotation*
+ (
+
+%0">
+ (2
+0
+field'com.smilepile.security.BiometricManagerB/-
++com.smilepile.onboarding.OnboardingActivityH`×
+kcom.smilepile.onboarding.OnboardingActivity#setBiometricManager(Lcom/smilepile/security/BiometricManager;)V
+__unknown_file ("0*×
+0 (€
+~
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*>
+ (2
+0
+value'com.smilepile.security.BiometricManager`
+^
+ (0
+value'com.smilepile.security.BiometricManager"__annotation*
+ (
+
+%0Á
+¾
+ (l-
++com.smilepile.onboarding.OnboardingActivity";
+biometricManager'com.smilepile.security.BiometricManager"__id*>
+ (2
+0
+value'com.smilepile.security.BiometricManager"
+ (
+implicit return:<
+ (0
+value'com.smilepile.security.BiometricManagerB/-
 +com.smilepile.onboarding.OnboardingActivityH`©
 ?com.smilepile.onboarding.OnboardingActivity#onCreate(LBundle;)Vm
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt ("0*Œ
-0 (L
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt- -("0*Œ
+0- -(L
 J
- (
+. .(
 %0java.lang.Object"__id* 
- (
+. .(
 java.lang.Object"/
 
 __unknown_file (
 implicit return:2
- (5&
+- -(5&
 savedInstanceStatejava.lang.ObjectB/-
++com.smilepile.onboarding.OnboardingActivityHÒ
+Fcom.smilepile.onboarding.OnboardingActivity#handleImportBackup(LUri;)Vm
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.ktY Y(""0*>
+0Y Y("/
+
+__unknown_file (
+implicit return:#
+Y# Y(+
+urijava.lang.ObjectB/-
++com.smilepile.onboarding.OnboardingActivityHû
+Rcom.smilepile.onboarding.OnboardingActivity#copyUriToTempFile(LUri;)Ljava/io/File;m
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt| |(!"2"4*œ
+2~ ~(HTR
+~ ~(H%
+%1java.lang.IllegalStateException"java.lang.IllegalStateException±
+®
+~ ~(H
+%2";java.lang.IllegalStateException#<init>(Ljava/lang/String;)V*3
+~ ~(H'
+%
+%1java.lang.IllegalStateException**
+~, ~(F
+Failed to read backup file*
+3*I
+3
+__unknown_file ("*
+
+__unknown_file (
+
+early exit*j
+4} }(>S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+1*ÿ
+1~ ~(HW
+U
+} ~(H
+inputStreamjava.lang.Object"__id*"
+
+__unknown_file (
+
+%0c
+a
+
+€ €(Z"
+tempFileerror.NonExistentClass"__id*)
+
+__unknown_file (
+	<unknown>"2
+
+† †($
+"
+tempFileerror.NonExistentClass:#
+|" |(*
+urijava.lang.ObjectB/-
++com.smilepile.onboarding.OnboardingActivityHhÖ
+Lcom.smilepile.onboarding.OnboardingActivity#detectZipFormat(Ljava/io/File;)Zo
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt‰ ‰("1*%
+2
+“
+ •(	"
+
+Š •(	
+
+%0*W
+3
+“ •(	A
+?
+
+__unknown_file (
+%0"__id*
+
+” ”(	
+false*
+2*¶
+1
+Š “(	z
+x
+
+‹ ‹(
+%1java.lang.String"(java.io.File#getName()Ljava/lang/String;*(
+
+‹ ‹(
+
+tempFilejava.io.Filefd
+
+Œ Œ(
+
+%2long"java.io.File#length()J*(
+
+Œ Œ(
+
+tempFilejava.io.File2length()d
+b
+
+Œ Œ("
+%3"	__compare*
+
+Œ Œ( 
+>*
+
+Œ Œ(
+
+
+%2long*
+
+Œ! Œ("2S
+Q
+
+__unknown_file (
+%0"__id*)
+
+__unknown_file (
+	<unknown>*
+2
+3:&
+
+‰  ‰(6
+tempFilejava.io.FileB/-
 +com.smilepile.onboarding.OnboardingActivityH

@@ -6,6 +6,7 @@ import os.log
 /// Optimized photo gallery with virtual scrolling and memory-efficient loading
 // MARK: - Category Selection Sheet
 struct CategorySelectionSheet: View {
+    @Environment(\.typography) var typography
     let categories: [Category]
     let onSelectCategory: (Category) -> Void
     let onCancel: () -> Void
@@ -13,8 +14,8 @@ struct CategorySelectionSheet: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Text("Select a Category")
-                    .font(.headline)
+                Text("Select a Pile")
+                    .font(typography.headlineSmall)
                     .padding()
 
                 List(categories) { category in
@@ -27,6 +28,7 @@ struct CategorySelectionSheet: View {
                                 .frame(width: 24, height: 24)
 
                             Text(category.displayName)
+                                .font(typography.bodyLarge)
                                 .foregroundColor(.primary)
 
                             Spacer()
@@ -47,6 +49,7 @@ struct CategorySelectionSheet: View {
 
 // MARK: - Photo Stack View
 private struct OptimizedPhotoStackView: View {
+    @Environment(\.typography) var typography
     let photos: [Photo]
     let onPhotoClick: (Photo) -> Void
     let onEditClick: ((Photo) -> Void)?
@@ -74,6 +77,7 @@ private struct OptimizedPhotoStackView: View {
 }
 
 private struct OptimizedPhotoStackItem: View {
+    @Environment(\.typography) var typography
     let photo: Photo
     let onPhotoClick: () -> Void
     let onEditClick: (() -> Void)?
@@ -104,7 +108,7 @@ private struct OptimizedPhotoStackItem: View {
                                         Image(systemName: "exclamationmark.triangle")
                                             .foregroundColor(.gray)
                                         Text("Failed to load")
-                                            .font(.caption)
+                                            .font(typography.labelMedium)
                                             .foregroundColor(.gray)
                                     }
                                 )
@@ -126,7 +130,7 @@ private struct OptimizedPhotoStackItem: View {
                                 Image(systemName: "photo.slash")
                                     .foregroundColor(.gray)
                                 Text("Photo not found")
-                                    .font(.caption)
+                                    .font(typography.labelMedium)
                                     .foregroundColor(.gray)
                             }
                         )
@@ -146,14 +150,14 @@ private struct OptimizedPhotoStackItem: View {
 }
 
 private struct OptimizedEmptyPhotoStackState: View {
+    @Environment(\.typography) var typography
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "photo.stack")
                 .font(.system(size: 64))
                 .foregroundColor(.gray)
             Text("No photos in this category")
-                .font(.title2)
-                .fontWeight(.semibold)
+                .font(typography.headlineMedium)
             Text("Add photos to get started")
                 .foregroundColor(.secondary)
         }
@@ -163,6 +167,7 @@ private struct OptimizedEmptyPhotoStackState: View {
 }
 
 struct OptimizedPhotoGalleryView: View {
+    @Environment(\.typography) var typography
     @StateObject private var viewModel = PhotoGalleryViewModel()
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
     @Environment(\.horizontalSizeClass) var sizeClass
@@ -316,12 +321,12 @@ struct OptimizedPhotoGalleryView: View {
                     .frame(width: 200)
 
                 Text("\(Int(viewModel.loadingProgress * 100))%")
-                    .font(.caption)
+                    .font(typography.labelMedium)
                     .foregroundColor(.secondary)
             }
 
             Text("Loading photos...")
-                .font(.subheadline)
+                .font(typography.bodyMedium)
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -335,15 +340,13 @@ struct OptimizedPhotoGalleryView: View {
 
             if viewModel.selectedCategory == nil {
                 Text("Select a category above")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(typography.headlineMedium)
 
                 Text("Then tap + to add photos")
                     .foregroundColor(.secondary)
             } else {
                 Text("No photos in \(viewModel.selectedCategory?.displayName ?? "this category")")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(typography.headlineMedium)
 
                 Text("Tap the + button to add photos")
                     .foregroundColor(.secondary)
@@ -355,7 +358,7 @@ struct OptimizedPhotoGalleryView: View {
     private var debugOverlay: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Debug Info")
-                .font(.headline)
+                .font(typography.headlineSmall)
 
             Text("Photos: \(viewModel.photos.count)")
             Text("Visible: \(viewModel.visiblePhotos.count)")
@@ -515,8 +518,8 @@ struct OptimizedPhotoGalleryView: View {
         FloatingActionButton(
             action: handleAddPhotosButtonTap,
             isPulsing: viewModel.photos.isEmpty,
-            backgroundColor: Color(red: 74/255, green: 144/255, blue: 226/255),
-            iconName: "photo.badge.plus"
+            backgroundColor: Color.smilePileBlue,
+            iconName: "plus"
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         .padding(.trailing, 16)
@@ -631,15 +634,16 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
 
 // MARK: - Performance Monitoring View
 struct PerformanceMonitorView: View {
+    @Environment(\.typography) var typography
     let metrics: PerformanceMetrics
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Label("Performance", systemImage: "speedometer")
-                .font(.caption.bold())
+                .font(typography.labelLarge)
 
             Text(metrics.description)
-                .font(.caption2)
+                .font(typography.labelSmall)
                 .foregroundColor(.secondary)
         }
         .padding(8)

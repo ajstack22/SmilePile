@@ -38,7 +38,7 @@ struct SmilePileLogo: View {
             HStack(spacing: 0) {
                 // "Smile" in golden
                 Text("Smile")
-                    .font(.custom("Nunito-ExtraBold", size: fontSize))
+                    .font(.custom("Nunito", size: fontSize).weight(.heavy))
                     .foregroundColor(smileGolden)
                     // Subtle crisp shadow effect
                     .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
@@ -46,7 +46,7 @@ struct SmilePileLogo: View {
 
                 // "P" in green
                 Text("P")
-                    .font(.custom("Nunito-ExtraBold", size: fontSize))
+                    .font(.custom("Nunito", size: fontSize).weight(.heavy))
                     .foregroundColor(pileGreen)
                     // Subtle crisp shadow effect
                     .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
@@ -54,7 +54,7 @@ struct SmilePileLogo: View {
 
                 // "i" in blue
                 Text("i")
-                    .font(.custom("Nunito-ExtraBold", size: fontSize))
+                    .font(.custom("Nunito", size: fontSize).weight(.heavy))
                     .foregroundColor(pileBlue)
                     // Subtle crisp shadow effect
                     .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
@@ -62,7 +62,7 @@ struct SmilePileLogo: View {
 
                 // "l" in orange
                 Text("l")
-                    .font(.custom("Nunito-ExtraBold", size: fontSize))
+                    .font(.custom("Nunito", size: fontSize).weight(.heavy))
                     .foregroundColor(pileBoldOrange)
                     // Subtle crisp shadow effect
                     .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
@@ -70,7 +70,7 @@ struct SmilePileLogo: View {
 
                 // "e" in pink
                 Text("e")
-                    .font(.custom("Nunito-ExtraBold", size: fontSize))
+                    .font(.custom("Nunito", size: fontSize).weight(.heavy))
                     .foregroundColor(pilePink)
                     // Subtle crisp shadow effect
                     .shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)

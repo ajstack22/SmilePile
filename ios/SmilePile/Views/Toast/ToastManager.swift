@@ -214,6 +214,7 @@ struct ToastView: View {
     let toast: ToastItem
     @State private var isShowing = false
     @State private var dragOffset: CGSize = .zero
+    @Environment(\.typography) var typography
 
     private var isTopPosition: Bool {
         toast.position == .top || toast.position == .categoryTop
@@ -228,7 +229,8 @@ struct ToastView: View {
             }
 
             Text(toast.message)
-                .font(.system(size: 16, weight: .medium))
+                .font(typography.bodyMedium)
+                .fontWeight(.medium)
                 .foregroundColor(textColor)
                 .lineLimit(2)
 

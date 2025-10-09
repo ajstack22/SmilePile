@@ -395,8 +395,10 @@ class BackupManager {
             try context.save()
         }
 
-        // 4. Clear keychain data
-        try? keychainManager.delete(for: "pin")
+        // 4. Clear keychain data (use correct PIN key)
+        // Fix: Use PINManager's actual key name "parental_pin" not "pin"
+        try? keychainManager.delete(for: "parental_pin")
+        try? keychainManager.delete(for: "failed_attempts")
         try? keychainManager.delete(for: "biometric_enabled")
     }
 

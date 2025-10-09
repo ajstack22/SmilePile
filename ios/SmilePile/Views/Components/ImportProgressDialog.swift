@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ImportProgressDialog: View {
     @ObservedObject var viewModel: BackupViewModel
+    @Environment(\.typography) var typography
 
     var body: some View {
         VStack(spacing: 20) {
@@ -9,15 +10,15 @@ struct ImportProgressDialog: View {
                 .scaleEffect(1.5)
 
             Text("Importing Data")
-                .font(.headline)
+                .font(typography.headlineSmall)
 
             Text(viewModel.importMessage)
-                .font(.caption)
+                .font(typography.labelMedium)
                 .foregroundColor(.secondary)
 
             if viewModel.importProgress > 0 {
                 Text("Progress: \(Int(viewModel.importProgress * 100))%")
-                    .font(.caption)
+                    .font(typography.labelMedium)
                     .foregroundColor(.secondary)
             }
         }

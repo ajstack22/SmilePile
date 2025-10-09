@@ -9,6 +9,7 @@ struct AddCategorySheet: View {
     @State private var selectedColorHex: String
     @State private var showDuplicateError = false
     @FocusState private var isNameFieldFocused: Bool
+    @Environment(\.typography) var typography
 
     private let predefinedColors = ColorPickerGrid.defaultColors
 
@@ -39,7 +40,7 @@ struct AddCategorySheet: View {
                 VStack(spacing: 24) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Pile Name")
-                            .font(.subheadline)
+                            .font(typography.bodyLarge)
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
 
@@ -54,14 +55,14 @@ struct AddCategorySheet: View {
 
                         if showDuplicateError {
                             Text("A pile with this name already exists")
-                                .font(.caption)
+                                .font(typography.labelMedium)
                                 .foregroundColor(.red)
                         }
                     }
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Pile Color")
-                            .font(.subheadline)
+                            .font(typography.bodyLarge)
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
 
@@ -70,7 +71,7 @@ struct AddCategorySheet: View {
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Preview")
-                            .font(.subheadline)
+                            .font(typography.bodyLarge)
                             .fontWeight(.medium)
                             .foregroundColor(.secondary)
 
@@ -87,7 +88,7 @@ struct AddCategorySheet: View {
                         } else {
                             HStack {
                                 Text("Enter pile name to see preview")
-                                    .font(.subheadline)
+                                    .font(typography.bodyLarge)
                                     .foregroundColor(.secondary)
                                     .italic()
 
@@ -102,7 +103,7 @@ struct AddCategorySheet: View {
                                 .foregroundColor(.orange)
 
                             Text("This is a default pile. Only the color can be changed.")
-                                .font(.caption)
+                                .font(typography.labelMedium)
                                 .foregroundColor(.secondary)
 
                             Spacer()
@@ -123,12 +124,14 @@ struct AddCategorySheet: View {
                     Button("Cancel") {
                         onCancel()
                     }
+                    .font(typography.bodyMedium)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(isEditMode ? "Save" : "Add") {
                         handleSave()
                     }
+                    .font(typography.bodyMedium)
                     .fontWeight(.semibold)
                     .disabled(!isValid)
                 }

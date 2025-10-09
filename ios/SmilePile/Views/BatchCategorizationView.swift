@@ -5,6 +5,7 @@ import PhotosUI
 struct BatchCategorizationView: View {
     @StateObject private var viewModel = BatchCategorizationViewModel()
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.typography) var typography
 
     var body: some View {
         NavigationStack {
@@ -86,9 +87,9 @@ struct BatchCategorizationView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("\(viewModel.photos.count) Photos")
-                    .font(.headline)
+                    .font(typography.headlineSmall)
                 Text("\(viewModel.categorizedCount) categorized")
-                    .font(.caption)
+                    .font(typography.labelSmall)
                     .foregroundColor(.secondary)
             }
 
@@ -167,7 +168,7 @@ struct BatchCategorizationView: View {
             // Selected photos info
             HStack {
                 Text("\(viewModel.selectedPhotoIds.count) photos selected")
-                    .font(.caption)
+                    .font(typography.labelSmall)
                     .foregroundColor(.secondary)
 
                 Spacer()
@@ -175,7 +176,7 @@ struct BatchCategorizationView: View {
                 Button("Clear") {
                     viewModel.clearSelection()
                 }
-                .font(.caption)
+                .font(typography.labelSmall)
             }
             .padding(.horizontal)
 
@@ -198,7 +199,7 @@ struct BatchCategorizationView: View {
                         viewModel.showCreateCategory = true
                     }) {
                         Label("New", systemImage: "plus.circle")
-                            .font(.caption)
+                            .font(typography.labelSmall)
                             .foregroundColor(.accentColor)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
@@ -219,7 +220,7 @@ struct BatchCategorizationView: View {
                     }
                 }) {
                     Text("Apply to Selected")
-                        .font(.headline)
+                        .font(typography.headlineSmall)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
@@ -252,11 +253,11 @@ struct BatchCategorizationView: View {
                 )
 
             Text("No Photos to Categorize")
-                .font(.title2)
+                .font(typography.titleMedium)
                 .fontWeight(.bold)
 
             Text("Import photos to start organizing them into categories")
-                .font(.body)
+                .font(typography.bodyMedium)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
 
@@ -264,7 +265,7 @@ struct BatchCategorizationView: View {
                 viewModel.showPhotosPicker = true
             }) {
                 Label("Import Photos", systemImage: "photo.badge.plus")
-                    .font(.headline)
+                    .font(typography.headlineSmall)
                     .foregroundColor(.white)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 12)
@@ -287,7 +288,7 @@ struct BatchCategorizationView: View {
                         .scaleEffect(1.5)
 
                     Text(viewModel.processingStatus)
-                        .font(.headline)
+                        .font(typography.headlineSmall)
                         .foregroundColor(.white)
 
                     if viewModel.processingProgress > 0 {
@@ -296,7 +297,7 @@ struct BatchCategorizationView: View {
                             .frame(width: 200)
 
                         Text("\(Int(viewModel.processingProgress * 100))%")
-                            .font(.caption)
+                            .font(typography.labelSmall)
                             .foregroundColor(.white)
                     }
                 }
@@ -589,6 +590,7 @@ struct BatchPhotoCard: View {
 
 struct CategoryBadge: View {
     let category: Category
+    @Environment(\.typography) var typography
 
     var body: some View {
         ZStack {
@@ -598,11 +600,11 @@ struct CategoryBadge: View {
 
             if let icon = category.iconResource {
                 Image(systemName: icon)
-                    .font(.caption2)
+                    .font(typography.labelSmall)
                     .foregroundColor(.white)
             } else {
                 Text(String(category.displayName.prefix(1)))
-                    .font(.caption2)
+                    .font(typography.labelSmall)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }
@@ -613,6 +615,7 @@ struct CategoryBadge: View {
 struct CategoryAssignmentChip: View {
     let category: Category
     let onTap: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: onTap) {
@@ -622,7 +625,7 @@ struct CategoryAssignmentChip: View {
                     .frame(width: 8, height: 8)
 
                 Text(category.displayName)
-                    .font(.caption)
+                    .font(typography.labelSmall)
                     .fontWeight(.medium)
             }
             .foregroundColor(.primary)
@@ -645,6 +648,7 @@ struct QuickActionButton: View {
     let icon: String
     let color: Color
     let action: () -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: action) {
@@ -652,7 +656,7 @@ struct QuickActionButton: View {
                 Image(systemName: icon)
                     .font(.title2)
                 Text(title)
-                    .font(.caption2)
+                    .font(typography.labelSmall)
             }
             .foregroundColor(color)
             .frame(width: 80, height: 60)
@@ -671,6 +675,7 @@ struct QuickActionButton: View {
 private struct BatchCircularProgressView: View {
     let progress: Double
     let color: Color
+    @Environment(\.typography) var typography
 
     var body: some View {
         ZStack {
@@ -684,7 +689,7 @@ private struct BatchCircularProgressView: View {
                 .animation(.spring(), value: progress)
 
             Text("\(Int(progress * 100))%")
-                .font(.caption2)
+                .font(typography.labelSmall)
                 .fontWeight(.bold)
         }
     }

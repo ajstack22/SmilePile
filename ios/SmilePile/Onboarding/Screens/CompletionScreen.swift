@@ -4,6 +4,7 @@ struct CompletionScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
     @State private var showCheckmark = false
     @State private var showContent = false
+    @Environment(\.typography) var typography
 
     var body: some View {
         VStack(spacing: 40) {
@@ -28,10 +29,11 @@ struct CompletionScreen: View {
             if showContent {
                 VStack(spacing: 12) {
                     Text("All Set!")
-                        .font(.custom("Nunito-Bold", size: 32))
+                        .font(typography.displaySmall)
+                        .fontWeight(.bold)
 
                     Text("SmilePile is ready to use")
-                        .font(.custom("Nunito-Regular", size: 18))
+                        .font(typography.bodyLarge)
                         .foregroundColor(.secondary)
                 }
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -47,7 +49,7 @@ struct CompletionScreen: View {
                                 .foregroundColor(.smilePileOrange)
 
                             Text("\(coordinator.onboardingData.categories.count) piles created")
-                                .font(.custom("Nunito-Regular", size: 16))
+                                .font(typography.bodyMedium)
                         }
                     }
 
@@ -58,7 +60,7 @@ struct CompletionScreen: View {
                                 .foregroundColor(Color(hex: "#45B7D1") ?? .smilePileBlue)
 
                             Text("PIN protection enabled")
-                                .font(.custom("Nunito-Regular", size: 16))
+                                .font(typography.bodyMedium)
                         }
                     }
                 }
@@ -81,7 +83,8 @@ struct CompletionScreen: View {
                     coordinator.isComplete = true
                 }) {
                     Text("Start Using SmilePile")
-                        .font(.custom("Nunito-Medium", size: 18))
+                        .font(typography.bodyLarge)
+                        .fontWeight(.medium)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)

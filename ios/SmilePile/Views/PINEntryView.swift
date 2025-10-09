@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PINEntryView: View {
     @Binding var isPresented: Bool
@@ -15,6 +16,8 @@ struct PINEntryView: View {
     @State private var errorMessage = ""
     @State private var cooldownRemaining: Int = 0
     @State private var timer: Timer?
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.typography) var typography
 
     enum PINEntryMode {
         case setup
@@ -24,96 +27,147 @@ struct PINEntryView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) {
-                // Header
-                VStack(spacing: 12) {
-                    Image(systemName: "lock.circle.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(Color(red: 1.0, green: 0.792, blue: 0.157))
-
-                    Text(headerTitle)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-
-                    if cooldownRemaining > 0 {
-                        Text("Please wait \(cooldownRemaining) seconds")
-                            .foregroundColor(.red)
-                            .font(.subheadline)
-                    }
-                }
-                .padding(.top, 20)
-
-                // PIN Dots
-                HStack(spacing: 20) {
-                    ForEach(0..<pinLength) { index in
+            VStack(spacing: 0) {
+                // Header section with consistent styling
+                VStack(spacing: 20) {
+                    // Icon container with background
+                    ZStack {
                         Circle()
-                            .fill(pinDotColor(at: index))
-                            .frame(width: 16, height: 16)
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                            )
-                            .scaleEffect(currentPIN.count > index ? 1.2 : 1.0)
-                            .animation(.spring(response: 0.3), value: currentPIN.count)
-                    }
-                }
-                .padding(.vertical, 20)
+                            .fill(Color.smilePileYellow.opacity(0.1))
+                            .frame(width: 80, height: 80)
 
-                // Error Message
-                if showError {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .font(.caption)
-                        .transition(.opacity)
+                        Image(systemName: mode == .validate ? "lock.fill" : "lock.shield.fill")
+                            .font(.system(size: 36))
+                            .foregroundColor(Color.smilePileYellow)
+                    }
+                    .padding(.top, 32)
+
+                    // Title and subtitle
+                    VStack(spacing: 8) {
+                        Text(headerTitle)
+                            .font(typography.headlineSmall)
+                            .foregroundColor(.primary)
+
+                        Text(headerSubtitle)
+                            .font(typography.bodyMedium)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 32)
+
+                        if cooldownRemaining > 0 {
+                            Text("Please wait \(cooldownRemaining) seconds")
+                                .foregroundColor(Color.smilePileOrange)
+                                .font(typography.labelLarge)
+                                .padding(.top, 8)
+                        }
+                    }
+
+                    // PIN Dots with improved design
+                    HStack(spacing: 16) {
+                        ForEach(0..<pinLength) { index in
+                            Circle()
+                                .fill(pinDotColor(at: index))
+                                .frame(width: 18, height: 18)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            currentPIN.count > index
+                                                ? Color.smilePileYellow.opacity(0.3)
+                                                : Color.gray.opacity(0.2),
+                                            lineWidth: 2
+                                        )
+                                )
+                                .scaleEffect(currentPIN.count > index ? 1.1 : 1.0)
+                                .animation(.easeInOut(duration: 0.15), value: currentPIN.count)
+                        }
+                    }
+                    .padding(.vertical, 24)
+
+                    // Error Message
+                    if showError {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(typography.bodyMedium)
+                                .foregroundColor(Color.smilePileOrange)
+
+                            Text(errorMessage)
+                                .foregroundColor(Color.smilePileOrange)
+                                .font(typography.bodyMedium)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.smilePileOrange.opacity(0.1))
+                        )
+                        .transition(.opacity.combined(with: .scale))
+                    }
                 }
 
                 Spacer()
 
-                // Number Pad
-                VStack(spacing: 16) {
+                // Number Pad with improved design
+                VStack(spacing: 20) {
                     ForEach(0..<3) { row in
-                        HStack(spacing: 30) {
+                        HStack(spacing: 24) {
                             ForEach(1...3, id: \.self) { col in
                                 let number = row * 3 + col
                                 PINNumberButton(number: "\(number)") {
                                     if cooldownRemaining == 0 {
                                         addDigit("\(number)")
+                                        provideHapticFeedback()
                                     }
                                 }
                             }
                         }
                     }
 
-                    HStack(spacing: 30) {
-                        // Empty space
+                    HStack(spacing: 24) {
+                        // Empty space for layout
                         Color.clear
-                            .frame(width: 70, height: 70)
+                            .frame(width: 72, height: 72)
 
                         PINNumberButton(number: "0") {
                             if cooldownRemaining == 0 {
                                 addDigit("0")
+                                provideHapticFeedback()
                             }
                         }
 
-                        // Backspace
-                        Button(action: removeDigit) {
-                            Image(systemName: "delete.left.fill")
-                                .font(.title2)
-                                .foregroundColor(.gray)
-                                .frame(width: 70, height: 70)
+                        // Backspace with consistent design
+                        Button(action: {
+                            removeDigit()
+                            provideHapticFeedback()
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.gray.opacity(0.08))
+                                    .frame(width: 72, height: 72)
+
+                                Image(systemName: "delete.left.fill")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.secondary)
+                            }
                         }
+                        .buttonStyle(ScaleButtonStyle())
                     }
                 }
-                .padding(.bottom, 30)
+                .padding(.horizontal, 40)
+                .padding(.bottom, 40)
                 .disabled(cooldownRemaining > 0)
+                .opacity(cooldownRemaining > 0 ? 0.5 : 1.0)
             }
-            .padding(.horizontal)
+            .background(Color(UIColor.systemBackground))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(action: {
                         onCancel()
                         isPresented = false
+                    }) {
+                        Text("Cancel")
+                            .foregroundColor(Color.smilePileYellow)
+                            .font(typography.bodyLarge)
                     }
                 }
             }
@@ -137,15 +191,31 @@ struct PINEntryView: View {
         }
     }
 
+    private var headerSubtitle: String {
+        switch mode {
+        case .setup:
+            return isConfirming ? "Re-enter the PIN to confirm" : "This PIN will protect Parent Mode"
+        case .validate:
+            return "Verify your identity to continue"
+        case .change:
+            return isConfirming ? "Re-enter the new PIN to confirm" : "Choose a new 4-digit PIN"
+        }
+    }
+
     private var currentPIN: String {
         isConfirming ? confirmPIN : enteredPIN
     }
 
     private func pinDotColor(at index: Int) -> Color {
         if currentPIN.count > index {
-            return Color(red: 1.0, green: 0.792, blue: 0.157)
+            return Color.smilePileYellow
         }
-        return Color.gray.opacity(0.2)
+        return Color.gray.opacity(0.15)
+    }
+
+    private func provideHapticFeedback() {
+        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+        impactFeedback.impactOccurred()
     }
 
     private func addDigit(_ digit: String) {
@@ -247,22 +317,22 @@ struct PINEntryView: View {
 private struct PINNumberButton: View {
     let number: String
     let action: () -> Void
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.typography) var typography
 
     var body: some View {
         Button(action: action) {
-            Text(number)
-                .font(.title)
-                .fontWeight(.medium)
-                .foregroundColor(.primary)
-                .frame(width: 70, height: 70)
-                .background(
-                    Circle()
-                        .fill(Color.gray.opacity(0.1))
-                )
-                .overlay(
-                    Circle()
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                )
+            ZStack {
+                Circle()
+                    .fill(colorScheme == .dark
+                        ? Color.gray.opacity(0.15)
+                        : Color.gray.opacity(0.08))
+                    .frame(width: 72, height: 72)
+
+                Text(number)
+                    .font(typography.headlineMedium)
+                    .foregroundColor(.primary)
+            }
         }
         .buttonStyle(ScaleButtonStyle())
     }

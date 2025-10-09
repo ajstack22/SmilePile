@@ -4,6 +4,7 @@ struct CategoryManagementCard: View {
     let categoryWithCount: CategoryWithCount
     let onEdit: (Category) -> Void
     let onDelete: (Category) -> Void
+    @Environment(\.typography) var typography
 
     var body: some View {
         HStack(spacing: 12) {
@@ -15,11 +16,11 @@ struct CategoryManagementCard: View {
             // Category info
             VStack(alignment: .leading, spacing: 4) {
                 Text(categoryWithCount.category.displayName)
-                    .font(.headline)
+                    .font(typography.bodyLarge)
                     .foregroundColor(.primary)
 
                 Text("\(categoryWithCount.photoCount) photo\(categoryWithCount.photoCount == 1 ? "" : "s")")
-                    .font(.subheadline)
+                    .font(typography.bodyMedium)
                     .foregroundColor(.secondary)
             }
 
