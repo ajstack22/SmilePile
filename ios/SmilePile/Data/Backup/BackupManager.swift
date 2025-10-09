@@ -375,7 +375,7 @@ class BackupManager {
         }
 
         // 2. Batch delete all categories from CoreData
-        let context = PersistenceController.shared.container.viewContext
+        let context = CoreDataStack.shared.viewContext
         let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryEntity")
         let categoryBatchDelete = NSBatchDeleteRequest(fetchRequest: categoryRequest)
         categoryBatchDelete.resultType = .resultTypeCount

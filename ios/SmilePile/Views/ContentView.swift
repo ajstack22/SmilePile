@@ -74,10 +74,10 @@ struct ContentView: View {
         .onAppear {
             checkFirstLaunch()
         }
-        .onChange(of: settingsManager.onboardingCompleted) { oldValue, newValue in
+        .onChange(of: settingsManager.onboardingCompleted) { newValue in
             // If onboarding flag is cleared (e.g., after Clear All Data), show onboarding
             // Use guard flag to prevent re-entry loops
-            if !newValue && !isCheckingFirstLaunch && oldValue != newValue {
+            if !newValue && !isCheckingFirstLaunch {
                 print("🔄 onboardingCompleted changed to false - triggering onboarding check")
                 isCheckingFirstLaunch = true
                 checkFirstLaunch()
@@ -90,7 +90,7 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $showOnboarding) {
             OnboardingView()
         }
-        .onChange(of: settingsManager.shouldRestartApp) { _, shouldRestart in
+        .onChange(of: settingsManager.shouldRestartApp) { shouldRestart in
             // Handle app restart request from Clear All Data
             if shouldRestart {
                 // Dismiss any presented views and prepare for restart
