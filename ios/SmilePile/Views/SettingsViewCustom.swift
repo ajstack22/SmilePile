@@ -17,6 +17,7 @@ struct SettingsViewCustom: View {
     @State private var isClearing = false
     @State private var clearError: String?
     @State private var showErrorAlert = false
+    @State private var showClearSuccess = false
 
     private var appVersionString: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
@@ -267,6 +268,13 @@ struct SettingsViewCustom: View {
         } message: {
             Text(clearError ?? "Unknown error occurred")
         }
+        .alert("Data Cleared Successfully", isPresented: $showClearSuccess) {
+            Button("OK", role: .cancel) {
+                showClearSuccess = false
+            }
+        } message: {
+            Text("All photos, categories, settings, and PIN have been deleted. Please restart the app to complete the reset.")
+        }
         .onAppear {
             Task {
                 do {
@@ -339,8 +347,9 @@ struct SettingsViewCustom: View {
                 // Ensures UserDefaults and CoreData changes are written to disk
                 try await Task.sleep(nanoseconds: 300_000_000) // 300ms
 
-                // Terminate app (iOS will restart it if in foreground)
-                await terminateApp()
+                // Reset loading state and show success
+                isClearing = false
+                showClearSuccess = true
 
             } catch ClearDataError.concurrentOperation {
                 // Reset loading state
@@ -361,17 +370,6 @@ struct SettingsViewCustom: View {
         }
     }
 
-    /// Terminates the app properly after data clearing
-    /// Note: Apple discourages programmatic app termination, but this is required for data reset
-    private func terminateApp() async {
-        // Wait to ensure all data persistence operations complete
-        // This gives CoreData and UserDefaults time to write to disk
-        try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
-
-        // Direct termination is safer than UIControl().sendAction() which can
-        // trigger iOS background cleanup that may access deallocated objects
-        exit(0)
-    }
 }
 
 // MARK: - Clear Data Errors
