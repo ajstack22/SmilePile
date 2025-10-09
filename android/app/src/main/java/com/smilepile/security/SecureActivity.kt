@@ -2,7 +2,7 @@ package com.smilepile.security
 
 import android.os.Bundle
 import android.view.WindowManager
-import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.smilepile.mode.AppMode
@@ -14,10 +14,11 @@ import javax.inject.Inject
 
 /**
  * Base secure activity that provides security features
+ * Extends FragmentActivity (required for BiometricPrompt API)
  * Screenshot prevention has been removed to allow sharing moments
  */
 @AndroidEntryPoint
-abstract class SecureActivity : ComponentActivity() {
+abstract class SecureActivity : FragmentActivity() {
 
     @Inject
     lateinit var securePreferences: SecurePreferencesManager

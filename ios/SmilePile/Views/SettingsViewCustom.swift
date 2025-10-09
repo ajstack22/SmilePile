@@ -1,20 +1,16 @@
 import SwiftUI
+import LocalAuthentication
 
 struct SettingsViewCustom: View {
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @StateObject private var securityViewModel = SecuritySettingsViewModel()
+    @StateObject private var backupViewModel = BackupViewModel()
     @State private var backupPhotoCount: Int = 0
     @State private var backupCategoryCount: Int = 0
     @EnvironmentObject private var settingsManager: SettingsManager
     @State private var showPINSetup = false
     @State private var showPINChange = false
-    @State private var showingExportSheet = false
-    @State private var showingImportPicker = false
     @State private var showingAboutDialog = false
-    @State private var exportProgress: Double = 0.0
-    @State private var importProgress: Double = 0.0
-    @State private var isExporting = false
-    @State private var isImporting = false
 
     private var appVersionString: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
@@ -90,7 +86,12 @@ struct SettingsViewCustom: View {
                                 title: "Export Data",
                                 subtitle: "Save your photos and categories",
                                 icon: "square.and.arrow.up",
-                                action: { showingExportSheet = true }
+                                action: {
+                                    // Fix SECURITY-M4: Require biometric authentication
+                                    authenticateUser {
+                                        backupViewModel.exportData()
+                                    }
+                                }
                             )
 
                             Divider()
@@ -100,7 +101,12 @@ struct SettingsViewCustom: View {
                                 title: "Import Data",
                                 subtitle: "Restore from backup",
                                 icon: "square.and.arrow.down",
-                                action: { showingImportPicker = true }
+                                action: {
+                                    // Fix SECURITY-M4: Require biometric authentication
+                                    authenticateUser {
+                                        backupViewModel.showFilePicker()
+                                    }
+                                }
                             )
                         }
                     }
@@ -162,46 +168,66 @@ struct SettingsViewCustom: View {
                 onCancel: {}
             )
         }
-        .sheet(isPresented: $showingExportSheet) {
-            NavigationView {
-                VStack(spacing: 20) {
-                    Text("Exporting backup...")
-                        .font(.headline)
-
-                    if isExporting {
-                        ProgressView(value: exportProgress)
-                            .progressViewStyle(LinearProgressViewStyle())
-                            .padding(.horizontal)
-
-                        Text("Preparing backup...")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-
-                    Button("Export") {
-                        Task {
-                            isExporting = true
-                            // TODO: Implement export functionality
-                            try? await Task.sleep(nanoseconds: 2_000_000_000)
-                            isExporting = false
-                            showingExportSheet = false
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(isExporting)
-
-                    Spacer()
+        .sheet(isPresented: $backupViewModel.isExporting) {
+            ExportProgressDialog(viewModel: backupViewModel)
+        }
+        .sheet(isPresented: $backupViewModel.showDocumentPicker) {
+            DocumentPickerView(
+                selectedURL: .constant(nil),
+                onSelect: { url in
+                    backupViewModel.handleSelectedFile(url)
                 }
-                .padding()
-                .navigationTitle("Export Backup")
-                .navigationBarItems(trailing: Button("Cancel") {
-                    showingExportSheet = false
-                })
+            )
+        }
+        .sheet(isPresented: $backupViewModel.showShareSheet) {
+            if let url = backupViewModel.exportedFileURL {
+                ShareSheet(items: [url])
+                    .onDisappear {
+                        backupViewModel.dismissShareSheet()
+                    }
             }
         }
-        .sheet(isPresented: $showingImportPicker) {
-            Text("Import functionality coming soon")
-                .padding()
+        .alert("Restore Backup?", isPresented: $backupViewModel.showImportConfirmation) {
+            Button("Cancel", role: .cancel) {
+                backupViewModel.cancelImport()
+            }
+            Button("Restore") {
+                backupViewModel.confirmImport()
+            }
+        } message: {
+            if let result = backupViewModel.backupValidationResult {
+                Text("\(result.photosCount) photos, \(result.categoriesCount) categories")
+            }
+        }
+        .sheet(isPresented: $backupViewModel.isImporting) {
+            ImportProgressDialog(viewModel: backupViewModel)
+        }
+        .alert("Import Complete", isPresented: $backupViewModel.importSuccess) {
+            Button("OK") {
+                backupViewModel.dismissImportSuccess()
+            }
+        } message: {
+            if let result = backupViewModel.importResult {
+                Text("\(result.photosImported) photos imported successfully")
+            }
+        }
+        .alert("Export Error", isPresented: .constant(backupViewModel.exportError != nil)) {
+            Button("OK") {
+                backupViewModel.exportError = nil
+            }
+        } message: {
+            if let error = backupViewModel.exportError {
+                Text(error.localizedDescription)
+            }
+        }
+        .alert("Import Error", isPresented: .constant(backupViewModel.importError != nil)) {
+            Button("OK") {
+                backupViewModel.importError = nil
+            }
+        } message: {
+            if let error = backupViewModel.importError {
+                Text(error.localizedDescription)
+            }
         }
         .sheet(isPresented: $showingAboutDialog) {
             AboutDialog(
@@ -224,6 +250,95 @@ struct SettingsViewCustom: View {
             }
             securityViewModel.refreshSecurityStatus()
         }
+    }
+
+    // Fix SECURITY-M4: Biometric authentication for sensitive operations
+    private func authenticateUser(completion: @escaping () -> Void) {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            let reason = "Authenticate to access backup/restore"
+
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
+                DispatchQueue.main.async {
+                    if success {
+                        completion()
+                    } else {
+                        // Authentication failed - user cancelled or error occurred
+                        // No action needed, operation won't proceed
+                    }
+                }
+            }
+        } else {
+            // No biometric authentication available - proceed anyway
+            // (device doesn't support or user hasn't set up)
+            completion()
+        }
+    }
+}
+
+// MARK: - Progress Dialogs
+
+struct ExportProgressDialog: View {
+    @ObservedObject var viewModel: BackupViewModel
+
+    var body: some View {
+        VStack(spacing: 20) {
+            ProgressView()
+                .scaleEffect(1.5)
+
+            Text("Exporting Data")
+                .font(.headline)
+
+            Text("Creating backup with photos. This may take a moment...")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+
+            Text(viewModel.exportMessage)
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            if viewModel.exportProgress > 0 {
+                Text("Progress: \(Int(viewModel.exportProgress * 100))%")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(30)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+        .interactiveDismissDisabled()
+    }
+}
+
+struct ImportProgressDialog: View {
+    @ObservedObject var viewModel: BackupViewModel
+
+    var body: some View {
+        VStack(spacing: 20) {
+            ProgressView()
+                .scaleEffect(1.5)
+
+            Text("Importing Data")
+                .font(.headline)
+
+            Text(viewModel.importMessage)
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            if viewModel.importProgress > 0 {
+                Text("Progress: \(Int(viewModel.importProgress * 100))%")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(30)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+        .interactiveDismissDisabled()
     }
 }
 

@@ -218,6 +218,17 @@ private fun SmilePileBottomNavigation(
             NavigationBarItem(
                 modifier = Modifier.padding(top = 6.dp), // Reduced padding with increased bar height
                 icon = {
+                    // Determine color based on route and selection state
+                    val iconColor = if (isSelected) {
+                        when (item.route) {
+                            NavigationRoutes.GALLERY -> Color(0xFF2196F3) // SmilePile blue
+                            NavigationRoutes.CATEGORIES -> Color(0xFFFF9800) // SmilePile orange
+                            else -> Color(0xFFE86082) // SmilePile pink (Settings)
+                        }
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+
                     Icon(
                         imageVector = if (isSelected) {
                             item.selectedIcon
@@ -225,14 +236,27 @@ private fun SmilePileBottomNavigation(
                             item.unselectedIcon
                         },
                         contentDescription = stringResource(item.iconTextId),
+                        tint = iconColor,
                         modifier = Modifier
-                            .size(28.dp)
+                            .size(22.4.dp) // Reduced by 20% from 28.dp
                             .scale(iconScale)
                     )
                 },
                 label = {
+                    // Determine color based on route and selection state
+                    val textColor = if (isSelected) {
+                        when (item.route) {
+                            NavigationRoutes.GALLERY -> Color(0xFF2196F3) // SmilePile blue
+                            NavigationRoutes.CATEGORIES -> Color(0xFFFF9800) // SmilePile orange
+                            else -> Color(0xFFE86082) // SmilePile pink (Settings)
+                        }
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+
                     Text(
                         text = stringResource(item.iconTextId),
+                        color = textColor,
                         style = MaterialTheme.typography.labelMedium.copy(
                             fontSize = 14.sp,
                             fontWeight = if (isSelected) androidx.compose.ui.text.font.FontWeight.SemiBold else androidx.compose.ui.text.font.FontWeight.Normal
@@ -242,8 +266,8 @@ private fun SmilePileBottomNavigation(
                 selected = isSelected,
                 onClick = { onNavigateToDestination(item.route) },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color(0xFFE86082), // SmilePile pink
-                    selectedTextColor = Color(0xFFE86082), // SmilePile pink
+                    selectedIconColor = Color.Transparent, // Handled manually above
+                    selectedTextColor = Color.Transparent, // Handled manually above
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     indicatorColor = Color.Transparent // No background glow

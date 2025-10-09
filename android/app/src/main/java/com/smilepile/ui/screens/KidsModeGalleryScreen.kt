@@ -58,6 +58,9 @@ import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 import com.smilepile.ui.toast.CategoryToastUI
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import dagger.hilt.android.EntryPointAccessors
+import com.smilepile.di.BiometricManagerEntryPoint
 
 /**
  * Simplified gallery screen for Kids Mode
@@ -75,6 +78,19 @@ fun KidsModeGalleryScreen(
     modeViewModel: AppModeViewModel = hiltViewModel(),
     toastState: com.smilepile.ui.toast.ToastState? = null
 ) {
+    val context = LocalContext.current
+    val activity = context as? androidx.fragment.app.FragmentActivity
+    val coroutineScope = rememberCoroutineScope()
+
+    // Get BiometricManager from Hilt
+    val biometricManager = remember {
+        val appContext = context.applicationContext as android.app.Application
+        EntryPointAccessors.fromApplication(
+            appContext,
+            BiometricManagerEntryPoint::class.java
+        ).biometricManager()
+    }
+
     val galleryState by galleryViewModel.uiState.collectAsState()
     val categories by galleryViewModel.categories.collectAsState()
     val selectedCategoryId by galleryViewModel.selectedCategoryId.collectAsState()
@@ -83,6 +99,7 @@ fun KidsModeGalleryScreen(
 
     var zoomedPhoto by remember { mutableStateOf<Photo?>(null) }
     var maintainZoom by remember { mutableStateOf(false) }
+    var showPinDialog by remember { mutableStateOf(false) }
 
     // Initialize state and side effects
     KidsModeEffects(
@@ -94,6 +111,37 @@ fun KidsModeGalleryScreen(
         modeState = modeState,
         onNavigateToParentalLock = onNavigateToParentalLock
     )
+
+    // Handle authentication when mode toggle is requested with protection
+    LaunchedEffect(modeState.requiresPinAuth) {
+        if (modeState.requiresPinAuth) {
+            // Check if biometric is enabled and available
+            if (biometricManager.shouldOfferBiometricFirst() && activity != null) {
+                // Try biometric first
+                coroutineScope.launch {
+                    when (biometricManager.authenticateWithBiometrics(
+                        activity = activity,
+                        title = "Exit Kids Mode",
+                        subtitle = "Use your fingerprint or face to return to Parent Mode",
+                        description = "Biometric authentication protects parental settings"
+                    )) {
+                        com.smilepile.security.BiometricResult.SUCCESS -> {
+                            modeViewModel.forceParentMode()
+                        }
+                        com.smilepile.security.BiometricResult.USER_CANCELED -> {
+                            showPinDialog = true
+                        }
+                        else -> {
+                            showPinDialog = true
+                        }
+                    }
+                }
+            } else {
+                // No biometric available - show PIN dialog
+                showPinDialog = true
+            }
+        }
+    }
 
     // Handle back button
     BackHandler {
@@ -145,23 +193,52 @@ fun KidsModeGalleryScreen(
                 )
             }
     ) {
-        // Category filter chips at top - floating bar
+        // Category filter chips at top - floating bar with close button
         if (categories.isNotEmpty()) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .statusBarsPadding(), // Push content below status bar/notch
+                    .padding(top = 40.dp), // Reserve space for status bar/notch (even when hidden in Kids Mode)
                 shadowElevation = 8.dp,
                 color = MaterialTheme.colorScheme.surface
             ) {
-                CategoryFilterComponentKidsMode(
-                    categories = categories,
-                    selectedCategoryId = selectedCategoryId,
-                    onCategorySelected = { categoryId ->
-                        galleryViewModel.selectCategory(categoryId)
-                        // Toast removed - only show in fullscreen mode
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    // Category filter chips (scrollable, stops before close button)
+                    CategoryFilterComponentKidsMode(
+                        categories = categories,
+                        selectedCategoryId = selectedCategoryId,
+                        onCategorySelected = { categoryId ->
+                            galleryViewModel.selectCategory(categoryId)
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 56.dp) // Make room for close button
+                    )
+
+                    // Close button (fixed on right side)
+                    Surface(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 8.dp)
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .clickable { modeViewModel.requestModeToggle() },
+                        color = Color(0xFFE53935), // Red background
+                        shadowElevation = 2.dp
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Lock,
+                                contentDescription = "Exit Kids Mode",
+                                tint = Color.White,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
                     }
-                )
+                }
             }
         }
         // Photo grid
@@ -231,13 +308,20 @@ fun KidsModeGalleryScreen(
         }
     }
 
-    // Navigate to ParentalLockScreen for biometric/PIN authentication
-    LaunchedEffect(modeState.requiresPinAuth) {
-        if (modeState.requiresPinAuth) {
-            // Reset the requiresPinAuth state and navigate to ParentalLockScreen
-            modeViewModel.cancelPinAuth()
-            onNavigateToParentalLock()
-        }
+    // Show PIN verification dialog
+    if (showPinDialog) {
+        com.smilepile.ui.components.settings.PinVerificationDialog(
+            onDismiss = {
+                showPinDialog = false
+                modeViewModel.cancelPinAuth()
+            },
+            onVerify = { pin ->
+                modeViewModel.validatePinAndToggle(pin)
+            },
+            onSuccess = {
+                showPinDialog = false
+            }
+        )
     }
 
 }

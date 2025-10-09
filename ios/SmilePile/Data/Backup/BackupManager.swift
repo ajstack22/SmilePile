@@ -24,6 +24,11 @@ class BackupManager {
         self.categoryRepository = categoryRepository
         self.settingsManager = settingsManager
         self.keychainManager = keychainManager
+
+        // Fix ADVERSARIAL-CRITICAL-5: Clean up orphaned temp files on launch
+        Task {
+            await cleanupOrphanedTempFiles()
+        }
     }
 
     // MARK: - Directory Management
@@ -49,10 +54,15 @@ class BackupManager {
         let backupDir = try getBackupsDirectory()
         let workingDir = backupDir.appendingPathComponent(workingDirName, isDirectory: true)
 
+        // Fix SECURITY-M3: Set restricted permissions (user-only access)
+        let attributes: [FileAttributeKey: Any] = [
+            .posixPermissions: 0o700  // User read/write/execute only
+        ]
+
         try fileManager.createDirectory(
             at: workingDir,
             withIntermediateDirectories: true,
-            attributes: nil
+            attributes: attributes
         )
 
         return workingDir
@@ -60,6 +70,33 @@ class BackupManager {
 
     func cleanupBackupWorkingDirectory(_ directory: URL) {
         try? fileManager.removeItem(at: directory)
+    }
+
+    // Fix ADVERSARIAL-CRITICAL-5: Clean up orphaned temp files from crashes
+    func cleanupOrphanedTempFiles() async {
+        guard let backupDir = try? getBackupsDirectory() else { return }
+
+        guard let contents = try? fileManager.contentsOfDirectory(
+            at: backupDir,
+            includingPropertiesForKeys: [.creationDateKey],
+            options: .skipsHiddenFiles
+        ) else { return }
+
+        let oneHourAgo = Date().addingTimeInterval(-3600) // 1 hour
+
+        for item in contents {
+            // Only delete temp directories (backup_temp_* or restore_temp_*)
+            let filename = item.lastPathComponent
+            if filename.contains("_temp_") {
+                // Check file age
+                if let attrs = try? fileManager.attributesOfItem(atPath: item.path),
+                   let creationDate = attrs[.creationDate] as? Date,
+                   creationDate < oneHourAgo {
+                    // Delete old temp files
+                    try? fileManager.removeItem(at: item)
+                }
+            }
+        }
     }
 
     // MARK: - Data Collection
@@ -73,21 +110,12 @@ class BackupManager {
     }
 
     func collectSettings() -> BackupSettings {
-        // Check if PIN exists using PINManager
-        let hasPIN = PINManager.shared.isPINEnabled()
-
-        let securitySettings = BackupSecuritySettings(
-            hasPIN: hasPIN,
-            hasPattern: false, // iOS doesn't support pattern lock
-            kidSafeModeEnabled: settingsManager.kidsModeEnabled,
-            deleteProtectionEnabled: false // Not implemented yet
-        )
-
+        // Fix CRITICAL-3: Remove security settings from metadata (SECURITY-M2)
+        // Security settings should not be exported as they disclose security posture
         let isDarkMode = settingsManager.themeMode == .dark
 
         return BackupSettings(
-            isDarkMode: isDarkMode,
-            securitySettings: securitySettings
+            isDarkMode: isDarkMode
         )
     }
 
@@ -196,10 +224,17 @@ class BackupManager {
             cleanupBackupWorkingDirectory(workingDir)
         }
 
-        // Step 1: Collect data
+        // Fix CRITICAL-1: Calculate actual total items based on photo count
+        // Step 1: Collect data to determine total items
+        let categories = try await collectCategories()
+        let photos = try await collectPhotos()
+
+        // Calculate total progress items: categories + photos + metadata + ZIP
+        let totalItems = categories.count + photos.count + 3
+
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 10,
+            totalItems: totalItems,
+            processedItems: categories.count,
             currentOperation: "Collecting categories...",
             currentFile: nil,
             bytesProcessed: 0,
@@ -207,24 +242,10 @@ class BackupManager {
             errors: []
         ))
 
-        let categories = try await collectCategories()
-
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 20,
+            totalItems: totalItems,
+            processedItems: categories.count + photos.count,
             currentOperation: "Collecting photos...",
-            currentFile: nil,
-            bytesProcessed: 0,
-            totalBytes: 0,
-            errors: []
-        ))
-
-        let photos = try await collectPhotos()
-
-        progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 30,
-            currentOperation: "Collecting settings...",
             currentFile: nil,
             bytesProcessed: 0,
             totalBytes: 0,
@@ -233,10 +254,20 @@ class BackupManager {
 
         let settings = collectSettings()
 
+        progressCallback?(ExportProgress(
+            totalItems: totalItems,
+            processedItems: categories.count + photos.count,
+            currentOperation: "Collecting settings...",
+            currentFile: nil,
+            bytesProcessed: 0,
+            totalBytes: 0,
+            errors: []
+        ))
+
         // Step 2: Copy photos to working directory
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 40,
+            totalItems: totalItems,
+            processedItems: categories.count + photos.count,
             currentOperation: "Copying photos...",
             currentFile: nil,
             bytesProcessed: 0,
@@ -245,10 +276,10 @@ class BackupManager {
         ))
 
         let manifest = try await copyPhotosToBackupDirectory(photos, to: workingDir) { current, total in
-            let progress = 40 + Int((Double(current) / Double(total)) * 40)
+            let processedItems = categories.count + current
             progressCallback?(ExportProgress(
-                totalItems: 100,
-                processedItems: progress,
+                totalItems: totalItems,
+                processedItems: processedItems,
                 currentOperation: "Copying photos (\(current)/\(total))...",
                 currentFile: nil,
                 bytesProcessed: 0,
@@ -259,8 +290,8 @@ class BackupManager {
 
         // Step 3: Create metadata.json
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 80,
+            totalItems: totalItems,
+            processedItems: categories.count + photos.count + 1,
             currentOperation: "Creating metadata...",
             currentFile: nil,
             bytesProcessed: 0,
@@ -280,8 +311,8 @@ class BackupManager {
 
         // Step 4: Create ZIP file
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 90,
+            totalItems: totalItems,
+            processedItems: categories.count + photos.count + 2,
             currentOperation: "Creating ZIP archive...",
             currentFile: nil,
             bytesProcessed: 0,
@@ -295,10 +326,10 @@ class BackupManager {
         let zipPath = backupDir.appendingPathComponent(zipFilename)
 
         try await ZipUtils.createZip(from: workingDir, to: zipPath) { progress in
-            let totalProgress = 90 + Int(progress * 10)
+            let zipProgress = categories.count + photos.count + 2
             progressCallback?(ExportProgress(
-                totalItems: 100,
-                processedItems: totalProgress,
+                totalItems: totalItems,
+                processedItems: zipProgress,
                 currentOperation: "Compressing...",
                 currentFile: nil,
                 bytesProcessed: 0,
@@ -309,8 +340,8 @@ class BackupManager {
 
         // Step 5: Done
         progressCallback?(ExportProgress(
-            totalItems: 100,
-            processedItems: 100,
+            totalItems: totalItems,
+            processedItems: totalItems,
             currentOperation: "Backup complete",
             currentFile: nil,
             bytesProcessed: 0,

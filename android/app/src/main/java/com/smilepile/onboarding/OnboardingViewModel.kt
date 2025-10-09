@@ -41,6 +41,11 @@ data class ImportedPhotoData(
     val categoryId: String? = null
 )
 
+data class ImportStats(
+    val categoriesRestored: Int = 0,
+    val photosImported: Int = 0
+)
+
 data class OnboardingUiState(
     val currentStep: OnboardingStep = OnboardingStep.WELCOME,
     val navigationHistory: List<OnboardingStep> = emptyList(),
@@ -49,7 +54,10 @@ data class OnboardingUiState(
     val pinCode: String? = null,
     val skipPin: Boolean = false,
     val isLoading: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    val importMode: Boolean = false,
+    val importStats: ImportStats? = null,
+    val biometricEnabled: Boolean = false
 )
 
 @HiltViewModel
@@ -82,7 +90,11 @@ class OnboardingViewModel @Inject constructor(
 
         // Determine next step
         val nextStep = when (currentState.currentStep) {
-            OnboardingStep.WELCOME -> OnboardingStep.CATEGORIES
+            OnboardingStep.WELCOME -> {
+                // Skip categories if in import mode
+                if (currentState.importMode) OnboardingStep.PIN_SETUP
+                else OnboardingStep.CATEGORIES
+            }
             OnboardingStep.CATEGORIES -> OnboardingStep.PIN_SETUP
             OnboardingStep.PIN_SETUP -> OnboardingStep.COMPLETE
             OnboardingStep.COMPLETE -> OnboardingStep.COMPLETE
@@ -176,16 +188,26 @@ class OnboardingViewModel @Inject constructor(
             try {
                 val state = _uiState.value
 
-                // If user hasn't created any categories, create default ones
-                val categoriesToSave = if (state.categories.isEmpty()) {
-                    createDefaultTempCategories()
-                } else {
-                    state.categories
+                // Only create/save categories in fresh setup mode (not import mode)
+                if (!state.importMode) {
+                    // If user hasn't created any categories, create default ones
+                    val categoriesToSave = if (state.categories.isEmpty()) {
+                        createDefaultTempCategories()
+                    } else {
+                        state.categories
+                    }
+
+                    val categoryIdMap = saveCategories(categoriesToSave)
+                    importPhotos(state.importedPhotos, categoryIdMap)
                 }
 
-                val categoryIdMap = saveCategories(categoriesToSave)
-                importPhotos(state.importedPhotos, categoryIdMap)
                 savePinIfProvided(state.pinCode)
+
+                // Save biometric preference if PIN was set and user enabled it
+                if (!state.pinCode.isNullOrEmpty() && state.biometricEnabled) {
+                    securePreferencesManager.setBiometricEnabled(true)
+                }
+
                 settingsManager.setOnboardingCompleted(true)
 
                 _uiState.update { it.copy(
@@ -283,5 +305,24 @@ class OnboardingViewModel @Inject constructor(
 
     fun clearError() {
         _uiState.update { it.copy(error = null) }
+    }
+
+    fun startImportFlow() {
+        _uiState.update { it.copy(importMode = true) }
+    }
+
+    fun setImportStats(categoriesRestored: Int, photosImported: Int) {
+        _uiState.update {
+            it.copy(
+                importStats = ImportStats(
+                    categoriesRestored = categoriesRestored,
+                    photosImported = photosImported
+                )
+            )
+        }
+    }
+
+    fun setBiometricEnabled(enabled: Boolean) {
+        _uiState.update { it.copy(biometricEnabled = enabled) }
     }
 }

@@ -375,11 +375,9 @@ class RestoreManager {
             settingsManager.themeMode = .light
         }
 
-        // Restore security settings
-        settingsManager.kidsModeEnabled = settings.securitySettings.kidSafeModeEnabled
-
-        // Note: PINs are not restored for security reasons
-        // User must set up PIN again if needed
+        // Fix CRITICAL-3: Security settings no longer exported/restored (SECURITY-M2)
+        // Security settings like PIN, Kids Mode are not backed up or restored
+        // User must configure these manually after restore for security reasons
     }
 
     // MARK: - Utilities

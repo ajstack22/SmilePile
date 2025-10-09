@@ -27,6 +27,9 @@ fun CompletionScreen(
     categories: List<TempCategory>,
     photosImported: Int,
     pinEnabled: Boolean,
+    biometricEnabled: Boolean = false,
+    importMode: Boolean = false,
+    importStats: com.smilepile.onboarding.ImportStats? = null,
     onComplete: () -> Unit
 ) {
     var showCheckmark by remember { mutableStateOf(false) }
@@ -113,58 +116,106 @@ fun CompletionScreen(
                     modifier = Modifier.padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Piles created
-                    if (categories.isNotEmpty()) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Outlined.Layers,
-                                contentDescription = null,
-                                tint = Color(0xFFFF6600), // SmilePile orange
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Text(
-                                text = "${categories.size} piles created",
-                                fontSize = 14.sp
-                            )
+                    if (importMode) {
+                        // Import mode stats
+                        importStats?.let { stats ->
+                            // Categories restored
+                            if (stats.categoriesRestored > 0) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Outlined.Layers,
+                                        contentDescription = null,
+                                        tint = Color(0xFFFF6600), // SmilePile orange
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(
+                                        text = "${stats.categoriesRestored} piles restored",
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            }
+
+                            // Photos imported
+                            if (stats.photosImported > 0) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Default.Photo,
+                                        contentDescription = null,
+                                        tint = Color(0xFF4ECDC4),
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(
+                                        text = "${stats.photosImported} photos imported",
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            }
+                        }
+                    } else {
+                        // Fresh setup mode stats
+                        // Piles created
+                        if (categories.isNotEmpty()) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Layers,
+                                    contentDescription = null,
+                                    tint = Color(0xFFFF6600), // SmilePile orange
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Text(
+                                    text = "${categories.size} piles created",
+                                    fontSize = 14.sp
+                                )
+                            }
+                        }
+
+                        // Photos imported
+                        if (photosImported > 0) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    Icons.Default.Photo,
+                                    contentDescription = null,
+                                    tint = Color(0xFF4ECDC4),
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Text(
+                                    text = "$photosImported photos imported",
+                                    fontSize = 14.sp
+                                )
+                            }
                         }
                     }
 
-                    // Photos imported
-                    if (photosImported > 0) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Default.Photo,
-                                contentDescription = null,
-                                tint = Color(0xFF4ECDC4),
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Text(
-                                text = "$photosImported photos imported",
-                                fontSize = 14.sp
-                            )
-                        }
-                    }
-
-                    // PIN enabled
+                    // PIN enabled (shown for both modes)
                     if (pinEnabled) {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                Icons.Default.Lock,
+                                if (biometricEnabled) Icons.Default.Fingerprint else Icons.Default.Lock,
                                 contentDescription = null,
-                                tint = Color(0xFF45B7D1),
+                                tint = if (biometricEnabled) Color(0xFF4CAF50) else Color(0xFF45B7D1),
                                 modifier = Modifier.size(24.dp)
                             )
                             Text(
-                                text = "PIN protection enabled",
+                                text = if (biometricEnabled) {
+                                    "PIN with biometric unlock"
+                                } else {
+                                    "PIN protection enabled"
+                                },
                                 fontSize = 14.sp
                             )
                         }

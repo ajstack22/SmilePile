@@ -52,7 +52,8 @@ private val nunitoFontFamily = FontFamily(
 
 @Composable
 fun WelcomeScreen(
-    onGetStarted: () -> Unit
+    onGetStarted: () -> Unit,
+    onImportBackup: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -205,24 +206,49 @@ fun WelcomeScreen(
             )
         }
 
-        // Get Started button
-        Button(
-            onClick = onGetStarted,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 32.dp)
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = SmilePileBlue
-            ),
-            shape = MaterialTheme.shapes.medium
+        // Buttons
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(
-                text = "Get Started",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
+            // Start Fresh button
+            Button(
+                onClick = onGetStarted,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = SmilePileBlue
+                ),
+                shape = MaterialTheme.shapes.medium
+            ) {
+                Text(
+                    text = "Start Fresh",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            // Import Backup button
+            OutlinedButton(
+                onClick = onImportBackup,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = MaterialTheme.shapes.medium,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = SmilePileBlue
+                )
+            ) {
+                Text(
+                    text = "Import Backup",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
+
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 

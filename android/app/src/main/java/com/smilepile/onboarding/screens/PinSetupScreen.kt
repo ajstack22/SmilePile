@@ -4,8 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Fingerprint
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,11 +24,15 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun PinSetupScreen(
     onPinSet: (String) -> Unit,
-    onSkip: () -> Unit
+    onSkip: () -> Unit,
+    biometricAvailable: Boolean = false,
+    biometricEnabled: Boolean = false,
+    onBiometricToggle: (Boolean) -> Unit = {}
 ) {
     var pinCode by remember { mutableStateOf("") }
     var confirmPinCode by remember { mutableStateOf("") }
     var isConfirming by remember { mutableStateOf(false) }
+    var isPinConfirmed by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
 
@@ -33,49 +41,101 @@ fun PinSetupScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
+        // Compact header when PIN is confirmed to make room
+        if (isPinConfirmed) {
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = "PIN Set Successfully",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        } else {
+            Spacer(modifier = Modifier.height(16.dp))
+            PinHeader(
+                isConfirming = isConfirming,
+                showError = showError,
+                errorMessage = errorMessage,
+                currentPin = if (isConfirming) confirmPinCode else pinCode
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
 
-        PinHeader(
-            isConfirming = isConfirming,
-            showError = showError,
-            errorMessage = errorMessage,
-            currentPin = if (isConfirming) confirmPinCode else pinCode
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        PinNumberPad(
-            pinLength = pinLength,
-            currentPin = if (isConfirming) confirmPinCode else pinCode,
-            onNumberClick = { digit ->
-                addDigit(digit, if (isConfirming) confirmPinCode else pinCode, pinLength)?.let { newPin ->
-                    if (isConfirming) confirmPinCode = newPin else pinCode = newPin
+        // Number pad (only show when not confirmed)
+        if (!isPinConfirmed) {
+            PinNumberPad(
+                pinLength = pinLength,
+                currentPin = if (isConfirming) confirmPinCode else pinCode,
+                onNumberClick = { digit ->
+                    addDigit(digit, if (isConfirming) confirmPinCode else pinCode, pinLength)?.let { newPin ->
+                        if (isConfirming) confirmPinCode = newPin else pinCode = newPin
+                    }
+                },
+                onBackspace = {
+                    if (isConfirming && confirmPinCode.isNotEmpty()) {
+                        confirmPinCode = confirmPinCode.dropLast(1)
+                    } else if (!isConfirming && pinCode.isNotEmpty()) {
+                        pinCode = pinCode.dropLast(1)
+                    }
                 }
-            },
-            onBackspace = {
-                if (isConfirming && confirmPinCode.isNotEmpty()) {
-                    confirmPinCode = confirmPinCode.dropLast(1)
-                } else if (!isConfirming && pinCode.isNotEmpty()) {
-                    pinCode = pinCode.dropLast(1)
-                }
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+        } else {
+            // Biometric toggle (shown only after PIN is confirmed)
+            Spacer(modifier = Modifier.height(32.dp))
+            if (biometricAvailable) {
+                BiometricToggleCard(
+                    enabled = biometricEnabled,
+                    onToggle = onBiometricToggle
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = "You can enable biometric unlock for quick access to your protected content.",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
+            } else {
+                Icon(
+                    Icons.Default.CheckCircle,
+                    contentDescription = null,
+                    tint = Color(0xFF4CAF50),
+                    modifier = Modifier.size(80.dp)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Your content is now protected with a PIN",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 32.dp)
+                )
             }
-        )
+            Spacer(modifier = Modifier.height(32.dp))
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
         PinActionButtons(
             isConfirming = isConfirming,
+            isPinConfirmed = isPinConfirmed,
             pinCode = pinCode,
             confirmPinCode = confirmPinCode,
             pinLength = pinLength,
             onSkip = onSkip,
             onAction = {
-                if (isConfirming) {
+                if (isPinConfirmed) {
+                    // Move to next step
+                    onPinSet(pinCode)
+                } else if (isConfirming) {
                     if (pinCode == confirmPinCode) {
-                        onPinSet(pinCode)
+                        isPinConfirmed = true
+                        showError = false
                     } else {
                         errorMessage = "PINs don't match. Please try again."
                         showError = true
@@ -198,8 +258,6 @@ private fun PinNumberPad(
     onBackspace: () -> Unit
 ) {
     Column {
-        PinDotsIndicator(pinLength, currentPin)
-
         Spacer(modifier = Modifier.height(16.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -239,8 +297,62 @@ private fun PinNumberPad(
 }
 
 @Composable
+private fun BiometricToggleCard(
+    enabled: Boolean,
+    onToggle: (Boolean) -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    Icons.Default.Fingerprint,
+                    contentDescription = null,
+                    tint = Color(0xFF4CAF50),
+                    modifier = Modifier.size(32.dp)
+                )
+                Column {
+                    Text(
+                        text = "Use Biometrics",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        text = "Quick unlock with fingerprint",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            Switch(
+                checked = enabled,
+                onCheckedChange = onToggle
+            )
+        }
+    }
+}
+
+@Composable
 private fun PinActionButtons(
     isConfirming: Boolean,
+    isPinConfirmed: Boolean,
     pinCode: String,
     confirmPinCode: String,
     pinLength: Int,
@@ -253,7 +365,7 @@ private fun PinActionButtons(
             .fillMaxWidth()
             .padding(bottom = 16.dp)
     ) {
-        if (!isConfirming) {
+        if (!isConfirming && !isPinConfirmed) {
             OutlinedButton(
                 onClick = onSkip,
                 modifier = Modifier
@@ -273,14 +385,19 @@ private fun PinActionButtons(
             modifier = Modifier
                 .weight(1f)
                 .height(56.dp),
-            enabled = (isConfirming && confirmPinCode.length == pinLength) ||
+            enabled = (isPinConfirmed) ||
+                      (isConfirming && confirmPinCode.length == pinLength) ||
                       (!isConfirming && pinCode.length == pinLength),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF2196F3)
             )
         ) {
             Text(
-                text = if (isConfirming) "Confirm PIN" else "Set PIN",
+                text = when {
+                    isPinConfirmed -> "Continue"
+                    isConfirming -> "Confirm PIN"
+                    else -> "Set PIN"
+                },
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )

@@ -31,6 +31,9 @@ fun OnboardingScreen(
     onCategoryRemoved: (TempCategory) -> Unit,
     onPhotosSelected: (List<ImportedPhotoData>) -> Unit,
     onPinSet: (String) -> Unit,
+    onBiometricToggle: (Boolean) -> Unit,
+    isBiometricAvailable: Boolean,
+    onImportBackup: () -> Unit,
     onComplete: () -> Unit
 ) {
     Box(
@@ -86,7 +89,10 @@ fun OnboardingScreen(
             ) { step ->
                 when (step) {
                     OnboardingStep.WELCOME -> {
-                        WelcomeScreen(onGetStarted = onNavigateNext)
+                        WelcomeScreen(
+                            onGetStarted = onNavigateNext,
+                            onImportBackup = onImportBackup
+                        )
                     }
                     OnboardingStep.CATEGORIES -> {
                         CategorySetupScreen(
@@ -104,7 +110,10 @@ fun OnboardingScreen(
                             },
                             onSkip = {
                                 onSkip()
-                            }
+                            },
+                            biometricAvailable = isBiometricAvailable,
+                            biometricEnabled = uiState.biometricEnabled,
+                            onBiometricToggle = onBiometricToggle
                         )
                     }
                     OnboardingStep.COMPLETE -> {
@@ -112,6 +121,9 @@ fun OnboardingScreen(
                             categories = uiState.categories,
                             photosImported = 0,
                             pinEnabled = !uiState.skipPin && uiState.pinCode != null,
+                            biometricEnabled = uiState.biometricEnabled,
+                            importMode = uiState.importMode,
+                            importStats = uiState.importStats,
                             onComplete = onComplete
                         )
                     }

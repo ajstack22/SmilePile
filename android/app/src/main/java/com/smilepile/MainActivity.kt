@@ -1,13 +1,18 @@
 package com.smilepile
 
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
@@ -58,6 +63,8 @@ class MainActivity : SecureActivity() {
     private val modeViewModel: AppModeViewModel by viewModels()
 
     private var showKidsModeExitDialog by mutableStateOf(false)
+    private var sharedPhotoUris by mutableStateOf<List<Uri>?>(null)
+    private var showSharedPhotoCategoryDialog by mutableStateOf(false)
 
     private val kidsBackPressedCallback = object : OnBackPressedCallback(false) {
         override fun handleOnBackPressed() {
@@ -79,6 +86,11 @@ class MainActivity : SecureActivity() {
 
         // Enable edge-to-edge display
         enableEdgeToEdge()
+
+        // Handle share intent first
+        if (handleShareIntent(intent)) {
+            return
+        }
 
         // Check for first launch and show onboarding if needed
         lifecycleScope.launch {
@@ -114,6 +126,111 @@ class MainActivity : SecureActivity() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.let {
+            setIntent(it)
+
+            Log.d("MainActivity", "onNewIntent called with action: ${it.action}")
+
+            // Reset state before handling new share intent
+            sharedPhotoUris = null
+            showSharedPhotoCategoryDialog = false
+
+            handleShareIntent(it)
+        }
+    }
+
+    private fun handleShareIntent(intent: Intent): Boolean {
+        when (intent.action) {
+            Intent.ACTION_SEND -> {
+                if (intent.type?.startsWith("image/") == true) {
+                    handleSendImage(intent)
+                    return true
+                }
+            }
+            Intent.ACTION_SEND_MULTIPLE -> {
+                if (intent.type?.startsWith("image/") == true) {
+                    handleSendMultipleImages(intent)
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    private fun handleSendImage(intent: Intent) {
+        val imageUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
+        }
+
+        imageUri?.let { uri ->
+            if (isValidContentUri(uri)) {
+                showCategorySelectionForSharedPhotos(listOf(uri))
+            } else {
+                Log.e("MainActivity", "Invalid shared URI: $uri")
+            }
+        }
+    }
+
+    private fun handleSendMultipleImages(intent: Intent) {
+        val imageUris = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM, Uri::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)
+        }
+
+        imageUris?.let { uris ->
+            val validUris = uris.filter { isValidContentUri(it) }
+            if (validUris.isNotEmpty()) {
+                val truncatedUris = if (validUris.size > 50) {
+                    Log.w("MainActivity", "Truncating ${validUris.size} photos to 50")
+                    validUris.take(50)
+                } else {
+                    validUris
+                }
+                showCategorySelectionForSharedPhotos(truncatedUris)
+            }
+        }
+    }
+
+    private fun isValidContentUri(uri: Uri): Boolean {
+        return try {
+            uri.scheme == "content" &&
+            contentResolver.getType(uri)?.startsWith("image/") == true
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error validating URI: $uri", e)
+            false
+        }
+    }
+
+    private fun showCategorySelectionForSharedPhotos(uris: List<Uri>) {
+        lifecycleScope.launch {
+            Log.d("MainActivity", "showCategorySelectionForSharedPhotos: ${uris.size} URIs")
+
+            val needsOnboarding = shouldShowOnboarding()
+            if (needsOnboarding) {
+                val intent = Intent(this@MainActivity, OnboardingActivity::class.java)
+                startActivity(intent)
+                return@launch
+            }
+
+            sharedPhotoUris = uris
+            showSharedPhotoCategoryDialog = true
+
+            Log.d("MainActivity", "Set showSharedPhotoCategoryDialog = true, sharedPhotoUris size = ${sharedPhotoUris?.size}")
+
+            if (!hasSetupUI) {
+                setupMainUI()
+                hasSetupUI = true
+            }
+        }
+    }
+
     private fun setupMainUI() {
         // Initialize settings on first launch
         initializeSettings()
@@ -145,6 +262,81 @@ class MainActivity : SecureActivity() {
                         onKidsModeExitDialogDismiss = { showKidsModeExitDialog = false },
                         modeViewModel = modeViewModel
                     )
+
+                    // Show category selection dialog for shared photos
+                    SharedPhotoHandler()
+                }
+            }
+        }
+    }
+
+    @androidx.compose.runtime.Composable
+    private fun SharedPhotoHandler() {
+        if (showSharedPhotoCategoryDialog && sharedPhotoUris != null) {
+            val categoryViewModel: com.smilepile.ui.viewmodels.CategoryViewModel by viewModels()
+            val importViewModel: com.smilepile.ui.viewmodels.PhotoImportViewModel by viewModels()
+
+            // Clear any previous import state to prevent LaunchedEffects from firing with stale data
+            androidx.compose.runtime.LaunchedEffect(sharedPhotoUris) {
+                importViewModel.clearMessages()
+            }
+
+            val categories by categoryViewModel.categories.collectAsState()
+            val importState by importViewModel.uiState.collectAsState()
+
+            com.smilepile.ui.components.CategorySelectionDialog(
+                categories = categories,
+                selectedCategoryIds = emptySet(),
+                multiSelectMode = false,
+                title = "Add ${sharedPhotoUris!!.size} photo${if (sharedPhotoUris!!.size > 1) "s" else ""} to which pile?",
+                onCategorySelected = { categoryIds ->
+                    val categoryId = categoryIds.firstOrNull()
+                    if (categoryId != null) {
+                        importViewModel.importPhotos(sharedPhotoUris!!, categoryId)
+                    }
+                    showSharedPhotoCategoryDialog = false
+                    sharedPhotoUris = null
+                },
+                onDismiss = {
+                    showSharedPhotoCategoryDialog = false
+                    sharedPhotoUris = null
+                }
+            )
+
+            // Show import progress
+            if (importState.isImporting) {
+                androidx.compose.ui.window.Dialog(onDismissRequest = {}) {
+                    androidx.compose.material3.Card {
+                        androidx.compose.foundation.layout.Column(
+                            modifier = Modifier.padding(24.dp),
+                            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                        ) {
+                            androidx.compose.material3.CircularProgressIndicator()
+                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+                            androidx.compose.material3.Text("Importing photos...")
+                            if (importState.isBatchImport) {
+                                androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(8.dp))
+                                androidx.compose.material3.Text(
+                                    importState.batchProgressText,
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Handle import completion
+            androidx.compose.runtime.LaunchedEffect(importState.successMessage) {
+                importState.successMessage?.let { message ->
+                    android.widget.Toast.makeText(this@MainActivity, message, android.widget.Toast.LENGTH_SHORT).show()
+                    sharedPhotoUris = null
+                }
+            }
+
+            androidx.compose.runtime.LaunchedEffect(importState.error) {
+                importState.error?.let { error ->
+                    android.widget.Toast.makeText(this@MainActivity, error, android.widget.Toast.LENGTH_LONG).show()
                 }
             }
         }

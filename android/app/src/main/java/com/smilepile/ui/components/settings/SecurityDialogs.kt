@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Pattern
 import androidx.compose.material.icons.filled.Pin
 import androidx.compose.material.icons.filled.Security
@@ -245,6 +246,93 @@ fun PatternSetupDialog(
                         textAlign = TextAlign.Center
                     )
                 }
+
+                error?.let { errorMsg ->
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = errorMsg,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        }
+    )
+
+    UniversalCrudDialog(
+        config = dialogConfig,
+        onDismiss = onDismiss
+    )
+}
+
+/**
+ * PIN verification dialog for exiting Kids Mode
+ */
+@Composable
+fun PinVerificationDialog(
+    onDismiss: () -> Unit,
+    onVerify: (String) -> Boolean,
+    onSuccess: () -> Unit
+) {
+    var pin by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    val dialogConfig = DialogConfig(
+        type = DialogType.CUSTOM,
+        title = "Exit Kids Mode",
+        message = "Enter PIN to return to Parent Mode",
+        icon = Icons.Default.Lock,
+        primaryAction = ActionConfig(
+            text = "Unlock",
+            style = ActionStyle.FILLED,
+            enabled = pin.isNotEmpty(),
+            onClick = {
+                if (onVerify(pin)) {
+                    onSuccess()
+                } else {
+                    error = "Incorrect PIN"
+                    pin = ""
+                }
+            }
+        ),
+        dismissAction = ActionConfig(
+            text = "Cancel",
+            style = ActionStyle.TEXT,
+            onClick = onDismiss
+        ),
+        content = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                OutlinedTextField(
+                    value = pin,
+                    onValueChange = { value ->
+                        if (value.all { it.isDigit() } && value.length <= 6) {
+                            pin = value
+                            error = null
+                        }
+                    },
+                    label = { Text("Enter PIN") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.NumberPassword,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            if (onVerify(pin)) {
+                                onSuccess()
+                            } else {
+                                error = "Incorrect PIN"
+                                pin = ""
+                            }
+                        }
+                    ),
+                    singleLine = true,
+                    isError = error != null,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
                 error?.let { errorMsg ->
                     Spacer(modifier = Modifier.height(8.dp))

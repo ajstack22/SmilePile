@@ -148,15 +148,16 @@ struct BackupPhoto: Codable {
 
 struct BackupSettings: Codable {
     let isDarkMode: Bool
-    let securitySettings: BackupSecuritySettings
+    // Fix CRITICAL-3: Removed securitySettings to prevent security disclosure (SECURITY-M2)
 }
 
-struct BackupSecuritySettings: Codable {
-    let hasPIN: Bool
-    let hasPattern: Bool
-    let kidSafeModeEnabled: Bool
-    let deleteProtectionEnabled: Bool
-}
+// Deprecated: Security settings should not be exported
+// struct BackupSecuritySettings: Codable {
+//     let hasPIN: Bool
+//     let hasPattern: Bool
+//     let kidSafeModeEnabled: Bool
+//     let deleteProtectionEnabled: Bool
+// }
 
 // MARK: - Photo Manifest
 

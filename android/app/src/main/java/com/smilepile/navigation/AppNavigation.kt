@@ -118,8 +118,8 @@ fun AppNavHost(
                         // Navigation not needed for zoom-to-fit functionality
                     },
                     onNavigateToParentalLock = {
-                        // Exit Kids Mode directly - parental controls removed
-                        modeViewModel.forceParentMode()
+                        // Request mode toggle - will check for PIN if enabled
+                        modeViewModel.requestModeToggle()
                     },
                     toastState = toastState
                 )

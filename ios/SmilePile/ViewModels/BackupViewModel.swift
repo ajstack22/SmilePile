@@ -1,9 +1,12 @@
 import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
+import UIKit
 
 @MainActor
 class BackupViewModel: ObservableObject {
+    // Background task tracking to prevent iOS from killing long operations
+    private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     // Export state
     @Published var isExporting = false
     @Published var exportProgress: Double = 0
@@ -39,6 +42,9 @@ class BackupViewModel: ObservableObject {
 
     func exportData() {
         Task {
+            // Fix ADVERSARIAL-CRITICAL-4: Register background task to prevent iOS killing operation
+            registerBackgroundTask()
+
             do {
                 isExporting = true
                 exportError = nil
@@ -47,7 +53,9 @@ class BackupViewModel: ObservableObject {
 
                 let zipURL = try await backupManager.createBackup { progress in
                     Task { @MainActor in
-                        self.exportProgress = Double(progress.processedItems) / 100.0
+                        // Fix ADVERSARIAL-CRITICAL-1: Calculate progress from actual totalItems, not hardcoded 100
+                        let total = max(1, progress.totalItems) // Avoid division by zero
+                        self.exportProgress = Double(progress.processedItems) / Double(total)
                         self.exportMessage = progress.currentOperation
                     }
                 }
@@ -66,6 +74,7 @@ class BackupViewModel: ObservableObject {
             }
 
             isExporting = false
+            endBackgroundTask()
         }
     }
 
@@ -105,6 +114,9 @@ class BackupViewModel: ObservableObject {
         guard let url = selectedImportURL else { return }
 
         Task {
+            // Fix ADVERSARIAL-CRITICAL-4: Register background task to prevent iOS killing operation
+            registerBackgroundTask()
+
             do {
                 startImport()
                 guard backupValidationResult != nil else { return }
@@ -116,6 +128,7 @@ class BackupViewModel: ObservableObject {
             }
 
             isImporting = false
+            endBackgroundTask()
         }
     }
 
@@ -176,7 +189,9 @@ class BackupViewModel: ObservableObject {
             options: createRestoreOptions()
         ) { progress in
             Task { @MainActor in
-                self.importProgress = Double(progress.processedItems) / 100.0
+                // Fix ADVERSARIAL-CRITICAL-1: Calculate progress from actual totalItems, not hardcoded 100
+                let total = max(1, progress.totalItems) // Avoid division by zero
+                self.importProgress = Double(progress.processedItems) / Double(total)
                 self.importMessage = progress.currentOperation
             }
         }
@@ -203,6 +218,74 @@ class BackupViewModel: ObservableObject {
     private func handleImportError(_ error: Error) {
         importError = error
         importMessage = "Import failed: \(error.localizedDescription)"
+    }
+
+    // MARK: - Background Task Management
+    // Fix ADVERSARIAL-CRITICAL-4: Background task registration
+    // Fix CRITICAL-2: Add proper error handling and cancellation logic
+
+    private func registerBackgroundTask() {
+        backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "BackupRestore") { [weak self] in
+            guard let self = self else { return }
+
+            // Fix CRITICAL-2: Task about to expire - cancel operations and notify user
+            Task { @MainActor in
+                // Cancel ongoing operations
+                self.isExporting = false
+                self.isImporting = false
+
+                // Set error message
+                let errorMessage = "Operation interrupted. The system stopped the operation to save battery. Please try again."
+                if self.isExporting {
+                    self.exportError = NSError(
+                        domain: "BackupViewModel",
+                        code: -2,
+                        userInfo: [NSLocalizedDescriptionKey: errorMessage]
+                    )
+                    self.exportMessage = "Export interrupted"
+                } else if self.isImporting {
+                    self.importError = NSError(
+                        domain: "BackupViewModel",
+                        code: -2,
+                        userInfo: [NSLocalizedDescriptionKey: errorMessage]
+                    )
+                    self.importMessage = "Import interrupted"
+                }
+
+                // Cleanup background task
+                self.endBackgroundTask()
+            }
+        }
+
+        // Fix CRITICAL-2: Check if background task registration failed
+        if backgroundTaskID == .invalid {
+            let errorMessage = "Unable to start background operation. Please ensure the app has sufficient permissions."
+            if isExporting {
+                exportError = NSError(
+                    domain: "BackupViewModel",
+                    code: -3,
+                    userInfo: [NSLocalizedDescriptionKey: errorMessage]
+                )
+                exportMessage = "Failed to start export"
+                isExporting = false
+            } else if isImporting {
+                importError = NSError(
+                    domain: "BackupViewModel",
+                    code: -3,
+                    userInfo: [NSLocalizedDescriptionKey: errorMessage]
+                )
+                importMessage = "Failed to start import"
+                isImporting = false
+            }
+        }
+    }
+
+    private func endBackgroundTask() {
+        // Fix CRITICAL-2: Ensure background task is always ended to prevent memory leaks
+        if backgroundTaskID != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            backgroundTaskID = .invalid
+        }
     }
 }
 
