@@ -364,18 +364,12 @@ struct SettingsViewCustom: View {
     /// Terminates the app properly after data clearing
     /// Note: Apple discourages programmatic app termination, but this is required for data reset
     private func terminateApp() async {
-        // Give UI time to update
-        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
-
-        // Proper iOS app termination approach
-        // This triggers a clean shutdown that iOS handles gracefully
-        UIControl().sendAction(#selector(URLSessionTask.suspend),
-                              to: UIApplication.shared,
-                              for: nil)
-
-        // Fallback: If the above doesn't work, use exit(0)
-        // This is acceptable since all data has been cleared and persisted
+        // Wait to ensure all data persistence operations complete
+        // This gives CoreData and UserDefaults time to write to disk
         try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
+
+        // Direct termination is safer than UIControl().sendAction() which can
+        // trigger iOS background cleanup that may access deallocated objects
         exit(0)
     }
 }
