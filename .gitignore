@@ -151,6 +151,14 @@ node_modules/
 secrets/
 api-keys/android/.gradle/8.2/
 
+# SmilePile Deployment Credentials - NEVER COMMIT
+android/keystore.properties
+play-console-credentials/
+app-store-connect-api-keys/
+*.p8
+*.p12
+*.mobileprovision
+
 # iOS specific
 ios/DerivedData/
 ios/build/
@@ -211,3 +219,13 @@ get_*.py
 gitleaks-report.json
 gitleaks-report.sarif
 gitleaks-report.txt
+smilepile-deployment-bb0ce47cd4d2.json
+
+# SmilePile Deployment Credentials - NEVER COMMIT
+android/keystore.properties
+android/smilepile-deployment-*.json
+app-store-connect-api-keys/
+*.p8
+*.p12
+*.mobileprovision
+**/keystores/*.keystore
