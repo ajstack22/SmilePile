@@ -4,7 +4,6 @@ import SwiftUI
 /// Matches Android KidsModeGalleryScreen behavior exactly
 struct KidsModeGalleryView: View {
     @ObservedObject var viewModel: KidsModeViewModel
-    @StateObject private var galleryViewModel = PhotoGalleryViewModel()
     @State private var selectedPhotoIndex: Int?
     @State private var showFullscreenViewer = false
     @State private var dragOffset: CGSize = .zero
@@ -14,21 +13,9 @@ struct KidsModeGalleryView: View {
     private let swipeThreshold: CGFloat = 100 // 100px threshold as per Android
     private let swipeDebounceInterval: TimeInterval = 0.3 // 300ms debounce
 
-    // Device-specific layout
-    private var columns: [GridItem] {
-        let columnCount = UIDevice.current.userInterfaceIdiom == .pad ? 5 : 3
-        return Array(repeating: GridItem(.flexible(), spacing: 2), count: columnCount)
-    }
-
     // Filter photos by selected category
     private var displayedPhotos: [Photo] {
         guard let selectedCategory = viewModel.selectedCategory else {
-            // If no category selected, select first category (mandatory selection)
-            if let firstCategory = viewModel.categories.first {
-                DispatchQueue.main.async {
-                    viewModel.selectCategory(firstCategory)
-                }
-            }
             return []
         }
         return viewModel.getPhotosForCategory(selectedCategory.id)
@@ -45,10 +32,11 @@ struct KidsModeGalleryView: View {
                         selectedCategory: viewModel.selectedCategory,
                         onCategorySelected: { category in
                             viewModel.selectCategory(category)
+                        },
+                        onExitKidsMode: {
+                            viewModel.requestModeToggle()
                         }
                     )
-                    .background(Color(UIColor.systemBackground))
-                    .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
                     .zIndex(1)
                 }
 
@@ -57,21 +45,20 @@ struct KidsModeGalleryView: View {
                     KidsEmptyGalleryView()
                 } else {
                     ScrollView {
-                        ScrollViewReader { proxy in
-                            LazyVGrid(columns: columns, spacing: 2) {
-                                ForEach(Array(displayedPhotos.enumerated()), id: \.element.id) { index, photo in
-                                    PhotoGridItem(photo: photo)
-                                        .id(photo.id)
-                                        .onTapGesture {
-                                            selectedPhotoIndex = index
-                                            showFullscreenViewer = true
-                                            viewModel.setFullscreen(true)
-                                        }
-                                }
+                        LazyVStack(spacing: 12) {
+                            ForEach(Array(displayedPhotos.enumerated()), id: \.element.id) { index, photo in
+                                PhotoGridItem(photo: photo)
+                                    .id(photo.id)
+                                    .onTapGesture {
+                                        selectedPhotoIndex = index
+                                        showFullscreenViewer = true
+                                        viewModel.setFullscreen(true)
+                                    }
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 8)
+                        .padding(.bottom, 16)
                     }
                 }
             }
@@ -107,14 +94,14 @@ struct KidsModeGalleryView: View {
             // which is integrated at the root level with .toastOverlay()
         }
         .onAppear {
-            // Initialize with first category if none selected
-            if viewModel.selectedCategory == nil && !viewModel.categories.isEmpty {
-                viewModel.selectCategory(viewModel.categories[0])
-            }
-
-            // Load photos
+            // Load real data from repositories
             Task {
-                await galleryViewModel.loadPhotos()
+                await viewModel.loadData()
+
+                // Select first category after loading if none selected
+                if viewModel.selectedCategory == nil && !viewModel.categories.isEmpty {
+                    viewModel.selectCategory(viewModel.categories[0])
+                }
             }
         }
     }
@@ -160,38 +147,10 @@ private struct PhotoGridItem: View {
     let photo: Photo
 
     var body: some View {
-        GeometryReader { geometry in
-            AsyncImage(url: URL(fileURLWithPath: photo.path)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 0.75) // 4:3 aspect ratio
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-
-                case .failure:
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.3))
-                        .overlay {
-                            Image(systemName: "photo")
-                                .foregroundColor(.gray)
-                        }
-
-                case .empty:
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.2))
-                        .overlay {
-                            ProgressView()
-                        }
-
-                @unknown default:
-                    EmptyView()
-                }
-            }
-        }
-        .aspectRatio(4/3, contentMode: .fit) // Maintain 4:3 aspect ratio
+        // Use the same AsyncImageView component as parent gallery for consistent loading
+        AsyncImageView(photo: photo, contentMode: .fill)
+            .aspectRatio(4/3, contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 

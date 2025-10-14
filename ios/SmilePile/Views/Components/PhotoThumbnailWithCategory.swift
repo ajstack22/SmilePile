@@ -170,6 +170,9 @@ struct PhotoGridWithCategories: View {
                     selectedCategory: photoGalleryViewModel.selectedCategory,
                     onCategorySelected: { category in
                         photoGalleryViewModel.selectedCategory = category
+                    },
+                    onExitKidsMode: {
+                        // Not used in normal gallery view
                     }
                 )
             }

@@ -15,11 +15,13 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>25.10.09.008</string>
+	<string>25.10.14.001</string>
 	<key>CFBundleVersion</key>
-	<string>251009008</string>
+	<string>251014001</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>SmilePile uses Face ID to protect parental settings and keep your child's content secure.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>SmilePile needs permission to save edited photos to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -2,13 +2,14 @@
 
 **Status**: COMPLETE WITH CONDITIONS (95%)
 **Completion Date**: 2025-10-14
-**Total Documentation**: 11 files, 336 KB, 10,685 lines
+**Total Documentation**: 13 files, 368 KB, 10,685+ lines
 
 ---
 
 ## Quick Links
 
-- **START HERE**: [WAVE-1-COMPLETE.md](./WAVE-1-COMPLETE.md) - Completion report
+- **EXECUTIVE SUMMARY**: [EXECUTIVE-SUMMARY.md](./EXECUTIVE-SUMMARY.md) - 1-page overview
+- **COMPLETION REPORT**: [WAVE-1-COMPLETE.md](./WAVE-1-COMPLETE.md) - Full details
 - **NEXT STEPS**: [../WAVE-2-HANDOFF.md](../WAVE-2-HANDOFF.md) - Wave 2 handoff
 
 ---
@@ -51,8 +52,12 @@ Story file not created (Foundation setup treated as standalone wave)
   Product manager validation assessment
 
 ### Phase 8: Clean-up
+- [EXECUTIVE-SUMMARY.md](./EXECUTIVE-SUMMARY.md) - 4 KB
+  1-page executive summary
 - [WAVE-1-COMPLETE.md](./WAVE-1-COMPLETE.md) - 14 KB
   Final completion report and Wave 2 handoff
+- [README.md](./README.md) - 3 KB
+  This file - documentation index
 
 ### Phase 9: Deployment
 Not yet executed (pending permission fix and final validation)

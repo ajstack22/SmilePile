@@ -55,18 +55,37 @@ class RestoreManager {
     }
 
     private func extractAndParseBackup(zipPath: URL, tempDir: URL) async throws -> AppBackup? {
+        // Step 1: Extract ZIP
         do {
             try await ZipUtils.extractZip(from: zipPath, to: tempDir)
         } catch {
+            print("❌ ZIP Extraction failed: \(error)")
+            print("   ZIP path: \(zipPath.path)")
+            print("   Temp dir: \(tempDir.path)")
             return nil
         }
 
+        // Step 2: Check for metadata file
         let metadataPath = tempDir.appendingPathComponent(ZipUtils.METADATA_FILE)
         guard fileManager.fileExists(atPath: metadataPath.path) else {
+            print("❌ Metadata file not found at: \(metadataPath.path)")
+            // List what files ARE in the extracted directory
+            if let contents = try? fileManager.contentsOfDirectory(atPath: tempDir.path) {
+                print("   Extracted files: \(contents)")
+            }
             return nil
         }
 
-        return try? parseBackupMetadata(from: metadataPath)
+        // Step 3: Parse metadata JSON
+        do {
+            return try parseBackupMetadata(from: metadataPath)
+        } catch {
+            print("❌ Metadata parsing failed: \(error)")
+            if let contents = try? String(contentsOf: metadataPath) {
+                print("   Metadata contents (first 500 chars): \(contents.prefix(500))")
+            }
+            return nil
+        }
     }
 
     private func parseBackupMetadata(from path: URL) throws -> AppBackup {

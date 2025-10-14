@@ -96,10 +96,8 @@ fun SettingsScreen(
     paddingValues: PaddingValues = PaddingValues(0.dp),
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
     val dialogState = rememberDialogState()
-    val showDebugOptions by remember { mutableStateOf(BuildConfig.DEBUG) }
 
     val launchers = rememberBackupLaunchers(viewModel)
     val pinDialogHandlers = rememberPinDialogHandlers(viewModel, dialogState)
@@ -118,8 +116,6 @@ fun SettingsScreen(
             paddingValues = paddingValues,
             uiState = uiState,
             viewModel = viewModel,
-            context = context,
-            showDebugOptions = showDebugOptions,
             launchers = launchers,
             onShowAboutDialog = { dialogState.showAbout.value = true },
             onShowPinDialog = { dialogState.showPinSetup.value = true },
@@ -200,8 +196,6 @@ private fun SettingsContent(
     paddingValues: PaddingValues,
     uiState: com.smilepile.ui.viewmodels.SettingsUiState,
     viewModel: SettingsViewModel,
-    context: android.content.Context,
-    showDebugOptions: Boolean,
     launchers: BackupLaunchers,
     onShowAboutDialog: () -> Unit,
     onShowPinDialog: () -> Unit,
@@ -235,28 +229,22 @@ private fun SettingsContent(
         }
 
         item {
-            BackupSection(
+            DataSection(
                 onExport = {
                     val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault()).format(java.util.Date())
                     launchers.exportLauncher.launch("smilepile_backup_$timestamp.zip")
                 },
                 onImport = {
                     launchers.importLauncher.launch(arrayOf("application/zip", "*/*"))
-                }
+                },
+                onClearAllData = { viewModel.resetAppForOnboarding() },
+                hasPIN = uiState.hasPIN,
+                viewModel = viewModel
             )
         }
 
         item {
             AboutSection(onAboutClick = onShowAboutDialog)
-        }
-
-        if (showDebugOptions) {
-            item {
-                DebugSection(
-                    context = context,
-                    onResetApp = { viewModel.resetAppForOnboarding() }
-                )
-            }
         }
     }
 }
@@ -427,14 +415,21 @@ private fun PINSettingsItem(
 }
 
 @Composable
-private fun BackupSection(
+private fun DataSection(
     onExport: () -> Unit,
-    onImport: () -> Unit
+    onImport: () -> Unit,
+    onClearAllData: () -> Unit,
+    hasPIN: Boolean,
+    viewModel: SettingsViewModel
 ) {
-    SettingsSection(title = "Backup & Restore") {
+    var showResetConfirmation by remember { mutableStateOf(false) }
+    var showPinVerification by remember { mutableStateOf(false) }
+    var isResetting by remember { mutableStateOf(false) }
+
+    SettingsSection(title = "Data") {
         Column {
             SettingsActionItem(
-                title = "Export Data",
+                title = "Export",
                 subtitle = "Save your photos and categories",
                 icon = Icons.Default.Upload,
                 onClick = onExport
@@ -443,59 +438,31 @@ private fun BackupSection(
             SectionDivider()
 
             SettingsActionItem(
-                title = "Import Data",
+                title = "Import",
                 subtitle = "Restore from backup",
                 icon = Icons.Default.Download,
                 onClick = onImport
             )
+
+            SectionDivider()
+
+            SettingsActionItem(
+                title = "Clear All Data",
+                subtitle = "Permanently delete all photos, categories, and settings",
+                icon = Icons.Default.Delete,
+                iconTint = MaterialTheme.colorScheme.error,
+                onClick = {
+                    if (hasPIN) {
+                        showPinVerification = true
+                    } else {
+                        showResetConfirmation = true
+                    }
+                },
+                enabled = !isResetting
+            )
         }
     }
-}
 
-@Composable
-private fun AboutSection(
-    onAboutClick: () -> Unit
-) {
-    SettingsSection(title = stringResource(R.string.settings_about)) {
-        SettingsActionItem(
-            title = "SmilePile",
-            subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
-            icon = Icons.Default.Info,
-            onClick = onAboutClick
-        )
-    }
-}
-
-@Composable
-private fun DebugSection(
-    context: android.content.Context,
-    onResetApp: () -> Unit
-) {
-    var showResetConfirmation by remember { mutableStateOf(false) }
-    var showPinVerification by remember { mutableStateOf(false) }
-    var isResetting by remember { mutableStateOf(false) }
-    val viewModel: SettingsViewModel = hiltViewModel()
-    val uiState by viewModel.uiState.collectAsState()
-
-    SettingsSection(title = "Developer") {
-        SettingsActionItem(
-            title = "Clear All Data",
-            subtitle = "Clear all data and restart onboarding",
-            icon = Icons.Default.Delete,
-            iconTint = MaterialTheme.colorScheme.error,
-            onClick = {
-                // Check if PIN is set
-                if (uiState.hasPIN) {
-                    showPinVerification = true
-                } else {
-                    showResetConfirmation = true
-                }
-            },
-            enabled = !isResetting
-        )
-    }
-
-    // PIN Verification Dialog
     if (showPinVerification) {
         PinVerificationDialog(
             onDismiss = { showPinVerification = false },
@@ -507,7 +474,6 @@ private fun DebugSection(
         )
     }
 
-    // Reset Confirmation Dialog
     if (showResetConfirmation) {
         AlertDialog(
             onDismissRequest = { if (!isResetting) showResetConfirmation = false },
@@ -527,7 +493,7 @@ private fun DebugSection(
                 TextButton(
                     onClick = {
                         isResetting = true
-                        onResetApp()
+                        onClearAllData()
                     },
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = MaterialTheme.colorScheme.error
@@ -548,6 +514,21 @@ private fun DebugSection(
         )
     }
 }
+
+@Composable
+private fun AboutSection(
+    onAboutClick: () -> Unit
+) {
+    SettingsSection(title = stringResource(R.string.settings_about)) {
+        SettingsActionItem(
+            title = "SmilePile",
+            subtitle = stringResource(R.string.settings_version, BuildConfig.VERSION_NAME),
+            icon = Icons.Default.Info,
+            onClick = onAboutClick
+        )
+    }
+}
+
 
 @Composable
 private fun PinVerificationDialog(

@@ -96,10 +96,8 @@ struct SettingsViewCustom: View {
                                 subtitle: "Save your photos and categories",
                                 icon: "square.and.arrow.up",
                                 action: {
-                                    // Fix SECURITY-M4: Require biometric authentication
-                                    authenticateUser {
-                                        backupViewModel.exportData()
-                                    }
+                                    // Export is a user-initiated data operation, no auth required
+                                    backupViewModel.exportData()
                                 }
                             )
 
@@ -111,10 +109,8 @@ struct SettingsViewCustom: View {
                                 subtitle: "Restore from backup",
                                 icon: "square.and.arrow.down",
                                 action: {
-                                    // Fix SECURITY-M4: Require biometric authentication
-                                    authenticateUser {
-                                        backupViewModel.showFilePicker()
-                                    }
+                                    // Import is a user-initiated data operation, no auth required
+                                    backupViewModel.showFilePicker()
                                 }
                             )
 
@@ -134,17 +130,23 @@ struct SettingsViewCustom: View {
                                         return
                                     }
 
-                                    // Require PIN authentication if PIN is set
-                                    // Refresh security status to ensure we have the latest PIN state
+                                    // Require authentication if security is set
+                                    // Refresh security status to ensure we have the latest state
                                     securityViewModel.refreshSecurityStatus()
 
                                     // Use DispatchQueue to ensure state updates are processed properly
                                     DispatchQueue.main.async {
                                         if securityViewModel.hasPIN {
-                                            // Show PIN validation sheet
-                                            showClearPINValidation = true
+                                            // Check if biometric is also enabled
+                                            if securityViewModel.isBiometricEnabled && securityViewModel.isBiometricAvailable {
+                                                // Try biometric first (iOS Settings pattern)
+                                                authenticateForClearData()
+                                            } else {
+                                                // Only PIN available, show PIN validation sheet
+                                                showClearPINValidation = true
+                                            }
                                         } else {
-                                            // No PIN set, show confirmation directly
+                                            // No security set, show confirmation directly
                                             showClearConfirmation = true
                                         }
                                     }
@@ -318,28 +320,30 @@ struct SettingsViewCustom: View {
         }
     }
 
-    // Fix SECURITY-M4: Biometric authentication for sensitive operations
-    private func authenticateUser(completion: @escaping () -> Void) {
+    /// Authenticates user with biometric for Clear All Data action
+    /// Falls back to PIN if biometric fails or is cancelled
+    private func authenticateForClearData() {
         let context = LAContext()
         var error: NSError?
 
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            let reason = "Authenticate to access backup/restore"
+        // Check if biometric authentication is available
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Authenticate to clear all data"
 
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
                 DispatchQueue.main.async {
                     if success {
-                        completion()
+                        // Biometric authentication successful, show confirmation dialog
+                        self.showClearConfirmation = true
                     } else {
-                        // Authentication failed - user cancelled or error occurred
-                        // No action needed, operation won't proceed
+                        // Biometric failed or cancelled, fall back to PIN
+                        self.showClearPINValidation = true
                     }
                 }
             }
         } else {
-            // No biometric authentication available - proceed anyway
-            // (device doesn't support or user hasn't set up)
-            completion()
+            // Biometric not available, fall back to PIN
+            showClearPINValidation = true
         }
     }
 

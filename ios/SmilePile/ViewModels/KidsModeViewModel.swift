@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+@MainActor
 class KidsModeViewModel: ObservableObject {
     @Published var isKidsMode = false
     @Published var isFullscreen = false
@@ -16,11 +17,36 @@ class KidsModeViewModel: ObservableObject {
     private let swipeDebounceInterval: TimeInterval = 0.3 // 300ms
     let swipeThreshold: CGFloat = 150 // 150px threshold
 
-
+    // Repositories for loading real data
+    private let photoRepository: PhotoRepository
+    private let categoryRepository: CategoryRepository
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
-        loadMockData()
+    init(photoRepository: PhotoRepository = PhotoRepositoryImpl(),
+         categoryRepository: CategoryRepository = CategoryRepositoryImpl.shared) {
+        self.photoRepository = photoRepository
+        self.categoryRepository = categoryRepository
+    }
+
+    // Load real photos and categories from repositories
+    func loadData() async {
+        do {
+            // Load categories
+            categories = try await categoryRepository.getAllCategories()
+
+            // Load all photos
+            photos = try await photoRepository.getAllPhotos()
+
+            // Select first category by default if none selected
+            if selectedCategory == nil && !categories.isEmpty {
+                selectedCategory = categories.first
+            }
+        } catch {
+            print("Error loading data: \(error)")
+            // Fall back to empty arrays on error
+            categories = []
+            photos = []
+        }
     }
 
 
@@ -32,6 +58,11 @@ class KidsModeViewModel: ObservableObject {
             // Entering Kids Mode doesn't require PIN
             isKidsMode = true
         }
+    }
+
+    func requestModeToggle() {
+        // Request mode toggle - triggers PIN/biometric authentication flow
+        requiresPINAuth = true
     }
 
     func exitKidsMode(authenticated: Bool) {
@@ -91,31 +122,5 @@ class KidsModeViewModel: ObservableObject {
     func showCategoryToast(_ category: Category) {
         // Use centralized ToastManager for category toasts
         ToastManager.shared.showCategoryToast(category)
-    }
-
-    // Mock data for testing
-    private func loadMockData() {
-        // Create sample categories
-        categories = [
-            Category(id: 1, name: "family", displayName: "Family", position: 0, colorHex: "#4CAF50"),
-            Category(id: 2, name: "vacation", displayName: "Vacation", position: 1, colorHex: "#2196F3"),
-            Category(id: 3, name: "pets", displayName: "Pets", position: 2, colorHex: "#FF9800"),
-            Category(id: 4, name: "school", displayName: "School", position: 3, colorHex: "#9C27B0")
-        ]
-
-        // Create sample photos
-        if !categories.isEmpty {
-            photos = [
-                Photo(path: "sample1", categoryId: categories[0].id),
-                Photo(path: "sample2", categoryId: categories[0].id),
-                Photo(path: "sample3", categoryId: categories[1].id),
-                Photo(path: "sample4", categoryId: categories[2].id),
-                Photo(path: "sample5", categoryId: categories[2].id),
-                Photo(path: "sample6", categoryId: categories[3].id)
-            ]
-        }
-
-        // Select first category by default
-        selectedCategory = categories.first
     }
 }

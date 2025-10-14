@@ -6,26 +6,49 @@ struct CategoryFilterView: View {
     let categories: [Category]
     let selectedCategory: Category?
     let onCategorySelected: (Category) -> Void
+    let onExitKidsMode: () -> Void
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                ForEach(categories) { category in
-                    KidsCategoryChip(
-                        category: category,
-                        isSelected: selectedCategory?.id == category.id,
-                        onTap: {
-                            // Always select a category, never allow nil (no "All Photos" state)
-                            onCategorySelected(category)
-                        }
-                    )
+        HStack(spacing: 0) {
+            // Filter chips (scrollable)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(categories) { category in
+                        KidsCategoryChip(
+                            category: category,
+                            isSelected: selectedCategory?.id == category.id,
+                            onTap: {
+                                // Always select a category, never allow nil (no "All Photos" state)
+                                onCategorySelected(category)
+                            }
+                        )
+                    }
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+
+            // Lock button (fixed on right side)
+            Button(action: onExitKidsMode) {
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+                    .frame(width: 48, height: 48)
+                    .background(Color.red)
+                    .clipShape(Circle())
+                    .shadow(radius: 2)
+            }
+            .padding(.trailing, 8)
+            .padding(.leading, 8)
+            .accessibilityLabel("Exit Kids Mode")
         }
-        .padding(.top, 50) // Push content below Dynamic Island/status bar
-        .frame(height: 56) // Consistent height for the filter bar
+        .padding(.top, 50) // Fixed padding below Dynamic Island (matches AppHeaderComponent)
+        .padding(.vertical, 8)
+        .background(
+            Color(UIColor.systemBackground)
+                .ignoresSafeArea(edges: .top) // Background extends under safe area
+        )
+        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Category filters")
     }
@@ -44,33 +67,39 @@ private struct KidsCategoryChip: View {
         colorScheme == .dark
     }
 
+    // Match Android: white in dark mode, black in light mode at 10% opacity
     private var backgroundColor: Color {
         if isSelected {
-            return category.color
-        } else if isDarkMode {
-            return Color.black
+            return isDarkMode ? Color.white.opacity(0.1) : Color.black.opacity(0.1)
         } else {
-            return Color(UIColor.secondarySystemBackground)
+            return Color.clear
         }
     }
 
+    // Match Android: primary label when selected, secondary when not
     private var textColor: Color {
-        if isSelected || isDarkMode {
-            return .white
+        if isSelected {
+            return Color(UIColor.label) // Full contrast text
         } else {
-            return category.color
+            return Color(UIColor.secondaryLabel) // Muted text
         }
     }
 
+    // Match Android: solid border when selected, 30% opacity when not
     private var borderColor: Color {
-        isSelected ? Color.clear : category.color
+        if isDarkMode {
+            return isSelected ? Color.white : Color.white.opacity(0.3)
+        } else {
+            return isSelected ? Color.black : Color.black.opacity(0.3)
+        }
     }
 
+    // Match Android: Bold in dark mode (all chips), Medium when selected in light mode
     private var fontWeight: Font.Weight {
         if isDarkMode {
-            return .heavy
-        } else if isSelected {
             return .bold
+        } else if isSelected {
+            return .medium
         } else {
             return .regular
         }
@@ -78,20 +107,34 @@ private struct KidsCategoryChip: View {
 
     var body: some View {
         Button(action: onTap) {
-            Text(category.displayName)
-                .font(.system(size: 14, weight: fontWeight))
-                .foregroundColor(textColor)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(
-                    Capsule()
-                        .fill(backgroundColor)
-                        .overlay(
-                            Capsule()
-                                .stroke(borderColor, lineWidth: 1.5)
-                        )
-                )
-                .shadow(color: isSelected ? .black.opacity(0.1) : .clear, radius: 1, y: 1)
+            HStack(spacing: 8) {
+                // Category color dot (12pt diameter)
+                Circle()
+                    .fill(category.color)
+                    .frame(width: 12, height: 12)
+                    .overlay(
+                        Circle()
+                            .stroke(
+                                isDarkMode ? Color.white.opacity(0.3) : Color.black.opacity(0.3),
+                                lineWidth: 1
+                            )
+                    )
+
+                // Category text
+                Text(category.displayName)
+                    .font(.system(size: 14, weight: fontWeight))
+                    .foregroundColor(textColor)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(backgroundColor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(borderColor, lineWidth: 1)
+                    )
+            )
         }
         .buttonStyle(PlainButtonStyle())
         .accessibilityLabel("\(category.displayName) category")

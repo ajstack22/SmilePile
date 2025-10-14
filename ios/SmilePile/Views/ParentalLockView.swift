@@ -280,7 +280,7 @@ struct ParentalLockView: View {
         if shouldAllowSetup() {
             handleUnlock()
         } else if shouldPromptBiometric() {
-            promptBiometricAfterDelay()
+            authenticateWithBiometric()
         }
     }
 
@@ -290,12 +290,6 @@ struct ParentalLockView: View {
 
     private func shouldPromptBiometric() -> Bool {
         return viewModel.isBiometricEnabled && viewModel.isBiometricAvailable
-    }
-
-    private func promptBiometricAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            authenticateWithBiometric()
-        }
     }
 
     private func authenticateWithBiometric() {

@@ -374,14 +374,18 @@ class BackupManager {
             }
         }
 
-        // 2. Batch delete all categories from CoreData
+        // 2. Delete only user-created categories (preserve defaults for import)
+        // Fix: Selective deletion to allow imports after clear data
         let context = CoreDataStack.shared.viewContext
-        let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CategoryEntity")
-        let categoryBatchDelete = NSBatchDeleteRequest(fetchRequest: categoryRequest)
-        categoryBatchDelete.resultType = .resultTypeCount
+        let categoryRequest = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
+        // Only delete non-default categories (isDefault == false or nil)
+        categoryRequest.predicate = NSPredicate(format: "isDefault == NO OR isDefault == nil")
 
         try await context.perform {
-            _ = try context.execute(categoryBatchDelete)
+            let userCategories = try context.fetch(categoryRequest)
+            for category in userCategories {
+                context.delete(category)
+            }
             try context.save()
         }
 

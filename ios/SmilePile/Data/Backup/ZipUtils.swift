@@ -60,7 +60,7 @@ class ZipUtils {
     static let PHOTOS_DIR = "photos/"
     static let METADATA_FILE = "metadata.json"
 
-    /// Create ZIP file from directory using native iOS NSFileCoordinator
+    /// Create ZIP file from directory using ZIPFoundation (same library as extract)
     /// - Parameters:
     ///   - sourcePath: Directory containing files to ZIP
     ///   - destinationPath: Output ZIP file path
@@ -77,35 +77,51 @@ class ZipUtils {
         // Check disk space
         try checkDiskSpace(for: sourcePath)
 
-        // Use NSFileCoordinator to create ZIP (native iOS API)
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            var coordinationError: NSError?
-            let coordinator = NSFileCoordinator()
+        // Remove existing ZIP if it exists
+        if FileManager.default.fileExists(atPath: destinationPath.path) {
+            try FileManager.default.removeItem(at: destinationPath)
+        }
 
-            coordinator.coordinate(
-                readingItemAt: sourcePath,
-                options: [.forUploading],
-                error: &coordinationError
-            ) { zippedURL in
-                do {
-                    // NSFileCoordinator creates a temporary ZIP file
-                    // Copy it to our destination
-                    if FileManager.default.fileExists(atPath: destinationPath.path) {
-                        try FileManager.default.removeItem(at: destinationPath)
+        // Use ZIPFoundation to create ZIP (same library as extraction for compatibility)
+        do {
+            guard let archive = Archive(url: destinationPath, accessMode: .create) else {
+                throw BackupError.zipCreationFailed("Failed to create archive")
+            }
+
+            // Collect all files to add
+            var filesToAdd: [(fileURL: URL, relativePath: String)] = []
+            if let enumerator = FileManager.default.enumerator(at: sourcePath, includingPropertiesForKeys: [.isRegularFileKey]) {
+                for case let fileURL as URL in enumerator {
+                    // Skip directories, only add files
+                    if let resourceValues = try? fileURL.resourceValues(forKeys: [.isRegularFileKey]),
+                       resourceValues.isRegularFile == true {
+                        // Calculate relative path from source directory
+                        let relativePath = fileURL.path.replacingOccurrences(of: sourcePath.path + "/", with: "")
+                        filesToAdd.append((fileURL: fileURL, relativePath: relativePath))
                     }
-
-                    try FileManager.default.copyItem(at: zippedURL, to: destinationPath)
-
-                    progressCallback?(1.0)
-                    continuation.resume()
-                } catch {
-                    continuation.resume(throwing: BackupError.zipCreationFailed(error.localizedDescription))
                 }
             }
 
-            if let error = coordinationError {
-                continuation.resume(throwing: BackupError.zipCreationFailed(error.localizedDescription))
+            let totalFiles = filesToAdd.count
+            var processedFiles = 0
+
+            // Add each file to the archive
+            for fileInfo in filesToAdd {
+                try archive.addEntry(
+                    with: fileInfo.relativePath,
+                    relativeTo: sourcePath,
+                    compressionMethod: .deflate
+                )
+
+                processedFiles += 1
+                if let callback = progressCallback {
+                    callback(Double(processedFiles) / Double(totalFiles))
+                }
             }
+
+            progressCallback?(1.0)
+        } catch {
+            throw BackupError.zipCreationFailed(error.localizedDescription)
         }
     }
 
