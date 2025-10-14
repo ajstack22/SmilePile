@@ -485,7 +485,7 @@ deploy_ios_local() {
     else
         xcodebuild build \
             -project SmilePile.xcodeproj \
-            -scheme SmilePile \
+            -scheme "SmilePile Qual" \
             -configuration Debug \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
             -derivedDataPath ./DerivedData \
@@ -495,7 +495,7 @@ deploy_ios_local() {
         }
     fi
 
-    local app_path="$PROJECT_ROOT/ios/DerivedData/Build/Products/Debug-iphonesimulator/SmilePile.app"
+    local app_path="$PROJECT_ROOT/ios/DerivedData/Build/Products/Debug-iphonesimulator/SmilePile Qual.app"
 
     # Get available simulators
     log INFO "Checking for iOS simulators..."
@@ -526,7 +526,7 @@ deploy_ios_local() {
 
             # Launch app
             log INFO "Launching app on simulator $sim..."
-            xcrun simctl launch "$sim" com.smilepile.SmilePile
+            xcrun simctl launch "$sim" com.smilepile.qual
         fi
 
         log SUCCESS "Deployed to simulator: $sim"

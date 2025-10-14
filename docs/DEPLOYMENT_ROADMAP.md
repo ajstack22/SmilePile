@@ -30,14 +30,6 @@ This roadmap implements a professional 4-tier deployment system (QUAL, STAGE, BE
 - **Calendar Time**: 2-3 weeks (accounting for Apple/Google approval delays)
 - **Active Development**: 45-60 hours using Atlas workflow with parallel agents
 
----
-
-## Wave 1: Foundation & Account Setup
-
-**Objective**: Establish App Store Connect, Play Console accounts, generate certificates, and create deployment infrastructure foundation.
-
-### Atlas Workflow - Wave 1
-
 #### Phase 1: Research (General-Purpose Agent)
 **Agent Prompt:**
 ```

@@ -1,0 +1,25 @@
+// ============================================================================
+// SmilePile BETA Configuration
+// ============================================================================
+// For external testing via TestFlight External
+// Uses production bundle ID (shares with STAGE/PROD)
+
+// Include base configuration
+#include "Base.xcconfig"
+
+// MARK: - Application Identity
+PRODUCT_BUNDLE_IDENTIFIER = com.smilepile
+PRODUCT_NAME = SmilePile Beta
+APP_DISPLAY_NAME = SmilePile Beta
+BUILD_TYPE_ENV = beta
+
+// MARK: - Code Signing (Distribution for TestFlight)
+CODE_SIGN_IDENTITY = Apple Distribution
+
+// MARK: - Swift Optimization (Release for production-like performance)
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE BETA
+SWIFT_COMPILATION_MODE = wholemodule
+MTL_ENABLE_DEBUG_INFO = NO
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+COPY_PHASE_STRIP = YES

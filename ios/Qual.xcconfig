@@ -1,0 +1,23 @@
+// ============================================================================
+// SmilePile QUAL Configuration
+// ============================================================================
+// For local development and testing
+// Uses unique bundle ID for side-by-side installation with other tiers
+
+// Include base configuration
+#include "Base.xcconfig"
+
+// MARK: - Application Identity
+PRODUCT_BUNDLE_IDENTIFIER = com.smilepile.qual
+PRODUCT_NAME = SmilePile Qual
+APP_DISPLAY_NAME = SmilePile Qual
+BUILD_TYPE_ENV = qual
+
+// MARK: - Code Signing (Override for development)
+CODE_SIGN_IDENTITY = iPhone Developer
+
+// MARK: - Swift Optimization (Debug for faster builds)
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG QUAL
+MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE
+DEBUG_INFORMATION_FORMAT = dwarf
