@@ -43,9 +43,63 @@ SmilePile is an iOS app for photo management with Kids Mode functionality.
 - Color extension conflicts - check for multiple Color.init(hex:) definitions
 - Missing CoreData entities - ensure .xcdatamodeld is properly configured
 
-## Running the App
+## 4-Tier Deployment Configuration
+
+SmilePile uses a 4-tier deployment system (QUAL, STAGE, BETA, PROD) configured via Xcode schemes and xcconfig files.
+
+### Available Schemes
+- **SmilePile Qual** - Development/testing (Debug, bundle ID: com.smilepile.qual)
+- **SmilePile Stage** - Staging environment (Stage, bundle ID: com.smilepile)
+- **SmilePile Beta** - Beta testing (Beta, bundle ID: com.smilepile)
+- **SmilePile Prod** - Production (Release, bundle ID: com.smilepile)
+
+### Tier Detection in Code
+```swift
+import BuildConfig
+
+// Check current tier
+if BuildConfig.isQual {
+    // Development-only code
+}
+
+// Get tier name
+let tier = BuildConfig.buildType // "qual", "stage", "beta", or "prod"
+```
+
+### XCConfig Files
+Each tier has its own xcconfig file in `/ios/`:
+- `Qual.xcconfig` - QUAL tier settings
+- `Stage.xcconfig` - STAGE tier settings
+- `Beta.xcconfig` - BETA tier settings
+- `Prod.xcconfig` - PROD tier settings
+
+**Important**: Never hardcode PRODUCT_BUNDLE_IDENTIFIER in project.pbxproj - always use xcconfig files.
+
+### Building Different Tiers
 ```bash
-xcodebuild -project SmilePile.xcodeproj -scheme SmilePile -configuration Debug -destination 'platform=iOS Simulator,id=EE3F2A09-2BA9-463D-8C07-323B0688FAE5' -derivedDataPath ./DerivedData build
-xcrun simctl install "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" DerivedData/Build/Products/Debug-iphonesimulator/SmilePile.app
-xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" com.smilepile.SmilePile
+# QUAL (Development)
+xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Qual" -configuration Debug ...
+
+# PROD (Production)
+xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Prod" -configuration Release ...
+```
+
+### Bundle ID Strategy
+- **QUAL**: `com.smilepile.qual` (unique ID for side-by-side installation)
+- **STAGE/BETA/PROD**: `com.smilepile` (shared ID, only one installable at a time)
+
+## Running the App
+
+### QUAL Tier (Most Common)
+```bash
+xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Qual" -configuration Debug -destination 'platform=iOS Simulator,id=EE3F2A09-2BA9-463D-8C07-323B0688FAE5' -derivedDataPath ./DerivedData build
+xcrun simctl install "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" "DerivedData/Build/Products/Debug-iphonesimulator/SmilePile Qual.app"
+xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" com.smilepile.qual
+```
+
+### PROD Tier
+```bash
+xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Prod" -configuration Release -destination 'platform=iOS Simulator,id=EE3F2A09-2BA9-463D-8C07-323B0688FAE5' -derivedDataPath ./DerivedData build
+xcrun simctl install "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" "DerivedData/Build/Products/Release-iphonesimulator/SmilePile.app"
+xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" com.smilepile
 ```

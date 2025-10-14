@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC2F476E75CA92A685EFF389"
-               BuildableName = "SmilePile.app"
+               BuildableName = "SmilePile Qual.app"
                BlueprintName = "SmilePile"
                ReferencedContainer = "container:SmilePile.xcodeproj">
             </BuildableReference>
@@ -38,7 +38,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Stage"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
@@ -58,7 +58,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Stage"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -72,14 +72,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC2F476E75CA92A685EFF389"
-            BuildableName = "SmilePile.app"
+            BuildableName = "SmilePile Qual.app"
             BlueprintName = "SmilePile"
             ReferencedContainer = "container:SmilePile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Stage"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -89,17 +89,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC2F476E75CA92A685EFF389"
-            BuildableName = "SmilePile.app"
+            BuildableName = "SmilePile Qual.app"
             BlueprintName = "SmilePile"
             ReferencedContainer = "container:SmilePile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Stage">
+      buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Stage"
+      buildConfiguration = "Debug"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
