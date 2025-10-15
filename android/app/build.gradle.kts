@@ -30,8 +30,8 @@ android {
         applicationId = "com.smilepile"
         minSdk = 24
         targetSdk = 35
-        versionCode = 251015010  // YYMMDDVVV format as integer
-        versionName = "25.10.15.010"
+        versionCode = 251015016  // YYMMDDVVV format as integer
+        versionName = "25.10.15.016"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

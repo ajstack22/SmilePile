@@ -18,6 +18,7 @@ export PROJECT_ROOT="$(dirname "$DEPLOY_ROOT")"
 # Source libraries
 source "${DEPLOY_ROOT}/lib/common.sh"
 source "${DEPLOY_ROOT}/lib/env_manager.sh"
+source "${DEPLOY_ROOT}/lib/build_number.sh"
 
 # ============================================================================
 # Configuration
@@ -86,6 +87,49 @@ EOF
     exit 0
 }
 
+# Wave 7: Proactive security - iOS simulator input validation
+# Prevents command injection even though prod tier creates archives, not simulator builds
+detect_available_simulator() {
+    # Security: Allow override but validate input to prevent command injection
+    if [[ -n "${IOS_SIMULATOR_NAME:-}" ]]; then
+        # CRITICAL: Input validation - only allow alphanumeric, spaces, and hyphens
+        if [[ ! "$IOS_SIMULATOR_NAME" =~ ^[a-zA-Z0-9\ \-]+$ ]]; then
+            log ERROR "Invalid IOS_SIMULATOR_NAME: contains unsafe characters"
+            log ERROR "Only alphanumeric, spaces, and hyphens allowed"
+            return 1
+        fi
+        echo "$IOS_SIMULATOR_NAME"
+        return 0
+    fi
+
+    # Try booted simulator first
+    local booted_sim=$(xcrun simctl list devices 2>/dev/null | grep "Booted" | head -n1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    if [[ -n "$booted_sim" ]]; then
+        echo "$booted_sim"
+        return 0
+    fi
+
+    # Fallback priority: iPhone 16 > iPhone 15 > iPhone 14 > any iPhone
+    for sim_name in "iPhone 16" "iPhone 15" "iPhone 14"; do
+        local sim_id=$(xcrun simctl list devices 2>/dev/null | grep -m1 "$sim_name" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+        if [[ -n "$sim_id" ]]; then
+            echo "$sim_id"
+            return 0
+        fi
+    done
+
+    # Last resort: any available iPhone simulator
+    local any_iphone=$(xcrun simctl list devices 2>/dev/null | grep -m1 "iPhone" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    if [[ -n "$any_iphone" ]]; then
+        echo "$any_iphone"
+        return 0
+    fi
+
+    log ERROR "No iOS simulators found"
+    log ERROR "Install simulators via Xcode or set IOS_SIMULATOR_NAME environment variable"
+    return 1
+}
+
 # Check prerequisites
 check_prerequisites() {
     print_header "Checking Prerequisites"
@@ -121,6 +165,34 @@ check_prerequisites() {
     if [[ ${#missing_tools[@]} -gt 0 ]]; then
         log ERROR "Missing required tools: ${missing_tools[*]}"
         exit 1
+    fi
+
+    # Phase 4 requirement: Disk space check
+    local free_space=$(df -k "$DEPLOY_ROOT" | awk 'NR==2 {print $4}')
+    local required_space=$((5 * 1024 * 1024))  # 5GB in KB
+
+    if [[ $free_space -lt $required_space ]]; then
+        log ERROR "Insufficient disk space: $(($free_space / 1024 / 1024))GB free"
+        log ERROR "Required: 5GB for build artifacts"
+        exit 1
+    fi
+
+    # Phase 4 requirement: Pre-flight credential validation
+    if [[ "$DRY_RUN" != "true" ]]; then
+        log INFO "Validating credentials..."
+
+        if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
+            if [[ ! -f "${ANDROID_KEYSTORE_PATH:-}" ]]; then
+                log ERROR "Android keystore not found. Set ANDROID_KEYSTORE_PATH"
+                exit 1
+            fi
+
+            local keystore_perms=$(stat -f "%Lp" "$ANDROID_KEYSTORE_PATH" 2>/dev/null || stat -c "%a" "$ANDROID_KEYSTORE_PATH" 2>/dev/null)
+            if [[ "$keystore_perms" != "600" ]]; then
+                log WARN "Keystore file has weak permissions: $keystore_perms"
+                log WARN "Recommended: chmod 600 $ANDROID_KEYSTORE_PATH"
+            fi
+        fi
     fi
 
     log SUCCESS "All prerequisites met"
@@ -165,209 +237,183 @@ production_approval() {
     log INFO "Production deployment approved"
 }
 
-# Bump version
-bump_version() {
-    local platform=$1
+# Wave 7: Version management now uses centralized build_number.sh
+# Old bump_version() function removed - using update_version_all_platforms() instead
 
-    if [[ "$VERSION_BUMP" == "none" ]]; then
-        log INFO "Version bump skipped"
-        return 0
-    fi
-
-    print_header "Version Bump - $platform"
-
-    case "$platform" in
-        android)
-            cd "$PROJECT_ROOT/android"
-            local gradle_file="app/build.gradle"
-
-            if [[ ! -f "$gradle_file" ]]; then
-                log ERROR "Gradle file not found"
-                return 1
-            fi
-
-            # Get current version
-            local current_version=$(grep "versionName" "$gradle_file" | head -n1 | cut -d'"' -f2)
-            local current_code=$(grep "versionCode" "$gradle_file" | head -n1 | awk '{print $2}')
-
-            log INFO "Current Android version: $current_version (code: $current_code)"
-
-            # Calculate new version
-            local new_version
-            if [[ "$VERSION_BUMP" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-                new_version="$VERSION_BUMP"
-            else
-                IFS='.' read -ra VERSION_PARTS <<< "$current_version"
-                local major="${VERSION_PARTS[0]}"
-                local minor="${VERSION_PARTS[1]}"
-                local patch="${VERSION_PARTS[2]}"
-
-                case "$VERSION_BUMP" in
-                    major)
-                        ((major++))
-                        minor=0
-                        patch=0
-                        ;;
-                    minor)
-                        ((minor++))
-                        patch=0
-                        ;;
-                    patch)
-                        ((patch++))
-                        ;;
-                esac
-
-                new_version="${major}.${minor}.${patch}"
-            fi
-
-            local new_code=$((current_code + 1))
-
-            if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would bump to version $new_version (code: $new_code)"
-            else
-                # Update gradle file
-                sed -i '' "s/versionName \"$current_version\"/versionName \"$new_version\"/" "$gradle_file"
-                sed -i '' "s/versionCode $current_code/versionCode $new_code/" "$gradle_file"
-
-                log SUCCESS "Android version bumped to $new_version (code: $new_code)"
-            fi
-            ;;
-
-        ios)
-            cd "$PROJECT_ROOT/ios"
-
-            # Get current version from Info.plist
-            local current_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" SmilePile/Info.plist)
-            local current_build=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" SmilePile/Info.plist)
-
-            log INFO "Current iOS version: $current_version (build: $current_build)"
-
-            # Calculate new version
-            local new_version
-            if [[ "$VERSION_BUMP" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-                new_version="$VERSION_BUMP"
-            else
-                IFS='.' read -ra VERSION_PARTS <<< "$current_version"
-                local major="${VERSION_PARTS[0]}"
-                local minor="${VERSION_PARTS[1]}"
-                local patch="${VERSION_PARTS[2]}"
-
-                case "$VERSION_BUMP" in
-                    major)
-                        ((major++))
-                        minor=0
-                        patch=0
-                        ;;
-                    minor)
-                        ((minor++))
-                        patch=0
-                        ;;
-                    patch)
-                        ((patch++))
-                        ;;
-                esac
-
-                new_version="${major}.${minor}.${patch}"
-            fi
-
-            local new_build=$((current_build + 1))
-
-            if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would bump to version $new_version (build: $new_build)"
-            else
-                # Update Info.plist
-                /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $new_version" SmilePile/Info.plist
-                /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $new_build" SmilePile/Info.plist
-
-                log SUCCESS "iOS version bumped to $new_version (build: $new_build)"
-            fi
-            ;;
-    esac
-}
-
-# Run production tests
+# Run production tests with 3-tier quality gates
 run_production_tests() {
-    local platform=$1
-
     if [[ "$SKIP_TESTS" == "true" ]]; then
         log WARN "Tests skipped by configuration"
         return 0
     fi
 
-    print_header "Production Tests - $platform"
+    print_header "Tiered Test Execution - Production"
 
-    case "$platform" in
-        android)
-            cd "$PROJECT_ROOT/android"
+    if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
+        cd "$PROJECT_ROOT/android"
 
-            log INFO "Running Android tests..."
+        # Tier 1: Critical Tests (BLOCKING)
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        log INFO "TIER 1: Critical Tests (Security, Data Integrity)"
+        log INFO "Status: BLOCKING - Deployment will abort on failure"
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        if [[ "$DRY_RUN" == "true" ]]; then
+            log INFO "DRY RUN: Would run: ./gradlew app:testProdReleaseTier1Critical"
+        else
+            ./gradlew app:testProdReleaseTier1Critical || {
+                log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
+                exit 1
+            }
+            log SUCCESS "[TIER 1] PASSED - Critical tests successful"
+        fi
+
+        # Tier 2: Important Tests (BLOCKING)
+        log INFO ""
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        log INFO "TIER 2: Important Tests (ViewModels, Repositories)"
+        log INFO "Status: BLOCKING - Deployment will abort on failure"
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        if [[ "$DRY_RUN" == "true" ]]; then
+            log INFO "DRY RUN: Would run: ./gradlew app:testProdReleaseTier2Important"
+        else
+            ./gradlew app:testProdReleaseTier2Important || {
+                log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
+                exit 1
+            }
+            log SUCCESS "[TIER 2] PASSED - Important tests successful"
+        fi
+
+        # Tier 3: UI Tests (WARNING ONLY)
+        log INFO ""
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        log INFO "TIER 3: UI Tests (Components, Integration)"
+        log INFO "Status: WARNING - Deployment will continue with warning"
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        local tier3_failed=0
+        if [[ "$DRY_RUN" == "true" ]]; then
+            log INFO "DRY RUN: Would run: ./gradlew app:testProdReleaseTier3UI"
+        else
+            ./gradlew app:testProdReleaseTier3UI || {
+                tier3_failed=1
+                log WARN "WARNING: Tier 3 UI tests failed"
+                log WARN "Review failures but deployment will continue."
+            }
+            if [[ $tier3_failed -eq 0 ]]; then
+                log SUCCESS "[TIER 3] PASSED - UI tests successful"
+            fi
+        fi
+
+        # Summary
+        log INFO ""
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        log INFO "TEST EXECUTION SUMMARY - ANDROID"
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        log SUCCESS "Tier 1 Critical:  PASSED"
+        log SUCCESS "Tier 2 Important: PASSED"
+        if [[ $tier3_failed -eq 1 ]]; then
+            log WARN "Tier 3 UI:        FAILED (WARNING ONLY)"
+        else
+            log SUCCESS "Tier 3 UI:        PASSED"
+        fi
+        log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    fi
+
+    if [[ "$PLATFORM" == "ios" ]] || [[ "$PLATFORM" == "both" ]]; then
+        if [[ "$OS_TYPE" == "Darwin" ]]; then
+            cd "$PROJECT_ROOT"
+
+            # Tier 1: Critical Tests (BLOCKING)
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 1: Critical Tests (Security, Data Integrity)"
+            log INFO "Status: BLOCKING - Deployment will abort on failure"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run full Android test suite"
+                log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier1"
             else
-                ./gradlew test || {
-                    log ERROR "Android tests failed"
-                    return 1
+                ./ios/scripts/run-tier-tests.sh tier1 || {
+                    log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
+                    exit 1
                 }
-
-                # Run lint checks
-                ./gradlew lint || {
-                    log WARN "Android lint warnings detected"
-                }
+                log SUCCESS "[TIER 1] PASSED - Critical tests successful"
             fi
 
-            log SUCCESS "Android tests completed"
-            ;;
+            # Tier 2: Important Tests (BLOCKING)
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 2: Important Tests (Repositories, DI)"
+            log INFO "Status: BLOCKING - Deployment will abort on failure"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-        ios)
-            if [[ "$OS_TYPE" == "Darwin" ]]; then
-                cd "$PROJECT_ROOT/ios"
+            if [[ "$DRY_RUN" == "true" ]]; then
+                log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier2"
+            else
+                ./ios/scripts/run-tier-tests.sh tier2 || {
+                    log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
+                    exit 1
+                }
+                log SUCCESS "[TIER 2] PASSED - Important tests successful"
+            fi
 
-                log INFO "Running iOS tests..."
-                if [[ "$DRY_RUN" == "true" ]]; then
-                    log INFO "DRY RUN: Would run full iOS test suite"
-                else
-                    xcodebuild test \
-                        -project SmilePile.xcodeproj \
-                        -scheme SmilePile \
-                        -destination 'platform=iOS Simulator,name=iPhone 15' \
-                        || {
-                        log ERROR "iOS tests failed"
-                        return 1
-                    }
+            # Tier 3: UI Tests (WARNING ONLY)
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TIER 3: UI Tests (Components, Integration)"
+            log INFO "Status: WARNING - Deployment will continue with warning"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            local tier3_failed=0
+            if [[ "$DRY_RUN" == "true" ]]; then
+                log INFO "DRY RUN: Would run: ./ios/scripts/run-tier-tests.sh tier3"
+            else
+                ./ios/scripts/run-tier-tests.sh tier3 || {
+                    tier3_failed=1
+                    log WARN "WARNING: Tier 3 UI tests failed"
+                    log WARN "Review failures but deployment will continue."
+                }
+                if [[ $tier3_failed -eq 0 ]]; then
+                    log SUCCESS "[TIER 3] PASSED - UI tests successful"
                 fi
-
-                log SUCCESS "iOS tests completed"
             fi
-            ;;
-    esac
+
+            # Summary
+            log INFO ""
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log INFO "TEST EXECUTION SUMMARY - IOS"
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            log SUCCESS "Tier 1 Critical:  PASSED"
+            log SUCCESS "Tier 2 Important: PASSED"
+            if [[ $tier3_failed -eq 1 ]]; then
+                log WARN "Tier 3 UI:        FAILED (WARNING ONLY)"
+            else
+                log SUCCESS "Tier 3 UI:        PASSED"
+            fi
+            log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        fi
+    fi
 }
 
-# Build Android AAB
+# Build Android AAB via Fastlane
 build_android_aab() {
     print_header "Building Android App Bundle (AAB)"
 
     cd "$PROJECT_ROOT/android"
 
-    # Clean if requested
-    if [[ "$CLEAN_BUILD" == "true" ]]; then
-        log INFO "Cleaning Android build..."
-        if [[ "$DRY_RUN" != "true" ]]; then
-            ./gradlew clean
-        fi
-    fi
-
-    # Build AAB
-    log INFO "Building release AAB..."
+    # Build via Fastlane
+    log INFO "Building production AAB via Fastlane..."
     if [[ "$DRY_RUN" == "true" ]]; then
-        log INFO "DRY RUN: Would build AAB with ./gradlew bundleRelease"
+        log INFO "DRY RUN: Would run: bundle exec fastlane prod_android"
     else
-        ./gradlew bundleRelease || {
-            log ERROR "AAB build failed"
+        bundle exec fastlane prod_android || {
+            log ERROR "Android Fastlane build failed"
             return 1
         }
     fi
 
-    local aab_path="$PROJECT_ROOT/android/app/build/outputs/bundle/release/app-release.aab"
+    local aab_path="$PROJECT_ROOT/android/app/build/outputs/bundle/prodRelease/app-prod-release.aab"
 
     if [[ ! -f "$aab_path" ]] && [[ "$DRY_RUN" != "true" ]]; then
         log ERROR "AAB not found at: $aab_path"
@@ -377,29 +423,13 @@ build_android_aab() {
     # Copy to artifacts
     mkdir -p "$DEPLOY_ROOT/artifacts/production"
     if [[ "$DRY_RUN" != "true" ]]; then
-        cp "$aab_path" "$DEPLOY_ROOT/artifacts/production/SmilePile-${DEPLOYMENT_ID}.aab"
+        cp "$aab_path" "$DEPLOY_ROOT/artifacts/production/SmilePile-v${VERSION_NAME}-prod.aab"
+        log INFO "AAB saved to: artifacts/production/SmilePile-v${VERSION_NAME}-prod.aab"
 
-        # Generate APK from AAB for testing (optional)
-        log INFO "Generating universal APK from AAB for testing..."
-        if command -v bundletool >/dev/null 2>&1; then
-            bundletool build-apks \
-                --bundle="$aab_path" \
-                --output="$DEPLOY_ROOT/artifacts/production/SmilePile-${DEPLOYMENT_ID}.apks" \
-                --mode=universal \
-                --ks="${ANDROID_KEYSTORE_PATH}" \
-                --ks-pass="pass:${ANDROID_KEYSTORE_PASSWORD}" \
-                --ks-key-alias="${ANDROID_KEY_ALIAS}" \
-                --key-pass="pass:${ANDROID_KEY_PASSWORD}" \
-                2>/dev/null || log WARN "Could not generate universal APK"
-        fi
-    fi
-
-    # Size analysis
-    if [[ "$DRY_RUN" != "true" ]]; then
+        # Size analysis
         local aab_size=$(du -h "$aab_path" | cut -f1)
         log INFO "AAB size: $aab_size"
 
-        # Check if size is reasonable
         local size_mb=$(du -m "$aab_path" | cut -f1)
         if [[ $size_mb -gt 150 ]]; then
             log WARN "AAB size exceeds 150MB (Google Play limit)"
@@ -407,18 +437,17 @@ build_android_aab() {
     fi
 
     log SUCCESS "Android AAB generated successfully"
-    log INFO "AAB location: $DEPLOY_ROOT/artifacts/production/"
 
     echo ""
     echo "📱 Next steps for Android:"
     echo "1. Go to Google Play Console: https://play.google.com/console"
     echo "2. Select your app"
     echo "3. Go to 'Production' > 'Releases'"
-    echo "4. Upload the AAB file from artifacts/production/"
+    echo "4. Upload AAB: artifacts/production/SmilePile-v${VERSION_NAME}-prod.aab"
     echo "5. Fill in release notes and submit for review"
 }
 
-# Build iOS Archive
+# Build iOS Archive via Fastlane
 build_ios_archive() {
     print_header "Building iOS Archive"
 
@@ -429,82 +458,28 @@ build_ios_archive() {
 
     cd "$PROJECT_ROOT/ios"
 
-    # Clean if requested
-    if [[ "$CLEAN_BUILD" == "true" ]]; then
-        log INFO "Cleaning iOS build..."
-        if [[ "$DRY_RUN" != "true" ]]; then
-            xcodebuild clean -project SmilePile.xcodeproj -scheme SmilePile
-            rm -rf ~/Library/Developer/Xcode/DerivedData/SmilePile-*
-        fi
-    fi
-
-    # Build archive
-    log INFO "Building iOS archive..."
-    local archive_path="$DEPLOY_ROOT/artifacts/production/SmilePile-${DEPLOYMENT_ID}.xcarchive"
-
+    # Build via Fastlane
+    log INFO "Building production archive via Fastlane..."
     if [[ "$DRY_RUN" == "true" ]]; then
-        log INFO "DRY RUN: Would build archive with xcodebuild archive"
+        log INFO "DRY RUN: Would run: bundle exec fastlane prod_ios"
     else
-        xcodebuild archive \
-            -project SmilePile.xcodeproj \
-            -scheme SmilePile \
-            -configuration Release \
-            -archivePath "$archive_path" \
-            -destination "generic/platform=iOS" \
-            || {
-            log ERROR "Archive build failed"
+        bundle exec fastlane prod_ios || {
+            log ERROR "iOS Fastlane build failed"
             return 1
         }
     fi
 
-    # Export IPA
-    if [[ "$DRY_RUN" != "true" ]] && [[ -d "$archive_path" ]]; then
-        log INFO "Exporting IPA from archive..."
-
-        # Create export options plist
-        cat > "$DEPLOY_ROOT/artifacts/production/ExportOptions.plist" << EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>method</key>
-    <string>app-store</string>
-    <key>teamID</key>
-    <string>${APPLE_TEAM_ID:-YOUR_TEAM_ID}</string>
-    <key>uploadSymbols</key>
-    <true/>
-    <key>compileBitcode</key>
-    <true/>
-    <key>stripSwiftSymbols</key>
-    <true/>
-    <key>thinning</key>
-    <string>&lt;none&gt;</string>
-</dict>
-</plist>
-EOF
-
-        xcodebuild -exportArchive \
-            -archivePath "$archive_path" \
-            -exportPath "$DEPLOY_ROOT/artifacts/production" \
-            -exportOptionsPlist "$DEPLOY_ROOT/artifacts/production/ExportOptions.plist" \
-            || {
-            log WARN "IPA export failed - archive still available for manual export"
-        }
-    fi
-
-    log SUCCESS "iOS archive generated successfully"
-    log INFO "Archive location: $archive_path"
+    # Fastlane handles archive and IPA export
+    log SUCCESS "iOS archive and IPA generated successfully"
+    log INFO "Archive location: Check Xcode Organizer or Fastlane output"
 
     echo ""
     echo "📱 Next steps for iOS:"
-    echo "1. Open Xcode"
-    echo "2. Go to Window > Organizer"
-    echo "3. Select the archive (or use the one in artifacts/production/)"
-    echo "4. Click 'Distribute App'"
-    echo "5. Choose 'App Store Connect' and follow the wizard"
-    echo "6. Once uploaded, go to App Store Connect to submit for review"
-    echo ""
-    echo "Alternative: Use Transporter app with the exported IPA"
+    echo "1. Open Xcode > Window > Organizer"
+    echo "2. Select the latest archive"
+    echo "3. Click 'Distribute App' > 'App Store Connect'"
+    echo "4. Or use Transporter app with the exported IPA"
+    echo "5. Complete submission in App Store Connect"
 }
 
 # Generate release notes
@@ -646,18 +621,24 @@ main() {
     # Production approval gate
     production_approval
 
+    # Update version numbers using centralized build_number.sh
+    log INFO "Updating build version..."
+    update_version_all_platforms "$PLATFORM" || {
+        log ERROR "Failed to update version numbers"
+        exit 1
+    }
+
+    # Run tests with 3-tier quality gates
+    run_production_tests
+
     # Process each platform
     local deploy_success=true
 
     if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
-        bump_version "android"
-        run_production_tests "android"
         build_android_aab || deploy_success=false
     fi
 
     if [[ "$PLATFORM" == "ios" ]] || [[ "$PLATFORM" == "both" ]]; then
-        bump_version "ios"
-        run_production_tests "ios"
         build_ios_archive || deploy_success=false
     fi
 

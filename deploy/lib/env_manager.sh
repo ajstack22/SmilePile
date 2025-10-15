@@ -110,7 +110,7 @@ validate_environment_vars() {
     local required_vars=()
 
     case "$env_name" in
-        production)
+        production|prod)
             required_vars=(
                 "ANDROID_KEYSTORE_PATH"
                 "ANDROID_KEYSTORE_PASSWORD"
@@ -121,7 +121,7 @@ validate_environment_vars() {
                 "BUILD_NUMBER"
             )
             ;;
-        staging|quality)
+        staging|quality|stage|beta|qual)
             required_vars=(
                 "APP_VERSION"
                 "BUILD_NUMBER"

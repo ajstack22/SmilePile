@@ -1,9 +1,9 @@
 #!/bin/bash
 # ============================================================================
-# SmilePile Stage Deployment Script
+# SmilePile Beta Deployment Script
 # ============================================================================
-# Deploys to TestFlight Internal Testing + Play Console Internal Testing
-# Stage = Internal testing track for QA/stakeholders
+# Deploys to TestFlight External Testing + Play Console Closed Testing
+# Beta = External testing track for beta testers
 
 set -euo pipefail
 
@@ -28,10 +28,17 @@ PLATFORM="${1:-both}"
 SKIP_TESTS="${SKIP_TESTS:-false}"
 SKIP_COMMIT="${SKIP_COMMIT:-false}"
 ALLOW_UNCOMMITTED="${ALLOW_UNCOMMITTED:-false}"
+REQUIRE_APPROVAL="${REQUIRE_APPROVAL:-true}"
 DRY_RUN="${DRY_RUN:-false}"
 
+# CI Detection
+CI="${CI:-false}"
+if [[ -n "${GITHUB_ACTIONS:-}" ]] || [[ -n "${JENKINS_HOME:-}" ]] || [[ -n "${GITLAB_CI:-}" ]]; then
+    CI="true"
+fi
+
 # Deployment tracking
-DEPLOYMENT_ID="stage_$(date +%Y%m%d_%H%M%S)"
+DEPLOYMENT_ID="beta_$(date +%Y%m%d_%H%M%S)"
 LOG_FILE="${LOG_DIR}/deploy_${DEPLOYMENT_ID}.log"
 
 # ============================================================================
@@ -41,18 +48,18 @@ LOG_FILE="${LOG_DIR}/deploy_${DEPLOYMENT_ID}.log"
 usage() {
     cat << EOF
 ================================================================================
-SmilePile Stage Deployment Script
+SmilePile Beta Deployment Script
 ================================================================================
 
-Builds and uploads to internal testing tracks:
-- iOS: TestFlight Internal Testing
-- Android: Play Console Internal Testing
+Builds and uploads to external testing tracks:
+- iOS: TestFlight External Testing
+- Android: Play Console Closed Testing
 
 Usage: $0 [platform] [options]
 
 Platforms:
-    android     Deploy to Play Console Internal Testing
-    ios         Deploy to TestFlight Internal Testing
+    android     Deploy to Play Console Closed Testing
+    ios         Deploy to TestFlight External Testing
     both        Deploy to both platforms (default)
 
 Environment Variables:
@@ -60,16 +67,17 @@ Environment Variables:
     SKIP_COMMIT=true        Skip git commit/push
     ALLOW_UNCOMMITTED=true  Allow deployment with uncommitted changes
     DRY_RUN=true           Test run without actual deployment
+    REQUIRE_APPROVAL=false  Skip beta approval gate (for CI)
 
 Examples:
-    # Deploy both platforms to internal testing
+    # Deploy both platforms to external beta testing
     $0 both
 
-    # Deploy only iOS to TestFlight
+    # Deploy only iOS to TestFlight External
     $0 ios
 
-    # Deploy without running tests (not recommended)
-    SKIP_TESTS=true $0
+    # Deploy without approval prompt
+    REQUIRE_APPROVAL=false $0 both
 
 ================================================================================
 EOF
@@ -117,6 +125,40 @@ detect_available_simulator() {
     log ERROR "No iOS simulators found"
     log ERROR "Install simulators via Xcode or set IOS_SIMULATOR_NAME environment variable"
     return 1
+}
+
+# Beta approval gate
+beta_approval() {
+    if [[ "$REQUIRE_APPROVAL" == "false" ]] || [[ "$CI" == "true" ]] || [[ "$DRY_RUN" == "true" ]]; then
+        log INFO "Beta approval bypassed (CI/config)"
+        return 0
+    fi
+
+    print_header "BETA DEPLOYMENT APPROVAL"
+
+    echo ""
+    echo "⚠️  WARNING: You are about to deploy to EXTERNAL beta testers"
+    echo ""
+    echo "Platform: $PLATFORM"
+    echo ""
+    echo "This will make the build available to:"
+    if [[ "$PLATFORM" == "ios" ]] || [[ "$PLATFORM" == "both" ]]; then
+        echo "  - TestFlight External Testing (public beta testers)"
+    fi
+    if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
+        echo "  - Play Console Closed Testing (beta track)"
+    fi
+    echo ""
+    echo -n "Are you sure? (yes/no): "
+
+    read -r response
+
+    if [[ "$response" != "yes" ]]; then
+        log ERROR "Beta deployment cancelled by user"
+        exit 1
+    fi
+
+    log INFO "Beta deployment approved"
 }
 
 # Check prerequisites with pre-flight validation
@@ -234,11 +276,11 @@ commit_to_github() {
     fi
 
     # Generate commit message with version
-    local commit_msg="stage: Deploy ${PLATFORM} - v${VERSION_NAME}"
+    local commit_msg="beta: Deploy ${PLATFORM} - v${VERSION_NAME}"
 
     if [[ "$DRY_RUN" == "true" ]]; then
         log INFO "DRY RUN: Would commit with message: $commit_msg"
-        log INFO "DRY RUN: Would tag as: v${VERSION_NAME}-stage"
+        log INFO "DRY RUN: Would tag as: v${VERSION_NAME}-beta"
         return 0
     fi
 
@@ -253,9 +295,9 @@ commit_to_github() {
     }
 
     # Tag
-    local tag_name="v${VERSION_NAME}-stage"
+    local tag_name="v${VERSION_NAME}-beta"
     log INFO "Creating tag: $tag_name"
-    git tag -a "$tag_name" -m "Stage deployment v${VERSION_NAME}"
+    git tag -a "$tag_name" -m "Beta deployment v${VERSION_NAME}"
 
     # Push
     log INFO "Pushing to GitHub..."
@@ -295,15 +337,18 @@ main() {
     exec 1> >(tee -a "$LOG_FILE")
     exec 2>&1
 
-    print_header "SmilePile Stage Deployment"
+    print_header "SmilePile Beta Deployment"
 
     log INFO "Deployment ID: $DEPLOYMENT_ID"
     log INFO "Platform: $PLATFORM"
-    log INFO "Target: Internal Testing (TestFlight + Play Console)"
+    log INFO "Target: External Testing (TestFlight External + Play Console Closed)"
     log INFO "Dry Run: $DRY_RUN"
 
     # Check prerequisites
     check_prerequisites
+
+    # Beta approval gate
+    beta_approval
 
     # Wave 7: Acquire git lock to prevent concurrent deployments
     if [[ "$DRY_RUN" != "true" ]] && [[ "$SKIP_COMMIT" != "true" ]]; then
@@ -313,8 +358,8 @@ main() {
     # Manylla Pattern: No git status check here - we test uncommitted changes
     # Git check happens AFTER validation in commit_to_github() function
 
-    # Load stage environment
-    load_environment "stage"
+    # Load beta environment
+    load_environment "beta"
 
     # Update version numbers
     log INFO "Updating build version..."
@@ -337,9 +382,9 @@ main() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testStageReleaseTier1Critical"
+                log INFO "DRY RUN: Would run: ./gradlew app:testBetaReleaseTier1Critical"
             else
-                ./gradlew app:testStageReleaseTier1Critical || {
+                ./gradlew app:testBetaReleaseTier1Critical || {
                     log ERROR "CRITICAL FAILURE: Tier 1 tests failed"
                     exit 1
                 }
@@ -354,9 +399,9 @@ main() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testStageReleaseTier2Important"
+                log INFO "DRY RUN: Would run: ./gradlew app:testBetaReleaseTier2Important"
             else
-                ./gradlew app:testStageReleaseTier2Important || {
+                ./gradlew app:testBetaReleaseTier2Important || {
                     log ERROR "IMPORTANT FAILURE: Tier 2 tests failed"
                     exit 1
                 }
@@ -372,9 +417,9 @@ main() {
 
             local tier3_failed=0
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testStageReleaseTier3UI"
+                log INFO "DRY RUN: Would run: ./gradlew app:testBetaReleaseTier3UI"
             else
-                ./gradlew app:testStageReleaseTier3UI || {
+                ./gradlew app:testBetaReleaseTier3UI || {
                     tier3_failed=1
                     log WARN "WARNING: Tier 3 UI tests failed"
                     log WARN "Review failures but deployment will continue."
@@ -483,48 +528,48 @@ main() {
         if [[ "$OS_TYPE" != "Darwin" ]]; then
             log WARN "iOS deployment skipped (not on macOS)"
         else
-            print_header "iOS Stage Deployment"
-            log INFO "Building and uploading iOS to TestFlight Internal Testing..."
+            print_header "iOS Beta Deployment"
+            log INFO "Building and uploading iOS to TestFlight External Testing..."
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: cd ios && bundle exec fastlane stage_ios"
+                log INFO "DRY RUN: Would run: cd ios && bundle exec fastlane beta_ios"
             else
                 cd "$PROJECT_ROOT/ios"
-                bundle exec fastlane stage_ios || {
-                    log ERROR "iOS stage deployment failed"
+                bundle exec fastlane beta_ios || {
+                    log ERROR "iOS beta deployment failed"
                     deploy_success=false
                 }
             fi
 
             if [[ "$deploy_success" == "true" ]]; then
-                log SUCCESS "iOS uploaded to TestFlight Internal Testing"
+                log SUCCESS "iOS uploaded to TestFlight External Testing"
                 log INFO "View: https://appstoreconnect.apple.com"
             fi
         fi
     fi
 
     if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
-        print_header "Android Stage Deployment"
-        log INFO "Building and uploading Android to Play Console Internal Testing..."
+        print_header "Android Beta Deployment"
+        log INFO "Building and uploading Android to Play Console Closed Testing..."
 
         if [[ "$DRY_RUN" == "true" ]]; then
-            log INFO "DRY RUN: Would run: cd android && bundle exec fastlane stage_android"
+            log INFO "DRY RUN: Would run: cd android && bundle exec fastlane beta_android"
         else
             cd "$PROJECT_ROOT/android"
-            bundle exec fastlane stage_android || {
-                log ERROR "Android stage deployment failed"
+            bundle exec fastlane beta_android || {
+                log ERROR "Android beta deployment failed"
                 deploy_success=false
             }
         fi
 
         if [[ "$deploy_success" == "true" ]]; then
-            log SUCCESS "Android uploaded to Play Console Internal Testing"
+            log SUCCESS "Android uploaded to Play Console Closed Testing"
             log INFO "View: https://play.google.com/console"
         fi
     fi
 
     if [[ "$deploy_success" != "true" ]]; then
-        log ERROR "Stage deployment failed"
+        log ERROR "Beta deployment failed"
         exit 1
     fi
 
@@ -532,12 +577,12 @@ main() {
     commit_to_github
 
     # Generate summary
-    print_header "Stage Deployment Summary"
+    print_header "Beta Deployment Summary"
 
     cat << EOF
 
 ================================================================================
-STAGE DEPLOYMENT COMPLETED
+BETA DEPLOYMENT COMPLETED
 ================================================================================
 
 Deployment ID:     $DEPLOYMENT_ID
@@ -546,14 +591,15 @@ Platform:          $PLATFORM
 Timestamp:         $(date)
 
 Distribution:
-  iOS:             TestFlight Internal Testing
-  Android:         Play Console Internal Testing
+  iOS:             TestFlight External Testing
+  Android:         Play Console Closed Testing (Beta Track)
 
-Testing Instructions:
-  1. iOS testers: Check TestFlight app for new build
-  2. Android testers: Check email for Play Console invite
-  3. Report issues via established QA channels
-  4. Approved builds can be promoted to BETA tier
+Beta Testing Instructions:
+  1. iOS testers: Check TestFlight app for new beta build
+  2. Android testers: Join beta program via Play Console invite
+  3. Collect feedback from external beta testers
+  4. Monitor crash reports and analytics
+  5. Approved builds can be promoted to PROD tier
 
 Dashboards:
   App Store Connect: https://appstoreconnect.apple.com
@@ -562,7 +608,7 @@ Dashboards:
 ================================================================================
 EOF
 
-    log SUCCESS "Stage deployment completed successfully!"
+    log SUCCESS "Beta deployment completed successfully!"
 }
 
 # Run main
