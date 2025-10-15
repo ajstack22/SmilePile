@@ -1,0 +1,9 @@
+# android/fastlane/Appfile
+# SmilePile Android App Configuration
+
+json_key_file("#{Dir.home}/.fastlane/play-store-credentials.json")  # Service account JSON
+package_name("com.smilepile")  # Base package name
+
+# Tier-specific package names are handled automatically by flavors:
+# - qual: com.smilepile.qual (from qualDebug/qualRelease flavors)
+# - stage/beta/prod: com.smilepile (from respective flavors)

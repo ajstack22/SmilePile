@@ -1,0 +1,113 @@
+# android/fastlane/Fastfile
+# SmilePile Android Fastlane Configuration
+
+default_platform(:android)
+
+platform :android do
+
+  # LANE 1: QUAL - APK builds for local emulator testing
+  desc "Build QUAL APK for emulator testing"
+  lane :qual_android do
+    gradle(
+      task: "clean assembleQualDebug",
+      project_dir: ".",
+      print_command: true
+    )
+
+    apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    puts ""
+    puts "✅ QUAL APK built: #{apk_path}"
+    puts "📲 To install: adb install -r #{apk_path}"
+    puts "🚀 To launch: adb shell monkey -p com.smilepile.qual -c android.intent.category.LAUNCHER 1"
+    puts ""
+  end
+
+  # LANE 2: STAGE - Play Console Internal Testing
+  desc "Build and upload STAGE to Play Console Internal Testing"
+  lane :stage_android do
+    gradle(
+      task: "clean bundleStageRelease",
+      project_dir: ".",
+      print_command: true,
+      print_command_output: true
+    )
+
+    upload_to_play_store(
+      track: "internal",
+      release_status: "completed",
+      aab: "app/build/outputs/bundle/stageRelease/app-stage-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      validate_only: false
+    )
+
+    puts ""
+    puts "✅ STAGE uploaded to Play Console Internal Testing!"
+    puts "🔗 View: https://play.google.com/console"
+    puts ""
+  end
+
+  # LANE 3: BETA - Play Console Closed Testing
+  desc "Build and upload BETA to Play Console Closed Testing"
+  lane :beta_android do
+    gradle(
+      task: "clean bundleBetaRelease",
+      project_dir: ".",
+      print_command: true
+    )
+
+    upload_to_play_store(
+      track: "beta",
+      release_status: "completed",
+      aab: "app/build/outputs/bundle/betaRelease/app-beta-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+
+    puts ""
+    puts "✅ BETA uploaded to Play Console Closed Testing!"
+    puts "🔗 View: https://play.google.com/console"
+    puts ""
+  end
+
+  # LANE 4: PROD - Play Console Production
+  desc "Build and upload PROD to Play Console Production"
+  lane :prod_android do
+    gradle(
+      task: "clean bundleProdRelease",
+      project_dir: ".",
+      print_command: true
+    )
+
+    upload_to_play_store(
+      track: "production",
+      release_status: "draft",  # Draft for manual rollout control
+      aab: "app/build/outputs/bundle/prodRelease/app-prod-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+
+    puts ""
+    puts "✅ PROD uploaded to Play Console (draft)!"
+    puts "⚠️  Manual rollout required in Play Console"
+    puts "🔗 https://play.google.com/console"
+    puts ""
+  end
+
+  # Error handling
+  error do |lane, exception|
+    puts ""
+    puts "❌ Lane #{lane} failed: #{exception.message}"
+    puts ""
+  end
+
+end

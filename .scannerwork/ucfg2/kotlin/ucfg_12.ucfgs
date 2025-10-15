@@ -2624,10 +2624,9 @@ s
 
 π π(,
 sizeInByteslongB"
-com.smilepile.ui.screensHü
-
+com.smilepile.ui.screensHÀ
 ëcom.smilepile.ui.screens#RemoveFromLibraryConfirmationDialog(Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Vn
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt« «(/"0*“
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/PhotoViewerScreen.kt« «(/"0*˛
 0∆ «(ê
 ç
 
@@ -2688,7 +2687,80 @@ k
 
 __unknown_file (
 
-%2"/
+%2£
+†
+œ œ(•
+%3"__concat*2
+
+œ œ(7$"
+ Are you sure you want to remove *
+
+œ7 œ(9
+\"*-
+
+œ: œ(C
+
+	photoNamejava.lang.String*
+
+œC œ(E
+\"*r
+œE œ(§ca
+_ from your SmilePile library? The photo will remain on your device but won't appear in the app.‰
+·
+
+Õ ÷(	6
+%40com.smilepile.ui.components.dialogs.DialogConfig"àcom.smilepile.ui.components.dialogs.DialogBuilder#confirmation(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;*R
+
+Õ Õ(D
+B
+DialogBuilder1com.smilepile.ui.components.dialogs.DialogBuilder*%
+
+Œ Œ((
+Remove from Library*
+œ œ(•
+
+%3*
+
+– –(!
+
+Remove*
+
+— —( 
+
+Cancel*
+
+“ “(!	
+false*7
+
+”! ”(4)
+'
+RemoveCircleOutlinejava.lang.Object*;
+
+‘ ‘(!-
++
+	onConfirmkotlin.jvm.functions.Function0*;
+
+’ ’( -
++
+	onDismisskotlin.jvm.functions.Function0ú
+ô
+
+Ã ÿ(
+%5kotlin.Unit"ñcom.smilepile.ui.components.dialogs#UniversalCrudDialog(Lcom/smilepile/ui/components/dialogs/DialogConfig;Lkotlin/jvm/functions/Function0;LModifier;)V*
+
+__unknown_file ( *F
+
+Õ ÷(	8
+6
+%40com.smilepile.ui.components.dialogs.DialogConfig*;
+
+◊ ◊(-
++
+	onDismisskotlin.jvm.functions.Function0*:
+
+__unknown_file (
+
+Modifierjava.lang.Object"/
 
 __unknown_file (
 implicit return:+

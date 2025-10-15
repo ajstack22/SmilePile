@@ -210,14 +210,14 @@ iconTextIdintÛ
 iconTextIdint:
 G G( 
 hasNewsbooleanB1/
--com.smilepile.ui.screens.BottomNavigationItemHƒ
+-com.smilepile.ui.screens.BottomNavigationItemH­
 ·com.smilepile.ui.screens#MainScreen(LModifier;LNavHostController;ZLkotlin/jvm/functions/Function0;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastManager;)Ve
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktN N("0*«
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktN N("0*©
 3
-„% „(BÊÇ
+„% „(BÉÆ
 
-„% „(B
-%10boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
+„% „(B
+%8boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
 
 „% „(0!
 
@@ -225,26 +225,26 @@ iconTextIdint:
 
 „< „(B&
 $
-PARENTcom.smilepile.mode.AppMode2equals(Ljava/lang/Object;)H
-F
+PARENTcom.smilepile.mode.AppMode2equals(Ljava/lang/Object;)G
+E
 
 __unknown_file (
-%6"__id*
+%7"__id*
 
-„% „(B
-
-%10boolean*
+„% „(B
+
+%8boolean*
 1*W
 4
 … …(A
 ?
 
 __unknown_file (
-%6"__id*
+%7"__id*
 
 … …(	
 false*
-1*²
+1*Þ
 0J L(
 Š
 O O(!
@@ -371,44 +371,28 @@ V
 scopejava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>c
-a
-] ](.$
-
-toastStateerror.NonExistentClass"__id*)
+	<unknown>ß
+Ü
+] ](.'
+%6!com.smilepile.ui.toast.ToastState"^com.smilepile.ui.toast#rememberToastState(LCoroutineScope;)Lcom/smilepile/ui/toast/ToastState;*
 
-__unknown_file (
-	<unknown>h
+__unknown_file ( *'
+]( ](-
+
+scopejava.lang.Objectz
+x
+] ](./
+
+toastState!com.smilepile.ui.toast.ToastState"__id*5
+] ](.)
+'
+%6!com.smilepile.ui.toast.ToastStateh
 f
 k ~()
 bottomNavigationItemsjava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>À
-½
-
-‚ ‚( 
-%7java.lang.String"Hcom.smilepile.navigation.NavigationRoutes#getGALLERY()Ljava/lang/String;*M
-
-‚ ‚(?
-=
-NavigationRoutes)com.smilepile.navigation.NavigationRoutesÃ
-À
-
-ƒ ƒ(#
-%8java.lang.String"Kcom.smilepile.navigation.NavigationRoutes#getCATEGORIES()Ljava/lang/String;*M
-
-ƒ ƒ(?
-=
-NavigationRoutes)com.smilepile.navigation.NavigationRoutesÁ
-¾
-
-„ „(!
-%9java.lang.String"Icom.smilepile.navigation.NavigationRoutes#getSETTINGS()Ljava/lang/String;*M
-
-„ „(?
-=
-NavigationRoutes)com.smilepile.navigation.NavigationRoutes*
+	<unknown>*
 3
 4*¡
 1
@@ -420,7 +404,7 @@ f
 
 __unknown_file (
 
-%6"/
+%7"/
 
 __unknown_file (
 implicit return:(

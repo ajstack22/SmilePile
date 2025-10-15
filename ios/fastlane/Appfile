@@ -1,0 +1,13 @@
+# ios/fastlane/Appfile
+# SmilePile iOS App Configuration
+
+app_identifier("com.smilepile")  # Base bundle ID
+apple_id("adam@stackmap.app")    # Apple Developer email
+team_id("84W9WSYQQB")            # Team ID
+
+# iTunesConnect team ID (same as developer team)
+itc_team_id("84W9WSYQQB")
+
+# Tier-specific bundle IDs are handled automatically by schemes:
+# - Qual: com.smilepile.qual (from SmilePile Qual scheme)
+# - Stage/Beta/Prod: com.smilepile (from respective schemes)

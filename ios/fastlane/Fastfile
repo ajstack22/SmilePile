@@ -1,0 +1,138 @@
+# ios/fastlane/Fastfile
+# SmilePile iOS Fastlane Configuration
+
+default_platform(:ios)
+
+platform :ios do
+
+  # LANE 1: QUAL - Simulator builds for local testing
+  desc "Build QUAL for simulator testing"
+  lane :qual_ios do
+    gym(
+      scheme: "SmilePile Qual",
+      configuration: "Debug",
+      skip_package_ipa: true,
+      skip_codesigning: false,  # Use development signing
+      sdk: "iphonesimulator",
+      destination: "generic/platform=iOS Simulator",
+      derived_data_path: "./DerivedData",
+      output_directory: "./build/qual",
+      clean: true,
+      buildlog_path: "./build/logs"
+    )
+
+    puts ""
+    puts "✅ QUAL build complete!"
+    puts "📱 App location: DerivedData/Build/Products/Debug-iphonesimulator/SmilePile Qual.app"
+    puts "📲 To install: xcrun simctl install booted '<path-to-app>'"
+    puts ""
+  end
+
+  # LANE 2: STAGE - TestFlight Internal Testing
+  desc "Build and upload STAGE to TestFlight Internal Testing"
+  lane :stage_ios do
+    # Ensure clean build
+    clear_derived_data
+
+    # Build IPA
+    gym(
+      scheme: "SmilePile Stage",
+      configuration: "Debug",  # Stage scheme uses Debug configuration
+      export_method: "app-store",
+      derived_data_path: "./build/stage",
+      output_directory: "./build/stage",
+      output_name: "SmilePile-Stage",
+      clean: true,
+      buildlog_path: "./build/logs"
+    )
+
+    # Upload to TestFlight
+    pilot(
+      skip_waiting_for_build_processing: true,
+      distribute_external: false,
+      groups: ["Internal Testers"],
+      changelog: "Stage build for internal testing",
+      notify_external_testers: false,
+      app_identifier: "com.smilepile",
+      team_id: "84W9WSYQQB"
+    )
+
+    puts ""
+    puts "✅ STAGE uploaded to TestFlight Internal Testing!"
+    puts "🔗 View: https://appstoreconnect.apple.com"
+    puts ""
+  end
+
+  # LANE 3: BETA - TestFlight External Testing
+  desc "Build and upload BETA to TestFlight External Testing"
+  lane :beta_ios do
+    clear_derived_data
+
+    gym(
+      scheme: "SmilePile Beta",
+      configuration: "Beta",
+      export_method: "app-store",
+      derived_data_path: "./build/beta",
+      output_directory: "./build/beta",
+      output_name: "SmilePile-Beta",
+      clean: true,
+      buildlog_path: "./build/logs"
+    )
+
+    pilot(
+      skip_waiting_for_build_processing: false,  # Wait for processing before external distribution
+      distribute_external: true,
+      groups: ["Beta Testers"],
+      changelog: "Beta build for external testing",
+      notify_external_testers: true,
+      app_identifier: "com.smilepile",
+      team_id: "84W9WSYQQB"
+    )
+
+    puts ""
+    puts "✅ BETA uploaded to TestFlight External Testing!"
+    puts "🔗 View: https://appstoreconnect.apple.com"
+    puts ""
+  end
+
+  # LANE 4: PROD - App Store
+  desc "Build and upload PROD to App Store Connect"
+  lane :prod_ios do
+    clear_derived_data
+
+    gym(
+      scheme: "SmilePile Prod",
+      configuration: "Release",
+      export_method: "app-store",
+      derived_data_path: "./build/prod",
+      output_directory: "./build/prod",
+      output_name: "SmilePile-Prod",
+      clean: true,
+      buildlog_path: "./build/logs"
+    )
+
+    # Upload but don't auto-submit
+    deliver(
+      skip_metadata: true,
+      skip_screenshots: true,
+      submit_for_review: false,  # Manual submission required
+      force: true,
+      app_identifier: "com.smilepile",
+      team_id: "84W9WSYQQB"
+    )
+
+    puts ""
+    puts "✅ PROD uploaded to App Store Connect!"
+    puts "⚠️  Manual submission required in App Store Connect"
+    puts "🔗 https://appstoreconnect.apple.com"
+    puts ""
+  end
+
+  # Error handling
+  error do |lane, exception|
+    puts ""
+    puts "❌ Lane #{lane} failed: #{exception.message}"
+    puts ""
+  end
+
+end

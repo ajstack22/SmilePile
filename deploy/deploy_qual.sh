@@ -92,6 +92,7 @@ check_prerequisites() {
 
     # Check common tools
     command -v git >/dev/null 2>&1 || missing_tools+=("git")
+    command -v jq >/dev/null 2>&1 || missing_tools+=("jq (install via: brew install jq)")
 
     # Check Android tools if deploying Android
     if [[ "$PLATFORM" == "android" ]] || [[ "$PLATFORM" == "both" ]]; then
@@ -166,10 +167,10 @@ run_tests() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier1Critical"
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier1Critical"
             else
                 local tier1_output="/tmp/tier1-android-output.txt"
-                ./gradlew app:testQualDebugTier1Critical 2>&1 | tee "$tier1_output"
+                ./gradlew app:testTier1Critical 2>&1 | tee "$tier1_output"
                 local tier1_exit=${PIPESTATUS[0]}
 
                 if [[ $tier1_exit -ne 0 ]]; then
@@ -194,10 +195,10 @@ run_tests() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier2Important"
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier2Important"
             else
                 local tier2_output="/tmp/tier2-android-output.txt"
-                ./gradlew app:testQualDebugTier2Important 2>&1 | tee "$tier2_output"
+                ./gradlew app:testTier2Important 2>&1 | tee "$tier2_output"
                 local tier2_exit=${PIPESTATUS[0]}
 
                 if [[ $tier2_exit -ne 0 ]]; then
@@ -223,10 +224,10 @@ run_tests() {
 
             local tier3_failed=0
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier3UI"
+                log INFO "DRY RUN: Would run: ./gradlew app:testTier3UI"
             else
                 local tier3_output="/tmp/tier3-android-output.txt"
-                ./gradlew app:testQualDebugTier3UI 2>&1 | tee "$tier3_output"
+                ./gradlew app:testTier3UI 2>&1 | tee "$tier3_output"
                 local tier3_exit=${PIPESTATUS[0]}
 
                 if [[ $tier3_exit -ne 0 ]]; then
@@ -378,19 +379,61 @@ run_tests() {
     esac
 }
 
+# Detect available iOS simulator (with security input validation)
+detect_available_simulator() {
+    # Security: Allow override but validate input to prevent command injection
+    if [[ -n "${IOS_SIMULATOR_NAME:-}" ]]; then
+        # CRITICAL: Input validation - only allow alphanumeric, spaces, and hyphens
+        if [[ ! "$IOS_SIMULATOR_NAME" =~ ^[a-zA-Z0-9\ \-]+$ ]]; then
+            log ERROR "Invalid IOS_SIMULATOR_NAME: contains unsafe characters"
+            log ERROR "Only alphanumeric, spaces, and hyphens allowed"
+            return 1
+        fi
+        echo "$IOS_SIMULATOR_NAME"
+        return 0
+    fi
+
+    # Try booted simulator first
+    local booted_sim=$(xcrun simctl list devices 2>/dev/null | grep "Booted" | head -n1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    if [[ -n "$booted_sim" ]]; then
+        echo "$booted_sim"
+        return 0
+    fi
+
+    # Fallback priority: iPhone 16 > iPhone 15 > iPhone 14 > any iPhone
+    for sim_name in "iPhone 16" "iPhone 15" "iPhone 14"; do
+        local sim_id=$(xcrun simctl list devices 2>/dev/null | grep -m1 "$sim_name" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+        if [[ -n "$sim_id" ]]; then
+            echo "$sim_id"
+            return 0
+        fi
+    done
+
+    # Last resort: any available iPhone simulator
+    local any_iphone=$(xcrun simctl list devices 2>/dev/null | grep -m1 "iPhone" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    if [[ -n "$any_iphone" ]]; then
+        echo "$any_iphone"
+        return 0
+    fi
+
+    log ERROR "No iOS simulators found"
+    log ERROR "Install simulators via Xcode or set IOS_SIMULATOR_NAME environment variable"
+    return 1
+}
+
 # Deploy to Android devices
 deploy_android_local() {
     print_header "Android Local Deployment"
 
     cd "$PROJECT_ROOT/android"
 
-    # Build APK (Wave 3: Using qualDebug flavor)
-    log INFO "Building Android APK..."
+    # Build APK (Wave 5: Using Fastlane qual_android lane)
+    log INFO "Building Android APK via Fastlane..."
     if [[ "$DRY_RUN" == "true" ]]; then
-        log INFO "DRY RUN: Would build APK"
+        log INFO "DRY RUN: Would run: bundle exec fastlane qual_android"
     else
-        ./gradlew assembleQualDebug || {
-            log ERROR "Android build failed"
+        bundle exec fastlane qual_android || {
+            log ERROR "Android Fastlane build failed"
             return 1
         }
     fi
@@ -485,19 +528,13 @@ deploy_ios_local() {
 
     cd "$PROJECT_ROOT/ios"
 
-    # Build for simulator
-    log INFO "Building iOS app..."
+    # Build for simulator (Wave 5: Using Fastlane qual_ios lane)
+    log INFO "Building iOS app via Fastlane..."
     if [[ "$DRY_RUN" == "true" ]]; then
-        log INFO "DRY RUN: Would build iOS app"
+        log INFO "DRY RUN: Would run: bundle exec fastlane qual_ios"
     else
-        xcodebuild build \
-            -project SmilePile.xcodeproj \
-            -scheme "SmilePile Qual" \
-            -configuration Debug \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -derivedDataPath ./DerivedData \
-            || {
-            log ERROR "iOS build failed"
+        bundle exec fastlane qual_ios || {
+            log ERROR "iOS Fastlane build failed"
             return 1
         }
     fi
@@ -506,16 +543,26 @@ deploy_ios_local() {
 
     # Get available simulators
     log INFO "Checking for iOS simulators..."
-    local booted_sims=$(xcrun simctl list devices | grep "Booted" | cut -d'(' -f2 | cut -d')' -f1 || true)
+    # Only match iPhone/iPad devices (exclude Mac/Apple Watch/etc)
+    local booted_sims=$(xcrun simctl list devices | grep -E "iPhone|iPad" | grep "Booted" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
 
     if [[ -z "$booted_sims" ]]; then
-        log INFO "Starting iOS simulator..."
+        log INFO "No booted simulators found, detecting available simulator..."
+        local simulator_id
+        if ! simulator_id=$(detect_available_simulator); then
+            log ERROR "Failed to detect iOS simulator"
+            return 1
+        fi
+
+        log INFO "Starting iOS simulator: $simulator_id"
         if [[ "$DRY_RUN" == "true" ]]; then
-            log INFO "DRY RUN: Would boot iPhone 15 simulator"
+            log INFO "DRY RUN: Would boot simulator: $simulator_id"
         else
-            xcrun simctl boot "iPhone 16" 2>/dev/null || true
+            xcrun simctl boot "$simulator_id" 2>/dev/null || {
+                log WARN "Failed to boot simulator $simulator_id, trying already booted"
+            }
             sleep 5
-            booted_sims=$(xcrun simctl list devices | grep "Booted" | cut -d'(' -f2 | cut -d')' -f1 || true)
+            booted_sims=$(xcrun simctl list devices | grep -E "iPhone|iPad" | grep "Booted" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
         fi
     fi
 
@@ -559,11 +606,17 @@ commit_to_github() {
 
     cd "$PROJECT_ROOT"
 
-    # Check git status
+    # Manylla Pattern: Check git status AFTER validation
+    # This ensures we never commit untested code
     local changes=$(git status --porcelain)
     if [[ -z "$changes" ]] && [[ "$AUTO_COMMIT" != "true" ]]; then
         log INFO "No changes to commit"
         return 0
+    fi
+
+    if [[ -n "$changes" ]]; then
+        log INFO "Uncommitted changes detected - will be included in commit"
+        log INFO "✅ All validation passed - safe to commit"
     fi
 
     # Generate commit message with version
@@ -683,14 +736,9 @@ main() {
     # Check prerequisites
     check_prerequisites
 
-    # Check git status
-    if [[ "$ALLOW_UNCOMMITTED" != "true" ]]; then
-        if [[ -n $(git status --porcelain) ]]; then
-            log ERROR "Uncommitted changes detected"
-            log ERROR "Commit changes or set ALLOW_UNCOMMITTED=true"
-            exit 1
-        fi
-    fi
+    # Manylla Pattern: Validate FIRST, then commit
+    # Do NOT check git status here - we want to test uncommitted changes
+    # Git check happens after validation in commit_to_github()
 
     # Load quality environment
     load_environment "quality"

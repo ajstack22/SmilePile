@@ -109,10 +109,17 @@ hashCode()kotlin.Boolean#hashCode()I
 or(Z)kotlin.Boolean#or(Z)Z9
 
 toString()+kotlin.Boolean#toString()Ljava/lang/String; 
-xor(Z)kotlin.Boolean#xor(Z)Z²
-)com.smilepile.navigation.NavigationRoutesjava.lang.Objectˆ
-$photoEditorRoute(Ljava/lang/String;)`com.smilepile.navigation.NavigationRoutes#photoEditorRoute(Ljava/lang/String;)Ljava/lang/String;h
-photoViewerRoute(JI)Pcom.smilepile.navigation.NavigationRoutes#photoViewerRoute(JI)Ljava/lang/String;Ü
+xor(Z)kotlin.Boolean#xor(Z)Z¦	
+!com.smilepile.ui.toast.ToastStatejava.lang.Object=
+hideToast().com.smilepile.ui.toast.ToastState#hideToast()Vg
+ showCategory(Ljava/lang/String;)Ccom.smilepile.ui.toast.ToastState#showCategory(Ljava/lang/String;)Vc
+showError(Ljava/lang/String;J)Acom.smilepile.ui.toast.ToastState#showError(Ljava/lang/String;J)V_
+showInfo(Ljava/lang/String;)?com.smilepile.ui.toast.ToastState#showInfo(Ljava/lang/String;)Ve
+showLoading(Ljava/lang/String;)Bcom.smilepile.ui.toast.ToastState#showLoading(Ljava/lang/String;)V­
+CshowSuccess(Ljava/lang/String;Lcom/smilepile/ui/toast/ToastAction;)fcom.smilepile.ui.toast.ToastState#showSuccess(Ljava/lang/String;Lcom/smilepile/ui/toast/ToastAction;)V
+-showToast(Lcom/smilepile/ui/toast/ToastData;)Pcom.smilepile.ui.toast.ToastState#showToast(Lcom/smilepile/ui/toast/ToastData;)Vþ
+kshowToast(Ljava/lang/String;JLColor;Lcom/smilepile/ui/toast/ToastAction;Lcom/smilepile/ui/toast/ToastType;)Žcom.smilepile.ui.toast.ToastState#showToast(Ljava/lang/String;JLColor;Lcom/smilepile/ui/toast/ToastAction;Lcom/smilepile/ui/toast/ToastType;)Ve
+showWarning(Ljava/lang/String;)Bcom.smilepile.ui.toast.ToastState#showWarning(Ljava/lang/String;)VÜ
 +com.smilepile.onboarding.OnboardingActivityjava.lang.Objectn
 copyUriToTempFile(LUri;)Rcom.smilepile.onboarding.OnboardingActivity#copyUriToTempFile(LUri;)Ljava/io/File;o
 detectZipFormat(Ljava/io/File;)Lcom.smilepile.onboarding.OnboardingActivity#detectZipFormat(Ljava/io/File;)Zc
@@ -249,7 +256,27 @@ toString()(kotlin.Long#toString()Ljava/lang/String;)
 unaryMinus()kotlin.Long#unaryMinus()J'
 unaryPlus()kotlin.Long#unaryPlus()J
 ushr(I)kotlin.Long#ushr(I)J
-xor(J)kotlin.Long#xor(J)JŸ	
+xor(J)kotlin.Long#xor(J)JW
+kotlin.Unitjava.lang.Object6
+
+toString()(kotlin.Unit#toString()Ljava/lang/String;/
+kotlin.collections.Iterablejava.lang.Object3
+kotlin.collections.Collectionjava.lang.Iterable/
+kotlin.collections.Listjava.util.Collectionù
+0com.smilepile.ui.components.dialogs.DialogConfigjava.lang.Object}
+component1()mcom.smilepile.ui.components.dialogs.DialogConfig#component1()Lcom/smilepile/ui/components/dialogs/DialogType;_
+component2()Ocom.smilepile.ui.components.dialogs.DialogConfig#component2()Ljava/lang/String;_
+component3()Ocom.smilepile.ui.components.dialogs.DialogConfig#component3()Ljava/lang/String;Z
+component4()Jcom.smilepile.ui.components.dialogs.DialogConfig#component4()LImageVector;
+component5()ocom.smilepile.ui.components.dialogs.DialogConfig#component5()Lcom/smilepile/ui/components/dialogs/ActionConfig;
+component6()ocom.smilepile.ui.components.dialogs.DialogConfig#component6()Lcom/smilepile/ui/components/dialogs/ActionConfig;
+component7()ocom.smilepile.ui.components.dialogs.DialogConfig#component7()Lcom/smilepile/ui/components/dialogs/ActionConfig;m
+component8()]com.smilepile.ui.components.dialogs.DialogConfig#component8()Lkotlin/jvm/functions/Function0;£
+copy(Lcom/smilepile/ui/components/dialogs/DialogType;Ljava/lang/String;Ljava/lang/String;LImageVector;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lkotlin/jvm/functions/Function0;)€com.smilepile.ui.components.dialogs.DialogConfig#copy(Lcom/smilepile/ui/components/dialogs/DialogType;Ljava/lang/String;Ljava/lang/String;LImageVector;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;ƒ
+1com.smilepile.ui.components.dialogs.DialogBuilderjava.lang.Object²
+¤confirmation(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)ˆcom.smilepile.ui.components.dialogs.DialogBuilder#confirmation(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ZLImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;È
+ïcustom(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Ócom.smilepile.ui.components.dialogs.DialogBuilder#custom(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;»
+iinfo(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;)Ícom.smilepile.ui.components.dialogs.DialogBuilder#info(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;LImageVector;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;Ÿ	
 /com.smilepile.ui.viewmodels.PhotoGalleryUiStatejava.lang.Object\
 component1()Lcom.smilepile.ui.viewmodels.PhotoGalleryUiState#component1()Ljava/util/List;\
 component2()Lcom.smilepile.ui.viewmodels.PhotoGalleryUiState#component2()Ljava/util/List;[
@@ -297,16 +324,12 @@ icopy(Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/lang/Long;ZLjava/lang
 component7()Jcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#component7()ZZ
 component8()Jcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#component8()ZZ
 component9()Jcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#component9()Z³
-Ùcopy(Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;Lcom/smilepile/ui/viewmodels/PhotoImportUiState;Lcom/smilepile/ui/viewmodels/AppModeUiState;ZZZZZZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Ôcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#copy(Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;Lcom/smilepile/ui/viewmodels/PhotoImportUiState;Lcom/smilepile/ui/viewmodels/AppModeUiState;ZZZZZZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;/
-kotlin.collections.Iterablejava.lang.Object3
-kotlin.collections.Collectionjava.lang.Iterable/
-kotlin.collections.Listjava.util.Collection#
+Ùcopy(Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;Lcom/smilepile/ui/viewmodels/PhotoImportUiState;Lcom/smilepile/ui/viewmodels/AppModeUiState;ZZZZZZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Ôcom.smilepile.ui.orchestrators.PhotoGalleryOrchestratorState#copy(Lcom/smilepile/ui/viewmodels/PhotoGalleryUiState;Lcom/smilepile/ui/viewmodels/PhotoImportUiState;Lcom/smilepile/ui/viewmodels/AppModeUiState;ZZZZZZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/orchestrators/PhotoGalleryOrchestratorState;#
 kotlin.Functionjava.lang.Object#
-kotlin.Function0kotlin.FunctionW
-kotlin.Unitjava.lang.Object6
-
-toString()(kotlin.Unit#toString()Ljava/lang/String;#
-kotlin.Function1kotlin.Function¶
+kotlin.Function0kotlin.Function.
+kotlin.collections.Setjava.util.Collection#
+kotlin.Function1kotlin.Function;
+'com.smilepile.utils.PermissionRationalejava.lang.Object¶
 com.smilepile.data.models.Photojava.lang.Object=
 component1()-com.smilepile.data.models.Photo#component1()JN
 component2()>com.smilepile.data.models.Photo#component2()Ljava/lang/String;=
@@ -691,8 +714,7 @@ rcopy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lj
 component3()Ycom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#component3()Ljava/util/Set;[
 component4()Kcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#component4()Zl
 component5()\com.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#component5()Ljava/lang/String;
-Åcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#copy(Ljava/util/List;Ljava/util/List;Ljava/util/Set;ZLjava/lang/String;)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$BaseUiState;Åcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#copy(Ljava/util/List;Ljava/util/List;Ljava/util/Set;ZLjava/lang/String;)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$BaseUiState;.
-kotlin.collections.Setjava.util.Collection¿
+Åcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#copy(Ljava/util/List;Ljava/util/List;Ljava/util/Set;ZLjava/lang/String;)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$BaseUiState;Åcom.smilepile.ui.viewmodels.PhotoGalleryViewModel$BaseUiState#copy(Ljava/util/List;Ljava/util/List;Ljava/util/Set;ZLjava/lang/String;)Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel$BaseUiState;¿
 @com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionStatejava.lang.Object^
 component1()Ncom.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#component1()Zl
 component2()\com.smilepile.ui.viewmodels.PhotoGalleryViewModel$SelectionState#component2()Ljava/util/Set;^
@@ -868,17 +890,7 @@ fcopy(Ljava/lang/String;JLColor;Lcom/smilepile/ui/toast/ToastAction;Lcom/smilepi
 component1()Acom.smilepile.ui.toast.ToastAction#component1()Ljava/lang/String;_
 component2()Ocom.smilepile.ui.toast.ToastAction#component2()Lkotlin/jvm/functions/Function0;»
 8copy(Ljava/lang/String;Lkotlin/jvm/functions/Function0;)com.smilepile.ui.toast.ToastAction#copy(Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/toast/ToastAction;2
- com.smilepile.ui.toast.ToastTypejava.lang.Enum¦	
-!com.smilepile.ui.toast.ToastStatejava.lang.Object=
-hideToast().com.smilepile.ui.toast.ToastState#hideToast()Vg
- showCategory(Ljava/lang/String;)Ccom.smilepile.ui.toast.ToastState#showCategory(Ljava/lang/String;)Vc
-showError(Ljava/lang/String;J)Acom.smilepile.ui.toast.ToastState#showError(Ljava/lang/String;J)V_
-showInfo(Ljava/lang/String;)?com.smilepile.ui.toast.ToastState#showInfo(Ljava/lang/String;)Ve
-showLoading(Ljava/lang/String;)Bcom.smilepile.ui.toast.ToastState#showLoading(Ljava/lang/String;)V­
-CshowSuccess(Ljava/lang/String;Lcom/smilepile/ui/toast/ToastAction;)fcom.smilepile.ui.toast.ToastState#showSuccess(Ljava/lang/String;Lcom/smilepile/ui/toast/ToastAction;)V
--showToast(Lcom/smilepile/ui/toast/ToastData;)Pcom.smilepile.ui.toast.ToastState#showToast(Lcom/smilepile/ui/toast/ToastData;)Vþ
-kshowToast(Ljava/lang/String;JLColor;Lcom/smilepile/ui/toast/ToastAction;Lcom/smilepile/ui/toast/ToastType;)Žcom.smilepile.ui.toast.ToastState#showToast(Ljava/lang/String;JLColor;Lcom/smilepile/ui/toast/ToastAction;Lcom/smilepile/ui/toast/ToastType;)Ve
-showWarning(Ljava/lang/String;)Bcom.smilepile.ui.toast.ToastState#showWarning(Ljava/lang/String;)Vî
+ com.smilepile.ui.toast.ToastTypejava.lang.Enumî
 %com.smilepile.security.SecureActivityjava.lang.Object
 2applySecurityForMode(Lcom/smilepile/mode/AppMode;)Ycom.smilepile.security.SecureActivity#applySecurityForMode(Lcom/smilepile/mode/AppMode;)Vz
 getSecuritySummary()bcom.smilepile.security.SecureActivity#getSecuritySummary()Lcom/smilepile/security/SecuritySummary;S
@@ -2122,17 +2134,7 @@ GrestoreBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)tcom.sm
 toCategory()ecom.smilepile.data.repository.CategoryRepositoryImpl#toCategory()Lcom/smilepile/data/models/Category;‰
 toCategoryEntity()scom.smilepile.data.repository.CategoryRepositoryImpl#toCategoryEntity()Lcom/smilepile/data/entities/CategoryEntity;¢
 4updateCategory(Lcom/smilepile/data/models/Category;)jcom.smilepile.data.repository.CategoryRepositoryImpl#updateCategory(Lcom/smilepile/data/models/Category;)VP
-9com.smilepile.data.repository.CategoryRepositoryExceptionjava.lang.Exceptionù
-0com.smilepile.ui.components.dialogs.DialogConfigjava.lang.Object}
-component1()mcom.smilepile.ui.components.dialogs.DialogConfig#component1()Lcom/smilepile/ui/components/dialogs/DialogType;_
-component2()Ocom.smilepile.ui.components.dialogs.DialogConfig#component2()Ljava/lang/String;_
-component3()Ocom.smilepile.ui.components.dialogs.DialogConfig#component3()Ljava/lang/String;Z
-component4()Jcom.smilepile.ui.components.dialogs.DialogConfig#component4()LImageVector;
-component5()ocom.smilepile.ui.components.dialogs.DialogConfig#component5()Lcom/smilepile/ui/components/dialogs/ActionConfig;
-component6()ocom.smilepile.ui.components.dialogs.DialogConfig#component6()Lcom/smilepile/ui/components/dialogs/ActionConfig;
-component7()ocom.smilepile.ui.components.dialogs.DialogConfig#component7()Lcom/smilepile/ui/components/dialogs/ActionConfig;m
-component8()]com.smilepile.ui.components.dialogs.DialogConfig#component8()Lkotlin/jvm/functions/Function0;£
-copy(Lcom/smilepile/ui/components/dialogs/DialogType;Ljava/lang/String;Ljava/lang/String;LImageVector;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lkotlin/jvm/functions/Function0;)€com.smilepile.ui.components.dialogs.DialogConfig#copy(Lcom/smilepile/ui/components/dialogs/DialogType;Ljava/lang/String;Ljava/lang/String;LImageVector;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lcom/smilepile/ui/components/dialogs/ActionConfig;Lkotlin/jvm/functions/Function0;)Lcom/smilepile/ui/components/dialogs/DialogConfig;£
+9com.smilepile.data.repository.CategoryRepositoryExceptionjava.lang.Exception£
 0com.smilepile.ui.components.dialogs.ActionConfigjava.lang.Object_
 component1()Ocom.smilepile.ui.components.dialogs.ActionConfig#component1()Ljava/lang/String;~
 component2()ncom.smilepile.ui.components.dialogs.ActionConfig#component2()Lcom/smilepile/ui/components/dialogs/ActionStyle;N
@@ -2331,7 +2333,8 @@ $enableScrollPerformanceMonitoring(Z)Tcom.smilepile.ui.components.PerformanceMo
 4setTimeoutCallback(Lkotlin/jvm/functions/Function0;)^com.smilepile.security.InactivityManager#setTimeoutCallback(Lkotlin/jvm/functions/Function0;)VX
 setTimeoutDuration(J)?com.smilepile.security.InactivityManager#setTimeoutDuration(J)VV
 setTimeoutEnabled(Z)>com.smilepile.security.InactivityManager#setTimeoutEnabled(Z)VN
-triggerTimeout():com.smilepile.security.InactivityManager#triggerTimeout()V‚
+triggerTimeout():com.smilepile.security.InactivityManager#triggerTimeout()VK
+7com.smilepile.ui.viewmodels.CategoryViewModel$Companionjava.lang.Object‚
 %com.smilepile.onboarding.TempCategoryjava.lang.ObjectT
 component1()Dcom.smilepile.onboarding.TempCategory#component1()Ljava/lang/String;T
 component2()Dcom.smilepile.onboarding.TempCategory#component2()Ljava/lang/String;T
