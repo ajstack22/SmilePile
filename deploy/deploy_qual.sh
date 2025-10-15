@@ -166,10 +166,10 @@ run_tests() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testTier1Critical"
+                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier1Critical"
             else
                 local tier1_output="/tmp/tier1-android-output.txt"
-                ./gradlew app:testTier1Critical 2>&1 | tee "$tier1_output"
+                ./gradlew app:testQualDebugTier1Critical 2>&1 | tee "$tier1_output"
                 local tier1_exit=${PIPESTATUS[0]}
 
                 if [[ $tier1_exit -ne 0 ]]; then
@@ -194,10 +194,10 @@ run_tests() {
             log INFO "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testTier2Important"
+                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier2Important"
             else
                 local tier2_output="/tmp/tier2-android-output.txt"
-                ./gradlew app:testTier2Important 2>&1 | tee "$tier2_output"
+                ./gradlew app:testQualDebugTier2Important 2>&1 | tee "$tier2_output"
                 local tier2_exit=${PIPESTATUS[0]}
 
                 if [[ $tier2_exit -ne 0 ]]; then
@@ -223,10 +223,10 @@ run_tests() {
 
             local tier3_failed=0
             if [[ "$DRY_RUN" == "true" ]]; then
-                log INFO "DRY RUN: Would run: ./gradlew app:testTier3UI"
+                log INFO "DRY RUN: Would run: ./gradlew app:testQualDebugTier3UI"
             else
                 local tier3_output="/tmp/tier3-android-output.txt"
-                ./gradlew app:testTier3UI 2>&1 | tee "$tier3_output"
+                ./gradlew app:testQualDebugTier3UI 2>&1 | tee "$tier3_output"
                 local tier3_exit=${PIPESTATUS[0]}
 
                 if [[ $tier3_exit -ne 0 ]]; then
@@ -248,9 +248,9 @@ run_tests() {
             log INFO ""
             log INFO "Generating test coverage report..."
             if [[ "$DRY_RUN" != "true" ]]; then
-                ./gradlew jacocoDebugTestReport --continue || log WARN "Coverage report generation failed"
+                ./gradlew jacocoQualDebugTestReport --continue || log WARN "Coverage report generation failed"
 
-                local coverage_report="$PROJECT_ROOT/android/app/build/reports/jacoco/jacocoDebugTestReport/html/index.html"
+                local coverage_report="$PROJECT_ROOT/android/app/build/reports/jacoco/jacocoQualDebugTestReport/html/index.html"
                 if [[ -f "$coverage_report" ]]; then
                     log SUCCESS "Coverage report: $coverage_report"
                 fi
@@ -384,22 +384,29 @@ deploy_android_local() {
 
     cd "$PROJECT_ROOT/android"
 
-    # Build APK
+    # Build APK (Wave 3: Using qualDebug flavor)
     log INFO "Building Android APK..."
     if [[ "$DRY_RUN" == "true" ]]; then
         log INFO "DRY RUN: Would build APK"
     else
-        ./gradlew assembleDebug || {
+        ./gradlew assembleQualDebug || {
             log ERROR "Android build failed"
             return 1
         }
     fi
 
-    local apk_path="$PROJECT_ROOT/android/app/build/outputs/apk/debug/app-debug.apk"
+    # Wave 3: APK path with flavor directory and fallback
+    local apk_path="$PROJECT_ROOT/android/app/build/outputs/apk/qual/debug/app-qual-debug.apk"
 
+    # Fallback to old path for backward compatibility during transition
     if [[ ! -f "$apk_path" ]] && [[ "$DRY_RUN" != "true" ]]; then
-        log ERROR "APK not found at: $apk_path"
-        return 1
+        log WARN "Flavor APK not found at: $apk_path"
+        apk_path="$PROJECT_ROOT/android/app/build/outputs/apk/debug/app-debug.apk"
+        if [[ ! -f "$apk_path" ]]; then
+            log ERROR "APK not found in either location"
+            return 1
+        fi
+        log INFO "Using fallback APK path: $apk_path"
     fi
 
     # Get connected devices and emulators
@@ -449,9 +456,9 @@ deploy_android_local() {
                 continue
             }
 
-            # Launch app
+            # Launch app (Wave 3: Using qual package name)
             log INFO "Launching app on $device..."
-            adb -s "$device" shell monkey -p com.smilepile -c android.intent.category.LAUNCHER 1
+            adb -s "$device" shell monkey -p com.smilepile.qual -c android.intent.category.LAUNCHER 1
         fi
 
         log SUCCESS "Deployed to device: $device"

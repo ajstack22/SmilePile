@@ -34,3 +34,20 @@
 
 # Keep custom views
 -keep class com.smilepile.ui.views.** { *; }
+
+# ============================================================================
+# Wave 3: Android 4-Tier Configuration
+# ============================================================================
+
+# Protect BuildConfig tier detection fields
+# Without these rules, R8 may optimize away BUILD_TYPE_ENV constant
+-keep class com.smilepile.BuildConfig {
+    public static final java.lang.String BUILD_TYPE_ENV;
+    public static final java.lang.String APPLICATION_ID;
+    public static final java.lang.String VERSION_NAME;
+    public static final int VERSION_CODE;
+}
+
+# Protect custom BuildConfig module
+# Ensures tier detection methods remain accessible
+-keep class com.smilepile.config.BuildConfig { *; }

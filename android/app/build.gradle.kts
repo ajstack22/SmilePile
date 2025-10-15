@@ -1,3 +1,7 @@
+// Wave 3: Imports for keystore loading
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,6 +15,13 @@ plugins {
 // Apply JaCoCo configuration
 apply(from = "../jacoco.gradle")
 
+// Wave 3: Load keystore properties for production signing
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.smilepile"
     compileSdk = 35
@@ -19,13 +30,68 @@ android {
         applicationId = "com.smilepile"
         minSdk = 24
         targetSdk = 35
-        versionCode = 251014001  // YYMMDDVVV format as integer
-        versionName = "25.10.14.001"
+        versionCode = 251014003  // YYMMDDVVV format as integer
+        versionName = "25.10.14.003"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables {
             useSupportLibrary = true
+        }
+    }
+
+    // Wave 3: 4-Tier Configuration
+    flavorDimensions += "tier"
+
+    productFlavors {
+        create("qual") {
+            dimension = "tier"
+            applicationIdSuffix = ".qual"
+            versionNameSuffix = "-qual"
+            buildConfigField("String", "BUILD_TYPE_ENV", "\"qual\"")
+        }
+        create("stage") {
+            dimension = "tier"
+            versionNameSuffix = "-stage"
+            buildConfigField("String", "BUILD_TYPE_ENV", "\"stage\"")
+        }
+        create("beta") {
+            dimension = "tier"
+            versionNameSuffix = "-beta"
+            buildConfigField("String", "BUILD_TYPE_ENV", "\"beta\"")
+        }
+        create("prod") {
+            dimension = "tier"
+            buildConfigField("String", "BUILD_TYPE_ENV", "\"prod\"")
+        }
+    }
+
+    // Optional: Reduce build variant complexity
+    variantFilter {
+        if (name.startsWith("stage") && name.endsWith("Debug")) {
+            ignore = true  // stageDebug not needed
+        }
+        if (name.startsWith("beta") && name.endsWith("Debug")) {
+            ignore = true  // betaDebug not needed
+        }
+        if (name.startsWith("prod") && name.endsWith("Debug")) {
+            ignore = true  // prodDebug NEVER use
+        }
+    }
+
+    // Wave 3: Signing Configuration
+    signingConfigs {
+        if (keystorePropertiesFile.exists()) {
+            create("production") {
+                storeFile = keystoreProperties["storeFile"]?.let { file(it.toString()) }
+                    ?: throw org.gradle.api.GradleException("storeFile not found in keystore.properties")
+                storePassword = keystoreProperties["storePassword"]?.toString()
+                    ?: throw org.gradle.api.GradleException("storePassword not found in keystore.properties")
+                keyAlias = keystoreProperties["keyAlias"]?.toString()
+                    ?: throw org.gradle.api.GradleException("keyAlias not found in keystore.properties")
+                keyPassword = keystoreProperties["keyPassword"]?.toString()
+                    ?: throw org.gradle.api.GradleException("keyPassword not found in keystore.properties")
+            }
         }
     }
 
@@ -36,6 +102,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Apply production signing to release builds
+            signingConfig = if (keystorePropertiesFile.exists()) {
+                signingConfigs.getByName("production")
+            } else {
+                // Fallback to debug signing if keystore not configured
+                logger.warn("keystore.properties not found, using debug signing for release build")
+                signingConfigs.getByName("debug")
+            }
         }
         debug {
             isMinifyEnabled = false
