@@ -134,9 +134,20 @@ final class PhotoRepositoryImpl: PhotoRepository {
             request.sortDescriptors = [NSSortDescriptor(keyPath: \PhotoEntity.timestamp, ascending: false)]
 
             let entities = try context.fetch(request)
-            let photos = entities.compactMap { self.entityToPhoto($0) }
-            self.logger.info("Retrieved \(photos.count) total photos from database")
-            return photos
+            let allPhotos = entities.compactMap { self.entityToPhoto($0) }
+
+            // Filter based on demo mode
+            let isDemoMode = SettingsManager.shared.isDemoMode
+            let filteredPhotos = allPhotos.filter { photo in
+                if isDemoMode {
+                    return photo.isFromAssets == true
+                } else {
+                    return photo.isFromAssets == false
+                }
+            }
+
+            self.logger.info("Retrieved \(filteredPhotos.count) photos (demo mode: \(isDemoMode), total in DB: \(allPhotos.count))")
+            return filteredPhotos
         }
     }
 
@@ -314,12 +325,16 @@ final class PhotoRepositoryImpl: PhotoRepository {
         let url = URL(fileURLWithPath: fixedPath)
         let name = url.deletingPathExtension().lastPathComponent
 
+        // Determine if photo is from assets based on filename pattern
+        // Demo photos have names like "demo_milestones_001.jpg"
+        let isFromAssets = name.hasPrefix("demo_")
+
         return Photo(
             id: photoId,
             path: fixedPath,
             categoryId: entity.categoryId,
             name: name,
-            isFromAssets: false,
+            isFromAssets: isFromAssets,
             createdAt: entity.timestamp,
             fileSize: 0, // Will be calculated when needed
             width: 0,    // Will be calculated when needed

@@ -248,6 +248,155 @@ class OnboardingCoordinator: ObservableObject {
         errorMessage = message
         showError = true
     }
+
+    // MARK: - Demo Mode
+
+    func enterDemoMode() {
+        Task { @MainActor in
+            do {
+                // Set demo mode flags
+                let settings = SettingsManager.shared
+                settings.isDemoMode = true
+                settings.demoModeEntered = true
+                settings.demoModeEntryCount += 1
+
+                // Mark onboarding as complete
+                settings.onboardingCompleted = true
+                settings.firstLaunch = false
+
+                // Load demo data if needed
+                try await loadDemoDataIfNeeded()
+
+                // Navigate to complete screen
+                currentStep = .complete
+                isComplete = true
+
+                // Delay before dismissing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.dismissOnboarding()
+                }
+
+            } catch {
+                showError(message: "Failed to enter demo mode: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func loadDemoDataIfNeeded() async throws {
+        let photoRepo = PhotoRepositoryImpl()
+        let categoryRepo = CategoryRepositoryImpl.shared
+
+        // Check if demo data already exists
+        let existingPhotos = try await photoRepo.getAllPhotos()
+        let demoPhotos = existingPhotos.filter { $0.isFromAssets }
+
+        if !demoPhotos.isEmpty {
+            print("Demo data already exists (\(demoPhotos.count) photos), skipping load")
+            return
+        }
+
+        print("Loading demo data...")
+
+        // Load categories first
+        var loadedCategories: [Category] = []
+        for (index, categoryData) in DemoData.categories.enumerated() {
+            let category = Category(
+                id: 0, // Auto-generate
+                name: categoryData.name,
+                displayName: categoryData.displayName,
+                position: categoryData.position,
+                iconResource: categoryData.icon,
+                colorHex: categoryData.colorHex,
+                isDefault: false,
+                isDemoCategory: true,
+                createdAt: Int64(Date().timeIntervalSince1970 * 1000)
+            )
+
+            let categoryId = try await categoryRepo.insertCategory(category)
+            let insertedCategory = Category(
+                id: categoryId,
+                name: category.name,
+                displayName: category.displayName,
+                position: category.position,
+                iconResource: category.iconResource,
+                colorHex: category.colorHex,
+                isDefault: category.isDefault,
+                isDemoCategory: category.isDemoCategory,
+                createdAt: category.createdAt
+            )
+            loadedCategories.append(insertedCategory)
+            print("Created demo category: \(categoryData.displayName) (id: \(categoryId))")
+        }
+
+        // Load first 10 photos immediately (high priority)
+        let priorityPhotos = Array(DemoData.photoMetadata.prefix(10))
+        for photoMeta in priorityPhotos {
+            try await loadDemoPhoto(photoMeta, from: loadedCategories, using: photoRepo)
+        }
+
+        // Load remaining photos in background
+        let remainingPhotos = Array(DemoData.photoMetadata.dropFirst(10))
+        if !remainingPhotos.isEmpty {
+            Task.detached {
+                for photoMeta in remainingPhotos {
+                    do {
+                        try await self.loadDemoPhoto(photoMeta, from: loadedCategories, using: photoRepo)
+                    } catch {
+                        print("Warning: Failed to load demo photo \(photoMeta.assetName): \(error)")
+                    }
+                }
+                print("Background demo photo loading complete")
+            }
+        }
+
+        print("Demo data loading initiated (10 photos loaded, \(remainingPhotos.count) loading in background)")
+    }
+
+    private func loadDemoPhoto(_ photoMeta: DemoData.PhotoMetadata, from categories: [Category], using photoRepo: PhotoRepositoryImpl) async throws {
+        guard let categoryId = DemoData.getCategoryId(for: photoMeta.categoryName, from: categories) else {
+            print("Warning: Category not found for \(photoMeta.categoryName)")
+            return
+        }
+
+        // Load image from Assets
+        guard let image = UIImage(named: photoMeta.assetName) else {
+            print("Warning: Asset not found: \(photoMeta.assetName)")
+            return
+        }
+
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
+            print("Warning: Failed to convert image to JPEG data: \(photoMeta.assetName)")
+            return
+        }
+
+        // Save to Documents directory
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = "\(photoMeta.assetName).jpg"
+        let imagePath = documentsPath.appendingPathComponent(fileName)
+
+        do {
+            try imageData.write(to: imagePath)
+        } catch {
+            print("Warning: Failed to save demo photo \(fileName): \(error)")
+            return
+        }
+
+        // Create Photo object
+        let photo = Photo(
+            id: 0,
+            path: imagePath.path,
+            categoryId: categoryId,
+            name: photoMeta.assetName,
+            isFromAssets: true,
+            createdAt: Int64(photoMeta.date.timeIntervalSince1970 * 1000),
+            fileSize: Int64(imageData.count),
+            width: Int(image.size.width),
+            height: Int(image.size.height)
+        )
+
+        _ = try await photoRepo.insertPhoto(photo)
+        print("Loaded demo photo: \(photoMeta.assetName) -> category \(categoryId)")
+    }
 }
 
 extension Notification.Name {

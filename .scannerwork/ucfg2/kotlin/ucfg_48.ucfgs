@@ -519,7 +519,7 @@ photoCountint:.
 
 ¢ ¢(6 
 recentPhotoIdsjava.util.ListB=;
-9com.smilepile.managers.CategoryManager$CategoryWithPhotosHÿ
+9com.smilepile.managers.CategoryManager$CategoryWithPhotosHÄ
 ncom.smilepile.managers.CategoryManager#createCategory(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Jj
 ^/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/managers/CategoryManager.ktÆ Æ("0*Ø
 2
@@ -582,7 +582,7 @@ early exit*Ï
 
 displayNamejava.lang.String2'existsByDisplayName(Ljava/lang/String;)*
 2
-1*”
+1*˚
 1
 π	 ª(–
 Õ
@@ -618,11 +618,11 @@ getCount()@
 Systemkotlin.Unit2currentTimeMillis()lj
 
 º ¬(	0
-%9*com.smilepile.data.entities.CategoryEntity"*com.smilepile.data.entities.CategoryEntityŸ
-÷
+%9*com.smilepile.data.entities.CategoryEntity"*com.smilepile.data.entities.CategoryEntityÅ
+˛
 
 º ¬(	
-%10"ncom.smilepile.data.entities.CategoryEntity#<init>(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)V*@
+%10"ocom.smilepile.data.entities.CategoryEntity#<init>(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZJ)V*@
 
 º ¬(	2
 0
@@ -647,6 +647,9 @@ getCount()@
 positionint*
 
 ¡ ¡(	
+false*%
+
+__unknown_file (	
 false*(
 
 __unknown_file (
@@ -809,7 +812,7 @@ getCount()èå
 
 __unknown_file (
 implicit returnB*(
-&com.smilepile.managers.CategoryManagerHó-
+&com.smilepile.managers.CategoryManagerHø-
 ocom.smilepile.managers.CategoryManager#updateCategory(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Zj
 ^/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/managers/CategoryManager.ktÚ Ú("2"3*≠
 13
@@ -844,7 +847,7 @@ U
 colorHexjava.lang.String*
 13
 16
-17*¯
+17*†
 15
 Ñ# Ñ(4õò
 
@@ -853,11 +856,11 @@ U
 
 __unknown_file (
 
-Systemkotlin.Unit2currentTimeMillis()•
-¢
+Systemkotlin.Unit2currentTimeMillis()Õ
+ 
 
 Å' Ö(	1
-%20*com.smilepile.data.entities.CategoryEntity"ócom.smilepile.data.entities.CategoryEntity#copy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)Lcom/smilepile/data/entities/CategoryEntity;*F
+%20*com.smilepile.data.entities.CategoryEntity"òcom.smilepile.data.entities.CategoryEntity#copy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZJ)Lcom/smilepile/data/entities/CategoryEntity;*F
 
 Å Å(&8
 6
@@ -878,6 +881,9 @@ U
 %17*
 
 __unknown_file (2 *%
+
+__unknown_file (	
+false*%
 
 __unknown_file (	
 false*)

@@ -29,6 +29,7 @@ import java.util.UUID
 class PhotoRepositoryImplTest {
 
     private lateinit var photoDao: PhotoDao
+    private lateinit var settingsManager: com.smilepile.settings.SettingsManager
     private lateinit var repository: PhotoRepositoryImpl
     private val testDispatcher = StandardTestDispatcher()
 
@@ -37,7 +38,9 @@ class PhotoRepositoryImplTest {
         ShadowLog.stream = System.out
         Dispatchers.setMain(testDispatcher)
         photoDao = mockk(relaxed = true)
-        repository = PhotoRepositoryImpl(photoDao, testDispatcher)
+        settingsManager = mockk(relaxed = true)
+        every { settingsManager.isDemoMode() } returns flowOf(false)
+        repository = PhotoRepositoryImpl(photoDao, testDispatcher, settingsManager)
     }
 
     @After

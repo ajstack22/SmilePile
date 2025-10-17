@@ -22,21 +22,29 @@ import com.smilepile.di.IoDispatcher
 class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
     private val photoCategoryDao: PhotoCategoryDao,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val settingsManager: com.smilepile.settings.SettingsManager
 ) : CategoryRepository {
 
     /**
      * Maps CategoryEntity to Category domain model
      */
     private fun CategoryEntity.toCategory(): Category {
+        val name = this.displayName.lowercase().replace(" ", "_")
+
+        // Determine if category is a demo category based on name pattern
+        val demoCategoryNames = listOf("milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures")
+        val isDemoCategory = demoCategoryNames.contains(name)
+
         return Category(
             id = this.id, // Now directly uses Long
-            name = this.displayName.lowercase().replace(" ", "_"), // Generate a normalized name from displayName
+            name = name,
             displayName = this.displayName,
             position = this.position,
             iconResource = this.iconName, // Use iconName from entity
             colorHex = this.colorHex,
             isDefault = this.isDefault,
+            isDemoCategory = isDemoCategory,
             createdAt = this.createdAt
         )
     }
@@ -110,7 +118,20 @@ class CategoryRepositoryImpl @Inject constructor(
     override suspend fun getAllCategories(): List<Category> = withContext(ioDispatcher) {
         try {
             // Since CategoryDao.getAll returns Flow, we need to get the first emission
-            categoryDao.getAll().first().map { it.toCategory() }
+            val allCategories = categoryDao.getAll().first().map { it.toCategory() }
+
+            // Filter based on demo mode
+            val isDemoMode = settingsManager.isDemoMode().first()
+            val filteredCategories = allCategories.filter { category ->
+                if (isDemoMode) {
+                    category.isDemoCategory == true
+                } else {
+                    category.isDemoCategory == false
+                }
+            }
+
+            android.util.Log.d("CategoryRepository", "Retrieved ${filteredCategories.size} categories (demo mode: $isDemoMode, total in DB: ${allCategories.size})")
+            filteredCategories
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to get all categories: ${e.message}", e)
         }
@@ -230,6 +251,30 @@ class CategoryRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to reorder categories: ${e.message}", e)
+        }
+    }
+
+    // MARK: - Demo Mode Operations
+
+    override suspend fun deleteDemoCategories() = withContext(ioDispatcher) {
+        try {
+            val demoCategoryNames = listOf("milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures")
+            val allCategories = categoryDao.getAll().first()
+
+            var deletedCount = 0
+            allCategories.forEach { entity ->
+                val name = entity.displayName.lowercase().replace(" ", "_")
+                if (demoCategoryNames.contains(name)) {
+                    categoryDao.delete(entity)
+                    deletedCount++
+                }
+            }
+
+            if (deletedCount > 0) {
+                android.util.Log.d("CategoryRepository", "Deleted $deletedCount demo categories")
+            }
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to delete demo categories: ${e.message}", e)
         }
     }
 }

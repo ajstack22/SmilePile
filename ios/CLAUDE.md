@@ -85,8 +85,8 @@ xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Prod" -configuration 
 ```
 
 ### Bundle ID Strategy
-- **QUAL**: `com.smilepile.qual` (unique ID for side-by-side installation)
-- **STAGE/BETA/PROD**: `com.smilepile` (shared ID, only one installable at a time)
+- **QUAL**: `app.smilepile.qual` (unique ID for side-by-side installation)
+- **STAGE/BETA/PROD**: `app.smilepile` (shared ID, only one installable at a time)
 
 ## Running the App
 
@@ -94,12 +94,12 @@ xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Prod" -configuration 
 ```bash
 xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Qual" -configuration Debug -destination 'platform=iOS Simulator,id=EE3F2A09-2BA9-463D-8C07-323B0688FAE5' -derivedDataPath ./DerivedData build
 xcrun simctl install "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" "DerivedData/Build/Products/Debug-iphonesimulator/SmilePile Qual.app"
-xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" com.smilepile.qual
+xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" app.smilepile.qual
 ```
 
 ### PROD Tier
 ```bash
 xcodebuild -project SmilePile.xcodeproj -scheme "SmilePile Prod" -configuration Release -destination 'platform=iOS Simulator,id=EE3F2A09-2BA9-463D-8C07-323B0688FAE5' -derivedDataPath ./DerivedData build
 xcrun simctl install "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" "DerivedData/Build/Products/Release-iphonesimulator/SmilePile.app"
-xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" com.smilepile
+xcrun simctl launch "EE3F2A09-2BA9-463D-8C07-323B0688FAE5" app.smilepile
 ```

@@ -157,6 +157,36 @@ struct SettingsViewCustom: View {
                     }
                     .padding(.horizontal, 16)
 
+                    // Demo Section
+                    SettingsSection(
+                        title: "Demo"
+                    ) {
+                        VStack(spacing: 0) {
+                            if settingsManager.isDemoMode {
+                                SettingsActionItem(
+                                    title: "Demo Mode Active",
+                                    subtitle: "Use banner to exit",
+                                    icon: "star.fill",
+                                    iconColor: Color(red: 156/255, green: 39/255, blue: 176/255),
+                                    action: {}
+                                )
+                            } else {
+                                SettingsActionItem(
+                                    title: "Try Demo Mode",
+                                    subtitle: settingsManager.demoModeEntered
+                                        ? "Entered \(settingsManager.demoModeEntryCount) time\(settingsManager.demoModeEntryCount == 1 ? "" : "s")"
+                                        : "Experience SmilePile with pre-filled photos",
+                                    icon: "star.fill",
+                                    iconColor: Color(red: 156/255, green: 39/255, blue: 176/255),
+                                    action: {
+                                        // TODO: Navigate to demo mode entry
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+
                     // About Section
                     SettingsSection(
                         title: "About"

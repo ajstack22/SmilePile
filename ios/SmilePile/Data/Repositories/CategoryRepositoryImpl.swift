@@ -163,7 +163,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
     func getAllCategories() async throws -> [Category] {
         try await ensureInitialized()
 
-        let categories = try await coreDataStack.performBackgroundTask { context in
+        let allCategories = try await coreDataStack.performBackgroundTask { context in
             let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
             request.sortDescriptors = [NSSortDescriptor(keyPath: \CategoryEntity.position, ascending: true)]
 
@@ -171,9 +171,21 @@ final class CategoryRepositoryImpl: CategoryRepository {
             return entities.compactMap { self.entityToCategory($0) }
         }
 
+        // Filter based on demo mode
+        let isDemoMode = SettingsManager.shared.isDemoMode
+        let filteredCategories = allCategories.filter { category in
+            if isDemoMode {
+                return category.isDemoCategory == true
+            } else {
+                return category.isDemoCategory == false
+            }
+        }
+
+        logger.info("Retrieved \(filteredCategories.count) categories (demo mode: \(isDemoMode), total in DB: \(allCategories.count))")
+
         // DON'T auto-initialize - let onboarding create categories for first-time users
         // This prevents skipping onboarding wizard
-        return categories
+        return filteredCategories
     }
 
     func getAllCategoriesFlow() -> AnyPublisher<[Category], Error> {
@@ -247,6 +259,33 @@ final class CategoryRepositoryImpl: CategoryRepository {
         }
     }
 
+    // MARK: - Demo Mode Operations
+
+    func deleteDemoCategories() async throws {
+        let demoCategoryNames = ["milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures"]
+
+        try await coreDataStack.performBackgroundTask { context in
+            let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
+            let entities = try context.fetch(request)
+
+            var deletedCount = 0
+            for entity in entities {
+                guard let displayName = entity.displayName else { continue }
+                let name = displayName.lowercased().replacingOccurrences(of: " ", with: "_")
+
+                if demoCategoryNames.contains(name) {
+                    context.delete(entity)
+                    deletedCount += 1
+                }
+            }
+
+            if deletedCount > 0 {
+                try self.coreDataStack.saveContext(context)
+                self.logger.info("Deleted \(deletedCount) demo categories")
+            }
+        }
+    }
+
     // MARK: - Private Helpers
 
     private func entityToCategory(_ entity: CategoryEntity) -> Category? {
@@ -257,6 +296,11 @@ final class CategoryRepositoryImpl: CategoryRepository {
 
         let name = displayName.lowercased().replacingOccurrences(of: " ", with: "_")
 
+        // Determine if category is a demo category based on name pattern
+        // Demo categories have names like "milestones", "birthdays", etc. from DemoData
+        let demoCategoryNames = ["milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures"]
+        let isDemoCategory = demoCategoryNames.contains(name)
+
         return Category(
             id: entity.id,
             name: name,
@@ -265,6 +309,7 @@ final class CategoryRepositoryImpl: CategoryRepository {
             iconResource: nil,
             colorHex: entity.colorHex,
             isDefault: entity.isDefault,
+            isDemoCategory: isDemoCategory,
             createdAt: entity.createdAt
         )
     }

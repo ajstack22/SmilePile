@@ -406,6 +406,64 @@ n
 implicit return:
  (
 valuebooleanB&$
+"com.smilepile.data.models.CategoryH`Ê
+4com.smilepile.data.models.Category#isDemoCategory()Z
+__unknown_file ("0*È
+0 (u
+s
+ (
+fieldboolean"__id*O
+ (C*A$
+"com.smilepile.data.models.Category"
+isDemoCategoryboolean`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+fieldboolean@
+>
+ (
+fieldboolean"__annotation*
+ (
+
+%0"
+ (
+
+fieldbooleanB&$
+"com.smilepile.data.models.CategoryH`í
+8com.smilepile.data.models.Category#setIsDemoCategory(Z)V
+__unknown_file ("0*É
+0 (`
+^
+ (
+%0"
+__annotate* 
+ (
+java.lang.Object*
+ (
+
+valueboolean@
+>
+ (
+valueboolean"__annotation*
+ (
+
+%0u
+s
+ (A$
+"com.smilepile.data.models.Category"
+isDemoCategoryboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB&$
 "com.smilepile.data.models.CategoryH`´
 2com.smilepile.data.models.Category#getCreatedAt()J
 __unknown_file ("0*´
@@ -464,10 +522,10 @@ h
 implicit return:
  (
 valuelongB&$
-"com.smilepile.data.models.CategoryH`È 
-xcom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)Vd
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt ("0*—
-0 '(z
+"com.smilepile.data.models.CategoryH`°$
+ycom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZZJ)Vd
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt ("0*×
+0 *(z
 x
  (
 %0"
@@ -595,10 +653,28 @@ R
 
 __unknown_file (
 
-%6
-
-% &(4
+%6Š
+‡
+% &('
 %7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+isDemoCategorybooleanY
+W
+% &('
+isDemoCategoryboolean"__annotation*"
+
+__unknown_file (
+
+%7
+
+( )(4
+%8"
 __annotate*0
 
 __unknown_file (
@@ -608,16 +684,16 @@ __annotate*0
 
 	createdAtlongQ
 O
-% &(4
+( )(4
 	createdAtlong"__annotation*"
 
 __unknown_file (
 
-%7µ
+%8µ
 ²
  (
 
-%8long",com.smilepile.data.models.Category#setId(J)V*B
+%9long",com.smilepile.data.models.Category#setId(J)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*(
@@ -625,10 +701,10 @@ O
 __unknown_file (
 
 
-idlongâ
-ß
- (
-%9java.lang.String"?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V*B
+idlongã
+à
+ (
+%10java.lang.String"?com.smilepile.data.models.Category#setName(Ljava/lang/String;)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*6
@@ -638,7 +714,7 @@ O
 namejava.lang.Stringñ
 î
  (
-%10java.lang.String"Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V*B
+%11java.lang.String"Fcom.smilepile.data.models.Category#setDisplayName(Ljava/lang/String;)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*=
@@ -649,7 +725,7 @@ O
 ½
  (
 
-%11int"2com.smilepile.data.models.Category#setPosition(I)V*B
+%12int"2com.smilepile.data.models.Category#setPosition(I)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*-
@@ -659,7 +735,7 @@ O
 positionintó
 ð
  ($
-%12java.lang.String"Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V*B
+%13java.lang.String"Gcom.smilepile.data.models.Category#setIconResource(Ljava/lang/String;)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*>
@@ -669,7 +745,7 @@ O
 iconResourcejava.lang.Stringë
 è
   ( 
-%13java.lang.String"Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V*B
+%14java.lang.String"Ccom.smilepile.data.models.Category#setColorHex(Ljava/lang/String;)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*:
@@ -679,17 +755,27 @@ O
 colorHexjava.lang.StringÊ
 Ç
 " #("
-%14boolean"3com.smilepile.data.models.Category#setIsDefault(Z)V*B
+%15boolean"3com.smilepile.data.models.Category#setIsDefault(Z)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*2
 
 __unknown_file (
 
-	isDefaultbooleanÄ
+	isDefaultbooleanÔ
+Ñ
+% &('
+%16boolean"8com.smilepile.data.models.Category#setIsDemoCategory(Z)V*B
+
+__unknown_file (&$
+"com.smilepile.data.models.Category*7
+
+__unknown_file (
+
+isDemoCategorybooleanÄ
 Á
-% &(4
-%15long"3com.smilepile.data.models.Category#setCreatedAt(J)V*B
+( )(4
+%17long"3com.smilepile.data.models.Category#setCreatedAt(J)V*B
 
 __unknown_file (&$
 "com.smilepile.data.models.Category*/
@@ -714,13 +800,15 @@ O
   ( 
 colorHexjava.lang.String: 
 " #("
-	isDefaultboolean:
-% &(4
+	isDefaultboolean:%
+% &('
+isDemoCategoryboolean:
+( )(4
 	createdAtlongB&$
 "com.smilepile.data.models.CategoryHœ
 Scom.smilepile.data.models.Category$Companion#getDefaultCategories()Ljava/util/List;d
-Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt* *( "0*(
-0*  *(""
-*5 K(	
+Z/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/models/Category.kt- -( "0*(
+0-  -(""
+-5 N(	
 	<unknown>B0".
 ,com.smilepile.data.models.Category$CompanionH

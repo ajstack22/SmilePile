@@ -37,8 +37,14 @@ platform :ios do
     # Build IPA
     gym(
       scheme: "SmilePile Stage",
-      configuration: "Debug",  # Stage scheme uses Debug configuration
+      configuration: "Stage",  # Stage scheme uses Stage configuration
       export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          "app.smilepile" => "SmilePile Distribution"
+        }
+      },
       derived_data_path: "./build/stage",
       output_directory: "./build/stage",
       output_name: "SmilePile-Stage",
@@ -46,14 +52,22 @@ platform :ios do
       buildlog_path: "./build/logs"
     )
 
-    # Upload to TestFlight
+    # Upload to TestFlight using App Store Connect API
+    api_key = app_store_connect_api_key(
+      key_id: "BJAC3957M4",
+      issuer_id: "a608e0f8-9834-49e6-8f6e-623d726ba970",
+      key_filepath: File.expand_path("~/.fastlane/AuthKey_BJAC3957M4.p8"),
+      in_house: false
+    )
+
     pilot(
+      api_key: api_key,
       skip_waiting_for_build_processing: true,
       distribute_external: false,
       groups: ["Internal Testers"],
       changelog: "Stage build for internal testing",
       notify_external_testers: false,
-      app_identifier: "com.smilepile",
+      app_identifier: "app.smilepile",
       team_id: "84W9WSYQQB"
     )
 
@@ -72,6 +86,12 @@ platform :ios do
       scheme: "SmilePile Beta",
       configuration: "Beta",
       export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          "app.smilepile" => "SmilePile Distribution"
+        }
+      },
       derived_data_path: "./build/beta",
       output_directory: "./build/beta",
       output_name: "SmilePile-Beta",
@@ -85,7 +105,7 @@ platform :ios do
       groups: ["Beta Testers"],
       changelog: "Beta build for external testing",
       notify_external_testers: true,
-      app_identifier: "com.smilepile",
+      app_identifier: "app.smilepile",
       team_id: "84W9WSYQQB"
     )
 
@@ -104,6 +124,12 @@ platform :ios do
       scheme: "SmilePile Prod",
       configuration: "Release",
       export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          "app.smilepile" => "SmilePile Distribution"
+        }
+      },
       derived_data_path: "./build/prod",
       output_directory: "./build/prod",
       output_name: "SmilePile-Prod",
@@ -117,7 +143,7 @@ platform :ios do
       skip_screenshots: true,
       submit_for_review: false,  # Manual submission required
       force: true,
-      app_identifier: "com.smilepile",
+      app_identifier: "app.smilepile",
       team_id: "84W9WSYQQB"
     )
 

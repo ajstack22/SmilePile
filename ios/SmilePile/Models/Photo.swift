@@ -67,6 +67,7 @@ public struct Category: Identifiable, Codable, Equatable {
     public let iconResource: String?
     public let colorHex: String?
     public let isDefault: Bool
+    public let isDemoCategory: Bool
     public let createdAt: Int64
 
     public init(
@@ -77,6 +78,7 @@ public struct Category: Identifiable, Codable, Equatable {
         iconResource: String? = nil,
         colorHex: String? = nil,
         isDefault: Bool = false,
+        isDemoCategory: Bool = false,
         createdAt: Int64 = Int64(Date().timeIntervalSince1970 * 1000)
     ) {
         self.id = id
@@ -86,6 +88,7 @@ public struct Category: Identifiable, Codable, Equatable {
         self.iconResource = iconResource
         self.colorHex = colorHex
         self.isDefault = isDefault
+        self.isDemoCategory = isDemoCategory
         self.createdAt = createdAt
     }
 

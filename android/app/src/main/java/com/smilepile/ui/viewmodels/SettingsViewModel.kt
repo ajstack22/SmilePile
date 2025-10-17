@@ -39,7 +39,10 @@ data class SettingsUiState(
     val importProgress: ImportProgress? = null,
     val hasPIN: Boolean = false,
     val biometricEnabled: Boolean = false,
-    val kidSafeModeEnabled: Boolean = true
+    val kidSafeModeEnabled: Boolean = true,
+    val isDemoMode: Boolean = false,
+    val demoModeEntered: Boolean = false,
+    val demoModeEntryCount: Int = 0
 )
 
 /**
@@ -157,6 +160,25 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             settingsManager.getNotificationsEnabled().collect { enabled ->
                 // Update notification permissions
+            }
+        }
+
+        // Observe demo mode settings
+        viewModelScope.launch {
+            settingsManager.isDemoMode().collect { isDemoMode ->
+                _uiState.value = _uiState.value.copy(isDemoMode = isDemoMode)
+            }
+        }
+
+        viewModelScope.launch {
+            settingsManager.hasDemoModeEntered().collect { entered ->
+                _uiState.value = _uiState.value.copy(demoModeEntered = entered)
+            }
+        }
+
+        viewModelScope.launch {
+            settingsManager.getDemoModeEntryCount().collect { count ->
+                _uiState.value = _uiState.value.copy(demoModeEntryCount = count)
             }
         }
     }

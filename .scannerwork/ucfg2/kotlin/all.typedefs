@@ -656,7 +656,7 @@ ecopy(JLjava/lang/String;Ljava/util/List;Ljava/util/List;Lcom/smilepile/data/bac
 component5()Gcom.smilepile.data.backup.CategoryExport#component5()Ljava/lang/String;W
 component6()Gcom.smilepile.data.backup.CategoryExport#component6()Ljava/lang/String;F
 component7()6com.smilepile.data.backup.CategoryExport#component7()I˙
-Qcopy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;I)§com.smilepile.data.backup.CategoryExport#copy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;I)Lcom/smilepile/data/backup/CategoryExport;˝
+Qcopy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;I)§com.smilepile.data.backup.CategoryExport#copy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;I)Lcom/smilepile/data/backup/CategoryExport;¡
 "com.smilepile.data.models.Categoryjava.lang.Object@
 component1()0com.smilepile.data.models.Category#component1()JQ
 component2()Acom.smilepile.data.models.Category#component2()Ljava/lang/String;Q
@@ -665,8 +665,9 @@ Qcopy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;
 component5()Acom.smilepile.data.models.Category#component5()Ljava/lang/String;Q
 component6()Acom.smilepile.data.models.Category#component6()Ljava/lang/String;@
 component7()0com.smilepile.data.models.Category#component7()Z@
-component8()0com.smilepile.data.models.Category#component8()J
-Rcopy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)ôcom.smilepile.data.models.Category#copy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)Lcom/smilepile/data/models/Category;®
+component8()0com.smilepile.data.models.Category#component8()Z@
+component9()0com.smilepile.data.models.Category#component9()JÚ
+Scopy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZZJ)öcom.smilepile.data.models.Category#copy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZZJ)Lcom/smilepile/data/models/Category;®
 %com.smilepile.data.backup.PhotoExportjava.lang.ObjectC
 component1()3com.smilepile.data.backup.PhotoExport#component1()JT
 component2()Dcom.smilepile.data.backup.PhotoExport#component2()Ljava/lang/String;C
@@ -971,7 +972,7 @@ $handleInvalidPin(Ljava/lang/String;)Rcom.smilepile.ui.viewmodels.AppModeViewMo
 'onConfigurationChanged(LConfiguration;)Icom.smilepile.theme.ThemeManager#onConfigurationChanged(LConfiguration;)Vñ
 8saveThemeModePreference(Lcom/smilepile/theme/ThemeMode;)Zcom.smilepile.theme.ThemeManager#saveThemeModePreference(Lcom/smilepile/theme/ThemeMode;)VÄ
 -setThemeMode(Lcom/smilepile/theme/ThemeMode;)Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V@
-toggleTheme()/com.smilepile.theme.ThemeManager#toggleTheme()V£6
+toggleTheme()/com.smilepile.theme.ThemeManager#toggleTheme()V¥:
 &com.smilepile.settings.SettingsManagerjava.lang.ObjectP
 clearKidsModePIN():com.smilepile.settings.SettingsManager#clearKidsModePIN()VZ
 exportSettings()Fcom.smilepile.settings.SettingsManager#exportSettings()Ljava/util/Map;W
@@ -986,7 +987,8 @@ $handleInvalidPin(Ljava/lang/String;)Rcom.smilepile.ui.viewmodels.AppModeViewMo
 getBackupWifiOnly()@com.smilepile.settings.SettingsManager#getBackupWifiOnly()LFlow;[
 getBiometricEnabled()Bcom.smilepile.settings.SettingsManager#getBiometricEnabled()LFlow;M
 getCacheSize();com.smilepile.settings.SettingsManager#getCacheSize()LFlow;Y
-getDefaultCategory()Acom.smilepile.settings.SettingsManager#getDefaultCategory()LFlow;c
+getDefaultCategory()Acom.smilepile.settings.SettingsManager#getDefaultCategory()LFlow;_
+getDemoModeEntryCount()Dcom.smilepile.settings.SettingsManager#getDemoModeEntryCount()LFlow;c
 getDynamicColorsEnabled()Fcom.smilepile.settings.SettingsManager#getDynamicColorsEnabled()LFlow;K
 getGridSize():com.smilepile.settings.SettingsManager#getGridSize()LFlow;Y
 getKidsModeEnabled()Acom.smilepile.settings.SettingsManager#getKidsModeEnabled()LFlow;Q
@@ -1004,8 +1006,11 @@ $handleInvalidPin(Ljava/lang/String;)Rcom.smilepile.ui.viewmodels.AppModeViewMo
 getThemeMode();com.smilepile.settings.SettingsManager#getThemeMode()LFlow;[
 getThumbnailQuality()Bcom.smilepile.settings.SettingsManager#getThumbnailQuality()LFlow;U
 getUploadQuality()?com.smilepile.settings.SettingsManager#getUploadQuality()LFlow;a
-hasCompletedOnboarding()Ecom.smilepile.settings.SettingsManager#hasCompletedOnboarding()LFlow;l
- importSettings(Ljava/util/Map;Z)Hcom.smilepile.settings.SettingsManager#importSettings(Ljava/util/Map;Z)VO
+hasCompletedOnboarding()Ecom.smilepile.settings.SettingsManager#hasCompletedOnboarding()LFlow;Y
+hasDemoModeEntered()Acom.smilepile.settings.SettingsManager#hasDemoModeEntered()LFlow;l
+ importSettings(Ljava/util/Map;Z)Hcom.smilepile.settings.SettingsManager#importSettings(Ljava/util/Map;Z)Vf
+incrementDemoModeEntryCount()Ecom.smilepile.settings.SettingsManager#incrementDemoModeEntryCount()VI
+isDemoMode()9com.smilepile.settings.SettingsManager#isDemoMode()LFlow;O
 isFirstLaunch()<com.smilepile.settings.SettingsManager#isFirstLaunch()LFlow;]
 isKidsModePINEnabled()Ccom.smilepile.settings.SettingsManager#isKidsModePINEnabled()LFlow;Æ
 AmigrateFromSharedPreferences(Landroid.content.SharedPreferences;)icom.smilepile.settings.SettingsManager#migrateFromSharedPreferences(Landroid.content.SharedPreferences;)VN
@@ -1021,7 +1026,9 @@ scom.smilepile.settings.SettingsManager#setBackupFrequency(Lcom/smilepile/settin
 setBackupWifiOnly(Z)<com.smilepile.settings.SettingsManager#setBackupWifiOnly(Z)VX
 setBiometricEnabled(Z)>com.smilepile.settings.SettingsManager#setBiometricEnabled(Z)VJ
 setCacheSize(I)7com.smilepile.settings.SettingsManager#setCacheSize(I)Vx
-&setDefaultCategory(Ljava/lang/String;)Ncom.smilepile.settings.SettingsManager#setDefaultCategory(Ljava/lang/String;)V`
+&setDefaultCategory(Ljava/lang/String;)Ncom.smilepile.settings.SettingsManager#setDefaultCategory(Ljava/lang/String;)VH
+setDemoMode(Z)6com.smilepile.settings.SettingsManager#setDemoMode(Z)VV
+setDemoModeEntered(Z)=com.smilepile.settings.SettingsManager#setDemoModeEntered(Z)V`
 setDynamicColorsEnabled(Z)Bcom.smilepile.settings.SettingsManager#setDynamicColorsEnabled(Z)VN
 setFirstLaunch(Z)9com.smilepile.settings.SettingsManager#setFirstLaunch(Z)VH
 setGridSize(I)6com.smilepile.settings.SettingsManager#setGridSize(I)VV
@@ -1881,7 +1888,7 @@ GupdateCategory(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)ocom.sm
 component1()rcom.smilepile.managers.CategoryManager$CategoryWithPhotos#component1()Lcom/smilepile/data/entities/CategoryEntity;W
 component2()Gcom.smilepile.managers.CategoryManager$CategoryWithPhotos#component2()If
 component3()Vcom.smilepile.managers.CategoryManager$CategoryWithPhotos#component3()Ljava/util/List;ˆ
-∏com.smilepile.managers.CategoryManager$CategoryWithPhotos#copy(Lcom/smilepile/data/entities/CategoryEntity;ILjava/util/List;)Lcom/smilepile/managers/CategoryManager$CategoryWithPhotos;∏com.smilepile.managers.CategoryManager$CategoryWithPhotos#copy(Lcom/smilepile/data/entities/CategoryEntity;ILjava/util/List;)Lcom/smilepile/managers/CategoryManager$CategoryWithPhotos;÷
+∏com.smilepile.managers.CategoryManager$CategoryWithPhotos#copy(Lcom/smilepile/data/entities/CategoryEntity;ILjava/util/List;)Lcom/smilepile/managers/CategoryManager$CategoryWithPhotos;∏com.smilepile.managers.CategoryManager$CategoryWithPhotos#copy(Lcom/smilepile/data/entities/CategoryEntity;ILjava/util/List;)Lcom/smilepile/managers/CategoryManager$CategoryWithPhotos;¢
 *com.smilepile.data.entities.CategoryEntityjava.lang.ObjectH
 component1()8com.smilepile.data.entities.CategoryEntity#component1()JY
 component2()Icom.smilepile.data.entities.CategoryEntity#component2()Ljava/lang/String;Y
@@ -1889,8 +1896,9 @@ GupdateCategory(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)ocom.sm
 component4()Icom.smilepile.data.entities.CategoryEntity#component4()Ljava/lang/String;H
 component5()8com.smilepile.data.entities.CategoryEntity#component5()IH
 component6()8com.smilepile.data.entities.CategoryEntity#component6()ZH
-component7()8com.smilepile.data.entities.CategoryEntity#component7()J‹
-@copy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)ócom.smilepile.data.entities.CategoryEntity#copy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZJ)Lcom/smilepile/data/entities/CategoryEntity;D
+component7()8com.smilepile.data.entities.CategoryEntity#component7()ZH
+component8()8com.smilepile.data.entities.CategoryEntity#component8()Jﬁ
+Acopy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZJ)òcom.smilepile.data.entities.CategoryEntity#copy(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZJ)Lcom/smilepile/data/entities/CategoryEntity;D
 0com.smilepile.managers.CategoryManager$Companionjava.lang.Object†
 -com.smilepile.data.entities.PhotoCategoryJoinjava.lang.Object\
 component1()Lcom.smilepile.data.entities.PhotoCategoryJoin#component1()Ljava/lang/String;K
@@ -1901,7 +1909,15 @@ GupdateCategory(JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)ocom.sm
 0com.smilepile.settings.SettingsManager$SortOrderjava.lang.EnumE
 3com.smilepile.settings.SettingsManager$PhotoQualityjava.lang.EnumH
 6com.smilepile.settings.SettingsManager$BackupFrequencyjava.lang.EnumB
-0com.smilepile.settings.SettingsManager$ThemeModejava.lang.EnumÄ
+0com.smilepile.settings.SettingsManager$ThemeModejava.lang.Enum≈
++com.smilepile.ui.viewmodels.DemoModeUiStatejava.lang.ObjectI
+component1()9com.smilepile.ui.viewmodels.DemoModeUiState#component1()ZI
+component2()9com.smilepile.ui.viewmodels.DemoModeUiState#component2()ZZ
+component3()Jcom.smilepile.ui.viewmodels.DemoModeUiState#component3()Ljava/lang/String;ë
+copy(ZZLjava/lang/String;)scom.smilepile.ui.viewmodels.DemoModeUiState#copy(ZZLjava/lang/String;)Lcom/smilepile/ui/viewmodels/DemoModeUiState;ﬂ
+-com.smilepile.ui.viewmodels.DemoModeViewModeljava.lang.ObjectK
+clearError();com.smilepile.ui.viewmodels.DemoModeViewModel#clearError()VO
+exitDemoMode()=com.smilepile.ui.viewmodels.DemoModeViewModel#exitDemoMode()VÄ
 'com.smilepile.data.models.PhotoMetadatajava.lang.ObjectV
 component1()Fcom.smilepile.data.models.PhotoMetadata#component1()Ljava/lang/String;X
 component10()Gcom.smilepile.data.models.PhotoMetadata#component10()Ljava/lang/String;U
@@ -2003,10 +2019,13 @@ Ecopy(Ljava/util/List;IILBitmap;LBitmap;FLRect;ZLjava/lang/String;ZZF)†com.smi
 copy(JJJI)Qcom.smilepile.storage.StorageUsage#copy(JJJI)Lcom/smilepile/storage/StorageUsage;@
 getPhotoMB()0com.smilepile.storage.StorageUsage#getPhotoMB()DH
 getThumbnailMB()4com.smilepile.storage.StorageUsage#getThumbnailMB()D@
-getTotalMB()0com.smilepile.storage.StorageUsage#getTotalMB()D¶
+getTotalMB()0com.smilepile.storage.StorageUsage#getTotalMB()Dì
 +com.smilepile.ui.viewmodels.SettingsUiStatejava.lang.ObjectI
 component1()9com.smilepile.ui.viewmodels.SettingsUiState#component1()ZK
-component10():com.smilepile.ui.viewmodels.SettingsUiState#component10()Zg
+component10():com.smilepile.ui.viewmodels.SettingsUiState#component10()ZK
+component11():com.smilepile.ui.viewmodels.SettingsUiState#component11()ZK
+component12():com.smilepile.ui.viewmodels.SettingsUiState#component12()ZK
+component13():com.smilepile.ui.viewmodels.SettingsUiState#component13()Ig
 component2()Wcom.smilepile.ui.viewmodels.SettingsUiState#component2()Lcom/smilepile/theme/ThemeMode;I
 component3()9com.smilepile.ui.viewmodels.SettingsUiState#component3()ZZ
 component4()Jcom.smilepile.ui.viewmodels.SettingsUiState#component4()Ljava/lang/String;o
@@ -2014,8 +2033,8 @@ copy(JJJI)Qcom.smilepile.storage.StorageUsage#copy(JJJI)Lcom/smilepile/storage/
 component6()bcom.smilepile.ui.viewmodels.SettingsUiState#component6()Lcom/smilepile/data/backup/ImportProgress;r
 component7()bcom.smilepile.ui.viewmodels.SettingsUiState#component7()Lcom/smilepile/data/backup/ImportProgress;I
 component8()9com.smilepile.ui.viewmodels.SettingsUiState#component8()ZI
-component9()9com.smilepile.ui.viewmodels.SettingsUiState#component9()ZÕ
-∑copy(ZLcom/smilepile/theme/ThemeMode;ZLjava/lang/String;Lcom/smilepile/data/backup/BackupStats;Lcom/smilepile/data/backup/ImportProgress;Lcom/smilepile/data/backup/ImportProgress;ZZZ)êcom.smilepile.ui.viewmodels.SettingsUiState#copy(ZLcom/smilepile/theme/ThemeMode;ZLjava/lang/String;Lcom/smilepile/data/backup/BackupStats;Lcom/smilepile/data/backup/ImportProgress;Lcom/smilepile/data/backup/ImportProgress;ZZZ)Lcom/smilepile/ui/viewmodels/SettingsUiState;∑$
+component9()9com.smilepile.ui.viewmodels.SettingsUiState#component9()Z”
+∫copy(ZLcom/smilepile/theme/ThemeMode;ZLjava/lang/String;Lcom/smilepile/data/backup/BackupStats;Lcom/smilepile/data/backup/ImportProgress;Lcom/smilepile/data/backup/ImportProgress;ZZZZZI)ìcom.smilepile.ui.viewmodels.SettingsUiState#copy(ZLcom/smilepile/theme/ThemeMode;ZLjava/lang/String;Lcom/smilepile/data/backup/BackupStats;Lcom/smilepile/data/backup/ImportProgress;Lcom/smilepile/data/backup/ImportProgress;ZZZZZI)Lcom/smilepile/ui/viewmodels/SettingsUiState;∑$
 -com.smilepile.ui.viewmodels.SettingsViewModeljava.lang.Objectë
 /changePIN(Ljava/lang/String;Ljava/lang/String;)^com.smilepile.ui.viewmodels.SettingsViewModel#changePIN(Ljava/lang/String;Ljava/lang/String;)Zq
 cleanupTempFile(Ljava/io/File;)Ncom.smilepile.ui.viewmodels.SettingsViewModel#cleanupTempFile(Ljava/io/File;)VK
@@ -2113,11 +2132,12 @@ GrestoreBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)tcom.sm
 component1()8com.smilepile.ui.viewmodels.BackupProgress#component1()IH
 component2()8com.smilepile.ui.viewmodels.BackupProgress#component2()IY
 component3()Icom.smilepile.ui.viewmodels.BackupProgress#component3()Ljava/lang/String;è
-copy(IILjava/lang/String;)qcom.smilepile.ui.viewmodels.BackupProgress#copy(IILjava/lang/String;)Lcom/smilepile/ui/viewmodels/BackupProgress;”
+copy(IILjava/lang/String;)qcom.smilepile.ui.viewmodels.BackupProgress#copy(IILjava/lang/String;)Lcom/smilepile/ui/viewmodels/BackupProgress;“
 4com.smilepile.data.repository.CategoryRepositoryImpl0com.smilepile.data.repository.CategoryRepository∞
 ;assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)qcom.smilepile.data.repository.CategoryRepositoryImpl#assignPhotoToCategories(Ljava/lang/String;Ljava/util/List;)Vå
 )assignPhotosToCategory(Ljava/util/List;J)_com.smilepile.data.repository.CategoryRepositoryImpl#assignPhotosToCategory(Ljava/util/List;J)V¢
-4deleteCategory(Lcom/smilepile/data/models/Category;)jcom.smilepile.data.repository.CategoryRepositoryImpl#deleteCategory(Lcom/smilepile/data/models/Category;)Vm
+4deleteCategory(Lcom/smilepile/data/models/Category;)jcom.smilepile.data.repository.CategoryRepositoryImpl#deleteCategory(Lcom/smilepile/data/models/Category;)V}
+deleteDemoCategories()ccom.smilepile.data.repository.CategoryRepositoryImpl#deleteDemoCategories()Lerror/NonExistentClass;m
 getAllCategories()Wcom.smilepile.data.repository.CategoryRepositoryImpl#getAllCategories()Ljava/util/List;k
 getAllCategoriesFlow()Qcom.smilepile.data.repository.CategoryRepositoryImpl#getAllCategoriesFlow()LFlow;õ
 )getCategoriesForPhoto(Ljava/lang/String;)ncom.smilepile.data.repository.CategoryRepositoryImpl#getCategoriesForPhoto(Ljava/lang/String;)Ljava/util/List;ô
@@ -2361,17 +2381,22 @@ $com.smilepile.onboarding.ImportStatsjava.lang.ObjectB
 component7()8com.smilepile.onboarding.OnboardingUiState#component7()ZY
 component8()Icom.smilepile.onboarding.OnboardingUiState#component8()Ljava/lang/String;H
 component9()8com.smilepile.onboarding.OnboardingUiState#component9()Z∑
-≠copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;ZLcom/smilepile/onboarding/ImportStats;Z)Ñcom.smilepile.onboarding.OnboardingUiState#copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;ZLcom/smilepile/onboarding/ImportStats;Z)Lcom/smilepile/onboarding/OnboardingUiState;Ä
+≠copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;ZLcom/smilepile/onboarding/ImportStats;Z)Ñcom.smilepile.onboarding.OnboardingUiState#copy(Lcom/smilepile/onboarding/OnboardingStep;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/String;ZZLjava/lang/String;ZLcom/smilepile/onboarding/ImportStats;Z)Lcom/smilepile/onboarding/OnboardingUiState;¢
 ,com.smilepile.onboarding.OnboardingViewModeljava.lang.Objectö
 4addCategory(Lcom/smilepile/onboarding/TempCategory;)bcom.smilepile.onboarding.OnboardingViewModel#addCategory(Lcom/smilepile/onboarding/TempCategory;)VJ
 clearError():com.smilepile.onboarding.OnboardingViewModel#clearError()VZ
-completeOnboarding()Bcom.smilepile.onboarding.OnboardingViewModel#completeOnboarding()V÷
+completeOnboarding()Bcom.smilepile.onboarding.OnboardingViewModel#completeOnboarding()Vx
+#copyResourceToFile(ILjava/io/File;)Qcom.smilepile.onboarding.OnboardingViewModel#copyResourceToFile(ILjava/io/File;)V÷
 @createCategoryFromTemp(Lcom/smilepile/onboarding/TempCategory;I)ëcom.smilepile.onboarding.OnboardingViewModel#createCategoryFromTemp(Lcom/smilepile/onboarding/TempCategory;I)Lcom/smilepile/data/models/Category;{
 createDefaultTempCategories()Zcom.smilepile.onboarding.OnboardingViewModel#createDefaultTempCategories()Ljava/util/List;€
-DcreatePhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)ícom.smilepile.onboarding.OnboardingViewModel#createPhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)Lcom/smilepile/data/models/Photo;ä
+DcreatePhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)ícom.smilepile.onboarding.OnboardingViewModel#createPhotoFromImport(Lcom/smilepile/onboarding/ImportedPhotoData;J)Lcom/smilepile/data/models/Photo;P
+enterDemoMode()=com.smilepile.onboarding.OnboardingViewModel#enterDemoMode()Vt
+!getResourceId(Ljava/lang/String;)Ocom.smilepile.onboarding.OnboardingViewModel#getResourceId(Ljava/lang/String;)Iä
 ,handleOnboardingError(Ljava/lang/Exception;)Zcom.smilepile.onboarding.OnboardingViewModel#handleOnboardingError(Ljava/lang/Exception;)Vå
 -importPhotos(Ljava/util/List;Ljava/util/Map;)[com.smilepile.onboarding.OnboardingViewModel#importPhotos(Ljava/util/List;Ljava/util/Map;)VŒ
-NimportSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)|com.smilepile.onboarding.OnboardingViewModel#importSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)VN
+NimportSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)|com.smilepile.onboarding.OnboardingViewModel#importSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)V^
+loadDemoDataIfNeeded()Dcom.smilepile.onboarding.OnboardingViewModel#loadDemoDataIfNeeded()V˝
+|com.smilepile.onboarding.OnboardingViewModel#loadDemoPhoto(Lcom/smilepile/data/demo/DemoData$PhotoMetadata;Ljava/util/List;)}com.smilepile.onboarding.OnboardingViewModel#loadDemoPhoto(Lcom/smilepile/data/demo/DemoData$PhotoMetadata;Ljava/util/List;)VN
 navigateBack()<com.smilepile.onboarding.OnboardingViewModel#navigateBack()VN
 navigateNext()<com.smilepile.onboarding.OnboardingViewModel#navigateNext()V†
 7removeCategory(Lcom/smilepile/onboarding/TempCategory;)ecom.smilepile.onboarding.OnboardingViewModel#removeCategory(Lcom/smilepile/onboarding/TempCategory;)VÄ
@@ -2383,7 +2408,120 @@ NimportSinglePhoto(Lcom/smilepile/onboarding/ImportedPhotoData;Ljava/util/Map;)
 setPinCode(Ljava/lang/String;)Lcom.smilepile.onboarding.OnboardingViewModel#setPinCode(Ljava/lang/String;)V>
 skip()4com.smilepile.onboarding.OnboardingViewModel#skip()VT
 startImportFlow()?com.smilepile.onboarding.OnboardingViewModel#startImportFlow()V\
-validateCurrentStep()Ccom.smilepile.onboarding.OnboardingViewModel#validateCurrentStep()Z…	
+validateCurrentStep()Ccom.smilepile.onboarding.OnboardingViewModel#validateCurrentStep()Z
+ com.smilepile.data.demo.DemoDatajava.lang.ObjectN
+
+daysAgo(J)@com.smilepile.data.demo.DemoData#daysAgo(J)Ljava/time/LocalDate;ó
+1getCategoryId(Ljava/lang/String;Ljava/util/List;)bcom.smilepile.data.demo.DemoData#getCategoryId(Ljava/lang/String;Ljava/util/List;)Ljava/lang/Long;P
+yearsAgo(D)Acom.smilepile.data.demo.DemoData#yearsAgo(D)Ljava/time/LocalDate;™
+.com.smilepile.data.demo.DemoData$PhotoMetadatajava.lang.Object]
+component1()Mcom.smilepile.data.demo.DemoData$PhotoMetadata#component1()Ljava/lang/String;]
+component2()Mcom.smilepile.data.demo.DemoData$PhotoMetadata#component2()Ljava/lang/String;]
+component3()Mcom.smilepile.data.demo.DemoData$PhotoMetadata#component3()Ljava/lang/String;`
+component4()Pcom.smilepile.data.demo.DemoData$PhotoMetadata#component4()Ljava/time/LocalDate;Ê
+∞com.smilepile.data.demo.DemoData$PhotoMetadata#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/time/LocalDate;)Lcom/smilepile/data/demo/DemoData$PhotoMetadata;∞com.smilepile.data.demo.DemoData$PhotoMetadata#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/time/LocalDate;)Lcom/smilepile/data/demo/DemoData$PhotoMetadata;€
+#java.time.temporal.TemporalAccessorjava.lang.Objectw
+'get(Ljava/time/temporal/TemporalField;)Ljava.time.temporal.TemporalAccessor#get(Ljava/time/temporal/TemporalField;)Iå
+)query(Ljava/time/temporal/TemporalQuery;)_java.time.temporal.TemporalAccessor#query(Ljava/time/temporal/TemporalQuery;)Ljava/lang/Object;ô
+)range(Ljava/time/temporal/TemporalField;)ljava.time.temporal.TemporalAccessor#range(Ljava/time/temporal/TemporalField;)Ljava/time/temporal/ValueRange;ê
+java.time.temporal.Temporal#java.time.temporal.TemporalAccessorè
+)minus(JLjava/time/temporal/TemporalUnit;)bjava.time.temporal.Temporal#minus(JLjava/time/temporal/TemporalUnit;)Ljava/time/temporal/Temporal;ë
+*minus(Ljava/time/temporal/TemporalAmount;)cjava.time.temporal.Temporal#minus(Ljava/time/temporal/TemporalAmount;)Ljava/time/temporal/Temporal;è
+)plus(Ljava/time/temporal/TemporalAmount;)bjava.time.temporal.Temporal#plus(Ljava/time/temporal/TemporalAmount;)Ljava/time/temporal/Temporal;ì
++with(Ljava/time/temporal/TemporalAdjuster;)djava.time.temporal.Temporal#with(Ljava/time/temporal/TemporalAdjuster;)Ljava/time/temporal/Temporal;7
+#java.time.temporal.TemporalAdjusterjava.lang.Objectˇ
+ java.time.chrono.ChronoLocalDatejava.lang.Comparablejava.time.temporal.Temporal#java.time.temporal.TemporalAdjusterî
+)adjustInto(Ljava/time/temporal/Temporal;)gjava.time.chrono.ChronoLocalDate#adjustInto(Ljava/time/temporal/Temporal;)Ljava/time/temporal/Temporal;Ö
+atTime(Ljava/time/LocalTime;)djava.time.chrono.ChronoLocalDate#atTime(Ljava/time/LocalTime;)Ljava/time/chrono/ChronoLocalDateTime;Ä
+-compareTo(Ljava/time/chrono/ChronoLocalDate;)Ojava.time.chrono.ChronoLocalDate#compareTo(Ljava/time/chrono/ChronoLocalDate;)Iè
+,format(Ljava/time/format/DateTimeFormatter;)_java.time.chrono.ChronoLocalDate#format(Ljava/time/format/DateTimeFormatter;)Ljava/lang/String;K
+getEra()?java.time.chrono.ChronoLocalDate#getEra()Ljava/time/chrono/Era;|
++isAfter(Ljava/time/chrono/ChronoLocalDate;)Mjava.time.chrono.ChronoLocalDate#isAfter(Ljava/time/chrono/ChronoLocalDate;)Z~
+,isBefore(Ljava/time/chrono/ChronoLocalDate;)Njava.time.chrono.ChronoLocalDate#isBefore(Ljava/time/chrono/ChronoLocalDate;)Z|
++isEqual(Ljava/time/chrono/ChronoLocalDate;)Mjava.time.chrono.ChronoLocalDate#isEqual(Ljava/time/chrono/ChronoLocalDate;)Z>
+isLeapYear().java.time.chrono.ChronoLocalDate#isLeapYear()ZÑ
+/isSupported(Ljava/time/temporal/TemporalField;)Qjava.time.chrono.ChronoLocalDate#isSupported(Ljava/time/temporal/TemporalField;)ZÇ
+.isSupported(Ljava/time/temporal/TemporalUnit;)Pjava.time.chrono.ChronoLocalDate#isSupported(Ljava/time/temporal/TemporalUnit;)ZB
+lengthOfYear()0java.time.chrono.ChronoLocalDate#lengthOfYear()Iô
+)minus(JLjava/time/temporal/TemporalUnit;)ljava.time.chrono.ChronoLocalDate#minus(JLjava/time/temporal/TemporalUnit;)Ljava/time/chrono/ChronoLocalDate;õ
+*minus(Ljava/time/temporal/TemporalAmount;)mjava.time.chrono.ChronoLocalDate#minus(Ljava/time/temporal/TemporalAmount;)Ljava/time/chrono/ChronoLocalDate;ó
+(plus(JLjava/time/temporal/TemporalUnit;)kjava.time.chrono.ChronoLocalDate#plus(JLjava/time/temporal/TemporalUnit;)Ljava/time/chrono/ChronoLocalDate;ô
+)plus(Ljava/time/temporal/TemporalAmount;)ljava.time.chrono.ChronoLocalDate#plus(Ljava/time/temporal/TemporalAmount;)Ljava/time/chrono/ChronoLocalDate;â
+)query(Ljava/time/temporal/TemporalQuery;)\java.time.chrono.ChronoLocalDate#query(Ljava/time/temporal/TemporalQuery;)Ljava/lang/Object;>
+toEpochDay().java.time.chrono.ChronoLocalDate#toEpochDay()Jù
++with(Ljava/time/temporal/TemporalAdjuster;)njava.time.chrono.ChronoLocalDate#with(Ljava/time/temporal/TemporalAdjuster;)Ljava/time/chrono/ChronoLocalDate;ô
+)with(Ljava/time/temporal/TemporalField;J)ljava.time.chrono.ChronoLocalDate#with(Ljava/time/temporal/TemporalField;J)Ljava/time/chrono/ChronoLocalDate;»1
+java.time.LocalDatejava.io.Serializablejava.lang.Object java.time.chrono.ChronoLocalDatejava.time.temporal.Temporal#java.time.temporal.TemporalAdjusterá
+)adjustInto(Ljava/time/temporal/Temporal;)Zjava.time.LocalDate#adjustInto(Ljava/time/temporal/Temporal;)Ljava/time/temporal/Temporal;M
+atStartOfDay();java.time.LocalDate#atStartOfDay()Ljava/time/LocalDateTime;q
+ atStartOfDay(Ljava/time/ZoneId;)Mjava.time.LocalDate#atStartOfDay(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;E
+
+atTime(II)7java.time.LocalDate#atTime(II)Ljava/time/LocalDateTime;G
+atTime(III)8java.time.LocalDate#atTime(III)Ljava/time/LocalDateTime;I
+atTime(IIII)9java.time.LocalDate#atTime(IIII)Ljava/time/LocalDateTime;k
+atTime(Ljava/time/LocalTime;)Jjava.time.LocalDate#atTime(Ljava/time/LocalTime;)Ljava/time/LocalDateTime;n
+atTime(Ljava/time/OffsetTime;)Ljava.time.LocalDate#atTime(Ljava/time/OffsetTime;)Ljava/time/OffsetDateTime;s
+-compareTo(Ljava/time/chrono/ChronoLocalDate;)Bjava.time.LocalDate#compareTo(Ljava/time/chrono/ChronoLocalDate;)I[
+!compareTo0(Ljava/time/LocalDate;)6java.time.LocalDate#compareTo0(Ljava/time/LocalDate;)Is
+!datesUntil(Ljava/time/LocalDate;)Njava.time.LocalDate#datesUntil(Ljava/time/LocalDate;)Ljava/util/stream/Stream;ó
+3datesUntil(Ljava/time/LocalDate;Ljava/time/Period;)`java.time.LocalDate#datesUntil(Ljava/time/LocalDate;Ljava/time/Period;)Ljava/util/stream/Stream;Y
+ daysUntil(Ljava/time/LocalDate;)5java.time.LocalDate#daysUntil(Ljava/time/LocalDate;)JM
+equals(Ljava/lang/Object;)/java.time.LocalDate#equals(Ljava/lang/Object;)ZÇ
+,format(Ljava/time/format/DateTimeFormatter;)Rjava.time.LocalDate#format(Ljava/time/format/DateTimeFormatter;)Ljava/lang/String;_
+#formatTo(Ljava/lang/StringBuilder;)8java.time.LocalDate#formatTo(Ljava/lang/StringBuilder;)Vg
+'get(Ljava/time/temporal/TemporalField;)<java.time.LocalDate#get(Ljava/time/temporal/TemporalField;)Ii
+(get0(Ljava/time/temporal/TemporalField;)=java.time.LocalDate#get0(Ljava/time/temporal/TemporalField;)IV
+getChronology()Cjava.time.LocalDate#getChronology()Ljava/time/chrono/IsoChronology;7
+getDayOfMonth()$java.time.LocalDate#getDayOfMonth()II
+getDayOfWeek()7java.time.LocalDate#getDayOfWeek()Ljava/time/DayOfWeek;5
+getDayOfYear()#java.time.LocalDate#getDayOfYear()IA
+getEra()5java.time.LocalDate#getEra()Ljava/time/chrono/IsoEra;o
++getLong(Ljava/time/temporal/TemporalField;)@java.time.LocalDate#getLong(Ljava/time/temporal/TemporalField;)J=
+
+getMonth()/java.time.LocalDate#getMonth()Ljava/time/Month;7
+getMonthValue()$java.time.LocalDate#getMonthValue()I?
+getProlepticMonth()(java.time.LocalDate#getProlepticMonth()J+
+	getYear()java.time.LocalDate#getYear()I-
+
+hashCode()java.time.LocalDate#hashCode()Io
++isAfter(Ljava/time/chrono/ChronoLocalDate;)@java.time.LocalDate#isAfter(Ljava/time/chrono/ChronoLocalDate;)Zq
+,isBefore(Ljava/time/chrono/ChronoLocalDate;)Ajava.time.LocalDate#isBefore(Ljava/time/chrono/ChronoLocalDate;)Zo
++isEqual(Ljava/time/chrono/ChronoLocalDate;)@java.time.LocalDate#isEqual(Ljava/time/chrono/ChronoLocalDate;)Z1
+isLeapYear()!java.time.LocalDate#isLeapYear()Zw
+/isSupported(Ljava/time/temporal/TemporalField;)Djava.time.LocalDate#isSupported(Ljava/time/temporal/TemporalField;)Zu
+.isSupported(Ljava/time/temporal/TemporalUnit;)Cjava.time.LocalDate#isSupported(Ljava/time/temporal/TemporalUnit;)Z7
+lengthOfMonth()$java.time.LocalDate#lengthOfMonth()I5
+lengthOfYear()#java.time.LocalDate#lengthOfYear()I
+)minus(JLjava/time/temporal/TemporalUnit;)Rjava.time.LocalDate#minus(JLjava/time/temporal/TemporalUnit;)Ljava/time/LocalDate;Å
+*minus(Ljava/time/temporal/TemporalAmount;)Sjava.time.LocalDate#minus(Ljava/time/temporal/TemporalAmount;)Ljava/time/LocalDate;E
+minusDays(J)5java.time.LocalDate#minusDays(J)Ljava/time/LocalDate;I
+minusMonths(J)7java.time.LocalDate#minusMonths(J)Ljava/time/LocalDate;G
+minusWeeks(J)6java.time.LocalDate#minusWeeks(J)Ljava/time/LocalDate;G
+minusYears(J)6java.time.LocalDate#minusYears(J)Ljava/time/LocalDate;]
+"monthsUntil(Ljava/time/LocalDate;)7java.time.LocalDate#monthsUntil(Ljava/time/LocalDate;)J}
+(plus(JLjava/time/temporal/TemporalUnit;)Qjava.time.LocalDate#plus(JLjava/time/temporal/TemporalUnit;)Ljava/time/LocalDate;
+)plus(Ljava/time/temporal/TemporalAmount;)Rjava.time.LocalDate#plus(Ljava/time/temporal/TemporalAmount;)Ljava/time/LocalDate;C
+plusDays(J)4java.time.LocalDate#plusDays(J)Ljava/time/LocalDate;G
+plusMonths(J)6java.time.LocalDate#plusMonths(J)Ljava/time/LocalDate;E
+plusWeeks(J)5java.time.LocalDate#plusWeeks(J)Ljava/time/LocalDate;E
+plusYears(J)5java.time.LocalDate#plusYears(J)Ljava/time/LocalDate;|
+)query(Ljava/time/temporal/TemporalQuery;)Ojava.time.LocalDate#query(Ljava/time/temporal/TemporalQuery;)Ljava/lang/Object;â
+)range(Ljava/time/temporal/TemporalField;)\java.time.LocalDate#range(Ljava/time/temporal/TemporalField;)Ljava/time/temporal/ValueRange;g
+'readObject(Ljava/io/ObjectInputStream;)<java.time.LocalDate#readObject(Ljava/io/ObjectInputStream;)V1
+toEpochDay()!java.time.LocalDate#toEpochDay()Jç
+:toEpochSecond(Ljava/time/LocalTime;Ljava/time/ZoneOffset;)Ojava.time.LocalDate#toEpochSecond(Ljava/time/LocalTime;Ljava/time/ZoneOffset;)J>
+
+toString()0java.time.LocalDate#toString()Ljava/lang/String;|
+)until(Ljava/time/chrono/ChronoLocalDate;)Ojava.time.LocalDate#until(Ljava/time/chrono/ChronoLocalDate;)Ljava/time/Period;£
+Euntil(Ljava/time/temporal/Temporal;Ljava/time/temporal/TemporalUnit;)Zjava.time.LocalDate#until(Ljava/time/temporal/Temporal;Ljava/time/temporal/TemporalUnit;)JÉ
++with(Ljava/time/temporal/TemporalAdjuster;)Tjava.time.LocalDate#with(Ljava/time/temporal/TemporalAdjuster;)Ljava/time/LocalDate;
+)with(Ljava/time/temporal/TemporalField;J)Rjava.time.LocalDate#with(Ljava/time/temporal/TemporalField;J)Ljava/time/LocalDate;O
+withDayOfMonth(I):java.time.LocalDate#withDayOfMonth(I)Ljava/time/LocalDate;M
+withDayOfYear(I)9java.time.LocalDate#withDayOfYear(I)Ljava/time/LocalDate;E
+withMonth(I)5java.time.LocalDate#withMonth(I)Ljava/time/LocalDate;C
+withYear(I)4java.time.LocalDate#withYear(I)Ljava/time/LocalDate;_
+#writeExternal(Ljava/io/DataOutput;)8java.time.LocalDate#writeExternal(Ljava/io/DataOutput;)VF
+writeReplace()4java.time.LocalDate#writeReplace()Ljava/lang/Object;…	
 *com.smilepile.storage.FileOperationHelpersjava.lang.ObjectÄ
 (atomicMove(Ljava/io/File;Ljava/io/File;)Tcom.smilepile.storage.FileOperationHelpers#atomicMove(Ljava/io/File;Ljava/io/File;)ZÉ
 !calculateFileHash(Ljava/io/File;)^com.smilepile.storage.FileOperationHelpers#calculateFileHash(Ljava/io/File;)Ljava/lang/String;v
@@ -2646,4 +2784,11 @@ toString()Hjava.util.concurrent.atomic.AtomicReference#toString()Ljava/lang/Str
 !dateToTimestamp(Ljava/util/Date;)Xcom.smilepile.data.database.Converters#dateToTimestamp(Ljava/util/Date;)Ljava/lang/Long;
 "fromStringList(Ljava/lang/String;)Ycom.smilepile.data.database.Converters#fromStringList(Ljava/lang/String;)Ljava/util/List;y
 fromTimestamp(Ljava/lang/Long;)Vcom.smilepile.data.database.Converters#fromTimestamp(Ljava/lang/Long;)Ljava/util/Date;Ö
-$stringListToString(Ljava/util/List;)]com.smilepile.data.database.Converters#stringListToString(Ljava/util/List;)Ljava/lang/String;
+$stringListToString(Ljava/util/List;)]com.smilepile.data.database.Converters#stringListToString(Ljava/util/List;)Ljava/lang/String;Á
+-com.smilepile.data.demo.DemoData$CategoryDatajava.lang.Object\
+component1()Lcom.smilepile.data.demo.DemoData$CategoryData#component1()Ljava/lang/String;\
+component2()Lcom.smilepile.data.demo.DemoData$CategoryData#component2()Ljava/lang/String;\
+component3()Lcom.smilepile.data.demo.DemoData$CategoryData#component3()Ljava/lang/String;\
+component4()Lcom.smilepile.data.demo.DemoData$CategoryData#component4()Ljava/lang/String;K
+component5();com.smilepile.data.demo.DemoData$CategoryData#component5()Iﬁ
+¨com.smilepile.data.demo.DemoData$CategoryData#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)Lcom/smilepile/data/demo/DemoData$CategoryData;¨com.smilepile.data.demo.DemoData$CategoryData#copy(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)Lcom/smilepile/data/demo/DemoData$CategoryData;

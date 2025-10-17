@@ -19,6 +19,9 @@ interface CategoryRepository {
     suspend fun getCategoryCount(): Int
     suspend fun reorderCategories(categoryIds: List<Long>)
 
+    // Demo mode support
+    suspend fun deleteDemoCategories()
+
     // Batch operations for photo-category associations
     suspend fun assignPhotosToCategory(photoIds: List<String>, categoryId: Long)
     suspend fun removePhotosFromCategory(photoIds: List<String>, categoryId: Long)

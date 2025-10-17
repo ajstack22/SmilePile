@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,7 +54,8 @@ private val nunitoFontFamily = FontFamily(
 @Composable
 fun WelcomeScreen(
     onGetStarted: () -> Unit,
-    onImportBackup: () -> Unit
+    onImportBackup: () -> Unit,
+    onTryDemo: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -211,6 +213,45 @@ fun WelcomeScreen(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            // Try Demo button
+            OutlinedButton(
+                onClick = onTryDemo,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = MaterialTheme.shapes.medium,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = SmilePilePink
+                ),
+                border = BorderStroke(2.dp, SmilePilePink)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                    ) {
+                        Text(
+                            text = "Try Demo",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Explore with pre-filled example photos",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Normal
+                        )
+                    }
+                }
+            }
+
             // Start Fresh button
             Button(
                 onClick = onGetStarted,
@@ -224,24 +265,6 @@ fun WelcomeScreen(
             ) {
                 Text(
                     text = "Start Fresh",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            // Import Backup button
-            OutlinedButton(
-                onClick = onImportBackup,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = SmilePileBlue
-                )
-            ) {
-                Text(
-                    text = "Import Backup",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
                 )

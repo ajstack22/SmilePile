@@ -900,7 +900,7 @@ e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 ‘% ‘(8
 displayNamejava.lang.StringB1/
--com.smilepile.ui.viewmodels.CategoryViewModelH¥
+-com.smilepile.ui.viewmodels.CategoryViewModelHÍ
 ‰com.smilepile.ui.viewmodels.CategoryViewModel#createNewCategory(Ljava/lang/String;Ljava/lang/String;)Lcom/smilepile/data/models/Category;q
 e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/CategoryViewModel.kt• •()"0*i
 2
@@ -950,7 +950,8 @@ categoriesjava.util.List"__id*$
 
 %1java.util.List*
 2
-3*æ	
+3*Ž
+
 1
 —H —(IV
 T
@@ -992,11 +993,11 @@ K
 Systemkotlin.Unit2currentTimeMillis()\Z
 
 ™ Ÿ(	(
-%6"com.smilepile.data.models.Category""com.smilepile.data.models.Categoryò
-ï
+%6"com.smilepile.data.models.Category""com.smilepile.data.models.Categoryš
+—
 
 ™ Ÿ(	
-%7"xcom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)V*8
+%7"ycom.smilepile.data.models.Category#<init>(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZZJ)V*8
 
 ™ Ÿ(	*
 (
@@ -1022,6 +1023,9 @@ K
 colorHexjava.lang.String*
 
 ž ž(	
+false*%
+
+__unknown_file (	
 false*(
 
 __unknown_file (

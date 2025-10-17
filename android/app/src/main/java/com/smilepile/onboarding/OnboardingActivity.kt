@@ -76,6 +76,10 @@ class OnboardingActivity : ComponentActivity() {
                         onImportBackup = {
                             importLauncher.launch(arrayOf("application/zip", "*/*"))
                         },
+                        onTryDemo = {
+                            viewModel.enterDemoMode()
+                            finish() // Close onboarding and return to main activity
+                        },
                         onComplete = {
                             viewModel.completeOnboarding()
                             finish() // Close onboarding and return to main activity

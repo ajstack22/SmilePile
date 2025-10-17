@@ -31,6 +31,7 @@ class CategoryRepositoryImplTest {
 
     private lateinit var categoryDao: CategoryDao
     private lateinit var photoCategoryDao: PhotoCategoryDao
+    private lateinit var settingsManager: com.smilepile.settings.SettingsManager
     private lateinit var repository: CategoryRepositoryImpl
     private val testDispatcher = StandardTestDispatcher()
 
@@ -40,7 +41,9 @@ class CategoryRepositoryImplTest {
         Dispatchers.setMain(testDispatcher)
         categoryDao = mockk(relaxed = true)
         photoCategoryDao = mockk(relaxed = true)
-        repository = CategoryRepositoryImpl(categoryDao, photoCategoryDao, testDispatcher)
+        settingsManager = mockk(relaxed = true)
+        every { settingsManager.isDemoMode() } returns flowOf(false)
+        repository = CategoryRepositoryImpl(categoryDao, photoCategoryDao, testDispatcher, settingsManager)
     }
 
     @After

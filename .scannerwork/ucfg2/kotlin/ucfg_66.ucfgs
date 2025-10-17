@@ -1,111 +1,780 @@
+ãò
+ˇcom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)Vp
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktI I("0*“
+2
+≠ µ(d
+b
+
+Æ Æ(M#
+currentCategoryjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>S
+Q
+
+__unknown_file (
+%9"__id*)
+
+__unknown_file (
+	<unknown>*
+3
+4*>
+3≈ «"/
+
+__unknown_file (
+implicit return*»Ò
+4
+∏ ≈(‰
+·
+
+__unknown_file (
+%11"__declareFunction*™
+
+__unknown_file (çä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0∫∑
+
+__unknown_file (ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"__ScopeWrapperã
+à
+
+__unknown_file (™
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+contextjava.lang.Object"__id*9
+
+__unknown_file (
+
+contextjava.lang.Objectç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+activityjava.lang.Object"__id*:
+
+__unknown_file (
+
+activityjava.lang.Objectô
+ñ
+
+__unknown_file (±
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0""
+coroutineScopejava.lang.Object"__id*@
+
+__unknown_file ($
+"
+coroutineScopejava.lang.Objectù
+ö
+
+__unknown_file (≥
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"$
+biometricManagerjava.lang.Object"__id*B
+
+__unknown_file (&
+$
+biometricManagerjava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0" 
+galleryStatejava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+galleryStatejava.lang.Objectë
+é
+
+__unknown_file (≠
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+
+categoriesjava.lang.Object"__id*<
+
+__unknown_file ( 
+
+
+categoriesjava.lang.Object°
+û
+
+__unknown_file (µ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"&
+selectedCategoryIdjava.lang.Object"__id*D
+
+__unknown_file ((
+&
+selectedCategoryIdjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+	allPhotosjava.lang.Object"__id*;
+
+__unknown_file (
+
+	allPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+	modeStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	modeStatejava.lang.Objectì
+ê
+
+__unknown_file (Æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+zoomedPhotojava.lang.Object"__id*=
+
+__unknown_file (!
+
+zoomedPhotojava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0" 
+maintainZoomjava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+maintainZoomjava.lang.Objectó
+î
+
+__unknown_file (∞
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"!
+showPinDialogjava.lang.Object"__id*?
+
+__unknown_file (#
+!
+showPinDialogjava.lang.Objectõ
+ò
+
+__unknown_file (≤
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"#
+displayedPhotosjava.lang.Object"__id*A
+
+__unknown_file (%
+#
+displayedPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+	listStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	listStatejava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*c
+
+__unknown_file (G
+E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler±
+Æ
+
+__unknown_file (Ω
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0".
+onPhotoClickkotlin.jvm.functions.Function2"__id*L
+
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function2…
+∆
+
+__unknown_file (…
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0":
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*X
+
+__unknown_file (<
+:
+onNavigateToParentalLockkotlin.jvm.functions.Function0ç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"
+modifierjava.lang.Object"__id*:
+
+__unknown_file (
+
+modifierjava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*c
+
+__unknown_file (G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModelœ
 Ã
-gcom.smilepile.ui.viewmodels.BackupViewModel#getBackupManager()Lcom/smilepile/data/backup/BackupManager;
-__unknown_file ("0*é
-0 (æ
-ª
- (0
-field'com.smilepile.data.backup.BackupManager"__id*w
- (k*i-
-+com.smilepile.ui.viewmodels.BackupViewModel"8
-backupManager'com.smilepile.data.backup.BackupManager">
- (2
-0
-field'com.smilepile.data.backup.BackupManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Ï
-hcom.smilepile.ui.viewmodels.BackupViewModel#setBackupManager(Lcom/smilepile/data/backup/BackupManager;)V
-__unknown_file ("0*Ô
-0 (æ
-ª
- (i-
-+com.smilepile.ui.viewmodels.BackupViewModel"8
-backupManager'com.smilepile.data.backup.BackupManager"__id*>
- (2
-0
-value'com.smilepile.data.backup.BackupManager"
- (
-implicit return:<
- (0
-value'com.smilepile.data.backup.BackupManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`“
-icom.smilepile.ui.viewmodels.BackupViewModel#getRestoreManager()Lcom/smilepile/data/backup/RestoreManager;
-__unknown_file ("0*í
-0 (¡
-æ
- (1
-field(com.smilepile.data.backup.RestoreManager"__id*y
- (m*k-
-+com.smilepile.ui.viewmodels.BackupViewModel":
-restoreManager(com.smilepile.data.backup.RestoreManager"?
- (3
-1
-field(com.smilepile.data.backup.RestoreManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Ú
-jcom.smilepile.ui.viewmodels.BackupViewModel#setRestoreManager(Lcom/smilepile/data/backup/RestoreManager;)V
-__unknown_file ("0*Ú
-0 (¡
-æ
- (k-
-+com.smilepile.ui.viewmodels.BackupViewModel":
-restoreManager(com.smilepile.data.backup.RestoreManager"__id*?
- (3
-1
-value(com.smilepile.data.backup.RestoreManager"
- (
-implicit return:=
- (1
-value(com.smilepile.data.backup.RestoreManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Ã
-gcom.smilepile.ui.viewmodels.BackupViewModel#getExportManager()Lcom/smilepile/data/backup/ExportManager;
-__unknown_file ("0*é
-0 (æ
-ª
- (0
-field'com.smilepile.data.backup.ExportManager"__id*w
- (k*i-
-+com.smilepile.ui.viewmodels.BackupViewModel"8
-exportManager'com.smilepile.data.backup.ExportManager">
- (2
-0
-field'com.smilepile.data.backup.ExportManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Ï
-hcom.smilepile.ui.viewmodels.BackupViewModel#setExportManager(Lcom/smilepile/data/backup/ExportManager;)V
-__unknown_file ("0*Ô
-0 (æ
-ª
- (i-
-+com.smilepile.ui.viewmodels.BackupViewModel"8
-exportManager'com.smilepile.data.backup.ExportManager"__id*>
- (2
-0
-value'com.smilepile.data.backup.ExportManager"
- (
-implicit return:<
- (0
-value'com.smilepile.data.backup.ExportManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`¨*
-±com.smilepile.ui.viewmodels.BackupViewModel#<init>(Lcom/smilepile/data/backup/BackupManager;Lcom/smilepile/data/backup/RestoreManager;Lcom/smilepile/data/backup/ExportManager;)Vm
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt ()"0*¸%
-0 (©
-¶
- (,
+
+__unknown_file (Ã
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*[
+
+__unknown_file (?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel≥
+∞
+
+__unknown_file (æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"/
+
+toastState!com.smilepile.ui.toast.ToastState"__id*M
+
+__unknown_file (1
+/
+
+toastState!com.smilepile.ui.toast.ToastStateÁ
+‰
+
+__unknown_file (î
+
+%11"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0"__id*™
+
+__unknown_file (ç
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0‰
+·
+
+__unknown_file (
+%12"__declareFunction*™
+
+__unknown_file (çä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1∫∑
+
+__unknown_file (ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"__ScopeWrapperã
+à
+
+__unknown_file (™
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+contextjava.lang.Object"__id*9
+
+__unknown_file (
+
+contextjava.lang.Objectç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+activityjava.lang.Object"__id*:
+
+__unknown_file (
+
+activityjava.lang.Objectô
+ñ
+
+__unknown_file (±
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1""
+coroutineScopejava.lang.Object"__id*@
+
+__unknown_file ($
+"
+coroutineScopejava.lang.Objectù
+ö
+
+__unknown_file (≥
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"$
+biometricManagerjava.lang.Object"__id*B
+
+__unknown_file (&
+$
+biometricManagerjava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1" 
+galleryStatejava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+galleryStatejava.lang.Objectë
+é
+
+__unknown_file (≠
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+
+categoriesjava.lang.Object"__id*<
+
+__unknown_file ( 
+
+
+categoriesjava.lang.Object°
+û
+
+__unknown_file (µ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"&
+selectedCategoryIdjava.lang.Object"__id*D
+
+__unknown_file ((
+&
+selectedCategoryIdjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+	allPhotosjava.lang.Object"__id*;
+
+__unknown_file (
+
+	allPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+	modeStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	modeStatejava.lang.Objectì
+ê
+
+__unknown_file (Æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+zoomedPhotojava.lang.Object"__id*=
+
+__unknown_file (!
+
+zoomedPhotojava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1" 
+maintainZoomjava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+maintainZoomjava.lang.Objectó
+î
+
+__unknown_file (∞
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"!
+showPinDialogjava.lang.Object"__id*?
+
+__unknown_file (#
+!
+showPinDialogjava.lang.Objectõ
+ò
+
+__unknown_file (≤
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"#
+displayedPhotosjava.lang.Object"__id*A
+
+__unknown_file (%
+#
+displayedPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+	listStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	listStatejava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*c
+
+__unknown_file (G
+E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler±
+Æ
+
+__unknown_file (Ω
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1".
+onPhotoClickkotlin.jvm.functions.Function2"__id*L
+
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function2…
+∆
+
+__unknown_file (…
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1":
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*X
+
+__unknown_file (<
+:
+onNavigateToParentalLockkotlin.jvm.functions.Function0ç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"
+modifierjava.lang.Object"__id*:
+
+__unknown_file (
+
+modifierjava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*c
+
+__unknown_file (G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModelœ
+Ã
+
+__unknown_file (Ã
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*[
+
+__unknown_file (?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel≥
+∞
+
+__unknown_file (æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"/
+
+toastState!com.smilepile.ui.toast.ToastState"__id*M
+
+__unknown_file (1
+/
+
+toastState!com.smilepile.ui.toast.ToastStateÁ
+‰
+
+__unknown_file (î
+
+%12"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1"__id*™
+
+__unknown_file (ç
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1‰
+·
+
+__unknown_file (
+%13"__declareFunction*™
+
+__unknown_file (çä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2∫∑
+
+__unknown_file (ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"__ScopeWrapperã
+à
+
+__unknown_file (™
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+contextjava.lang.Object"__id*9
+
+__unknown_file (
+
+contextjava.lang.Objectç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+activityjava.lang.Object"__id*:
+
+__unknown_file (
+
+activityjava.lang.Objectô
+ñ
+
+__unknown_file (±
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2""
+coroutineScopejava.lang.Object"__id*@
+
+__unknown_file ($
+"
+coroutineScopejava.lang.Objectù
+ö
+
+__unknown_file (≥
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"$
+biometricManagerjava.lang.Object"__id*B
+
+__unknown_file (&
+$
+biometricManagerjava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2" 
+galleryStatejava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+galleryStatejava.lang.Objectë
+é
+
+__unknown_file (≠
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+
+categoriesjava.lang.Object"__id*<
+
+__unknown_file ( 
+
+
+categoriesjava.lang.Object°
+û
+
+__unknown_file (µ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"&
+selectedCategoryIdjava.lang.Object"__id*D
+
+__unknown_file ((
+&
+selectedCategoryIdjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+	allPhotosjava.lang.Object"__id*;
+
+__unknown_file (
+
+	allPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+	modeStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	modeStatejava.lang.Objectì
+ê
+
+__unknown_file (Æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+zoomedPhotojava.lang.Object"__id*=
+
+__unknown_file (!
+
+zoomedPhotojava.lang.Objectï
+í
+
+__unknown_file (Ø
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2" 
+maintainZoomjava.lang.Object"__id*>
+
+__unknown_file ("
+ 
+maintainZoomjava.lang.Objectó
+î
+
+__unknown_file (∞
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"!
+showPinDialogjava.lang.Object"__id*?
+
+__unknown_file (#
+!
+showPinDialogjava.lang.Objectõ
+ò
+
+__unknown_file (≤
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"#
+displayedPhotosjava.lang.Object"__id*A
+
+__unknown_file (%
+#
+displayedPhotosjava.lang.Objectè
+å
+
+__unknown_file (¨
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+	listStatejava.lang.Object"__id*;
+
+__unknown_file (
+
+	listStatejava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*c
+
+__unknown_file (G
+E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler±
+Æ
+
+__unknown_file (Ω
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2".
+onPhotoClickkotlin.jvm.functions.Function2"__id*L
+
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function2…
+∆
+
+__unknown_file (…
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2":
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*X
+
+__unknown_file (<
+:
+onNavigateToParentalLockkotlin.jvm.functions.Function0ç
+ä
+
+__unknown_file (´
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"
+modifierjava.lang.Object"__id*:
+
+__unknown_file (
+
+modifierjava.lang.Objectﬂ
+‹
+
+__unknown_file (‘
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*c
+
+__unknown_file (G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModelœ
+Ã
+
+__unknown_file (Ã
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*[
+
+__unknown_file (?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel≥
+∞
+
+__unknown_file (æ
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"/
+
+toastState!com.smilepile.ui.toast.ToastState"__id*M
+
+__unknown_file (1
+/
+
+toastState!com.smilepile.ui.toast.ToastStateÁ
+‰
+
+__unknown_file (î
+
+%13"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2"__id*™
+
+__unknown_file (ç
+ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2“
+œ
+
+π- ƒ(	
+%14kotlin.Unit"ùcom.smilepile.ui.components.settings#PinVerificationDialog(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)V*
+
+__unknown_file ( *#
+
+__unknown_file (
+
+%11*#
+
+__unknown_file (
+
+%12*#
+
+__unknown_file (
+
+%13M
+K
+
+__unknown_file (
+%10"__id*"
+
+π- ƒ(	
+
+%14kotlin.Unit*
+3*á
+0A G(ü
+ú
+J J(&
 %0"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*V
+java.lang.Object*L
 
-__unknown_file (:
-8
-backupManager'com.smilepile.data.backup.BackupManagerx
-v
- (,8
-backupManager'com.smilepile.data.backup.BackupManager"__annotation*"
+__unknown_file (0
+.
+onPhotoClickkotlin.jvm.functions.Function2n
+l
+J J(&.
+onPhotoClickkotlin.jvm.functions.Function2"__annotation*"
 
 __unknown_file (
 
 %0´
 ®
- (.
+K K(-
 %1"
 __annotate*0
 
@@ -114,1809 +783,2392 @@ __annotate*0
 
 __unknown_file (<
 :
-restoreManager(com.smilepile.data.backup.RestoreManagerz
+onNavigateToParentalLockkotlin.jvm.functions.Function0z
 x
- (.:
-restoreManager(com.smilepile.data.backup.RestoreManager"__annotation*"
+K K(-:
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
-%1©
-¶
- (,
+%1ç
+ä
+L L(!
 %2"
 __annotate*0
 
 __unknown_file (
-java.lang.Object*V
+java.lang.Object*:
 
-__unknown_file (:
-8
-exportManager'com.smilepile.data.backup.ExportManagerx
-v
- (,8
-exportManager'com.smilepile.data.backup.ExportManager"__annotation*"
+__unknown_file (
+
+modifierjava.lang.Object\
+Z
+L L(!
+modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
-%2À
-»
- (,-
-%3'com.smilepile.data.backup.BackupManager"hcom.smilepile.ui.viewmodels.BackupViewModel#setBackupManager(Lcom/smilepile/data/backup/BackupManager;)V*K
+%2∂
+≥
+M M(=
+%3"
+__annotate*0
 
-__unknown_file (/-
-+com.smilepile.ui.viewmodels.BackupViewModel*V
+__unknown_file (
+java.lang.Object*c
 
-__unknown_file (:
-8
-backupManager'com.smilepile.data.backup.BackupManager–
-Õ
- (..
-%4(com.smilepile.data.backup.RestoreManager"jcom.smilepile.ui.viewmodels.BackupViewModel#setRestoreManager(Lcom/smilepile/data/backup/RestoreManager;)V*K
+__unknown_file (G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModelÜ
+É
+M M(=E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__annotation*"
 
-__unknown_file (/-
-+com.smilepile.ui.viewmodels.BackupViewModel*X
+__unknown_file (
+
+%3Æ
+´
+N N(5
+%4"
+__annotate*0
 
-__unknown_file (<
-:
-restoreManager(com.smilepile.data.backup.RestoreManagerÀ
-»
- (,-
-%5'com.smilepile.data.backup.ExportManager"hcom.smilepile.ui.viewmodels.BackupViewModel#setExportManager(Lcom/smilepile/data/backup/ExportManager;)V*K
+__unknown_file (
+java.lang.Object*[
 
-__unknown_file (/-
-+com.smilepile.ui.viewmodels.BackupViewModel*V
+__unknown_file (?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel}
+{
+N N(5=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__annotation*"
 
-__unknown_file (:
-8
-exportManager'com.smilepile.data.backup.ExportManager·
-ﬁ
- (<
-%6java.lang.Object"Rcom.smilepile.ui.viewmodels.BackupViewModel#set_uiState(Lerror/NonExistentClass;)V*;
- (</-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>µ
-≤
-, (4
-%7java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*;
-, (4/-
-+com.smilepile.ui.viewmodels.BackupViewModel”
-–
- (B
-%8java.lang.Object"Dcom.smilepile.ui.viewmodels.BackupViewModel#setUiState(LStateFlow;)V*;
- (B/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>Ë
-Â
- (I
-%9java.lang.Object"Ycom.smilepile.ui.viewmodels.BackupViewModel#set_backupProgress(Lerror/NonExistentClass;)V*;
- (I/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>Ω
-∫
-5 (D
-%10java.lang.Object"Xcom.smilepile.ui.viewmodels.BackupViewModel#get_backupProgress()Lerror/NonExistentClass;*;
-5 (D/-
-+com.smilepile.ui.viewmodels.BackupViewModel€
-ÿ
- (R
-%11java.lang.Object"Kcom.smilepile.ui.viewmodels.BackupViewModel#setBackupProgress(LStateFlow;)V*;
- (R/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>Í
-Á
-  (J
-%12java.lang.Object"Zcom.smilepile.ui.viewmodels.BackupViewModel#set_restoreProgress(Lerror/NonExistentClass;)V*;
-  (J/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>æ
-ª
-!6 !(F
-%13java.lang.Object"Ycom.smilepile.ui.viewmodels.BackupViewModel#get_restoreProgress()Lerror/NonExistentClass;*;
-!6 !(F/-
-+com.smilepile.ui.viewmodels.BackupViewModel‹
-Ÿ
-! !(T
-%14java.lang.Object"Lcom.smilepile.ui.viewmodels.BackupViewModel#setRestoreProgress(LStateFlow;)V*;
-! !(T/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>È
-Ê
-# $(I
-%15java.lang.Object"Ycom.smilepile.ui.viewmodels.BackupViewModel#set_exportProgress(Lerror/NonExistentClass;)V*;
-# $(I/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>Ω
-∫
-%5 %(D
-%16java.lang.Object"Xcom.smilepile.ui.viewmodels.BackupViewModel#get_exportProgress()Lerror/NonExistentClass;*;
-%5 %(D/-
-+com.smilepile.ui.viewmodels.BackupViewModel€
-ÿ
-% %(R
-%17java.lang.Object"Kcom.smilepile.ui.viewmodels.BackupViewModel#setExportProgress(LStateFlow;)V*;
-% %(R/-
-+com.smilepile.ui.viewmodels.BackupViewModel*)
-
-__unknown_file (
-	<unknown>†
+__unknown_file (
+
+%4†
 ù
-( ((
-%18kotlin.Unit"@com.smilepile.ui.viewmodels.BackupViewModel#loadBackupHistory()V*;
-( ((/-
-+com.smilepile.ui.viewmodels.BackupViewModel°
+O O(9
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*M
+
+__unknown_file (1
+/
+
+toastState!com.smilepile.ui.toast.ToastStateo
+m
+O O(9/
+
+toastState!com.smilepile.ui.toast.ToastState"__annotation*"
+
+__unknown_file (
+
+%5Z
+X
+Q Q(&
+contextjava.lang.Object"__id*)
+Q Q(&
+
+currentjava.lang.Object[
+Y
+R R(E
+activityjava.lang.Object"__id*)
+R R(
+
+contextjava.lang.Objecta
+_
+S S(1"
+coroutineScopejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>c
+a
+V \($
+biometricManagerjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>à
+Ö
+i q(
+%6kotlin.Unit"ôcom.smilepile.ui.screens#KidsModeEffects(Ljava/util/List;Ljava/lang/Long;Lcom/smilepile/data/models/Photo;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeUiState;Lkotlin/jvm/functions/Function0;)V*
+
+__unknown_file ( *,
+j j( 
+
+
+categoriesjava.lang.Object*4
+k k(/(
+&
+selectedCategoryIdjava.lang.Object*-
+l l(!!
+
+zoomedPhotojava.lang.Object*K
+m m(%?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel*S
+n n(+G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel*+
+o o(
+
+	modeStatejava.lang.Object*H
+p# p(;<
+:
+onNavigateToParentalLockkotlin.jvm.functions.Function0d
+b
+
+ö ú(#
+displayedPhotosjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>^
+\
+
+¶ ¶(+
+	listStatejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>†
+ù
+
+∞ ¥(3
+%7-com.smilepile.ui.screens.CategorySwipeHandler"¶com.smilepile.ui.screens#rememberCategorySwipeHandler(Ljava/util/List;Ljava/lang/Long;Lkotlin/jvm/functions/Function1;)Lcom/smilepile/ui/screens/CategorySwipeHandler;*
+
+__unknown_file ( *.
+
+± ±( 
+
+
+categoriesjava.lang.Object*6
+
+≤ ≤(/(
+&
+selectedCategoryIdjava.lang.Object*)
+
+__unknown_file (
+	<unknown>°
 û
-) )(
-%19kotlin.Unit"Acom.smilepile.ui.viewmodels.BackupViewModel#loadBackupSchedule()V*;
-) )(/-
-+com.smilepile.ui.viewmodels.BackupViewModel"/
-
-__unknown_file (
-implicit return:D
- (,8
-backupManager'com.smilepile.data.backup.BackupManager:F
- (.:
-restoreManager(com.smilepile.data.backup.RestoreManager:D
- (,8
-exportManager'com.smilepile.data.backup.ExportManagerB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHÏ
-Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;
-__unknown_file ("0*ƒ
-0 (ã
-à
- (
-fieldjava.lang.Object"__id*[
- (O*M-
-+com.smilepile.ui.viewmodels.BackupViewModel"
-_uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`å
-Rcom.smilepile.ui.viewmodels.BackupViewModel#set_uiState(Lerror/NonExistentClass;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M-
-+com.smilepile.ui.viewmodels.BackupViewModel"
-_uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`›
-Ccom.smilepile.ui.viewmodels.BackupViewModel#getUiState()LStateFlow;
-__unknown_file ("0*√
-0 (ä
-á
- (
-fieldjava.lang.Object"__id*Z
- (N*L-
-+com.smilepile.ui.viewmodels.BackupViewModel"
-uiStatejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`˝
-Dcom.smilepile.ui.viewmodels.BackupViewModel#setUiState(LStateFlow;)V
-__unknown_file ("0*ª
-0 (ä
-á
- (L-
-+com.smilepile.ui.viewmodels.BackupViewModel"
-uiStatejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`˙
-Xcom.smilepile.ui.viewmodels.BackupViewModel#get_backupProgress()Lerror/NonExistentClass;
-__unknown_file ("0*À
-0 (í
-è
- (
-fieldjava.lang.Object"__id*b
- (V*T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-_backupProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ö
-Ycom.smilepile.ui.viewmodels.BackupViewModel#set_backupProgress(Lerror/NonExistentClass;)V
-__unknown_file ("0*√
-0 (í
-è
- (T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-_backupProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Î
-Jcom.smilepile.ui.viewmodels.BackupViewModel#getBackupProgress()LStateFlow;
-__unknown_file ("0* 
-0 (ë
-é
- (
-fieldjava.lang.Object"__id*a
- (U*S-
-+com.smilepile.ui.viewmodels.BackupViewModel""
-backupProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ã
-Kcom.smilepile.ui.viewmodels.BackupViewModel#setBackupProgress(LStateFlow;)V
-__unknown_file ("0*¬
-0 (ë
-é
- (S-
-+com.smilepile.ui.viewmodels.BackupViewModel""
-backupProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`¸
-Ycom.smilepile.ui.viewmodels.BackupViewModel#get_restoreProgress()Lerror/NonExistentClass;
-__unknown_file ("0*Ã
-0 (ì
-ê
- (
-fieldjava.lang.Object"__id*c
- (W*U-
-+com.smilepile.ui.viewmodels.BackupViewModel"$
-_restoreProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ú
-Zcom.smilepile.ui.viewmodels.BackupViewModel#set_restoreProgress(Lerror/NonExistentClass;)V
-__unknown_file ("0*ƒ
-0 (ì
-ê
- (U-
-+com.smilepile.ui.viewmodels.BackupViewModel"$
-_restoreProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Ì
-Kcom.smilepile.ui.viewmodels.BackupViewModel#getRestoreProgress()LStateFlow;
-__unknown_file ("0*À
-0 (í
-è
- (
-fieldjava.lang.Object"__id*b
- (V*T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-restoreProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ç
-Lcom.smilepile.ui.viewmodels.BackupViewModel#setRestoreProgress(LStateFlow;)V
-__unknown_file ("0*√
-0 (í
-è
- (T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-restoreProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`˙
-Xcom.smilepile.ui.viewmodels.BackupViewModel#get_exportProgress()Lerror/NonExistentClass;
-__unknown_file ("0*À
-0 (í
-è
- (
-fieldjava.lang.Object"__id*b
- (V*T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-_exportProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ö
-Ycom.smilepile.ui.viewmodels.BackupViewModel#set_exportProgress(Lerror/NonExistentClass;)V
-__unknown_file ("0*√
-0 (í
-è
- (T-
-+com.smilepile.ui.viewmodels.BackupViewModel"#
-_exportProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`Î
-Jcom.smilepile.ui.viewmodels.BackupViewModel#getExportProgress()LStateFlow;
-__unknown_file ("0* 
-0 (ë
-é
- (
-fieldjava.lang.Object"__id*a
- (U*S-
-+com.smilepile.ui.viewmodels.BackupViewModel""
-exportProgressjava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`ã
-Kcom.smilepile.ui.viewmodels.BackupViewModel#setExportProgress(LStateFlow;)V
-__unknown_file ("0*¬
-0 (ë
-é
- (S-
-+com.smilepile.ui.viewmodels.BackupViewModel""
-exportProgressjava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH`¿
-icom.smilepile.ui.viewmodels.BackupViewModel#createBackup(Lcom/smilepile/data/backup/BackupOptions;LUri;)Vm
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt/ /("0*>
-0, .("/
-
-__unknown_file (
-implicit return:>
-0 0(02
-options'com.smilepile.data.backup.BackupOptions:.
-1 1(#"
-destinationUrijava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHÌ
-Xcom.smilepile.ui.viewmodels.BackupViewModel#createIncrementalBackup(Ljava/lang/String;)Vm
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktj j("0*>
-0g i("/
-
-__unknown_file (
-implicit return:,
-j  j(4 
-baseBackupIdjava.lang.StringB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH‡
-Kcom.smilepile.ui.viewmodels.BackupViewModel#validateBackup(Ljava/io/File;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktï ï("0*@
+
+∞ ¥(E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*C
+
+∞ ¥(5
+3
+%7-com.smilepile.ui.screens.CategorySwipeHandler•¢
+
+≠ ≠(
+%8boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
+
+≠ ≠(!
+
+zoomedPhotojava.lang.Object*
+
+≠ ≠( 2equals(Ljava/lang/Object;)*	
+2
+3
+4::
+J J(&.
+onPhotoClickkotlin.jvm.functions.Function2:F
+K K(-:
+onNavigateToParentalLockkotlin.jvm.functions.Function0:(
+L L(!
+modifierjava.lang.Object:Q
+M M(=E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel:I
+N N(5=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel:;
+O O(9/
+
+toastState!com.smilepile.ui.toast.ToastStateB"
+com.smilepile.ui.screensH€"
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt∫ Ω("0*∑
 0
-í î("/
-
-__unknown_file (
-implicit return:(
-
-ï ï('
-
-backupFilejava.io.FileB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHÃ
-tcom.smilepile.ui.viewmodels.BackupViewModel#restoreBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt≥ ≥("0*@
-0
-∞ ≤("/
-
-__unknown_file (
-implicit return:(
-
-¥ ¥(
-
-backupFilejava.io.File:A
-
-µ µ(23
-options(com.smilepile.data.backup.RestoreOptionsB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHØ
-~com.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktƒ ƒ(/"0*ò
-0
-ƒ ƒ(È
-Ê
-
-≈ ≈(.
-%0(com.smilepile.data.backup.RestoreManager"icom.smilepile.ui.viewmodels.BackupViewModel#getRestoreManager()Lcom/smilepile/data/backup/RestoreManager;*=
-
-≈ ≈(/-
-+com.smilepile.ui.viewmodels.BackupViewModel‚
-ﬂ
+∫ Ω(ı
+Ú
 
 __unknown_file (
-%1"__declareFunction*©
+%0"__id*…
 
-__unknown_file (åâ
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0π∂
+__unknown_file (¨*©
+com.smilepile.ui.screens"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda0É
+Ä
 
-__unknown_file (â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"__ScopeWrapperà
-Ö
+__unknown_file (
+contextjava.lang.Object"__id*A
 
-__unknown_file (®
-â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"
-
-backupFilejava.io.File"__id*8
+__unknown_file (%*#
+
+%0"
+contextjava.lang.ObjectÖ
+Ç
 
 __unknown_file (
-
-
-backupFilejava.io.File∫
-∑
+activityjava.lang.Object"__id*B
 
-__unknown_file (¡
-â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"3
-options(com.smilepile.data.backup.RestoreOptions"__id*Q
-
-__unknown_file (5
-3
-options(com.smilepile.data.backup.RestoreOptions‰
-·
-
-__unknown_file (í
+__unknown_file (&*$
 
-%1"â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0"__id*©
+%0"
+activityjava.lang.Objectë
+é
 
-__unknown_file (å
-â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0ô
-ñ
+__unknown_file ("
+coroutineScopejava.lang.Object"__id*H
+
+__unknown_file (,**
+
+%0""
+coroutineScopejava.lang.Objectï
+í
+
+__unknown_file ($
+biometricManagerjava.lang.Object"__id*J
+
+__unknown_file (.*,
+
+%0"$
+biometricManagerjava.lang.Objectç
+ä
+
+__unknown_file ( 
+galleryStatejava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+galleryStatejava.lang.Objectâ
+Ü
+
+__unknown_file (
 
-≈ À(	
-%2java.lang.Object"öcom.smilepile.data.backup.RestoreManager#restoreFromBackup(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)LFlow;*>
+categoriesjava.lang.Object"__id*D
+
+__unknown_file ((*&
+
+%0"
 
-≈ ≈(0
-.
-%0(com.smilepile.data.backup.RestoreManager**
+categoriesjava.lang.Objectô
+ñ
+
+__unknown_file (&
+selectedCategoryIdjava.lang.Object"__id*L
+
+__unknown_file (0*.
+
+%0"&
+selectedCategoryIdjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	allPhotosjava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	allPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	modeStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	modeStatejava.lang.Objectã
+à
+
+__unknown_file (
+zoomedPhotojava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+zoomedPhotojava.lang.Objectç
+ä
+
+__unknown_file ( 
+maintainZoomjava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+maintainZoomjava.lang.Objectè
+å
+
+__unknown_file (!
+showPinDialogjava.lang.Object"__id*G
+
+__unknown_file (+*)
+
+%0"!
+showPinDialogjava.lang.Objectì
+ê
+
+__unknown_file (#
+displayedPhotosjava.lang.Object"__id*I
+
+__unknown_file (-*+
+
+%0"#
+displayedPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	listStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	listStatejava.lang.Object◊
+‘
+
+__unknown_file (E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*k
+
+__unknown_file (O*M
+
+%0"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler©
+¶
+
+__unknown_file (.
+onPhotoClickkotlin.jvm.functions.Function2"__id*T
+
+__unknown_file (8*6
+
+%0".
+onPhotoClickkotlin.jvm.functions.Function2¡
+æ
+
+__unknown_file (:
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*`
+
+__unknown_file (D*B
+
+%0":
+onNavigateToParentalLockkotlin.jvm.functions.Function0Ö
+Ç
+
+__unknown_file (
+modifierjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+modifierjava.lang.Object◊
+‘
+
+__unknown_file (E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*k
+
+__unknown_file (O*M
+
+%0"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel«
+ƒ
+
+__unknown_file (=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*c
+
+__unknown_file (G*E
+
+%0"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel´
+®
+
+__unknown_file (/
 
-∆ ∆(#
-
+toastState!com.smilepile.ui.toast.ToastState"__id*U
+
+__unknown_file (9*7
+
+%0"/
 
-backupFilejava.io.File*C
+toastState!com.smilepile.ui.toast.ToastStateP
+N
 
-« «(5
-3
-options(com.smilepile.data.backup.RestoreOptions*"
+ª ª(%!
+showPinDialogjava.lang.Object"__id*
+
+ª  ª(%	
+false∞
+≠
+
+º º(-
+%1kotlin.Unit"=com.smilepile.ui.viewmodels.AppModeViewModel#cancelPinAuth()V*M
+
+º º(?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"/
+
+__unknown_file (
+
+%1kotlin.UnitB
+com.smilepile.ui.screensHÍ"
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktæ ¿("0*ü
+0
+æ ¿(ı
+Ú
+
+__unknown_file (
+%0"__id*…
+
+__unknown_file (¨*©
+com.smilepile.ui.screens"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda1É
+Ä
+
+__unknown_file (
+contextjava.lang.Object"__id*A
+
+__unknown_file (%*#
+
+%0"
+contextjava.lang.ObjectÖ
+Ç
+
+__unknown_file (
+activityjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+activityjava.lang.Objectë
+é
+
+__unknown_file ("
+coroutineScopejava.lang.Object"__id*H
+
+__unknown_file (,**
+
+%0""
+coroutineScopejava.lang.Objectï
+í
+
+__unknown_file ($
+biometricManagerjava.lang.Object"__id*J
+
+__unknown_file (.*,
+
+%0"$
+biometricManagerjava.lang.Objectç
+ä
+
+__unknown_file ( 
+galleryStatejava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+galleryStatejava.lang.Objectâ
+Ü
+
+__unknown_file (
+
+categoriesjava.lang.Object"__id*D
+
+__unknown_file ((*&
+
+%0"
+
+categoriesjava.lang.Objectô
+ñ
+
+__unknown_file (&
+selectedCategoryIdjava.lang.Object"__id*L
+
+__unknown_file (0*.
+
+%0"&
+selectedCategoryIdjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	allPhotosjava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	allPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	modeStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	modeStatejava.lang.Objectã
+à
+
+__unknown_file (
+zoomedPhotojava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+zoomedPhotojava.lang.Objectç
+ä
+
+__unknown_file ( 
+maintainZoomjava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+maintainZoomjava.lang.Objectè
+å
+
+__unknown_file (!
+showPinDialogjava.lang.Object"__id*G
+
+__unknown_file (+*)
+
+%0"!
+showPinDialogjava.lang.Objectì
+ê
+
+__unknown_file (#
+displayedPhotosjava.lang.Object"__id*I
+
+__unknown_file (-*+
+
+%0"#
+displayedPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	listStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	listStatejava.lang.Object◊
+‘
+
+__unknown_file (E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*k
+
+__unknown_file (O*M
+
+%0"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler©
+¶
+
+__unknown_file (.
+onPhotoClickkotlin.jvm.functions.Function2"__id*T
+
+__unknown_file (8*6
+
+%0".
+onPhotoClickkotlin.jvm.functions.Function2¡
+æ
+
+__unknown_file (:
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*`
+
+__unknown_file (D*B
+
+%0":
+onNavigateToParentalLockkotlin.jvm.functions.Function0Ö
+Ç
+
+__unknown_file (
+modifierjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+modifierjava.lang.Object◊
+‘
+
+__unknown_file (E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*k
+
+__unknown_file (O*M
+
+%0"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel«
+ƒ
+
+__unknown_file (=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*c
+
+__unknown_file (G*E
+
+%0"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel´
+®
+
+__unknown_file (/
+
+toastState!com.smilepile.ui.toast.ToastState"__id*U
+
+__unknown_file (9*7
+
+%0"/
+
+toastState!com.smilepile.ui.toast.ToastStateÓ
+Î
+
+ø ø(7
+%1boolean"Vcom.smilepile.ui.viewmodels.AppModeViewModel#validatePinAndToggle(Ljava/lang/String;)Z*M
+
+ø ø(?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel*'
+
+ø3 ø(6
+
+pinjava.lang.String"+
+
+__unknown_file (
+
+%1boolean:%
+
+æ æ(
+pinjava.lang.StringB
+com.smilepile.ui.screensH∏!
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt¡ √("0*î
+0
+¡ √(ı
+Ú
+
+__unknown_file (
+%0"__id*…
+
+__unknown_file (¨*©
+com.smilepile.ui.screens"ä
+ácom.smilepile.ui.screens#KidsModeGalleryScreen(Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;LModifier;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastState;)V$lambda2É
+Ä
+
+__unknown_file (
+contextjava.lang.Object"__id*A
+
+__unknown_file (%*#
+
+%0"
+contextjava.lang.ObjectÖ
+Ç
+
+__unknown_file (
+activityjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+activityjava.lang.Objectë
+é
+
+__unknown_file ("
+coroutineScopejava.lang.Object"__id*H
+
+__unknown_file (,**
+
+%0""
+coroutineScopejava.lang.Objectï
+í
+
+__unknown_file ($
+biometricManagerjava.lang.Object"__id*J
+
+__unknown_file (.*,
+
+%0"$
+biometricManagerjava.lang.Objectç
+ä
+
+__unknown_file ( 
+galleryStatejava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+galleryStatejava.lang.Objectâ
+Ü
+
+__unknown_file (
+
+categoriesjava.lang.Object"__id*D
+
+__unknown_file ((*&
+
+%0"
+
+categoriesjava.lang.Objectô
+ñ
+
+__unknown_file (&
+selectedCategoryIdjava.lang.Object"__id*L
+
+__unknown_file (0*.
+
+%0"&
+selectedCategoryIdjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	allPhotosjava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	allPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	modeStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	modeStatejava.lang.Objectã
+à
+
+__unknown_file (
+zoomedPhotojava.lang.Object"__id*E
+
+__unknown_file ()*'
+
+%0"
+zoomedPhotojava.lang.Objectç
+ä
+
+__unknown_file ( 
+maintainZoomjava.lang.Object"__id*F
+
+__unknown_file (**(
+
+%0" 
+maintainZoomjava.lang.Objectè
+å
+
+__unknown_file (!
+showPinDialogjava.lang.Object"__id*G
+
+__unknown_file (+*)
+
+%0"!
+showPinDialogjava.lang.Objectì
+ê
+
+__unknown_file (#
+displayedPhotosjava.lang.Object"__id*I
+
+__unknown_file (-*+
+
+%0"#
+displayedPhotosjava.lang.Objectá
+Ñ
+
+__unknown_file (
+	listStatejava.lang.Object"__id*C
+
+__unknown_file ('*%
+
+%0"
+	listStatejava.lang.Object◊
+‘
+
+__unknown_file (E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler"__id*k
+
+__unknown_file (O*M
+
+%0"E
+categorySwipeHandler-com.smilepile.ui.screens.CategorySwipeHandler©
+¶
+
+__unknown_file (.
+onPhotoClickkotlin.jvm.functions.Function2"__id*T
+
+__unknown_file (8*6
+
+%0".
+onPhotoClickkotlin.jvm.functions.Function2¡
+æ
+
+__unknown_file (:
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__id*`
+
+__unknown_file (D*B
+
+%0":
+onNavigateToParentalLockkotlin.jvm.functions.Function0Ö
+Ç
+
+__unknown_file (
+modifierjava.lang.Object"__id*B
+
+__unknown_file (&*$
+
+%0"
+modifierjava.lang.Object◊
+‘
+
+__unknown_file (E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__id*k
+
+__unknown_file (O*M
+
+%0"E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel«
+ƒ
+
+__unknown_file (=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__id*c
+
+__unknown_file (G*E
+
+%0"=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel´
+®
+
+__unknown_file (/
+
+toastState!com.smilepile.ui.toast.ToastState"__id*U
+
+__unknown_file (9*7
+
+%0"/
+
+toastState!com.smilepile.ui.toast.ToastStateP
+N
+
+¬ ¬(%!
+showPinDialogjava.lang.Object"__id*
+
+¬  ¬(%	
+false"?
+
+__unknown_file (#
+!
+showPinDialogjava.lang.ObjectB
+com.smilepile.ui.screensH∑	
+ocom.smilepile.ui.screens#KidsPhotoStackItem(Lcom/smilepile/data/models/Photo;Lkotlin/jvm/functions/Function0;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktÀ À("0*ª
+0  À(õ
+ò
+
+Ã Ã(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*F
+
+__unknown_file (*
+(
+photocom.smilepile.data.models.Photoj
+h
+
+Ã Ã((
+photocom.smilepile.data.models.Photo"__annotation*"
 
 __unknown_file (
 
-%1"/
-
-__unknown_file (
-implicit return:(
+%0ú
+ô
 
-ƒ0 ƒ(@
-
-backupFilejava.io.File:A
-
-ƒB ƒ(Y3
-options(com.smilepile.data.backup.RestoreOptionsB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHå
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0o
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt»  ("0*Ú
-
-0
-»  (á
-Ñ
+Õ Õ(
+%1"
+__annotate*0
 
-__unknown_file (
-%0"__id*€
+__unknown_file (
+java.lang.Object*G
 
-__unknown_file (æ*ª-
-+com.smilepile.ui.viewmodels.BackupViewModel"â
-Ücom.smilepile.ui.viewmodels.BackupViewModel#executeRestoreOperation(Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V$lambda0Ä
-~
-
-__unknown_file (
+__unknown_file (+
+)
+onClickkotlin.jvm.functions.Function0k
+i
 
-backupFilejava.io.File"__id*@
+Õ Õ()
+onClickkotlin.jvm.functions.Function0"__annotation*"
 
-__unknown_file ($*"
+__unknown_file (
 
-%0"
+%1ç
+ä
 
-backupFilejava.io.File≥
-∞
-
-__unknown_file (3
-options(com.smilepile.data.backup.RestoreOptions"__id*Y
-
-__unknown_file (=*;
-
-%0"3
-options(com.smilepile.data.backup.RestoreOptions¡
-æ
+— —($
+%2"__calculate*
 
-… …( 
-%1java.lang.Object"Ycom.smilepile.ui.viewmodels.BackupViewModel#get_restoreProgress()Lerror/NonExistentClass;*=
-
-… …( /-
-+com.smilepile.ui.viewmodels.BackupViewModelhf
-
-…) …(R.
-%2(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress≈
-¬
-
-…) …(R
-%3"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*>
-
-…) …(R0
-.
-%2(com.smilepile.data.backup.ImportProgress*
-
-…8 …(=
-
-totalint*
-
-…? …(F
-
-currentint*-
-
-…H …(Q
-
-	operationjava.lang.String*)
+—  —(!
+/*)
 
 __unknown_file (
-	<unknown>o
-m
+	<unknown>*)
+
+__unknown_file (
+	<unknown>U
+S
 
-… …(R
-valuejava.lang.Object"__id*>
+— —($
+defaultAspectRatiofloat"__id*"
+
+__unknown_file (
+
+%2"/
+
+__unknown_file (
+implicit return:6
 
-…) …(R0
-.
-%2(com.smilepile.data.backup.ImportProgress"7
+Ã Ã((
+photocom.smilepile.data.models.Photo:7
+
+Õ Õ()
+onClickkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHÖ
+,com.smilepile.ui.screens#EmptyKidsGallery()Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktÁ Á("0*>
+0Ê Á("/
+
+__unknown_file (
+implicit returnB"
+com.smilepile.ui.screensHû
+êcom.smilepile.ui.screens#ZoomedPhotoOverlay(Ljava/util/List;Ljava/util/List;JILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktà à("0*Ã
+0Ü à(ä
+á
+
+â â(
+%0"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*9
+
+__unknown_file (
+
+	allPhotosjava.util.Listé
+ã
+
+â â(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*9
+
+__unknown_file (
+
+	allPhotosjava.util.ListÅ
+
+
+â â(
+	allPhotosjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0*"
+
+__unknown_file (
+
+%1ã
+à
+
+ä ä(
+%2"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*:
+
+__unknown_file (
+
+
+categoriesjava.util.Listè
+å
+
+ä ä(
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.ListÉ
+Ä
+
+ä ä(
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3à
+Ö
+
+ã ã(
+%4"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*7
 
 __unknown_file (
 
-valuejava.lang.Object:
+currentCategoryIdlongå
+â
 
-»! »((
-currentint:
-
-»* »(/
-totalint:+
-
-»1 »(:
-	operationjava.lang.StringB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH¢
-ncom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreProgress(Lcom/smilepile/data/backup/ImportProgress;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt— —(%"0*÷
-2
-‹ ‹(Kø
-º
-
-‹ ‹(%
-%3java.lang.String"Pcom.smilepile.data.backup.ImportProgress#getCurrentOperation()Ljava/lang/String;*D
-
-‹ ‹(6
-4
-progress(com.smilepile.data.backup.ImportProgress*
-4*•
-3
-”R €(π
-∂
-
-‘ ‘(
-%2java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
-
-‘ ‘(/-
-+com.smilepile.ui.viewmodels.BackupViewModelS
-Q
+ã ã(
+%5"
+__annotate*0
 
-__unknown_file (
-%0"__id*)
+__unknown_file (
+java.lang.Object*7
+
+__unknown_file (
+
+currentCategoryIdlong
+}
+
+ã ã(
+currentCategoryIdlong"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5á
+Ñ
+
+å å(
+%6"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*6
+
+__unknown_file (
+
+initialPhotoIndexintã
+à
+
+å å(
+%7"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*6
+
+__unknown_file (
+
+initialPhotoIndexint~
+|
+
+å å(
+initialPhotoIndexint"__annotation*"
+
+__unknown_file (
+
+%6*"
+
+__unknown_file (
+
+%7ö
+ó
+
+ç ç(
+%8"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0û
+õ
+
+ç ç(
+%9"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*I
+
+__unknown_file (-
++
+	onDismisskotlin.jvm.functions.Function0í
+è
+
+ç ç(+
+	onDismisskotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%8*"
+
+__unknown_file (
+
+%9¢
+ü
+
+é é($
+%10"
+__annotate*,
+
+__unknown_file (
+kotlin.OptIn*P
+
+__unknown_file (4
+2
+onCategoryChangekotlin.jvm.functions.Function1¶
+£
+
+é é($
+%11"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*P
+
+__unknown_file (4
+2
+onCategoryChangekotlin.jvm.functions.Function1õ
+ò
+
+é é($2
+onCategoryChangekotlin.jvm.functions.Function1"__annotation*#
+
+__unknown_file (
+
+%10*#
+
+__unknown_file (
+
+%11i
+g
+
+ñ ò((
+currentCategoryIndexjava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>*
-1*•
-4
-‹O ‰(π
-∂
+	<unknown>g
+e
 
-› ›(
-%4java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
-
-› ›(/-
-+com.smilepile.ui.viewmodels.BackupViewModelS
-Q
-
-__unknown_file (
-%0"__id*)
+õ û(&
+categoryPagerStatejava.lang.Object"__id*)
 
 __unknown_file (
-	<unknown>*
-1*Ÿ
-0
-— —(ø
-º
-
-” ”(%
-%1java.lang.String"Pcom.smilepile.data.backup.ImportProgress#getCurrentOperation()Ljava/lang/String;*D
-
-” ”(6
-4
-progress(com.smilepile.data.backup.ImportProgress*
-2
-3*@
-1
-Â	 Ê("/
+	<unknown>"/
 
 __unknown_file (
-implicit return:B
+implicit return:)
 
-—& —(>4
-progress(com.smilepile.data.backup.ImportProgressB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH¶
-Vcom.smilepile.ui.viewmodels.BackupViewModel#handleRestoreError(Ljava/lang/Exception;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktË Ë(""0*¸
-0
-Ë Ë(π
-∂
+â â(
+	allPhotosjava.util.List:*
 
-È È(
-%0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
+ä ä(
 
-È È(/-
-+com.smilepile.ui.viewmodels.BackupViewModel"/
+categoriesjava.util.List:'
+
+ã ã(
+currentCategoryIdlong:&
+
+å å(
+initialPhotoIndexint:9
+
+ç ç(+
+	onDismisskotlin.jvm.functions.Function0:@
+
+é é($2
+onCategoryChangekotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensHü
+ôcom.smilepile.ui.screens#KidsModeEffects(Ljava/util/List;Ljava/lang/Long;Lcom/smilepile/data/models/Photo;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/viewmodels/PhotoGalleryViewModel;Lcom/smilepile/ui/viewmodels/AppModeUiState;Lkotlin/jvm/functions/Function0;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktÄ Ä("0*ò
+0ˇ Ä(è
+å
+
+Å Å(
+%0"
+__annotate*0
 
-__unknown_file (
-implicit return:&
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
 
-Ë# Ë(/
-ejava.lang.ExceptionB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHØ
-ècom.smilepile.ui.viewmodels.BackupViewModel#exportData(Lcom/smilepile/data/backup/ExportFormat;Lcom/smilepile/data/backup/ExportOptions;LUri;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktı ı("0*@
-0
-Ú Ù("/
-
-__unknown_file (
-implicit return:>
+categoriesjava.util.List^
+\
 
-ˆ ˆ(0
-format&com.smilepile.data.backup.ExportFormat:@
+Å Å(
 
-˜ ˜(02
-options'com.smilepile.data.backup.ExportOptions:0
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0ó
+î
 
-¯ ¯(#"
-destinationUrijava.lang.ObjectB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHñ
-gcom.smilepile.ui.viewmodels.BackupViewModel#scheduleBackup(Lcom/smilepile/data/backup/BackupSchedule;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt´ ´("0*@
-0
-® ™("/
+Ç Ç(
+%1"
+__annotate*0
 
-__unknown_file (
-implicit return:B
+__unknown_file (
+java.lang.Object*B
+
+__unknown_file (&
+$
+selectedCategoryIdjava.lang.Longf
+d
 
-´ ´(/4
-schedule(com.smilepile.data.backup.BackupScheduleB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHØ
-Dcom.smilepile.ui.viewmodels.BackupViewModel#cancelScheduledBackup()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktΩ Ω("0*@
-0
-∫ º("/
+Ç Ç($
+selectedCategoryIdjava.lang.Long"__annotation*"
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH´
-@com.smilepile.ui.viewmodels.BackupViewModel#loadBackupHistory()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt– –(!"0*@
-0
-Õ œ("/
+__unknown_file (
+
+%1°
+û
+
+É É(
+%2"
+__annotate*0
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH¨
-Acom.smilepile.ui.viewmodels.BackupViewModel#loadBackupSchedule()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt‡ ‡(""0*@
-0
-› ﬂ("/
+__unknown_file (
+java.lang.Object*L
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH©
->com.smilepile.ui.viewmodels.BackupViewModel#loadBackupStats()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktÚ Ú("0*@
-0
-Ô Ò("/
+__unknown_file (0
+.
+zoomedPhotocom.smilepile.data.models.Photop
+n
+
+É É(.
+zoomedPhotocom.smilepile.data.models.Photo"__annotation*"
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH‰
-Mcom.smilepile.ui.viewmodels.BackupViewModel#deleteBackup(Ljava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktá á("0*@
-0
-Ñ Ü("/
+__unknown_file (
+
+%2∞
+≠
+
+Ñ Ñ(#
+%3"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*[
+
+__unknown_file (?
+=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel
+}
+
+Ñ Ñ(#=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__annotation*"
+
+__unknown_file (
+
+%3∏
+µ
+
+Ö Ö(+
+%4"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*c
+
+__unknown_file (G
+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModelà
+Ö
+
+Ö Ö(+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel"__annotation*"
+
+__unknown_file (
+
+%4™
+ß
+
+Ü Ü(
+%5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*U
+
+__unknown_file (9
+7
+	modeState*com.smilepile.ui.viewmodels.AppModeUiStatey
+w
+
+Ü Ü(7
+	modeState*com.smilepile.ui.viewmodels.AppModeUiState"__annotation*"
+
+__unknown_file (
+
+%5≠
+™
+
+á á((
+%6"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*X
+
+__unknown_file (<
+:
+onNavigateToParentalLockkotlin.jvm.functions.Function0|
+z
+
+á á((:
+onNavigateToParentalLockkotlin.jvm.functions.Function0"__annotation*"
+
+__unknown_file (
+
+%6"/
 
 __unknown_file (
 implicit return:*
 
-á á(%
-backupIdjava.lang.StringB/-
-+com.smilepile.ui.viewmodels.BackupViewModelH·
-9com.smilepile.ui.viewmodels.BackupViewModel#clearError()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.ktü ü("0*¸
-0
-ú û(π
-∂
+Å Å(
 
-† †(
-%0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
+categoriesjava.util.List:2
 
-† †(/-
-+com.smilepile.ui.viewmodels.BackupViewModel"/
+Ç Ç($
+selectedCategoryIdjava.lang.Long:<
+
+É É(.
+zoomedPhotocom.smilepile.data.models.Photo:K
+
+Ñ Ñ(#=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel:S
+
+Ö Ö(+E
+galleryViewModel1com.smilepile.ui.viewmodels.PhotoGalleryViewModel:E
+
+Ü Ü(7
+	modeState*com.smilepile.ui.viewmodels.AppModeUiState:H
+
+á á((:
+onNavigateToParentalLockkotlin.jvm.functions.Function0B"
+com.smilepile.ui.screensHô
+acom.smilepile.ui.screens#filterPhotosByCategory(Ljava/util/List;Ljava/lang/Long;)Ljava/util/List;r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt§ §(""0*k
+2
+®B ™(U
+S
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHÈ
-Acom.smilepile.ui.viewmodels.BackupViewModel#resetSuccessStates()Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt¶ ¶("0*¸
-0
-£ •(π
-∂
+__unknown_file (
+%2"__id*+
 
-ß ß(
-%0java.lang.Object"Qcom.smilepile.ui.viewmodels.BackupViewModel#get_uiState()Lerror/NonExistentClass;*=
-
-ß ß(/-
-+com.smilepile.ui.viewmodels.BackupViewModel"/
+© ©(
+
+	allPhotosjava.util.List*
+1*i
+3
+™ ¨(S
+Q
 
-__unknown_file (
-implicit returnB/-
-+com.smilepile.ui.viewmodels.BackupViewModelHƒ
-?com.smilepile.ui.viewmodels.BackupUiState#isBackupInProgress()Z
-__unknown_file ("0*∞
-0 (Ä
-~
- (
-fieldboolean"__id*Z
- (N*L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isBackupInProgressboolean"
- (
-
-fieldbooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Á
-Ccom.smilepile.ui.viewmodels.BackupUiState#setIsBackupInProgress(Z)V
-__unknown_file ("0*±
-0 (Ä
-~
- (L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isBackupInProgressboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ó
-Ocom.smilepile.ui.viewmodels.BackupUiState#getBackupSuccess()Ljava/lang/Boolean;
-__unknown_file ("0* 
-0 (ê
-ç
- (
-fieldjava.lang.Boolean"__id*_
- (S*Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-backupSuccessjava.lang.Boolean"(
- (
-
-fieldjava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`é
-Pcom.smilepile.ui.viewmodels.BackupUiState#setBackupSuccess(Ljava/lang/Boolean;)V
-__unknown_file ("0*¡
-0 (ê
-ç
- (Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-backupSuccessjava.lang.Boolean"__id*(
- (
-
-valuejava.lang.Boolean"
- (
-implicit return:&
- (
-valuejava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`‰
-Mcom.smilepile.ui.viewmodels.BackupUiState#getLastBackupTime()Ljava/lang/Long;
+__unknown_file (
+%2"__id*)
+
+__unknown_file (
+	<unknown>*
+1*æ
+0§ §(´®
+
+® ®()
+%0boolean"'kotlin.Long#equals(Ljava/lang/Object;)Z*4
+
+® ®(!&
+$
+selectedCategoryIdjava.lang.Long*
+
+®% ®() 2equals(Ljava/lang/Object;)yw
+
+®7 ®(@
+%1boolean""kotlin.collections.List#isEmpty()Z*+
+
+®- ®(6
+
+	allPhotosjava.util.List2	isEmpty()*
+2
+3*%
+1
+™ ¨("
+
+® ¨(
+
+%2:)
+
+• •(
+	allPhotosjava.util.List:2
+
+¶ ¶($
+selectedCategoryIdjava.lang.LongB"
+com.smilepile.ui.screensHË
+Mcom.smilepile.ui.screens.CategorySwipeHandler#getCategories()Ljava/util/List;
 __unknown_file ("0*¬
 0 (ã
 à
  (
-fieldjava.lang.Long"__id*]
- (Q*O+
-)com.smilepile.ui.viewmodels.BackupUiState" 
-lastBackupTimejava.lang.Long"%
+fieldjava.util.List"__id*]
+ (Q*O/
+-com.smilepile.ui.screens.CategorySwipeHandler"
+
+categoriesjava.util.List"%
  (
 
-fieldjava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ñ
-Ncom.smilepile.ui.viewmodels.BackupUiState#setLastBackupTime(Ljava/lang/Long;)V
+fieldjava.util.ListB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`à
+Ncom.smilepile.ui.screens.CategorySwipeHandler#setCategories(Ljava/util/List;)V
 __unknown_file ("0*º
 0 (ã
 à
- (O+
-)com.smilepile.ui.viewmodels.BackupUiState" 
-lastBackupTimejava.lang.Long"__id*%
- (
-
-valuejava.lang.Long"
- (
-implicit return:#
- (
-valuejava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ï
-Ocom.smilepile.ui.viewmodels.BackupUiState#getLastBackupFile()Ljava/lang/String;
-__unknown_file ("0*»
-0 (è
-å
- (
-fieldjava.lang.String"__id*_
- (S*Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-lastBackupFilejava.lang.String"'
- (
-
-fieldjava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`å
-Pcom.smilepile.ui.viewmodels.BackupUiState#setLastBackupFile(Ljava/lang/String;)V
-__unknown_file ("0*¿
-0 (è
-å
- (Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-lastBackupFilejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`∆
-@com.smilepile.ui.viewmodels.BackupUiState#isRestoreInProgress()Z
-__unknown_file ("0*±
-0 (Å
-
- (
-fieldboolean"__id*[
- (O*M+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isRestoreInProgressboolean"
- (
-
-fieldbooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`È
-Dcom.smilepile.ui.viewmodels.BackupUiState#setIsRestoreInProgress(Z)V
-__unknown_file ("0*≤
-0 (Å
-
- (M+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isRestoreInProgressboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`
-Pcom.smilepile.ui.viewmodels.BackupUiState#getRestoreSuccess()Ljava/lang/Boolean;
-__unknown_file ("0*À
-0 (ë
-é
- (
-fieldjava.lang.Boolean"__id*`
- (T*R+
-)com.smilepile.ui.viewmodels.BackupUiState"#
-restoreSuccessjava.lang.Boolean"(
- (
-
-fieldjava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`ê
-Qcom.smilepile.ui.viewmodels.BackupUiState#setRestoreSuccess(Ljava/lang/Boolean;)V
-__unknown_file ("0*¬
-0 (ë
-é
- (R+
-)com.smilepile.ui.viewmodels.BackupUiState"#
-restoreSuccessjava.lang.Boolean"__id*(
- (
-
-valuejava.lang.Boolean"
- (
-implicit return:&
- (
-valuejava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ê
-Ncom.smilepile.ui.viewmodels.BackupUiState#getLastRestoreTime()Ljava/lang/Long;
-__unknown_file ("0*√
-0 (å
-â
- (
-fieldjava.lang.Long"__id*^
- (R*P+
-)com.smilepile.ui.viewmodels.BackupUiState"!
-lastRestoreTimejava.lang.Long"%
- (
-
-fieldjava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ü
-Ocom.smilepile.ui.viewmodels.BackupUiState#setLastRestoreTime(Ljava/lang/Long;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (P+
-)com.smilepile.ui.viewmodels.BackupUiState"!
-lastRestoreTimejava.lang.Long"__id*%
- (
-
-valuejava.lang.Long"
- (
-implicit return:#
- (
-valuejava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`ƒ
-?com.smilepile.ui.viewmodels.BackupUiState#isExportInProgress()Z
-__unknown_file ("0*∞
-0 (Ä
-~
- (
-fieldboolean"__id*Z
- (N*L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isExportInProgressboolean"
- (
-
-fieldbooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Á
-Ccom.smilepile.ui.viewmodels.BackupUiState#setIsExportInProgress(Z)V
-__unknown_file ("0*±
-0 (Ä
-~
- (L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isExportInProgressboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ó
-Ocom.smilepile.ui.viewmodels.BackupUiState#getExportSuccess()Ljava/lang/Boolean;
-__unknown_file ("0* 
-0 (ê
-ç
- (
-fieldjava.lang.Boolean"__id*_
- (S*Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-exportSuccessjava.lang.Boolean"(
- (
-
-fieldjava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`é
-Pcom.smilepile.ui.viewmodels.BackupUiState#setExportSuccess(Ljava/lang/Boolean;)V
-__unknown_file ("0*¡
-0 (ê
-ç
- (Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-exportSuccessjava.lang.Boolean"__id*(
- (
-
-valuejava.lang.Boolean"
- (
-implicit return:&
- (
-valuejava.lang.BooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`‰
-Mcom.smilepile.ui.viewmodels.BackupUiState#getLastExportTime()Ljava/lang/Long;
-__unknown_file ("0*¬
-0 (ã
-à
- (
-fieldjava.lang.Long"__id*]
- (Q*O+
-)com.smilepile.ui.viewmodels.BackupUiState" 
-lastExportTimejava.lang.Long"%
- (
-
-fieldjava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ñ
-Ncom.smilepile.ui.viewmodels.BackupUiState#setLastExportTime(Ljava/lang/Long;)V
-__unknown_file ("0*º
-0 (ã
-à
- (O+
-)com.smilepile.ui.viewmodels.BackupUiState" 
-lastExportTimejava.lang.Long"__id*%
- (
-
-valuejava.lang.Long"
- (
-implicit return:#
- (
-valuejava.lang.LongB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ï
-Ocom.smilepile.ui.viewmodels.BackupUiState#getLastExportFile()Ljava/lang/String;
-__unknown_file ("0*»
-0 (è
-å
- (
-fieldjava.lang.String"__id*_
- (S*Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-lastExportFilejava.lang.String"'
- (
-
-fieldjava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`å
-Pcom.smilepile.ui.viewmodels.BackupUiState#setLastExportFile(Ljava/lang/String;)V
-__unknown_file ("0*¿
-0 (è
-å
- (Q+
-)com.smilepile.ui.viewmodels.BackupUiState""
-lastExportFilejava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`∑
-9com.smilepile.ui.viewmodels.BackupUiState#isValidating()Z
-__unknown_file ("0*©
-0 (z
-x
- (
-fieldboolean"__id*T
- (H*F+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isValidatingboolean"
- (
-
-fieldbooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`⁄
-=com.smilepile.ui.viewmodels.BackupUiState#setIsValidating(Z)V
-__unknown_file ("0*™
-0 (z
-x
- (F+
-)com.smilepile.ui.viewmodels.BackupUiState"
-isValidatingboolean"__id*
- (
-
-valueboolean"
- (
-implicit return:
- (
-valuebooleanB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ò
-qcom.smilepile.ui.viewmodels.BackupUiState#getValidationResult()Lcom/smilepile/data/backup/BackupValidationResult;
-__unknown_file ("0*´
-0 (“
-œ
- (9
-field0com.smilepile.data.backup.BackupValidationResult"__id*Å
- (u*s+
-)com.smilepile.ui.viewmodels.BackupUiState"D
-validationResult0com.smilepile.data.backup.BackupValidationResult"G
- (;
-9
-field0com.smilepile.data.backup.BackupValidationResultB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`ê
-rcom.smilepile.ui.viewmodels.BackupUiState#setValidationResult(Lcom/smilepile/data/backup/BackupValidationResult;)V
-__unknown_file ("0*Ç
-0 (—
-Œ
- (s+
-)com.smilepile.ui.viewmodels.BackupUiState"D
-validationResult0com.smilepile.data.backup.BackupValidationResult"__id*G
- (;
-9
-value0com.smilepile.data.backup.BackupValidationResult"
- (
-implicit return:E
- (9
-value0com.smilepile.data.backup.BackupValidationResultB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ã
-gcom.smilepile.ui.viewmodels.BackupUiState#getBackupSchedule()Lcom/smilepile/data/backup/BackupSchedule;
-__unknown_file ("0*ê
-0 (ø
-º
- (1
-field(com.smilepile.data.backup.BackupSchedule"__id*w
- (k*i+
-)com.smilepile.ui.viewmodels.BackupUiState":
-backupSchedule(com.smilepile.data.backup.BackupSchedule"?
- (3
-1
-field(com.smilepile.data.backup.BackupScheduleB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ï
-hcom.smilepile.ui.viewmodels.BackupUiState#setBackupSchedule(Lcom/smilepile/data/backup/BackupSchedule;)V
-__unknown_file ("0*
-0 (ø
-º
- (i+
-)com.smilepile.ui.viewmodels.BackupUiState":
-backupSchedule(com.smilepile.data.backup.BackupSchedule"__id*?
- (3
-1
-value(com.smilepile.data.backup.BackupSchedule"
- (
-implicit return:=
- (1
-value(com.smilepile.data.backup.BackupScheduleB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`‚
-Lcom.smilepile.ui.viewmodels.BackupUiState#getBackupHistory()Ljava/util/List;
-__unknown_file ("0*¡
-0 (ä
-á
- (
-fieldjava.util.List"__id*\
- (P*N+
-)com.smilepile.ui.viewmodels.BackupUiState"
-backupHistoryjava.util.List"%
- (
-
-fieldjava.util.ListB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ç
-Mcom.smilepile.ui.viewmodels.BackupUiState#setBackupHistory(Ljava/util/List;)V
-__unknown_file ("0*ª
-0 (ä
-á
- (N+
-)com.smilepile.ui.viewmodels.BackupUiState"
-backupHistoryjava.util.List"__id*%
+ (O/
+-com.smilepile.ui.screens.CategorySwipeHandler"
+
+categoriesjava.util.List"__id*%
  (
 
 valuejava.util.List"
  (
 implicit return:#
  (
-valuejava.util.ListB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`∞
-=com.smilepile.ui.viewmodels.BackupUiState#getCategoryCount()I
-__unknown_file ("0*û
-0 (s
-q
- (
-fieldint"__id*Q
- (E*C+
-)com.smilepile.ui.viewmodels.BackupUiState"
-categoryCountint"
- (
-
-fieldintB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`–
->com.smilepile.ui.viewmodels.BackupUiState#setCategoryCount(I)V
-__unknown_file ("0*£
-0 (s
-q
- (C+
-)com.smilepile.ui.viewmodels.BackupUiState"
-categoryCountint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`™
-:com.smilepile.ui.viewmodels.BackupUiState#getPhotoCount()I
-__unknown_file ("0*õ
-0 (p
-n
- (
-fieldint"__id*N
- (B*@+
-)com.smilepile.ui.viewmodels.BackupUiState"
-
-photoCountint"
- (
-
-fieldintB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH` 
-;com.smilepile.ui.viewmodels.BackupUiState#setPhotoCount(I)V
-__unknown_file ("0*†
-0 (p
-n
- (@+
-)com.smilepile.ui.viewmodels.BackupUiState"
-
-photoCountint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`‚
-Jcom.smilepile.ui.viewmodels.BackupUiState#getLastError()Ljava/lang/String;
-__unknown_file ("0*√
-0 (ä
-á
+valuejava.util.ListB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`¯
+Ucom.smilepile.ui.screens.CategorySwipeHandler#getSelectedCategoryId()Ljava/lang/Long;
+__unknown_file ("0* 
+0 (ì
+ê
+ (
+fieldjava.lang.Long"__id*e
+ (Y*W/
+-com.smilepile.ui.screens.CategorySwipeHandler"$
+selectedCategoryIdjava.lang.Long"%
  (
-fieldjava.lang.String"__id*Z
- (N*L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-	lastErrorjava.lang.String"'
- (
-
-fieldjava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`Ç
-Kcom.smilepile.ui.viewmodels.BackupUiState#setLastError(Ljava/lang/String;)V
-__unknown_file ("0*ª
-0 (ä
-á
- (L+
-)com.smilepile.ui.viewmodels.BackupUiState"
-	lastErrorjava.lang.String"__id*'
- (
-
-valuejava.lang.String"
- (
-implicit return:%
- (
-valuejava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateH`å0
-ƒcom.smilepile.ui.viewmodels.BackupUiState#<init>(ZLjava/lang/Boolean;Ljava/lang/Long;Ljava/lang/String;ZLjava/lang/Boolean;Ljava/lang/Long;ZLjava/lang/Boolean;Ljava/lang/Long;Ljava/lang/String;ZLcom/smilepile/data/backup/BackupValidationResult;Lcom/smilepile/data/backup/BackupSchedule;Ljava/util/List;IILjava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt¥ ¥("0*£%
-0
-¥ ÷(Î
-Ë
-
-∂ ∂(+
-%0boolean"Ccom.smilepile.ui.viewmodels.BackupUiState#setIsBackupInProgress(Z)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*;
-
-__unknown_file (
-
-isBackupInProgressbooleaná
-Ñ
-
-∑ ∑(&
-%1java.lang.Boolean"Pcom.smilepile.ui.viewmodels.BackupUiState#setBackupSuccess(Ljava/lang/Boolean;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*@
-
-__unknown_file ($
-"
-backupSuccessjava.lang.BooleanÄ
-˝
-
-∏ ∏($
-%2java.lang.Long"Ncom.smilepile.ui.viewmodels.BackupUiState#setLastBackupTime(Ljava/lang/Long;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*>
-
-__unknown_file ("
- 
-lastBackupTimejava.lang.LongÜ
-É
-
-π π(&
-%3java.lang.String"Pcom.smilepile.ui.viewmodels.BackupUiState#setLastBackupFile(Ljava/lang/String;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*@
-
-__unknown_file ($
-"
-lastBackupFilejava.lang.StringÌ
-Í
-
-º º(,
-%4boolean"Dcom.smilepile.ui.viewmodels.BackupUiState#setIsRestoreInProgress(Z)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*<
-
-__unknown_file ( 
-
-isRestoreInProgressbooleanâ
-Ü
-
-Ω Ω('
-%5java.lang.Boolean"Qcom.smilepile.ui.viewmodels.BackupUiState#setRestoreSuccess(Ljava/lang/Boolean;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*A
-
-__unknown_file (%
-#
-restoreSuccessjava.lang.BooleanÇ
-ˇ
-
-æ æ(%
-%6java.lang.Long"Ocom.smilepile.ui.viewmodels.BackupUiState#setLastRestoreTime(Ljava/lang/Long;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*?
-
-__unknown_file (#
-!
-lastRestoreTimejava.lang.LongÎ
-Ë
-
-¡ ¡(+
-%7boolean"Ccom.smilepile.ui.viewmodels.BackupUiState#setIsExportInProgress(Z)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*;
-
-__unknown_file (
-
-isExportInProgressbooleaná
-Ñ
-
-¬ ¬(&
-%8java.lang.Boolean"Pcom.smilepile.ui.viewmodels.BackupUiState#setExportSuccess(Ljava/lang/Boolean;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*@
-
-__unknown_file ($
-"
-exportSuccessjava.lang.BooleanÄ
-˝
-
-√ √($
-%9java.lang.Long"Ncom.smilepile.ui.viewmodels.BackupUiState#setLastExportTime(Ljava/lang/Long;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*>
-
-__unknown_file ("
- 
-lastExportTimejava.lang.Longá
-Ñ
-
-ƒ ƒ(&
-%10java.lang.String"Pcom.smilepile.ui.viewmodels.BackupUiState#setLastExportFile(Ljava/lang/String;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*@
-
-__unknown_file ($
-"
-lastExportFilejava.lang.String‡
-›
-
-« «(%
-%11boolean"=com.smilepile.ui.viewmodels.BackupUiState#setIsValidating(Z)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*5
-
-__unknown_file (
 
-isValidatingbooleanÎ
-Ë
+fieldjava.lang.LongB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`ò
+Vcom.smilepile.ui.screens.CategorySwipeHandler#setSelectedCategoryId(Ljava/lang/Long;)V
+__unknown_file ("0*ƒ
+0 (ì
+ê
+ (W/
+-com.smilepile.ui.screens.CategorySwipeHandler"$
+selectedCategoryIdjava.lang.Long"__id*%
+ (
+
+valuejava.lang.Long"
+ (
+implicit return:#
+ (
+valuejava.lang.LongB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`∏
+ecom.smilepile.ui.screens.CategorySwipeHandler#getOnCategorySelected()Lkotlin/jvm/functions/Function1;
+__unknown_file ("0*˙
+0 (≥
+∞
+ ('
+fieldkotlin.jvm.functions.Function1"__id*u
+ (i*g/
+-com.smilepile.ui.screens.CategorySwipeHandler"4
+onCategorySelectedkotlin.jvm.functions.Function1"5
+ ()
+'
+fieldkotlin.jvm.functions.Function1B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`ÿ
+fcom.smilepile.ui.screens.CategorySwipeHandler#setOnCategorySelected(Lkotlin/jvm/functions/Function1;)V
+__unknown_file ("0*‰
+0 (≥
+∞
+ (g/
+-com.smilepile.ui.screens.CategorySwipeHandler"4
+onCategorySelectedkotlin.jvm.functions.Function1"__id*5
+ ()
+'
+valuekotlin.jvm.functions.Function1"
+ (
+implicit return:3
+ ('
+valuekotlin.jvm.functions.Function1B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`Ô
+wcom.smilepile.ui.screens.CategorySwipeHandler#<init>(Ljava/util/List;Ljava/lang/Long;Lkotlin/jvm/functions/Function1;)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt∞ ∞(""0*£
 
-» »(87
-%120com.smilepile.data.backup.BackupValidationResult"rcom.smilepile.ui.viewmodels.BackupUiState#setValidationResult(Lcom/smilepile/data/backup/BackupValidationResult;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*b
-
-__unknown_file (F
-D
-validationResult0com.smilepile.data.backup.BackupValidationResultœ
-Ã
+0
+∞" ¥(Ä
+˝
 
-À À(./
-%13(com.smilepile.data.backup.BackupSchedule"hcom.smilepile.ui.viewmodels.BackupUiState#setBackupSchedule(Lcom/smilepile/data/backup/BackupSchedule;)V*I
+± ±(*
+%0java.util.List"Ncom.smilepile.ui.screens.CategorySwipeHandler#setCategories(Ljava/util/List;)V*M
 
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*X
+__unknown_file (1/
+-com.smilepile.ui.screens.CategorySwipeHandler*:
 
-__unknown_file (<
-:
-backupSchedule(com.smilepile.data.backup.BackupScheduleˇ
-¸
+__unknown_file (
+
 
-Œ Œ(=
-%14java.util.List"Mcom.smilepile.ui.viewmodels.BackupUiState#setBackupHistory(Ljava/util/List;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*=
-
-__unknown_file (!
-
-backupHistoryjava.util.List⁄
-◊
+categoriesjava.util.Listê
+ç
 
-— —(
+≤ ≤()
+%1java.lang.Long"Vcom.smilepile.ui.screens.CategorySwipeHandler#setSelectedCategoryId(Ljava/lang/Long;)V*M
+
+__unknown_file (1/
+-com.smilepile.ui.screens.CategorySwipeHandler*B
+
+__unknown_file (&
+$
+selectedCategoryIdjava.lang.Long¿
+Ω
 
-%15int">com.smilepile.ui.viewmodels.BackupUiState#setCategoryCount(I)V*I
+≥ ≥(2$
+%2kotlin.jvm.functions.Function1"fcom.smilepile.ui.screens.CategorySwipeHandler#setOnCategorySelected(Lkotlin/jvm/functions/Function1;)V*M
 
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*2
+__unknown_file (1/
+-com.smilepile.ui.screens.CategorySwipeHandler*R
 
-__unknown_file (
-
-categoryCountint‘
-—
+__unknown_file (6
+4
+onCategorySelectedkotlin.jvm.functions.Function1Õ
+ 
 
-“ “(
+µ µ(%
+%3float"Ccom.smilepile.ui.screens.CategorySwipeHandler#setSwipeThreshold(F)V*?
 
-%16int";com.smilepile.ui.viewmodels.BackupUiState#setPhotoCount(I)V*I
+µ µ(%1/
+-com.smilepile.ui.screens.CategorySwipeHandler*)
 
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*/
-
-__unknown_file (
-
+__unknown_file (
+	<unknown>∑
+¥
 
-photoCountint˝
-˙
+∂ ∂(&
 
-’ ’(!
-%17java.lang.String"Kcom.smilepile.ui.viewmodels.BackupUiState#setLastError(Ljava/lang/String;)V*I
-
-__unknown_file (-+
-)com.smilepile.ui.viewmodels.BackupUiState*;
-
-__unknown_file (
-
-	lastErrorjava.lang.String"/
+%4long"Dcom.smilepile.ui.screens.CategorySwipeHandler#setSwipeDebounceMs(J)V*?
+
+∂ ∂(&1/
+-com.smilepile.ui.screens.CategorySwipeHandler*
+
+∂" ∂(&2¨"/
 
 __unknown_file (
-implicit return:+
+implicit return:*
 
-∂ ∂(+
-isBackupInProgressboolean:0
+± ±(*
 
-∑ ∑(&"
-backupSuccessjava.lang.Boolean:.
+categoriesjava.util.List:2
 
-∏ ∏($ 
-lastBackupTimejava.lang.Long:0
+≤ ≤()$
+selectedCategoryIdjava.lang.Long:B
 
-π π(&"
-lastBackupFilejava.lang.String:,
-
-º º(,
-isRestoreInProgressboolean:1
-
-Ω Ω('#
-restoreSuccessjava.lang.Boolean:/
-
-æ æ(%!
-lastRestoreTimejava.lang.Long:+
-
-¡ ¡(+
-isExportInProgressboolean:0
-
-¬ ¬(&"
-exportSuccessjava.lang.Boolean:.
-
-√ √($ 
-lastExportTimejava.lang.Long:0
-
-ƒ ƒ(&"
-lastExportFilejava.lang.String:%
-
-« «(%
-isValidatingboolean:R
-
-» »(8D
-validationResult0com.smilepile.data.backup.BackupValidationResult:H
-
-À À(.:
-backupSchedule(com.smilepile.data.backup.BackupSchedule:-
-
-Œ Œ(=
-backupHistoryjava.util.List:"
-
-— —(
-categoryCountint:
-
-“ “(
-
-photoCountint:+
-
-’ ’(!
-	lastErrorjava.lang.StringB-+
-)com.smilepile.ui.viewmodels.BackupUiStateHß
-8com.smilepile.ui.viewmodels.BackupProgress#getCurrent()I
-__unknown_file ("0*ô
-0 (n
-l
- (
-fieldint"__id*L
- (@*>,
-*com.smilepile.ui.viewmodels.BackupProgress"
-currentint"
- (
-
-fieldintB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`«
-9com.smilepile.ui.viewmodels.BackupProgress#setCurrent(I)V
-__unknown_file ("0*û
-0 (n
-l
- (>,
-*com.smilepile.ui.viewmodels.BackupProgress"
-currentint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`£
-6com.smilepile.ui.viewmodels.BackupProgress#getTotal()I
-__unknown_file ("0*ó
-0 (l
-j
- (
-fieldint"__id*J
- (>*<,
-*com.smilepile.ui.viewmodels.BackupProgress"
-totalint"
- (
-
-fieldintB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`√
-7com.smilepile.ui.viewmodels.BackupProgress#setTotal(I)V
-__unknown_file ("0*ú
-0 (l
-j
- (<,
-*com.smilepile.ui.viewmodels.BackupProgress"
-totalint"__id*
- (
-
-valueint"
- (
-implicit return:
- (
-valueintB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`Â
-Kcom.smilepile.ui.viewmodels.BackupProgress#getOperation()Ljava/lang/String;
-__unknown_file ("0*ƒ
-0 (ã
-à
+≥ ≥(24
+onCategorySelectedkotlin.jvm.functions.Function1B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerHÁ
+Bcom.smilepile.ui.screens.CategorySwipeHandler#getSwipeThreshold()F
+__unknown_file ("0*Ã
+0 (ì
+ê
  (
-fieldjava.lang.String"__id*[
- (O*M,
-*com.smilepile.ui.viewmodels.BackupProgress"
-	operationjava.lang.String"'
+fieldjava.lang.Object"__id*c
+ (W*U/
+-com.smilepile.ui.screens.CategorySwipeHandler""
+swipeThresholdjava.lang.Object"'
  (
 
-fieldjava.lang.StringB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`Ö
-Lcom.smilepile.ui.viewmodels.BackupProgress#setOperation(Ljava/lang/String;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M,
-*com.smilepile.ui.viewmodels.BackupProgress"
-	operationjava.lang.String"__id*'
+fieldjava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`á
+Ccom.smilepile.ui.screens.CategorySwipeHandler#setSwipeThreshold(F)V
+__unknown_file ("0*ƒ
+0 (ì
+ê
+ (U/
+-com.smilepile.ui.screens.CategorySwipeHandler""
+swipeThresholdjava.lang.Object"__id*'
  (
 
-valuejava.lang.String"
+valuejava.lang.Object"
  (
 implicit return:%
  (
-valuejava.lang.StringB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`ª
-Hcom.smilepile.ui.viewmodels.BackupProgress#<init>(IILjava/lang/String;)Vo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt€ €("0*·
-0
-€ ﬂ(œ
-Ã
-
-‹ ‹(	
-%0int"9com.smilepile.ui.viewmodels.BackupProgress#setCurrent(I)V*J
-
-__unknown_file (.,
-*com.smilepile.ui.viewmodels.BackupProgress*,
-
-__unknown_file (
-
-currentintÀ
-»
-
-› ›(	
-%1int"7com.smilepile.ui.viewmodels.BackupProgress#setTotal(I)V*J
-
-__unknown_file (.,
-*com.smilepile.ui.viewmodels.BackupProgress**
-
-__unknown_file (
-
-totalint˛
-˚
-
-ﬁ ﬁ(
-%2java.lang.String"Lcom.smilepile.ui.viewmodels.BackupProgress#setOperation(Ljava/lang/String;)V*J
-
-__unknown_file (.,
-*com.smilepile.ui.viewmodels.BackupProgress*;
-
-__unknown_file (
-
-	operationjava.lang.String"/
-
-__unknown_file (
-implicit return:
-
-‹ ‹(
-currentint:
-
-› ›(
-totalint:+
-
-ﬁ ﬁ(
-	operationjava.lang.StringB.,
-*com.smilepile.ui.viewmodels.BackupProgressHÕ
-<com.smilepile.ui.viewmodels.BackupProgress#setPercentage(I)V
-__unknown_file ("0*°
-0 (q
-o
- (A,
-*com.smilepile.ui.viewmodels.BackupProgress"
-
-percentageint"__id*
- (
-
-valueint"
+valuejava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`È
+Ccom.smilepile.ui.screens.CategorySwipeHandler#getSwipeDebounceMs()J
+__unknown_file ("0*Õ
+0 (î
+ë
+ (
+fieldjava.lang.Object"__id*d
+ (X*V/
+-com.smilepile.ui.screens.CategorySwipeHandler"#
+swipeDebounceMsjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`â
+Dcom.smilepile.ui.screens.CategorySwipeHandler#setSwipeDebounceMs(J)V
+__unknown_file ("0*≈
+0 (î
+ë
+ (V/
+-com.smilepile.ui.screens.CategorySwipeHandler"#
+swipeDebounceMsjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
  (
-implicit return:
- (
-valueintB.,
-*com.smilepile.ui.viewmodels.BackupProgressH`Â	
-;com.smilepile.ui.viewmodels.BackupProgress#getPercentage()Io
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/BackupViewModel.kt· ·(="0*Ë
-2
-· ·(6í
+implicit return:%
+ (
+valuejava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`ä
+_com.smilepile.ui.screens.CategorySwipeHandler#getHorizontalDragOffset()Lerror/NonExistentClass;
+__unknown_file ("0*“
+0 (ô
+ñ
+ (
+fieldjava.lang.Object"__id*i
+ (]*[/
+-com.smilepile.ui.screens.CategorySwipeHandler"(
+horizontalDragOffsetjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`™
+`com.smilepile.ui.screens.CategorySwipeHandler#setHorizontalDragOffset(Lerror/NonExistentClass;)V
+__unknown_file ("0* 
+0 (ô
+ñ
+ ([/
+-com.smilepile.ui.screens.CategorySwipeHandler"(
+horizontalDragOffsetjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`¸
+Xcom.smilepile.ui.screens.CategorySwipeHandler#getLastSwipeTime()Lerror/NonExistentClass;
+__unknown_file ("0*À
+0 (í
 è
+ (
+fieldjava.lang.Object"__id*b
+ (V*T/
+-com.smilepile.ui.screens.CategorySwipeHandler"!
+lastSwipeTimejava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`ú
+Ycom.smilepile.ui.screens.CategorySwipeHandler#setLastSwipeTime(Lerror/NonExistentClass;)V
+__unknown_file ("0*√
+0 (í
+è
+ (T/
+-com.smilepile.ui.screens.CategorySwipeHandler"!
+lastSwipeTimejava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH`—
+>com.smilepile.ui.screens.CategorySwipeHandler#handleDragEnd()Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktª ª("0*‘
+2
+æ& ¡(	ü
+ú
 
-·  ·('	
-%3int"8com.smilepile.ui.viewmodels.BackupProgress#getCurrent()I*<
+ø ø(
+%3kotlin.Unit":com.smilepile.ui.screens.CategorySwipeHandler#resetDrag()V*?
 
-·  ·('.,
-*com.smilepile.ui.viewmodels.BackupProgresse
-c
+ø ø(1/
+-com.smilepile.ui.screens.CategorySwipeHandler"!
 
-·  ·(-
-%4"__calculate*
-
-·( ·()
-**
-
-·  ·('
-	
-%3int*
-
-·* ·(-2dê
-ç
-
-·1 ·(6	
-%5int"6com.smilepile.ui.viewmodels.BackupProgress#getTotal()I*<
-
-·1 ·(6.,
-*com.smilepile.ui.viewmodels.BackupProgressu
-s
-
-· ·(6
-%6"__calculate*
-
-·/ ·(0
-/*"
-
-__unknown_file (
-
-%4*
-
-·1 ·(6
-	
-%5intL
-J
-
-__unknown_file (
-%2"__id*"
-
-__unknown_file (
-
-%6*
-1*P
+¿ ¿(
+explicit return*é
 3
-·< ·(=:
+ƒa ƒ(bU
+S
+
+ƒ ƒ(b
+currentCategoryIndexint"__id*"
+
+__unknown_file (
+
+%5ù
+ö
+
+… …(
+%7boolean"<com.smilepile.ui.screens.CategorySwipeHandler#isSwipeLeft()Z*?
+
+… …(1/
+-com.smilepile.ui.screens.CategorySwipeHandler*
+7
+8*P
+4
+ƒa ƒ(b:
 8
 
 __unknown_file (
-%2"__id*
+%5"__id*
 
-·< ·(=2 *
-1*ç
+ƒa ƒ(b2 *
+3*l
+5
+ƒ# ƒ(]S
+Q
+
+__unknown_file (
+%5"__id*)
+
+__unknown_file (
+	<unknown>*
+3
+4*„
+6
+œ	 —(†
+ù
+
+— —(
+%11kotlin.Unit":com.smilepile.ui.screens.CategorySwipeHandler#resetDrag()V*?
+
+— —(1/
+-com.smilepile.ui.screens.CategorySwipeHandler"/
+
+__unknown_file (
+implicit return*µ
+7
+Ã Ã(6û
+õ
+
+Ã Ã(
+%9boolean"=com.smilepile.ui.screens.CategorySwipeHandler#isSwipeRight()Z*?
+
+Ã Ã(1/
+-com.smilepile.ui.screens.CategorySwipeHandler*
+9*û
+8
+…9 À(∫
+∑
+
+   (O
+%8kotlin.Unit"Rcom.smilepile.ui.screens.CategorySwipeHandler#handleSwipeLeft(ILjava/util/List;J)V*?
+
+   (O1/
+-com.smilepile.ui.screens.CategorySwipeHandler*+
+
+    (4
+
+currentCategoryIndexint*/
+
+ 6  (A!
+
+categoryIdsjava.lang.Object*#
+
+ C  (N
+
+currentTimelongK
+I
+
+__unknown_file (
+%6"__id*!
+
+   (O
+
+%8kotlin.Unit*
+6*°
+9
+Ã: Œ(º
+π
+
+Õ Õ(P
+%10kotlin.Unit"Scom.smilepile.ui.screens.CategorySwipeHandler#handleSwipeRight(ILjava/util/List;J)V*?
+
+Õ Õ(P1/
+-com.smilepile.ui.screens.CategorySwipeHandler*+
+
+Õ! Õ(5
+
+currentCategoryIndexint*/
+
+Õ7 Õ(B!
+
+categoryIdsjava.lang.Object*#
+
+ÕD Õ(O
+
+currentTimelongL
+J
+
+__unknown_file (
+%6"__id*"
+
+Õ Õ(P
+
+%10kotlin.Unit*
+6*£
 0
-· ·(ê
-ç
+ª ª(}{
 
-· ·(	
-%0int"6com.smilepile.ui.viewmodels.BackupProgress#getTotal()I*<
+º! º(4
 
-· ·(.,
-*com.smilepile.ui.viewmodels.BackupProgressa
-_
+%0long"%java.lang.System#currentTimeMillis()J*%
 
-· ·(
-%1"	__compare*
+º º( 
+
+Systemkotlin.Unit2currentTimeMillis()E
+C
 
-· ·(
->*
+º º(4
+currentTimelong"__id*
 
-· ·(
-	
-%0int*
+º! º(4
 
-· ·(2 *
+
+%0long√
+¿
+
+æ æ($
+%1boolean"=com.smilepile.ui.screens.CategorySwipeHandler#isDebounced(J)Z*?
+
+æ æ($1/
+-com.smilepile.ui.screens.CategorySwipeHandler*#
+
+æ æ(#
+
+currentTimelong*
 2
-3*3
+1*±
 1
-·< ·(=""
+¡	 √(µ
+≤
+
+√ √($
+%4java.util.List"Mcom.smilepile.ui.screens.CategorySwipeHandler#getCategories()Ljava/util/List;*?
+
+√ √($1/
+-com.smilepile.ui.screens.CategorySwipeHandler`
+^
+
+√ √(2
+categoryIdsjava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>*
+4
+5B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerHú
+=com.smilepile.ui.screens.CategorySwipeHandler#isDebounced(J)Zr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt‘ ‘("0*ã
+0
+‘ ‘(¬
+ø
+
+’ ’(*
+%0java.lang.Object"Xcom.smilepile.ui.screens.CategorySwipeHandler#getLastSwipeTime()Lerror/NonExistentClass;*?
+
+’ ’(*1/
+-com.smilepile.ui.screens.CategorySwipeHandlerÑ
+Å
+
+’ ’(*
+%1"__calculate*
+
+’ ’(
+-*#
+
+’ ’(
+
+currentTimelong*&
+
+’ ’(*
+
+%0java.lang.Object°
+û
+
+’- ’(<
+
+%2long"Ccom.smilepile.ui.screens.CategorySwipeHandler#getSwipeDebounceMs()J*?
+
+’- ’(<1/
+-com.smilepile.ui.screens.CategorySwipeHandlert
+r
+
+’ ’(<
+%3"	__compare*
+
+’+ ’(,
+<*"
 
 __unknown_file (
 
-%2B.,
-*com.smilepile.ui.viewmodels.BackupProgressH
+%1*
+
+’- ’(<
+
+
+%2long"
+
+’ ’(<
+
+%3:!
+
+‘ ‘(-
+currentTimelongB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH
+<com.smilepile.ui.screens.CategorySwipeHandler#isSwipeLeft()Zr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktÿ ÿ("0*É
+0
+ÿ ÿ(…
+∆
+
+Ÿ Ÿ(#
+%0java.lang.Object"_com.smilepile.ui.screens.CategorySwipeHandler#getHorizontalDragOffset()Lerror/NonExistentClass;*?
+
+Ÿ Ÿ(#1/
+-com.smilepile.ui.screens.CategorySwipeHandler°
+û
+
+Ÿ' Ÿ(5
+%1float"Bcom.smilepile.ui.screens.CategorySwipeHandler#getSwipeThreshold()F*?
+
+Ÿ' Ÿ(51/
+-com.smilepile.ui.screens.CategorySwipeHandlerq
+o
+
+Ÿ& Ÿ(5
+%2float"kotlin.Float#unaryMinus()F*
+
+Ÿ' Ÿ(5
+
+%1float*
+
+Ÿ' Ÿ(5
+
+%1floaty
+w
+
+Ÿ Ÿ(5
+%3"	__compare*
+
+Ÿ$ Ÿ(%
+<*&
+
+Ÿ Ÿ(#
+
+%0java.lang.Object*
+
+Ÿ& Ÿ(5
+
+%2float"
+
+Ÿ Ÿ(5
+
+%3B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH˛
+=com.smilepile.ui.screens.CategorySwipeHandler#isSwipeRight()Zr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt‹ ‹("0*ê
+0
+‹ ‹(…
+∆
+
+› ›(#
+%0java.lang.Object"_com.smilepile.ui.screens.CategorySwipeHandler#getHorizontalDragOffset()Lerror/NonExistentClass;*?
+
+› ›(#1/
+-com.smilepile.ui.screens.CategorySwipeHandler°
+û
+
+›& ›(4
+%1float"Bcom.smilepile.ui.screens.CategorySwipeHandler#getSwipeThreshold()F*?
+
+›& ›(41/
+-com.smilepile.ui.screens.CategorySwipeHandlery
+w
+
+› ›(4
+%2"	__compare*
+
+›$ ›(%
+>*&
+
+› ›(#
+
+%0java.lang.Object*
+
+›& ›(4
+
+%1float"
+
+› ›(4
+
+%2B1/
+-com.smilepile.ui.screens.CategorySwipeHandlerHÙ
+Rcom.smilepile.ui.screens.CategorySwipeHandler#handleSwipeLeft(ILjava/util/List;J)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt‡ ‡("0*˛
+
+0
+‡ ‡(o
+m
+
+· ·()
+%0"__calculate*
+
+·& ·('
++*#
+
+· ·(%
+
+currentIndexint*
+
+·( ·()2l
+j
+
+·9 ·(=	
+%1int""kotlin.collections.List#getSize()I*-
+
+·- ·(8
+
+categoryIdsjava.util.Listu
+s
+
+· ·(=
+%2"__calculate*
+
+·+ ·(,
+%*"
+
+__unknown_file (
+
+%0*
+
+·9 ·(=
+	
+%1intJ
+H
+
+· ·(=
+	nextIndexint"__id*"
+
+__unknown_file (
+
+%2¶£
+
+‚ ‚(3
+
+%3long"0kotlin.collections.List#get(I)Ljava/lang/Object;*-
+
+‚ ‚((
+
+categoryIdsjava.util.List* 
+
+‚) ‚(2
+
+	nextIndexint2get(I)H
+F
+
+‚ ‚(3
+nextCategoryIdlong"__id*
+
+‚ ‚(3
+
+
+%3long›
+⁄
+
+‰ ‰($
+%4kotlin.jvm.functions.Function1"ecom.smilepile.ui.screens.CategorySwipeHandler#getOnCategorySelected()Lkotlin/jvm/functions/Function1;*?
+
+‰ ‰(1/
+-com.smilepile.ui.screens.CategorySwipeHandler€ÿ
+
+‰ ‰(*
+%5kotlin.Unit"=kotlin.Function1#invoke(Ljava/lang/Object;)Ljava/lang/Object;*4
+
+‰ ‰(&
+$
+%4kotlin.jvm.functions.Function1*&
+
+‰ ‰()
+
+nextCategoryIdlong2invoke(Ljava/lang/Object;)Ë
+Â
+
+Â Â(#
+%6java.lang.Object"Ycom.smilepile.ui.screens.CategorySwipeHandler#setLastSwipeTime(Lerror/NonExistentClass;)V*?
+
+Â Â(#1/
+-com.smilepile.ui.screens.CategorySwipeHandler*#
+
+Â Â(#
+
+currentTimelong"/
+
+__unknown_file (
+implicit return:!
+
+‡  ‡(1
+currentIndexint:+
+
+‡3 ‡(J
+categoryIdsjava.util.List:!
+
+‡L ‡(]
+currentTimelongB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerHÂ
+Scom.smilepile.ui.screens.CategorySwipeHandler#handleSwipeRight(ILjava/util/List;J)Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktË Ë( "0*∑
+2
+È/ Î(	l
+j
+
+Í Í(	
+%2int""kotlin.collections.List#getSize()I*-
+
+Í Í(
+
+categoryIdsjava.util.Liste
+c
+
+Í Í( 
+%3"__calculate*
+
+Í Í(
+-*
+
+Í Í(
+	
+%2int*
+
+Í Í( 2L
+J
+
+__unknown_file (
+%1"__id*"
+
+__unknown_file (
+
+%3*
+1*”
+3
+Î Ì(	o
+m
+
+Ï Ï(
+%4"__calculate*
+
+Ï Ï(
+-*#
+
+Ï Ï(
+
+currentIndexint*
+
+Ï Ï(2L
+J
+
+__unknown_file (
+%1"__id*"
+
+__unknown_file (
+
+%4*
+1*≥
+0
+Ë Ë(ôñ
+
+È È(-
+%0boolean"&kotlin.Int#equals(Ljava/lang/Object;)Z*#
+
+È È((
+
+currentIndexint*
+
+È, È(-2 2equals(Ljava/lang/Object;)*
+2
+3*®
+1
+Î Ì(	J
+H
+
+È Ì(	
+	prevIndexint"__id*"
+
+__unknown_file (
+
+%1¶£
+
+Ó Ó(3
+
+%5long"0kotlin.collections.List#get(I)Ljava/lang/Object;*-
+
+Ó Ó((
+
+categoryIdsjava.util.List* 
+
+Ó) Ó(2
+
+	prevIndexint2get(I)H
+F
+
+Ó Ó(3
+prevCategoryIdlong"__id*
+
+Ó Ó(3
+
+
+%5long›
+⁄
+
+ ($
+%6kotlin.jvm.functions.Function1"ecom.smilepile.ui.screens.CategorySwipeHandler#getOnCategorySelected()Lkotlin/jvm/functions/Function1;*?
+
+ (1/
+-com.smilepile.ui.screens.CategorySwipeHandler€ÿ
+
+ (*
+%7kotlin.Unit"=kotlin.Function1#invoke(Ljava/lang/Object;)Ljava/lang/Object;*4
+
+ (&
+$
+%6kotlin.jvm.functions.Function1*&
+
+ ()
+
+prevCategoryIdlong2invoke(Ljava/lang/Object;)Ë
+Â
+
+Ò Ò(#
+%8java.lang.Object"Ycom.smilepile.ui.screens.CategorySwipeHandler#setLastSwipeTime(Lerror/NonExistentClass;)V*?
+
+Ò Ò(#1/
+-com.smilepile.ui.screens.CategorySwipeHandler*#
+
+Ò Ò(#
+
+currentTimelong"/
+
+__unknown_file (
+implicit return:!
+
+Ë! Ë(2
+currentIndexint:+
+
+Ë4 Ë(K
+categoryIdsjava.util.List:!
+
+ËM Ë(^
+currentTimelongB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerH£
+:com.smilepile.ui.screens.CategorySwipeHandler#resetDrag()Vr
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.ktÙ Ù("0*∏
+0
+Ù Ù(ı
+Ú
+
+ı ı(!
+%0java.lang.Object"`com.smilepile.ui.screens.CategorySwipeHandler#setHorizontalDragOffset(Lerror/NonExistentClass;)V*?
+
+ı ı(!1/
+-com.smilepile.ui.screens.CategorySwipeHandler*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB1/
+-com.smilepile.ui.screens.CategorySwipeHandlerHß
+
+¶com.smilepile.ui.screens#rememberCategorySwipeHandler(Ljava/util/List;Ljava/lang/Long;Lkotlin/jvm/functions/Function1;)Lcom/smilepile/ui/screens/CategorySwipeHandler;r
+f/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/KidsModeGalleryScreen.kt˙ ˙(("0*¿
+0˘ ˙(è
+å
+
+˚ ˚(
+%0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*:
+
+__unknown_file (
+
+
+categoriesjava.util.List^
+\
+
+˚ ˚(
+
+categoriesjava.util.List"__annotation*"
+
+__unknown_file (
+
+%0ó
+î
+
+¸ ¸(
+%1"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*B
+
+__unknown_file (&
+$
+selectedCategoryIdjava.lang.Longf
+d
+
+¸ ¸($
+selectedCategoryIdjava.lang.Long"__annotation*"
+
+__unknown_file (
+
+%1ß
+§
+
+˝ ˝(&
+%2"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*R
+
+__unknown_file (6
+4
+onCategorySelectedkotlin.jvm.functions.Function1v
+t
+
+˝ ˝(&4
+onCategorySelectedkotlin.jvm.functions.Function1"__annotation*"
+
+__unknown_file (
+
+%2"
+
+ˇ Å(
+	<unknown>:*
+
+˚ ˚(
+
+categoriesjava.util.List:2
+
+¸ ¸($
+selectedCategoryIdjava.lang.Long:B
+
+˝ ˝(&4
+onCategorySelectedkotlin.jvm.functions.Function1B"
+com.smilepile.ui.screensH

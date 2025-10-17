@@ -317,6 +317,9 @@ struct ParentModeView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // Demo Mode Banner (if active)
+            DemoModeBanner(settingsManager: settingsManager)
+
             // Main content area
             Group {
                 switch selectedTab {

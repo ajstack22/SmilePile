@@ -135,6 +135,12 @@ fun MainScreen(
 
     Box(modifier = modifier.fillMaxSize()) {
         Scaffold(
+            topBar = {
+                // Show demo banner only in Parent Mode
+                if (currentMode == AppMode.PARENT) {
+                    com.smilepile.ui.components.DemoModeBanner()
+                }
+            },
             bottomBar = {
             if (shouldShowBottomNavigation) {
                 SmilePileBottomNavigation(

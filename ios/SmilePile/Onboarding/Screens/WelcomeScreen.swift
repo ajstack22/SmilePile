@@ -59,18 +59,46 @@ struct WelcomeScreen: View {
 
             Spacer()
 
-            // Get Started button
-            Button(action: {
-                coordinator.navigateToNext()
-            }) {
-                Text("Get Started")
-                    .font(typography.bodyLarge)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+            // Try Demo button
+            VStack(spacing: 12) {
+                Button(action: {
+                    coordinator.enterDemoMode()
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "star.fill")
+                            .font(typography.bodyMedium)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Try Demo")
+                                .font(typography.bodyLarge)
+                                .fontWeight(.bold)
+                            Text("Explore with pre-filled example photos")
+                                .font(typography.labelMedium)
+                        }
+                        Spacer()
+                    }
+                    .foregroundColor(Color(red: 156/255, green: 39/255, blue: 176/255))
                     .frame(maxWidth: .infinity)
                     .frame(height: 56)
-                    .background(Color.smilePileBlue)
-                    .cornerRadius(12)
+                    .padding(.horizontal, 16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color(red: 156/255, green: 39/255, blue: 176/255), lineWidth: 2)
+                    )
+                }
+
+                // Get Started button
+                Button(action: {
+                    coordinator.navigateToNext()
+                }) {
+                    Text("Get Started")
+                        .font(typography.bodyLarge)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 56)
+                        .background(Color.smilePileBlue)
+                        .cornerRadius(12)
+                }
             }
             .padding(.horizontal, 40)
             .padding(.bottom, 50)

@@ -34,6 +34,7 @@ fun OnboardingScreen(
     onBiometricToggle: (Boolean) -> Unit,
     isBiometricAvailable: Boolean,
     onImportBackup: () -> Unit,
+    onTryDemo: () -> Unit,
     onComplete: () -> Unit
 ) {
     Box(
@@ -91,7 +92,8 @@ fun OnboardingScreen(
                     OnboardingStep.WELCOME -> {
                         WelcomeScreen(
                             onGetStarted = onNavigateNext,
-                            onImportBackup = onImportBackup
+                            onImportBackup = onImportBackup,
+                            onTryDemo = onTryDemo
                         )
                     }
                     OnboardingStep.CATEGORIES -> {

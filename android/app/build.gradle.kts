@@ -27,11 +27,11 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.smilepile"
+        applicationId = "app.smilepile"
         minSdk = 24
         targetSdk = 35
-        versionCode = 251015016  // YYMMDDVVV format as integer
-        versionName = "25.10.15.016"
+        versionCode = 251017002  // YYMMDDVVV format as integer
+        versionName = "25.10.17.002"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

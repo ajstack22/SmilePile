@@ -150,6 +150,9 @@ node_modules/
 *.secret
 secrets/
 api-keys/android/.gradle/8.2/
+.env
+.env.local
+.env.*.local
 
 # SmilePile Deployment Credentials - NEVER COMMIT
 android/keystore.properties
@@ -230,3 +233,6 @@ app-store-connect-api-keys/
 *.mobileprovision
 **/keystores/*.keystore
 android/app/keystore.properties
+
+# Build number tracking (generated, not source)
+.build_number

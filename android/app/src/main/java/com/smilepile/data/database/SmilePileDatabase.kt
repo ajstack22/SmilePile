@@ -31,7 +31,7 @@ import com.smilepile.data.backup.EntityType
         DeletionRecord::class,
         CompressedArchive::class
     ],
-    version = 8,
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -66,6 +66,14 @@ abstract class SmilePileDatabase : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the same time
         @Volatile
         private var INSTANCE: SmilePileDatabase? = null
+
+        // Migration from version 8 to 9: Add is_demo_category column to categories
+        private val MIGRATION_8_9 = object : Migration(8, 9) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Add is_demo_category column to category_entities table
+                database.execSQL("ALTER TABLE category_entities ADD COLUMN is_demo_category INTEGER NOT NULL DEFAULT 0")
+            }
+        }
 
         // Migration from version 7 to 8: Add deletion tracking tables
         private val MIGRATION_7_8 = object : Migration(7, 8) {
@@ -242,7 +250,7 @@ abstract class SmilePileDatabase : RoomDatabase() {
                     SmilePileDatabase::class.java,
                     "smilepile_database"
                 )
-                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8)
+                    .addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9)
                     .fallbackToDestructiveMigration() // Fallback for other version jumps
                     .build()
                 INSTANCE = instance

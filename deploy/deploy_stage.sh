@@ -184,18 +184,17 @@ check_prerequisites() {
     log SUCCESS "All prerequisites met"
 }
 
-# Wave 7: Git lock for concurrent deployment safety
+# Wave 7: Git lock for concurrent deployment safety (macOS compatible)
 acquire_git_lock() {
-    local lock_file="$PROJECT_ROOT/.git/deployment.lock"
+    local lock_dir="$PROJECT_ROOT/.git/deployment.lock.d"
     local lock_timeout=5
     local wait_time=0
 
-    exec 200>"$lock_file"
-
-    while ! flock -n 200; do
+    while ! mkdir "$lock_dir" 2>/dev/null; do
         if [[ $wait_time -ge $lock_timeout ]]; then
             log ERROR "Could not acquire deployment lock after ${lock_timeout}s"
             log ERROR "Another deployment may be in progress"
+            log ERROR "If you're sure no deployment is running, remove: $lock_dir"
             exit 1
         fi
         log INFO "Waiting for deployment lock..."
@@ -204,7 +203,7 @@ acquire_git_lock() {
     done
 
     # Set trap to release lock on exit
-    trap 'flock -u 200' EXIT
+    trap "rm -rf '$lock_dir'" EXIT INT TERM
 
     log INFO "Deployment lock acquired"
 }

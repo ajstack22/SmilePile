@@ -21,7 +21,8 @@ import java.util.concurrent.ConcurrentHashMap
 @Singleton
 class PhotoRepositoryImpl @Inject constructor(
     private val photoDao: PhotoDao,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val settingsManager: com.smilepile.settings.SettingsManager
 ) : PhotoRepository {
     // Cache to reduce database queries and improve performance
     private val photoCacheById = ConcurrentHashMap<Long, Photo>()
@@ -31,12 +32,16 @@ class PhotoRepositoryImpl @Inject constructor(
      * Uses a stable hash of the URI to generate a consistent Long ID
      */
     private fun PhotoEntity.toPhoto(): Photo {
+        val filename = this.uri.substringAfterLast("/").substringBeforeLast(".")
+        // Demo photos have names like "demo_milestones_001"
+        val isFromAssets = filename.startsWith("demo_")
+
         return Photo(
             id = generateStableIdFromUri(this.uri),
             path = this.uri,
             categoryId = this.categoryId,
-            name = this.uri.substringAfterLast("/").substringBeforeLast("."),
-            isFromAssets = false,
+            name = filename,
+            isFromAssets = isFromAssets,
             createdAt = this.timestamp,
             fileSize = 0L, // PhotoEntity doesn't store file size
             width = 0, // PhotoEntity doesn't store dimensions
@@ -261,7 +266,20 @@ class PhotoRepositoryImpl @Inject constructor(
     override suspend fun getAllPhotos(): List<Photo> = withContext(ioDispatcher) {
         try {
             // Since PhotoDao.getAll returns Flow, we need to get the first emission
-            photoDao.getAll().first().map { it.toPhoto() }
+            val allPhotos = photoDao.getAll().first().map { it.toPhoto() }
+
+            // Filter based on demo mode
+            val isDemoMode = settingsManager.isDemoMode().first()
+            val filteredPhotos = allPhotos.filter { photo ->
+                if (isDemoMode) {
+                    photo.isFromAssets == true
+                } else {
+                    photo.isFromAssets == false
+                }
+            }
+
+            android.util.Log.d("PhotoRepository", "Retrieved ${filteredPhotos.size} photos (demo mode: $isDemoMode, total in DB: ${allPhotos.size})")
+            filteredPhotos
         } catch (e: Exception) {
             throw PhotoRepositoryException("Failed to get all photos: ${e.message}", e)
         }

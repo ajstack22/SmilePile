@@ -105,15 +105,19 @@ update_ios_version() {
         return 1
     fi
 
-    log INFO "Updating iOS version to $VERSION_NAME ($VERSION_CODE)"
+    # iOS requires max 3-part version (YY.MM.DD), not 4-part
+    # Extract first 3 parts from VERSION_NAME (25.10.16.007 -> 25.10.16)
+    local ios_version_string=$(echo "$VERSION_NAME" | cut -d. -f1-3)
 
-    # Update CFBundleShortVersionString (version name)
-    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION_NAME" "$plist_file" 2>/dev/null || {
+    log INFO "Updating iOS version to $ios_version_string ($VERSION_CODE)"
+
+    # Update CFBundleShortVersionString (version name - max 3 parts for iOS)
+    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $ios_version_string" "$plist_file" 2>/dev/null || {
         # Try alternate method with plutil
-        plutil -replace CFBundleShortVersionString -string "$VERSION_NAME" "$plist_file"
+        plutil -replace CFBundleShortVersionString -string "$ios_version_string" "$plist_file"
     }
 
-    # Update CFBundleVersion (build number)
+    # Update CFBundleVersion (build number - can have full precision)
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION_CODE" "$plist_file" 2>/dev/null || {
         # Try alternate method with plutil
         plutil -replace CFBundleVersion -string "$VERSION_CODE" "$plist_file"

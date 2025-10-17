@@ -76,6 +76,11 @@ class SettingsManager @Inject constructor(
         private val KEY_MIGRATION_VERSION = intPreferencesKey("migration_version")
         private val KEY_ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
 
+        // Demo Mode Settings
+        private val KEY_IS_DEMO_MODE = booleanPreferencesKey("is_demo_mode")
+        private val KEY_DEMO_MODE_ENTERED = booleanPreferencesKey("demo_mode_entered")
+        private val KEY_DEMO_MODE_ENTRY_COUNT = intPreferencesKey("demo_mode_entry_count")
+
         // Default Values
         const val DEFAULT_GRID_SIZE = 3
         const val DEFAULT_CACHE_SIZE_MB = 100
@@ -537,6 +542,42 @@ class SettingsManager @Inject constructor(
     fun getMigrationVersion(): Flow<Int> = context.dataStore.data
         .map { preferences ->
             preferences[KEY_MIGRATION_VERSION] ?: 0
+        }
+
+    // Demo Mode Settings
+
+    suspend fun setDemoMode(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_IS_DEMO_MODE] = enabled
+        }
+    }
+
+    fun isDemoMode(): Flow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[KEY_IS_DEMO_MODE] ?: false
+        }
+
+    suspend fun setDemoModeEntered(entered: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[KEY_DEMO_MODE_ENTERED] = entered
+        }
+    }
+
+    fun hasDemoModeEntered(): Flow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[KEY_DEMO_MODE_ENTERED] ?: false
+        }
+
+    suspend fun incrementDemoModeEntryCount() {
+        context.dataStore.edit { preferences ->
+            val current = preferences[KEY_DEMO_MODE_ENTRY_COUNT] ?: 0
+            preferences[KEY_DEMO_MODE_ENTRY_COUNT] = current + 1
+        }
+    }
+
+    fun getDemoModeEntryCount(): Flow<Int> = context.dataStore.data
+        .map { preferences ->
+            preferences[KEY_DEMO_MODE_ENTRY_COUNT] ?: 0
         }
 
     // Batch Operations

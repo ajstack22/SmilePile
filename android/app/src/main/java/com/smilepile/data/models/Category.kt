@@ -34,6 +34,9 @@ data class Category(
     @ColumnInfo(name = "is_default")
     val isDefault: Boolean = false,
 
+    @ColumnInfo(name = "is_demo_category")
+    val isDemoCategory: Boolean = false,
+
     @ColumnInfo(name = "created_at")
     val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable {

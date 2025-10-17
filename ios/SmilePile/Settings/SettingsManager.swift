@@ -77,6 +77,11 @@ class SettingsManager: ObservableObject {
         static let hapticFeedbackEnabled = "haptic_feedback_enabled"
         static let swipeGesturesEnabled = "swipe_gestures_enabled"
         static let photoLibraryPermissionGranted = "photo_library_permission_granted"
+
+        // Demo Mode Settings
+        static let isDemoMode = "is_demo_mode"
+        static let demoModeEntered = "demo_mode_entered"
+        static let demoModeEntryCount = "demo_mode_entry_count"
     }
 
     // MARK: - Enums
@@ -185,6 +190,11 @@ class SettingsManager: ObservableObject {
     @AppStorage(Keys.hapticFeedbackEnabled) var hapticFeedbackEnabled: Bool = true
     @AppStorage(Keys.swipeGesturesEnabled) var swipeGesturesEnabled: Bool = true
     @AppStorage(Keys.photoLibraryPermissionGranted) var photoLibraryPermissionGranted: Bool = false
+
+    // Demo Mode Properties
+    @AppStorage(Keys.isDemoMode) var isDemoMode: Bool = false
+    @AppStorage(Keys.demoModeEntered) var demoModeEntered: Bool = false
+    @AppStorage(Keys.demoModeEntryCount) var demoModeEntryCount: Int = 0
 
     // MARK: - Computed Properties for Enums
 
@@ -351,7 +361,10 @@ class SettingsManager: ObservableObject {
             Keys.migrationVersion: 0,
             Keys.hapticFeedbackEnabled: true,
             Keys.swipeGesturesEnabled: true,
-            Keys.photoLibraryPermissionGranted: false
+            Keys.photoLibraryPermissionGranted: false,
+            Keys.isDemoMode: false,
+            Keys.demoModeEntered: false,
+            Keys.demoModeEntryCount: 0
         ]
         userDefaults.register(defaults: defaults)
     }

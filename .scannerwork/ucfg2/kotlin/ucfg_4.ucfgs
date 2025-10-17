@@ -1,6 +1,6 @@
 õ
 5com.smilepile.onboarding.OnboardingActivity#<init>()Vl
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt ó("0*<
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt õ("0*<
 0 ("/
 
 __unknown_file (
@@ -281,26 +281,31 @@ J
 savedInstanceStatejava.lang.ObjectB/-
 +com.smilepile.onboarding.OnboardingActivityH“
 Fcom.smilepile.onboarding.OnboardingActivity#handleImportBackup(LUri;)Vm
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.ktY Y(""0*>
-0Y Y("/
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt] ](""0*>
+0] ]("/
 
 __unknown_file (
 implicit return:#
-Y# Y(+
+]# ](+
 urijava.lang.ObjectB/-
-+com.smilepile.onboarding.OnboardingActivityH˚
-Rcom.smilepile.onboarding.OnboardingActivity#copyUriToTempFile(LUri;)Ljava/io/File;m
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.kt| |(!"2"4*ú
-2~ ~(HTR
-~ ~(H%
-%1java.lang.IllegalStateException"java.lang.IllegalStateException±
-Æ
-~ ~(H
-%2";java.lang.IllegalStateException#<init>(Ljava/lang/String;)V*3
-~ ~(H'
++com.smilepile.onboarding.OnboardingActivityHè
+Rcom.smilepile.onboarding.OnboardingActivity#copyUriToTempFile(LUri;)Ljava/io/File;o
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.ktÄ Ä(!"2"4*¶
+2
+Ç Ç(HVT
+
+Ç Ç(H%
+%1java.lang.IllegalStateException"java.lang.IllegalStateException∑
+¥
+
+Ç Ç(H
+%2";java.lang.IllegalStateException#<init>(Ljava/lang/String;)V*5
+
+Ç Ç(H'
 %
-%1java.lang.IllegalStateException**
-~, ~(F
+%1java.lang.IllegalStateException*,
+
+Ç, Ç(F
 Failed to read backup file*
 3*I
 3
@@ -308,8 +313,9 @@ c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/O
 
 __unknown_file (
 
-early exit*j
-4} }(>S
+early exit*l
+4
+Å Å(>S
 Q
 
 __unknown_file (
@@ -318,10 +324,12 @@ Q
 __unknown_file (
 	<unknown>*
 2
-1*ˇ
-1~ ~(HW
-U
-} ~(H
+1*É
+1
+Ç Ç(HY
+W
+
+Å Ç(H
 inputStreamjava.lang.Object"__id*"
 
 __unknown_file (
@@ -329,69 +337,70 @@ U
 %0c
 a
 
-Ä Ä(Z"
+Ñ Ñ(Z"
 tempFileerror.NonExistentClass"__id*)
 
 __unknown_file (
 	<unknown>"2
 
-Ü Ü($
+ä ä($
 "
-tempFileerror.NonExistentClass:#
-|" |(*
+tempFileerror.NonExistentClass:%
+
+Ä" Ä(*
 urijava.lang.ObjectB/-
 +com.smilepile.onboarding.OnboardingActivityHh÷
 Lcom.smilepile.onboarding.OnboardingActivity#detectZipFormat(Ljava/io/File;)Zo
-c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.ktâ â("1*%
+c/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/onboarding/OnboardingActivity.ktç ç("1*%
 2
-ì
- ï(	"
+ó
+ ô(	"
 
-ä ï(	
+é ô(	
 
 %0*W
 3
-ì ï(	A
+ó ô(	A
 ?
 
 __unknown_file (
 %0"__id*
 
-î î(	
+ò ò(	
 false*
 2*∂
 1
-ä ì(	z
+é ó(	z
 x
 
-ã ã(
+è è(
 %1java.lang.String"(java.io.File#getName()Ljava/lang/String;*(
 
-ã ã(
+è è(
 
 tempFilejava.io.Filefd
 
-å å(
+ê ê(
 
 %2long"java.io.File#length()J*(
 
-å å(
+ê ê(
 
 tempFilejava.io.File2length()d
 b
 
-å å("
+ê ê("
 %3"	__compare*
 
-å å( 
+ê ê( 
 >*
 
-å å(
+ê ê(
 
 
 %2long*
 
-å! å("2S
+ê! ê("2S
 Q
 
 __unknown_file (
@@ -402,6 +411,6 @@ Q
 2
 3:&
 
-â  â(6
+ç  ç(6
 tempFilejava.io.FileB/-
 +com.smilepile.onboarding.OnboardingActivityH

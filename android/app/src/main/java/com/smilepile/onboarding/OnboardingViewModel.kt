@@ -65,7 +65,8 @@ class OnboardingViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val photoRepository: PhotoRepository,
     private val securePreferencesManager: ISecurePreferencesManager,
-    private val settingsManager: SettingsManager
+    private val settingsManager: SettingsManager,
+    @dagger.hilt.android.qualifiers.ApplicationContext private val context: android.content.Context
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(OnboardingUiState())
@@ -324,5 +325,157 @@ class OnboardingViewModel @Inject constructor(
 
     fun setBiometricEnabled(enabled: Boolean) {
         _uiState.update { it.copy(biometricEnabled = enabled) }
+    }
+
+    // MARK: - Demo Mode
+
+    fun enterDemoMode() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+
+            try {
+                // Set demo mode flags
+                settingsManager.setDemoMode(true)
+                settingsManager.setDemoModeEntered(true)
+                settingsManager.incrementDemoModeEntryCount()
+
+                // Mark onboarding as complete
+                settingsManager.setOnboardingCompleted(true)
+                settingsManager.setFirstLaunch(false)
+
+                // Load demo data if needed
+                loadDemoDataIfNeeded()
+
+                _uiState.update { it.copy(
+                    isLoading = false,
+                    currentStep = OnboardingStep.COMPLETE
+                ) }
+
+            } catch (e: Exception) {
+                handleOnboardingError(e)
+            }
+        }
+    }
+
+    private suspend fun loadDemoDataIfNeeded() {
+        // Check if demo data already exists
+        val existingPhotos = photoRepository.getAllPhotos()
+        val demoPhotos = existingPhotos.filter { it.isFromAssets }
+
+        if (demoPhotos.isNotEmpty()) {
+            android.util.Log.d("OnboardingVM", "Demo data already exists (${demoPhotos.size} photos), skipping load")
+            return
+        }
+
+        android.util.Log.d("OnboardingVM", "Loading demo data...")
+
+        // Load categories first
+        val loadedCategories = mutableListOf<com.smilepile.data.models.Category>()
+        com.smilepile.data.demo.DemoData.categories.forEach { categoryData ->
+            val category = com.smilepile.data.models.Category(
+                id = 0, // Auto-generate
+                name = categoryData.name,
+                displayName = categoryData.displayName,
+                position = categoryData.position,
+                iconResource = categoryData.icon,
+                colorHex = categoryData.colorHex,
+                isDefault = false,
+                isDemoCategory = true,
+                createdAt = System.currentTimeMillis()
+            )
+
+            val categoryId = categoryRepository.insertCategory(category)
+            val insertedCategory = category.copy(id = categoryId)
+            loadedCategories.add(insertedCategory)
+            android.util.Log.d("OnboardingVM", "Created demo category: ${categoryData.displayName} (id: $categoryId)")
+        }
+
+        // Load first 10 photos immediately (high priority)
+        val priorityPhotos = com.smilepile.data.demo.DemoData.photoMetadata.take(10)
+        priorityPhotos.forEach { photoMeta ->
+            loadDemoPhoto(photoMeta, loadedCategories)
+        }
+
+        // Load remaining photos in background
+        val remainingPhotos = com.smilepile.data.demo.DemoData.photoMetadata.drop(10)
+        if (remainingPhotos.isNotEmpty()) {
+            viewModelScope.launch {
+                remainingPhotos.forEach { photoMeta ->
+                    try {
+                        loadDemoPhoto(photoMeta, loadedCategories)
+                    } catch (e: Exception) {
+                        android.util.Log.w("OnboardingVM", "Failed to load demo photo ${photoMeta.assetName}: ${e.message}")
+                    }
+                }
+                android.util.Log.d("OnboardingVM", "Background demo photo loading complete")
+            }
+        }
+
+        android.util.Log.d("OnboardingVM", "Demo data loading initiated (10 photos loaded, ${remainingPhotos.size} loading in background)")
+    }
+
+    private suspend fun loadDemoPhoto(
+        photoMeta: com.smilepile.data.demo.DemoData.PhotoMetadata,
+        categories: List<com.smilepile.data.models.Category>
+    ) {
+        val categoryId = com.smilepile.data.demo.DemoData.getCategoryId(photoMeta.categoryName, categories)
+        if (categoryId == null) {
+            android.util.Log.w("OnboardingVM", "Category not found for ${photoMeta.categoryName}")
+            return
+        }
+
+        // Copy from drawable to app filesDir
+        try {
+            val resourceId = getResourceId(photoMeta.assetName)
+            if (resourceId == 0) {
+                android.util.Log.w("OnboardingVM", "Resource not found: ${photoMeta.assetName}")
+                return
+            }
+
+            // Create file in app storage
+            val fileName = "${photoMeta.assetName}.jpg"
+            val file = java.io.File(context.filesDir, fileName)
+
+            // Copy resource to file
+            copyResourceToFile(resourceId, file)
+
+            // Create Photo object
+            val photo = com.smilepile.data.models.Photo(
+                id = 0,
+                path = file.absolutePath,
+                categoryId = categoryId,
+                name = photoMeta.assetName,
+                isFromAssets = true,
+                createdAt = photoMeta.date.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                fileSize = file.length(),
+                width = 0, // Will be calculated when needed
+                height = 0  // Will be calculated when needed
+            )
+
+            photoRepository.insertPhoto(photo)
+            android.util.Log.d("OnboardingVM", "Loaded demo photo: ${photoMeta.assetName} -> category $categoryId")
+
+        } catch (e: Exception) {
+            android.util.Log.w("OnboardingVM", "Failed to load demo photo ${photoMeta.assetName}: ${e.message}")
+        }
+    }
+
+    private fun getResourceId(assetName: String): Int {
+        // Get resource ID from drawable using reflection
+        // Resource naming: demo_milestones_001 -> R.drawable.demo_milestones_001
+        return try {
+            context.resources.getIdentifier(assetName, "drawable", context.packageName)
+        } catch (e: Exception) {
+            android.util.Log.w("OnboardingVM", "Failed to get resource ID for $assetName: ${e.message}")
+            0
+        }
+    }
+
+    private fun copyResourceToFile(resourceId: Int, file: java.io.File) {
+        context.resources.openRawResource(resourceId).use { input ->
+            file.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        }
     }
 }
