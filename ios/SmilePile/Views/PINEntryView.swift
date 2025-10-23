@@ -18,6 +18,7 @@ struct PINEntryView: View {
     @State private var timer: Timer?
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     enum PINEntryMode {
         case setup
@@ -25,8 +26,29 @@ struct PINEntryView: View {
         case change
     }
 
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var buttonSize: CGFloat {
+        isIPad ? 90 : 72
+    }
+
+    private var buttonSpacing: CGFloat {
+        isIPad ? 32 : 24
+    }
+
+    private var iconSize: CGFloat {
+        isIPad ? 100 : 80
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 500 : nil
+    }
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Header section with consistent styling
                 VStack(spacing: 20) {
@@ -34,13 +56,13 @@ struct PINEntryView: View {
                     ZStack {
                         Circle()
                             .fill(Color.smilePileYellow.opacity(0.1))
-                            .frame(width: 80, height: 80)
+                            .frame(width: iconSize, height: iconSize)
 
                         Image(systemName: mode == .validate ? "lock.fill" : "lock.shield.fill")
-                            .font(.system(size: 36))
+                            .font(.system(size: isIPad ? 44 : 36))
                             .foregroundColor(Color.smilePileYellow)
                     }
-                    .padding(.top, 32)
+                    .padding(.top, isIPad ? 40 : 32)
 
                     // Title and subtitle
                     VStack(spacing: 8) {
@@ -106,54 +128,61 @@ struct PINEntryView: View {
 
                 Spacer()
 
-                // Number Pad with improved design
-                VStack(spacing: 20) {
-                    ForEach(0..<3) { row in
-                        HStack(spacing: 24) {
-                            ForEach(1...3, id: \.self) { col in
-                                let number = row * 3 + col
-                                PINNumberButton(number: "\(number)") {
-                                    if cooldownRemaining == 0 {
-                                        addDigit("\(number)")
-                                        provideHapticFeedback()
+                // Number Pad with improved design - centered on iPad
+                HStack {
+                    if isIPad { Spacer() }
+
+                    VStack(spacing: isIPad ? 24 : 20) {
+                        ForEach(0..<3) { row in
+                            HStack(spacing: buttonSpacing) {
+                                ForEach(1...3, id: \.self) { col in
+                                    let number = row * 3 + col
+                                    PINNumberButton(number: "\(number)", size: buttonSize) {
+                                        if cooldownRemaining == 0 {
+                                            addDigit("\(number)")
+                                            provideHapticFeedback()
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    HStack(spacing: 24) {
-                        // Empty space for layout
-                        Color.clear
-                            .frame(width: 72, height: 72)
+                        HStack(spacing: buttonSpacing) {
+                            // Empty space for layout
+                            Color.clear
+                                .frame(width: buttonSize, height: buttonSize)
 
-                        PINNumberButton(number: "0") {
-                            if cooldownRemaining == 0 {
-                                addDigit("0")
+                            PINNumberButton(number: "0", size: buttonSize) {
+                                if cooldownRemaining == 0 {
+                                    addDigit("0")
+                                    provideHapticFeedback()
+                                }
+                            }
+
+                            // Backspace with consistent design
+                            Button(action: {
+                                removeDigit()
                                 provideHapticFeedback()
-                            }
-                        }
+                            }) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.08))
+                                        .frame(width: buttonSize, height: buttonSize)
 
-                        // Backspace with consistent design
-                        Button(action: {
-                            removeDigit()
-                            provideHapticFeedback()
-                        }) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.gray.opacity(0.08))
-                                    .frame(width: 72, height: 72)
-
-                                Image(systemName: "delete.left.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.secondary)
+                                    Image(systemName: "delete.left.fill")
+                                        .font(.system(size: isIPad ? 28 : 24))
+                                        .foregroundColor(.secondary)
+                                }
                             }
+                            .buttonStyle(ScaleButtonStyle())
                         }
-                        .buttonStyle(ScaleButtonStyle())
                     }
+                    .frame(maxWidth: contentMaxWidth)
+
+                    if isIPad { Spacer() }
                 }
-                .padding(.horizontal, 40)
-                .padding(.bottom, 40)
+                .padding(.horizontal, isIPad ? 48 : 40)
+                .padding(.bottom, isIPad ? 48 : 40)
                 .disabled(cooldownRemaining > 0)
                 .opacity(cooldownRemaining > 0 ? 0.5 : 1.0)
             }
@@ -316,6 +345,7 @@ struct PINEntryView: View {
 
 private struct PINNumberButton: View {
     let number: String
+    let size: CGFloat
     let action: () -> Void
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.typography) var typography
@@ -327,7 +357,7 @@ private struct PINNumberButton: View {
                     .fill(colorScheme == .dark
                         ? Color.gray.opacity(0.15)
                         : Color.gray.opacity(0.08))
-                    .frame(width: 72, height: 72)
+                    .frame(width: size, height: size)
 
                 Text(number)
                     .font(typography.headlineMedium)

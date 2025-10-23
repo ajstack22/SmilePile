@@ -22,6 +22,9 @@ interface CategoryRepository {
     // Demo mode support
     suspend fun deleteDemoCategories()
 
+    // For clearing all data (bypasses demo mode filter)
+    suspend fun getAllCategoriesUnfiltered(): List<Category>
+
     // Batch operations for photo-category associations
     suspend fun assignPhotosToCategory(photoIds: List<String>, categoryId: Long)
     suspend fun removePhotosFromCategory(photoIds: List<String>, categoryId: Long)

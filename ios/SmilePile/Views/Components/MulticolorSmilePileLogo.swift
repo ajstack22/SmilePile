@@ -14,30 +14,42 @@ struct MulticolorSmilePileLogo: View {
             Text("Smile")
                 .foregroundColor(.smilePileYellow)
                 .font(.custom("Nunito", size: fontSize).weight(.heavy))
+                .if(showShadow) { view in
+                    view.shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                        .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
+                }
 
             Text("P")
                 .foregroundColor(.smilePileGreen)
                 .font(.custom("Nunito", size: fontSize).weight(.heavy))
+                .if(showShadow) { view in
+                    view.shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                        .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
+                }
 
             Text("i")
                 .foregroundColor(.smilePileBlue)
                 .font(.custom("Nunito", size: fontSize).weight(.heavy))
+                .if(showShadow) { view in
+                    view.shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                        .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
+                }
 
             Text("l")
                 .foregroundColor(.smilePileOrange)
                 .font(.custom("Nunito", size: fontSize).weight(.heavy))
+                .if(showShadow) { view in
+                    view.shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                        .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
+                }
 
             Text("e")
                 .foregroundColor(.smilePilePink)
                 .font(.custom("Nunito", size: fontSize).weight(.heavy))
-        }
-        .if(showShadow) { view in
-            view.shadow(
-                color: .black.opacity(0.9),
-                radius: 6,
-                x: 4,
-                y: 4
-            )
+                .if(showShadow) { view in
+                    view.shadow(color: Color.black.opacity(0.5), radius: 1, x: 1, y: 1)
+                        .shadow(color: Color.black.opacity(0.3), radius: 0, x: 1, y: 1)
+                }
         }
     }
 }

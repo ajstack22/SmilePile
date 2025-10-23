@@ -6,6 +6,24 @@ struct BatchCategorizationView: View {
     @StateObject private var viewModel = BatchCategorizationViewModel()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var gridMinimum: CGFloat {
+        isIPad ? 130 : 100
+    }
+
+    private var gridSpacing: CGFloat {
+        isIPad ? 4 : 2
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 900 : nil
+    }
 
     var body: some View {
         NavigationStack {
@@ -54,24 +72,31 @@ struct BatchCategorizationView: View {
             // Quick actions
             quickActionsBar
 
-            // Photo grid with categories
+            // Photo grid with categories - centered on iPad
             ScrollView {
-                LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 100), spacing: 2)],
-                    spacing: 2
-                ) {
-                    ForEach(viewModel.photos) { photo in
-                        BatchPhotoCard(
-                            photo: photo,
-                            category: viewModel.getCategory(for: photo),
-                            isSelected: viewModel.selectedPhotoIds.contains(photo.id),
-                            onTap: {
-                                viewModel.togglePhotoSelection(photo.id)
-                            }
-                        )
+                HStack {
+                    if isIPad { Spacer() }
+
+                    LazyVGrid(
+                        columns: [GridItem(.adaptive(minimum: gridMinimum), spacing: gridSpacing)],
+                        spacing: gridSpacing
+                    ) {
+                        ForEach(viewModel.photos) { photo in
+                            BatchPhotoCard(
+                                photo: photo,
+                                category: viewModel.getCategory(for: photo),
+                                isSelected: viewModel.selectedPhotoIds.contains(photo.id),
+                                onTap: {
+                                    viewModel.togglePhotoSelection(photo.id)
+                                }
+                            )
+                        }
                     }
+                    .frame(maxWidth: contentMaxWidth)
+                    .padding(gridSpacing)
+
+                    if isIPad { Spacer() }
                 }
-                .padding(2)
             }
 
             // Category assignment bar

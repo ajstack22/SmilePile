@@ -2,21 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #0ea5e9;
-  --color-accent: #f59e0b;
-  --color-text: #1f2937;
-  --color-bg: #ffffff;
-  --max-content-width: 65ch;
-}
-
 @layer base {
   html {
     @apply scroll-smooth;
   }
-  
+
   body {
-    @apply min-h-screen bg-gray-50 text-gray-900 antialiased;
+    @apply text-gray-900 bg-white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    @apply text-4xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-bold leading-snug;
+  }
+
+  h3 {
+    @apply text-2xl font-bold leading-normal;
+  }
+
+  a {
+    @apply text-primary underline underline-offset-2;
+  }
+
+  a:hover {
+    @apply text-primary-600;
+  }
+
+  a:focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
   }
 }
 
@@ -24,27 +43,47 @@
   .skip-link {
     @apply absolute left-0 -top-10 z-50 bg-primary-600 text-white px-4 py-2 rounded focus:top-4;
   }
-  
+
+  .btn-primary {
+    @apply bg-primary text-white font-bold px-6 py-3 rounded-lg min-h-[48px];
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary-600;
+  }
+
+  .btn-primary:focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-primary text-primary bg-transparent font-bold px-6 py-3 rounded-lg min-h-[48px];
+  }
+
+  .btn-secondary:hover {
+    @apply bg-primary bg-opacity-10;
+  }
+
   .prose {
-    @apply max-w-content leading-relaxed;
+    @apply max-w-content leading-loose;
   }
-  
+
   .prose h2 {
-    @apply text-2xl font-bold mt-8 mb-4 text-gray-900;
+    @apply text-3xl font-bold mt-8 mb-4 text-gray-900;
   }
-  
+
   .prose h3 {
-    @apply text-xl font-semibold mt-6 mb-3 text-gray-900;
+    @apply text-2xl font-bold mt-6 mb-3 text-gray-900;
   }
-  
+
   .prose p {
     @apply mb-4 text-gray-700;
   }
-  
+
   .prose ul, .prose ol {
     @apply mb-4 ml-6;
   }
-  
+
   .prose li {
     @apply mb-2;
   }
@@ -52,7 +91,16 @@
 
 @layer utilities {
   .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -60,11 +108,11 @@
   header, footer, nav {
     display: none !important;
   }
-  
+
   body {
     @apply bg-white text-black;
   }
-  
+
   .no-print {
     display: none !important;
   }

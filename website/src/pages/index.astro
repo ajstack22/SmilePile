@@ -6,8 +6,8 @@ import DownloadButtons from '../components/DownloadButtons.astro';
 ---
 
 <BaseLayout
-  title="SmilePile - Family Photo Timeline Organizer"
-  description="Organize your family photos into beautiful timelines. Local-only storage keeps memories private. Available on iOS and Android."
+  title="SmilePile - Keep Family, Friends, and Favorites Close"
+  description="A curated photo gallery your child can enjoy anytime. Organize photos into piles of their favorite things—family, fun, characters. Protected from accidental changes, perfect for comfort and connection."
 >
   <Header slot="header" />
 
@@ -24,85 +24,82 @@ import DownloadButtons from '../components/DownloadButtons.astro';
   </script>
 
   <!-- Hero Section -->
-  <section class="bg-gradient-to-b from-primary-50 to-white py-20">
+  <section class="bg-gradient-to-b from-primary-50 to-white py-12 md:py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
-        <!-- Text Content -->
-        <div class="text-center lg:text-left">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            Organize Your Family Photos by
-            <span class="text-primary-600">Timeline</span>
-          </h1>
-          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-            SmilePile helps you rediscover precious moments by organizing photos
-            into beautiful timelines. Local-only storage keeps your memories private.
-          </p>
-          <DownloadButtons />
-        </div>
-
-        <!-- Hero Image Placeholder -->
-        <div class="mt-12 lg:mt-0">
-          <div class="mx-auto max-w-sm lg:max-w-none">
-            <div class="aspect-[9/16] bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl shadow-2xl flex items-center justify-center">
-              <svg class="w-24 h-24 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-          </div>
-        </div>
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Keep Family, Friends, and Favorites Close
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          A curated photo gallery your child can enjoy anytime—organized into piles of their favorite things, protected from accidental changes.
+        </p>
+        <DownloadButtons />
       </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-20 bg-white">
+  <section id="features" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          Everything You Need to Cherish Your Memories
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+          A Photo Gallery Made for Kids
         </h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          SmilePile makes it easy to organize, browse, and enjoy your family photos.
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Safe access to their favorite things, anytime they need it
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-12">
-        <!-- Feature 1 -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Feature 1: Curated Piles -->
         <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #FFBF0020;">
+            <svg class="w-8 h-8" style="color: #FFBF00;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Timeline View</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Curated Piles</h3>
           <p class="text-gray-600">
-            Browse your photos chronologically and relive your family's journey through time.
+            Organize photos into Family, Fun, Characters, or any category your child loves. Each pile becomes their own special collection.
           </p>
         </div>
 
-        <!-- Feature 2 -->
+        <!-- Feature 2: Safe Access -->
         <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #4CAF5020;">
+            <svg class="w-8 h-8" style="color: #4CAF50;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Privacy First</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Safe Access for Kids</h3>
           <p class="text-gray-600">
-            All photos stored locally on your device. No cloud sync, no tracking, complete privacy.
+            PIN or biometric protection prevents accidental deletion or changes, while giving your child unlimited viewing access.
           </p>
         </div>
 
-        <!-- Feature 3 -->
+        <!-- Feature 3: Comfort & Connection -->
         <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: #E8608220;">
+            <svg class="w-8 h-8" style="color: #E86082;" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Easy Search</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Comfort & Connection</h3>
           <p class="text-gray-600">
-            Quickly find the moments that matter with powerful search and filtering.
+            Many families find that easy access to favorite photos helps with separation anxiety, provides comfort during transitions, and offers a calming touchpoint.
+          </p>
+        </div>
+
+        <!-- Feature 4: Completely Private -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Completely Private</h3>
+          <p class="text-gray-600">
+            All photos stored locally on your device. No cloud, no internet required, no data collection.
           </p>
         </div>
       </div>
@@ -110,13 +107,13 @@ import DownloadButtons from '../components/DownloadButtons.astro';
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-primary-600">
+  <section class="py-16 bg-primary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
-        Start Organizing Your Memories Today
+      <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">
+        Give Your Child Access to Their Favorite Things
       </h2>
-      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-        Download SmilePile for free on iOS and Android. No account required.
+      <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+        Free on iOS and Android. No account required, completely private.
       </p>
       <div class="flex justify-center">
         <DownloadButtons />

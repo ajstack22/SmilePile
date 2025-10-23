@@ -29,6 +29,11 @@ const siteUrl = 'https://smilepile.app';
   <!-- Canonical URL -->
   <link rel="canonical" href={siteUrl + canonical}>
 
+  <!-- Google Fonts - Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content={siteUrl + canonical}>
@@ -48,7 +53,7 @@ const siteUrl = 'https://smilepile.app';
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
-<body class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+<body class="min-h-screen flex flex-col bg-white text-gray-900">
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <slot name="header" />
   <main id="main-content" class="flex-grow">

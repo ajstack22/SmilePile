@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddPhotoAlternate
 import androidx.compose.material.icons.filled.ArrowDownward
@@ -86,7 +87,9 @@ fun PhotoGalleryScreen(
     onNavigateToPhotoEditor: (List<String>) -> Unit = {},
     onNavigateToPhotoEditorWithUris: (List<android.net.Uri>, Long) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier,
-    paddingValues: PaddingValues = PaddingValues(0.dp)
+    paddingValues: PaddingValues = PaddingValues(0.dp),
+    demoState: com.smilepile.ui.viewmodels.DemoModeUiState = com.smilepile.ui.viewmodels.DemoModeUiState(),
+    onShowExitDemoDialog: () -> Unit = {}
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -101,7 +104,9 @@ fun PhotoGalleryScreen(
             modifier = modifier,
             orchestratorState = orchestratorState,
             snackbarHostState = snackbarHostState,
-            paddingValues = paddingValues
+            paddingValues = paddingValues,
+            demoState = demoState,
+            onShowExitDemoDialog = onShowExitDemoDialog
         )
 
         GalleryDialogs(orchestratorState = orchestratorState)
@@ -386,24 +391,52 @@ private fun GalleryScaffold(
     modifier: Modifier,
     orchestratorState: PhotoGalleryOrchestratorState,
     snackbarHostState: SnackbarHostState,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    demoState: com.smilepile.ui.viewmodels.DemoModeUiState = com.smilepile.ui.viewmodels.DemoModeUiState(),
+    onShowExitDemoDialog: () -> Unit = {}
 ) {
-    @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
-    Scaffold(
-        modifier = modifier,
-        contentWindowInsets = WindowInsets(0.dp),
-        topBar = {
-            if (orchestratorState.galleryState.isSelectionMode) {
-                SelectionToolbarComponent(
-                    selectedCount = orchestratorState.galleryState.selectedPhotosCount,
-                    isAllSelected = orchestratorState.galleryState.isAllPhotosSelected,
-                    onExitSelectionMode = orchestratorState.onExitSelectionMode,
-                    onSelectAll = orchestratorState.onSelectAllPhotos,
-                    onDeselectAll = orchestratorState.onDeselectAllPhotos
-                )
-            }
-        },
-        floatingActionButton = {
+    Box(modifier = modifier.fillMaxSize()) {
+        @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            contentWindowInsets = WindowInsets(0.dp),
+            topBar = {
+                if (orchestratorState.galleryState.isSelectionMode) {
+                    SelectionToolbarComponent(
+                        selectedCount = orchestratorState.galleryState.selectedPhotosCount,
+                        isAllSelected = orchestratorState.galleryState.isAllPhotosSelected,
+                        onExitSelectionMode = orchestratorState.onExitSelectionMode,
+                        onSelectAll = orchestratorState.onSelectAllPhotos,
+                        onDeselectAll = orchestratorState.onDeselectAllPhotos
+                    )
+                }
+            },
+            bottomBar = {
+                if (orchestratorState.canPerformBatchOperations) {
+                    BatchOperationsBottomBar(
+                        selectedCount = orchestratorState.galleryState.selectedPhotosCount,
+                        onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
+                        onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
+                        onShareClick = orchestratorState.onShareSelectedPhotos,
+                        onEditClick = { orchestratorState.onEditSelectedPhotos() }
+                    )
+                }
+            },
+            snackbarHost = { SnackbarHost(snackbarHostState) }
+        ) { _ ->
+            GalleryContent(
+                orchestratorState = orchestratorState,
+                paddingValues = paddingValues
+            )
+        }
+
+        // Add Photos FAB overlay (bottom-right)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(end = 16.dp, bottom = 102.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
             CustomFloatingActionButton(
                 onClick = {
                     if (!orchestratorState.isAddingPhotos) {
@@ -414,27 +447,28 @@ private fun GalleryScaffold(
                 contentDescription = "Add Photos",
                 backgroundColor = Color(0xFF4A90E2),
                 isPulsing = true,
-                enabled = !orchestratorState.isAddingPhotos,
-                modifier = Modifier.padding(end = 16.dp, bottom = 102.dp)
+                enabled = !orchestratorState.isAddingPhotos
             )
-        },
-        bottomBar = {
-            if (orchestratorState.canPerformBatchOperations) {
-                BatchOperationsBottomBar(
-                    selectedCount = orchestratorState.galleryState.selectedPhotosCount,
-                    onDeleteClick = { orchestratorState.onShowBatchDeleteDialog(true) },
-                    onMoveClick = { orchestratorState.onShowBatchMoveDialog(true) },
-                    onShareClick = orchestratorState.onShareSelectedPhotos,
-                    onEditClick = { orchestratorState.onEditSelectedPhotos() }
+        }
+
+        // Demo exit FAB overlay (bottom-left)
+        if (demoState.isDemoMode) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 16.dp, bottom = 102.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                CustomFloatingActionButton(
+                    onClick = onShowExitDemoDialog,
+                    icon = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Exit Demo Mode",
+                    backgroundColor = Color(0xFF9C27B0),
+                    isPulsing = false,
+                    enabled = !demoState.isExiting
                 )
             }
-        },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { _ ->
-        GalleryContent(
-            orchestratorState = orchestratorState,
-            paddingValues = paddingValues
-        )
+        }
     }
 }
 

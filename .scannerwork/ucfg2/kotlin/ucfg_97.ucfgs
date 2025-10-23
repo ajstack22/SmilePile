@@ -1,203 +1,439 @@
-´
-^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;
-__unknown_file ("0*˜
-0 (Æ
-´
- ()
-field com.smilepile.theme.ThemeManager"__id*n
- (b*`,
-*com.smilepile.ui.viewmodels.ThemeViewModel"0
-themeManager com.smilepile.theme.ThemeManager"7
- (+
-)
-field com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`À
-_com.smilepile.ui.viewmodels.ThemeViewModel#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V
-__unknown_file ("0*ﬂ
-0 (Æ
-´
- (`,
-*com.smilepile.ui.viewmodels.ThemeViewModel"0
-themeManager com.smilepile.theme.ThemeManager"__id*7
- (+
-)
-value com.smilepile.theme.ThemeManager"
+Ÿ
+Ecom.smilepile.storage.FileOperationHelpers#getTAG()Ljava/lang/String;
+__unknown_file ("0*æ
+0 (Ö
+Ç
+ (
+fieldjava.lang.Object"__id*U
+ (I*G,
+*com.smilepile.storage.FileOperationHelpers"
+TAGjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`˘
+Fcom.smilepile.storage.FileOperationHelpers#setTAG(Ljava/lang/String;)V
+__unknown_file ("0*∂
+0 (Ö
+Ç
+ (G,
+*com.smilepile.storage.FileOperationHelpers"
+TAGjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
  (
-implicit return:5
- ()
-value com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`¬
-Vcom.smilepile.ui.viewmodels.ThemeViewModel#<init>(Lcom/smilepile/theme/ThemeManager;)Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt (("0*Ü
-0 (°
-û
- (*
+implicit return:%
+ (
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`Ì
+Ocom.smilepile.storage.FileOperationHelpers#getTEMP_DIR_NAME()Ljava/lang/String;
+__unknown_file ("0*»
+0 (è
+å
+ (
+fieldjava.lang.Object"__id*_
+ (S*Q,
+*com.smilepile.storage.FileOperationHelpers"!
+TEMP_DIR_NAMEjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ç
+Pcom.smilepile.storage.FileOperationHelpers#setTEMP_DIR_NAME(Ljava/lang/String;)V
+__unknown_file ("0*¿
+0 (è
+å
+ (Q,
+*com.smilepile.storage.FileOperationHelpers"!
+TEMP_DIR_NAMEjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ÿ
+<com.smilepile.storage.FileOperationHelpers#getMAX_RETRIES()I
+__unknown_file ("0*∆
+0 (ç
+ä
+ (
+fieldjava.lang.Object"__id*]
+ (Q*O,
+*com.smilepile.storage.FileOperationHelpers"
+MAX_RETRIESjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`¯
+=com.smilepile.storage.FileOperationHelpers#setMAX_RETRIES(I)V
+__unknown_file ("0*æ
+0 (ç
+ä
+ (O,
+*com.smilepile.storage.FileOperationHelpers"
+MAX_RETRIESjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`ﬁ
+?com.smilepile.storage.FileOperationHelpers#getRETRY_DELAY_MS()J
+__unknown_file ("0*…
+0 (ê
+ç
+ (
+fieldjava.lang.Object"__id*`
+ (T*R,
+*com.smilepile.storage.FileOperationHelpers""
+RETRY_DELAY_MSjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`˛
+@com.smilepile.storage.FileOperationHelpers#setRETRY_DELAY_MS(J)V
+__unknown_file ("0*¡
+0 (ê
+ç
+ (R,
+*com.smilepile.storage.FileOperationHelpers""
+RETRY_DELAY_MSjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`Ö
+fcom.smilepile.storage.FileOperationHelpers#getDirectoryLocks()Ljava/util/concurrent/ConcurrentHashMap;
+__unknown_file ("0*…
+0 (ê
+ç
+ (
+fieldjava.lang.Object"__id*`
+ (T*R,
+*com.smilepile.storage.FileOperationHelpers""
+directoryLocksjava.lang.Object"'
+ (
+
+fieldjava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`•
+gcom.smilepile.storage.FileOperationHelpers#setDirectoryLocks(Ljava/util/concurrent/ConcurrentHashMap;)V
+__unknown_file ("0*¡
+0 (ê
+ç
+ (R,
+*com.smilepile.storage.FileOperationHelpers""
+directoryLocksjava.lang.Object"__id*'
+ (
+
+valuejava.lang.Object"
+ (
+implicit return:%
+ (
+valuejava.lang.ObjectB.,
+*com.smilepile.storage.FileOperationHelpersH`
+Tcom.smilepile.storage.FileOperationHelpers#atomicMove(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt   ("0*(
+0 ("
+! L(	
+	<unknown>:"
+   ('
+sourcejava.io.File:'
+ )  (:
+destinationjava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHÓ
+Rcom.smilepile.storage.FileOperationHelpers#copyFile(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktR R( "0*(
+0O Q("
+S o(	
+	<unknown>:"
+R! R(-
+sourcejava.io.File:'
+R/ R(@
+destinationjava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHÚ
+]com.smilepile.storage.FileOperationHelpers#verifyFileIntegrity(Ljava/io/File;Ljava/io/File;)Zl
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktu u(#"0*(
+0r t("
+v (	
+	<unknown>:!
+u$ u(/
+file1java.io.File:!
+u1 u(<
+file2java.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHπ
+^com.smilepile.storage.FileOperationHelpers#calculateFileHash(Ljava/io/File;)Ljava/lang/String;n
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktê ê()"0*ç
+0
+Ç é(Ü
+É
+
+ê* ê(4
 %0"
-__annotate*0
+__annotate*/
 
-__unknown_file (
-java.lang.Object*N
+__unknown_file (
+kotlin.Suppress*2
 
-__unknown_file (2
-0
-themeManager com.smilepile.theme.ThemeManagerp
-n
- (*0
-themeManager com.smilepile.theme.ThemeManager"__annotation*"
+__unknown_file (
+
+filejava.io.FileV
+T
+
+ê* ê(4
+filejava.io.File"__annotation*"
 
 __unknown_file (
 
-%0≤
-Ø
- (*&
-%1 com.smilepile.theme.ThemeManager"_com.smilepile.ui.viewmodels.ThemeViewModel#setThemeManager(Lcom/smilepile/theme/ThemeManager;)V*J
+%0"
+
+ë õ(	
+	<unknown>:"
+
+ê* ê(4
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersHà
+bcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;n
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt° °(%"0*‘
+0
+û †(„
+‡
+
+¢ ¢(",
+%0&java.util.concurrent.ConcurrentHashMap"fcom.smilepile.storage.FileOperationHelpers#getDirectoryLocks()Ljava/util/concurrent/ConcurrentHashMap;*<
+
+¢ ¢(".,
+*com.smilepile.storage.FileOperationHelpers√
+¿
 
-__unknown_file (.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*N
+__unknown_file (
+%1"__declareFunction*ä
 
-__unknown_file (2
-0
-themeManager com.smilepile.theme.ThemeManager—
-Œ
-) (5&
-%2 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
-) (5.,
-*com.smilepile.ui.viewmodels.ThemeViewModelï
-í
-6 (@
-%3java.lang.Object"8com.smilepile.theme.ThemeManager#isDarkMode()LStateFlow;*4
-) (5(
-&
-%2 com.smilepile.theme.ThemeManagerœ
-Ã
- (@
-%4java.lang.Object"Fcom.smilepile.ui.viewmodels.ThemeViewModel#setIsDarkMode(LStateFlow;)V*:
- (@.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*$
-6 (@
+__unknown_file (nl
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0õò
+
+__unknown_file (l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"__ScopeWrapperÊ
+„
+
+__unknown_file (à
+l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"
+pathjava.lang.String"__id*6
+
+__unknown_file (
+
+pathjava.lang.String¶
+£
+
+__unknown_file (t
+
+%1"l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0"__id*ä
+
+__unknown_file (n
+l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0Ì
+
+¢# ¢(8
+%2java.lang.Object"yjava.util.concurrent.ConcurrentHashMap#computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;*<
+
+¢ ¢(".
+,
+%0&java.util.concurrent.ConcurrentHashMap*(
+
+¢3 ¢(7
+
+pathjava.lang.String*"
+
+__unknown_file (
+
+%12@computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)W
+U
+
+¢ ¢(D
+mutexjava.lang.Object"__id*&
+
+¢# ¢(8
 
-%3java.lang.Object—
-Œ
-* (6&
-%5 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
-* (6.,
-*com.smilepile.ui.viewmodels.ThemeViewModeló
-î
-7 (@
-%6java.lang.Object":com.smilepile.theme.ThemeManager#getThemeMode()LStateFlow;*4
-* (6(
-&
-%5 com.smilepile.theme.ThemeManagerŒ
+%2java.lang.Object"
+
+§ π(	
+	<unknown>:&
+
+°& °(2
+pathjava.lang.StringB.,
+*com.smilepile.storage.FileOperationHelpersHÎ
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0n
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt¢9 ¢(D"0*£
+0
+¢9 ¢(DË
+Â
+
+__unknown_file (
+%0"__id*º
+
+__unknown_file (ü*ú,
+*com.smilepile.storage.FileOperationHelpers"l
+jcom.smilepile.storage.FileOperationHelpers#ensureDirectoryExists(Ljava/lang/String;)Ljava/io/File;$lambda0|
+z
+
+__unknown_file (
+pathjava.lang.String"__id*>
+
+__unknown_file ("* 
+
+%0"
+pathjava.lang.String")
+
+__unknown_file (
+	<unknown>:2
+
+__unknown_file (
+itjava.lang.StringB.,
+*com.smilepile.storage.FileOperationHelpersHå
+Xcom.smilepile.storage.FileOperationHelpers#cleanupTempFiles(Landroid.content.Context;J)Vn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktø ø( "0*@
+0
+º æ("/
+
+__unknown_file (
+implicit return:)
+
+ø! ø(A
+contextjava.lang.Object:
+
+øC ø(\
+maxAgeMslongB.,
+*com.smilepile.storage.FileOperationHelpersHø
+Fcom.smilepile.storage.FileOperationHelpers#safeDelete(Ljava/io/File;)Zn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kt’ ’("0*,
+0
+“ ‘("
+
+÷ ¸(	
+	<unknown>:"
+
+’ ’(%
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersH”
+Mcom.smilepile.storage.FileOperationHelpers#getAvailableSpace(Ljava/io/File;)Jn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.ktÇ Ç("1*%
+2
+Ö
+ à(	"
+
+É à(	
+
+%0*P
+3
+Ö à(	:
+8
+
+__unknown_file (
+%0"__id*
+
+á á(2 *
+2*ø
+1
+É Ö(	`
+^
+
+Ñ Ñ(
+
+%1long"java.io.File#getUsableSpace()J*$
+
+Ñ Ñ(
+
+filejava.io.FileD
+B
+
+__unknown_file (
+%0"__id*
+
+Ñ Ñ(
+
+
+%1long*
+2
+3:"
+
+Ç Ç($
+filejava.io.FileB.,
+*com.smilepile.storage.FileOperationHelpersH•
+Ocom.smilepile.storage.FileOperationHelpers#checkStorageQuota(Ljava/io/File;JJ)Zn
+b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/FileOperationHelpers.kté é("0*ø
+0
+ã ç(Œ
 À
- (@
-%7java.lang.Object"Ecom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(LStateFlow;)V*:
- (@.,
-*com.smilepile.ui.viewmodels.ThemeViewModel*$
-7 (@
-
-%6java.lang.Object"/
-
-__unknown_file (
-implicit return:<
- (*0
-themeManager com.smilepile.theme.ThemeManagerB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH›
-Bcom.smilepile.ui.viewmodels.ThemeViewModel#isDarkMode()LStateFlow;
-__unknown_file ("0*≈
-0 (å
-â
- (
-fieldjava.lang.Object"__id*\
- (P*N,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
 
-isDarkModejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`Ä
-Fcom.smilepile.ui.viewmodels.ThemeViewModel#setIsDarkMode(LStateFlow;)V
-__unknown_file ("0*Ω
-0 (å
-â
- (N,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
+è è(/
 
-isDarkModejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`ﬁ
-Dcom.smilepile.ui.viewmodels.ThemeViewModel#getThemeMode()LStateFlow;
-__unknown_file ("0*ƒ
-0 (ã
-à
- (
-fieldjava.lang.Object"__id*[
- (O*M,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
-	themeModejava.lang.Object"'
- (
-
-fieldjava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`˛
-Ecom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(LStateFlow;)V
-__unknown_file ("0*º
-0 (ã
-à
- (M,
-*com.smilepile.ui.viewmodels.ThemeViewModel"
-	themeModejava.lang.Object"__id*'
- (
-
-valuejava.lang.Object"
- (
-implicit return:%
- (
-valuejava.lang.ObjectB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH`˝
-9com.smilepile.ui.viewmodels.ThemeViewModel#toggleTheme()Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt ("0*ú
-0 (—
-Œ
- (&
-%0 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
- (.,
-*com.smilepile.ui.viewmodels.ThemeViewModelá
-Ñ
- ("
-%1kotlin.Unit"/com.smilepile.theme.ThemeManager#toggleTheme()V*4
- ((
-&
-%0 com.smilepile.theme.ThemeManager"/
+%0long"Mcom.smilepile.storage.FileOperationHelpers#getAvailableSpace(Ljava/io/File;)J*<
+
+è è(/.,
+*com.smilepile.storage.FileOperationHelpers*$
+
+è* è(.
+
+filejava.io.FileC
+A
+
+è è(/
+	availablelong"__id*
+
+è è(/
+
+
+%0longÑ
+Å
+
+ê ê(8
+%1"__calculate*
+
+ê* ê(+
++*%
+
+ê ê()
+
+requiredSpacelong*$
+
+ê, ê(8
+
+safetyMarginlong{
+y
+
+ê ê(9
+%2"	__compare*
+
+ê ê(
+>*!
+
+ê ê(
+
+	availablelong*"
 
-__unknown_file (
-implicit returnB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH•
-Ycom.smilepile.ui.viewmodels.ThemeViewModel#setThemeMode(Lcom/smilepile/theme/ThemeMode;)Vl
-b/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/ThemeViewModel.kt ("0*Ò
-0 (%—
-Œ
- (&
-%0 com.smilepile.theme.ThemeManager"^com.smilepile.ui.viewmodels.ThemeViewModel#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
- (.,
-*com.smilepile.ui.viewmodels.ThemeViewModel‹
-Ÿ
- ('
-%1kotlin.Unit"Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V*4
- ((
-&
-%0 com.smilepile.theme.ThemeManager*3
-" (&'
-%
-modecom.smilepile.theme.ThemeMode"/
-
-__unknown_file (
-implicit return:1
- ($%
-modecom.smilepile.theme.ThemeModeB.,
-*com.smilepile.ui.viewmodels.ThemeViewModelH
+__unknown_file (
+
+%1"
+
+ê ê(9
+
+%2:"
+
+é é($
+filejava.io.File:#
+
+é& é(9
+requiredSpacelong:"
+
+é; é(`
+safetyMarginlongB.,
+*com.smilepile.storage.FileOperationHelpersH

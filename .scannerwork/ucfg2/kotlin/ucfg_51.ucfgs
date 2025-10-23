@@ -84,12 +84,40 @@ Icom.smilepile.ui.viewmodels.DemoModeUiState#setError(Ljava/lang/String;)V
 implicit return:%
  (
 valuejava.lang.StringB/-
-+com.smilepile.ui.viewmodels.DemoModeUiStateH`÷
-Icom.smilepile.ui.viewmodels.DemoModeUiState#<init>(ZZLjava/lang/String;)Vo
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt ("0*ı
-0 (›
++com.smilepile.ui.viewmodels.DemoModeUiStateH`ﬁ
+Lcom.smilepile.ui.viewmodels.DemoModeUiState#getShouldNavigateToOnboarding()Z
+__unknown_file ("0*ª
+0 (ã
+à
+ (
+fieldboolean"__id*d
+ (X*V-
++com.smilepile.ui.viewmodels.DemoModeUiState"%
+shouldNavigateToOnboardingboolean"
+ (
+
+fieldbooleanB/-
++com.smilepile.ui.viewmodels.DemoModeUiStateH`˛
+Mcom.smilepile.ui.viewmodels.DemoModeUiState#setShouldNavigateToOnboarding(Z)V
+__unknown_file ("0*º
+0 (ã
+à
+ (V-
++com.smilepile.ui.viewmodels.DemoModeUiState"%
+shouldNavigateToOnboardingboolean"__id*
+ (
+
+valueboolean"
+ (
+implicit return:
+ (
+valuebooleanB/-
++com.smilepile.ui.viewmodels.DemoModeUiStateH`ä
+Jcom.smilepile.ui.viewmodels.DemoModeUiState#<init>(ZZLjava/lang/String;Z)Vo
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt ("0*ı
+0 (›
 ⁄
- (#
+ (#
 %0boolean"=com.smilepile.ui.viewmodels.DemoModeUiState#setIsDemoMode(Z)V*K
 
 __unknown_file (/-
@@ -100,7 +128,7 @@ e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 isDemoModeboolean€
 ÿ
- ("
+ ("
 %1boolean"<com.smilepile.ui.viewmodels.DemoModeUiState#setIsExiting(Z)V*K
 
 __unknown_file (/-
@@ -110,7 +138,7 @@ isDemoModeboolean€
 
 	isExitingbooleanˆ
 Û
- (
+ (
 %2java.lang.String"Icom.smilepile.ui.viewmodels.DemoModeUiState#setError(Ljava/lang/String;)V*K
 
 __unknown_file (/-
@@ -118,17 +146,29 @@ isDemoModeboolean€
 
 __unknown_file (
 
-errorjava.lang.String"/
+errorjava.lang.String˝
+˙
+ (3
+%3boolean"Mcom.smilepile.ui.viewmodels.DemoModeUiState#setShouldNavigateToOnboarding(Z)V*K
+
+__unknown_file (/-
++com.smilepile.ui.viewmodels.DemoModeUiState*C
+
+__unknown_file ('
+%
+shouldNavigateToOnboardingboolean"/
 
 __unknown_file (
 implicit return:!
- (#
+ (#
 
 isDemoModeboolean: 
- ("
+ ("
 	isExitingboolean:%
- (
-errorjava.lang.StringB/-
+ (
+errorjava.lang.String:1
+ (3%
+shouldNavigateToOnboardingbooleanB/-
 +com.smilepile.ui.viewmodels.DemoModeUiStateH“
 jcom.smilepile.ui.viewmodels.DemoModeViewModel#getSettingsManager()Lcom/smilepile/settings/SettingsManager;
 __unknown_file ("0*è
@@ -213,13 +253,31 @@ xcom.smilepile.ui.viewmodels.DemoModeViewModel#setCategoryRepository(Lcom/smilep
 implicit return:E
  (9
 value0com.smilepile.data.repository.CategoryRepositoryB1/
--com.smilepile.ui.viewmodels.DemoModeViewModelH`È
-¿com.smilepile.ui.viewmodels.DemoModeViewModel#<init>(Lcom/smilepile/settings/SettingsManager;Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/data/repository/CategoryRepository;)Vo
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt  (+"0*ë
-0 (™
-ß
- (0
+-com.smilepile.ui.viewmodels.DemoModeViewModelH`ó
+Õcom.smilepile.ui.viewmodels.DemoModeViewModel#<init>(LApplication;Lcom/smilepile/settings/SettingsManager;Lcom/smilepile/data/repository/PhotoRepository;Lcom/smilepile/data/repository/CategoryRepository;)Vo
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt  (+"0*Ö
+0 (ê
+ç
+ (
 %0"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*=
+
+__unknown_file (!
+
+applicationjava.lang.Object_
+]
+ (
+applicationjava.lang.Object"__annotation*"
+
+__unknown_file (
+
+%0™
+ß
+ (0
+%1"
 __annotate*0
 
 __unknown_file (
@@ -229,15 +287,15 @@ __annotate*0
 9
 settingsManager&com.smilepile.settings.SettingsManagery
 w
- (09
+ (09
 settingsManager&com.smilepile.settings.SettingsManager"__annotation*"
 
 __unknown_file (
 
-%0±
+%1±
 Æ
- (0
-%1"
+ (0
+%2"
 __annotate*0
 
 __unknown_file (
@@ -247,15 +305,15 @@ __annotate*0
 @
 photoRepository-com.smilepile.data.repository.PhotoRepositoryÄ
 ~
- (0@
+ (0@
 photoRepository-com.smilepile.data.repository.PhotoRepository"__annotation*"
 
 __unknown_file (
 
-%1∑
+%2∑
 ¥
- (6
-%2"
+ (6
+%3"
 __annotate*0
 
 __unknown_file (
@@ -265,15 +323,15 @@ __annotate*0
 F
 categoryRepository0com.smilepile.data.repository.CategoryRepositoryá
 Ñ
- (6F
+ (6F
 categoryRepository0com.smilepile.data.repository.CategoryRepository"__annotation*"
 
 __unknown_file (
 
-%2–
+%3–
 Õ
- (0,
-%3&com.smilepile.settings.SettingsManager"kcom.smilepile.ui.viewmodels.DemoModeViewModel#setSettingsManager(Lcom/smilepile/settings/SettingsManager;)V*M
+ (0,
+%4&com.smilepile.settings.SettingsManager"kcom.smilepile.ui.viewmodels.DemoModeViewModel#setSettingsManager(Lcom/smilepile/settings/SettingsManager;)V*M
 
 __unknown_file (1/
 -com.smilepile.ui.viewmodels.DemoModeViewModel*W
@@ -282,8 +340,8 @@ F
 9
 settingsManager&com.smilepile.settings.SettingsManagerÂ
 ‚
- (03
-%4-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.DemoModeViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*M
+ (03
+%5-com.smilepile.data.repository.PhotoRepository"rcom.smilepile.ui.viewmodels.DemoModeViewModel#setPhotoRepository(Lcom/smilepile/data/repository/PhotoRepository;)V*M
 
 __unknown_file (1/
 -com.smilepile.ui.viewmodels.DemoModeViewModel*^
@@ -292,8 +350,8 @@ F
 @
 photoRepository-com.smilepile.data.repository.PhotoRepositoryÙ
 Ò
- (66
-%50com.smilepile.data.repository.CategoryRepository"xcom.smilepile.ui.viewmodels.DemoModeViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*M
+ (66
+%60com.smilepile.data.repository.CategoryRepository"xcom.smilepile.ui.viewmodels.DemoModeViewModel#setCategoryRepository(Lcom/smilepile/data/repository/CategoryRepository;)V*M
 
 __unknown_file (1/
 -com.smilepile.ui.viewmodels.DemoModeViewModel*d
@@ -302,34 +360,36 @@ F
 F
 categoryRepository0com.smilepile.data.repository.CategoryRepositoryÂ
 ‚
- (>
-%6java.lang.Object"Tcom.smilepile.ui.viewmodels.DemoModeViewModel#set_uiState(Lerror/NonExistentClass;)V*=
- (>1/
+" "(>
+%7java.lang.Object"Tcom.smilepile.ui.viewmodels.DemoModeViewModel#set_uiState(Lerror/NonExistentClass;)V*=
+" "(>1/
 -com.smilepile.ui.viewmodels.DemoModeViewModel*)
 
 __unknown_file (
 	<unknown>π
 ∂
-. (6
-%7java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
-. (61/
+#. #(6
+%8java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
+#. #(61/
 -com.smilepile.ui.viewmodels.DemoModeViewModel◊
 ‘
- (D
-%8java.lang.Object"Fcom.smilepile.ui.viewmodels.DemoModeViewModel#setUiState(LStateFlow;)V*=
- (D1/
+# #(D
+%9java.lang.Object"Fcom.smilepile.ui.viewmodels.DemoModeViewModel#setUiState(LStateFlow;)V*=
+# #(D1/
 -com.smilepile.ui.viewmodels.DemoModeViewModel*)
 
 __unknown_file (
 	<unknown>"/
 
 __unknown_file (
-implicit return:E
- (09
+implicit return:+
+ (
+applicationjava.lang.Object:E
+ (09
 settingsManager&com.smilepile.settings.SettingsManager:L
- (0@
+ (0@
 photoRepository-com.smilepile.data.repository.PhotoRepository:R
- (6F
+ (6F
 categoryRepository0com.smilepile.data.repository.CategoryRepositoryB1/
 -com.smilepile.ui.viewmodels.DemoModeViewModelHÚ
 Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;
@@ -389,27 +449,50 @@ Fcom.smilepile.ui.viewmodels.DemoModeViewModel#setUiState(LStateFlow;)V
 valuejava.lang.ObjectB1/
 -com.smilepile.ui.viewmodels.DemoModeViewModelH`®
 =com.smilepile.ui.viewmodels.DemoModeViewModel#exitDemoMode()Vo
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt' '("0*>
-0' '("/
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.kt- -("0*>
+0- -("/
 
 __unknown_file (
 implicit returnB1/
 -com.smilepile.ui.viewmodels.DemoModeViewModelH˘
 ;com.smilepile.ui.viewmodels.DemoModeViewModel#clearError()Vo
-e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.ktL L("0*ê
-0L L(π
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.ktm m("0*ê
+0m m(π
 ∂
-M M(
+n n(
 %0java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
-M M(1/
+n n(1/
 -com.smilepile.ui.viewmodels.DemoModeViewModelπ
 ∂
-M M(!
+n n(!
 %1java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
-M M(!1/
+n n(!1/
 -com.smilepile.ui.viewmodels.DemoModeViewModelX
 V
-M M(:
+n n(:
+valuejava.lang.Object"__id*)
+
+__unknown_file (
+	<unknown>"/
+
+__unknown_file (
+implicit returnB1/
+-com.smilepile.ui.viewmodels.DemoModeViewModelHÜ
+Hcom.smilepile.ui.viewmodels.DemoModeViewModel#onNavigatedToOnboarding()Vo
+e/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/DemoModeViewModel.ktq q("0*ê
+0q q(!π
+∂
+r r(
+%0java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
+r r(1/
+-com.smilepile.ui.viewmodels.DemoModeViewModelπ
+∂
+r r(!
+%1java.lang.Object"Scom.smilepile.ui.viewmodels.DemoModeViewModel#get_uiState()Lerror/NonExistentClass;*=
+r r(!1/
+-com.smilepile.ui.viewmodels.DemoModeViewModelX
+V
+r r(P
 valuejava.lang.Object"__id*)
 
 __unknown_file (

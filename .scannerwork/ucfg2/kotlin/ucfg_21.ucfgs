@@ -140,11 +140,11 @@ Bcom.smilepile.ui.viewmodels.AppModeUiState#setIsKidsFullscreen(Z)V
 valuebooleanB.,
 *com.smilepile.ui.viewmodels.AppModeUiStateH`ˆ
 ecom.smilepile.ui.viewmodels.AppModeUiState#<init>(Lcom/smilepile/mode/AppMode;ZZLjava/lang/String;Z)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt ("0*ê
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt ("0*ê
 
-0 (û
+0 (û
 õ
- (+ 
+ (+ 
 %0com.smilepile.mode.AppMode"Xcom.smilepile.ui.viewmodels.AppModeUiState#setCurrentMode(Lcom/smilepile/mode/AppMode;)V*J
 
 __unknown_file (.,
@@ -154,7 +154,7 @@ d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 )
 currentModecom.smilepile.mode.AppModeÂ
 ‚
- ((
+ ((
 %1boolean"Acom.smilepile.ui.viewmodels.AppModeUiState#setIsTransitioning(Z)V*J
 
 __unknown_file (.,
@@ -164,7 +164,7 @@ d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 isTransitioningbooleanÂ
 ‚
- ((
+ ((
 %2boolean"Acom.smilepile.ui.viewmodels.AppModeUiState#setRequiresPinAuth(Z)V*J
 
 __unknown_file (.,
@@ -174,7 +174,7 @@ d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 requiresPinAuthbooleanÙ
 Ò
- (
+ (
 %3java.lang.String"Hcom.smilepile.ui.viewmodels.AppModeUiState#setError(Ljava/lang/String;)V*J
 
 __unknown_file (.,
@@ -184,7 +184,7 @@ d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 errorjava.lang.StringÁ
 ‰
- (\
+ (\
 %4boolean"Bcom.smilepile.ui.viewmodels.AppModeUiState#setIsKidsFullscreen(Z)V*J
 
 __unknown_file (.,
@@ -196,15 +196,15 @@ d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodel
 
 __unknown_file (
 implicit return:5
- (+)
+ (+)
 currentModecom.smilepile.mode.AppMode:&
- ((
+ ((
 isTransitioningboolean:&
- ((
+ ((
 requiresPinAuthboolean:%
- (
+ (
 errorjava.lang.String:'
- (\
+ (\
 isKidsFullscreenbooleanB.,
 *com.smilepile.ui.viewmodels.AppModeUiStateHß
 ]com.smilepile.ui.viewmodels.AppModeViewModel#getModeManager()Lcom/smilepile/mode/ModeManager;
@@ -264,10 +264,10 @@ vcom.smilepile.ui.viewmodels.AppModeViewModel#setSecurePreferences(Lcom/smilepil
 value0com.smilepile.security.ISecurePreferencesManagerB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH`¸
 àcom.smilepile.ui.viewmodels.AppModeViewModel#<init>(Lcom/smilepile/mode/ModeManager;Lcom/smilepile/security/ISecurePreferencesManager;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt (*"0*π
-0 (û
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt (*"0*π
+0 (û
 õ
- ((
+ ((
 %0"
 __annotate*0
 
@@ -278,14 +278,14 @@ __annotate*0
 -
 modeManagercom.smilepile.mode.ModeManagerm
 k
- ((-
+ ((-
 modeManagercom.smilepile.mode.ModeManager"__annotation*"
 
 __unknown_file (
 
 %0∂
 ≥
- (<
+ (<
 %1"
 __annotate*0
 
@@ -296,14 +296,14 @@ __annotate*0
 E
 securePreferences0com.smilepile.security.ISecurePreferencesManagerÜ
 É
- (<E
+ (<E
 securePreferences0com.smilepile.security.ISecurePreferencesManager"__annotation*"
 
 __unknown_file (
 
 %1Æ
 ´
- (($
+ (($
 %2com.smilepile.mode.ModeManager"^com.smilepile.ui.viewmodels.AppModeViewModel#setModeManager(Lcom/smilepile/mode/ModeManager;)V*L
 
 __unknown_file (0.
@@ -313,7 +313,7 @@ E
 -
 modeManagercom.smilepile.mode.ModeManager
 Ì
- (<6
+ (<6
 %30com.smilepile.security.ISecurePreferencesManager"vcom.smilepile.ui.viewmodels.AppModeViewModel#setSecurePreferences(Lcom/smilepile/security/ISecurePreferencesManager;)V*L
 
 __unknown_file (0.
@@ -323,45 +323,45 @@ E
 E
 securePreferences0com.smilepile.security.ISecurePreferencesManager„
 ‡
- (=
+" "(=
 %4java.lang.Object"Scom.smilepile.ui.viewmodels.AppModeViewModel#set_uiState(Lerror/NonExistentClass;)V*<
- (=0.
+" "(=0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel*)
 
 __unknown_file (
 	<unknown>∑
 ¥
- -  (5
+#- #(5
 %5java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
- -  (50.
+#- #(50.
 ,com.smilepile.ui.viewmodels.AppModeViewModel’
 “
-   (C
+# #(C
 %6java.lang.Object"Ecom.smilepile.ui.viewmodels.AppModeViewModel#setUiState(LStateFlow;)V*<
-   (C0.
+# #(C0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel*)
 
 __unknown_file (
 	<unknown>Â
 ‚
-" #($
+% &($
 %7java.lang.Object"Ucom.smilepile.ui.viewmodels.AppModeViewModel#setStateMutex(Lerror/NonExistentClass;)V*<
-" #($0.
+% &($0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel*)
 
 __unknown_file (
 	<unknown>¢
 ü
-& &(
+) )(
 %8kotlin.Unit"Bcom.smilepile.ui.viewmodels.AppModeViewModel#observeModeChanges()V*<
-& &(0.
+) )(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel"/
 
 __unknown_file (
 implicit return:9
- ((-
+ ((-
 modeManagercom.smilepile.mode.ModeManager:Q
- (<E
+ (<E
 securePreferences0com.smilepile.security.ISecurePreferencesManagerB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelHÔ
 Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;
@@ -451,248 +451,177 @@ stateMutexjava.lang.Object"__id*'
 valuejava.lang.ObjectB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH`´
 Bcom.smilepile.ui.viewmodels.AppModeViewModel#observeModeChanges()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt) )(""0*>
-0) )("/
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt, ,(""0*>
+0, ,("/
 
 __unknown_file (
 implicit returnB0.
-,com.smilepile.ui.viewmodels.AppModeViewModelHí
+,com.smilepile.ui.viewmodels.AppModeViewModelH™
 Acom.smilepile.ui.viewmodels.AppModeViewModel#requestModeToggle()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt1 1("0*≥
-24M 7(	∑
-¥
-6 6(
-%5java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-6 6(0.
-,com.smilepile.ui.viewmodels.AppModeViewModel∑
-¥
-6 6(%
-%6java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-6 6(%0.
-,com.smilepile.ui.viewmodels.AppModeViewModelX
-V
-6 6(H
-valuejava.lang.Object"__id*)
-
-__unknown_file (
-	<unknown>Q
-O
-
-__unknown_file (
-%4"__id*'
-6 6(
-
-valuejava.lang.Object*
-1*Å
-37 :(	°
-û
-9 9(
-%7kotlin.Unit"Acom.smilepile.ui.viewmodels.AppModeViewModel#performModeToggle()V*<
-9 9(0.
-,com.smilepile.ui.viewmodels.AppModeViewModelI
-G
-
-__unknown_file (
-%4"__id*
-9 9(
-
-%7kotlin.Unit*
-1*´
-01 1(∑
-¥
-2 2("
-%0java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-2 2("0.
-,com.smilepile.ui.viewmodels.AppModeViewModelb
-`
-2 2(4
-currentModejava.lang.Object"__id*-
-2) 2(4!
-
-currentModejava.lang.Object¡æ
-4 4('
-%1boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*-
-4 4(!
-
-currentModejava.lang.Object*0
-4# 4('$
-"
-KIDScom.smilepile.mode.AppMode2equals(Ljava/lang/Object;)˙
-˜
-4+ 4(<6
-%20com.smilepile.security.ISecurePreferencesManager"ucom.smilepile.ui.viewmodels.AppModeViewModel#getSecurePreferences()Lcom/smilepile/security/ISecurePreferencesManager;*<
-4+ 4(<0.
-,com.smilepile.ui.viewmodels.AppModeViewModel¥±
-4= 4(K
-%3boolean"@com.smilepile.security.ISecurePreferencesManager#isPINEnabled()Z*D
-4+ 4(<8
-6
-%20com.smilepile.security.ISecurePreferencesManager2isPINEnabled()*
-2
-3*>
-1:	 ;("/
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt4 4("0*>
+04 4("/
 
 __unknown_file (
 implicit returnB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH∆
 Vcom.smilepile.ui.viewmodels.AppModeViewModel#validatePinAndToggle(Ljava/lang/String;)Zn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt= =("0*ï
-2>0 E(	°
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktJ J("0*ï
+2K0 R(	°
 û
-? ?(
+L L(
 %3kotlin.Unit"Acom.smilepile.ui.viewmodels.AppModeViewModel#performModeToggle()V*<
-? ?(0.
+L L(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel∑
 ¥
-@ @(
+M M(
 %4java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-@ @(0.
+M M(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel∑
 ¥
-@ @(%
+M M(%
 %5java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-@ @(%0.
+M M(%0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelX
 V
-@ C(
+M P(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>"
-D D(
+Q Q(
 true*Ú
-3E J(	∑
+3R W(	∑
 ¥
-F F(
+S S(
 %6java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-F F(0.
+S S(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel∑
 ¥
-F F(%
+S S(%
 %7java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-F F(%0.
+S S(%0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelX
 V
-F H(
+S U(
 valuejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>"
-I I(	
+V V(	
 false*í
-0= =()˙
+0J J()˙
 ˜
-> >(6
+K K(6
 %00com.smilepile.security.ISecurePreferencesManager"ucom.smilepile.ui.viewmodels.AppModeViewModel#getSecurePreferences()Lcom/smilepile/security/ISecurePreferencesManager;*<
-> >(0.
+K K(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel˝˙
-> >(.
+K K(.
 %1boolean"Qcom.smilepile.security.ISecurePreferencesManager#validatePIN(Ljava/lang/String;)Z*D
-> >(8
+K K(8
 6
 %00com.smilepile.security.ISecurePreferencesManager*%
->* >(-
+K* K(-
 
 pinjava.lang.String2validatePIN(Ljava/lang/String;)*
 2
 3:#
-= =((
+J J((
 pinjava.lang.StringB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelHª
 \com.smilepile.ui.viewmodels.AppModeViewModel#validatePinForKidsModeExit(Ljava/lang/String;)Zn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktP P(""0*˜
-2Q\ T(	¢
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt] ](""0*˜
+2^\ a(	¢
 ü
-R R( 
+_ _( 
 %6kotlin.Unit"Bcom.smilepile.ui.viewmodels.AppModeViewModel#switchToParentMode()V*<
-R R( 0.
+_ _( 0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel>
 <
 
 __unknown_file (
 %5"__id*
-S S(
+` `(
 true*
 1*∫
-3T W(	‰
+3a d(	‰
 ·
-U U(@
+b b(@
 %7kotlin.Unit"Rcom.smilepile.ui.viewmodels.AppModeViewModel#handleInvalidPin(Ljava/lang/String;)V*<
-U U(@0.
+b b(@0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel*0
-U U(>$"
+b b(>$"
  Incorrect PIN. Please try again.?
 =
 
 __unknown_file (
 %5"__id*
-V V(	
+c c(	
 false*
 1*¥
-0M O(˙
+0Z \(˙
 ˜
-Q Q(%6
+^ ^(%6
 %00com.smilepile.security.ISecurePreferencesManager"ucom.smilepile.ui.viewmodels.AppModeViewModel#getSecurePreferences()Lcom/smilepile/security/ISecurePreferencesManager;*<
-Q Q(%0.
+^ ^(%0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel¥±
-Q& Q(4
+^& ^(4
 %1boolean"@com.smilepile.security.ISecurePreferencesManager#isPINEnabled()Z*D
-Q Q(%8
+^ ^(%8
 6
 %00com.smilepile.security.ISecurePreferencesManager2isPINEnabled()l
 j
-Q Q(4
+^ ^(4
 %2boolean"kotlin.Boolean#not()Z*
-Q& Q(4
+^& ^(4
 
 %1boolean*
-Q& Q(4
+^& ^(4
 
 %1boolean˙
 ˜
-Q8 Q(I6
+^8 ^(I6
 %30com.smilepile.security.ISecurePreferencesManager"ucom.smilepile.ui.viewmodels.AppModeViewModel#getSecurePreferences()Lcom/smilepile/security/ISecurePreferencesManager;*<
-Q8 Q(I0.
+^8 ^(I0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel˝˙
-QJ Q(Z
+^J ^(Z
 %4boolean"Qcom.smilepile.security.ISecurePreferencesManager#validatePIN(Ljava/lang/String;)Z*D
-Q8 Q(I8
+^8 ^(I8
 6
 %30com.smilepile.security.ISecurePreferencesManager*%
-QV Q(Y
+^V ^(Y
 
 pinjava.lang.String2validatePIN(Ljava/lang/String;)*
 2
 3*!
-1T W(	"
-Q W(	
+1a d(	"
+^ d(	
 
 %5:#
-P# P(.
+]# ](.
 pinjava.lang.StringB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH´
 Bcom.smilepile.ui.viewmodels.AppModeViewModel#switchToParentMode()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktZ Z(""0*>
-0Z Z("/
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktg g(""0*>
+0g g("/
 
 __unknown_file (
 implicit returnB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH∏
 Rcom.smilepile.ui.viewmodels.AppModeViewModel#handleInvalidPin(Ljava/lang/String;)Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktf f( "0*å
-0f f(∑
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kts s( "0*å
+0s s(∑
 ¥
-g g(
+t t(
 %0java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-g g(0.
+t t(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel∑
 ¥
-g g(!
+t t(!
 %1java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-g g(!0.
+t t(!0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelX
 V
-g g(B
+t t(B
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -700,24 +629,24 @@ V
 
 __unknown_file (
 implicit return:,
-f! f(5 
+s! s(5 
 errorMessagejava.lang.StringB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelHı
 =com.smilepile.ui.viewmodels.AppModeViewModel#cancelPinAuth()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktj j("0*å
-0j j(∑
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktw w("0*å
+0w w(∑
 ¥
-k k(
+x x(
 %0java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-k k(0.
+x x(0.
 ,com.smilepile.ui.viewmodels.AppModeViewModel∑
 ¥
-k k(!
+x x(!
 %1java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-k k(!0.
+x x(!0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelX
 V
-k n(	
+x {(	
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -727,27 +656,74 @@ V
 implicit returnB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH™
 Acom.smilepile.ui.viewmodels.AppModeViewModel#performModeToggle()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktq q(!"0*>
-0q q("/
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt~ ~(!"0*>
+0~ ~("/
 
 __unknown_file (
 implicit returnB0.
-,com.smilepile.ui.viewmodels.AppModeViewModelHÚ
-:com.smilepile.ui.viewmodels.AppModeViewModel#clearError()Vn
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kty y("0*å
-0y y(∑
-¥
-z z(
-%0java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-z z(0.
-,com.smilepile.ui.viewmodels.AppModeViewModel∑
-¥
-z z(!
-%1java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*<
-z z(!0.
-,com.smilepile.ui.viewmodels.AppModeViewModelX
-V
-z z(:
+,com.smilepile.ui.viewmodels.AppModeViewModelH 
+Icom.smilepile.ui.viewmodels.AppModeViewModel#performModeToggleInternal()Vp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktÑ Ñ(1"1*@
+3
+è	 ê("/
+
+__unknown_file (
+implicit return*I
+4
+__unknown_file ("*
+
+__unknown_file (
+
+early exit*ƒ
+1
+â ã(	‘
+—
+
+ä ä($
+%1com.smilepile.mode.ModeManager"]com.smilepile.ui.viewmodels.AppModeViewModel#getModeManager()Lcom/smilepile/mode/ModeManager;*>
+
+ä ä(0.
+,com.smilepile.ui.viewmodels.AppModeViewModelÜ
+É
+
+ä ä($
+%2kotlin.Unit",com.smilepile.mode.ModeManager#toggleMode()V*4
+
+ä ä(&
+$
+%1com.smilepile.mode.ModeManagerK
+I
+
+__unknown_file (
+%0"__id*!
+
+ä ä($
+
+%2kotlin.Unit*
+3
+4B0.
+,com.smilepile.ui.viewmodels.AppModeViewModelHhÄ
+:com.smilepile.ui.viewmodels.AppModeViewModel#clearError()Vp
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktí í("0*ò
+0
+í í(ª
+∏
+
+ì ì(
+%0java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*>
+
+ì ì(0.
+,com.smilepile.ui.viewmodels.AppModeViewModelª
+∏
+
+ì ì(!
+%1java.lang.Object"Rcom.smilepile.ui.viewmodels.AppModeViewModel#get_uiState()Lerror/NonExistentClass;*>
+
+ì ì(!0.
+,com.smilepile.ui.viewmodels.AppModeViewModelZ
+X
+
+ì ì(:
 valuejava.lang.Object"__id*)
 
 __unknown_file (
@@ -755,30 +731,31 @@ V
 
 __unknown_file (
 implicit returnB0.
-,com.smilepile.ui.viewmodels.AppModeViewModelH®
+,com.smilepile.ui.viewmodels.AppModeViewModelH™
 =com.smilepile.ui.viewmodels.AppModeViewModel#forceKidsMode()Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktÄ Ä("0*>
-0} ("/
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktô ô("0*@
+0
+ñ ò("/
 
 __unknown_file (
 implicit returnB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH¨
 ?com.smilepile.ui.viewmodels.AppModeViewModel#forceParentMode()Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.ktã ã("0*@
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt§ §("0*@
 0
-à ä("/
+° £("/
 
 __unknown_file (
 implicit returnB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH÷
 Bcom.smilepile.ui.viewmodels.AppModeViewModel#setKidsFullscreen(Z)Vp
-d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.któ ó("0*@
+d/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/viewmodels/AppModeViewModel.kt∞ ∞("0*@
 0
-ì ñ("/
+¨ Ø("/
 
 __unknown_file (
 implicit return:%
 
-ó ó(/
+∞ ∞(/
 isFullscreenbooleanB0.
 ,com.smilepile.ui.viewmodels.AppModeViewModelH

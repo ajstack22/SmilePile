@@ -34,9 +34,16 @@ struct CategoryFilterView: View {
                     .font(.system(size: 24))
                     .foregroundColor(.white)
                     .frame(width: 48, height: 48)
-                    .background(Color.red)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                            Circle()
+                                .fill(Color.red.opacity(0.8))
+                        }
+                    )
                     .clipShape(Circle())
-                    .shadow(radius: 2)
+                    .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
             }
             .padding(.trailing, 8)
             .padding(.leading, 8)

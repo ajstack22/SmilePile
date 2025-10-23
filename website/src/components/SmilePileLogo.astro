@@ -1,0 +1,35 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  showIcon?: boolean;
+}
+
+const { size = 'md', showIcon = true } = Astro.props;
+
+const iconSizes = {
+  sm: 'w-6 h-6',
+  md: 'w-8 h-8',
+  lg: 'w-12 h-12',
+  xl: 'w-16 h-16',
+};
+
+const textSizes = {
+  sm: 'text-lg',
+  md: 'text-2xl',
+  lg: 'text-4xl',
+  xl: 'text-5xl',
+};
+---
+
+<div class="flex items-center gap-2">
+  {showIcon && (
+    <img
+      src="/smilepile-logo.svg"
+      alt="SmilePile icon"
+      class={iconSizes[size]}
+    />
+  )}
+  <span class={`font-display font-black ${textSizes[size]}`} style="letter-spacing: -0.02em; text-shadow: 1px 1px 1px rgba(0,0,0,0.3);">
+    <span class="text-smilepile-yellow">Smile</span><span class="text-smilepile-green">P</span><span class="text-smilepile-blue">i</span><span class="text-smilepile-orange">l</span><span class="text-smilepile-pink">e</span>
+  </span>
+</div>

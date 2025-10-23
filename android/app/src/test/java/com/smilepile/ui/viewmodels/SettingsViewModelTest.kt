@@ -256,7 +256,7 @@ class SettingsViewModelTest {
     fun `prepares export successfully`() = runTest {
         // Given
         val mockIntent = mockk<Intent>()
-        coEvery { backupManager.exportToZip(any()) } returns Result.success(testExportFile)
+        coEvery { backupManager.exportToZip(any(), any(), any()) } returns Result.success(testExportFile)
         coEvery { backupManager.createExportIntent(BackupFormat.ZIP) } returns mockIntent
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
@@ -264,6 +264,7 @@ class SettingsViewModelTest {
 
         // When
         val intent = viewModel.prepareExport()
+        advanceUntilIdle()
 
         // Then
         assertNotNull(intent)
@@ -274,13 +275,14 @@ class SettingsViewModelTest {
     @Test
     fun `handles export preparation failure`() = runTest {
         // Given
-        coEvery { backupManager.exportToZip(any()) } returns Result.failure(RuntimeException("Export failed"))
+        coEvery { backupManager.exportToZip(any(), any(), any()) } returns Result.failure(RuntimeException("Export failed"))
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
 
         // When
         val intent = viewModel.prepareExport()
+        advanceUntilIdle()
 
         // Then
         assertNull(intent)
@@ -291,7 +293,7 @@ class SettingsViewModelTest {
     fun `completes export to URI`() = runTest {
         // Given
         val uri = mockk<Uri>()
-        coEvery { backupManager.exportToZip(any()) } returns Result.success(testExportFile)
+        coEvery { backupManager.exportToZip(any(), any(), any()) } returns Result.success(testExportFile)
         coEvery { backupManager.writeZipToFile(any(), any()) } returns Result.success(Unit)
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
@@ -310,9 +312,14 @@ class SettingsViewModelTest {
     @Test
     fun `imports from ZIP file URI`() = runTest {
         // Given
+        val mockContext = mockk<Context>(relaxed = true)
         val uri = mockk<Uri>()
-        val contentResolver = mockk<android.content.ContentResolver>()
-        every { context.contentResolver } returns contentResolver
+        val contentResolver = mockk<android.content.ContentResolver>(relaxed = true)
+        val cacheDir = File(context.cacheDir, "test")
+        cacheDir.mkdirs()
+
+        every { mockContext.contentResolver } returns contentResolver
+        every { mockContext.cacheDir } returns cacheDir
         every { contentResolver.openInputStream(uri) } returns "PK\u0003\u0004test".byteInputStream()
 
         val importProgress = ImportProgress(
@@ -323,7 +330,7 @@ class SettingsViewModelTest {
         )
         coEvery { backupManager.importFromZip(any(), any(), any()) } returns flowOf(importProgress)
 
-        viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
+        viewModel = SettingsViewModel(mockContext, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
 
         // When
@@ -334,14 +341,21 @@ class SettingsViewModelTest {
         coVerify { backupManager.importFromZip(any(), ImportStrategy.MERGE, any()) }
         assertFalse(viewModel.uiState.value.isLoading)
         assertNull(viewModel.uiState.value.error)
+
+        cacheDir.deleteRecursively()
     }
 
     @Test
     fun `imports from JSON file URI`() = runTest {
         // Given
+        val mockContext = mockk<Context>(relaxed = true)
         val uri = mockk<Uri>()
-        val contentResolver = mockk<android.content.ContentResolver>()
-        every { context.contentResolver } returns contentResolver
+        val contentResolver = mockk<android.content.ContentResolver>(relaxed = true)
+        val cacheDir = File(context.cacheDir, "test")
+        cacheDir.mkdirs()
+
+        every { mockContext.contentResolver } returns contentResolver
+        every { mockContext.cacheDir } returns cacheDir
         every { contentResolver.openInputStream(uri) } returns "{\"test\":\"data\"}".byteInputStream()
 
         val importProgress = ImportProgress(
@@ -352,7 +366,7 @@ class SettingsViewModelTest {
         )
         coEvery { backupManager.importFromJson(any(), any()) } returns flowOf(importProgress)
 
-        viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
+        viewModel = SettingsViewModel(mockContext, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()
 
         // When
@@ -361,6 +375,8 @@ class SettingsViewModelTest {
 
         // Then
         coVerify { backupManager.importFromJson(any(), ImportStrategy.MERGE) }
+
+        cacheDir.deleteRecursively()
     }
 
     @Test
@@ -384,8 +400,6 @@ class SettingsViewModelTest {
         securePreferencesManager.setBiometricEnabled(true)
         coEvery { backupManager.clearAllData() } just Runs
         coEvery { settingsManager.setOnboardingCompleted(false) } just Runs
-        every { context.packageManager } returns mockk(relaxed = true)
-        every { context.packageName } returns "com.smilepile"
 
         viewModel = SettingsViewModel(context, themeManager, backupManager, securePreferencesManager, biometricManager, settingsManager)
         advanceUntilIdle()

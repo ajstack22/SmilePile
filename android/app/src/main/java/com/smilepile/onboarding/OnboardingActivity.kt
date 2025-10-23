@@ -78,7 +78,7 @@ class OnboardingActivity : ComponentActivity() {
                         },
                         onTryDemo = {
                             viewModel.enterDemoMode()
-                            finish() // Close onboarding and return to main activity
+                            // Don't finish() immediately - let demo data load and show completion screen first
                         },
                         onComplete = {
                             viewModel.completeOnboarding()

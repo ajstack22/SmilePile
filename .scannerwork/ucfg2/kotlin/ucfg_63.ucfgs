@@ -427,40 +427,54 @@ icom.smilepile.storage.StorageManager#savePhotoToInternalStorage(LBitmap;Ljava/l
 bitmapjava.lang.Object:(
 {; {(K
 filenamejava.lang.StringB(&
+$com.smilepile.storage.StorageManagerH
+^com.smilepile.storage.StorageManager#saveEditedPhoto(LBitmap;Ljava/lang/String;)Ljava/io/File;h
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt‘ ‘("0*,
+0
+‹ ("
+
+‘O ‘(j
+	<unknown>:(
+
+‘  ‘(.
+bitmapjava.lang.Object:.
+
+‘0 ‘(D 
+existingPathjava.lang.StringB(&
 $com.smilepile.storage.StorageManagerHÈ
 Scom.smilepile.storage.StorageManager#importPhotos(Ljava/util/List;)Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt ("0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¦ ¦("0*,
 0
-‹ ("
+¡ ¥("
 
-K (f
+¦K ¦(f
 	<unknown>:*
 
- (2
+¦ ¦(2
 
 sourceUrisjava.util.ListB(&
 $com.smilepile.storage.StorageManagerH»
 Ecom.smilepile.storage.StorageManager#deletePhoto(Ljava/lang/String;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt   ("0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¶ ¶("0*,
 0
-› Ÿ("
+± µ("
 
- :  (U
+¶: ¶(U
 	<unknown>:+
 
-   (-
+¶ ¶(-
 	photoPathjava.lang.StringB(&
 $com.smilepile.storage.StorageManagerHÕ
 [com.smilepile.storage.StorageManager#getThumbnailPath(Ljava/lang/String;)Ljava/lang/String;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÀ À("0*ñ
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÖ Ö("0*ñ
 2
-Ä+ Ä(Eˆ
+Ú+ Ú(Eˆ
 …
 
-Ä9 Ä(E
+Ú9 Ú(E
 %9java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*-
 
-Ä+ Ä(8
+Ú+ Ú(8
 
 thumbnailFilejava.io.FileP
 N
@@ -468,273 +482,273 @@ N
 __unknown_file (
 %8"__id*&
 
-Ä9 Ä(E
+Ú9 Ú(E
 
 %9java.lang.String*
 1*P
 3
-ÄK Ä(O:
+ÚK Ú(O:
 8
 
 __unknown_file (
 %8"__id*
 
-ÄK Ä(O *
+ÚK Ú(O *
 1*Â	
 0
-½ ¿(0.
+Ó Õ(0.
 
-Á Á('
+× ×('
 %0java.io.File"java.io.File’
 
 
-Á Á('
+× ×('
 %1"(java.io.File#<init>(Ljava/lang/String;)V*"
 
-Á Á('
+× ×('
 
 %0java.io.File*-
 
-Á Á(&
+× ×(&
 
 	photoPathjava.lang.StringS
 Q
 
-Á Á('
+× ×('
 	photoFilejava.io.File"__id*"
 
-Á Á('
+× ×('
 
 %0java.io.File{
 y
 
-Â! Â(%
+Ø! Ø(%
 %2java.lang.String"(java.io.File#getName()Ljava/lang/String;*)
 
-Â Â( 
+Ø Ø( 
 
 	photoFilejava.io.FileZ
 X
 
-Â Â(%
+Ø Ø(%
 fileNamejava.lang.String"__id*&
 
-Â! Â(%
+Ø! Ø(%
 
 %2java.lang.String¢
 Ÿ
 
-Ã! Ã(.
+Ù! Ù(.
 %3java.io.File"Ecom.smilepile.storage.StorageManager#getThumbnailsDir()Ljava/io/File;*6
 
-Ã! Ã(.(&
+Ù! Ù(.(&
 $com.smilepile.storage.StorageManagerf
 d
 
-Ã0 Ã(A
+Ù0 Ù(A
 %4"__concat*
 
-Ã1 Ã(7
+Ù1 Ù(7
 
 thumb_*,
 
-Ã8 Ã(@
+Ù8 Ù(@
 
 fileNamejava.lang.String0.
 
-Ã Ã(B
+Ù Ù(B
 %5java.io.File"java.io.File«
 ¨
 
-Ã Ã(B
+Ù Ù(B
 %6"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-Ã Ã(B
+Ù Ù(B
 
 %5java.io.File*"
 
-Ã! Ã(.
+Ù! Ù(.
 
 %3java.io.File*
 
-Ã0 Ã(A
+Ù0 Ù(A
 
 %4W
 U
 
-Ã Ã(B
+Ù Ù(B
 thumbnailFilejava.io.File"__id*"
 
-Ã Ã(B
+Ù Ù(B
 
 %5java.io.Filenl
 
-Ä! Ä()
+Ú! Ú()
 %7boolean"java.io.File#exists()Z*-
 
-Ä Ä( 
+Ú Ú( 
 
 thumbnailFilejava.io.File2exists()*
 2
 3*%
 1
-ÄK Ä(O"
+ÚK Ú(O"
 
-Ä Ä(O
+Ú Ú(O
 
 %8:+
 
-À À(*
+Ö Ö(*
 	photoPathjava.lang.StringB(&
 $com.smilepile.storage.StorageManagerH©
 `com.smilepile.storage.StorageManager#calculateStorageUsage()Lcom/smilepile/storage/StorageUsage;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktË Ë(%"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktá á(%"0*,
 0
-Ç Ê("
+İ à("
 
-Ë8 Ë(S
+á8 á(S
 	<unknown>B(&
 $com.smilepile.storage.StorageManagerHŠ
 Acom.smilepile.storage.StorageManager#cleanupOrphanedThumbnails()Ih
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktæ æ()"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktü ü()"0*,
 0
-ã å("
+ù û("
 
-æ3 æ(N
+ü3 ü(N
 	<unknown>B(&
 $com.smilepile.storage.StorageManagerH³
 9com.smilepile.storage.StorageManager#getAvailableSpace()Jh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt„ „("0*Ü
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktš š("0*Ü
 0
- ƒ(›
+— ™(›
 ˜
 
-… …(
+› ›(
 %0java.lang.Object":com.smilepile.storage.StorageManager#getContext()LContext;*6
 
-… …((&
+› ›((&
 $com.smilepile.storage.StorageManager"-
 
-… …()
+› ›()
 
 	freeSpacejava.lang.ObjectB(&
 $com.smilepile.storage.StorageManagerH©
 7com.smilepile.storage.StorageManager#hasEnoughSpace(J)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktŒ Œ("0*¯
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¢ ¢("0*¯
 0
-ˆ ‹(
+ ¡(
 ‹
 
- ("
+£ £("
 
 %0long"9com.smilepile.storage.StorageManager#getAvailableSpace()J*6
 
- ("(&
+£ £("(&
 $com.smilepile.storage.StorageManagerw
 u
 
- (2
+£ £(2
 %1"	__compare*
 
-# ($
+£# £($
 >*
 
- ("
+£ £("
 
 
 %0long*%
 
-% (2
+£% £(2
 
 estimatedSizelong"
 
- (2
+£ £(2
 
 %1:#
 
-Œ Œ(=
+¢ ¢(=
 estimatedSizelongB(&
 $com.smilepile.storage.StorageManagerH”
 Kcom.smilepile.storage.StorageManager#getAllInternalPhotos()Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt” ”($"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktª ª($"0*,
 0
- “("
+¦ ©("
 
-”7 ”(R
+ª7 ª(R
 	<unknown>B(&
 $com.smilepile.storage.StorageManagerHç
 tcom.smilepile.storage.StorageManager#copyPhotoToInternalStorage(Ljava/io/File;)Lcom/smilepile/storage/StorageResult;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¦ ¦(*"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¼ ¼(*"0*,
 0
-  ¥("
+¶ »("
 
-¦W ¦(r
+¼W ¼(r
 	<unknown>:(
 
-¦+ ¦(C
+¼+ ¼(C
 
 sourceFilejava.io.FileB(&
 $com.smilepile.storage.StorageManagerHä
 fcom.smilepile.storage.StorageManager#migrateExternalPhotosToInternal(Ljava/util/List;)Ljava/util/List;h
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÔ Ô(/"0*-
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktê ê(/"0*-
 0
-Î Ó("
-Ôi Ô(„
+ä é("
+êi ê(„
 	<unknown>:2
 
-Ô0 Ô(P$
+ê0 ê(P$
 externalPhotoPathsjava.util.ListB(&
 $com.smilepile.storage.StorageManagerH
 Ocom.smilepile.storage.StorageManager#isInternalStoragePath(Ljava/lang/String;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktê ê("1*%
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt€ €("1*%
 2
-î
- ğ(	"
+„
+ †(	"
 
-ë ğ(	
+ †(	
 
 %0*W
 3
-î ğ(	A
+„ †(	A
 ?
 
 __unknown_file (
 %0"__id*
 
-ï ï(	
+… …(	
 false*
 2*ƒ
 1
-ë î(	0.
+ „(	0.
 
-ì ì(&
+‚ ‚(&
 %1java.io.File"java.io.File’
 
 
-ì ì(&
+‚ ‚(&
 %2"(java.io.File#<init>(Ljava/lang/String;)V*"
 
-ì ì(&
+‚ ‚(&
 
 %1java.io.File*-
 
-ì ì(%
+‚ ‚(%
 
 	photoPathjava.lang.StringN
 L
 
-ì ì(&
+‚ ‚(&
 filejava.io.File"__id*"
 
-ì ì(&
+‚ ‚(&
 
 %1java.io.File~
 |
 
-í í(
+ƒ ƒ(
 %3java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*$
 
-í í(
+ƒ ƒ(
 
 filejava.io.FileS
 Q
@@ -747,76 +761,76 @@ Q
 2
 3:+
 
-ê ê(/
+€ €(/
 	photoPathjava.lang.StringB(&
 $com.smilepile.storage.StorageManagerHû
 ^com.smilepile.storage.StorageManager#copyAndResizePhotoFromFile(Ljava/io/File;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktö ö(2"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktŒ Œ(2"0*,
 0
-ó õ("
+‰ ‹("
 
-öb ö(}
+Œb Œ(}
 	<unknown>:(
 
-ö3 ö(C
+Œ3 Œ(C
 
 sourceFilejava.io.File:(
 
-öE ö(U
+ŒE Œ(U
 
 targetFilejava.io.FileB(&
 $com.smilepile.storage.StorageManagerHí
 Mcom.smilepile.storage.StorageManager#copyAndResizePhoto(LUri;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt™ ™(*"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¯ ¯(*"0*,
 0
-™ ™("
+¯ ¯("
 
-™X ™(s
+¯X ¯(s
 	<unknown>:+
 
-™+ ™(9
+¯+ ¯(9
 	sourceUrijava.lang.Object:(
 
-™; ™(K
+¯; ¯(K
 
 targetFilejava.io.FileB(&
 $com.smilepile.storage.StorageManagerHõ
 Ucom.smilepile.storage.StorageManager#generateThumbnail(Ljava/io/File;Ljava/io/File;)Zh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt¼ ¼()"0*,
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÒ Ò()"0*,
 0
-¼ ¼("
+Ò Ò("
 
-¼\ ¼(w
+Ò\ Ò(w
 	<unknown>:(
 
-¼* ¼(:
+Ò* Ò(:
 
 sourceFilejava.io.File:+
 
-¼< ¼(O
+Ò< Ò(O
 thumbnailFilejava.io.FileB(&
 $com.smilepile.storage.StorageManagerH­	
 >com.smilepile.storage.StorageManager#calculateSampleSize(III)Ih
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktæ æ(#"0*
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktü ü(#"0*
 2
-ê4 ì(	n
+€4 ‚(	n
 l
 
-ë ë(
+ (
 %4"__calculate*
 
-ë ë(
+ (
 *=*!
 
-ë ë(
+ (
 
 
 sampleSizeint*
 
-ë ë(2K
+ (2K
 I
 
-ë ë(
+ (
 
 sampleSizeint"__id*"
 
@@ -828,66 +842,66 @@ I
 __unknown_file (
 %3"__id*!
 
-ë ë(
+ (
 
 
 sampleSizeint*
 1*2
 3
-ì	 î("!
+‚	 „("!
 
-î î(
+„ „(
 
 
 sampleSizeint*´
 0
-æ æ(;
+ü ü(;
 9
 
-ç ç(
+ı ı(
 
 sampleSizeint"__id*
 
-ç ç(2a
+ı ı(2a
 _
 
-è è(/ 
+ş ş(/ 
 maxDimensionjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>*
 1*î
 1
-ê ê(2Œ
+€ €(2Œ
 ‰
 
-ê ê((
+€ €((
 %1"__calculate*
 
-ê ê(
+€ €(
 /*0
 
-ê ê("
+€ €("
  
 maxDimensionjava.lang.Object*!
 
-ê ê((
+€ €((
 
 
 sampleSizeintx
 v
 
-ê ê(2
+€ €(2
 %2"	__compare*
 
-ê) ê(*
+€) €(*
 >*"
 
 __unknown_file (
 
 %1*
 
-ê+ ê(2
+€+ €(2
 
 maxSizeintL
 J
@@ -901,13 +915,13 @@ J
 2
 3:
 
-æ$ æ(.
+ü$ ü(.
 widthint:
 
-æ0 æ(;
+ü0 ü(;
 heightint:
 
-æ= æ(I
+ü= ü(I
 maxSizeintB(&
 $com.smilepile.storage.StorageManagerHĞ
 Dcom.smilepile.storage.StorageResult#getPhotoPath()Ljava/lang/String;
@@ -1023,12 +1037,12 @@ h
 valuelongB'%
 #com.smilepile.storage.StorageResultH`’
 dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)Vh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktõ õ("0*ç
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt‹ ‹("0*ç
 0
-õ ú(ğ
+‹ (ğ
 í
 
-ö ö(
+Œ Œ(
 %0java.lang.String"Ecom.smilepile.storage.StorageResult#setPhotoPath(Ljava/lang/String;)V*C
 
 __unknown_file ('%
@@ -1039,7 +1053,7 @@ dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;
 	photoPathjava.lang.Stringø
 õ
 
-÷ ÷(
+ (
 %1java.lang.String"Icom.smilepile.storage.StorageResult#setThumbnailPath(Ljava/lang/String;)V*C
 
 __unknown_file ('%
@@ -1050,7 +1064,7 @@ dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;
 thumbnailPathjava.lang.Stringî
 ë
 
-ø ø(
+ (
 %2java.lang.String"Dcom.smilepile.storage.StorageResult#setFileName(Ljava/lang/String;)V*C
 
 __unknown_file ('%
@@ -1061,7 +1075,7 @@ dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;
 fileNamejava.lang.StringÅ
 Â
 
-ù ù(
+ (
 
 %3long"3com.smilepile.storage.StorageResult#setFileSize(J)V*C
 
@@ -1075,16 +1089,16 @@ dcom.smilepile.storage.StorageResult#<init>(Ljava/lang/String;Ljava/lang/String;
 __unknown_file (
 implicit return:+
 
-ö ö(
+Œ Œ(
 	photoPathjava.lang.String:/
 
-÷ ÷(!
+ (!
 thumbnailPathjava.lang.String:*
 
-ø ø(
+ (
 fileNamejava.lang.String:
 
-ù ù(
+ (
 fileSizelongB'%
 #com.smilepile.storage.StorageResultH˜
 3com.smilepile.storage.StorageUsage#getTotalBytes()J
@@ -1206,12 +1220,12 @@ photoCountint"__id*
 valueintB&$
 "com.smilepile.storage.StorageUsageH`Å	
 0com.smilepile.storage.StorageUsage#<init>(JJJI)Vh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktÿ ÿ("0*î
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt• •("0*î
 0
-ÿ „(Ç
+• š(Ç
 Ä
 
-€ €(
+– –(
 
 %0long"4com.smilepile.storage.StorageUsage#setTotalBytes(J)V*B
 
@@ -1224,7 +1238,7 @@ photoCountint"__id*
 totalByteslongÇ
 Ä
 
- (
+— —(
 
 %1long"4com.smilepile.storage.StorageUsage#setPhotoBytes(J)V*B
 
@@ -1237,7 +1251,7 @@ totalByteslongÇ
 photoByteslongÏ
 Ì
 
-‚ ‚( 
+˜ ˜( 
 
 %2long"8com.smilepile.storage.StorageUsage#setThumbnailBytes(J)V*B
 
@@ -1249,7 +1263,7 @@ photoByteslongÏ
 thumbnailByteslongÅ
 Â
 
-ƒ ƒ(	
+™ ™(	
 %3int"4com.smilepile.storage.StorageUsage#setPhotoCount(I)V*B
 
 __unknown_file (&$
@@ -1263,39 +1277,39 @@ photoCountint"/
 __unknown_file (
 implicit return: 
 
-€ €(
+– –(
 
 totalByteslong: 
 
- (
+— —(
 
 photoByteslong:$
 
-‚ ‚( 
+˜ ˜( 
 thumbnailByteslong:
 
-ƒ ƒ(
+™ ™(
 
 photoCountintB&$
 "com.smilepile.storage.StorageUsageH‚
 0com.smilepile.storage.StorageUsage#getTotalMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt… …("0*¶
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt› ›("0*¶
 0
-… …(†
+› ›(†
 ƒ
 
-… …()
+› ›()
 
 %0long"3com.smilepile.storage.StorageUsage#getTotalBytes()J*4
 
-… …()&$
+› ›()&$
 "com.smilepile.storage.StorageUsage
 Š
 
-…- …(<
+›- ›(<
 %1"__calculate*
 
-…4 …(5
+›4 ›(5
 **)
 
 __unknown_file (
@@ -1305,13 +1319,13 @@ photoCountintB&$
 	<unknown>v
 t
 
-… …(=
+› ›(=
 %2"__calculate*
 
-…* …(+
+›* ›(+
 /*
 
-… …()
+› ›()
 
 
 %0long*"
@@ -1320,28 +1334,28 @@ t
 
 %1"
 
-… …(=
+› ›(=
 
 %2B&$
 "com.smilepile.storage.StorageUsageH‚
 0com.smilepile.storage.StorageUsage#getPhotoMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt† †("0*¶
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.ktœ œ("0*¶
 0
-† †(†
+œ œ(†
 ƒ
 
-† †()
+œ œ()
 
 %0long"3com.smilepile.storage.StorageUsage#getPhotoBytes()J*4
 
-† †()&$
+œ œ()&$
 "com.smilepile.storage.StorageUsage
 Š
 
-†- †(<
+œ- œ(<
 %1"__calculate*
 
-†4 †(5
+œ4 œ(5
 **)
 
 __unknown_file (
@@ -1351,13 +1365,13 @@ t
 	<unknown>v
 t
 
-† †(=
+œ œ(=
 %2"__calculate*
 
-†* †(+
+œ* œ(+
 /*
 
-† †()
+œ œ()
 
 
 %0long*"
@@ -1366,28 +1380,28 @@ t
 
 %1"
 
-† †(=
+œ œ(=
 
 %2B&$
 "com.smilepile.storage.StorageUsageHŠ
 4com.smilepile.storage.StorageUsage#getThumbnailMB()Dh
-\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt‡ ‡("0*º
+\/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/storage/StorageManager.kt ("0*º
 0
-‡ ‡(Š
+ (Š
 ‡
 
-‡# ‡(1
+# (1
 
 %0long"7com.smilepile.storage.StorageUsage#getThumbnailBytes()J*4
 
-‡# ‡(1&$
+# (1&$
 "com.smilepile.storage.StorageUsage
 Š
 
-‡5 ‡(D
+5 (D
 %1"__calculate*
 
-‡< ‡(=
+< (=
 **)
 
 __unknown_file (
@@ -1397,13 +1411,13 @@ t
 	<unknown>v
 t
 
-‡# ‡(E
+# (E
 %2"__calculate*
 
-‡2 ‡(3
+2 (3
 /*
 
-‡# ‡(1
+# (1
 
 
 %0long*"
@@ -1412,7 +1426,7 @@ t
 
 %1"
 
-‡# ‡(E
+# (E
 
 %2B&$
 "com.smilepile.storage.StorageUsageH

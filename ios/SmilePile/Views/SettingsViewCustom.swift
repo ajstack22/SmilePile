@@ -3,6 +3,7 @@ import LocalAuthentication
 
 struct SettingsViewCustom: View {
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @StateObject private var kidsModeViewModel = KidsModeViewModel()
     @StateObject private var securityViewModel = SecuritySettingsViewModel()
     @StateObject private var backupViewModel = BackupViewModel()
@@ -12,6 +13,19 @@ struct SettingsViewCustom: View {
     @State private var showPINSetup = false
     @State private var showPINChange = false
     @State private var showingAboutDialog = false
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 700 : nil
+    }
+
+    private var horizontalPadding: CGFloat {
+        isIPad ? 32 : 16
+    }
 
     // Clear All Data state
     @State private var showClearConfirmation = false
@@ -35,173 +49,150 @@ struct SettingsViewCustom: View {
                 showViewModeButton: true
             )
 
-            // Settings content with cards matching Android
+            // Settings content with cards matching Android - centered on iPad
             ScrollView {
-                VStack(spacing: 16) {
-                    // Appearance Section
-                    SettingsSection(
-                        title: "Appearance"
-                    ) {
-                        ThemeSelector(themeMode: $settingsManager.themeMode)
-                    }
-                    .padding(.horizontal, 16)
+                HStack {
+                    if isIPad { Spacer() }
 
-                    // Security Section
-                    SettingsSection(
-                        title: "Security"
-                    ) {
-                        VStack(spacing: 0) {
-                            if securityViewModel.hasPIN {
-                                SettingsActionItem(
-                                    title: "Change PIN",
-                                    subtitle: "Update your security PIN",
-                                    icon: "lock.fill",
-                                    action: { showPINChange = true }
-                                )
+                    VStack(spacing: isIPad ? 20 : 16) {
+                        // Appearance Section
+                        SettingsSection(
+                            title: "Appearance"
+                        ) {
+                            ThemeSelector(themeMode: $settingsManager.themeMode)
+                        }
+                        .padding(.horizontal, horizontalPadding)
 
-                                if securityViewModel.isBiometricAvailable {
-                                    SettingsSwitchItem(
-                                        title: "Use \(securityViewModel.biometricName)",
-                                        subtitle: "Quick access with biometrics",
-                                        icon: securityViewModel.biometricIcon,
-                                        isOn: $securityViewModel.isBiometricEnabled
+                        // Security Section
+                        SettingsSection(
+                            title: "Security"
+                        ) {
+                            VStack(spacing: 0) {
+                                if securityViewModel.hasPIN {
+                                    SettingsActionItem(
+                                        title: "Change PIN",
+                                        subtitle: "Update your security PIN",
+                                        icon: "lock.fill",
+                                        action: { showPINChange = true }
+                                    )
+
+                                    if securityViewModel.isBiometricAvailable {
+                                        SettingsSwitchItem(
+                                            title: "Use \(securityViewModel.biometricName)",
+                                            subtitle: "Quick access with biometrics",
+                                            icon: securityViewModel.biometricIcon,
+                                            isOn: $securityViewModel.isBiometricEnabled
+                                        )
+                                    }
+
+                                    SettingsActionItem(
+                                        title: "Remove PIN",
+                                        subtitle: "Disable PIN protection",
+                                        icon: "lock.open.fill",
+                                        action: { securityViewModel.removePIN() }
+                                    )
+                                } else {
+                                    SettingsActionItem(
+                                        title: "Set PIN",
+                                        subtitle: "Protect Parent Mode with PIN",
+                                        icon: "lock.fill",
+                                        action: { showPINSetup = true }
                                     )
                                 }
-
-                                SettingsActionItem(
-                                    title: "Remove PIN",
-                                    subtitle: "Disable PIN protection",
-                                    icon: "lock.open.fill",
-                                    action: { securityViewModel.removePIN() }
-                                )
-                            } else {
-                                SettingsActionItem(
-                                    title: "Set PIN",
-                                    subtitle: "Protect Parent Mode with PIN",
-                                    icon: "lock.fill",
-                                    action: { showPINSetup = true }
-                                )
                             }
                         }
-                    }
-                    .padding(.horizontal, 16)
+                        .padding(.horizontal, horizontalPadding)
 
-                    // Data Section
-                    SettingsSection(
-                        title: "Data"
-                    ) {
-                        VStack(spacing: 0) {
-                            SettingsActionItem(
-                                title: "Export",
-                                subtitle: "Save your photos and categories",
-                                icon: "square.and.arrow.up",
-                                action: {
-                                    // Export is a user-initiated data operation, no auth required
-                                    backupViewModel.exportData()
-                                }
-                            )
-
-                            Divider()
-                                .padding(.leading, 56)
-
-                            SettingsActionItem(
-                                title: "Import",
-                                subtitle: "Restore from backup",
-                                icon: "square.and.arrow.down",
-                                action: {
-                                    // Import is a user-initiated data operation, no auth required
-                                    backupViewModel.showFilePicker()
-                                }
-                            )
-
-                            Divider()
-                                .padding(.leading, 56)
-
-                            SettingsActionItem(
-                                title: "Clear All Data",
-                                subtitle: "Permanently delete all photos, categories, and settings",
-                                icon: "trash.fill",
-                                iconColor: .red,
-                                action: {
-                                    // Check for concurrent operations
-                                    guard !backupViewModel.isExporting && !backupViewModel.isImporting else {
-                                        clearError = "Cannot clear data while import or export is in progress"
-                                        showErrorAlert = true
-                                        return
+                        // Data Section
+                        SettingsSection(
+                            title: "Data"
+                        ) {
+                            VStack(spacing: 0) {
+                                SettingsActionItem(
+                                    title: "Export",
+                                    subtitle: "Save your photos and categories",
+                                    icon: "square.and.arrow.up",
+                                    action: {
+                                        // Export is a user-initiated data operation, no auth required
+                                        backupViewModel.exportData()
                                     }
+                                )
 
-                                    // Require authentication if security is set
-                                    // Refresh security status to ensure we have the latest state
-                                    securityViewModel.refreshSecurityStatus()
+                                Divider()
+                                    .padding(.leading, 56)
 
-                                    // Use DispatchQueue to ensure state updates are processed properly
-                                    DispatchQueue.main.async {
-                                        if securityViewModel.hasPIN {
-                                            // Check if biometric is also enabled
-                                            if securityViewModel.isBiometricEnabled && securityViewModel.isBiometricAvailable {
-                                                // Try biometric first (iOS Settings pattern)
-                                                authenticateForClearData()
+                                SettingsActionItem(
+                                    title: "Import",
+                                    subtitle: "Restore from backup",
+                                    icon: "square.and.arrow.down",
+                                    action: {
+                                        // Import is a user-initiated data operation, no auth required
+                                        backupViewModel.showFilePicker()
+                                    }
+                                )
+
+                                Divider()
+                                    .padding(.leading, 56)
+
+                                SettingsActionItem(
+                                    title: "Clear All Data",
+                                    subtitle: "Permanently delete all photos, categories, and settings",
+                                    icon: "trash.fill",
+                                    iconColor: .red,
+                                    action: {
+                                        // Check for concurrent operations
+                                        guard !backupViewModel.isExporting && !backupViewModel.isImporting else {
+                                            clearError = "Cannot clear data while import or export is in progress"
+                                            showErrorAlert = true
+                                            return
+                                        }
+
+                                        // Require authentication if security is set
+                                        // Refresh security status to ensure we have the latest state
+                                        securityViewModel.refreshSecurityStatus()
+
+                                        // Use DispatchQueue to ensure state updates are processed properly
+                                        DispatchQueue.main.async {
+                                            if securityViewModel.hasPIN {
+                                                // Check if biometric is also enabled
+                                                if securityViewModel.isBiometricEnabled && securityViewModel.isBiometricAvailable {
+                                                    // Try biometric first (iOS Settings pattern)
+                                                    authenticateForClearData()
+                                                } else {
+                                                    // Only PIN available, show PIN validation sheet
+                                                    showClearPINValidation = true
+                                                }
                                             } else {
-                                                // Only PIN available, show PIN validation sheet
-                                                showClearPINValidation = true
+                                                // No security set, show confirmation directly
+                                                showClearConfirmation = true
                                             }
-                                        } else {
-                                            // No security set, show confirmation directly
-                                            showClearConfirmation = true
                                         }
                                     }
-                                }
-                            )
-                            .disabled(isClearing)
-                        }
-                    }
-                    .padding(.horizontal, 16)
-
-                    // Demo Section
-                    SettingsSection(
-                        title: "Demo"
-                    ) {
-                        VStack(spacing: 0) {
-                            if settingsManager.isDemoMode {
-                                SettingsActionItem(
-                                    title: "Demo Mode Active",
-                                    subtitle: "Use banner to exit",
-                                    icon: "star.fill",
-                                    iconColor: Color(red: 156/255, green: 39/255, blue: 176/255),
-                                    action: {}
                                 )
-                            } else {
-                                SettingsActionItem(
-                                    title: "Try Demo Mode",
-                                    subtitle: settingsManager.demoModeEntered
-                                        ? "Entered \(settingsManager.demoModeEntryCount) time\(settingsManager.demoModeEntryCount == 1 ? "" : "s")"
-                                        : "Experience SmilePile with pre-filled photos",
-                                    icon: "star.fill",
-                                    iconColor: Color(red: 156/255, green: 39/255, blue: 176/255),
-                                    action: {
-                                        // TODO: Navigate to demo mode entry
-                                    }
-                                )
+                                .disabled(isClearing)
                             }
                         }
-                    }
-                    .padding(.horizontal, 16)
+                        .padding(.horizontal, horizontalPadding)
 
-                    // About Section
-                    SettingsSection(
-                        title: "About"
-                    ) {
-                        SettingsActionItem(
-                            title: "SmilePile",
-                            subtitle: appVersionString,
-                            icon: "info.circle",
-                            action: { showingAboutDialog = true }
-                        )
+                        // About Section
+                        SettingsSection(
+                            title: "About"
+                        ) {
+                            SettingsActionItem(
+                                title: "SmilePile",
+                                subtitle: appVersionString,
+                                icon: "info.circle",
+                                action: { showingAboutDialog = true }
+                            )
+                        }
+                        .padding(.horizontal, horizontalPadding)
+                        .padding(.bottom, isIPad ? 20 : 16)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 16)
+                    .frame(maxWidth: contentMaxWidth)
+                    .padding(.top, isIPad ? 20 : 16)
+
+                    if isIPad { Spacer() }
                 }
-                .padding(.top, 16)
             }
         }
         .background(Color(UIColor.systemBackground))

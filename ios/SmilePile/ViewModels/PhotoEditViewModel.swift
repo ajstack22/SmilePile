@@ -235,19 +235,8 @@ class PhotoEditViewModel: ObservableObject {
         current.cropRect = rect
         editQueue[currentIndex] = current
         currentPhoto = current
-    }
-
-    func applyCrop() {
-        guard var current = currentPhoto,
-              let cropRect = current.cropRect else { return }
-
-        if let cropped = imageProcessor.cropImage(current.image, to: cropRect) {
-            current.image = cropped
-            // Don't clear cropRect here - let applyCurrentPhoto handle it
-            editQueue[currentIndex] = current
-            currentPhoto = current
-            updatePreviewImage()
-        }
+        // Don't update preview while user is adjusting crop
+        // The crop overlay will show the crop area visually
     }
 
     func applyAspectRatio(_ ratio: ImageProcessor.AspectRatio) {
@@ -421,6 +410,8 @@ class PhotoEditViewModel: ObservableObject {
                     if let imageData = result.image.jpegData(compressionQuality: 0.9) {
                         do {
                             try imageData.write(to: URL(fileURLWithPath: sourcePath))
+                            // Invalidate cache so gallery shows updated version immediately
+                            await OptimizedImageCache.shared.removeImage(for: sourcePath)
                         } catch {
                             print("Failed to overwrite photo: \(error)")
                         }
@@ -435,7 +426,7 @@ class PhotoEditViewModel: ObservableObject {
                         categoryId: result.categoryId,  // Always use the new categoryId
                         name: existingPhoto.name,
                         isFromAssets: existingPhoto.isFromAssets,
-                        createdAt: result.wasEdited ? Date().timeIntervalSince1970.toInt64() : existingPhoto.createdAt,
+                        createdAt: existingPhoto.createdAt,  // Always preserve original timestamp
                         fileSize: result.wasEdited ? Int64(result.image.jpegData(compressionQuality: 0.9)?.count ?? 0) : existingPhoto.fileSize,
                         width: result.wasEdited ? Int(result.image.size.width * result.image.scale) : existingPhoto.width,
                         height: result.wasEdited ? Int(result.image.size.height * result.image.scale) : existingPhoto.height
@@ -461,6 +452,8 @@ class PhotoEditViewModel: ObservableObject {
                     if result.wasEdited {
                         if let imageData = result.image.jpegData(compressionQuality: 0.9) {
                             try? imageData.write(to: URL(fileURLWithPath: savedPath))
+                            // Invalidate cache so gallery shows updated version immediately
+                            await OptimizedImageCache.shared.removeImage(for: savedPath)
                             print("📝 PhotoEdit: Overwrote edited image at \(savedPath)")
                         }
                     }
@@ -474,6 +467,8 @@ class PhotoEditViewModel: ObservableObject {
 
                     if let imageData = result.image.jpegData(compressionQuality: 0.9) {
                         try? imageData.write(to: URL(fileURLWithPath: savedPath))
+                        // Invalidate cache for new file
+                        await OptimizedImageCache.shared.removeImage(for: savedPath)
                     }
                     print("📝 PhotoEdit: Created new file at \(savedPath)")
                 }

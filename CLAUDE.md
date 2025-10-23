@@ -52,5 +52,19 @@ See `/Users/adamstack/SmilePile/atlas/docs/AGENT_WORKFLOW.md` for full details.
 - Photo IDs: Use PHAsset.localIdentifier (iOS), Uri.toString (Android)
 - Build: Use ./deploy/deploy_qual.sh for deployments
 
+## APPROVED TEST DEVICES
+### iOS Simulators (iOS 26.0 only)
+- **iPhone 17** (CC571231-D473-43E5-97F1-83F8289D8153)
+- **iPhone 17 Pro Max** (8314ACBC-020A-451F-A94F-B8D9B27227FD)
+- **iPad Pro 13-inch (M4)** (B9D4F952-EE7D-45FC-B75F-F4F5ED2C169C)
+
+### Android Emulators
+- **Pixel 9** - Standard phone
+- **Pixel 9 Pro XL** - Large phone
+- **Pixel Tablet** - Tablet form factor
+- **Television 4K** - TV platform (for StackMapTV)
+
+**Note**: Deploy script also installs on any physically connected ADB devices
+
 ## IF SOMETHING WON'T WORK
 **TELL THE USER IMMEDIATELY** - Don't take shortcuts or quick fixes

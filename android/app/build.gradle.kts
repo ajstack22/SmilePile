@@ -30,8 +30,8 @@ android {
         applicationId = "app.smilepile"
         minSdk = 24
         targetSdk = 35
-        versionCode = 251017002  // YYMMDDVVV format as integer
-        versionName = "25.10.17.002"
+        versionCode = 251023003  // YYMMDDVVV format as integer
+        versionName = "25.10.23.003"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -122,6 +122,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -172,6 +173,9 @@ android {
 }
 
 dependencies {
+    // Core Library Desugaring for java.time support on API < 26
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
     // Core Android dependencies
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

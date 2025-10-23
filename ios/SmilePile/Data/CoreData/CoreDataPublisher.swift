@@ -97,34 +97,34 @@ where S.Input == [Entity], S.Failure == Error {
 // MARK: - Fetch Request Builder
 
 struct FetchRequestBuilder<Entity: NSManagedObject> {
-    private var request: NSFetchRequest<Entity>
+    private let request: NSFetchRequest<Entity>
 
     init(_ entityType: Entity.Type) {
         self.request = NSFetchRequest<Entity>(entityName: String(describing: entityType))
     }
 
+    private init(request: NSFetchRequest<Entity>) {
+        self.request = request
+    }
+
     func predicate(_ predicate: NSPredicate) -> FetchRequestBuilder {
-        var builder = self
-        builder.request.predicate = predicate
-        return builder
+        request.predicate = predicate
+        return self
     }
 
     func sortDescriptors(_ descriptors: [NSSortDescriptor]) -> FetchRequestBuilder {
-        var builder = self
-        builder.request.sortDescriptors = descriptors
-        return builder
+        request.sortDescriptors = descriptors
+        return self
     }
 
     func limit(_ limit: Int) -> FetchRequestBuilder {
-        var builder = self
-        builder.request.fetchLimit = limit
-        return builder
+        request.fetchLimit = limit
+        return self
     }
 
     func batchSize(_ size: Int) -> FetchRequestBuilder {
-        var builder = self
-        builder.request.fetchBatchSize = size
-        return builder
+        request.fetchBatchSize = size
+        return self
     }
 
     func build() -> NSFetchRequest<Entity> {

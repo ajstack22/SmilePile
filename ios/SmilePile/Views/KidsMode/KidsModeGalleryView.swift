@@ -67,7 +67,7 @@ struct KidsModeGalleryView: View {
             // Fullscreen photo viewer overlay
             if showFullscreenViewer, let initialIndex = selectedPhotoIndex {
                 KidsPhotoViewer(
-                    photos: displayedPhotos,
+                    photosByCategory: createPhotosByCategory(),
                     categories: viewModel.categories,
                     selectedCategory: viewModel.selectedCategory,
                     initialPhotoIndex: initialIndex,
@@ -76,9 +76,7 @@ struct KidsModeGalleryView: View {
                         viewModel.setFullscreen(false)
                     },
                     onCategoryChange: { category in
-                        viewModel.selectCategory(category)
-                        // Show category toast when changed in fullscreen mode
-                        viewModel.showCategoryToast(category)
+                        viewModel.selectCategory(category) // This already shows the toast internally
                         // When category changes in fullscreen, update to first photo of new category
                         let newPhotos = viewModel.getPhotosForCategory(category.id)
                         if !newPhotos.isEmpty {
@@ -104,6 +102,16 @@ struct KidsModeGalleryView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Helper Methods
+
+    private func createPhotosByCategory() -> [Int64: [Photo]] {
+        var result: [Int64: [Photo]] = [:]
+        for category in viewModel.categories {
+            result[category.id] = viewModel.getPhotosForCategory(category.id)
+        }
+        return result
     }
 
     // MARK: - Swipe Gesture

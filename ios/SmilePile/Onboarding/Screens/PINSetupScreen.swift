@@ -9,17 +9,39 @@ struct PINSetupScreen: View {
     @State private var errorMessage = ""
     @FocusState private var pinFieldFocused: Bool
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     let pinLength = 4
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var buttonSize: CGFloat {
+        isIPad ? 90 : 70
+    }
+
+    private var buttonSpacing: CGFloat {
+        isIPad ? 32 : 24
+    }
+
+    private var iconSize: CGFloat {
+        isIPad ? 80 : 64
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 500 : nil
+    }
 
     var body: some View {
         VStack(spacing: 0) {
             // Instructions
-            VStack(spacing: 16) {
+            VStack(spacing: isIPad ? 20 : 16) {
                 Image(systemName: "lock.fill")
-                    .font(.system(size: 64))
+                    .font(.system(size: iconSize))
                     .foregroundColor(.smilePileYellow)  // Yellow not pink
-                    .padding(.bottom, 20)
+                    .padding(.bottom, isIPad ? 24 : 20)
 
                 Text(isConfirming ? "Confirm Your PIN" : "Set Up PIN Protection")
                     .font(typography.headlineSmall)
@@ -34,10 +56,10 @@ struct PINSetupScreen: View {
                         .font(typography.bodySmall)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 40)
+                        .padding(.horizontal, isIPad ? 48 : 40)
                 }
             }
-            .padding(.top, 40)
+            .padding(.top, isIPad ? 48 : 40)
 
             Spacer()
 
@@ -75,91 +97,105 @@ struct PINSetupScreen: View {
                         .transition(.opacity)
                 }
 
-                // Numeric keypad
-                VStack(spacing: 16) {
-                    ForEach(0..<3) { row in
-                        HStack(spacing: 24) {
-                            ForEach(1...3, id: \.self) { col in
-                                let number = row * 3 + col
-                                NumberButton(number: "\(number)") {
-                                    addDigit("\(number)")
+                // Numeric keypad - centered on iPad
+                HStack {
+                    if isIPad { Spacer() }
+
+                    VStack(spacing: isIPad ? 20 : 16) {
+                        ForEach(0..<3) { row in
+                            HStack(spacing: buttonSpacing) {
+                                ForEach(1...3, id: \.self) { col in
+                                    let number = row * 3 + col
+                                    NumberButton(number: "\(number)", size: buttonSize) {
+                                        addDigit("\(number)")
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    HStack(spacing: 24) {
-                        // Clear button
-                        Button(action: clearPin) {
-                            Image(systemName: "delete.left")
-                                .font(.title2)
-                                .foregroundColor(.gray)
-                                .frame(width: 70, height: 70)
+                        HStack(spacing: buttonSpacing) {
+                            // Clear button
+                            Button(action: clearPin) {
+                                Image(systemName: "delete.left")
+                                    .font(isIPad ? .title : .title2)
+                                    .foregroundColor(.gray)
+                                    .frame(width: buttonSize, height: buttonSize)
+                            }
+
+                            // Zero button
+                            NumberButton(number: "0", size: buttonSize) {
+                                addDigit("0")
+                            }
+
+                            // Empty space
+                            Color.clear
+                                .frame(width: buttonSize, height: buttonSize)
                         }
-
-                        // Zero button
-                        NumberButton(number: "0") {
-                            addDigit("0")
-                        }
-
-                        // Empty space
-                        Color.clear
-                            .frame(width: 70, height: 70)
                     }
+                    .frame(maxWidth: contentMaxWidth)
+
+                    if isIPad { Spacer() }
                 }
             }
 
             Spacer()
 
-            // Action buttons - horizontal layout at bottom
-            HStack(spacing: 16) {
-                // Skip button (only on first entry, not confirmation)
-                if !isConfirming {
-                    Button(action: {
-                        coordinator.onboardingData.skipPIN = true
-                        coordinator.navigateToNext()
-                    }) {
-                        Text("Skip")
-                            .font(typography.bodyLarge)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 56)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(12)
-                    }
-                }
+            // Action buttons - horizontal layout at bottom - centered on iPad
+            HStack {
+                if isIPad { Spacer() }
 
-                // Continue/Confirm button (always visible)
-                Button(action: {
-                    if isConfirming {
-                        confirmPin()
-                    } else {
-                        if pinCode.count == pinLength {
-                            proceedToConfirm()
+                HStack(spacing: 16) {
+                    // Skip button (only on first entry, not confirmation)
+                    if !isConfirming {
+                        Button(action: {
+                            coordinator.onboardingData.skipPIN = true
+                            coordinator.navigateToNext()
+                        }) {
+                            Text("Skip")
+                                .font(typography.bodyLarge)
+                                .fontWeight(.medium)
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: isIPad ? 64 : 56)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(12)
                         }
                     }
-                }) {
-                    Text(isConfirming ? "Confirm PIN" : "Continue")
-                        .font(typography.bodyLarge)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 56)
-                        .background(
-                            (isConfirming && confirmPinCode.count == pinLength) ||
-                            (!isConfirming && pinCode.count == pinLength) ?
-                            Color.smilePileBlue : Color.gray.opacity(0.3)
-                        )
-                        .cornerRadius(12)
+
+                    // Continue/Confirm button (always visible)
+                    Button(action: {
+                        if isConfirming {
+                            confirmPin()
+                        } else {
+                            if pinCode.count == pinLength {
+                                proceedToConfirm()
+                            }
+                        }
+                    }) {
+                        Text(isConfirming ? "Confirm PIN" : "Continue")
+                            .font(typography.bodyLarge)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: isIPad ? 64 : 56)
+                            .background(
+                                (isConfirming && confirmPinCode.count == pinLength) ||
+                                (!isConfirming && pinCode.count == pinLength) ?
+                                Color.smilePileBlue : Color.gray.opacity(0.3)
+                            )
+                            .cornerRadius(12)
+                    }
+                    .disabled(
+                        (isConfirming && confirmPinCode.count != pinLength) ||
+                        (!isConfirming && pinCode.count != pinLength)
+                    )
                 }
-                .disabled(
-                    (isConfirming && confirmPinCode.count != pinLength) ||
-                    (!isConfirming && pinCode.count != pinLength)
-                )
+                .frame(maxWidth: contentMaxWidth)
+
+                if isIPad { Spacer() }
             }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 50)
+            .padding(.horizontal, isIPad ? 48 : 40)
+            .padding(.bottom, isIPad ? 60 : 50)
         }
         .onAppear {
             pinFieldFocused = true
@@ -236,6 +272,7 @@ struct PINSetupScreen: View {
 
 struct NumberButton: View {
     let number: String
+    let size: CGFloat
     let action: () -> Void
     @Environment(\.typography) var typography
 
@@ -245,7 +282,7 @@ struct NumberButton: View {
                 .font(typography.titleLarge)
                 .fontWeight(.medium)
                 .foregroundColor(.primary)
-                .frame(width: 70, height: 70)
+                .frame(width: size, height: size)
                 .background(
                     Circle()
                         .fill(Color.gray.opacity(0.1))

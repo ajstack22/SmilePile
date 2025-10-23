@@ -1,29 +1,28 @@
 ---
+import SmilePileLogo from './SmilePileLogo.astro';
 ---
 
 <header class="sticky top-0 z-50 bg-white shadow-sm">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2 focus-visible-ring rounded">
-        <svg class="w-10 h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        <span class="text-xl font-bold text-gray-900">SmilePile</span>
+      <a href="/" class="focus-visible-ring rounded px-2 py-1 no-underline">
+        <SmilePileLogo size="lg" />
       </a>
 
       <!-- Desktop Navigation -->
       <ul class="hidden md:flex space-x-8">
-        <li><a href="/#features" class="text-gray-700 hover:text-primary-600 transition-colors focus-visible-ring rounded px-2 py-1">Features</a></li>
-        <li><a href="/support" class="text-gray-700 hover:text-primary-600 transition-colors focus-visible-ring rounded px-2 py-1">Support</a></li>
-        <li><a href="/privacy" class="text-gray-700 hover:text-primary-600 transition-colors focus-visible-ring rounded px-2 py-1">Privacy</a></li>
-        <li><a href="/terms" class="text-gray-700 hover:text-primary-600 transition-colors focus-visible-ring rounded px-2 py-1">Terms</a></li>
+        <li><a href="/#features" class="text-gray-700 hover:text-primary transition-colors focus-visible-ring rounded px-2 py-1 no-underline">Features</a></li>
+        <li><a href="/support" class="text-gray-700 hover:text-primary transition-colors focus-visible-ring rounded px-2 py-1 no-underline">FAQ</a></li>
+        <li><a href="/support-us" class="text-gray-700 hover:text-primary transition-colors focus-visible-ring rounded px-2 py-1 no-underline">Support Us</a></li>
+        <li><a href="/privacy" class="text-gray-700 hover:text-primary transition-colors focus-visible-ring rounded px-2 py-1 no-underline">Privacy</a></li>
+        <li><a href="/terms" class="text-gray-700 hover:text-primary transition-colors focus-visible-ring rounded px-2 py-1 no-underline">Terms</a></li>
       </ul>
 
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden p-2 rounded focus-visible-ring"
+        class="md:hidden p-2 rounded focus-visible-ring min-h-[48px] min-w-[48px]"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
@@ -35,10 +34,11 @@
 
     <!-- Mobile Navigation -->
     <ul id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
-      <li><a href="/#features" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded focus-visible-ring">Features</a></li>
-      <li><a href="/support" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded focus-visible-ring">Support</a></li>
-      <li><a href="/privacy" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded focus-visible-ring">Privacy</a></li>
-      <li><a href="/terms" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded focus-visible-ring">Terms</a></li>
+      <li><a href="/#features" class="block px-4 py-2 text-gray-700 hover:bg-primary-50 rounded focus-visible-ring min-h-[48px] no-underline">Features</a></li>
+      <li><a href="/support" class="block px-4 py-2 text-gray-700 hover:bg-primary-50 rounded focus-visible-ring min-h-[48px] no-underline">FAQ</a></li>
+      <li><a href="/support-us" class="block px-4 py-2 text-gray-700 hover:bg-primary-50 rounded focus-visible-ring min-h-[48px] no-underline">Support Us</a></li>
+      <li><a href="/privacy" class="block px-4 py-2 text-gray-700 hover:bg-primary-50 rounded focus-visible-ring min-h-[48px] no-underline">Privacy</a></li>
+      <li><a href="/terms" class="block px-4 py-2 text-gray-700 hover:bg-primary-50 rounded focus-visible-ring min-h-[48px] no-underline">Terms</a></li>
     </ul>
   </nav>
 </header>

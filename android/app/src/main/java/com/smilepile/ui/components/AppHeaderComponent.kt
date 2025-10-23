@@ -8,6 +8,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.RemoveRedEye
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,6 +22,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import android.os.SystemClock
 
 /**
  * Unified header component for all parent mode screens
@@ -30,15 +35,15 @@ fun AppHeaderComponent(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
-    // Check if we're in dark theme by comparing the background color
-    // In dark theme, background is #1C1B1F (very dark), in light theme it's #FFFBFE (almost white)
+    var lastClickTime by rememberSaveable { mutableStateOf(0L) }
+    val debounceMs = 500L
+
     val isDarkTheme = MaterialTheme.colorScheme.background == Color(0xFF1C1B1F)
 
-    // Use appropriate background color based on theme
     val headerBackgroundColor = if (isDarkTheme) {
         MaterialTheme.colorScheme.surfaceVariant
     } else {
-        Color(0xFFFAFAFA) // Very light gray, softer than pure white
+        Color(0xFFFAFAFA)
     }
 
     // Wrap everything in a column
@@ -66,15 +71,20 @@ fun AppHeaderComponent(
                     modifier = Modifier.align(Alignment.CenterStart)
                 )
 
-                // View Mode eye icon on the right
                 if (showViewModeButton) {
                     Surface(
                         modifier = Modifier
                             .align(Alignment.CenterEnd)
-                            .size(48.dp) // Same size as logo
+                            .size(48.dp)
                             .clip(CircleShape)
-                            .clickable { onViewModeClick() },
-                        color = Color(0xFF4CAF50) // Solid green background
+                            .clickable {
+                                val currentTime = SystemClock.elapsedRealtime()
+                                if (currentTime - lastClickTime >= debounceMs) {
+                                    lastClickTime = currentTime
+                                    onViewModeClick()
+                                }
+                            },
+                        color = Color(0xFF4CAF50)
                     ) {
                         Box(
                             contentAlignment = Alignment.Center,

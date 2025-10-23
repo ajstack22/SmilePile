@@ -3,6 +3,8 @@ import SwiftUI
 struct WelcomeScreen: View {
     @ObservedObject var coordinator: OnboardingCoordinator
     @Environment(\.typography) var typography: Typography
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @State private var showPrivacyPolicy = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -33,75 +35,115 @@ struct WelcomeScreen: View {
             Spacer()
 
             // Features list
-            VStack(alignment: .leading, spacing: 24) {
-                FeatureRow(
-                    icon: "square.stack",
-                    iconColor: .smilePileYellow,
-                    title: "Organize photos into piles",
-                    description: "Create colorful piles for your photos"
-                )
+            Group {
+                if sizeClass == .regular {
+                    HStack {
+                        Spacer()
+                        VStack(alignment: .leading, spacing: 24) {
+                            FeatureRow(
+                                icon: "square.stack",
+                                iconColor: .smilePileYellow,
+                                title: "Organize photos into piles",
+                                description: "Create colorful piles for your photos"
+                            )
 
-                FeatureRow(
-                    icon: "arrow.up.left.and.arrow.down.right",
-                    iconColor: .smilePileOrange,
-                    title: "Distraction-free mode",
-                    description: "Good for kids (and everyone else)"
-                )
+                            FeatureRow(
+                                icon: "arrow.up.left.and.arrow.down.right",
+                                iconColor: .smilePileOrange,
+                                title: "Distraction-free mode",
+                                description: "Good for kids (and everyone else)"
+                            )
 
-                FeatureRow(
-                    icon: "lock.fill",
-                    iconColor: .smilePileGreen,
-                    title: "Optional PIN protection",
-                    description: "Prevent inadvertent changes"
-                )
+                            FeatureRow(
+                                icon: "lock.fill",
+                                iconColor: .smilePileGreen,
+                                title: "Optional PIN protection",
+                                description: "Prevent inadvertent changes"
+                            )
+                        }
+                        .frame(maxWidth: 600)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 40)
+                } else {
+                    VStack(alignment: .leading, spacing: 24) {
+                        FeatureRow(
+                            icon: "square.stack",
+                            iconColor: .smilePileYellow,
+                            title: "Organize photos into piles",
+                            description: "Create colorful piles for your photos"
+                        )
+
+                        FeatureRow(
+                            icon: "arrow.up.left.and.arrow.down.right",
+                            iconColor: .smilePileOrange,
+                            title: "Distraction-free mode",
+                            description: "Good for kids (and everyone else)"
+                        )
+
+                        FeatureRow(
+                            icon: "lock.fill",
+                            iconColor: .smilePileGreen,
+                            title: "Optional PIN protection",
+                            description: "Prevent inadvertent changes"
+                        )
+                    }
+                    .padding(.horizontal, 40)
+                }
             }
-            .padding(.horizontal, 40)
 
             Spacer()
 
-            // Try Demo button
+            // Buttons
             VStack(spacing: 12) {
-                Button(action: {
-                    coordinator.enterDemoMode()
-                }) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "star.fill")
-                            .font(typography.bodyMedium)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Try Demo")
-                                .font(typography.bodyLarge)
-                                .fontWeight(.bold)
-                            Text("Explore with pre-filled example photos")
-                                .font(typography.labelMedium)
-                        }
-                        Spacer()
-                    }
-                    .foregroundColor(Color(red: 156/255, green: 39/255, blue: 176/255))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .padding(.horizontal, 16)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color(red: 156/255, green: 39/255, blue: 176/255), lineWidth: 2)
-                    )
-                }
-
-                // Get Started button
+                // Get Started button (primary action)
                 Button(action: {
                     coordinator.navigateToNext()
                 }) {
-                    Text("Get Started")
+                    Text("Start Fresh")
                         .font(typography.bodyLarge)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: 400)
                         .frame(height: 56)
+                        .frame(maxWidth: .infinity)
                         .background(Color.smilePileBlue)
                         .cornerRadius(12)
                 }
+
+                // Try Demo button (secondary action)
+                Button(action: {
+                    coordinator.enterDemoMode()
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 14))
+                        Text("Try Demo")
+                            .font(typography.bodyMedium)
+                            .fontWeight(.medium)
+                    }
+                    .foregroundColor(.smilePileBlue)
+                    .frame(maxWidth: 400)
+                    .frame(height: 48)
+                    .frame(maxWidth: .infinity)
+                }
             }
             .padding(.horizontal, 40)
+
+            // Privacy Policy Link
+            Button(action: {
+                showPrivacyPolicy = true
+            }) {
+                Text("Privacy Policy")
+                    .font(typography.bodySmall)
+                    .foregroundColor(.secondary)
+                    .underline()
+            }
+            .padding(.top, 8)
             .padding(.bottom, 50)
+        }
+        .sheet(isPresented: $showPrivacyPolicy) {
+            PrivacyPolicyView()
         }
     }
 }

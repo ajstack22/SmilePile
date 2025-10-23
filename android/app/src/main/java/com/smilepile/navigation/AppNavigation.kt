@@ -98,7 +98,9 @@ fun AppNavHost(
     startDestination: String = NavigationRoutes.GALLERY,
     modifier: Modifier = Modifier,
     paddingValues: androidx.compose.foundation.layout.PaddingValues = androidx.compose.foundation.layout.PaddingValues(0.dp),
-    toastState: com.smilepile.ui.toast.ToastState? = null
+    toastState: com.smilepile.ui.toast.ToastState? = null,
+    demoState: com.smilepile.ui.viewmodels.DemoModeUiState = com.smilepile.ui.viewmodels.DemoModeUiState(),
+    onShowExitDemoDialog: () -> Unit = {}
 ) {
     // Get mode state
     val modeViewModel: AppModeViewModel = hiltViewModel()
@@ -143,7 +145,9 @@ fun AppNavHost(
                     navController.currentBackStackEntry?.savedStateHandle?.set("importCategoryId", categoryId)
                     navController.navigate(NavigationRoutes.photoEditorRoute("import"))
                 },
-                paddingValues = paddingValues
+                paddingValues = paddingValues,
+                demoState = demoState,
+                onShowExitDemoDialog = onShowExitDemoDialog
                 )
             }
         }
@@ -161,7 +165,9 @@ fun AppNavHost(
                         popUpTo(NavigationRoutes.CATEGORIES) { inclusive = true }
                     }
                 },
-                paddingValues = paddingValues
+                paddingValues = paddingValues,
+                demoState = demoState,
+                onShowExitDemoDialog = onShowExitDemoDialog
             )
         }
 

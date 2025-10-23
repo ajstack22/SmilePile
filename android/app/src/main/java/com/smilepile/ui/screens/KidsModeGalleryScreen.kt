@@ -58,9 +58,12 @@ import com.smilepile.ui.viewmodels.PhotoGalleryViewModel
 import com.smilepile.ui.components.gallery.CategoryFilterComponentKidsMode
 import com.smilepile.ui.toast.CategoryToastUI
 import kotlinx.coroutines.delay
+import java.io.File
 import kotlinx.coroutines.launch
 import dagger.hilt.android.EntryPointAccessors
 import com.smilepile.di.BiometricManagerEntryPoint
+import android.os.SystemClock
+import androidx.compose.runtime.saveable.rememberSaveable
 
 /**
  * Simplified gallery screen for Kids Mode
@@ -100,6 +103,8 @@ fun KidsModeGalleryScreen(
     var zoomedPhoto by remember { mutableStateOf<Photo?>(null) }
     var maintainZoom by remember { mutableStateOf(false) }
     var showPinDialog by remember { mutableStateOf(false) }
+    var lastLockClickTime by rememberSaveable { mutableStateOf(0L) }
+    val lockDebounceMs = 500L
 
     // Initialize state and side effects
     KidsModeEffects(
@@ -193,12 +198,11 @@ fun KidsModeGalleryScreen(
                 )
             }
     ) {
-        // Category filter chips at top - floating bar with close button
         if (categories.isNotEmpty()) {
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 40.dp), // Reserve space for status bar/notch (even when hidden in Kids Mode)
+                    .statusBarsPadding(),
                 shadowElevation = 8.dp,
                 color = MaterialTheme.colorScheme.surface
             ) {
@@ -215,15 +219,20 @@ fun KidsModeGalleryScreen(
                             .padding(end = 56.dp) // Make room for close button
                     )
 
-                    // Close button (fixed on right side)
                     Surface(
                         modifier = Modifier
                             .align(Alignment.CenterEnd)
                             .padding(end = 8.dp)
                             .size(48.dp)
                             .clip(CircleShape)
-                            .clickable { modeViewModel.requestModeToggle() },
-                        color = Color(0xFFE53935), // Red background
+                            .clickable {
+                                val currentTime = SystemClock.elapsedRealtime()
+                                if (currentTime - lastLockClickTime >= lockDebounceMs) {
+                                    lastLockClickTime = currentTime
+                                    modeViewModel.requestModeToggle()
+                                }
+                            },
+                        color = Color(0xFFE53935),
                         shadowElevation = 2.dp
                     ) {
                         Box(
@@ -345,7 +354,9 @@ private fun KidsPhotoStackItem(
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(photo.path)
+                .data(File(photo.path))
+                .memoryCacheKey("${photo.path}_${photo.fileSize}")
+                .diskCacheKey("${photo.path}_${photo.fileSize}")
                 .crossfade(true)
                 .build(),
             contentDescription = null,
@@ -468,7 +479,9 @@ private fun ZoomedPhotoOverlay(
                     ) {
                         AsyncImage(
                             model = ImageRequest.Builder(LocalContext.current)
-                                .data(categoryPhotos[photoPage].path)
+                                .data(File(categoryPhotos[photoPage].path))
+                                .memoryCacheKey("${categoryPhotos[photoPage].path}_${categoryPhotos[photoPage].fileSize}")
+                                .diskCacheKey("${categoryPhotos[photoPage].path}_${categoryPhotos[photoPage].fileSize}")
                                 .crossfade(true)
                                 .build(),
                             contentDescription = null,

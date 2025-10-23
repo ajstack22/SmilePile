@@ -6,6 +6,21 @@ import FAQ from '../components/FAQ.astro';
 
 const faqs = [
   {
+    id: 'what-are-piles',
+    question: 'What are "piles"?',
+    answer: 'Piles are custom photo categories you create for your child. Think of them as collections of their favorite things—a Family pile with loved ones, a Fun pile with happy memories, a Characters pile with favorite TV/movie characters. You curate the photos, and your child can enjoy unlimited access to view them.'
+  },
+  {
+    id: 'who-is-this-for',
+    question: 'Who is SmilePile for?',
+    answer: 'SmilePile is designed for families with young children (typically ages 5-10, though this varies). It\'s <strong>especially helpful for special needs families</strong>, as many find that easy access to favorite photos helps with separation anxiety, provides comfort during transitions, and offers a calming touchpoint.'
+  },
+  {
+    id: 'how-is-this-different',
+    question: 'How is this different from regular photo apps?',
+    answer: 'Unlike general photo apps, SmilePile is designed specifically for kids to access independently. Parents curate the content, protect it from accidental changes with PIN/biometric locks, and children get safe, unlimited viewing access. It\'s not just photo organization—it\'s a tool for comfort, connection, and emotional support.'
+  },
+  {
     id: 'backup-photos',
     question: 'How do I backup my photos?',
     answer: 'SmilePile stores photos locally on your device. To backup, use your device\'s native backup solution:<br><strong>iOS:</strong> iCloud Photo Library or iTunes backup<br><strong>Android:</strong> Google Photos or local backup to computer'
@@ -21,11 +36,6 @@ const faqs = [
     answer: 'Go to <strong>Settings → Clear All Data</strong> in the app, or simply uninstall SmilePile. This permanently removes all photos and data from the app (but does not delete photos from your device\'s photo library).'
   },
   {
-    id: 'multiple-devices',
-    question: 'Can I use SmilePile on multiple devices?',
-    answer: 'Yes, you can install SmilePile on multiple devices (iPhone, iPad, Android phone/tablet). However, data is <strong>not synced between devices</strong> - each device maintains its own independent photo library.'
-  },
-  {
     id: 'photos-not-showing',
     question: 'Why aren\'t my photos showing up?',
     answer: 'Check these steps:<br>1. Grant photo permissions: <strong>Settings → Privacy → Photos → SmilePile</strong><br>2. Restart the app<br>3. Verify photos are saved to device (not just cloud)<br>4. Check for app updates in App Store/Google Play'
@@ -34,33 +44,27 @@ const faqs = [
     id: 'pricing',
     question: 'Is SmilePile free?',
     answer: 'Yes, SmilePile is <strong>completely free</strong> with no in-app purchases, subscriptions, or ads. We believe in keeping family memories accessible to everyone.'
-  },
-  {
-    id: 'age-requirement',
-    question: 'What\'s the minimum age to use SmilePile?',
-    answer: 'SmilePile is designed for ages <strong>13 and up</strong>, or younger with parental supervision. We comply with COPPA (Children\'s Online Privacy Protection Act) and do not collect data from children. See our <a href="/privacy" class="text-primary-600 hover:underline">Privacy Policy</a> for details.'
   }
 ];
 ---
 
 <BaseLayout
-  title="Support & Help - SmilePile"
-  description="Get help with SmilePile. Browse FAQs, contact support, and find solutions to common photo organization questions."
+  title="FAQ - SmilePile"
+  description="Frequently asked questions about SmilePile. Learn about piles, safe access for kids, and find solutions to common questions about your child's curated photo gallery."
 >
   <Header slot="header" />
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Page Header -->
     <header class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Support & Help</h1>
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
       <p class="text-xl text-gray-600">
-        Find answers to common questions or get in touch with our support team
+        Find answers to common questions about SmilePile
       </p>
     </header>
 
     <!-- FAQ Section -->
     <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
       <div class="space-y-0">
         {faqs.map(faq => (
           <FAQ {...faq} />
@@ -73,25 +77,25 @@ const faqs = [
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Troubleshooting Tips</h2>
       <ul class="space-y-3 text-gray-700">
         <li class="flex items-start">
-          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span><strong>Try restarting the app</strong> - Force close and reopen SmilePile</span>
         </li>
         <li class="flex items-start">
-          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span><strong>Check for app updates</strong> in the App Store or Google Play</span>
         </li>
         <li class="flex items-start">
-          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span><strong>Verify photo permissions</strong> are enabled in device settings</span>
         </li>
         <li class="flex items-start">
-          <svg class="w-6 h-6 text-primary-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="w-6 h-6 text-primary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span><strong>Ensure sufficient device storage</strong> is available</span>
@@ -108,7 +112,7 @@ const faqs = [
 
       <a
         href="mailto:support@stackmap.app?subject=SmilePile Support Request"
-        class="inline-flex items-center bg-primary-600 text-white px-8 py-4 rounded-lg hover:bg-primary-700 transition-colors focus-visible-ring text-lg font-semibold"
+        class="inline-flex items-center bg-primary text-white px-8 py-4 rounded-lg hover:bg-primary-600 transition-colors focus-visible-ring text-lg font-semibold min-h-[48px]"
       >
         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -132,12 +136,16 @@ const faqs = [
     <!-- Additional Resources -->
     <section class="mt-16">
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Resources</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="/privacy" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-500 transition-colors focus-visible-ring">
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/support-us" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors focus-visible-ring">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Support Us</h3>
+          <p class="text-gray-600">Learn how to support SmilePile</p>
+        </a>
+        <a href="/privacy" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors focus-visible-ring">
           <h3 class="text-lg font-bold text-gray-900 mb-2">Privacy Policy</h3>
           <p class="text-gray-600">Learn how we protect your family's privacy</p>
         </a>
-        <a href="/terms" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary-500 transition-colors focus-visible-ring">
+        <a href="/terms" class="block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary transition-colors focus-visible-ring">
           <h3 class="text-lg font-bold text-gray-900 mb-2">Terms of Service</h3>
           <p class="text-gray-600">Read our terms and conditions</p>
         </a>

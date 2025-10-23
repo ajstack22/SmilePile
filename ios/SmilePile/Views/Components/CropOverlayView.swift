@@ -4,20 +4,30 @@ import SwiftUI
 struct CropOverlayView: View {
     @Binding var cropRect: CGRect
     let imageSize: CGSize
+    let aspectRatio: CGFloat?
     let onComplete: (CGRect) -> Void
     let onCancel: () -> Void
 
     @State private var activeHandle: CropHandle? = nil
     @State private var initialCropRect: CGRect
     @State private var dragOffset = CGSize.zero
+    @State private var gestureStartRect: CGRect?
+    @State private var dragMode: DragMode = .none
+
+    private enum DragMode {
+        case none
+        case move
+        case resize(CropHandle)
+    }
 
     private let handleSize: CGFloat = 24  // Match Android's 24pt radius
     private let borderWidth: CGFloat = 2
     private let gridLineWidth: CGFloat = 1  // Match Android's 1dp
 
-    init(cropRect: Binding<CGRect>, imageSize: CGSize, onComplete: @escaping (CGRect) -> Void, onCancel: @escaping () -> Void) {
+    init(cropRect: Binding<CGRect>, imageSize: CGSize, aspectRatio: CGFloat?, onComplete: @escaping (CGRect) -> Void, onCancel: @escaping () -> Void) {
         self._cropRect = cropRect
         self.imageSize = imageSize
+        self.aspectRatio = aspectRatio
         self.onComplete = onComplete
         self.onCancel = onCancel
         self._initialCropRect = State(initialValue: cropRect.wrappedValue)
@@ -40,8 +50,16 @@ struct CropOverlayView: View {
                                         height: cropRect.height * scaleFactor(in: geometry)
                                     )
                                     .position(
-                                        x: cropRect.midX * scaleFactor(in: geometry),
-                                        y: cropRect.midY * scaleFactor(in: geometry)
+                                        x: {
+                                            let offsets = displayOffsets(in: geometry)
+                                            let scale = scaleFactor(in: geometry)
+                                            return offsets.x + (cropRect.midX * scale)
+                                        }(),
+                                        y: {
+                                            let offsets = displayOffsets(in: geometry)
+                                            let scale = scaleFactor(in: geometry)
+                                            return offsets.y + (cropRect.midY * scale)
+                                        }()
                                     )
                                     .blendMode(.destinationOut)
                             )
@@ -58,18 +76,63 @@ struct CropOverlayView: View {
                         height: cropRect.height * scaleFactor(in: geometry)
                     )
                     .position(
-                        x: cropRect.midX * scaleFactor(in: geometry),
-                        y: cropRect.midY * scaleFactor(in: geometry)
+                        x: {
+                            let offsets = displayOffsets(in: geometry)
+                            let scale = scaleFactor(in: geometry)
+                            return offsets.x + (cropRect.midX * scale)
+                        }(),
+                        y: {
+                            let offsets = displayOffsets(in: geometry)
+                            let scale = scaleFactor(in: geometry)
+                            return offsets.y + (cropRect.midY * scale)
+                        }()
                     )
                     .allowsHitTesting(false)
+
+                // Invisible tap area for moving crop
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(
+                        width: cropRect.width * scaleFactor(in: geometry),
+                        height: cropRect.height * scaleFactor(in: geometry)
+                    )
+                    .position(
+                        x: {
+                            let offsets = displayOffsets(in: geometry)
+                            let scale = scaleFactor(in: geometry)
+                            return offsets.x + (cropRect.midX * scale)
+                        }(),
+                        y: {
+                            let offsets = displayOffsets(in: geometry)
+                            let scale = scaleFactor(in: geometry)
+                            return offsets.y + (cropRect.midY * scale)
+                        }()
+                    )
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                if gestureStartRect == nil {
+                                    gestureStartRect = cropRect
+                                    dragMode = .move
+                                }
+                                if case .move = dragMode {
+                                    let delta = CGSize(
+                                        width: value.translation.width,
+                                        height: value.translation.height
+                                    )
+                                    moveCropRect(delta: delta, in: geometry)
+                                }
+                            }
+                            .onEnded { _ in
+                                gestureStartRect = nil
+                                dragMode = .none
+                            }
+                    )
 
                 // Corner handles
                 ForEach(CropHandle.allCases, id: \.self) { handle in
                     cropHandle(for: handle, in: geometry)
                 }
-
-                // Note: Crop controls are handled by PhotoEditView's bottom toolbar
-                // This matches Android where crop overlay doesn't have its own controls
             }
         }
     }
@@ -106,16 +169,32 @@ struct CropOverlayView: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        updateCropRect(for: handle, translation: value.translation, in: geometry)
+                        if gestureStartRect == nil {
+                            gestureStartRect = cropRect
+                            dragMode = .resize(handle)
+                        }
+                        if case .resize(let activeHandle) = dragMode, activeHandle == handle {
+                            let delta = CGSize(
+                                width: value.translation.width,
+                                height: value.translation.height
+                            )
+                            updateCropRect(for: handle, delta: delta, in: geometry)
+                        }
+                    }
+                    .onEnded { _ in
+                        gestureStartRect = nil
+                        dragMode = .none
                     }
             )
     }
 
     private func handlePosition(for handle: CropHandle, in geometry: GeometryProxy) -> CGPoint {
         let scale = scaleFactor(in: geometry)
+        let offsets = displayOffsets(in: geometry)
+
         let rect = CGRect(
-            x: cropRect.minX * scale,
-            y: cropRect.minY * scale,
+            x: offsets.x + (cropRect.minX * scale),
+            y: offsets.y + (cropRect.minY * scale),
             width: cropRect.width * scale,
             height: cropRect.height * scale
         )
@@ -132,34 +211,46 @@ struct CropOverlayView: View {
         }
     }
 
-    private func updateCropRect(for handle: CropHandle, translation: CGSize, in geometry: GeometryProxy) {
+    private func updateCropRect(for handle: CropHandle, delta: CGSize, in geometry: GeometryProxy) {
         let scale = scaleFactor(in: geometry)
         let minSize: CGFloat = 50 / scale
 
-        var newRect = cropRect
-        let deltaX = translation.width / scale
-        let deltaY = translation.height / scale
+        guard let startRect = gestureStartRect else { return }
+        var newRect = startRect
+        let deltaX = delta.width / scale
+        let deltaY = delta.height / scale
 
         switch handle {
         case .topLeft:
-            newRect.origin.x = min(cropRect.origin.x + deltaX, cropRect.maxX - minSize)
-            newRect.origin.y = min(cropRect.origin.y + deltaY, cropRect.maxY - minSize)
-            newRect.size.width = max(cropRect.width - deltaX, minSize)
-            newRect.size.height = max(cropRect.height - deltaY, minSize)
+            newRect.origin.x = min(startRect.origin.x + deltaX, startRect.maxX - minSize)
+            newRect.origin.y = min(startRect.origin.y + deltaY, startRect.maxY - minSize)
+            newRect.size.width = max(startRect.width - deltaX, minSize)
+            newRect.size.height = max(startRect.height - deltaY, minSize)
 
         case .topRight:
-            newRect.origin.y = min(cropRect.origin.y + deltaY, cropRect.maxY - minSize)
-            newRect.size.width = max(cropRect.width + deltaX, minSize)
-            newRect.size.height = max(cropRect.height - deltaY, minSize)
+            newRect.origin.y = min(startRect.origin.y + deltaY, startRect.maxY - minSize)
+            newRect.size.width = max(startRect.width + deltaX, minSize)
+            newRect.size.height = max(startRect.height - deltaY, minSize)
 
         case .bottomLeft:
-            newRect.origin.x = min(cropRect.origin.x + deltaX, cropRect.maxX - minSize)
-            newRect.size.width = max(cropRect.width - deltaX, minSize)
-            newRect.size.height = max(cropRect.height + deltaY, minSize)
+            newRect.origin.x = min(startRect.origin.x + deltaX, startRect.maxX - minSize)
+            newRect.size.width = max(startRect.width - deltaX, minSize)
+            newRect.size.height = max(startRect.height + deltaY, minSize)
 
         case .bottomRight:
-            newRect.size.width = max(cropRect.width + deltaX, minSize)
-            newRect.size.height = max(cropRect.height + deltaY, minSize)
+            newRect.size.width = max(startRect.width + deltaX, minSize)
+            newRect.size.height = max(startRect.height + deltaY, minSize)
+        }
+
+        // Enforce aspect ratio if set
+        if let ratio = aspectRatio {
+            newRect.size.height = newRect.size.width / ratio
+
+            // Re-constrain if height adjustment pushed us out of bounds
+            if newRect.maxY > imageSize.height {
+                newRect.size.height = imageSize.height - newRect.origin.y
+                newRect.size.width = newRect.size.height * ratio
+            }
         }
 
         // Constrain to image bounds
@@ -173,10 +264,52 @@ struct CropOverlayView: View {
         onComplete(newRect)
     }
 
+    private func moveCropRect(delta: CGSize, in geometry: GeometryProxy) {
+        let scale = scaleFactor(in: geometry)
+        guard let startRect = gestureStartRect else { return }
+
+        var newRect = startRect
+        let deltaX = delta.width / scale
+        let deltaY = delta.height / scale
+
+        // Translate origin
+        newRect.origin.x += deltaX
+        newRect.origin.y += deltaY
+
+        // Constrain to image bounds
+        newRect.origin.x = max(0, min(newRect.origin.x, imageSize.width - newRect.width))
+        newRect.origin.y = max(0, min(newRect.origin.y, imageSize.height - newRect.height))
+
+        cropRect = newRect
+        onComplete(newRect)
+    }
+
     private func scaleFactor(in geometry: GeometryProxy) -> CGFloat {
         let widthScale = geometry.size.width / imageSize.width
         let heightScale = geometry.size.height / imageSize.height
         return min(widthScale, heightScale)
+    }
+
+    private func displayDimensions(in geometry: GeometryProxy) -> (width: CGFloat, height: CGFloat) {
+        let imageAspectRatio = imageSize.width / imageSize.height
+        let canvasAspectRatio = geometry.size.width / geometry.size.height
+
+        if imageAspectRatio > canvasAspectRatio {
+            let displayWidth = geometry.size.width
+            let displayHeight = displayWidth / imageAspectRatio
+            return (displayWidth, displayHeight)
+        } else {
+            let displayHeight = geometry.size.height
+            let displayWidth = displayHeight * imageAspectRatio
+            return (displayWidth, displayHeight)
+        }
+    }
+
+    private func displayOffsets(in geometry: GeometryProxy) -> (x: CGFloat, y: CGFloat) {
+        let dims = displayDimensions(in: geometry)
+        let offsetX = (geometry.size.width - dims.width) / 2
+        let offsetY = (geometry.size.height - dims.height) / 2
+        return (offsetX, offsetY)
     }
 }
 

@@ -1,6 +1,20 @@
 # Test Coverage Improvement Plan
 **Target: 30% Coverage for iOS and Android**
 
+## Approved Test Devices
+### iOS Simulators (iOS 26.0 only)
+- **iPhone 17** (CC571231-D473-43E5-97F1-83F8289D8153)
+- **iPhone 17 Pro Max** (8314ACBC-020A-451F-A94F-B8D9B27227FD)
+- **iPad Pro 13-inch (M4)** (B9D4F952-EE7D-45FC-B75F-F4F5ED2C169C)
+
+### Android Emulators
+- **Pixel 9** - Standard phone
+- **Pixel 9 Pro XL** - Large phone
+- **Pixel Tablet** - Tablet form factor
+- **Television 4K** - TV platform (for StackMapTV)
+
+**Note**: deploy_qual.sh also installs on any physically connected ADB devices
+
 ## Current Status
 
 ### Android

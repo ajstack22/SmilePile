@@ -57,7 +57,8 @@ data class OnboardingUiState(
     val error: String? = null,
     val importMode: Boolean = false,
     val importStats: ImportStats? = null,
-    val biometricEnabled: Boolean = false
+    val biometricEnabled: Boolean = false,
+    val isDemoMode: Boolean = false
 )
 
 @HiltViewModel
@@ -189,8 +190,8 @@ class OnboardingViewModel @Inject constructor(
             try {
                 val state = _uiState.value
 
-                // Only create/save categories in fresh setup mode (not import mode)
-                if (!state.importMode) {
+                // Only create/save categories in fresh setup mode (not import mode or demo mode)
+                if (!state.importMode && !state.isDemoMode) {
                     // If user hasn't created any categories, create default ones
                     val categoriesToSave = if (state.categories.isEmpty()) {
                         createDefaultTempCategories()
@@ -209,6 +210,10 @@ class OnboardingViewModel @Inject constructor(
                     securePreferencesManager.setBiometricEnabled(true)
                 }
 
+                // Ensure demo mode is disabled when completing manual onboarding (but not when finishing demo mode)
+                if (!state.isDemoMode) {
+                    settingsManager.setDemoMode(false)
+                }
                 settingsManager.setOnboardingCompleted(true)
 
                 _uiState.update { it.copy(
@@ -244,6 +249,7 @@ class OnboardingViewModel @Inject constructor(
             colorHex = tempCategory.colorHex,
             iconResource = tempCategory.icon,
             isDefault = false,
+            isDemoCategory = false, // Explicitly mark as non-demo category
             createdAt = System.currentTimeMillis()
         )
     }
@@ -331,7 +337,7 @@ class OnboardingViewModel @Inject constructor(
 
     fun enterDemoMode() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = true, isDemoMode = true) }
 
             try {
                 // Set demo mode flags
@@ -345,6 +351,9 @@ class OnboardingViewModel @Inject constructor(
 
                 // Load demo data if needed
                 loadDemoDataIfNeeded()
+
+                // Wait for data to propagate through the system
+                kotlinx.coroutines.delay(500)
 
                 _uiState.update { it.copy(
                     isLoading = false,

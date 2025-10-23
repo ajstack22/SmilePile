@@ -1337,9 +1337,9 @@ backupFilejava.io.File:A
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataB,*
 (com.smilepile.data.backup.RestoreManagerH¿
 Îcom.smilepile.data.backup.RestoreManager#restoreCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktö ö('"1*e
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt­ ­('"1*e
 2
- ‚(L
+¸ ¹(L
 J
 
 __unknown_file (
@@ -1351,24 +1351,24 @@ J
 5
 6*ş
 3
-ı* ÿ(ç
+´* ¶(ç
 ä
 
-ş ş(RD
+µ µ(RD
 %6>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"úcom.smilepile.data.backup.RestoreManager#handleDuplicateCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/models/Category;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;*:
 
-ş ş(R,*
+µ µ(R,*
 (com.smilepile.data.backup.RestoreManager*J
 
-ş( ş(6<
+µ( µ(6<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory*F
 
-ş8 ş(H8
+µ8 µ(H8
 6
 existingCategory"com.smilepile.data.models.Category*C
 
-şJ ş(Q5
+µJ µ(Q5
 3
 options(com.smilepile.data.backup.RestoreOptions~
 |
@@ -1376,21 +1376,21 @@ J
 __unknown_file (
 %5"__id*T
 
-ş ş(RF
+µ µ(RF
 D
 %6>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 2*
 4
-ÿ (†
+¶ ¸(†
 ƒ
 
-€ €(1D
+· ·(1D
 %7>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"¦com.smilepile.data.backup.RestoreManager#insertNewCategory(Lcom/smilepile/data/backup/BackupCategory;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;*:
 
-€ €(1,*
+· ·(1,*
 (com.smilepile.data.backup.RestoreManager*J
 
-€" €(0<
+·" ·(0<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory~
 |
@@ -1398,54 +1398,54 @@ D
 __unknown_file (
 %5"__id*T
 
-€ €(1F
+· ·(1F
 D
 %7>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 2*%
 5
-‚
- ‡(	"
+¹
+ ¾(	"
 
-ú ‡(	
+± ¾(	
 
 %0*¦
 6
-‚ ‡(	
+¹ ¾(	
 
 
-…; …(B
+¼; ¼(B
 %8java.lang.String"/kotlin.Throwable#getMessage()Ljava/lang/String;*(
 
-…9 …(:
+¼9 ¼(:
 
 ejava.lang.Exceptionv
 t
 
-… …(D
+¼ ¼(D
 %9"__concat*.
 
-… …(7 
+¼ ¼(7 
 Failed to restore category: *&
 
-…; …(B
+¼; ¼(B
 
 %8java.lang.String–“
 
-ƒ †(E
+º ½(E
 %10>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult">com.smilepile.data.backup.RestoreManager$CategoryRestoreResultù
 ö
 
-ƒ †(
+º ½(
 %11"[com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)V*U
 
-ƒ †(G
+º ½(G
 E
 %10>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 
-„ „( 	
+» »( 	
 false*
 
-… …(D
+¼ ¼(D
 
 %9
 }
@@ -1453,103 +1453,103 @@ E
 __unknown_file (
 %0"__id*U
 
-ƒ †(G
+º ½(G
 E
 %10>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 5*å
 1
-ú ‚(	÷
+± ¹(	÷
 ô
 
-û# û(56
+²# ²(56
 %10com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-û# û(5,*
+²# ²(5,*
 (com.smilepile.data.backup.RestoreManager¹
 ¶
 
-ûW û([
+²W ²([
 %2java.lang.String"Dcom.smilepile.data.backup.BackupCategory#getName()Ljava/lang/String;*J
 
-ûH û(V<
+²H ²(V<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategoryÌÉ
 
-û6 û(\(
+²6 ²(\(
 %3"com.smilepile.data.models.Category"zcom.smilepile.data.repository.CategoryRepository#getCategoryByName(Ljava/lang/String;)Lcom/smilepile/data/models/Category;*F
 
-û# û(58
+²# ²(58
 6
 %10com.smilepile.data.repository.CategoryRepository*&
 
-ûW û([
+²W ²([
 
 %2java.lang.String2%getCategoryByName(Ljava/lang/String;)‡
 „
 
-û û(\6
+² ²(\6
 existingCategory"com.smilepile.data.models.Category"__id*8
 
-û6 û(\*
+²6 ²(\*
 (
 %3"com.smilepile.data.models.Category¼¹
 
-ı ı((
+´ ´((
 %4boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*F
 
-ı ı( 8
+´ ´( 8
 6
 existingCategory"com.smilepile.data.models.Category*
 
-ı$ ı(( 2equals(Ljava/lang/Object;)*
+´$ ´(( 2equals(Ljava/lang/Object;)*
 3
 4:H
 
-÷ ÷(&:
+® ®(&:
 categoryBackup(com.smilepile.data.backup.BackupCategory:A
 
-ø ø(3
+¯ ¯(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHÕ5
 úcom.smilepile.data.backup.RestoreManager#handleDuplicateCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/models/Category;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktŠ Š(/"0*Ş
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÁ Á(/"0*Ş
 3
-( •(À
+Ç( Ì(À
 ½
 
-“I “(T
+ÊI Ê(T
 %2java.lang.String"Kcom.smilepile.data.backup.BackupCategory#getDisplayName()Ljava/lang/String;*J
 
-“: “(H<
+Ê: Ê(H<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategorys
 q
 
-“ “(V
+Ê Ê(V
 %3"__concat*+
 
-“ “(8
+Ê Ê(8
 Category already exists: *&
 
-“I “(T
+ÊI Ê(T
 
 %2java.lang.String•’
 
-‘ ”(D
+È Ë(D
 %4>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult">com.smilepile.data.backup.RestoreManager$CategoryRestoreResult÷
 ô
 
-‘ ”(
+È Ë(
 %5"[com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)V*T
 
-‘ ”(F
+È Ë(F
 D
 %4>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 
-’ ’($	
+É É($	
 false*
 
-“ “(V
+Ê Ê(V
 
 %3~
 |
@@ -1557,39 +1557,39 @@ D
 __unknown_file (
 %1"__id*T
 
-‘ ”(F
+È Ë(F
 D
 %4>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 1*ê
 5
-–+ ™(÷
+Í+ Ğ(÷
 ô
 
-— —("6
+Î Î("6
 %60com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-— —(",*
+Î Î(",*
 (com.smilepile.data.backup.RestoreManagerĞÍ
 
-—# —(C
+Î# Î(C
 %7kotlin.Unit"fcom.smilepile.data.repository.CategoryRepository#deleteCategory(Lcom/smilepile/data/models/Category;)V*F
 
-— —("8
+Î Î("8
 6
 %60com.smilepile.data.repository.CategoryRepository*F
 
-—2 —(B8
+Î2 Î(B8
 6
 existingCategory"com.smilepile.data.models.Category24deleteCategory(Lcom/smilepile/data/models/Category;)†
 ƒ
 
-˜ ˜(1D
+Ï Ï(1D
 %8>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"¦com.smilepile.data.backup.RestoreManager#insertNewCategory(Lcom/smilepile/data/backup/BackupCategory;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;*:
 
-˜ ˜(1,*
+Ï Ï(1,*
 (com.smilepile.data.backup.RestoreManager*J
 
-˜" ˜(0<
+Ï" Ï(0<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory~
 |
@@ -1597,52 +1597,52 @@ D
 __unknown_file (
 %1"__id*T
 
-˜ ˜(1F
+Ï Ï(1F
 D
 %8>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 1*å
 7
-š* ¢(¹
+Ñ* Ù(¹
 ¶
 
-›H ›(L
+ÒH Ò(L
 %9java.lang.String"Dcom.smilepile.data.backup.BackupCategory#getName()Ljava/lang/String;*J
 
-›9 ›(G<
+Ò9 Ò(G<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory÷
 ô
 
-› ›(M
+Ò Ò(M
 %10java.lang.String"icom.smilepile.data.backup.RestoreManager#generateUniqueCategoryName(Ljava/lang/String;)Ljava/lang/String;*:
 
-› ›(M,*
+Ò Ò(M,*
 (com.smilepile.data.backup.RestoreManager*&
 
-›H ›(L
+ÒH Ò(L
 
 %9java.lang.StringZ
 X
 
-› ›(M
+Ò Ò(M
 newNamejava.lang.String"__id*'
 
-› ›(M
+Ò Ò(M
 
 %10java.lang.Stringô
 ñ
 
-œ5 œ(I/
+Ó5 Ó(I/
 %11(com.smilepile.data.backup.BackupCategory"¥com.smilepile.data.backup.BackupCategory#copy(JLjava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;ZJ)Lcom/smilepile/data/backup/BackupCategory;*J
 
-œ& œ(4<
+Ó& Ó(4<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory*)
 
 __unknown_file (
 	<unknown>*+
 
-œA œ(H
+ÓA Ó(H
 
 newNamejava.lang.String*)
 
@@ -1663,80 +1663,80 @@ X
 	<unknown>“
 
 
-œ œ(I;
+Ó Ó(I;
 renamedCategory(com.smilepile.data.backup.BackupCategory"__id*?
 
-œ5 œ(I1
+Ó5 Ó(I1
 /
 %11(com.smilepile.data.backup.BackupCategoryø
 õ
 
- ("7
+Ô Ô("7
 %120com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
- (",*
+Ô Ô(",*
 (com.smilepile.data.backup.RestoreManagerâ
 ß
 
-B (N)
+ÔB Ô(N)
 %13"com.smilepile.data.models.Category"Ycom.smilepile.data.backup.BackupCategory#toCategory()Lcom/smilepile/data/models/Category;*K
 
-2 (A=
+Ô2 Ô(A=
 ;
 renamedCategory(com.smilepile.data.backup.BackupCategory¾»
 
-# (O
+Ô# Ô(O
 %14long"fcom.smilepile.data.repository.CategoryRepository#insertCategory(Lcom/smilepile/data/models/Category;)J*G
 
- ("9
+Ô Ô("9
 7
 %120com.smilepile.data.repository.CategoryRepository*9
 
-B (N+
+ÔB Ô(N+
 )
 %13"com.smilepile.data.models.Category24insertCategory(Lcom/smilepile/data/models/Category;)Á
 ¾
 
- B  (M
+×B ×(M
 %15java.lang.String"Kcom.smilepile.data.backup.BackupCategory#getDisplayName()Ljava/lang/String;*J
 
- 3  (A<
+×3 ×(A<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory´
 ±
 
-   ([
+× ×([
 %16"__concat*$
 
-   (1
+× ×(1
 Renamed category: *'
 
- B  (M
+×B ×(M
 
 %15java.lang.String*
 
- N  (R
+×N ×(R
  -> *+
 
- S  (Z
+×S ×(Z
 
 newNamejava.lang.String–“
 
- ¡(E
+Õ Ø(E
 %17>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult">com.smilepile.data.backup.RestoreManager$CategoryRestoreResultù
 ö
 
- ¡(
+Õ Ø(
 %18"[com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)V*U
 
- ¡(G
+Õ Ø(G
 E
 %17>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 
-Ÿ Ÿ(#
+Ö Ö(#
 true*
 
-   ([
+× ×([
 
 %16
 }
@@ -1744,47 +1744,47 @@ E
 __unknown_file (
 %1"__id*U
 
- ¡(G
+Õ Ø(G
 E
 %17>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 1*æ
 8
-£, ¨(Á
+Ú, ß(Á
 ¾
 
-¦I ¦(T
+İI İ(T
 %19java.lang.String"Kcom.smilepile.data.backup.BackupCategory#getDisplayName()Ljava/lang/String;*J
 
-¦: ¦(H<
+İ: İ(H<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategoryu
 s
 
-¦ ¦(V
+İ İ(V
 %20"__concat*+
 
-¦ ¦(8
+İ İ(8
 Category already exists: *'
 
-¦I ¦(T
+İI İ(T
 
 %19java.lang.String–“
 
-¤ §(E
+Û Ş(E
 %21>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult">com.smilepile.data.backup.RestoreManager$CategoryRestoreResultú
 ÷
 
-¤ §(
+Û Ş(
 %22"[com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)V*U
 
-¤ §(G
+Û Ş(G
 E
 %21>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 
-¥ ¥($	
+Ü Ü($	
 false*
 
-¦ ¦(V
+İ İ(V
 
 %20
 }
@@ -1792,18 +1792,18 @@ E
 __unknown_file (
 %1"__id*U
 
-¤ §(G
+Û Ş(G
 E
 %21>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 1*›
 0
-Š Š(û
+Á Á(û
 ø
 
- (03
+Æ Æ(03
 %0-com.smilepile.data.backup.DuplicateResolution"pcom.smilepile.data.backup.RestoreOptions#getDuplicateResolution()Lcom/smilepile/data/backup/DuplicateResolution;*C
 
- (5
+Æ Æ(5
 3
 options(com.smilepile.data.backup.RestoreOptions*
 3
@@ -1811,84 +1811,84 @@ E
 7
 8*%
 1
-© ©(	"
+à à(	"
 
- ©(	
+Æ à(	
 
 %1:H
 
-‹ ‹(&:
+Â Â(&:
 categoryBackup(com.smilepile.data.backup.BackupCategory:D
 
-Œ Œ(<6
+Ã Ã(<6
 existingCategory"com.smilepile.data.models.Category:A
 
- (3
+Ä Ä(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerH¤
 ¦com.smilepile.data.backup.RestoreManager#insertNewCategory(Lcom/smilepile/data/backup/BackupCategory;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¬ ¬()"0*
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktã ã()"0*
 
 0
-¬ ¬(÷
+ã ã(÷
 ô
 
-­ ­(6
+ä ä(6
 %00com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-­ ­(,*
+ä ä(,*
 (com.smilepile.data.backup.RestoreManagerà
 İ
 
-­9 ­(E(
+ä9 ä(E(
 %1"com.smilepile.data.models.Category"Ycom.smilepile.data.backup.BackupCategory#toCategory()Lcom/smilepile/data/models/Category;*J
 
-­* ­(8<
+ä* ä(8<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory»¸
 
-­ ­(F
+ä ä(F
 
 %2long"fcom.smilepile.data.repository.CategoryRepository#insertCategory(Lcom/smilepile/data/models/Category;)J*F
 
-­ ­(8
+ä ä(8
 6
 %00com.smilepile.data.repository.CategoryRepository*8
 
-­9 ­(E*
+ä9 ä(E*
 (
 %1"com.smilepile.data.models.Category24insertCategory(Lcom/smilepile/data/models/Category;)•’
 
-® ®(5D
+å å(5D
 %3>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult">com.smilepile.data.backup.RestoreManager$CategoryRestoreResultò
 ï
 
-® ®(5
+å å(5
 %4"[com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)V*T
 
-® ®(5F
+å å(5F
 D
 %3>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 
-®0 ®(4
+å0 å(4
 true*
 
-É É(# "T
+€	 €	(# "T
 
-® ®(5F
+å å(5F
 D
 %3>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult:H
 
-¬* ¬(H:
+ã* ã(H:
 categoryBackup(com.smilepile.data.backup.BackupCategoryB,*
 (com.smilepile.data.backup.RestoreManagerHù8
 ¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt´ ´($"1"6*ù
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktë ë($"1"6*ù
 2
-Ï Ï(ZW
+† †(ZW
 U
 
-Ê Ï(Z
+ †(Z
 	finalPathjava.lang.String"__id*"
 
 __unknown_file (
@@ -1896,10 +1896,10 @@ U
 %4Ï
 Ì
 
-Ñ, Ñ(5&
+ˆ, ˆ(5&
 %12com.smilepile.data.models.Photo"Pcom.smilepile.data.backup.BackupPhoto#toPhoto()Lcom/smilepile/data/models/Photo;*D
 
-Ñ  Ñ(+6
+ˆ  ˆ(+6
 4
 photoBackup%com.smilepile.data.backup.BackupPhoto›˜
 
@@ -1911,16 +1911,16 @@ U
 Systemkotlin.Unit2currentTimeMillis()º
 ·
 
-Ñ6 Ñ(L&
+ˆ6 ˆ(L&
 %14com.smilepile.data.models.Photo"rcom.smilepile.data.models.Photo#copy(JLjava/lang/String;JLjava/lang/String;ZJJII)Lcom/smilepile/data/models/Photo;*6
 
-Ñ, Ñ(5(
+ˆ, ˆ(5(
 &
 %12com.smilepile.data.models.Photo*
 
 __unknown_file (2 *-
 
-ÑB Ñ(K
+ˆB ˆ(K
 
 	finalPathjava.lang.String*)
 
@@ -1944,136 +1944,136 @@ U
 __unknown_file (2 ~
 |
 
-Ñ Ñ(L0
+ˆ ˆ(L0
 photoToInsertcom.smilepile.data.models.Photo"__id*6
 
-Ñ6 Ñ(L(
+ˆ6 ˆ(L(
 &
 %14com.smilepile.data.models.Photoï
 ì
 
-Ò Ò(4
+‰ ‰(4
 %15-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-Ò Ò(,*
+‰ ‰(,*
 (com.smilepile.data.backup.RestoreManager³°
 
-Ò Ò(6
+‰ ‰(6
 %16long"]com.smilepile.data.repository.PhotoRepository#insertPhoto(Lcom/smilepile/data/models/Photo;)J*D
 
-Ò Ò(6
+‰ ‰(6
 4
 %15-com.smilepile.data.repository.PhotoRepository*@
 
-Ò( Ò(52
+‰( ‰(52
 0
 photoToInsertcom.smilepile.data.models.Photo2.insertPhoto(Lcom/smilepile/data/models/Photo;)Ğ
 Í
 
-Ô> Ô(J
+‹> ‹(J
 %17boolean"Ocom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#getFileRestored()Z*^
 
-Ô/ Ô(=P
+‹/ ‹(=P
 N
 restoreContext<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext¢Ÿ
 
-Ô& Ô(KK
+‹& ‹(KK
 %18Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported"Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Importedä
 á
 
-Ô& Ô(K
+‹& ‹(K
 %19"Ocom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#<init>(Z)V*[
 
-Ô& Ô(KM
+‹& ‹(KM
 K
 %18Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported*
 
-Ô> Ô(J
+‹> ‹(J
 
 %17boolean"[
 
-Ô Ô(KM
+‹ ‹(KM
 K
 %18Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported*–
 3
-Ï Ï(Z°
+† †(Z°
 ­
 
-ÏS Ï(W
+†S †(W
 %5java.lang.String"Acom.smilepile.data.backup.BackupPhoto#getName()Ljava/lang/String;*D
 
-ÏG Ï(R6
+†G †(R6
 4
 photoBackup%com.smilepile.data.backup.BackupPhotok
 i
 
-Ï3 Ï(Y
+†3 †(Y
 %6"__concat*#
 
-Ï4 Ï(E
+†4 †(E
 Duplicate photo: *&
 
-ÏS Ï(W
+†S †(W
 
 %5java.lang.StringŸœ
 
-Ï+ Ï(ZI
+†+ †(ZI
 %7Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped"Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skippedç
 ä
 
-Ï+ Ï(Z
+†+ †(Z
 %8"_com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#<init>(Ljava/lang/String;)V*Y
 
-Ï+ Ï(ZK
+†+ †(ZK
 I
 %7Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped*
 
-Ï3 Ï(Y
+†3 †(Y
 
 %6"Y
 
-Ï Ï(ZK
+† †(ZK
 I
 %7Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped*ê
 4
-Ê Ï(é
+ †(é
 æ
 
-Ë Ë(+
+‚ ‚(+
 %9java.lang.String"`com.smilepile.data.backup.RestoreManager$PhotoRestoreContext#getNewPhotoPath()Ljava/lang/String;*^
 
-Ë Ë(P
+‚ ‚(P
 N
 restoreContext<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext±
 ®
 
-Ì Ì( 
+ƒ ƒ( 
 %10java.lang.String"Acom.smilepile.data.backup.BackupPhoto#getName()Ljava/lang/String;*D
 
-Ì Ì(6
+ƒ ƒ(6
 4
 photoBackup%com.smilepile.data.backup.BackupPhotoİ
 Ú
 
-Ê Ï(
+ †(
 %11java.lang.String"­com.smilepile.data.backup.RestoreManager#handlePhotoDuplicate(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Ljava/lang/String;*:
 
-Ê Ï(,*
+ †(,*
 (com.smilepile.data.backup.RestoreManager*&
 
-Ë Ë(+
+‚ ‚(+
 
 %9java.lang.String*'
 
-Ì Ì( 
+ƒ ƒ( 
 
 %10java.lang.String*1
 
-Í Í(!#
+„ „(!#
 !
 internalPhotosDirjava.io.File*C
 
-Î Î(5
+… …(5
 3
 options(com.smilepile.data.backup.RestoreOptionsQ
 O
@@ -2081,447 +2081,447 @@ O
 __unknown_file (
 %4"__id*'
 
-Ê Ï(
+ †(
 
 %11java.lang.String*
 2
 3*ó
 6
-Õ ×(	ƒ
+Œ (	ƒ
 €
 
-ÖK Ö(R
+K (R
 %20java.lang.String"/kotlin.Throwable#getMessage()Ljava/lang/String;*(
 
-ÖI Ö(J
+I (J
 
 ejava.lang.Exceptionu
 s
 
-Ö- Ö(T
+- (T
 %21"__concat*+
 
-Ö. Ö(G
+. (G
 Failed to restore photo: *'
 
-ÖK Ö(R
+K (R
 
 %20java.lang.String›
 
-Ö& Ö(UI
+& (UI
 %22Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed"Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failedè
 å
 
-Ö& Ö(U
+& (U
 %23"^com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#<init>(Ljava/lang/String;)V*Y
 
-Ö& Ö(UK
+& (UK
 I
 %22Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed*
 
-Ö- Ö(T
+- (T
 
 %21"Y
 
-Ö Ö(UK
+ (UK
 I
 %22Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed*±
 1
-½ Õ(	°
+ô Œ(	°
 ­
 
-¾+ ¾(8
+õ+ õ(8
 %1java.util.List"Fcom.smilepile.data.backup.AppBackup#getPhotoManifest()Ljava/util/List;*A
 
-¾  ¾(*3
+õ  õ(*3
 1
 
 backupData#com.smilepile.data.backup.AppBackupb
 `
 
-¾ ¾(^!
+õ õ(^!
 manifestEntryjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>°
 ­
 
-Â Â( 
+ù ù( 
 %2java.lang.String"Acom.smilepile.data.backup.BackupPhoto#getPath()Ljava/lang/String;*D
 
-Â Â(6
+ù ù(6
 4
 photoBackup%com.smilepile.data.backup.BackupPhoto‘
 
 
-À! È(B
+÷! ÿ(B
 %3<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext"›com.smilepile.data.backup.RestoreManager#restorePhotoFile(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/lang/String;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;*:
 
-À! È(,*
+÷! ÿ(,*
 (com.smilepile.data.backup.RestoreManager*1
 
-Á Á(#
+ø ø(#
 !
 manifestEntryjava.lang.Object*&
 
-Â Â( 
+ù ù( 
 
 %2java.lang.String*)
 
-Ã Ã(
+ú ú(
 
 	photosDirjava.io.File*-
 
-Ä Ä(
+û û(
 
 thumbnailsDirjava.io.File*1
 
-Å Å(!#
+ü ü(!#
 !
 internalPhotosDirjava.io.File*5
 
-Æ Æ(%'
+ı ı(%'
 %
 internalThumbnailsDirjava.io.File*C
 
-Ç Ç(5
+ş ş(5
 3
 options(com.smilepile.data.backup.RestoreOptions¹
 ¶
 
-À È(N
+÷ ÿ(N
 restoreContext<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext"__id*R
 
-À! È(D
+÷! ÿ(D
 B
 %3<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*
 3
 4:B
 
-µ µ( 4
+ì ì( 4
 photoBackup%com.smilepile.data.backup.BackupPhoto:?
 
-¶ ¶(1
+í í(1
 
 backupData#com.smilepile.data.backup.AppBackup:'
 
-· ·(
+î î(
 	photosDirjava.io.File:+
 
-¸ ¸(
+ï ï(
 thumbnailsDirjava.io.File:/
 
-¹ ¹(!
+ğ ğ(!
 internalPhotosDirjava.io.File:3
 
-º º(#%
+ñ ñ(#%
 internalThumbnailsDirjava.io.File:A
 
-» »(3
+ò ò(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHø'
 ›com.smilepile.data.backup.RestoreManager#restorePhotoFile(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/lang/String;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreContext;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÚ Ú(("0*‰
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‘ ‘(("0*‰
 2
-ã# å(	‘
+š# œ(	‘
 
-ä ä(;B
+› ›(;B
 %2<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext"<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext
 Œ
 
-ä ä(;
+› ›(;
 %3"Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/String;Z)V*R
 
-ä ä(;D
+› ›(;D
 B
 %2<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*0
 
-ä' ä(3"
+›' ›(3"
  
 originalPathjava.lang.String*
 
-ä5 ä(:	
+›5 ›(:	
 false"R
 
-ä ä(;D
+› ›(;D
 B
 %2<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*‹
 3
-ê	 ì(È
+¡	 £(È
 Å
 
-ì ì(@
+£ £(@
 %12kotlin.Unit"¦com.smilepile.data.backup.RestoreManager#verifyPhotoIntegrity(Ljava/io/File;Lcom/smilepile/data/backup/PhotoManifestEntry;Lcom/smilepile/data/backup/RestoreOptions;)V*:
 
-ì ì(@,*
+£ £(@,*
 (com.smilepile.data.backup.RestoreManager**
 
-ì ì('
+£ £('
 
 
 sourceFilejava.io.File*M
 
-ì) ì(6?
+£) £(6?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry*C
 
-ì8 ì(?5
+£8 £(?5
 3
 options(com.smilepile.data.backup.RestoreOptionsÅ
 Â
 
-î= î(E
+¥= ¥(E
 %13java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getFileName()Ljava/lang/String;*M
 
-î/ î(<?
+¥/ ¥(<?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry1/
 
-î î(F
+¥ ¥(F
 %14java.io.File"java.io.FileÏ
 Ì
 
-î î(F
+¥ ¥(F
 %15"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*#
 
-î î(F
+¥ ¥(F
 
 %14java.io.File*1
 
-î î(-#
+¥ ¥(-#
 !
 internalPhotosDirjava.io.File*'
 
-î= î(E
+¥= ¥(E
 
 %13java.lang.StringS
 Q
 
-î î(F
+¥ ¥(F
 destFilejava.io.File"__id*#
 
-î î(F
+¥ ¥(F
 
 %14java.io.File‘
 
 
-ñ ñ([
+¨ ¨([
 %16kotlin.Unit"µcom.smilepile.data.backup.RestoreManager#restorePhotoThumbnail(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)V*:
 
-ñ ñ([,*
+¨ ¨([,*
 (com.smilepile.data.backup.RestoreManager*M
 
-ñ ñ(+?
+¨ ¨(+?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry*-
 
-ñ- ñ(:
+¨- ¨(:
 
 thumbnailsDirjava.io.File*5
 
-ñ< ñ(Q'
+¨< ¨(Q'
 %
 internalThumbnailsDirjava.io.File*C
 
-ñS ñ(Z5
+¨S ¨(Z5
 3
 options(com.smilepile.data.backup.RestoreOptions„
 
 
-ó, ó(8
+ª, ª(8
 %17java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*(
 
-ó# ó(+
+ª# ª(+
 
 destFilejava.io.File’
 
-ó ó(?C
+ª ª(?C
 %18<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext"<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext‡
 „
 
-ó ó(?
+ª ª(?
 %19"Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/String;Z)V*S
 
-ó ó(?E
+ª ª(?E
 C
 %18<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*'
 
-ó, ó(8
+ª, ª(8
 
 %17java.lang.String*
 
-ó: ó(>
+ª: ª(>
 true"S
 
-ó ó(?E
+ª ª(?E
 C
 %18<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*
 4
-è" ê(	’
+Ÿ" ¡(	’
 
-é é(;C
+   (;C
 %10<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext"<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext‘
 
 
-é é(;
+   (;
 %11"Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/String;Z)V*S
 
-é é(;E
+   (;E
 C
 %10<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*0
 
-é' é(3"
+ '  (3"
  
 originalPathjava.lang.String*
 
-é5 é(:	
+ 5  (:	
 false"S
 
-é é(;E
+   (;E
 C
 %10<com.smilepile.data.backup.RestoreManager$PhotoRestoreContext*ÿ
 0
-Ú Ú(åâ
+‘ ‘(åâ
 
-ã ã(!
+š š(!
 %0boolean"Hcom.smilepile.data.backup.PhotoManifestEntry#equals(Ljava/lang/Object;)Z*M
 
-ã ã(?
+š š(?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry*
 
-ã ã(! 2equals(Ljava/lang/Object;)*
+š š(! 2equals(Ljava/lang/Object;)*
 2
 1*
 1
-å	 ç(Ä
+œ	 (Ä
 Á
 
-ç7 ç(?
+7 (?
 %4java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getFileName()Ljava/lang/String;*M
 
-ç) ç(6?
+) (6?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry0.
 
-ç ç(@
+ (@
 %5java.io.File"java.io.FileÄ
 Á
 
-ç ç(@
+ (@
 %6"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-ç ç(@
+ (@
 
 %5java.io.File*)
 
-ç ç('
+ ('
 
 	photosDirjava.io.File*&
 
-ç7 ç(?
+7 (?
 
 %4java.lang.StringT
 R
 
-ç ç(@
+ (@
 
 sourceFilejava.io.File"__id*"
 
-ç ç(@
+ (@
 
 %5java.io.Fileki
 
-è è( 
+Ÿ Ÿ( 
 %7boolean"java.io.File#exists()Z**
 
-è è(
+Ÿ Ÿ(
 
 
 sourceFilejava.io.File2exists()r
 p
 
-è è( 
+Ÿ Ÿ( 
 %8boolean"kotlin.Boolean#not()Z*
 
-è è( 
+Ÿ Ÿ( 
 
 %7boolean*
 
-è è( 
+Ÿ Ÿ( 
 
 %7boolean*
 3
 4:K
 
-Û Û(*=
+’ ’(*=
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry:.
 
-Ü Ü( 
+“ “( 
 originalPathjava.lang.String:'
 
-İ İ(
+” ”(
 	photosDirjava.io.File:+
 
-Ş Ş(
+• •(
 thumbnailsDirjava.io.File:/
 
-ß ß(!
+– –(!
 internalPhotosDirjava.io.File:3
 
-à à(#%
+— —(#%
 internalThumbnailsDirjava.io.File:A
 
-á á(3
+˜ ˜(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHİ
 ¦com.smilepile.data.backup.RestoreManager#verifyPhotoIntegrity(Ljava/io/File;Lcom/smilepile/data/backup/PhotoManifestEntry;Lcom/smilepile/data/backup/RestoreOptions;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktö ö($"0*ï
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt­ ­($"0*ï
 2
-ûI €(	è
+²I ·(	è
 å
 
-ü! ü(9
+³! ³(9
 %4java.lang.String"Wcom.smilepile.data.backup.RestoreManager#calculateMD5(Ljava/io/File;)Ljava/lang/String;*:
 
-ü! ü(9,*
+³! ³(9,*
 (com.smilepile.data.backup.RestoreManager**
 
-ü. ü(8
+³. ³(8
 
 
 sourceFilejava.io.File`
 ^
 
-ü ü(9"
+³ ³(9"
 actualChecksumjava.lang.String"__id*&
 
-ü! ü(9
+³! ³(9
 
 %4java.lang.StringÄ
 Á
 
-ı0 ı(8
+´0 ´(8
 %5java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getChecksum()Ljava/lang/String;*M
 
-ı" ı(/?
+´" ´(/?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntryÁ¾
 
-ı ı(8
+´ ´(8
 %6boolean")kotlin.String#equals(Ljava/lang/Object;)Z*2
 
-ı ı($
+´ ´($
 "
 actualChecksumjava.lang.String*&
 
-ı0 ı(8
+´0 ´(8
 
 %5java.lang.String2equals(Ljava/lang/Object;)*
 3
 4*i
 3
-ÿ €(S
+¶ ·(S
 Q
 
 __unknown_file (
@@ -2531,39 +2531,39 @@ Q
 	<unknown>*
 1*¿
 4
-ı: ÿ(Ä
+´: ¶(Ä
 Á
 
-şT ş(\
+µT µ(\
 %8java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getFileName()Ljava/lang/String;*M
 
-şF ş(S?
+µF µ(S?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntryu
 s
 
-ş( ş(^
+µ( µ(^
 %9"__concat*-
 
-ş) ş(D
+µ) µ(D
 Integrity check failed for *&
 
-şT ş(\
+µT µ(\
 
 %8java.lang.StringOM
 
-ş ş(_"
+µ µ(_"
 %10java.lang.SecurityException"java.lang.SecurityException™
 –
 
-ş ş(_
+µ µ(_
 %11"7java.lang.SecurityException#<init>(Ljava/lang/String;)V*2
 
-ş ş(_$
+µ µ(_$
 "
 %10java.lang.SecurityException*
 
-ş( ş(^
+µ( µ(^
 
 %9*
 5*I
@@ -2574,112 +2574,112 @@ s
 
 early exit*¨
 0
-ö ö(¥
+­ ­(¥
 ¢
 
-û û(%
+² ²(%
 %0boolean"@com.smilepile.data.backup.RestoreOptions#getValidateIntegrity()Z*C
 
-û û(5
+² ²(5
 3
 options(com.smilepile.data.backup.RestoreOptionsÄ
 Á
 
-û7 û(?
+²7 ²(?
 %1java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getChecksum()Ljava/lang/String;*M
 
-û) û(6?
+²) ²(6?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntryŸœ
 
-û) û(G
+²) ²(G
 %2boolean")kotlin.String#equals(Ljava/lang/Object;)Z*&
 
-û7 û(?
+²7 ²(?
 
 %1java.lang.String*
 
-ûC û(G 2equals(Ljava/lang/Object;)*
+²C ²(G 2equals(Ljava/lang/Object;)*
 2
 1*@
 1
-€	 ("/
+·	 ¸("/
 
 __unknown_file (
 implicit return:(
 
-÷ ÷(
+® ®(
 
 sourceFilejava.io.File:K
 
-ø ø()=
+¯ ¯()=
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry:A
 
-ù ù(3
+° °(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHh
 µcom.smilepile.data.backup.RestoreManager#restorePhotoThumbnail(Lcom/smilepile/data/backup/PhotoManifestEntry;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktƒ ƒ(%"0*ğ
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktº º(%"0*ğ
 2
-‰' (	Ä
+À' Æ(	Ä
 Á
 
-ŠI Š(Q
+ÁI Á(Q
 %2java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getFileName()Ljava/lang/String;*M
 
-Š; Š(H?
+Á; Á(H?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry`
 ^
 
-Š2 Š(S
+Á2 Á(S
 %3"__concat*
 
-Š3 Š(9
+Á3 Á(9
 
 thumb_*&
 
-ŠI Š(Q
+ÁI Á(Q
 
 %2java.lang.String0.
 
-Š Š(T
+Á Á(T
 %4java.io.File"java.io.File¶
 ³
 
-Š Š(T
+Á Á(T
 %5"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-Š Š(T
+Á Á(T
 
 %4java.io.File*-
 
-Š# Š(0
+Á# Á(0
 
 thumbnailsDirjava.io.File*
 
-Š2 Š(S
+Á2 Á(S
 
 %3U
 S
 
-Š Š(T
+Á Á(T
 thumbSourcejava.io.File"__id*"
 
-Š Š(T
+Á Á(T
 
 %4java.io.Filelj
 
-‹ ‹($
+Â Â($
 %6boolean"java.io.File#exists()Z*+
 
-‹ ‹(
+Â Â(
 
 thumbSourcejava.io.File2exists()*
 3
 4*i
 3
- (S
+Å Æ(S
 Q
 
 __unknown_file (
@@ -2689,52 +2689,52 @@ Q
 	<unknown>*
 1*Ş
 4
-‹& (Ä
+Â& Å(Ä
 Á
 
-ŒS Œ([
+ÃS Ã([
 %8java.lang.String"Lcom.smilepile.data.backup.PhotoManifestEntry#getFileName()Ljava/lang/String;*M
 
-ŒE Œ(R?
+ÃE Ã(R?
 =
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry`
 ^
 
-Œ< Œ(]
+Ã< Ã(]
 %9"__concat*
 
-Œ= Œ(C
+Ã= Ã(C
 
 thumb_*&
 
-ŒS Œ([
+ÃS Ã([
 
 %8java.lang.String1/
 
-Œ  Œ(^
+Ã  Ã(^
 %10java.io.File"java.io.FileÀ
 ½
 
-Œ  Œ(^
+Ã  Ã(^
 %11"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*#
 
-Œ  Œ(^
+Ã  Ã(^
 
 %10java.io.File*5
 
-Œ% Œ(:'
+Ã% Ã(:'
 %
 internalThumbnailsDirjava.io.File*
 
-Œ< Œ(]
+Ã< Ã(]
 
 %9T
 R
 
-Œ Œ(^
+Ã Ã(^
 	thumbDestjava.io.File"__id*#
 
-Œ  Œ(^
+Ã  Ã(^
 
 %10java.io.FileS
 Q
@@ -2746,45 +2746,45 @@ Q
 	<unknown>*
 3*¿
 0
-ƒ ƒ(¥
+º º(¥
 ¢
 
-‰ ‰(%
+À À(%
 %0boolean"@com.smilepile.data.backup.RestoreOptions#getRestoreThumbnails()Z*C
 
-‰ ‰(5
+À À(5
 3
 options(com.smilepile.data.backup.RestoreOptions*
 2
 1*@
 1
-	 ("/
+Æ	 Ç("/
 
 __unknown_file (
 implicit return:K
 
-„ „()=
+» »()=
 manifestEntry,com.smilepile.data.backup.PhotoManifestEntry:+
 
-… …(
+¼ ¼(
 thumbnailsDirjava.io.File:3
 
-† †(#%
+½ ½(#%
 internalThumbnailsDirjava.io.File:A
 
-‡ ‡(3
+¾ ¾(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerH‡'
 ­com.smilepile.data.backup.RestoreManager#handlePhotoDuplicate(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Ljava/lang/String;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt’ ’(,"0*ô
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÉ É(,"0*ô
 13
-¬6 ®(‡
+ã6 å(‡
 „
 
-­  ­(,
+ä  ä(,
 %18java.lang.String"0java.io.File#getAbsolutePath()Ljava/lang/String;*+
 
-­ ­(
+ä ä(
 
 renamedFilejava.io.FileR
 P
@@ -2792,45 +2792,45 @@ P
 __unknown_file (
 %17"__id*'
 
-­  ­(,
+ä  ä(,
 
 %18java.lang.String*
 12*
 14
-® °(}
+å ç(}
 {
 
-¯[ ¯(_
+æ[ æ(_
 %19java.lang.String"(java.io.File#getName()Ljava/lang/String;**
 
-¯P ¯(Z
+æP æ(Z
 
 
 sourceFilejava.io.Filey
 w
 
-¯0 ¯(a
+æ0 æ(a
 %20"__concat*/
 
-¯1 ¯(N!
+æ1 æ(N!
 Failed to rename photo file: *'
 
-¯[ ¯(_
+æ[ æ(_
 
 %19java.lang.StringWU
 
-¯ ¯(b&
+æ æ(b&
 %21java.lang.IllegalStateException"java.lang.IllegalStateException¢
 Ÿ
 
-¯ ¯(b
+æ æ(b
 %22";java.lang.IllegalStateException#<init>(Ljava/lang/String;)V*6
 
-¯ ¯(b(
+æ æ(b(
 &
 %21java.lang.IllegalStateException*
 
-¯0 ¯(a
+æ0 æ(a
 
 %20*
 15*J
@@ -2841,41 +2841,41 @@ w
 
 early exit*Q
 16
-², ²(0:
+é, é(0:
 8
 
 __unknown_file (
 %4"__id*
 
-², ²(0 *
+é, é(0 *
 3*“
 0
-’ ’(î
+É É(î
 ë
 
-˜ ˜(,3
+Ï Ï(,3
 %0-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-˜ ˜(,,*
+Ï Ï(,,*
 (com.smilepile.data.backup.RestoreManagerÈÅ
 
-˜- ˜(;
+Ï- Ï(;
 %1java.util.List"Lcom.smilepile.data.repository.PhotoRepository#getAllPhotos()Ljava/util/List;*C
 
-˜ ˜(,5
+Ï Ï(,5
 3
 %0-com.smilepile.data.repository.PhotoRepository2getAllPhotos()\
 Z
 
-˜ ˜(; 
+Ï Ï(; 
 existingPhotosjava.util.List"__id*$
 
-˜- ˜(;
+Ï- Ï(;
 
 %1java.util.List`
 ^
 
-™ ™(E
+Ğ Ğ(E
 isDuplicatejava.lang.Object"__id*)
 
 __unknown_file (
@@ -2883,13 +2883,13 @@ Z
 2
 1*
 1
-	 Ÿ(û
+Ô	 Ö(û
 ø
 
-Ÿ Ÿ(03
+Ö Ö(03
 %3-com.smilepile.data.backup.DuplicateResolution"pcom.smilepile.data.backup.RestoreOptions#getDuplicateResolution()Lcom/smilepile/data/backup/DuplicateResolution;*C
 
-Ÿ Ÿ(5
+Ö Ö(5
 3
 options(com.smilepile.data.backup.RestoreOptions*
 5
@@ -2897,65 +2897,65 @@ Z
 7
 11*>
 2
-› (	"-
+Ò Ô(	"-
 
-œ œ(
+Ó Ó(
 
 	photoPathjava.lang.String*%
 3
-³ ³(	"
+ê ê(	"
 
-Ÿ ³(	
+Ö ê(	
 
 %4*P
 5
- (  (,:
+×( ×(,:
 8
 
 __unknown_file (
 %4"__id*
 
- (  (, *
+×( ×(, *
 3*¥
 7
-¡+ §(b
+Ø+ Ş(b
 `
 
-¢ ¢(P!
+Ù Ù(P!
 existingPhotojava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>§¤
 
-£ £()
+Ú Ú()
 %5boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*1
 
-£ £(!#
+Ú Ú(!#
 !
 existingPhotojava.lang.Object*
 
-£% £() 2equals(Ljava/lang/Object;)*
+Ú% Ú() 2equals(Ljava/lang/Object;)*
 8
 9*m
 8
-¥ ¦(W
+Ü İ(W
 U
 
 __unknown_file (
 %4"__id*-
 
-¦ ¦(
+İ İ(
 
 	photoPathjava.lang.String*
 3*Ú
 9
-£+ ¥(î
+Ú+ Ü(î
 ë
 
-¤ ¤(#3
+Û Û(#3
 %7-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-¤ ¤(#,*
+Û Û(#,*
 (com.smilepile.data.backup.RestoreManagerS
 Q
 
@@ -2966,116 +2966,116 @@ Q
 	<unknown>*
 8*ó
 11
-¨* ±(0.
+ß* è(0.
 
-©: ©(I
+à: à(I
 %8java.io.File"java.io.File’
 
 
-©: ©(I
+à: à(I
 %9"(java.io.File#<init>(Ljava/lang/String;)V*"
 
-©: ©(I
+à: à(I
 
 %8java.io.File*-
 
-©? ©(H
+à? à(H
 
 	photoPathjava.lang.Stringu
 s
 
-©J ©(N
+àJ à(N
 %10java.lang.String"(java.io.File#getName()Ljava/lang/String;*"
 
-©: ©(I
+à: à(I
 
 %8java.io.Fileõ
 ò
 
-©" ©(O
+à" à(O
 %11java.lang.String"fcom.smilepile.data.backup.RestoreManager#generateUniquePhotoName(Ljava/lang/String;)Ljava/lang/String;*:
 
-©" ©(O,*
+à" à(O,*
 (com.smilepile.data.backup.RestoreManager*'
 
-©J ©(N
+àJ à(N
 
 %10java.lang.String^
 \
 
-© ©(O
+à à(O
 newFileNamejava.lang.String"__id*'
 
-©" ©(O
+à" à(O
 
 %11java.lang.String1/
 
-ª" ª(F
+á" á(F
 %12java.io.File"java.io.File×
 Ô
 
-ª" ª(F
+á" á(F
 %13"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*#
 
-ª" ª(F
+á" á(F
 
 %12java.io.File*1
 
-ª' ª(8#
+á' á(8#
 !
 internalPhotosDirjava.io.File*/
 
-ª: ª(E!
+á: á(E!
 
 newFileNamejava.lang.StringV
 T
 
-ª ª(F
+á á(F
 renamedFilejava.io.File"__id*#
 
-ª" ª(F
+á" á(F
 
 %12java.io.File1/
 
-«! «(0
+â! â(0
 %14java.io.File"java.io.File”
 ‘
 
-«! «(0
+â! â(0
 %15"(java.io.File#<init>(Ljava/lang/String;)V*#
 
-«! «(0
+â! â(0
 
 %14java.io.File*-
 
-«& «(/
+â& â(/
 
 	photoPathjava.lang.StringU
 S
 
-« «(0
+â â(0
 
 sourceFilejava.io.File"__id*#
 
-«! «(0
+â! â(0
 
 %14java.io.Fileº·
 
-¬ ¬(4
+ã ã(4
 %16boolean"&java.io.File#renameTo(Ljava/io/File;)Z**
 
-¬ ¬(
+ã ã(
 
 
 sourceFilejava.io.File*+
 
-¬( ¬(3
+ã( ã(3
 
 renamedFilejava.io.File2renameTo(Ljava/io/File;)*
 13
 14*d
 12
-° ±(M
+ç è(M
 K
 
 __unknown_file (
@@ -3086,16 +3086,16 @@ K
 %17*
 3:+
 
-“ “(
+Ê Ê(
 	photoPathjava.lang.String:+
 
-” ”(
+Ë Ë(
 	photoNamejava.lang.String:/
 
-• •(!
+Ì Ì(!
 internalPhotosDirjava.io.File:A
 
-– –(3
+Í Í(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHh¡
 `com.smilepile.data.backup.RestoreManager$PhotoRestoreContext#getNewPhotoPath()Ljava/lang/String;
@@ -3155,12 +3155,12 @@ Pcom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#setFileRestored(Z)
 valuebooleanB@>
 <com.smilepile.data.backup.RestoreManager$PhotoRestoreContextH`İ
 Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/String;Z)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¶ ¶(*"0*ó
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktí í(*"0*ó
 0
-¶* ¹(¨
+í* ğ(¨
 ¥
 
-· ·( 
+î î( 
 %0java.lang.String"acom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#setNewPhotoPath(Ljava/lang/String;)V*\
 
 __unknown_file (@>
@@ -3171,7 +3171,7 @@ Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/
 newPhotoPathjava.lang.String…
 ‚
 
-¸ ¸(!
+ï ï(!
 %1boolean"Pcom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#setFileRestored(Z)V*\
 
 __unknown_file (@>
@@ -3184,22 +3184,22 @@ Ycom.smilepile.data.backup.RestoreManager$PhotoRestoreContext#<init>(Ljava/lang/
 __unknown_file (
 implicit return:.
 
-· ·(  
+î î(  
 newPhotoPathjava.lang.String:%
 
-¸ ¸(!
+ï ï(!
 fileRestoredbooleanB@>
 <com.smilepile.data.backup.RestoreManager$PhotoRestoreContextHğ
 ecom.smilepile.data.backup.RestoreManager#restoreSettings(Lcom/smilepile/data/backup/BackupSettings;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¾ ¾('"1*Ÿ
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktõ õ('"1*Ÿ
 2
-Â= Â(LÏ
+ù= ù(LÏ
 Ì
 
-Á Ã(
+ø ú(
 %4kotlin.Unit"Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V*6
 
-Á Á((
+ø ø((
 &
 %1 com.smilepile.theme.ThemeManager*"
 
@@ -3208,46 +3208,46 @@ ecom.smilepile.data.backup.RestoreManager#restoreSettings(Lcom/smilepile/data/ba
 %3ÿ
 ü
 
-Ç Ç()6
+ş ş()6
 %50com.smilepile.data.backup.BackupSecuritySettings"pcom.smilepile.data.backup.BackupSettings#getSecuritySettings()Lcom/smilepile/data/backup/BackupSecuritySettings;*D
 
-Ç Ç(6
+ş ş(6
 4
 settings(com.smilepile.data.backup.BackupSettings±
 ®
 
-Ç* Ç(<
+ş* ş(<
 %6boolean"Icom.smilepile.data.backup.BackupSecuritySettings#getKidSafeModeEnabled()Z*F
 
-Ç Ç()8
+ş ş()8
 6
 %50com.smilepile.data.backup.BackupSecuritySettings*
 5
 6*u
 3
-Â) Â(7_
+ù) ù(7_
 ]
 
 __unknown_file (
 %3"__id*5
 
-Â3 Â(7'
+ù3 ù(7'
 %
 DARKcom.smilepile.theme.ThemeMode*
 2*v
 4
-Â= Â(L`
+ù= ù(L`
 ^
 
 __unknown_file (
 %3"__id*6
 
-ÂG Â(L(
+ùG ù(L(
 &
 LIGHTcom.smilepile.theme.ThemeMode*
 2*l
 5
-Ê Ë(S
+ ‚(S
 Q
 
 __unknown_file (
@@ -3258,7 +3258,7 @@ Q
 7
 8*i
 6
-Ç> Ê(S
+ş> (S
 Q
 
 __unknown_file (
@@ -3268,12 +3268,12 @@ Q
 	<unknown>*
 5*@
 7
-Í	 Î("/
+„	 …("/
 
 __unknown_file (
 implicit return*i
 8
-Ë Í(	S
+‚ „(	S
 Q
 
 __unknown_file (
@@ -3283,152 +3283,152 @@ Q
 	<unknown>*
 7*Š
 1
-¿ Ë(	Ñ
+ö ‚(	Ñ
 Î
 
-Á Á(&
+ø ø(&
 %1 com.smilepile.theme.ThemeManager"\com.smilepile.data.backup.RestoreManager#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
 
-Á Á(,*
+ø ø(,*
 (com.smilepile.data.backup.RestoreManagerœ
 ™
 
-Â Â('
+ù ù('
 %2boolean"6com.smilepile.data.backup.BackupSettings#isDarkMode()Z*D
 
-Â Â(6
+ù ù(6
 4
 settings(com.smilepile.data.backup.BackupSettings*
 3
 4:B
 
-¾( ¾(@4
+õ( õ(@4
 settings(com.smilepile.data.backup.BackupSettingsB,*
 (com.smilepile.data.backup.RestoreManagerHŒ
 xcom.smilepile.data.backup.RestoreManager#createRollbackSnapshot()Lcom/smilepile/data/backup/RestoreManager$RollbackData;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÓ Ó(."0*î
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktŠ Š(."0*î
 0
-Ğ Ò(÷
+‡ ‰(÷
 ô
 
-Ô Ô(+6
+‹ ‹(+6
 %00com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-Ô Ô(+,*
+‹ ‹(+,*
 (com.smilepile.data.backup.RestoreManagerÖÓ
 
-Ô, Ô(>
+‹, ‹(>
 %1java.util.List"Scom.smilepile.data.repository.CategoryRepository#getAllCategories()Ljava/util/List;*F
 
-Ô Ô(+8
+‹ ‹(+8
 6
 %00com.smilepile.data.repository.CategoryRepository2getAllCategories()X
 V
 
-Ô Ô(>
+‹ ‹(>
 
 categoriesjava.util.List"__id*$
 
-Ô, Ô(>
+‹, ‹(>
 
 %1java.util.Listî
 ë
 
-Õ Õ($3
+Œ Œ($3
 %2-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-Õ Õ($,*
+Œ Œ($,*
 (com.smilepile.data.backup.RestoreManagerÈÅ
 
-Õ% Õ(3
+Œ% Œ(3
 %3java.util.List"Lcom.smilepile.data.repository.PhotoRepository#getAllPhotos()Ljava/util/List;*C
 
-Õ Õ($5
+Œ Œ($5
 3
 %2-com.smilepile.data.repository.PhotoRepository2getAllPhotos()T
 R
 
-Õ Õ(3
+Œ Œ(3
 photosjava.util.List"__id*$
 
-Õ% Õ(3
+Œ% Œ(3
 
 %3java.util.ListÑ
 Î
 
-Ö Ö(%&
+ (%&
 %4 com.smilepile.theme.ThemeManager"\com.smilepile.data.backup.RestoreManager#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
 
-Ö Ö(%,*
+ (%,*
 (com.smilepile.data.backup.RestoreManager™
 –
 
-Ö& Ö(0
+& (0
 %5java.lang.Object"8com.smilepile.theme.ThemeManager#isDarkMode()LStateFlow;*6
 
-Ö Ö(%(
+ (%(
 &
 %4 com.smilepile.theme.ThemeManager_
 ]
 
-Ö Ö(6
+ (6
 
 isDarkModejava.lang.Object"__id*)
 
-Ö1 Ö(6
+1 (6
 
 valuejava.lang.Objectf
 d
 
-Ù Ù(Z%
+ (Z%
 rollbackDirerror.NonExistentClass"__id*)
 
 __unknown_file (
 	<unknown>ƒ€
 
-Ü á(	;
+“ ˜(	;
 %65com.smilepile.data.backup.RestoreManager$RollbackData"5com.smilepile.data.backup.RestoreManager$RollbackData‘
 
 
-Ü á(	
+“ ˜(	
 %7"ncom.smilepile.data.backup.RestoreManager$RollbackData#<init>(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)V*K
 
-Ü á(	=
+“ ˜(	=
 ;
 %65com.smilepile.data.backup.RestoreManager$RollbackData*,
 
-İ İ(#
+” ”(#
 
 
 categoriesjava.util.List*(
 
-Ş Ş(
+• •(
 
 photosjava.util.List*.
 
-ß ß(# 
+– –(# 
 
 
 isDarkModejava.lang.Object*5
 
-à à(%'
+— —(%'
 %
 rollbackDirerror.NonExistentClass"K
 
-Ü á(	=
+“ ˜(	=
 ;
 %65com.smilepile.data.backup.RestoreManager$RollbackDataB,*
 (com.smilepile.data.backup.RestoreManagerHÿ%
 rcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktë ë('"1*”
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¢ ¢('"1*”
 2
-şA ş(PÑ
+µA µ(PÑ
 Î
 
-ı ÿ(
+´ ¶(
 %11kotlin.Unit"Ocom.smilepile.theme.ThemeManager#setThemeMode(Lcom/smilepile/theme/ThemeMode;)V*6
 
-ı ı((
+´ ´((
 &
 %8 com.smilepile.theme.ThemeManager*#
 
@@ -3437,10 +3437,10 @@ rcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 %10Ñ
 Î
 
-‚ ‚($
+¹ ¹($
 %12java.io.File"Tcom.smilepile.data.backup.RestoreManager$RollbackData#getRollbackDir()Ljava/io/File;*U
 
-‚ ‚(G
+¹ ¹(G
 E
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataS
 Q
@@ -3453,34 +3453,34 @@ Q
 5
 6*v
 3
-ş- ş(;`
+µ- µ(;`
 ^
 
 __unknown_file (
 %10"__id*5
 
-ş7 ş(;'
+µ7 µ(;'
 %
 DARKcom.smilepile.theme.ThemeMode*
 2*w
 4
-şA ş(Pa
+µA µ(Pa
 _
 
 __unknown_file (
 %10"__id*6
 
-şK ş(P(
+µK µ(P(
 &
 LIGHTcom.smilepile.theme.ThemeMode*
 2*@
 5
-‡	 ˆ("/
+¾	 ¿("/
 
 __unknown_file (
 implicit return*i
 6
-… ‡(	S
+¼ ¾(	S
 Q
 
 __unknown_file (
@@ -3490,20 +3490,20 @@ Q
 	<unknown>*
 5*İ
 1
-ì …(	˜
+£ ¼(	˜
 •
 
-ğ ğ(
+§ §(
 %1kotlin.Unit"8com.smilepile.data.backup.RestoreManager#clearAllData()V*:
 
-ğ ğ(,*
+§ §(,*
 (com.smilepile.data.backup.RestoreManagerÓ
 Ğ
 
-ó ó(#
+ª ª(#
 %2java.util.List"Ucom.smilepile.data.backup.RestoreManager$RollbackData#getCategories()Ljava/util/List;*U
 
-ó ó(G
+ª ª(G
 E
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataÓ
 Ğ
@@ -3537,10 +3537,10 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 |
 zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)V$lambda0ÕÒ
 
-ó$ ó(+
+ª$ ª(+
 %4kotlin.Unit"?kotlin.collections.List#forEach(Ljava/util/function/Consumer;)V*$
 
-ó ó(#
+ª ª(#
 
 %2java.util.List*"
 
@@ -3549,10 +3549,10 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 %32&forEach(Ljava/util/function/Consumer;)Ï
 Ì
 
-ø ø(
+¯ ¯(
 %5java.util.List"Qcom.smilepile.data.backup.RestoreManager$RollbackData#getPhotos()Ljava/util/List;*U
 
-ø ø(G
+¯ ¯(G
 E
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataÓ
 Ğ
@@ -3586,10 +3586,10 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 |
 zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)V$lambda1ÕÒ
 
-ø  ø('
+¯  ¯('
 %7kotlin.Unit"?kotlin.collections.List#forEach(Ljava/util/function/Consumer;)V*$
 
-ø ø(
+¯ ¯(
 
 %5java.util.List*"
 
@@ -3598,29 +3598,29 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 %62&forEach(Ljava/util/function/Consumer;)Ñ
 Î
 
-ı ı(&
+´ ´(&
 %8 com.smilepile.theme.ThemeManager"\com.smilepile.data.backup.RestoreManager#getThemeManager()Lcom/smilepile/theme/ThemeManager;*:
 
-ı ı(,*
+´ ´(,*
 (com.smilepile.data.backup.RestoreManagerº
 ·
 
-ş! ş(+
+µ! µ(+
 %9boolean"Ccom.smilepile.data.backup.RestoreManager$RollbackData#isDarkMode()Z*U
 
-ş ş( G
+µ µ( G
 E
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackData*
 3
 4:S
 
-ë( ë(BE
+¢( ¢(BE
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataB,*
 (com.smilepile.data.backup.RestoreManagerH¨
 zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)V$lambda0l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.któ, õ("0*Ê
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktª, ¬("0*Ê
 0
-ó, õ(ö
+ª, ¬(ö
 ó
 
 __unknown_file (
@@ -3640,21 +3640,21 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackData÷
 ô
 
-ô ô("6
+« «("6
 %10com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-ô ô(",*
+« «(",*
 (com.smilepile.data.backup.RestoreManagerÁ¾
 
-ô# ô(;
+«# «(;
 
 %2long"fcom.smilepile.data.repository.CategoryRepository#insertCategory(Lcom/smilepile/data/models/Category;)J*F
 
-ô ô("8
+« «("8
 6
 %10com.smilepile.data.repository.CategoryRepository*>
 
-ô2 ô(:0
+«2 «(:0
 .
 category"com.smilepile.data.models.Category24insertCategory(Lcom/smilepile/data/models/Category;)"(
 
@@ -3663,13 +3663,13 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 
 %2long:<
 
-ó. ó(6.
+ª. ª(6.
 category"com.smilepile.data.models.CategoryB,*
 (com.smilepile.data.backup.RestoreManagerH
 zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/backup/RestoreManager$RollbackData;)V$lambda1l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktø( ú("0*©
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¯( ±("0*©
 0
-ø( ú(ö
+¯( ±(ö
 ó
 
 __unknown_file (
@@ -3689,21 +3689,21 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 rollbackData5com.smilepile.data.backup.RestoreManager$RollbackDataî
 ë
 
-ù ù(3
+° °(3
 %1-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-ù ù(,*
+° °(,*
 (com.smilepile.data.backup.RestoreManager©¦
 
-ù  ù(2
+°  °(2
 
 %2long"]com.smilepile.data.repository.PhotoRepository#insertPhoto(Lcom/smilepile/data/models/Photo;)J*C
 
-ù ù(5
+° °(5
 3
 %1-com.smilepile.data.repository.PhotoRepository*8
 
-ù, ù(1*
+°, °(1*
 (
 photocom.smilepile.data.models.Photo2.insertPhoto(Lcom/smilepile/data/models/Photo;)"(
 
@@ -3712,13 +3712,13 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 
 %2long:6
 
-ø* ø(/(
+¯* ¯(/(
 photocom.smilepile.data.models.PhotoB,*
 (com.smilepile.data.backup.RestoreManagerHö
 8com.smilepile.data.backup.RestoreManager#clearAllData()Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‘ ‘($"1*@
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÈ È($"1*@
 2
-¥	 ¦("/
+Ü	 İ("/
 
 __unknown_file (
 implicit return*I
@@ -3729,27 +3729,27 @@ zcom.smilepile.data.backup.RestoreManager#performRollback(Lcom/smilepile/data/ba
 
 early exit*‰
 1
-’ ¢(	î
+É Ù(	î
 ë
 
-” ”(+3
+Ë Ë(+3
 %1-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-” ”(+,*
+Ë Ë(+,*
 (com.smilepile.data.backup.RestoreManagerÈÅ
 
-”, ”(:
+Ë, Ë(:
 %2java.util.List"Lcom.smilepile.data.repository.PhotoRepository#getAllPhotos()Ljava/util/List;*C
 
-” ”(+5
+Ë Ë(+5
 3
 %1-com.smilepile.data.repository.PhotoRepository2getAllPhotos()W
 U
 
-” ”(:
+Ë Ë(:
 	allPhotosjava.util.List"__id*$
 
-”, ”(:
+Ë, Ë(:
 
 %2java.util.List˜
 •
@@ -3783,10 +3783,10 @@ B
 B
 @com.smilepile.data.backup.RestoreManager#clearAllData()V$lambda0ÜÙ
 
-• •(
+Ì Ì(
 %4kotlin.Unit"?kotlin.collections.List#forEach(Ljava/util/function/Consumer;)V*+
 
-• •(
+Ì Ì(
 
 	allPhotosjava.util.List*"
 
@@ -3795,24 +3795,24 @@ B
 %32&forEach(Ljava/util/function/Consumer;)÷
 ô
 
-š  š(26
+Ñ  Ñ(26
 %50com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-š  š(2,*
+Ñ  Ñ(2,*
 (com.smilepile.data.backup.RestoreManagerÖÓ
 
-š3 š(E
+Ñ3 Ñ(E
 %6java.util.List"Scom.smilepile.data.repository.CategoryRepository#getAllCategories()Ljava/util/List;*F
 
-š  š(28
+Ñ  Ñ(28
 6
 %50com.smilepile.data.repository.CategoryRepository2getAllCategories()[
 Y
 
-š š(E
+Ñ Ñ(E
 allCategoriesjava.util.List"__id*$
 
-š3 š(E
+Ñ3 Ñ(E
 
 %6java.util.List˜
 •
@@ -3856,10 +3856,10 @@ B
 B
 @com.smilepile.data.backup.RestoreManager#clearAllData()V$lambda1àİ
 
-› ›(!
+Ò Ò(!
 %8kotlin.Unit"?kotlin.collections.List#forEach(Ljava/util/function/Consumer;)V*/
 
-› ›(!
+Ò Ò(!
 
 allCategoriesjava.util.List*"
 
@@ -3877,9 +3877,9 @@ Q
 4B,*
 (com.smilepile.data.backup.RestoreManagerHhÅ	
 @com.smilepile.data.backup.RestoreManager#clearAllData()V$lambda0l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt• —("0*§
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÌ Î("0*§
 0
-• —(º
+Ì Î(º
 ·
 
 __unknown_file (
@@ -3899,20 +3899,20 @@ Q
 	allPhotosjava.util.Listî
 ë
 
-– –(3
+Í Í(3
 %1-com.smilepile.data.repository.PhotoRepository"lcom.smilepile.data.backup.RestoreManager#getPhotoRepository()Lcom/smilepile/data/repository/PhotoRepository;*:
 
-– –(,*
+Í Í(,*
 (com.smilepile.data.backup.RestoreManager°­
 
-–  –(2
+Í  Í(2
 %2kotlin.Unit"]com.smilepile.data.repository.PhotoRepository#deletePhoto(Lcom/smilepile/data/models/Photo;)V*C
 
-– –(5
+Í Í(5
 3
 %1-com.smilepile.data.repository.PhotoRepository*8
 
-–, –(1*
+Í, Í(1*
 (
 photocom.smilepile.data.models.Photo2.deletePhoto(Lcom/smilepile/data/models/Photo;)"/
 
@@ -3920,29 +3920,29 @@ Q
 
 %2kotlin.Unit:6
 
-•  •(%(
+Ì  Ì(%(
 photocom.smilepile.data.models.PhotoB,*
 (com.smilepile.data.backup.RestoreManagerH÷
 @com.smilepile.data.backup.RestoreManager#clearAllData()V$lambda1l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt›" Ÿ("0*¦
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÒ" Ö("0*¦
 2
-œ) (÷
+Ó) Õ(÷
 ô
 
- (&6
+Ô Ô(&6
 %40com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
- (&,*
+Ô Ô(&,*
 (com.smilepile.data.backup.RestoreManagerÈÅ
 
-' (?
+Ô' Ô(?
 %5kotlin.Unit"fcom.smilepile.data.repository.CategoryRepository#deleteCategory(Lcom/smilepile/data/models/Category;)V*F
 
- (&8
+Ô Ô(&8
 6
 %40com.smilepile.data.repository.CategoryRepository*>
 
-6 (>0
+Ô6 Ô(>0
 .
 category"com.smilepile.data.models.Category24deleteCategory(Lcom/smilepile/data/models/Category;)K
 I
@@ -3950,12 +3950,12 @@ I
 __unknown_file (
 %3"__id*!
 
-' (?
+Ô' Ô(?
 
 %5kotlin.Unit*
 1*î
 0
-›" Ÿ(º
+Ò" Ö(º
 ·
 
 __unknown_file (
@@ -3984,53 +3984,53 @@ I
 allCategoriesjava.util.List
 Œ
 
-œ œ('
+Ó Ó('
 %1boolean"/com.smilepile.data.models.Category#isDefault()Z*>
 
-œ œ(0
+Ó Ó(0
 .
 category"com.smilepile.data.models.Categoryr
 p
 
-œ œ('
+Ó Ó('
 %2boolean"kotlin.Boolean#not()Z*
 
-œ œ('
+Ó Ó('
 
 %1boolean*
 
-œ œ('
+Ó Ó('
 
 %1boolean*
 2
 1*:
 1
-œ) (")
+Ó) Õ(")
 
 __unknown_file (
 	<unknown>:<
 
-›$ ›(,.
+Ò$ Ò(,.
 category"com.smilepile.data.models.CategoryB,*
 (com.smilepile.data.backup.RestoreManagerHÑ
 Scom.smilepile.data.backup.RestoreManager#validateMediaStoreUri(Ljava/lang/String;)Zl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt« «(-"0*,
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktâ â(-"0*,
 0
-¨ ª("
+ß á("
 
-«L «(g
+âL â(g
 	<unknown>:+
 
-«. «(?
+â. â(?
 	uriStringjava.lang.StringB,*
 (com.smilepile.data.backup.RestoreManagerHœ
 Wcom.smilepile.data.backup.RestoreManager#calculateMD5(Ljava/io/File;)Ljava/lang/String;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÑ Ñ("0*û
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktˆ ˆ("0*û
 0
-Ã Ï(†
+ú †(†
 ƒ
 
-Ñ Ñ('
+ˆ ˆ('
 %0"
 __annotate*/
 
@@ -4042,81 +4042,81 @@ __annotate*/
 filejava.io.FileV
 T
 
-Ñ Ñ('
+ˆ ˆ('
 filejava.io.File"__annotation*"
 
 __unknown_file (
 
 %0òï
 
-Ò# Ò(5!
+‰# ‰(5!
 %1java.security.MessageDigest"Xjava.security.MessageDigest#getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;*,
 
-Ò Ò("
+‰ ‰("
 
 MessageDigestkotlin.Unit*
 
-Ò0 Ò(3
+‰0 ‰(3
 MD52getInstance(Ljava/lang/String;)n
 l
 
-Ò Ò(5%
+‰ ‰(5%
 digestjava.security.MessageDigest"__id*1
 
-Ò# Ò(5#
+‰# ‰(5#
 !
 %1java.security.MessageDigest†ƒ
 
-Ú Ú(
+‘ ‘(
 %2byte[]"&java.security.MessageDigest#digest()[B*5
 
-Ú Ú('
+‘ ‘('
 %
 digestjava.security.MessageDigest2digest()"
 
-Ú Ú(E
+‘ ‘(E
 	<unknown>:"
 
-Ñ Ñ('
+ˆ ˆ('
 filejava.io.FileB,*
 (com.smilepile.data.backup.RestoreManagerHä
 icom.smilepile.data.backup.RestoreManager#generateUniqueCategoryName(Ljava/lang/String;)Ljava/lang/String;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktà à(2"0*
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt— —(2"0*
 2
-å6 è(	
+œ6 Ÿ(	
 
 
-æ æ(,
+ (,
 %4"__concat*,
 
-æ æ(!
+ (!
 
 baseNamejava.lang.String*
 
-æ" æ(#
+" (#
 _*
 
-æ$ æ(+
+$ (+
 
 counterintG
 E
 
-æ æ(,
+ (,
 newNamejava.lang.String"__id*
 
-æ æ(,
+ (,
 
 %4q
 o
 
-ç ç(
+ (
 counterint"kotlin.Int#inc()I*
 
-ç ç(
+ (
 
 counterint*
 
-ç ç(
+ (
 
 counterintH
 F
@@ -4124,58 +4124,58 @@ F
 __unknown_file (
 %3"__id*
 
-ç ç(
+ (
 
 counterint*
 1*<
 3
-è	 ê("+
+Ÿ	 ¡("+
 
-ê ê(
+¡ ¡(
 
 newNamejava.lang.String*Ü
 0
-İ ß(÷
+” –(÷
 ô
 
-á á(+6
+˜ ˜(+6
 %00com.smilepile.data.repository.CategoryRepository"rcom.smilepile.data.backup.RestoreManager#getCategoryRepository()Lcom/smilepile/data/repository/CategoryRepository;*:
 
-á á(+,*
+˜ ˜(+,*
 (com.smilepile.data.backup.RestoreManagerÖÓ
 
-á, á(>
+˜, ˜(>
 %1java.util.List"Scom.smilepile.data.repository.CategoryRepository#getAllCategories()Ljava/util/List;*F
 
-á á(+8
+˜ ˜(+8
 6
 %00com.smilepile.data.repository.CategoryRepository2getAllCategories()X
 V
 
-á á(>
+˜ ˜(>
 
 categoriesjava.util.List"__id*$
 
-á, á(>
+˜, ˜(>
 
 %1java.util.List8
 6
 
-â â(
+™ ™(
 counterint"__id*
 
-â â(2_
+™ ™(2_
 ]
 
-ã ã(
+š š(
 newNamejava.lang.String"__id*,
 
-ã ã(
+š š(
 
 baseNamejava.lang.String*
 1*l
 1
-å å(4S
+œ œ(4S
 Q
 
 __unknown_file (
@@ -4186,22 +4186,22 @@ Q
 2
 3:*
 
-à3 à(C
+—3 —(C
 baseNamejava.lang.StringB,*
 (com.smilepile.data.backup.RestoreManagerHÙ	
 fcom.smilepile.data.backup.RestoreManager#generateUniquePhotoName(Ljava/lang/String;)Ljava/lang/String;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktğ ğ('"0*¸
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt§ §('"0*¸
 2
-ôR ô(_b
+«R «(_b
 `
 
-ôR ô(_
+«R «(_
 %2"__concat*
 
-ôS ô(T
+«S «(T
 .*-
 
-ôU ô(^
+«U «(^
 
 	extensionjava.lang.Object>
 <
@@ -4209,12 +4209,12 @@ fcom.smilepile.data.backup.RestoreManager#generateUniquePhotoName(Ljava/lang/Str
 __unknown_file (
 %1"__id*
 
-ôR ô(_
+«R «(_
 
 %2*
 1*^
 3
-ôe ô(gH
+«e «(gH
 F
 
 __unknown_file (
@@ -4223,34 +4223,34 @@ F
 __unknown_file ( *
 1*¦
 0
-í ï(}{
+¤ ¦(}{
 
-ñ ñ(2
+¨ ¨(2
 
 %0long"%java.lang.System#currentTimeMillis()J*%
 
-ñ ñ(
+¨ ¨(
 
 Systemkotlin.Unit2currentTimeMillis()C
 A
 
-ñ ñ(2
+¨ ¨(2
 	timestamplong"__id*
 
-ñ ñ(2
+¨ ¨(2
 
 
 %0longi
 g
 
-ò ò(D(
+© ©(D(
 nameWithoutExtensionjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>^
 \
 
-ó ó(<
+ª ª(<
 	extensionjava.lang.Object"__id*)
 
 __unknown_file (
@@ -4258,20 +4258,20 @@ g
 2
 3*İ
 1
-ôg ô(hµ
+«g «(hµ
 ²
 
-ô ô(i
+« «(i
 %3"__concat*8
 
-ô ô(&*
+« «(&*
 (
 nameWithoutExtensionjava.lang.Object*
 
-ô' ô((
+«' «((
 _*!
 
-ô* ô(3
+«* «(3
 
 	timestamplong*"
 
@@ -4279,11 +4279,11 @@ g
 
 %1"
 
-ô ô(i
+« «(i
 
 %3:*
 
-ğ( ğ(8
+§( §(8
 baseNamejava.lang.StringB,*
 (com.smilepile.data.backup.RestoreManagerHø
 Rcom.smilepile.data.backup.RestoreManager$RestoreContext#getTempDir()Ljava/io/File;
@@ -4459,12 +4459,12 @@ Mcom.smilepile.data.backup.RestoreManager$RestoreContext#setProcessedItems(I)V
 valueintB;9
 7com.smilepile.data.backup.RestoreManager$RestoreContextH`û
 –com.smilepile.data.backup.RestoreManager$RestoreContext#<init>(Ljava/io/File;Lcom/smilepile/data/backup/AppBackup;ILjava/util/List;Ljava/util/List;I)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktú ú(%"0*¯
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt± ±(%"0*¯
 0
-ú% (ˆ
+±% ¸(ˆ
 …
 
-û û(
+² ²(
 %0java.io.File"Scom.smilepile.data.backup.RestoreManager$RestoreContext#setTempDir(Ljava/io/File;)V*W
 
 __unknown_file (;9
@@ -4475,7 +4475,7 @@ Mcom.smilepile.data.backup.RestoreManager$RestoreContext#setProcessedItems(I)V
 tempDirjava.io.FileÓ
 Ğ
 
-ü ü(!)
+³ ³(!)
 %1#com.smilepile.data.backup.AppBackup"mcom.smilepile.data.backup.RestoreManager$RestoreContext#setBackupData(Lcom/smilepile/data/backup/AppBackup;)V*W
 
 __unknown_file (;9
@@ -4487,7 +4487,7 @@ Mcom.smilepile.data.backup.RestoreManager$RestoreContext#setProcessedItems(I)V
 backupData#com.smilepile.data.backup.AppBackupï
 ì
 
-ı ı(	
+´ ´(	
 %2int"Icom.smilepile.data.backup.RestoreManager$RestoreContext#setTotalItems(I)V*W
 
 __unknown_file (;9
@@ -4499,7 +4499,7 @@ backupData#com.smilepile.data.backup.AppBackupï
 totalItemsintŒ
 ‰
 
-ş ş('
+µ µ('
 %3java.util.List"Tcom.smilepile.data.backup.RestoreManager$RestoreContext#setErrors(Ljava/util/List;)V*W
 
 __unknown_file (;9
@@ -4510,7 +4510,7 @@ totalItemsintŒ
 errorsjava.util.List
 
 
-ÿ ÿ()
+¶ ¶()
 %4java.util.List"Vcom.smilepile.data.backup.RestoreManager$RestoreContext#setWarnings(Ljava/util/List;)V*W
 
 __unknown_file (;9
@@ -4521,7 +4521,7 @@ totalItemsintŒ
 warningsjava.util.List÷
 ô
 
-€ €(#	
+· ·(#	
 %5int"Mcom.smilepile.data.backup.RestoreManager$RestoreContext#setProcessedItems(I)V*W
 
 __unknown_file (;9
@@ -4534,24 +4534,24 @@ totalItemsintŒ
 __unknown_file (
 implicit return:%
 
-û û(
+² ²(
 tempDirjava.io.File:?
 
-ü ü(!1
+³ ³(!1
 
 backupData#com.smilepile.data.backup.AppBackup:
 
-ı ı(
+´ ´(
 
 totalItemsint:&
 
-ş ş('
+µ µ('
 errorsjava.util.List:(
 
-ÿ ÿ()
+¶ ¶()
 warningsjava.util.List:#
 
-€ €(#
+· ·(#
 processedItemsintB;9
 7com.smilepile.data.backup.RestoreManager$RestoreContextHí
 Ocom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#getImported()I
@@ -4611,12 +4611,12 @@ ycom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#setProgress(Lc
 value(com.smilepile.data.backup.ImportProgressBDB
 @com.smilepile.data.backup.RestoreManager$CategoriesRestoreResultH`É
 ucom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#<init>(ILcom/smilepile/data/backup/ImportProgress;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt† †(."0*³
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt½ ½(."0*³
 0
-†. ‰(ı
+½. À(ı
 ú
 
-‡ ‡(	
+¾ ¾(	
 %0int"Pcom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#setImported(I)V*`
 
 __unknown_file (DB
@@ -4627,7 +4627,7 @@ ucom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#<init>(ILcom/s
 importedintğ
 í
 
-ˆ ˆ($.
+¿ ¿($.
 %1(com.smilepile.data.backup.ImportProgress"ycom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#setProgress(Lcom/smilepile/data/backup/ImportProgress;)V*`
 
 __unknown_file (DB
@@ -4640,10 +4640,10 @@ ucom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#<init>(ILcom/s
 __unknown_file (
 implicit return:
 
-‡ ‡(
+¾ ¾(
 importedint:B
 
-ˆ ˆ($4
+¿ ¿($4
 progress(com.smilepile.data.backup.ImportProgressBDB
 @com.smilepile.data.backup.RestoreManager$CategoriesRestoreResultHà
 Kcom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#getImported()I
@@ -4759,12 +4759,12 @@ ucom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#setProgress(Lcom/s
 value(com.smilepile.data.backup.ImportProgressB@>
 <com.smilepile.data.backup.RestoreManager$PhotosRestoreResultH`í
 scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smilepile/data/backup/ImportProgress;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt (*"0*›	
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÅ Å(*"0*›	
 0
-* “(õ
+Å* Ê(õ
 ò
 
- (	
+Æ Æ(	
 %0int"Lcom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#setImported(I)V*\
 
 __unknown_file (@>
@@ -4775,7 +4775,7 @@ scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smi
 importedintó
 ğ
 
- (	
+Ç Ç(	
 %1int"Kcom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#setSkipped(I)V*\
 
 __unknown_file (@>
@@ -4786,7 +4786,7 @@ scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smi
 skippedintÿ
 ü
 
-‘ ‘(	
+È È(	
 %2int"Qcom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#setFilesRestored(I)V*\
 
 __unknown_file (@>
@@ -4797,7 +4797,7 @@ scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smi
 filesRestoredintè
 å
 
-’ ’($.
+É É($.
 %3(com.smilepile.data.backup.ImportProgress"ucom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#setProgress(Lcom/smilepile/data/backup/ImportProgress;)V*\
 
 __unknown_file (@>
@@ -4810,16 +4810,16 @@ scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smi
 __unknown_file (
 implicit return:
 
- (
+Æ Æ(
 importedint:
 
- (
+Ç Ç(
 skippedint:"
 
-‘ ‘(
+È È(
 filesRestoredint:B
 
-’ ’($4
+É É($4
 progress(com.smilepile.data.backup.ImportProgressB@>
 <com.smilepile.data.backup.RestoreManager$PhotosRestoreResultH‚
 Vcom.smilepile.data.backup.RestoreManager$PhotoDirectories#getPhotosDir()Ljava/io/File;
@@ -4935,12 +4935,12 @@ ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnails
 valuejava.io.FileB=;
 9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesH`ª
 {com.smilepile.data.backup.RestoreManager$PhotoDirectories#<init>(Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt˜ ˜('"0*¼	
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÏ Ï('"0*¼	
 0
-˜' (
+Ï' Ô(
 
 
-™ ™(
+Ğ Ğ(
 %0java.io.File"Wcom.smilepile.data.backup.RestoreManager$PhotoDirectories#setPhotosDir(Ljava/io/File;)V*Y
 
 __unknown_file (=;
@@ -4951,7 +4951,7 @@ ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnails
 	photosDirjava.io.File˜
 •
 
-š š(
+Ñ Ñ(
 %1java.io.File"[com.smilepile.data.backup.RestoreManager$PhotoDirectories#setThumbnailsDir(Ljava/io/File;)V*Y
 
 __unknown_file (=;
@@ -4962,7 +4962,7 @@ ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnails
 thumbnailsDirjava.io.File 
 
 
-› ›(#
+Ò Ò(#
 %2java.io.File"_com.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalPhotosDir(Ljava/io/File;)V*Y
 
 __unknown_file (=;
@@ -4973,7 +4973,7 @@ ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnails
 internalPhotosDirjava.io.File¨
 ¥
 
-œ œ('
+Ó Ó('
 %3java.io.File"ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnailsDir(Ljava/io/File;)V*Y
 
 __unknown_file (=;
@@ -4986,127 +4986,127 @@ ccom.smilepile.data.backup.RestoreManager$PhotoDirectories#setInternalThumbnails
 __unknown_file (
 implicit return:'
 
-™ ™(
+Ğ Ğ(
 	photosDirjava.io.File:+
 
-š š(
+Ñ Ñ(
 thumbnailsDirjava.io.File:/
 
-› ›(#!
+Ò Ò(#!
 internalPhotosDirjava.io.File:3
 
-œ œ('%
+Ó Ó('%
 internalThumbnailsDirjava.io.FileB=;
 9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesH®
 ãcom.smilepile.data.backup.RestoreManager#initializeRestoreContext(LFlowCollector;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)Lcom/smilepile/data/backup/RestoreManager$RestoreContext;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¢6 ¢(N"0*ø
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÙ6 Ù(N"0*ø
 0
-Ÿ ¡(ÖÓ
+Ö Ø(ÖÓ
 
-¨ ¨(>
+ß ß(>
 %0kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-¨ ¨(4
+ß ß(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-¨! ¨(#2*
+ß! ß(#2*
 
-¨% ¨((2d*#
+ß% ß((2d*#
 
-¨+ ¨(<
+ß+ ß(<
 Extracting backup2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)´
 ±
 
-ª ª(2
+á á(2
 %1java.io.File"Scom.smilepile.data.backup.RestoreManager#createRestoreTempDirectory()Ljava/io/File;*:
 
-ª ª(2,*
+á á(2,*
 (com.smilepile.data.backup.RestoreManagerQ
 O
 
-ª ª(2
+á á(2
 tempDirjava.io.File"__id*"
 
-ª ª(2
+á á(2
 
 %1java.io.FileÌ
 É
 
-« «(@)
+â â(@)
 %2#com.smilepile.data.backup.AppBackup"com.smilepile.data.backup.RestoreManager#extractAndParseBackup(Ljava/io/File;Ljava/io/File;)Lcom/smilepile/data/backup/AppBackup;*:
 
-« «(@,*
+â â(@,*
 (com.smilepile.data.backup.RestoreManager*'
 
-«/ «(6
+â/ â(6
 
 zipFilejava.io.File*'
 
-«8 «(?
+â8 â(?
 
 tempDirjava.io.Fileƒ
 €
 
-« «(@1
+â â(@1
 
 backupData#com.smilepile.data.backup.AppBackup"__id*9
 
-« «(@+
+â â(@+
 )
 %2#com.smilepile.data.backup.AppBackup­
 ª
 
-¬$ ¬(.
+ã$ ã(.
 %3java.util.List"Ccom.smilepile.data.backup.AppBackup#getCategories()Ljava/util/List;*A
 
-¬ ¬(#3
+ã ã(#3
 1
 
 backupData#com.smilepile.data.backup.AppBackupc
 a
 
-¬/ ¬(3	
+ã/ ã(3	
 %4int""kotlin.collections.List#getSize()I*$
 
-¬$ ¬(.
+ã$ ã(.
 
 %3java.util.List©
 ¦
 
-¬A ¬(G
+ãA ã(G
 %5java.util.List"?com.smilepile.data.backup.AppBackup#getPhotos()Ljava/util/List;*A
 
-¬6 ¬(@3
+ã6 ã(@3
 1
 
 backupData#com.smilepile.data.backup.AppBackupc
 a
 
-¬H ¬(L	
+ãH ã(L	
 %6int""kotlin.collections.List#getSize()I*$
 
-¬A ¬(G
+ãA ã(G
 
 %5java.util.Listl
 j
 
-¬ ¬(L
+ã ã(L
 %7"__calculate*
 
-¬4 ¬(5
+ã4 ã(5
 +*
 
-¬/ ¬(3
+ã/ ã(3
 	
 %4int*
 
-¬H ¬(L
+ãH ã(L
 	
 %6intK
 I
 
-¬ ¬(L
+ã ã(L
 
 totalItemsint"__id*"
 
@@ -5114,27 +5114,27 @@ totalItemsint"__id*"
 
 %7‡„
 
-® ´(	=
+å ë(	=
 %87com.smilepile.data.backup.RestoreManager$RestoreContext"7com.smilepile.data.backup.RestoreManager$RestoreContextô
 ñ
 
-® ´(	
+å ë(	
 %9"–com.smilepile.data.backup.RestoreManager$RestoreContext#<init>(Ljava/io/File;Lcom/smilepile/data/backup/AppBackup;ILjava/util/List;Ljava/util/List;I)V*M
 
-® ´(	?
+å ë(	?
 =
 %87com.smilepile.data.backup.RestoreManager$RestoreContext*'
 
-¯ ¯(
+æ æ(
 
 tempDirjava.io.File*A
 
-° °(#3
+ç ç(#3
 1
 
 backupData#com.smilepile.data.backup.AppBackup*!
 
-± ±(#
+è è(#
 
 
 totalItemsint*)
@@ -5145,65 +5145,65 @@ totalItemsint*)
 __unknown_file (
 	<unknown>*
 
-€" €(#2 "M
+·" ·(#2 "M
 
-® ´(	?
+å ë(	?
 =
 %87com.smilepile.data.backup.RestoreManager$RestoreContext:%
 
-£ £(
+Ú Ú(
 zipFilejava.io.File:A
 
-¤ ¤(3
+Û Û(3
 options(com.smilepile.data.backup.RestoreOptions:@
 
-¥ ¥(R2
+Ü Ü(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerHŸ
 Scom.smilepile.data.backup.RestoreManager#createRestoreTempDirectory()Ljava/io/File;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktº º(*"0*¦
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktñ ñ(*"0*¦
 0
-· ¹(b
+î ğ(b
 `
 
-» »(Z!
+ò ò(Z!
 tempDirerror.NonExistentClass"__id*)
 
 __unknown_file (
 	<unknown>"1
 
-½ ½(#
+ô ô(#
 !
 tempDirerror.NonExistentClassB,*
 (com.smilepile.data.backup.RestoreManagerH»
 com.smilepile.data.backup.RestoreManager#extractAndParseBackup(Ljava/io/File;Ljava/io/File;)Lcom/smilepile/data/backup/AppBackup;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÃ Ã(-"0*Ù
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktú ú(-"0*Ù
 2
-Å% Ç(	y
+ü% ş(	y
 w
 
-Æ Æ(c
+ı ı(c
 %2"__concat*,
 
-Æ Æ(7
+ı ı(7
 Failed to extract backup: *+
 
-ÆZ Æ(a
+ıZ ı(a
 
 messagejava.lang.Object><
 
-Æ Æ(d
+ı ı(d
 %3java.lang.Exception"java.lang.Exception‡
 „
 
-Æ Æ(d
+ı ı(d
 %4"/java.lang.Exception#<init>(Ljava/lang/String;)V*)
 
-Æ Æ(d
+ı ı(d
 
 %3java.lang.Exception*
 
-Æ Æ(c
+ı ı(c
 
 %2*
 3*I
@@ -5214,222 +5214,222 @@ w
 
 early exit*Á
 0
-À Â(Æ
+÷ ù(Æ
 Ã
 
-Ä% Ä(A
+û% û(A
 %0java.lang.Object"ocom.smilepile.storage.ZipUtils#extractZip(Ljava/io/File;Ljava/io/File;Lkotlin/jvm/functions/Function2;)LResult;*:
 
-Ä Ä($,
+û û($,
 *
 ZipUtilscom.smilepile.storage.ZipUtils*'
 
-Ä0 Ä(7
+û0 û(7
 
 zipFilejava.io.File*'
 
-Ä9 Ä(@
+û9 û(@
 
 tempDirjava.io.File*
 
 __unknown_file ( _
 ]
 
-Ä Ä(A!
+û û(A!
 extractResultjava.lang.Object"__id*&
 
-Ä% Ä(A
+û% û(A
 
 %0java.lang.Object*
 2
 1*Ø
 1
-Ç	 É(¨
+ş	 €(¨
 ¥
 
-É2 É(?
+€2 €(?
 %5java.lang.String"Ccom.smilepile.storage.ZipUtils#getMETADATA_FILE()Ljava/lang/String;*:
 
-É) É(1,
+€) €(1,
 *
 ZipUtilscom.smilepile.storage.ZipUtils0.
 
-É É(@
+€ €(@
 %6java.io.File"java.io.FileÂ
 ¿
 
-É É(@
+€ €(@
 %7"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-É É(@
+€ €(@
 
 %6java.io.File*'
 
-É  É('
+€  €('
 
 tempDirjava.io.File*&
 
-É2 É(?
+€2 €(?
 
 %5java.lang.StringV
 T
 
-É É(@
+€ €(@
 metadataFilejava.io.File"__id*"
 
-É É(@
+€ €(@
 
 %6java.io.File¯
 ¬
 
-Ê Ê(
+ (
 %8java.lang.Object"Jcom.smilepile.data.backup.RestoreManager#getJson()Lerror/NonExistentClass;*:
 
-Ê Ê(,*
+ (,*
 (com.smilepile.data.backup.RestoreManager"
 
-Ê Ê(H
+ (H
 	<unknown>:%
 
-Ã. Ã(;
+ú. ú(;
 zipFilejava.io.File:%
 
-Ã= Ã(J
+ú= ú(J
 tempDirjava.io.FileB,*
 (com.smilepile.data.backup.RestoreManagerHhË
 Øcom.smilepile.data.backup.RestoreManager#executeStrategyPreparation(LFlowCollector;Lcom/smilepile/data/backup/RestoreOptions;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lkotlin/jvm/functions/Function3;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktĞ6 Ğ(P"0*Ú
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‡6 ‡(P"0*Ú
 2
-Õ8 Ù(	ÛØ
+Œ8 (	ÛØ
 
-× ×(G
+ (G
 %3kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-× ×(4
+ (4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-×% ×('2*
+% ('2*
 
-×) ×(,2d*(
+) (,2d*(
 
-×/ ×(E
+/ (E
 Clearing existing data2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)˜
 •
 
-Ø Ø(
+ (
 %4kotlin.Unit"8com.smilepile.data.backup.RestoreManager#clearAllData()V*:
 
-Ø Ø(,*
+ (,*
 (com.smilepile.data.backup.RestoreManagerK
 I
 
 __unknown_file (
 %2"__id*!
 
-Ø Ø(
+ (
 
 %4kotlin.Unit*
 1*Ï
 0
-Í Ï(æ
+„ †(æ
 ã
 
-Õ Õ(.
+Œ Œ(.
 %0(com.smilepile.data.backup.ImportStrategy"`com.smilepile.data.backup.RestoreOptions#getStrategy()Lcom/smilepile/data/backup/ImportStrategy;*C
 
-Õ Õ(5
+Œ Œ(5
 3
 options(com.smilepile.data.backup.RestoreOptionsÌ
 É
 
-Õ Õ(6
+Œ Œ(6
 %1boolean"'kotlin.Enum#equals(Ljava/lang/Object;)Z*>
 
-Õ Õ(0
+Œ Œ(0
 .
 %0(com.smilepile.data.backup.ImportStrategy*C
 
-Õ/ Õ(65
+Œ/ Œ(65
 3
 REPLACE(com.smilepile.data.backup.ImportStrategy*
 2
 1*@
 1
-Ù	 Ú("/
+	 ‘("/
 
 __unknown_file (
 implicit return:A
 
-Ñ Ñ(3
+ˆ ˆ(3
 options(com.smilepile.data.backup.RestoreOptions:W
 
-Ò Ò(&I
+‰ ‰(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:@
 
-Ó Ó(R2
+Š Š(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerHõ%
 —com.smilepile.data.backup.RestoreManager#restoreCategoriesFromZip(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)Lcom/smilepile/data/backup/RestoreManager$CategoriesRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktß6 ß(N"0*İ
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt–6 –(N"0*İ
 2
-éE ò(	
+ E ©(	
 ‹
 
-ê ê(KD
+¡ ¡(KD
 %4>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"com.smilepile.data.backup.RestoreManager#processCategoryRestore(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;*:
 
-ê ê(K,*
+¡ ¡(K,*
 (com.smilepile.data.backup.RestoreManager*J
 
-ê# ê(1<
+¡# ¡(1<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory*C
 
-ê3 ê(:5
+¡3 ¡(:5
 3
 options(com.smilepile.data.backup.RestoreOptions*Y
 
-ê< ê(JK
+¡< ¡(JK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÃ
 À
 
-ğ ğ()	
+§ §()	
 %5int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
-ğ ğ(K
+§ §(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextb
 `
 
-ğ ğ(+	
+§ §(+	
 %5int"kotlin.Int#inc()I*
 
-ğ ğ()
+§ §()
 	
 %5int*
 
-ğ ğ()
+§ §()
 	
 %5int¾
 »
 
-ñ ñ(X
+¨ ¨(X
 %6kotlin.Unit"«com.smilepile.data.backup.RestoreManager#updateCategoryProgress(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;ILkotlin/jvm/functions/Function3;)V*"
 
-ñ ñ(X
+¨ ¨(X
 java.lang.Object*Y
 
-ñ# ñ(1K
+¨# ¨(1K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext*)
 
-ñ3 ñ(E
+¨3 ¨(E
 
 categoriesImportedint*B
 
-ñG ñ(W4
+¨G ¨(W4
 2
 progressCallbackkotlin.jvm.functions.Function3K
 I
@@ -5437,133 +5437,133 @@ I
 __unknown_file (
 %3"__id*!
 
-ñ ñ(X
+¨ ¨(X
 
 %6kotlin.Unit*
 1*Û
 3
-ò	 ô(¿
+©	 «(¿
 ¼
 
-÷ ÷()	
+® ®()	
 %7int"Hcom.smilepile.data.backup.RestoreManager$RestoreContext#getTotalItems()I*Y
 
-÷ ÷(K
+® ®(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÃ
 À
 
-ø ø(-	
+¯ ¯(-	
 %8int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
-ø ø(K
+¯ ¯(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÕ
 Ò
 
-ú ú(%
+± ±(%
 %9java.util.List"Scom.smilepile.data.backup.RestoreManager$RestoreContext#getErrors()Ljava/util/List;*Y
 
-ú ú(K
+± ±(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextig
 
-ö û(/
+­ ²(/
 %10(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress³
 °
 
-ö û(
+­ ²(
 %11"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*?
 
-ö û(1
+­ ²(1
 /
 %10(com.smilepile.data.backup.ImportProgress*
 
-÷ ÷()
+® ®()
 	
 %7int*
 
-ø ø(-
+¯ ¯(-
 	
 %8int*&
 
-ù ù(%
+° °(%
 Restoring categories*$
 
-ú ú(%
+± ±(%
 
 %9java.util.Listš—
 
-ô ü(	G
+« ³(	G
 %12@com.smilepile.data.backup.RestoreManager$CategoriesRestoreResult"@com.smilepile.data.backup.RestoreManager$CategoriesRestoreResultÒ
 Ï
 
-ô ü(	
+« ³(	
 %13"ucom.smilepile.data.backup.RestoreManager$CategoriesRestoreResult#<init>(ILcom/smilepile/data/backup/ImportProgress;)V*W
 
-ô ü(	I
+« ³(	I
 G
 %12@com.smilepile.data.backup.RestoreManager$CategoriesRestoreResult*)
 
-õ õ()
+¬ ¬()
 
 categoriesImportedint*?
 
-ö û(1
+­ ²(1
 /
 %10(com.smilepile.data.backup.ImportProgress"W
 
-ô ü(	I
+« ³(	I
 G
 %12@com.smilepile.data.backup.RestoreManager$CategoriesRestoreResult*³
 0
-Ü Ş(ÙÖ
+“ •(ÙÖ
 
-å å(A
+œ œ(A
 %0kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-å å(4
+œ œ(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-å! å(#2(*
+œ! œ(#2(*
 
-å% å((2d*&
+œ% œ((2d*&
 
-å+ å(?
+œ+ œ(?
 Restoring categories2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)A
 ?
 
-ç ç("
+ ("
 categoriesImportedint"__id*
 
-ç! ç("2 *
+! ("2 *
 1*å
 1
-é ò(	ƒ
+  ©(	ƒ
 €
 
-é. é(8)
+ .  (8)
 %1#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-é é(-K
+   (-K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext¥
 ¢
 
-é9 é(C
+ 9  (C
 %2java.util.List"Ccom.smilepile.data.backup.AppBackup#getCategories()Ljava/util/List;*9
 
-é. é(8+
+ .  (8+
 )
 %1#com.smilepile.data.backup.AppBackup
 š
 
-é é(:
+   (:
 categoryBackup(com.smilepile.data.backup.BackupCategory"
 __arrayGet*$
 
-é9 é(C
+ 9  (C
 
 %2java.util.List*
 
@@ -5571,56 +5571,56 @@ __arrayGet*$
 2
 3:W
 
-à à(&I
+— —(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:A
 
-á á(3
+˜ ˜(3
 options(com.smilepile.data.backup.RestoreOptions:@
 
-â â(R2
+™ ™(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerH¬
 com.smilepile.data.backup.RestoreManager#processCategoryRestore(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‚ ‚(."1*
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¹ ¹(."1*
 2
-Œ (ƒ
+Ã Å(ƒ
 €
 
 __unknown_file (
 %0"__id*X
 
- (J
+Å Å(J
 H
 result>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult*
 4
 5*Û
 3
-Š< Œ(×
+Á< Ã(×
 Ô
 
-‹ ‹('
+Â Â('
 %7java.util.List"Ucom.smilepile.data.backup.RestoreManager$RestoreContext#getWarnings()Ljava/util/List;*Y
 
-‹ ‹(K
+Â Â(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextà
 İ
 
-‹3 ‹(:
+Â3 Â(:
 %8java.lang.String"]com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#getWarning()Ljava/lang/String;*X
 
-‹, ‹(2J
+Â, Â(2J
 H
 result>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult¾»
 
-‹( ‹(;
+Â( Â(;
 %9boolean"7kotlin.collections.MutableList#add(Ljava/lang/Object;)Z*$
 
-‹ ‹('
+Â Â('
 
 %7java.util.List*&
 
-‹3 ‹(:
+Â3 Â(:
 
 %8java.lang.String2add(Ljava/lang/Object;)G
 E
@@ -5628,70 +5628,70 @@ E
 __unknown_file (
 %6"__id*
 
-‹( ‹(;
+Â( Â(;
 
 %9boolean*
 2*%
 4
-
- ’(	"
+Æ
+ É(	"
 
-‡ ’(	
+¾ É(	
 
 %0*á
 5
- ’(	Ö
+Æ É(	Ö
 Ó
 
- (!
+Ç Ç(!
 %10java.util.List"Scom.smilepile.data.backup.RestoreManager$RestoreContext#getErrors()Ljava/util/List;*Y
 
- (K
+Ç Ç(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÁ
 ¾
 
-T (_
+ÇT Ç(_
 %11java.lang.String"Kcom.smilepile.data.backup.BackupCategory#getDisplayName()Ljava/lang/String;*J
 
-E (S<
+ÇE Ç(S<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategoryƒ
 €
 
-g (n
+Çg Ç(n
 %12java.lang.String"/kotlin.Throwable#getMessage()Ljava/lang/String;*(
 
-e (f
+Çe Ç(f
 
 ejava.lang.Exception¹
 ¶
 
-& (p
+Ç& Ç(p
 %13"__concat*.
 
-' (C 
+Ç' Ç(C 
 Failed to restore category '*'
 
-T (_
+ÇT Ç(_
 
 %11java.lang.String*
 
-` (c
+Ç` Ç(c
 ': *'
 
-g (n
+Çg Ç(n
 
 %12java.lang.String¯¬
 
-" (q
+Ç" Ç(q
 %14boolean"7kotlin.collections.MutableList#add(Ljava/lang/Object;)Z*%
 
- (!
+Ç Ç(!
 
 %10java.util.List*
 
-& (p
+Ç& Ç(p
 
 %132add(Ljava/lang/Object;):
 8
@@ -5699,146 +5699,146 @@ I
 __unknown_file (
 %0"__id*
 
-‘ ‘( *
+È È( *
 4*ˆ
 1
-‡ (	ó
+¾ Æ(	ó
 ğ
 
-ˆ ˆ(AD
+¿ ¿(AD
 %1>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"Îcom.smilepile.data.backup.RestoreManager#restoreCategory(Lcom/smilepile/data/backup/BackupCategory;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$CategoryRestoreResult;*:
 
-ˆ ˆ(A,*
+¿ ¿(A,*
 (com.smilepile.data.backup.RestoreManager*J
 
-ˆ) ˆ(7<
+¿) ¿(7<
 :
 categoryBackup(com.smilepile.data.backup.BackupCategory*C
 
-ˆ9 ˆ(@5
+¿9 ¿(@5
 3
 options(com.smilepile.data.backup.RestoreOptionsµ
 ²
 
-ˆ ˆ(AH
+¿ ¿(AH
 result>com.smilepile.data.backup.RestoreManager$CategoryRestoreResult"__id*T
 
-ˆ ˆ(AF
+¿ ¿(AF
 D
 %1>com.smilepile.data.backup.RestoreManager$CategoryRestoreResultÇ
 Ä
 
-Š Š( 
+Á Á( 
 %2boolean"Mcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#getImported()Z*X
 
-Š Š(J
+Á Á(J
 H
 result>com.smilepile.data.backup.RestoreManager$CategoryRestoreResultr
 p
 
-Š Š( 
+Á Á( 
 %3boolean"kotlin.Boolean#not()Z*
 
-Š Š( 
+Á Á( 
 
 %2boolean*
 
-Š Š( 
+Á Á( 
 
 %2booleanà
 İ
 
-Š+ Š(2
+Á+ Á(2
 %4java.lang.String"]com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#getWarning()Ljava/lang/String;*X
 
-Š$ Š(*J
+Á$ Á(*J
 H
 result>com.smilepile.data.backup.RestoreManager$CategoryRestoreResultŸœ
 
-Š$ Š(:
+Á$ Á(:
 %5boolean")kotlin.String#equals(Ljava/lang/Object;)Z*&
 
-Š+ Š(2
+Á+ Á(2
 
 %4java.lang.String*
 
-Š6 Š(: 2equals(Ljava/lang/Object;)*
+Á6 Á(: 2equals(Ljava/lang/Object;)*
 2
 3:H
 
-ƒ ƒ(&:
+º º(&:
 categoryBackup(com.smilepile.data.backup.BackupCategory:A
 
-„ „(3
+» »(3
 options(com.smilepile.data.backup.RestoreOptions:W
 
-… …(&I
+¼ ¼(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextB,*
 (com.smilepile.data.backup.RestoreManagerH¨
 «com.smilepile.data.backup.RestoreManager#updateCategoryProgress(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;ILkotlin/jvm/functions/Function3;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt˜6 ˜(L"0*’
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÏ6 Ï(L"0*’
 0
-• —(Ã
+Ì Î(Ã
 À
 
-- (;	
+Ô- Ô(;	
 %0int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
- (,K
+Ô Ô(,K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContexte
 c
 
- (@
+Ô Ô(@
 %1"__calculate*
 
-< (=
+Ô< Ô(=
 **
 
-- (;
+Ô- Ô(;
 	
 %0int*
 
-> (@2¿
+Ô> Ô(@2¿
 ¼
 
-S (]	
+ÔS Ô(]	
 %2int"Hcom.smilepile.data.backup.RestoreManager$RestoreContext#getTotalItems()I*Y
 
-D (RK
+ÔD Ô(RK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextu
 s
 
- (]
+Ô Ô(]
 %3"__calculate*
 
-B (C
+ÔB Ô(C
 /*"
 
 __unknown_file (
 
 %1*
 
-S (]
+ÔS Ô(]
 	
 %2intn
 l
 
- (^
+Ô Ô(^
 %4"__calculate*
 
- (
+Ô Ô(
 +*
 
- (2(*"
+Ô Ô(2(*"
 
 __unknown_file (
 
 %3I
 G
 
- (^
+Ô Ô(^
 progressint"__id*"
 
 __unknown_file (
@@ -5846,197 +5846,197 @@ G
 %4ƒ
 €
 
-l (v)
+Õl Õ(v)
 %5#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-] (kK
+Õ] Õ(kK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext¦
 £
-w (
+Õw Õ(
 %6java.util.List"Ccom.smilepile.data.backup.AppBackup#getCategories()Ljava/util/List;*9
 
-l (v+
+Õl Õ(v+
 )
 %5#com.smilepile.data.backup.AppBackupf
 d
-‚ (†	
+Õ‚ Õ(†	
 %7int""kotlin.collections.List#getSize()I*%
-w (
+Õw Õ(
 
 %6java.util.List¾
 »
-0 (‰
+Õ0 Õ(‰
 %8"__concat*(
 
-1 (G
+Õ1 Õ(G
 Restoring categories (*)
 
-H (Z
+ÕH Õ(Z
 
 categoriesImportedint*
 
-Z ([
+ÕZ Õ([
 /*
-‚ (†
+Õ‚ Õ(†
 	
 %7int*
-‡ (ˆ
+Õ‡ Õ(ˆ
 )ÖÓ
- (Š
+Õ Õ(Š
 %9kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
- (4
+Õ Õ(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-! ()
+Õ! Õ()
 
 progressint*
 
-+ (.2d*
-0 (‰
+Õ+ Õ(.2d*
+Õ0 Õ(‰
 
 %82>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)"/
 
 __unknown_file (
 implicit return:W
 
-™ ™(&I
+Ğ Ğ(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:'
 
-š š(
+Ñ Ñ(
 categoriesImportedint:@
 
-› ›(R2
+Ò Ò(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerH…I
 com.smilepile.data.backup.RestoreManager#restorePhotosFromZip(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)Lcom/smilepile/data/backup/RestoreManager$PhotosRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¥6 ¥(J"0*¢
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÜ6 Ü(J"0*¢
 13
-Ì	 Î(À
+ƒ	 …(À
 ½
 
-Ò5 Ò(?
+‰5 ‰(?
 
 %21int"Hcom.smilepile.data.backup.RestoreManager$RestoreContext#getTotalItems()I*Y
 
-Ò& Ò(4K
+‰& ‰(4K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÄ
 Á
 
-ÒP Ò(^
+‰P ‰(^
 
 %22int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
-ÒA Ò(OK
+‰A ‰(OK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextÙ
 Ö
-Òƒ Ò(‰
+‰ƒ ‰(‰
 %23java.util.List"Scom.smilepile.data.backup.RestoreManager$RestoreContext#getErrors()Ljava/util/List;*Z
-Òt Ò(‚K
+‰t ‰(‚K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextjh
-Ò Ò(Š/
+‰ ‰(Š/
 %24(com.smilepile.data.backup.ImportProgress"(com.smilepile.data.backup.ImportProgress¶
 ³
-Ò Ò(Š
+‰ ‰(Š
 %25"Vcom.smilepile.data.backup.ImportProgress#<init>(IILjava/lang/String;Ljava/util/List;)V*@
-Ò Ò(Š1
+‰ ‰(Š1
 /
 %24(com.smilepile.data.backup.ImportProgress*
 
-Ò5 Ò(?
+‰5 ‰(?
 
 
 %21int*
 
-ÒP Ò(^
+‰P ‰(^
 
 
 %22int*"
 
-Òa Ò(q
+‰a ‰(q
 Restoring photos*'
-Òƒ Ò(‰
+‰ƒ ‰(‰
 
 %23java.util.List’
 
-Î Ó(	C
+… Š(	C
 %26<com.smilepile.data.backup.RestoreManager$PhotosRestoreResult"<com.smilepile.data.backup.RestoreManager$PhotosRestoreResultš
 —
 
-Î Ó(	
+… Š(	
 %27"scom.smilepile.data.backup.RestoreManager$PhotosRestoreResult#<init>(IIILcom/smilepile/data/backup/ImportProgress;)V*S
 
-Î Ó(	E
+… Š(	E
 C
 %26<com.smilepile.data.backup.RestoreManager$PhotosRestoreResult*%
 
-Ï Ï(%
+† †(%
 
 photosImportedint*$
 
-Ğ Ğ(#
+‡ ‡(#
 
 photosSkippedint*)
 
-Ñ Ñ(.
+ˆ ˆ(.
 
 photoFilesRestoredint*@
-Ò Ò(Š1
+‰ ‰(Š1
 /
 %24(com.smilepile.data.backup.ImportProgress"S
 
-Î Ó(	E
+… Š(	E
 C
 %26<com.smilepile.data.backup.RestoreManager$PhotosRestoreResult*Ç
 
 2
-³> Ì(	ƒ
+ê> ƒ(	ƒ
 €
 
-¶ ¶())
+í í())
 %5#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-¶ ¶(K
+í í(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextñ
 î
 
-´ º(A
+ë ñ(A
 %6;com.smilepile.data.backup.RestoreManager$PhotoRestoreResult"åcom.smilepile.data.backup.RestoreManager#processPhotoRestore(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Lcom/smilepile/data/backup/RestoreManager$PhotoDirectories;Lcom/smilepile/data/backup/RestoreOptions;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;*:
 
-´ º(,*
+ë ñ(,*
 (com.smilepile.data.backup.RestoreManager*D
 
-µ µ(6
+ì ì(6
 4
 photoBackup%com.smilepile.data.backup.BackupPhoto*9
 
-¶ ¶()+
+í í()+
 )
 %5#com.smilepile.data.backup.AppBackup*X
 
-· ·(J
+î î(J
 H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectories*C
 
-¸ ¸(5
+ï ï(5
 3
 options(com.smilepile.data.backup.RestoreOptions*Y
 
-¹ ¹(K
+ğ ğ(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext¯
 ¬
 
-´ º(E
+ë ñ(E
 result;com.smilepile.data.backup.RestoreManager$PhotoRestoreResult"__id*Q
 
-´ º(C
+ë ñ(C
 A
 %6;com.smilepile.data.backup.RestoreManager$PhotoRestoreResult*
 
@@ -6044,48 +6044,48 @@ A
 9
 12*Ë
 3
-È Ê(Ä
+ÿ (Ä
 Á
 
-Ê Ê()
+ ()
 
 %19int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
-Ê Ê(K
+ (K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContexte
 c
 
-Ê Ê(+
+ (+
 
 %19int"kotlin.Int#inc()I*
 
-Ê Ê()
+ ()
 
 
 %19int*
 
-Ê Ê()
+ ()
 
 
 %19int¸
 µ
 
-Ë Ë(Q
+‚ ‚(Q
 %20kotlin.Unit"¨com.smilepile.data.backup.RestoreManager#updatePhotoProgress(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;ILkotlin/jvm/functions/Function3;)V*"
 
-Ë Ë(Q
+‚ ‚(Q
 java.lang.Object*Y
 
-Ë  Ë(.K
+‚  ‚(.K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext*%
 
-Ë0 Ë(>
+‚0 ‚(>
 
 photosImportedint*B
 
-Ë@ Ë(P4
+‚@ ‚(P4
 2
 progressCallbackkotlin.jvm.functions.Function3L
 J
@@ -6093,36 +6093,36 @@ J
 __unknown_file (
 %4"__id*"
 
-Ë Ë(Q
+‚ ‚(Q
 
 %20kotlin.Unit*
 1*û
 5
-½2 À(‡
+ô2 ÷(‡
 „
 
-¾ ¾($
+õ õ($
 photosImportedint"kotlin.Int#inc()I*%
 
-¾ ¾("
+õ õ("
 
 photosImportedint*%
 
-¾ ¾("
+õ õ("
 
 photosImportedint×
 Ô
 
-¿ ¿(+
+ö ö(+
 %8boolean"Wcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#getFileRestored()Z*^
 
-¿ ¿(P
+ö ö(P
 N
 resultDcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported*
 6
 7*i
 6
-¿A À(S
+öA ÷(S
 Q
 
 __unknown_file (
@@ -6132,17 +6132,17 @@ Q
 	<unknown>*
 3*ÿ
 7
-¿- ¿(A“
+ö- ö(A“
 
 
-¿- ¿(A
+ö- ö(A
 photoFilesRestoredint"kotlin.Int#inc()I*)
 
-¿- ¿(?
+ö- ö(?
 
 photoFilesRestoredint*)
 
-¿- ¿(?
+ö- ö(?
 
 photoFilesRestoredintS
 Q
@@ -6150,45 +6150,45 @@ Q
 __unknown_file (
 %9"__id*)
 
-¿- ¿(?
+ö- ö(?
 
 photoFilesRestoredint*
 6*±
 9
-Á1 Ä(„
+ø1 û(„
 
 
-Â Â(#
+ù ù(#
 photosSkippedint"kotlin.Int#inc()I*$
 
-Â Â(!
+ù ù(!
 
 photosSkippedint*$
 
-Â Â(!
+ù ù(!
 
 photosSkippedintê
 ç
 
-Ã Ã(%
+ú ú(%
 %10java.lang.String"acom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#getReason()Ljava/lang/String;*]
 
-Ã Ã(O
+ú ú(O
 M
 resultCcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped¡
 
-Ã Ã(-
+ú ú(-
 %11boolean")kotlin.String#equals(Ljava/lang/Object;)Z*'
 
-Ã Ã(%
+ú ú(%
 
 %10java.lang.String*
 
-Ã) Ã(- 2equals(Ljava/lang/Object;)*
+ú) ú(- 2equals(Ljava/lang/Object;)*
 10
 11*j
 10
-ÃY Ä(S
+úY û(S
 Q
 
 __unknown_file (
@@ -6198,90 +6198,90 @@ Q
 	<unknown>*
 3*ñ	
 0
-¢ ¤(ÕÒ
+Ù Û(ÕÒ
 
-« «(=
+â â(=
 %0kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-« «(4
+â â(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-«! «(#2F*
+â! â(#2F*
 
-«% «((2d*"
+â% â((2d*"
 
-«+ «(;
+â+ â(;
 Restoring photos2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)
 Œ
 
-­ ­(J?
+ä ä(J?
 %19com.smilepile.data.backup.RestoreManager$PhotoDirectories"àcom.smilepile.data.backup.RestoreManager#preparePhotoDirectories(Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoDirectories;*:
 
-­ ­(J,*
+ä ä(J,*
 (com.smilepile.data.backup.RestoreManager*Y
 
-­2 ­(@K
+ä2 ä(@K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext*C
 
-­B ­(I5
+äB ä(I5
 3
 options(com.smilepile.data.backup.RestoreOptions°
 ­
 
-­ ­(JH
+ä ä(JH
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectories"__id*O
 
-­ ­(JA
+ä ä(JA
 ?
 %19com.smilepile.data.backup.RestoreManager$PhotoDirectories=
 ;
 
-¯ ¯(
+æ æ(
 photosImportedint"__id*
 
-¯ ¯(2 <
+æ æ(2 <
 :
 
-° °(
+ç ç(
 photosSkippedint"__id*
 
-° °(2 A
+ç ç(2 A
 ?
 
-± ±("
+è è("
 photoFilesRestoredint"__id*
 
-±! ±("2 *
+è! è("2 *
 1*í
 11
-Ã/ Ã(YØ
+ú/ ú(YØ
 Õ
 
-Ã> Ã(F
+ú> ú(F
 %13java.util.List"Ucom.smilepile.data.backup.RestoreManager$RestoreContext#getWarnings()Ljava/util/List;*Y
 
-Ã/ Ã(=K
+ú/ ú(=K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextê
 ç
 
-ÃR Ã(X
+úR ú(X
 %14java.lang.String"acom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#getReason()Ljava/lang/String;*]
 
-ÃK Ã(QO
+úK ú(QO
 M
 resultCcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$SkippedÁ¾
 
-ÃG Ã(Y
+úG ú(Y
 %15boolean"7kotlin.collections.MutableList#add(Ljava/lang/Object;)Z*%
 
-Ã> Ã(F
+ú> ú(F
 
 %13java.util.List*'
 
-ÃR Ã(X
+úR ú(X
 
 %14java.lang.String2add(Ljava/lang/Object;)I
 G
@@ -6289,37 +6289,37 @@ G
 __unknown_file (
 %12"__id*
 
-ÃG Ã(Y
+úG ú(Y
 
 %15boolean*
 10*æ
 12
-Å0 Ç(Ö
+ü0 ş(Ö
 Ó
 
-Æ# Æ()
+ı# ı()
 %16java.util.List"Scom.smilepile.data.backup.RestoreManager$RestoreContext#getErrors()Ljava/util/List;*Y
 
-Æ Æ("K
+ı ı("K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextç
 ä
 
-Æ5 Æ(:
+ı5 ı(:
 %17java.lang.String"_com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#getError()Ljava/lang/String;*\
 
-Æ. Æ(4N
+ı. ı(4N
 L
 resultBcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$FailedÁ¾
 
-Æ* Æ(;
+ı* ı(;
 %18boolean"7kotlin.collections.MutableList#add(Ljava/lang/Object;)Z*%
 
-Æ# Æ()
+ı# ı()
 
 %16java.util.List*'
 
-Æ5 Æ(:
+ı5 ı(:
 
 %17java.lang.String2add(Ljava/lang/Object;)H
 F
@@ -6327,35 +6327,35 @@ F
 __unknown_file (
 %7"__id*
 
-Æ* Æ(;
+ı* ı(;
 
 %18boolean*
 3*Ü
 1
-³ Ì(	ƒ
+ê ƒ(	ƒ
 €
 
-³+ ³(5)
+ê+ ê(5)
 %2#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-³ ³(*K
+ê ê(*K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext¡
 
 
-³6 ³(<
+ê6 ê(<
 %3java.util.List"?com.smilepile.data.backup.AppBackup#getPhotos()Ljava/util/List;*9
 
-³+ ³(5+
+ê+ ê(5+
 )
 %2#com.smilepile.data.backup.AppBackup—
 ”
 
-³ ³(4
+ê ê(4
 photoBackup%com.smilepile.data.backup.BackupPhoto"
 __arrayGet*$
 
-³6 ³(<
+ê6 ê(<
 
 %3java.util.List*
 
@@ -6363,19 +6363,19 @@ __arrayGet*$
 2
 13:W
 
-¦ ¦(&I
+İ İ(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:A
 
-§ §(3
+Ş Ş(3
 options(com.smilepile.data.backup.RestoreOptions:@
 
-¨ ¨(R2
+ß ß(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerHØ
 àcom.smilepile.data.backup.RestoreManager#preparePhotoDirectories(Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoDirectories;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÙ Ù('"0*i
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt ('"0*i
 2
-àC â(	S
+—C ™(	S
 Q
 
 __unknown_file (
@@ -6385,7 +6385,7 @@ Q
 	<unknown>*
 1*i
 3
-â ä(	S
+™ ›(	S
 Q
 
 __unknown_file (
@@ -6396,219 +6396,219 @@ Q
 1*Ë
 
 0
-Ö Ø(Ò
+ (Ò
 Ï
 
-İ, İ(3
+”, ”(3
 %0java.io.File"Rcom.smilepile.data.backup.RestoreManager$RestoreContext#getTempDir()Ljava/io/File;*Y
 
-İ İ(+K
+” ”(+K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext0.
 
-İ İ(>
+” ”(>
 %1java.io.File"java.io.File¯
 ¬
 
-İ İ(>
+” ”(>
 %2"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-İ İ(>
+” ”(>
 
 %1java.io.File*"
 
-İ, İ(3
+”, ”(3
 
 %0java.io.File*
 
-İ6 İ(<
+”6 ”(<
 
 photosS
 Q
 
-İ İ(>
+” ”(>
 	photosDirjava.io.File"__id*"
 
-İ İ(>
+” ”(>
 
 %1java.io.FileÒ
 Ï
 
-Ş0 Ş(7
+•0 •(7
 %3java.io.File"Rcom.smilepile.data.backup.RestoreManager$RestoreContext#getTempDir()Ljava/io/File;*Y
 
-Ş! Ş(/K
+•! •(/K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext0.
 
-Ş Ş(F
+• •(F
 %4java.io.File"java.io.File³
 °
 
-Ş Ş(F
+• •(F
 %5"6java.io.File#<init>(Ljava/io/File;Ljava/lang/String;)V*"
 
-Ş Ş(F
+• •(F
 
 %4java.io.File*"
 
-Ş0 Ş(7
+•0 •(7
 
 %3java.io.File*
 
-Ş: Ş(D
+•: •(D
 
 thumbnailsW
 U
 
-Ş Ş(F
+• •(F
 thumbnailsDirjava.io.File"__id*"
 
-Ş Ş(F
+• •(F
 
 %4java.io.Filef
 d
 
-ß ß(S%
+– –(S%
 internalPhotosDirjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>¥
 ¢
 
-à0 à(A
+—0 —(A
 %6boolean"@com.smilepile.data.backup.RestoreOptions#getRestoreThumbnails()Z*C
 
-à( à(/5
+—( —(/5
 3
 options(com.smilepile.data.backup.RestoreOptions*
 2
 3*‘
 1
-â ä(	i
+™ ›(	i
 g
 
-à ä(	/
+— ›(	/
 internalThumbnailsDirerror.NonExistentClass"__id*"
 
 __unknown_file (
 
 %7‹ˆ
 
-æ æ(c?
+ (c?
 %89com.smilepile.data.backup.RestoreManager$PhotoDirectories"9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesµ
 ²
 
-æ æ(c
+ (c
 %9"{com.smilepile.data.backup.RestoreManager$PhotoDirectories#<init>(Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;)V*O
 
-æ æ(cA
+ (cA
 ?
 %89com.smilepile.data.backup.RestoreManager$PhotoDirectories*)
 
-æ  æ()
+  ()
 
 	photosDirjava.io.File*-
 
-æ+ æ(8
++ (8
 
 thumbnailsDirjava.io.File*5
 
-æ: æ(K'
+: (K'
 %
 internalPhotosDirjava.lang.Object*?
 
-æM æ(b1
+M (b1
 /
 internalThumbnailsDirerror.NonExistentClass"O
 
-æ æ(cA
+ (cA
 ?
 %89com.smilepile.data.backup.RestoreManager$PhotoDirectories:W
 
-Ú Ú(&I
+‘ ‘(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:A
 
-Û Û(3
+’ ’(3
 options(com.smilepile.data.backup.RestoreOptionsB,*
 (com.smilepile.data.backup.RestoreManagerHé#
 åcom.smilepile.data.backup.RestoreManager#processPhotoRestore(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Lcom/smilepile/data/backup/RestoreManager$PhotoDirectories;Lcom/smilepile/data/backup/RestoreOptions;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;l
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktì ì(+"1*%
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt£ £(+"1*%
 2
-ı
- €(	"
+´
+ ·(	"
 
-ó €(	
+ª ·(	
 
 %0*Œ
 3
-ı €(	Õ
+´ ·(	Õ
 Ò
 
-ş ş(!
+µ µ(!
 %6java.util.List"Scom.smilepile.data.backup.RestoreManager$RestoreContext#getErrors()Ljava/util/List;*Y
 
-ş ş(K
+µ µ(K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext°
 ­
 
-şN ş(R
+µN µ(R
 %7java.lang.String"Acom.smilepile.data.backup.BackupPhoto#getName()Ljava/lang/String;*D
 
-şB ş(M6
+µB µ(M6
 4
 photoBackup%com.smilepile.data.backup.BackupPhoto
 
 
-şZ ş(a
+µZ µ(a
 %8java.lang.String"/kotlin.Throwable#getMessage()Ljava/lang/String;*(
 
-şX ş(Y
+µX µ(Y
 
 ejava.lang.Exception³
 °
 
-ş& ş(c
+µ& µ(c
 %9"__concat*+
 
-ş' ş(@
+µ' µ(@
 Failed to restore photo '*&
 
-şN ş(R
+µN µ(R
 
 %7java.lang.String*
 
-şS ş(V
+µS µ(V
 ': *&
 
-şZ ş(a
+µZ µ(a
 
 %8java.lang.String­ª
 
-ş" ş(d
+µ" µ(d
 %10boolean"7kotlin.collections.MutableList#add(Ljava/lang/Object;)Z*$
 
-ş ş(!
+µ µ(!
 
 %6java.util.List*
 
-ş& ş(c
+µ& µ(c
 
 %92add(Ljava/lang/Object;)*
 5
 6*µ
 4
-ÿ3 ÿ(B›
+¶3 ¶(B›
 
-ÿ ÿ(CI
+¶ ¶(CI
 %13Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed"Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failedö
 ó
 
-ÿ ÿ(C
+¶ ¶(C
 %14"^com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#<init>(Ljava/lang/String;)V*Y
 
-ÿ ÿ(CK
+¶ ¶(CK
 I
 %13Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed*#
 
@@ -6620,28 +6620,28 @@ I
 __unknown_file (
 %0"__id*Y
 
-ÿ ÿ(CK
+¶ ¶(CK
 I
 %13Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed*
 2*`
 5
-ÿ3 ÿ(BJ
+¶3 ¶(BJ
 H
 
 __unknown_file (
 %11"__id*
 
-ÿ4 ÿ(A
+¶4 ¶(A
 Unknown error*
 4*ñ
 6
-ÿ& ÿ(/ƒ
+¶& ¶(/ƒ
 €
 
-ÿ( ÿ(/
+¶( ¶(/
 %12java.lang.String"/kotlin.Throwable#getMessage()Ljava/lang/String;*(
 
-ÿ& ÿ('
+¶& ¶('
 
 ejava.lang.ExceptionR
 P
@@ -6649,79 +6649,79 @@ P
 __unknown_file (
 %11"__id*'
 
-ÿ( ÿ(/
+¶( ¶(/
 
 %12java.lang.String*
 4
 5* 
 1
-ó ı(	Õ
+ª ´(	Õ
 Ò
 
-÷ ÷(%
+® ®(%
 %1java.io.File"Vcom.smilepile.data.backup.RestoreManager$PhotoDirectories#getPhotosDir()Ljava/io/File;*X
 
-÷ ÷(J
+® ®(J
 H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesÙ
 Ö
 
-ø ø()
+¯ ¯()
 %2java.io.File"Zcom.smilepile.data.backup.RestoreManager$PhotoDirectories#getThumbnailsDir()Ljava/io/File;*X
 
-ø ø(J
+¯ ¯(J
 H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesİ
 Ú
 
-ù ù(-
+° °(-
 %3java.io.File"^com.smilepile.data.backup.RestoreManager$PhotoDirectories#getInternalPhotosDir()Ljava/io/File;*X
 
-ù ù(J
+° °(J
 H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectoriesá
 Ş
 
-ú ú(1
+± ±(1
 %4java.io.File"bcom.smilepile.data.backup.RestoreManager$PhotoDirectories#getInternalThumbnailsDir()Ljava/io/File;*X
 
-ú ú(J
+± ±(J
 H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectories‘
 
 
-ô ü(A
+« ³(A
 %5;com.smilepile.data.backup.RestoreManager$PhotoRestoreResult"¢com.smilepile.data.backup.RestoreManager#restorePhoto(Lcom/smilepile/data/backup/BackupPhoto;Lcom/smilepile/data/backup/AppBackup;Ljava/io/File;Ljava/io/File;Ljava/io/File;Ljava/io/File;Lcom/smilepile/data/backup/RestoreOptions;)Lcom/smilepile/data/backup/RestoreManager$PhotoRestoreResult;*:
 
-ô ü(,*
+« ³(,*
 (com.smilepile.data.backup.RestoreManager*D
 
-õ õ(6
+¬ ¬(6
 4
 photoBackup%com.smilepile.data.backup.BackupPhoto*A
 
-ö ö(3
+­ ­(3
 1
 
 backupData#com.smilepile.data.backup.AppBackup*"
 
-÷ ÷(%
+® ®(%
 
 %1java.io.File*"
 
-ø ø()
+¯ ¯()
 
 %2java.io.File*"
 
-ù ù(-
+° °(-
 
 %3java.io.File*"
 
-ú ú(1
+± ±(1
 
 %4java.io.File*C
 
-û û(5
+² ²(5
 3
 options(com.smilepile.data.backup.RestoreOptions{
 y
@@ -6729,92 +6729,92 @@ y
 __unknown_file (
 %0"__id*Q
 
-ô ü(C
+« ³(C
 A
 %5;com.smilepile.data.backup.RestoreManager$PhotoRestoreResult*
 2
 3:B
 
-í í( 4
+¤ ¤( 4
 photoBackup%com.smilepile.data.backup.BackupPhoto:?
 
-î î(1
+¥ ¥(1
 
 backupData#com.smilepile.data.backup.AppBackup:V
 
-ï ï(%H
+¦ ¦(%H
 directories9com.smilepile.data.backup.RestoreManager$PhotoDirectories:A
 
-ğ ğ(3
+§ §(3
 options(com.smilepile.data.backup.RestoreOptions:W
 
-ñ ñ(&I
+¨ ¨(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextB,*
 (com.smilepile.data.backup.RestoreManagerHŠ
 ¨com.smilepile.data.backup.RestoreManager#updatePhotoProgress(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;ILkotlin/jvm/functions/Function3;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt†6 †(I"0*û
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt½6 ½(I"0*û
 0
-ƒ …(Ã
+º ¼(Ã
 À
 
-‹- ‹(;	
+Â- Â(;	
 %0int"Lcom.smilepile.data.backup.RestoreManager$RestoreContext#getProcessedItems()I*Y
 
-‹ ‹(,K
+Â Â(,K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContexte
 c
 
-‹ ‹(@
+Â Â(@
 %1"__calculate*
 
-‹< ‹(=
+Â< Â(=
 **
 
-‹- ‹(;
+Â- Â(;
 	
 %0int*
 
-‹> ‹(@2¿
+Â> Â(@2¿
 ¼
 
-‹S ‹(]	
+ÂS Â(]	
 %2int"Hcom.smilepile.data.backup.RestoreManager$RestoreContext#getTotalItems()I*Y
 
-‹D ‹(RK
+ÂD Â(RK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContextu
 s
 
-‹ ‹(]
+Â Â(]
 %3"__calculate*
 
-‹B ‹(C
+ÂB Â(C
 /*"
 
 __unknown_file (
 
 %1*
 
-‹S ‹(]
+ÂS Â(]
 	
 %2intn
 l
 
-‹ ‹(^
+Â Â(^
 %4"__calculate*
 
-‹ ‹(
+Â Â(
 +*
 
-‹ ‹(2F*"
+Â Â(2F*"
 
 __unknown_file (
 
 %3I
 G
 
-‹ ‹(^
+Â Â(^
 progressint"__id*"
 
 __unknown_file (
@@ -6822,122 +6822,122 @@ G
 %4ƒ
 €
 
-Œd Œ(n)
+Ãd Ã(n)
 %5#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-ŒU Œ(cK
+ÃU Ã(cK
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext¡
 
 
-Œo Œ(u
+Ão Ã(u
 %6java.util.List"?com.smilepile.data.backup.AppBackup#getPhotos()Ljava/util/List;*9
 
-Œd Œ(n+
+Ãd Ã(n+
 )
 %5#com.smilepile.data.backup.AppBackupc
 a
 
-Œv Œ(z	
+Ãv Ã(z	
 %7int""kotlin.collections.List#getSize()I*$
 
-Œo Œ(u
+Ão Ã(u
 
 %6java.util.List±
 ®
 
-Œ0 Œ(}
+Ã0 Ã(}
 %8"__concat*$
 
-Œ1 Œ(C
+Ã1 Ã(C
 Restoring photos (*%
 
-ŒD Œ(R
+ÃD Ã(R
 
 photosImportedint*
 
-ŒR Œ(S
+ÃR Ã(S
 /*
 
-Œv Œ(z
+Ãv Ã(z
 	
 %7int*
 
-Œ{ Œ(|
+Ã{ Ã(|
 )ÔÑ
 
-Œ Œ(~
+Ã Ã(~
 %9kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-Œ Œ(4
+Ã Ã(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-Œ! Œ()
+Ã! Ã()
 
 progressint*
 
-Œ+ Œ(.2d*
+Ã+ Ã(.2d*
 
-Œ0 Œ(}
+Ã0 Ã(}
 
 %82>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)"/
 
 __unknown_file (
 implicit return:W
 
-‡ ‡(&I
+¾ ¾(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:#
 
-ˆ ˆ(
+¿ ¿(
 photosImportedint:@
 
-‰ ‰(R2
+À À(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerH·
 Øcom.smilepile.data.backup.RestoreManager#restoreSettingsIfRequested(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreOptions;Lkotlin/jvm/functions/Function3;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt“6 “(P"0*£	
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÊ6 Ê(P"0*£	
 2
-˜S œ(	×Ô
+ÏS Ó(	×Ô
 
-š š(C
+Ñ Ñ(C
 %5kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-š š(4
+Ñ Ñ(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-š% š('2_*
+Ñ% Ñ('2_*
 
-š) š(,2d*$
+Ñ) Ñ(,2d*$
 
-š/ š(A
+Ñ/ Ñ(A
 Restoring settings2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)ƒ
 €
 
-›+ ›(5)
+Ò+ Ò(5)
 %6#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-› ›(*K
+Ò Ò(*K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext×
 Ô
 
-›6 ›(>.
+Ò6 Ò(>.
 %7(com.smilepile.data.backup.BackupSettings"[com.smilepile.data.backup.AppBackup#getSettings()Lcom/smilepile/data/backup/BackupSettings;*9
 
-›+ ›(5+
+Ò+ Ò(5+
 )
 %6#com.smilepile.data.backup.AppBackup…
 ‚
 
-› ›(?
+Ò Ò(?
 %8kotlin.Unit"ecom.smilepile.data.backup.RestoreManager#restoreSettings(Lcom/smilepile/data/backup/BackupSettings;)V*:
 
-› ›(?,*
+Ò Ò(?,*
 (com.smilepile.data.backup.RestoreManager*>
 
-›6 ›(>0
+Ò6 Ò(>0
 .
 %7(com.smilepile.data.backup.BackupSettingsK
 I
@@ -6945,105 +6945,105 @@ I
 __unknown_file (
 %4"__id*!
 
-› ›(?
+Ò Ò(?
 
 %8kotlin.Unit*
 1*ò
 0
- ’(£
+Ç É(£
  
 
-˜ ˜(#
+Ï Ï(#
 %0boolean">com.smilepile.data.backup.RestoreOptions#getRestoreSettings()Z*C
 
-˜ ˜(5
+Ï Ï(5
 3
 options(com.smilepile.data.backup.RestoreOptionsƒ
 €
 
-˜6 ˜(@)
+Ï6 Ï(@)
 %1#com.smilepile.data.backup.AppBackup"lcom.smilepile.data.backup.RestoreManager$RestoreContext#getBackupData()Lcom/smilepile/data/backup/AppBackup;*Y
 
-˜' ˜(5K
+Ï' Ï(5K
 I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext×
 Ô
 
-˜A ˜(I.
+ÏA Ï(I.
 %2(com.smilepile.data.backup.BackupSettings"[com.smilepile.data.backup.AppBackup#getSettings()Lcom/smilepile/data/backup/BackupSettings;*9
 
-˜6 ˜(@+
+Ï6 Ï(@+
 )
 %1#com.smilepile.data.backup.AppBackupÒÏ
 
-˜' ˜(Q
+Ï' Ï(Q
 %3boolean"Dcom.smilepile.data.backup.BackupSettings#equals(Ljava/lang/Object;)Z*>
 
-˜A ˜(I0
+ÏA Ï(I0
 .
 %2(com.smilepile.data.backup.BackupSettings*
 
-˜M ˜(Q 2equals(Ljava/lang/Object;)*
+ÏM Ï(Q 2equals(Ljava/lang/Object;)*
 2
 1*@
 1
-œ	 ("/
+Ó	 Ô("/
 
 __unknown_file (
 implicit return:W
 
-” ”(&I
+Ë Ë(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:A
 
-• •(3
+Ì Ì(3
 options(com.smilepile.data.backup.RestoreOptions:@
 
-– –(R2
+Í Í(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerHØ
 Lcom.smilepile.data.backup.RestoreManager#cleanupRestoreTemp(Ljava/io/File;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt¢ ¢(""0*@
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÙ Ù(""0*@
 0
-Ÿ ¡("/
+Ö Ø("/
 
 __unknown_file (
 implicit return:%
 
-¢# ¢(0
+Ù# Ù(0
 tempDirjava.io.FileB,*
 (com.smilepile.data.backup.RestoreManagerHÄ	
 ©com.smilepile.data.backup.RestoreManager#emitRestoreCompletion(LFlowCollector;Lcom/smilepile/data/backup/RestoreManager$RestoreContext;Lcom/smilepile/data/backup/RestoreManager$CategoriesRestoreResult;Lcom/smilepile/data/backup/RestoreManager$PhotosRestoreResult;Lkotlin/jvm/functions/Function3;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt©6 ©(K"0*™
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktà6 à(K"0*™
 0
-¦ ¨(ÖÓ
+İ ß(ÖÓ
 
-¯ ¯(?
+æ æ(?
 %0kotlin.Unit"akotlin.Function3#invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*B
 
-¯ ¯(4
+æ æ(4
 2
 progressCallbackkotlin.jvm.functions.Function3*
 
-¯! ¯($2d*
+æ! æ($2d*
 
-¯& ¯()2d*#
+æ& æ()2d*#
 
-¯, ¯(=
+æ, æ(=
 Restore completed2>invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)"/
 
 __unknown_file (
 implicit return:W
 
-ª ª(&I
+á á(&I
 restoreContext7com.smilepile.data.backup.RestoreManager$RestoreContext:b
 
-« «(1T
+â â(1T
 categoriesResult@com.smilepile.data.backup.RestoreManager$CategoriesRestoreResult:Z
 
-¬ ¬()L
+ã ã()L
 photosResult<com.smilepile.data.backup.RestoreManager$PhotosRestoreResult:@
 
-­ ­(R2
+ä ä(R2
 progressCallbackkotlin.jvm.functions.Function3B,*
 (com.smilepile.data.backup.RestoreManagerH€
 Ucom.smilepile.data.backup.RestoreManager$RollbackData#getCategories()Ljava/util/List;
@@ -7163,12 +7163,12 @@ Ucom.smilepile.data.backup.RestoreManager$RollbackData#setRollbackDir(Ljava/io/F
 valuejava.io.FileB97
 5com.smilepile.data.backup.RestoreManager$RollbackDataH`¨
 ncom.smilepile.data.backup.RestoreManager$RollbackData#<init>(Ljava/util/List;Ljava/util/List;ZLjava/io/File;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt½ ½(#"0*ã
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktô ô(#"0*ã
 0
-½# Â(
+ô# ù(
 
 
-¾ ¾(@
+õ õ(@
 %0java.util.List"Vcom.smilepile.data.backup.RestoreManager$RollbackData#setCategories(Ljava/util/List;)V*U
 
 __unknown_file (97
@@ -7180,7 +7180,7 @@ ncom.smilepile.data.backup.RestoreManager$RollbackData#<init>(Ljava/util/List;Lj
 categoriesjava.util.Listˆ
 …
 
-¿ ¿(9
+ö ö(9
 %1java.util.List"Rcom.smilepile.data.backup.RestoreManager$RollbackData#setPhotos(Ljava/util/List;)V*U
 
 __unknown_file (97
@@ -7191,7 +7191,7 @@ categoriesjava.util.Listˆ
 photosjava.util.Listó
 ğ
 
-À À(
+÷ ÷(
 %2boolean"Gcom.smilepile.data.backup.RestoreManager$RollbackData#setIsDarkMode(Z)V*U
 
 __unknown_file (97
@@ -7203,7 +7203,7 @@ categoriesjava.util.Listˆ
 isDarkModebooleanŒ
 ‰
 
-Á Á(
+ø ø(
 %3java.io.File"Ucom.smilepile.data.backup.RestoreManager$RollbackData#setRollbackDir(Ljava/io/File;)V*U
 
 __unknown_file (97
@@ -7216,18 +7216,18 @@ isDarkModebooleanŒ
 __unknown_file (
 implicit return:*
 
-¾ ¾(@
+õ õ(@
 
 categoriesjava.util.List:&
 
-¿ ¿(9
+ö ö(9
 photosjava.util.List:#
 
-À À(
+÷ ÷(
 
 isDarkModeboolean:)
 
-Á Á(
+ø ø(
 rollbackDirjava.io.FileB97
 5com.smilepile.data.backup.RestoreManager$RollbackDataHó
 Mcom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#getImported()Z
@@ -7287,12 +7287,12 @@ Ncom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#setImported(Z)V
 valuejava.lang.StringBB@
 >com.smilepile.data.backup.RestoreManager$CategoryRestoreResultH`Î
 [com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#<init>(ZLjava/lang/String;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÇ Ç(,"0*é
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktş ş(,"0*é
 0
-Ç, Ê(
+ş, 	(
 ş
 
-È È(
+ÿ ÿ(
 %0boolean"Ncom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#setImported(Z)V*^
 
 __unknown_file (B@
@@ -7303,7 +7303,7 @@ Ncom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#setImported(Z)V
 importedboolean¢
 Ÿ
 
-É É(#
+€	 €	(#
 %1java.lang.String"^com.smilepile.data.backup.RestoreManager$CategoryRestoreResult#setWarning(Ljava/lang/String;)V*^
 
 __unknown_file (B@
@@ -7316,16 +7316,16 @@ Ncom.smilepile.data.backup.RestoreManager$CategoryRestoreResult#setImported(Z)V
 __unknown_file (
 implicit return:!
 
-È È(
+ÿ ÿ(
 importedboolean:)
 
-É É(#
+€	 €	(#
 warningjava.lang.StringBB@
 >com.smilepile.data.backup.RestoreManager$CategoryRestoreResultH¿
 Ecom.smilepile.data.backup.RestoreManager$PhotoRestoreResult#<init>()Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÌ Ó("0*@
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktƒ	 Š	("0*@
 0
-Ì Î("/
+ƒ	 …	("/
 
 __unknown_file (
 implicit returnB?=
@@ -7359,12 +7359,12 @@ Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported"
 valuebooleanBHF
 Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$ImportedH`Õ
 Ocom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#<init>(Z)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktĞ Ğ("0*
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‡	 ‡	("0*
 0
-Ğ Ğ(6•
+‡	 ‡	(6•
 ’
 
-Ğ Ğ(5
+‡	 ‡	(5
 %0boolean"Xcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported#setFileRestored(Z)V*d
 
 __unknown_file (HF
@@ -7375,7 +7375,7 @@ Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported*5
 fileRestoredbooleanÂ
 ¿
 
-Ğ9 Ğ(M
+‡	9 ‡	(M
 %1"Ecom.smilepile.data.backup.RestoreManager$PhotoRestoreResult#<init>()V*d
 
 __unknown_file (HF
@@ -7384,7 +7384,7 @@ Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Imported"/
 __unknown_file (
 implicit return:%
 
-Ğ Ğ(5
+‡	 ‡	(5
 fileRestoredbooleanBHF
 Dcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$ImportedHª
 acom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#getReason()Ljava/lang/String;
@@ -7416,12 +7416,12 @@ Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped"
 valuejava.lang.StringBGE
 Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$SkippedH`û
 _com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#<init>(Ljava/lang/String;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÑ Ñ("0*±
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktˆ	 ˆ	("0*±
 0
-Ñ Ñ(/ª
+ˆ	 ˆ	(/ª
 §
 
-Ñ Ñ(.
+ˆ	 ˆ	(.
 %0java.lang.String"bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped#setReason(Ljava/lang/String;)V*c
 
 __unknown_file (GE
@@ -7432,7 +7432,7 @@ Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped*8
 reasonjava.lang.StringÁ
 ¾
 
-Ñ2 Ñ(F
+ˆ	2 ˆ	(F
 %1"Ecom.smilepile.data.backup.RestoreManager$PhotoRestoreResult#<init>()V*c
 
 __unknown_file (GE
@@ -7441,7 +7441,7 @@ Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Skipped"/
 __unknown_file (
 implicit return:(
 
-Ñ Ñ(.
+ˆ	 ˆ	(.
 reasonjava.lang.StringBGE
 Ccom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$SkippedH¥
 _com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#getError()Ljava/lang/String;
@@ -7473,12 +7473,12 @@ Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed"
 valuejava.lang.StringBFD
 Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$FailedH`ó
 ^com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#<init>(Ljava/lang/String;)Vl
-`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.ktÒ Ò("0*¬
+`/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/data/backup/RestoreManager.kt‰	 ‰	("0*¬
 0
-Ò Ò(,¦
+‰	 ‰	(,¦
 £
 
-Ò Ò(+
+‰	 ‰	(+
 %0java.lang.String"`com.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed#setError(Ljava/lang/String;)V*b
 
 __unknown_file (FD
@@ -7489,7 +7489,7 @@ Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed*7
 errorjava.lang.StringÀ
 ½
 
-Ò/ Ò(C
+‰	/ ‰	(C
 %1"Ecom.smilepile.data.backup.RestoreManager$PhotoRestoreResult#<init>()V*b
 
 __unknown_file (FD
@@ -7498,6 +7498,6 @@ Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$Failed"/
 __unknown_file (
 implicit return:'
 
-Ò Ò(+
+‰	 ‰	(+
 errorjava.lang.StringBFD
 Bcom.smilepile.data.backup.RestoreManager$PhotoRestoreResult$FailedH

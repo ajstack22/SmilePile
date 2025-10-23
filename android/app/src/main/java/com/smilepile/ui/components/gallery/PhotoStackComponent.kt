@@ -137,18 +137,24 @@ private fun PhotoStackItem(
             }
         )
     ) {
-        Box {
-            // Photo with 4:3 aspect ratio
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(4f / 3f) // Container with 4:3 ratio (like iOS .fit)
+        ) {
+            // Photo fills container (like iOS .fill with .clipped)
+            // Use fileSize as cache key to force reload when photo is edited
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(File(photo.path))
+                    .memoryCacheKey("${photo.path}_${photo.fileSize}")
+                    .diskCacheKey("${photo.path}_${photo.fileSize}")
                     .crossfade(true)
                     .build(),
                 contentDescription = photo.displayName,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(4f / 3f)
+                    .fillMaxSize()
                     .clip(RoundedCornerShape(12.dp))
             )
 

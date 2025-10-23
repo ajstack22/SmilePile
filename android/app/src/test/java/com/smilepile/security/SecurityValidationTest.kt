@@ -130,11 +130,11 @@ class SecurityValidationTest {
         every { modeManager.currentMode } returns modeFlow
         every { modeManager.isKidsMode() } answers { modeFlow.value == AppMode.KIDS }
         every { modeManager.isParentMode() } answers { modeFlow.value == AppMode.PARENT }
-        every { modeManager.toggleMode() } answers {
+        coEvery { modeManager.toggleMode() } answers {
             modeFlow.value = if (modeFlow.value == AppMode.KIDS) AppMode.PARENT else AppMode.KIDS
             Unit
         }
-        every { modeManager.setMode(any()) } answers {
+        coEvery { modeManager.setMode(any()) } answers {
             val mode = firstArg<AppMode>()
             modeFlow.value = mode
             Unit

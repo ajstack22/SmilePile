@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -55,6 +56,9 @@ fun PhotoEditScreen(
     // Key to force recreation of CropOverlay when aspect ratio changes
     var cropOverlayKey by remember { mutableStateOf(0) }
 
+    // Get context for clearing image cache
+    val context = LocalContext.current
+
     // Debug logging
     LaunchedEffect(Unit) {
         android.util.Log.e("SmilePile", "PhotoEditScreen rendered!")
@@ -66,8 +70,28 @@ fun PhotoEditScreen(
     LaunchedEffect(uiState.isComplete) {
         if (uiState.isComplete) {
             // Save all edited photos
-            val savedPhotos = viewModel.saveAllProcessedPhotos()
-            android.util.Log.e("SmilePile", "Saved ${savedPhotos.size} edited photos")
+            val results = viewModel.saveAllProcessedPhotos()
+            android.util.Log.e("SmilePile", "Saved ${results.size} edited photos")
+
+            // Clear Coil's cache for edited photos - clear BOTH old and new cache keys
+            val imageLoader = coil.Coil.imageLoader(context)
+            results.forEach { result ->
+                // Clear cache for OLD photo (with old fileSize)
+                result.oldPhoto?.let { oldPhoto ->
+                    val oldKey = "${oldPhoto.path}_${oldPhoto.fileSize}"
+                    imageLoader.diskCache?.remove(oldKey)
+                    imageLoader.memoryCache?.remove(coil.memory.MemoryCache.Key(oldKey))
+                    android.util.Log.d("SmilePile", "Cleared OLD cache key: $oldKey")
+                }
+
+                // Clear cache for NEW photo (with new fileSize)
+                val newKey = "${result.newPhoto.path}_${result.newPhoto.fileSize}"
+                imageLoader.diskCache?.remove(newKey)
+                imageLoader.memoryCache?.remove(coil.memory.MemoryCache.Key(newKey))
+                android.util.Log.d("SmilePile", "Cleared NEW cache key: $newKey")
+            }
+            android.util.Log.d("SmilePile", "Cleared Coil cache for ${results.size} edited photos")
+
             onComplete(viewModel.getProcessedResults())
         }
     }

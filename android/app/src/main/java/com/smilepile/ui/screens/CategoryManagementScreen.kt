@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material3.*
@@ -54,7 +55,9 @@ fun CategoryManagementScreen(
     onNavigateBack: () -> Unit,
     onNavigateToKidsMode: () -> Unit,
     viewModel: CategoryViewModel = hiltViewModel(),
-    paddingValues: PaddingValues = PaddingValues(0.dp)
+    paddingValues: PaddingValues = PaddingValues(0.dp),
+    demoState: com.smilepile.ui.viewmodels.DemoModeUiState = com.smilepile.ui.viewmodels.DemoModeUiState(),
+    onShowExitDemoDialog: () -> Unit = {}
 ) {
     val categories by viewModel.categoriesWithCountsFlow.collectAsStateWithLifecycle()
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
@@ -69,20 +72,9 @@ fun CategoryManagementScreen(
         // Main scaffold
         @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
         Scaffold(
-        modifier = Modifier,
+        modifier = Modifier.fillMaxSize(),
         bottomBar = {
             // Empty bottom bar to match PhotoGalleryScreen structure
-        },
-        floatingActionButton = {
-            CustomFloatingActionButton(
-                onClick = { showAddDialog = true },
-                icon = Icons.Default.Add,
-                contentDescription = "Add Pile",
-                backgroundColor = Color(0xFFFF6600), // SmilePile orange
-                isPulsing = true, // Always animate to draw attention
-                modifier = Modifier
-                    .padding(end = 16.dp, bottom = 102.dp)
-            )
         },
         contentWindowInsets = WindowInsets(0.dp) // Same as PhotoGalleryScreen
     ) { _ ->
@@ -262,6 +254,41 @@ fun CategoryManagementScreen(
             }
         )
     }
+
+        // Add Pile FAB overlay (bottom-right)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(end = 16.dp, bottom = 102.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            CustomFloatingActionButton(
+                onClick = { showAddDialog = true },
+                icon = Icons.Default.Add,
+                contentDescription = "Add Pile",
+                backgroundColor = Color(0xFFFF6600),
+                isPulsing = true
+            )
+        }
+
+        // Demo exit FAB overlay (bottom-left)
+        if (demoState.isDemoMode) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 16.dp, bottom = 102.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                CustomFloatingActionButton(
+                    onClick = onShowExitDemoDialog,
+                    icon = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Exit Demo Mode",
+                    backgroundColor = Color(0xFF9C27B0),
+                    isPulsing = false,
+                    enabled = !demoState.isExiting
+                )
+            }
+        }
 
         // Custom header overlay that extends into status bar
         AppHeaderComponent(

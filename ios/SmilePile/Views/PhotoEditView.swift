@@ -4,9 +4,33 @@ struct PhotoEditView: View {
     @StateObject private var viewModel = PhotoEditViewModel()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var showCategoryPicker = false
     @State private var showDeleteAlert = false
-    @State private var cropRect = CGRect.zero
+
+    // Computed binding for crop rect that syncs with ViewModel
+    private var cropRectBinding: Binding<CGRect> {
+        Binding(
+            get: {
+                guard let photo = viewModel.currentPhoto else { return .zero }
+                return photo.cropRect ?? CGRect(origin: .zero, size: photo.image.size)
+            },
+            set: { viewModel.updateCropRect($0) }
+        )
+    }
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var toolButtonSize: CGFloat {
+        isIPad ? 72 : 56
+    }
+
+    private var toolbarMaxWidth: CGFloat? {
+        isIPad ? 700 : nil
+    }
 
     let photos: [Photo]?
     let imageURLs: [URL]?
@@ -19,7 +43,7 @@ struct PhotoEditView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Black background
                 Color.black.ignoresSafeArea()
@@ -36,10 +60,6 @@ struct PhotoEditView: View {
                                 selectedRatio: $viewModel.selectedAspectRatio,
                                 onSelect: { ratio in
                                     viewModel.applyAspectRatio(ratio)
-                                    // Update the binding for the crop overlay
-                                    if let photo = viewModel.currentPhoto {
-                                        cropRect = viewModel.currentPhoto?.cropRect ?? CGRect(origin: .zero, size: photo.image.size)
-                                    }
                                 }
                             )
                             .padding(.top, 16)
@@ -55,11 +75,11 @@ struct PhotoEditView: View {
                                     // Crop overlay when active
                                     viewModel.showCropOverlay ?
                                     CropOverlayView(
-                                        cropRect: $cropRect,
-                                        imageSize: previewImage.size,
+                                        cropRect: cropRectBinding,
+                                        imageSize: viewModel.currentPhoto?.image.size ?? .zero,
+                                        aspectRatio: viewModel.selectedAspectRatio.ratio,
                                         onComplete: { rect in
-                                            viewModel.updateCropRect(rect)
-                                            // Don't auto-close, let user manually apply
+                                            // Binding already updates ViewModel, no need to call again
                                         },
                                         onCancel: {
                                             viewModel.showCropOverlay = false
@@ -93,16 +113,16 @@ struct PhotoEditView: View {
                 }
 
                 // Toolbar overlays
-                if !viewModel.showCropOverlay {
-                    VStack {
-                        // Top toolbar
+                VStack {
+                    // Top toolbar - hide during crop
+                    if !viewModel.showCropOverlay {
                         topToolbar
-
-                        Spacer()
-
-                        // Bottom toolbar
-                        bottomToolbar
                     }
+
+                    Spacer()
+
+                    // Bottom toolbar - always show (has internal conditions for edit tools)
+                    bottomToolbar
                 }
             }
             .navigationBarHidden(true)
@@ -112,9 +132,6 @@ struct PhotoEditView: View {
                     imageURLs: imageURLs,
                     categoryId: initialCategoryId
                 )
-                if let firstPhoto = viewModel.currentPhoto {
-                    cropRect = CGRect(origin: .zero, size: firstPhoto.image.size)
-                }
             }
             .onChange(of: viewModel.isComplete) { isComplete in
                 if isComplete {
@@ -182,126 +199,138 @@ struct PhotoEditView: View {
 
     private var bottomToolbar: some View {
         VStack(spacing: 0) {
-            // Edit tools - Match Android's 56pt touch targets (hide when cropping)
+            // Edit tools - Match Android's 56pt touch targets (hide when cropping) - centered on iPad
             if !viewModel.showCropOverlay {
                 HStack {
-                Spacer()
+                    if isIPad { Spacer() }
 
-                // Pile - Blue color
-                Button(action: { showCategoryPicker = true }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "square.stack")
-                            .font(.system(size: 24))
-                        Text("Pile")
-                            .font(typography.labelSmall)
-                    }
-                    .foregroundColor(Color.smilePileBlue)
-                    .frame(width: 56, height: 56)
-                }
+                    HStack {
+                        Spacer()
 
-                Spacer()
-
-                // Rotate - White color
-                Button(action: { viewModel.rotatePhoto() }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "rotate.right")
-                            .font(.system(size: 24))
-                        Text("Rotate")
-                            .font(typography.labelSmall)
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: 56, height: 56)
-                }
-
-                Spacer()
-
-                // Crop - Orange when active
-                Button(action: {
-                    viewModel.showCropOverlay.toggle()
-                    if viewModel.showCropOverlay {
-                        // Initialize crop rect to full image if not already set
-                        if let photo = viewModel.currentPhoto {
-                            cropRect = viewModel.currentPhoto?.cropRect ?? CGRect(origin: .zero, size: photo.image.size)
-                            // Apply the default aspect ratio
-                            viewModel.applyAspectRatio(viewModel.selectedAspectRatio)
+                        // Pile - Blue color
+                        Button(action: { showCategoryPicker = true }) {
+                            VStack(spacing: 4) {
+                                Image(systemName: "square.stack")
+                                    .font(.system(size: isIPad ? 28 : 24))
+                                Text("Pile")
+                                    .font(typography.labelSmall)
+                            }
+                            .foregroundColor(Color.smilePileBlue)
+                            .frame(width: toolButtonSize, height: toolButtonSize)
                         }
-                    } else {
-                        // When hiding crop overlay, don't apply - let user use Apply button
-                        viewModel.showCropOverlay = false
-                    }
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "crop")
-                            .font(.system(size: 24))
-                        Text("Crop")
-                            .font(typography.labelSmall)
-                    }
-                    .foregroundColor(viewModel.showCropOverlay ? .orange : .white)
-                    .frame(width: 56, height: 56)
-                }
 
-                Spacer()
+                        Spacer()
 
-                // Delete - System red color
-                Button(action: { showDeleteAlert = true }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "trash")
-                            .font(.system(size: 24))
-                        Text("Delete")
-                            .font(typography.labelSmall)
+                        // Rotate - White color
+                        Button(action: { viewModel.rotatePhoto() }) {
+                            VStack(spacing: 4) {
+                                Image(systemName: "rotate.right")
+                                    .font(.system(size: isIPad ? 28 : 24))
+                                Text("Rotate")
+                                    .font(typography.labelSmall)
+                            }
+                            .foregroundColor(.white)
+                            .frame(width: toolButtonSize, height: toolButtonSize)
+                        }
+
+                        Spacer()
+
+                        // Crop
+                        Button(action: {
+                            viewModel.showCropOverlay.toggle()
+                            if viewModel.showCropOverlay {
+                                if let photo = viewModel.currentPhoto {
+                                    let initialRect = viewModel.currentPhoto?.cropRect ?? CGRect(origin: .zero, size: photo.image.size)
+                                    viewModel.updateCropRect(initialRect)
+                                    viewModel.applyAspectRatio(viewModel.selectedAspectRatio)
+                                }
+                            } else {
+                                viewModel.showCropOverlay = false
+                            }
+                        }) {
+                            VStack(spacing: 4) {
+                                Image(systemName: "crop")
+                                    .font(.system(size: isIPad ? 28 : 24))
+                                Text("Crop")
+                                    .font(typography.labelSmall)
+                            }
+                            .foregroundColor(viewModel.showCropOverlay ? .orange : .white)
+                            .frame(width: toolButtonSize, height: toolButtonSize)
+                        }
+
+                        Spacer()
+
+                        // Delete - System red color
+                        Button(action: { showDeleteAlert = true }) {
+                            VStack(spacing: 4) {
+                                Image(systemName: "trash")
+                                    .font(.system(size: isIPad ? 28 : 24))
+                                Text("Delete")
+                                    .font(typography.labelSmall)
+                            }
+                            .foregroundColor(.red)
+                            .frame(width: toolButtonSize, height: toolButtonSize)
+                        }
+
+                        Spacer()
                     }
-                    .foregroundColor(.red)
-                    .frame(width: 56, height: 56)
-                }
+                    .frame(maxWidth: toolbarMaxWidth)
 
-                Spacer()
+                    if isIPad { Spacer() }
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, isIPad ? 12 : 8)
             }
 
-            // Action buttons - Match Android layout
-            HStack(spacing: 16) {
-                // Skip/Cancel button
-                Button(action: {
-                    if viewModel.editQueue.count == 1 {
-                        // Cancel - safe dismiss
-                        viewModel.cancelEditing()
-                        dismiss()
-                    } else {
-                        // Skip to next photo
-                        viewModel.skipCurrentPhoto()
-                    }
-                }) {
-                    Text(viewModel.editQueue.count == 1 ? "Cancel" : "Skip")
-                        .font(typography.bodyMedium)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                        .foregroundColor(.white)
-                }
-                .padding(.trailing, 8)
+            // Action buttons - Match Android layout - centered on iPad
+            HStack {
+                if isIPad { Spacer() }
 
-                // Apply button with checkmark
-                Button(action: { viewModel.applyCurrentPhoto() }) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 18))
-                        Text("Apply")
+                HStack(spacing: 16) {
+                    // Skip/Cancel button
+                    Button(action: {
+                        if viewModel.editQueue.count == 1 {
+                            // Cancel - safe dismiss
+                            viewModel.cancelEditing()
+                            dismiss()
+                        } else {
+                            // Skip to next photo
+                            viewModel.skipCurrentPhoto()
+                        }
+                    }) {
+                        Text(viewModel.editQueue.count == 1 ? "Cancel" : "Skip")
                             .font(typography.bodyMedium)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, isIPad ? 16 : 12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.white, lineWidth: 1)
+                            )
+                            .foregroundColor(.white)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+                    .padding(.trailing, 8)
+
+                    // Apply button with checkmark
+                    Button(action: { viewModel.applyCurrentPhoto() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: isIPad ? 20 : 18))
+                            Text("Apply")
+                                .font(typography.bodyMedium)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, isIPad ? 16 : 12)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                    }
+                    .padding(.leading, 8)
                 }
-                .padding(.leading, 8)
+                .frame(maxWidth: toolbarMaxWidth)
+
+                if isIPad { Spacer() }
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 10)
+            .padding(.horizontal, isIPad ? 24 : 16)
+            .padding(.top, isIPad ? 12 : 10)
 
             // Apply to all option - Only shows for rotation
             if viewModel.canApplyToAll {

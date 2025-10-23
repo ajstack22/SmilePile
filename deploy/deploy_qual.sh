@@ -379,6 +379,19 @@ run_tests() {
     esac
 }
 
+# Get approved iOS simulators (iOS 26.0 only)
+get_approved_simulators() {
+    # Approved simulator UDIDs (iOS 26.0)
+    local -a APPROVED_SIMS=(
+        "CC571231-D473-43E5-97F1-83F8289D8153"  # iPhone 17
+        "8314ACBC-020A-451F-A94F-B8D9B27227FD"  # iPhone 17 Pro Max
+        "B9D4F952-EE7D-45FC-B75F-F4F5ED2C169C"  # iPad Pro 13-inch (M4)
+    )
+
+    # Return all approved simulators
+    printf "%s\n" "${APPROVED_SIMS[@]}"
+}
+
 # Detect available iOS simulator (with security input validation)
 detect_available_simulator() {
     # Security: Allow override but validate input to prevent command injection
@@ -393,32 +406,40 @@ detect_available_simulator() {
         return 0
     fi
 
-    # Try booted simulator first
-    local booted_sim=$(xcrun simctl list devices 2>/dev/null | grep "Booted" | head -n1 | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
-    if [[ -n "$booted_sim" ]]; then
-        echo "$booted_sim"
-        return 0
-    fi
-
-    # Fallback priority: iPhone 16 > iPhone 15 > iPhone 14 > any iPhone
-    for sim_name in "iPhone 16" "iPhone 15" "iPhone 14"; do
-        local sim_id=$(xcrun simctl list devices 2>/dev/null | grep -m1 "$sim_name" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
-        if [[ -n "$sim_id" ]]; then
+    # Try booted approved simulators first
+    local approved_sims=$(get_approved_simulators)
+    for sim_id in $approved_sims; do
+        local is_booted=$(xcrun simctl list devices 2>/dev/null | grep "$sim_id" | grep "Booted" || true)
+        if [[ -n "$is_booted" ]]; then
             echo "$sim_id"
             return 0
         fi
     done
 
-    # Last resort: any available iPhone simulator
-    local any_iphone=$(xcrun simctl list devices 2>/dev/null | grep -m1 "iPhone" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
-    if [[ -n "$any_iphone" ]]; then
-        echo "$any_iphone"
+    # Return first approved simulator
+    local first_sim=$(echo "$approved_sims" | head -n1)
+    if [[ -n "$first_sim" ]]; then
+        echo "$first_sim"
         return 0
     fi
 
-    log ERROR "No iOS simulators found"
-    log ERROR "Install simulators via Xcode or set IOS_SIMULATOR_NAME environment variable"
+    log ERROR "No approved iOS simulators found"
+    log ERROR "Approved simulators: iPhone 17, iPhone 17 Pro Max, iPad Pro 13-inch (M4)"
     return 1
+}
+
+# Get approved Android emulators
+get_approved_emulators() {
+    # Approved emulator names
+    local -a APPROVED_EMUS=(
+        "Pixel_9"
+        "Pixel_9_Pro_XL"
+        "Pixel_Tablet"
+        "Television_4K"
+    )
+
+    # Return all approved emulators
+    printf "%s\n" "${APPROVED_EMUS[@]}"
 }
 
 # Deploy to Android devices
@@ -452,22 +473,60 @@ deploy_android_local() {
         log INFO "Using fallback APK path: $apk_path"
     fi
 
-    # Get connected devices and emulators
+    # Get all connected devices (physical devices via ADB)
     log INFO "Checking for Android devices..."
-    local devices=$(adb devices | grep -E "device$|emulator" | cut -f1 || true)
+    local all_devices=$(adb devices | grep -E "device$" | cut -f1 || true)
+    local physical_devices=""
+    local running_emulators=""
 
-    if [[ -z "$devices" ]]; then
-        log WARN "No Android devices found"
+    # Separate physical devices from emulators
+    for device in $all_devices; do
+        if [[ "$device" == emulator-* ]]; then
+            running_emulators="$running_emulators $device"
+        else
+            physical_devices="$physical_devices $device"
+        fi
+    done
 
-        # Try to start emulator
-        log INFO "Attempting to start Android emulator..."
+    # Filter running emulators to only approved ones
+    local approved_emulators=""
+    for emu_serial in $running_emulators; do
+        local emu_name=$(adb -s "$emu_serial" emu avd name 2>/dev/null | head -1 | tr -d '\r' || true)
+        local approved_list=$(get_approved_emulators)
+        if echo "$approved_list" | grep -q "^${emu_name}$"; then
+            approved_emulators="$approved_emulators $emu_serial"
+        else
+            log WARN "Skipping unapproved emulator: $emu_name ($emu_serial)"
+        fi
+    done
+
+    # Combine approved emulators and physical devices
+    local target_devices="$physical_devices $approved_emulators"
+
+    # If no devices found, try to start first approved emulator
+    if [[ -z "$target_devices" ]]; then
+        log WARN "No approved Android devices or emulators found"
+
+        # Try to start first approved emulator
+        log INFO "Attempting to start approved Android emulator..."
         if command -v emulator >/dev/null 2>&1; then
-            local emulator_name=$(emulator -list-avds | head -n1)
-            if [[ -n "$emulator_name" ]]; then
+            local available_avds=$(emulator -list-avds)
+            local approved_list=$(get_approved_emulators)
+            local first_approved=""
+
+            for approved_name in $approved_list; do
+                if echo "$available_avds" | grep -q "^${approved_name}$"; then
+                    first_approved="$approved_name"
+                    break
+                fi
+            done
+
+            if [[ -n "$first_approved" ]]; then
                 if [[ "$DRY_RUN" == "true" ]]; then
-                    log INFO "DRY RUN: Would start emulator: $emulator_name"
+                    log INFO "DRY RUN: Would start emulator: $first_approved"
                 else
-                    emulator -avd "$emulator_name" -no-window &
+                    log INFO "Starting approved emulator: $first_approved"
+                    emulator -avd "$first_approved" -no-window &
                     local emulator_pid=$!
 
                     # Wait for emulator
@@ -475,21 +534,43 @@ deploy_android_local() {
                     adb wait-for-device
                     sleep 10
                 fi
+            else
+                log WARN "No approved emulators available. Approved: Pixel_9, Pixel_9_Pro_XL, Pixel_Tablet, Television_4K"
             fi
         fi
 
         # Re-check devices
-        devices=$(adb devices | grep -E "device$|emulator" | cut -f1 || true)
+        all_devices=$(adb devices | grep -E "device$" | cut -f1 || true)
+        target_devices=""
+        for device in $all_devices; do
+            if [[ "$device" == emulator-* ]]; then
+                local emu_name=$(adb -s "$device" emu avd name 2>/dev/null || true)
+                local approved_list=$(get_approved_emulators)
+                if echo "$approved_list" | grep -q "^${emu_name}$"; then
+                    target_devices="$target_devices $device"
+                fi
+            else
+                target_devices="$target_devices $device"
+            fi
+        done
     fi
 
-    if [[ -z "$devices" ]] && [[ "$DRY_RUN" != "true" ]]; then
+    if [[ -z "$target_devices" ]] && [[ "$DRY_RUN" != "true" ]]; then
         log ERROR "No Android devices available for deployment"
+        log ERROR "Approved emulators: Pixel_9, Pixel_9_Pro_XL, Pixel_Tablet, Television_4K"
+        log ERROR "Also deploys to any physically connected ADB devices"
         return 1
     fi
 
-    # Deploy to each device
-    for device in $devices; do
-        log INFO "Deploying to device: $device"
+    # Deploy to each approved device
+    for device in $target_devices; do
+        local device_type="physical device"
+        if [[ "$device" == emulator-* ]]; then
+            local emu_name=$(adb -s "$device" emu avd name 2>/dev/null || echo "unknown")
+            device_type="emulator ($emu_name)"
+        fi
+
+        log INFO "Deploying to $device_type: $device"
 
         if [[ "$DRY_RUN" == "true" ]]; then
             log INFO "DRY RUN: Would install APK on $device"
@@ -501,10 +582,10 @@ deploy_android_local() {
 
             # Launch app (Wave 3: Using qual package name)
             log INFO "Launching app on $device..."
-            adb -s "$device" shell monkey -p com.smilepile.qual -c android.intent.category.LAUNCHER 1
+            adb -s "$device" shell monkey -p app.smilepile.qual -c android.intent.category.LAUNCHER 1
         fi
 
-        log SUCCESS "Deployed to device: $device"
+        log SUCCESS "Deployed to $device_type: $device"
     done
 
     # Copy APK to artifacts with version number
@@ -528,50 +609,77 @@ deploy_ios_local() {
 
     cd "$PROJECT_ROOT/ios"
 
-    # Build for simulator (Wave 5: Using Fastlane qual_ios lane)
-    log INFO "Building iOS app via Fastlane..."
+    # Build for simulator using xcodebuild directly for QUAL tier
+    log INFO "Building iOS app for simulator..."
     if [[ "$DRY_RUN" == "true" ]]; then
-        log INFO "DRY RUN: Would run: bundle exec fastlane qual_ios"
+        log INFO "DRY RUN: Would run xcodebuild for SmilePile Qual"
     else
-        bundle exec fastlane qual_ios || {
-            log ERROR "iOS Fastlane build failed"
+        # Clean previous builds
+        rm -rf "$PROJECT_ROOT/ios/DerivedData"
+
+        # Build using xcodebuild with correct scheme and configuration
+        xcodebuild \
+            -project SmilePile.xcodeproj \
+            -scheme "SmilePile Qual" \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -derivedDataPath "$PROJECT_ROOT/ios/DerivedData" \
+            -destination "generic/platform=iOS Simulator" \
+            clean build || {
+            log ERROR "iOS xcodebuild failed"
             return 1
         }
     fi
 
     local app_path="$PROJECT_ROOT/ios/DerivedData/Build/Products/Debug-iphonesimulator/SmilePile Qual.app"
 
-    # Get available simulators
-    log INFO "Checking for iOS simulators..."
-    # Only match iPhone/iPad devices (exclude Mac/Apple Watch/etc)
-    local booted_sims=$(xcrun simctl list devices | grep -E "iPhone|iPad" | grep "Booted" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    # Get approved simulators
+    log INFO "Checking for approved iOS simulators..."
+    local approved_sims=$(get_approved_simulators)
+    local booted_approved_sims=""
+    local available_approved_sims=""
 
-    if [[ -z "$booted_sims" ]]; then
-        log INFO "No booted simulators found, detecting available simulator..."
-        local simulator_id
-        if ! simulator_id=$(detect_available_simulator); then
-            log ERROR "Failed to detect iOS simulator"
-            return 1
+    # Check which approved simulators are booted
+    for sim_id in $approved_sims; do
+        local is_booted=$(xcrun simctl list devices 2>/dev/null | grep "$sim_id" | grep "Booted" || true)
+        if [[ -n "$is_booted" ]]; then
+            booted_approved_sims="$booted_approved_sims $sim_id"
         fi
+        available_approved_sims="$available_approved_sims $sim_id"
+    done
 
-        log INFO "Starting iOS simulator: $simulator_id"
-        if [[ "$DRY_RUN" == "true" ]]; then
-            log INFO "DRY RUN: Would boot simulator: $simulator_id"
-        else
-            xcrun simctl boot "$simulator_id" 2>/dev/null || {
-                log WARN "Failed to boot simulator $simulator_id, trying already booted"
-            }
-            sleep 5
-            booted_sims=$(xcrun simctl list devices | grep -E "iPhone|iPad" | grep "Booted" | sed -E 's/.*\(([A-Z0-9-]+)\).*/\1/' || true)
+    # If no approved simulators are booted, boot them all
+    if [[ -z "$booted_approved_sims" ]]; then
+        log INFO "No approved simulators booted, booting all approved simulators..."
+        for sim_id in $approved_sims; do
+            local sim_name=$(xcrun simctl list devices 2>/dev/null | grep "$sim_id" | sed -E 's/^[[:space:]]+([^(]+).*/\1/' || echo "Unknown")
+            log INFO "Booting approved simulator: $sim_name ($sim_id)"
+
+            if [[ "$DRY_RUN" == "true" ]]; then
+                log INFO "DRY RUN: Would boot simulator: $sim_id"
+                booted_approved_sims="$booted_approved_sims $sim_id"
+            else
+                xcrun simctl boot "$sim_id" 2>/dev/null || {
+                    log WARN "Simulator $sim_id already booted or failed to boot"
+                }
+                booted_approved_sims="$booted_approved_sims $sim_id"
+            fi
+        done
+
+        if [[ "$DRY_RUN" != "true" ]]; then
+            sleep 5  # Give simulators time to boot
         fi
     fi
 
-    # Install on simulators
-    for sim in $booted_sims; do
-        log INFO "Installing on simulator: $sim"
+    # Install on all approved simulators (booted only)
+    local deployed_count=0
+    for sim in $booted_approved_sims; do
+        local sim_name=$(xcrun simctl list devices 2>/dev/null | grep "$sim" | sed -E 's/^[[:space:]]+([^(]+).*/\1/' || echo "Unknown")
+        log INFO "Installing on approved simulator: $sim_name ($sim)"
 
         if [[ "$DRY_RUN" == "true" ]]; then
             log INFO "DRY RUN: Would install app on simulator $sim"
+            deployed_count=$((deployed_count + 1))
         else
             xcrun simctl install "$sim" "$app_path" || {
                 log ERROR "Failed to install on simulator: $sim"
@@ -580,11 +688,18 @@ deploy_ios_local() {
 
             # Launch app
             log INFO "Launching app on simulator $sim..."
-            xcrun simctl launch "$sim" com.smilepile.qual
-        fi
+            xcrun simctl launch "$sim" app.smilepile.qual
 
-        log SUCCESS "Deployed to simulator: $sim"
+            deployed_count=$((deployed_count + 1))
+            log SUCCESS "Deployed to simulator: $sim_name"
+        fi
     done
+
+    if [[ $deployed_count -eq 0 ]]; then
+        log ERROR "Failed to deploy to any approved iOS simulators"
+        log ERROR "Approved simulators: iPhone 17, iPhone 17 Pro Max, iPad Pro 13-inch (M4)"
+        return 1
+    fi
 
     # Check for connected physical devices
     local devices=$(xcrun devicectl list devices | grep -E "iPhone|iPad" | grep -v "Simulator" || true)

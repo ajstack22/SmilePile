@@ -363,9 +363,64 @@ class RestoreManager @Inject constructor(
         progressCallback: ((current: Int, total: Int, operation: String) -> Unit)?,
         rollbackData: RollbackData?
     ): Flow<ImportProgress> = flow {
-        // Similar to ZIP but without file restoration
-        // Implementation would be similar to existing importFromJson in BackupManager
-        // Reuse most of the logic but with RestoreOptions support
+        val errors = mutableListOf<String>()
+        try {
+            emit(ImportProgress(0, 0, "Parsing backup file", errors))
+            progressCallback?.invoke(5, 100, "Parsing backup file")
+
+            val backupData = withContext(Dispatchers.IO) {
+                json.decodeFromString<AppBackup>(jsonFile.readText())
+            }
+
+            val totalItems = backupData.categories.size + backupData.photos.size
+            var processedItems = 0
+
+            if (options.strategy == ImportStrategy.REPLACE) {
+                emit(ImportProgress(totalItems, processedItems, "Clearing existing data", errors))
+                progressCallback?.invoke(10, 100, "Clearing existing data")
+                clearAllData()
+            }
+
+            var categoriesImported = 0
+            for (categoryBackup in backupData.categories) {
+                try {
+                    val result = restoreCategory(categoryBackup, options)
+                    if (result.imported) categoriesImported++
+                } catch (e: Exception) {
+                    errors.add("Failed to restore category '${categoryBackup.displayName}': ${e.message}")
+                    Log.e(TAG, "Failed to restore category: ${categoryBackup.displayName}", e)
+                }
+                processedItems++
+                emit(ImportProgress(totalItems, processedItems, "Restoring categories", errors))
+                progressCallback?.invoke(10 + (processedItems * 40 / totalItems), 100, "Restoring categories")
+            }
+
+            var photosImported = 0
+            for (photoBackup in backupData.photos) {
+                try {
+                    photoRepository.insertPhoto(photoBackup.toPhoto())
+                    photosImported++
+                } catch (e: Exception) {
+                    errors.add("Failed to insert photo '${photoBackup.name}': ${e.message}")
+                    Log.e(TAG, "Failed to insert photo: ${photoBackup.name}", e)
+                }
+                processedItems++
+                emit(ImportProgress(totalItems, processedItems, "Restoring photos", errors))
+                progressCallback?.invoke(50 + (processedItems * 40 / totalItems), 100, "Restoring photos")
+            }
+
+            if (options.restoreSettings && backupData.settings != null) {
+                restoreSettings(backupData.settings)
+            }
+
+            emit(ImportProgress(totalItems, totalItems, "Restore completed", errors))
+            progressCallback?.invoke(100, 100, "Restore completed")
+
+        } catch (e: Exception) {
+            errors.add("Restore failed: ${e.message}")
+            Log.e(TAG, "JSON restore failed", e)
+            emit(ImportProgress(0, 0, "Restore failed", errors))
+        }
     }
 
     /**

@@ -175,9 +175,13 @@ final class CategoryRepositoryImpl: CategoryRepository {
         let isDemoMode = SettingsManager.shared.isDemoMode
         let filteredCategories = allCategories.filter { category in
             if isDemoMode {
+                // In demo mode: only show demo categories
                 return category.isDemoCategory == true
             } else {
-                return category.isDemoCategory == false
+                // NOT in demo mode: show all categories (don't filter by name matching)
+                // This prevents user-created categories from being hidden if they happen
+                // to match demo category names (e.g., "Family", "Friends")
+                return true
             }
         }
 

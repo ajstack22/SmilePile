@@ -26,6 +26,14 @@ import java.io.File
 import javax.inject.Inject
 
 /**
+ * Holds both old and new photo for cache clearing
+ */
+data class PhotoSaveResult(
+    val oldPhoto: Photo?,  // Photo before editing (for cache clearing with old fileSize)
+    val newPhoto: Photo    // Photo after editing (for cache clearing with new fileSize)
+)
+
+/**
  * ViewModel for photo editing operations.
  * Manages rotation, cropping, and batch processing.
  * Atlas Lite: pragmatic, under 250 lines.
@@ -117,6 +125,11 @@ class PhotoEditViewModel @Inject constructor(
                 val correctedBitmap = applyExifRotation(it, currentItem.path)
                 val preview = imageProcessor.createPreviewBitmap(correctedBitmap)
                 updateStateWithLoadedPhoto(correctedBitmap, preview)
+            } ?: run {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    error = "Failed to load photo"
+                )
             }
         } catch (e: Exception) {
             handleLoadPhotoError(e)
@@ -198,7 +211,8 @@ class PhotoEditViewModel @Inject constructor(
             rect.right.toInt(),
             rect.bottom.toInt()
         )
-        _uiState.value = _uiState.value.copy(currentCropRect = androidRect)
+        val rectCopy = Rect(androidRect)
+        _uiState.value = _uiState.value.copy(currentCropRect = rectCopy)
     }
 
     /**
@@ -232,14 +246,21 @@ class PhotoEditViewModel @Inject constructor(
         viewModelScope.launch {
             val bitmap = _uiState.value.currentBitmap ?: return@launch
             val cropRect = _uiState.value.currentCropRect
+            val rotation = _uiState.value.currentRotation
+
+            android.util.Log.d("PhotoEditVM", "applyCurrentPhoto: cropRect=$cropRect, rotation=$rotation, bitmap=${bitmap.width}x${bitmap.height}")
 
             // Process the image - rotation is already applied to currentBitmap
             // so we only need to apply crop if present
             val processedBitmap = if (cropRect != null) {
+                android.util.Log.d("PhotoEditVM", "Cropping bitmap to: left=${cropRect.left}, top=${cropRect.top}, right=${cropRect.right}, bottom=${cropRect.bottom}")
                 imageProcessor.cropBitmap(bitmap, cropRect)
             } else {
+                android.util.Log.d("PhotoEditVM", "No crop rect - using original bitmap")
                 bitmap
             }
+
+            android.util.Log.d("PhotoEditVM", "Processed bitmap: ${processedBitmap.width}x${processedBitmap.height}")
 
             // Mark as processed with edits
             markCurrentAsProcessed(
@@ -390,29 +411,29 @@ class PhotoEditViewModel @Inject constructor(
     /**
      * Save all processed photos to storage and database
      */
-    suspend fun saveAllProcessedPhotos(): List<Photo> {
-        val savedPhotos = mutableListOf<Photo>()
+    suspend fun saveAllProcessedPhotos(): List<PhotoSaveResult> {
+        val results = mutableListOf<PhotoSaveResult>()
 
         _uiState.value.editQueue.forEach { item ->
-            val savedPhoto = when {
+            val result = when {
                 shouldSaveEditedPhoto(item) && editMode == EditMode.GALLERY ->
                     saveEditedGalleryPhoto(item)
                 shouldSaveEditedPhoto(item) && editMode == EditMode.IMPORT ->
-                    saveNewImportedPhoto(item, savedPhotos.size)
+                    saveNewImportedPhoto(item, results.size)?.let { PhotoSaveResult(null, it) }
                 shouldSaveUneditedImport(item) ->
-                    saveUneditedImport(item, savedPhotos.size)
+                    saveUneditedImport(item, results.size)?.let { PhotoSaveResult(null, it) }
                 shouldUpdateCategoryOnly(item) ->
-                    updatePhotoCategory(item)
+                    updatePhotoCategory(item)?.let { PhotoSaveResult(null, it) }
                 else -> null
             }
 
-            savedPhoto?.let { photo ->
-                savedPhotos.add(photo)
-                updateQueueItemPath(item, photo.path)
+            result?.let {
+                results.add(it)
+                updateQueueItemPath(item, it.newPhoto.path)
             }
         }
 
-        return savedPhotos
+        return results
     }
 
     private fun shouldSaveEditedPhoto(item: PhotoEditItem): Boolean {
@@ -427,27 +448,42 @@ class PhotoEditViewModel @Inject constructor(
         return item.isProcessed && !item.wasEdited && editMode == EditMode.GALLERY && item.path != null
     }
 
-    private suspend fun saveEditedGalleryPhoto(item: PhotoEditItem): Photo? {
+    private suspend fun saveEditedGalleryPhoto(item: PhotoEditItem): PhotoSaveResult? {
         return try {
-            val existingFile = File(item.path!!)
-            val savedFile = storageManager.savePhotoToInternalStorage(
-                bitmap = item.processedBitmap!!,
-                filename = existingFile.name
-            ) ?: return null
+            android.util.Log.d("PhotoEditVM", "saveEditedGalleryPhoto: path=${item.path}, processedBitmap=${item.processedBitmap?.width}x${item.processedBitmap?.height}")
 
-            val existingPhoto = photoRepository.getPhotoByPath(item.path) ?: return null
+            // Get the existing photo BEFORE saving (for cache clearing with old fileSize)
+            val existingPhoto = photoRepository.getPhotoByPath(item.path!!) ?: run {
+                android.util.Log.e("PhotoEditVM", "Photo not found in repository: ${item.path}")
+                return null
+            }
+            android.util.Log.d("PhotoEditVM", "Existing photo: id=${existingPhoto.id}, width=${existingPhoto.width}, height=${existingPhoto.height}, fileSize=${existingPhoto.fileSize}")
+
+            // Save edited bitmap using StorageManager
+            val savedFile = storageManager.saveEditedPhoto(item.processedBitmap!!, item.path!!)
+            if (savedFile == null) {
+                android.util.Log.e("PhotoEditVM", "Failed to save edited photo to ${item.path}")
+                return null
+            }
+
+            android.util.Log.d("PhotoEditVM", "Saved file: ${savedFile.absolutePath}, size=${savedFile.length()}")
 
             val updatedPhoto = existingPhoto.copy(
                 categoryId = pendingCategoryId,
-                width = item.processedBitmap.width,
-                height = item.processedBitmap.height,
-                fileSize = savedFile.length(),
-                createdAt = System.currentTimeMillis()
+                width = item.processedBitmap!!.width,
+                height = item.processedBitmap!!.height,
+                fileSize = savedFile.length()
+                // createdAt intentionally not updated - preserve original timestamp
             )
+
+            android.util.Log.d("PhotoEditVM", "Updating photo in repository: id=${updatedPhoto.id}, width=${updatedPhoto.width}, height=${updatedPhoto.height}, fileSize=${updatedPhoto.fileSize}")
             photoRepository.updatePhoto(updatedPhoto)
-            updatedPhoto
+            android.util.Log.d("PhotoEditVM", "Photo updated successfully")
+
+            // Return both old and new photos for cache clearing
+            PhotoSaveResult(oldPhoto = existingPhoto, newPhoto = updatedPhoto)
         } catch (e: Exception) {
-            android.util.Log.e("SmilePile", "Failed to save edited photo: ${e.message}")
+            android.util.Log.e("PhotoEditVM", "Failed to save edited photo: ${e.message}", e)
             null
         }
     }

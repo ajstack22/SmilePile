@@ -30,6 +30,7 @@ fun CompletionScreen(
     biometricEnabled: Boolean = false,
     importMode: Boolean = false,
     importStats: com.smilepile.onboarding.ImportStats? = null,
+    isDemoMode: Boolean = false,
     onComplete: () -> Unit
 ) {
     var showCheckmark by remember { mutableStateOf(false) }
@@ -116,7 +117,23 @@ fun CompletionScreen(
                     modifier = Modifier.padding(20.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    if (importMode) {
+                    if (isDemoMode) {
+                        // Demo mode messages
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Text(
+                                text = "Demo Data Loaded",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = "Use the purple exit button to leave Demo Mode",
+                                fontSize = 14.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    } else if (importMode) {
                         // Import mode stats
                         importStats?.let { stats ->
                             // Categories restored
@@ -198,8 +215,8 @@ fun CompletionScreen(
                         }
                     }
 
-                    // PIN enabled (shown for both modes)
-                    if (pinEnabled) {
+                    // PIN enabled (shown for both modes, but not for demo mode)
+                    if (pinEnabled && !isDemoMode) {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             verticalAlignment = Alignment.CenterVertically

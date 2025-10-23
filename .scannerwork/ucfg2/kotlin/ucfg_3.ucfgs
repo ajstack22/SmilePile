@@ -142,11 +142,11 @@ w
 valuebooleanB1/
 -com.smilepile.ui.screens.BottomNavigationItemH`“
 ecom.smilepile.ui.screens.BottomNavigationItem#<init>(Ljava/lang/String;LImageVector;LImageVector;IZ)Ve
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktB B("0*Ö
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktG G("0*Ö
 
-0B H(˙
+0G M(˙
 ˜
-C C(
+H H(
 %0java.lang.String"Kcom.smilepile.ui.screens.BottomNavigationItem#setRoute(Ljava/lang/String;)V*M
 
 __unknown_file (1/
@@ -156,7 +156,7 @@ ecom.smilepile.ui.screens.BottomNavigationItem#<init>(Ljava/lang/String;LImageVe
 
 routejava.lang.StringÉ
 Ä
-D D(!
+I I(!
 %1java.lang.Object"Mcom.smilepile.ui.screens.BottomNavigationItem#setSelectedIcon(LImageVector;)V*M
 
 __unknown_file (1/
@@ -166,7 +166,7 @@ ecom.smilepile.ui.screens.BottomNavigationItem#<init>(Ljava/lang/String;LImageVe
  
 selectedIconjava.lang.Objectá
 Ñ
-E E(#
+J J(#
 %2java.lang.Object"Ocom.smilepile.ui.screens.BottomNavigationItem#setUnselectedIcon(LImageVector;)V*M
 
 __unknown_file (1/
@@ -176,7 +176,7 @@ ecom.smilepile.ui.screens.BottomNavigationItem#<init>(Ljava/lang/String;LImageVe
 "
 unselectedIconjava.lang.ObjectŸ
 ÷
-F F(	
+K K(	
 %3int"?com.smilepile.ui.screens.BottomNavigationItem#setIconTextId(I)V*M
 
 __unknown_file (1/
@@ -187,7 +187,7 @@ ecom.smilepile.ui.screens.BottomNavigationItem#<init>(Ljava/lang/String;LImageVe
 
 iconTextIdint€
 ÿ
-G G( 
+L L( 
 %4boolean"<com.smilepile.ui.screens.BottomNavigationItem#setHasNews(Z)V*M
 
 __unknown_file (1/
@@ -199,55 +199,70 @@ iconTextIdint€
 
 __unknown_file (
 implicit return:%
-C C(
+H H(
 routejava.lang.String:,
-D D(! 
+I I(! 
 selectedIconjava.lang.Object:.
-E E(#"
+J J(#"
 unselectedIconjava.lang.Object:
-F F(
+K K(
 
 iconTextIdint:
-G G( 
+L L( 
 hasNewsbooleanB1/
--com.smilepile.ui.screens.BottomNavigationItemH≠
-∑com.smilepile.ui.screens#MainScreen(LModifier;LNavHostController;ZLkotlin/jvm/functions/Function0;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/toast/ToastManager;)Ve
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktN N("0*©
+-com.smilepile.ui.screens.BottomNavigationItemHÌ 
+Êcom.smilepile.ui.screens#MainScreen(LModifier;LNavHostController;ZLkotlin/jvm/functions/Function0;Lcom/smilepile/ui/viewmodels/AppModeViewModel;Lcom/smilepile/ui/viewmodels/DemoModeViewModel;Lcom/smilepile/ui/toast/ToastManager;)Ve
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktS S("0*©
 3
-Ñ% Ñ(B…∆
+å% å(B…∆
 
-Ñ% Ñ(B
-%8boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
+å% å(B
+%9boolean"&kotlin.Any#equals(Ljava/lang/Object;)Z*/
 
-Ñ% Ñ(0!
+å% å(0!
 
 currentModejava.lang.Object*4
 
-Ñ< Ñ(B&
+å< å(B&
 $
 PARENTcom.smilepile.mode.AppMode2equals(Ljava/lang/Object;)G
 E
 
 __unknown_file (
-%7"__id*
+%8"__id*
 
-Ñ% Ñ(B
+å% å(B
 
-%8boolean*
+%9boolean*
 1*W
 4
-Ö Ö(A
+ç ç(A
 ?
 
 __unknown_file (
-%7"__id*
+%8"__id*
 
-Ö Ö(	
+ç ç(	
 false*
-1*ﬁ
-0J L(ç
+1*@
+5
+– “("/
+
+__unknown_file (
+implicit return*j
+6
+¥ –(T
+R
+
+__unknown_file (
+%10"__id*)
+
+__unknown_file (
+	<unknown>*
+5*õ
+0O Q(ç
 ä
-O O(!
+T T(!
 %0"
 __annotate*0
 
@@ -258,14 +273,14 @@ __annotate*0
 
 modifierjava.lang.Object\
 Z
-O O(!
+T T(!
 modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
 
 %0í
 è
-P P(>
+U U(>
 %1"
 __annotate*0
 
@@ -276,14 +291,14 @@ __annotate*0
 !
 navControllerjava.lang.Objecta
 _
-P P(>!
+U U(>!
 navControllerjava.lang.Object"__annotation*"
 
 __unknown_file (
 
 %1í
 è
-Q Q(+
+V V(+
 %2"
 __annotate*0
 
@@ -294,14 +309,14 @@ __annotate*0
 !
 showKidsModeExitDialogbooleana
 _
-Q Q(+!
+V V(+!
 showKidsModeExitDialogboolean"__annotation*"
 
 __unknown_file (
 
 %2Æ
 ´
-R R(0
+W W(0
 %3"
 __annotate*0
 
@@ -312,14 +327,14 @@ __annotate*0
 =
 onKidsModeExitDialogDismisskotlin.jvm.functions.Function0}
 {
-R R(0=
+W W(0=
 onKidsModeExitDialogDismisskotlin.jvm.functions.Function0"__annotation*"
 
 __unknown_file (
 
 %3Æ
 ´
-S S(5
+X X(5
 %4"
 __annotate*0
 
@@ -330,15 +345,33 @@ __annotate*0
 =
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel}
 {
-S S(5=
+X X(5=
 modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel"__annotation*"
 
 __unknown_file (
 
-%4§
-°
-T T(&
+%4≥
+∞
+Y Y(:
 %5"
+__annotate*0
+
+__unknown_file (
+java.lang.Object*`
+
+__unknown_file (D
+B
+demoModeViewModel-com.smilepile.ui.viewmodels.DemoModeViewModelÉ
+Ä
+Y Y(:B
+demoModeViewModel-com.smilepile.ui.viewmodels.DemoModeViewModel"__annotation*"
+
+__unknown_file (
+
+%5§
+°
+Z Z(&
+%6"
 __annotate*0
 
 __unknown_file (
@@ -348,98 +381,99 @@ __annotate*0
 3
 toastManager#com.smilepile.ui.toast.ToastManagers
 q
-T T(&3
+Z Z(&3
 toastManager#com.smilepile.ui.toast.ToastManager"__annotation*"
 
 __unknown_file (
 
-%5i
+%6i
 g
-W W(;&
+] ](;&
 currentDestinationjava.lang.Object"__id*-
-W0 W(;!
+]0 ](;!
 
 destinationjava.lang.Objectb
 `
-Y Y(+
+_ _(+
 currentModejava.lang.Object"__id*-
-Y  Y(+!
+_  _(+!
 
 currentModejava.lang.ObjectX
 V
-\ \((
+d d((
 scopejava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>ﬂ
 ‹
-] ](.'
-%6!com.smilepile.ui.toast.ToastState"^com.smilepile.ui.toast#rememberToastState(LCoroutineScope;)Lcom/smilepile/ui/toast/ToastState;*
+e e(.'
+%7!com.smilepile.ui.toast.ToastState"^com.smilepile.ui.toast#rememberToastState(LCoroutineScope;)Lcom/smilepile/ui/toast/ToastState;*
 
 __unknown_file ( *'
-]( ](-
+e( e(-
 
 scopejava.lang.Objectz
 x
-] ](./
+e e(./
 
 toastState!com.smilepile.ui.toast.ToastState"__id*5
-] ](.)
+e e(.)
 '
-%6!com.smilepile.ui.toast.ToastStateh
-f
-k ~()
+%7!com.smilepile.ui.toast.ToastStatei
+g
+	s Ü()
 bottomNavigationItemsjava.lang.Object"__id*)
 
 __unknown_file (
 	<unknown>*
 3
-4*°
+4*x
 1
-Ü Ü(_
+é é(_
 ]
 
-Å Ü(%
+â é(%
 shouldShowBottomNavigationboolean"__id*"
 
 __unknown_file (
 
-%7"/
-
-__unknown_file (
-implicit return:(
-O O(!
+%8*
+5
+6:(
+T T(!
 modifierjava.lang.Object:-
-P P(>!
+U U(>!
 navControllerjava.lang.Object:-
-Q Q(+!
+V V(+!
 showKidsModeExitDialogboolean:I
-R R(0=
+W W(0=
 onKidsModeExitDialogDismisskotlin.jvm.functions.Function0:I
-S S(5=
-modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel:?
-T T(&3
+X X(5=
+modeViewModel,com.smilepile.ui.viewmodels.AppModeViewModel:N
+Y Y(:B
+demoModeViewModel-com.smilepile.ui.viewmodels.DemoModeViewModel:?
+Z Z(&3
 toastManager#com.smilepile.ui.toast.ToastManagerB"
 com.smilepile.ui.screensH˛
 Vcom.smilepile.ui.screens#navigateWithSingleTop(LNavHostController;Ljava/lang/String;)Vg
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktπ π(!"0*>
-0π π("/
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.ktÏ Ï(!"0*>
+0Ï Ï("/
 
 __unknown_file (
 implicit return:/
 
-π" π(B!
+Ï" Ï(B!
 navControllerjava.lang.Object:'
 
-πD π(Q
+ÏD Ï(Q
 routejava.lang.StringB"
 com.smilepile.ui.screensH¡
 ìcom.smilepile.ui.screens#SmilePileBottomNavigation(Ljava/util/List;Landroidx.navigation.NavDestination;Lkotlin/jvm/functions/Function1;LModifier;)Vg
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.kt   (%"0* 
-0∆ »(ä
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.kt˝ ˝(%"0* 
+0˘ ˚(ä
 á
 
-À À(%
+˛ ˛(%
 %0"
 __annotate*0
 
@@ -451,7 +485,7 @@ __annotate*0
 itemsjava.util.ListY
 W
 
-À À(%
+˛ ˛(%
 itemsjava.util.List"__annotation*"
 
 __unknown_file (
@@ -459,7 +493,7 @@ W
 %0ô
 ñ
 
-Ã Ã(;
+ˇ ˇ(;
 %1"
 __annotate*0
 
@@ -471,7 +505,7 @@ __annotate*0
 currentDestinationjava.lang.Objecth
 f
 
-Ã Ã(;&
+ˇ ˇ(;&
 currentDestinationjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -479,7 +513,7 @@ f
 %1¨
 ©
 
-Õ Õ(-
+Ä Ä(-
 %2"
 __annotate*0
 
@@ -491,7 +525,7 @@ __annotate*0
 onNavigateToDestinationkotlin.jvm.functions.Function1{
 y
 
-Õ Õ(-9
+Ä Ä(-9
 onNavigateToDestinationkotlin.jvm.functions.Function1"__annotation*"
 
 __unknown_file (
@@ -499,7 +533,7 @@ y
 %2è
 å
 
-Œ Œ(!
+Å Å(!
 %3"
 __annotate*0
 
@@ -511,7 +545,7 @@ __annotate*0
 modifierjava.lang.Object^
 \
 
-Œ Œ(!
+Å Å(!
 modifierjava.lang.Object"__annotation*"
 
 __unknown_file (
@@ -521,21 +555,21 @@ __annotate*0
 __unknown_file (
 implicit return:%
 
-À À(%
+˛ ˛(%
 itemsjava.util.List:4
 
-Ã Ã(;&
+ˇ ˇ(;&
 currentDestinationjava.lang.Object:G
 
-Õ Õ(-9
+Ä Ä(-9
 onNavigateToDestinationkotlin.jvm.functions.Function1:*
 
-Œ Œ(!
+Å Å(!
 modifierjava.lang.ObjectB"
 com.smilepile.ui.screensH˚
 -com.smilepile.ui.screens#MainScreenPreview()Vg
-[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.kt£ £("0*>
-0û †("/
+[/Users/adamstack/SmilePile/android/app/src/main/java/com/smilepile/ui/screens/MainScreen.kt÷ ÷("0*>
+0— ”("/
 
 __unknown_file (
 implicit returnB"

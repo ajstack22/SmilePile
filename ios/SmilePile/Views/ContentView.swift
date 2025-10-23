@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showOnboarding = false
     @State private var isCheckingFirstLaunch = false  // Guard flag to prevent re-entry
     @StateObject private var settingsManager = SettingsManager.shared
+    @StateObject private var inactivityManager = InactivityManager()
 
     var body: some View {
         ZStack {
@@ -74,11 +75,36 @@ struct ContentView: View {
         .onAppear {
             checkFirstLaunch()
         }
+        .onChange(of: kidsModeViewModel.isKidsMode) { newValue in
+            if newValue {
+                // Entering Kids Mode - stop inactivity timer
+                inactivityManager.stopTimer()
+            } else {
+                // Exiting Kids Mode - start inactivity timer
+                inactivityManager.resetTimer()
+            }
+        }
+        .onChange(of: inactivityManager.shouldReturnToKidsMode) { shouldReturn in
+            if shouldReturn {
+                // Auto-enable Kids Mode after timeout
+                kidsModeViewModel.isKidsMode = true
+                inactivityManager.acknowledgeReturn()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            // Pause timer when app goes to background
+            inactivityManager.stopTimer()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            // Resume timer when app returns to foreground (if in Parent Mode)
+            if !kidsModeViewModel.isKidsMode {
+                inactivityManager.resetTimer()
+            }
+        }
         .onChange(of: settingsManager.onboardingCompleted) { newValue in
             // If onboarding flag is cleared (e.g., after Clear All Data), show onboarding
             // Use guard flag to prevent re-entry loops
             if !newValue && !isCheckingFirstLaunch {
-                print("🔄 onboardingCompleted changed to false - triggering onboarding check")
                 isCheckingFirstLaunch = true
                 checkFirstLaunch()
                 // Reset guard flag after a delay to allow future changes
@@ -109,12 +135,8 @@ struct ContentView: View {
     }
 
     private func checkFirstLaunch() {
-        print("🔍 checkFirstLaunch called")
-        print("🔍 onboardingCompleted = \(settingsManager.onboardingCompleted)")
-
         // Check if this is the first launch and we don't have completed onboarding
         if !settingsManager.onboardingCompleted {
-            print("🔍 Onboarding NOT completed, checking for existing data...")
             // Check if we have existing data
             Task {
                 // Small delay to ensure CoreData is fully initialized
@@ -123,32 +145,26 @@ struct ContentView: View {
                 do {
                     let categoryRepo = CategoryRepositoryImpl.shared
                     let categories = try await categoryRepo.getAllCategories()
-                    print("🔍 Found \(categories.count) categories")
 
                     if categories.isEmpty {
                         // First time launch, show onboarding
-                        print("✅ No categories found - SHOWING ONBOARDING")
                         await MainActor.run {
                             showOnboarding = true
                         }
                     } else {
                         // Has data but no onboarding flag - mark as complete (migrating user)
-                        print("⚠️ Has categories but no onboarding flag - marking as complete (migration)")
                         await MainActor.run {
                             settingsManager.onboardingCompleted = true
                             settingsManager.firstLaunch = false
                         }
                     }
                 } catch {
-                    print("❌ Error checking categories: \(error)")
                     // On error, show onboarding to be safe
                     await MainActor.run {
                         showOnboarding = true
                     }
                 }
             }
-        } else {
-            print("⏭️ Onboarding already completed - skipping")
         }
     }
 
@@ -314,34 +330,112 @@ struct ParentModeView: View {
     @State private var selectedTab = 0
     @EnvironmentObject var kidsModeViewModel: KidsModeViewModel
     @EnvironmentObject var settingsManager: SettingsManager
+    @State private var showExitDemoConfirmation = false
+    @State private var isExitingDemo = false
+    @State private var showDemoError = false
+    @State private var demoErrorMessage = ""
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Demo Mode Banner (if active)
-            DemoModeBanner(settingsManager: settingsManager)
+        ZStack {
+            // Main content
+            VStack(spacing: 0) {
+                // Main content area
+                Group {
+                    switch selectedTab {
+                    case 0:
+                        OptimizedPhotoGalleryView()
+                    case 1:
+                        CategoryManagementView()
+                    case 2:
+                        SettingsViewCustom()
+                            .environmentObject(kidsModeViewModel)
+                    default:
+                        EmptyView()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Main content area
-            Group {
-                switch selectedTab {
-                case 0:
-                    OptimizedPhotoGalleryView()
-                case 1:
-                    CategoryManagementView()
-                case 2:
-                    SettingsViewCustom()
-                        .environmentObject(kidsModeViewModel)
-                default:
-                    EmptyView()
+                // Material Design Tab Bar at bottom
+                Divider()
+                MaterialTabBar(selection: $selectedTab)
+                    .background(Color(UIColor.systemBackground))
+            }
+            .ignoresSafeArea(.keyboard)
+
+            // Exit Demo FAB (bottom-left)
+            if settingsManager.isDemoMode {
+                VStack {
+                    Spacer()
+                    HStack {
+                        FloatingActionButton(
+                            action: {
+                                showExitDemoConfirmation = true
+                            },
+                            isPulsing: false,
+                            backgroundColor: Color(red: 156/255, green: 39/255, blue: 176/255),
+                            iconName: "rectangle.portrait.and.arrow.right"
+                        )
+                        .padding(.leading, 16)
+                        .padding(.bottom, 102)
+                        .accessibilityLabel("Exit Demo Mode")
+                        .accessibilityHint("Double tap to exit demo mode and remove demo data")
+                        Spacer()
+                    }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            // Material Design Tab Bar at bottom
-            Divider()
-            MaterialTabBar(selection: $selectedTab)
-                .background(Color(UIColor.systemBackground))
         }
-        .ignoresSafeArea(.keyboard)
+        .alert("Exit Demo Mode?", isPresented: $showExitDemoConfirmation) {
+            Button("Cancel", role: .cancel) {}
+            Button("Exit Demo", role: .destructive) {
+                exitDemoMode()
+            }
+        } message: {
+            Text("This will remove all demo photos and categories. You can try demo mode again later.")
+        }
+        .alert("Error", isPresented: $showDemoError) {
+            Button("OK", role: .cancel) {
+                showDemoError = false
+            }
+        } message: {
+            Text(demoErrorMessage)
+        }
+    }
+
+    private func exitDemoMode() {
+        Task { @MainActor in
+            do {
+                isExitingDemo = true
+
+                // Delete all photos where isFromAssets = true
+                let photoRepo = PhotoRepositoryImpl()
+                let allPhotos = try await photoRepo.getAllPhotos()
+                let demoPhotos = allPhotos.filter { $0.isFromAssets }
+
+                for photo in demoPhotos {
+                    // Delete photo file
+                    let fileURL = URL(fileURLWithPath: photo.path)
+                    try? FileManager.default.removeItem(at: fileURL)
+
+                    // Delete from database
+                    try await photoRepo.deletePhoto(photo)
+                }
+
+                // Delete demo categories
+                let categoryRepo = CategoryRepositoryImpl.shared
+                try await categoryRepo.deleteDemoCategories()
+
+                // Set demo mode to false and reset onboarding to trigger wizard
+                settingsManager.isDemoMode = false
+                settingsManager.onboardingCompleted = false
+
+                isExitingDemo = false
+
+            } catch {
+                isExitingDemo = false
+                demoErrorMessage = "Failed to exit demo mode: \(error.localizedDescription)"
+                showDemoError = true
+            }
+        }
     }
 }
 

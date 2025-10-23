@@ -51,6 +51,7 @@ struct CategorySelectionSheet: View {
 private struct OptimizedPhotoStackView: View {
     @Environment(\.typography) var typography
     let photos: [Photo]
+    let refreshTrigger: Int
     let onPhotoClick: (Photo) -> Void
     let onEditClick: ((Photo) -> Void)?
     let onDeleteClick: ((Photo) -> Void)?
@@ -68,6 +69,7 @@ private struct OptimizedPhotoStackView: View {
                             onEditClick: { onEditClick?(photo) },
                             onDeleteClick: { onDeleteClick?(photo) }
                         )
+                        .id("\(photo.id)_\(refreshTrigger)")
                     }
                 }
                 .padding(16)
@@ -207,6 +209,13 @@ struct OptimizedPhotoGalleryView: View {
         .task {
             await initializeView()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .onboardingComplete)) { _ in
+            // Reload photos when onboarding completes (including demo mode)
+            Task {
+                logger.info("Onboarding completed notification received - reloading photos")
+                await initializeView()
+            }
+        }
         .sheet(isPresented: $showingPhotoEditor) {
             photoEditorSheet
         }
@@ -244,6 +253,7 @@ struct OptimizedPhotoGalleryView: View {
     private var photoStackView: some View {
         OptimizedPhotoStackView(
             photos: viewModel.filteredPhotos,
+            refreshTrigger: viewModel.refreshTrigger,
             onPhotoClick: { photo in
                 selectedPhotos = [photo]
                 showingPhotoEditor = true

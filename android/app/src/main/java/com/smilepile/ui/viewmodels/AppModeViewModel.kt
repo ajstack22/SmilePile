@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 data class AppModeUiState(
@@ -47,14 +50,24 @@ class AppModeViewModel @Inject constructor(
     }
 
     fun requestModeToggle() {
-        val currentMode = _uiState.value.currentMode
+        viewModelScope.launch(Dispatchers.Default) {
+            stateMutex.withLock {
+                if (_uiState.value.isTransitioning) {
+                    android.util.Log.d("AppModeViewModel", "Mode toggle already in progress, ignoring")
+                    return@withLock
+                }
 
-        if (currentMode == AppMode.KIDS && securePreferences.isPINEnabled()) {
-            // Require PIN to enter parent mode
-            _uiState.value = _uiState.value.copy(requiresPinAuth = true)
-        } else {
-            // No PIN required or switching to kids mode
-            performModeToggle()
+                delay(50)
+
+                withContext(Dispatchers.Main) {
+                    val currentMode = _uiState.value.currentMode
+                    if (currentMode == AppMode.KIDS && securePreferences.isPINEnabled()) {
+                        _uiState.value = _uiState.value.copy(requiresPinAuth = true)
+                    } else {
+                        performModeToggleInternal()
+                    }
+                }
+            }
         }
     }
 
@@ -112,9 +125,21 @@ class AppModeViewModel @Inject constructor(
 
     private fun performModeToggle() {
         viewModelScope.launch {
+            performModeToggleInternal()
+        }
+    }
+
+    private suspend fun performModeToggleInternal() {
+        withContext(Dispatchers.Main) {
             _uiState.value = _uiState.value.copy(isTransitioning = true)
+        }
+
+        try {
             modeManager.toggleMode()
-            _uiState.value = _uiState.value.copy(isTransitioning = false)
+        } finally {
+            withContext(Dispatchers.Main) {
+                _uiState.value = _uiState.value.copy(isTransitioning = false)
+            }
         }
     }
 

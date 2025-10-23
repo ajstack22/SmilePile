@@ -26,7 +26,18 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import com.smilepile.R
+import com.smilepile.utils.BrowserHelper
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
+import com.smilepile.ui.screens.PrivacyPolicyScreen
 
 // SmilePile brand colors
 private val SmilePileYellow = Color(0xFFFFBF00)
@@ -57,6 +68,11 @@ fun WelcomeScreen(
     onImportBackup: () -> Unit,
     onTryDemo: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    val configuration = LocalConfiguration.current
+    val isTablet = configuration.screenWidthDp >= 600
+    var showPrivacyPolicy by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -89,9 +105,9 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 36.sp,
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.9f),
-                                offset = Offset(4f, 4f),
-                                blurRadius = 6f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(1f, 1f),
+                                blurRadius = 1f
                             )
                         )
                     ) {
@@ -106,9 +122,9 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 36.sp,
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.9f),
-                                offset = Offset(4f, 4f),
-                                blurRadius = 6f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(1f, 1f),
+                                blurRadius = 1f
                             )
                         )
                     ) {
@@ -123,9 +139,9 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 36.sp,
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.9f),
-                                offset = Offset(4f, 4f),
-                                blurRadius = 6f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(1f, 1f),
+                                blurRadius = 1f
                             )
                         )
                     ) {
@@ -140,9 +156,9 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 36.sp,
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.9f),
-                                offset = Offset(4f, 4f),
-                                blurRadius = 6f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(1f, 1f),
+                                blurRadius = 1f
                             )
                         )
                     ) {
@@ -157,9 +173,9 @@ fun WelcomeScreen(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 36.sp,
                             shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.9f),
-                                offset = Offset(4f, 4f),
-                                blurRadius = 6f
+                                color = Color.Black.copy(alpha = 0.5f),
+                                offset = Offset(1f, 1f),
+                                blurRadius = 1f
                             )
                         )
                     ) {
@@ -182,80 +198,54 @@ fun WelcomeScreen(
         }
 
         // Features list
-        Column(
-            verticalArrangement = Arrangement.spacedBy(20.dp),
-            modifier = Modifier.padding(vertical = 40.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 40.dp),
+            horizontalArrangement = Arrangement.Center
         ) {
-            FeatureRow(
-                icon = Icons.Outlined.Layers,
-                title = "Organize photos into piles",
-                description = "Create colorful piles for your photos",
-                tintColor = SmilePileYellow
-            )
+            Column(
+                verticalArrangement = Arrangement.spacedBy(20.dp),
+                modifier = if (isTablet) {
+                    Modifier.widthIn(max = 550.dp)
+                } else {
+                    Modifier.fillMaxWidth()
+                }
+            ) {
+                FeatureRow(
+                    icon = Icons.Outlined.Layers,
+                    title = "Organize photos into piles",
+                    description = "Create colorful piles for your photos",
+                    tintColor = SmilePileYellow
+                )
 
-            FeatureRow(
-                icon = Icons.Default.FitScreen,
-                title = "Distraction-free mode",
-                description = "Good for kids (and everyone else)",
-                tintColor = SmilePileOrange
-            )
+                FeatureRow(
+                    icon = Icons.Default.FitScreen,
+                    title = "Distraction-free mode",
+                    description = "Good for kids (and everyone else)",
+                    tintColor = SmilePileOrange
+                )
 
-            FeatureRow(
-                icon = Icons.Default.Lock,
-                title = "Optional PIN protection",
-                description = "Prevent inadvertent changes",
-                tintColor = SmilePileGreen
-            )
+                FeatureRow(
+                    icon = Icons.Default.Lock,
+                    title = "Optional PIN protection",
+                    description = "Prevent inadvertent changes",
+                    tintColor = SmilePileGreen
+                )
+            }
         }
 
         // Buttons
         Column(
             modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Try Demo button
-            OutlinedButton(
-                onClick = onTryDemo,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = SmilePilePink
-                ),
-                border = BorderStroke(2.dp, SmilePilePink)
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        verticalArrangement = Arrangement.spacedBy(2.dp)
-                    ) {
-                        Text(
-                            text = "Try Demo",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = "Explore with pre-filled example photos",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Normal
-                        )
-                    }
-                }
-            }
-
-            // Start Fresh button
+            // Start Fresh button (primary action)
             Button(
                 onClick = onGetStarted,
                 modifier = Modifier
+                    .widthIn(max = 400.dp)
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -269,9 +259,65 @@ fun WelcomeScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
+
+            // Try Demo button (secondary action)
+            TextButton(
+                onClick = onTryDemo,
+                modifier = Modifier
+                    .widthIn(max = 400.dp)
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = "Try Demo",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            // Privacy Policy Link
+            TextButton(
+                onClick = {
+                    showPrivacyPolicy = true
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.privacy_policy_label),
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = TextStyle(textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(32.dp))
+    }
+
+    // Privacy Policy Dialog
+    if (showPrivacyPolicy) {
+        Dialog(
+            onDismissRequest = { showPrivacyPolicy = false },
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false
+            )
+        ) {
+            PrivacyPolicyScreen(
+                onDismiss = { showPrivacyPolicy = false }
+            )
+        }
     }
 }
 

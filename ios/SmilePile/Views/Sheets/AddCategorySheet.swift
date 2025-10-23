@@ -10,8 +10,22 @@ struct AddCategorySheet: View {
     @State private var showDuplicateError = false
     @FocusState private var isNameFieldFocused: Bool
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     private let predefinedColors = ColorPickerGrid.defaultColors
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 600 : nil
+    }
+
+    private var horizontalPadding: CGFloat {
+        isIPad ? 32 : 16
+    }
 
     init(
         category: Category?,
@@ -35,87 +49,94 @@ struct AddCategorySheet: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Pile Name")
-                            .font(typography.bodyLarge)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
+                HStack {
+                    if isIPad { Spacer() }
 
-                        TextField("Enter pile name", text: $displayName)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .focused($isNameFieldFocused)
-                            .onSubmit {
-                                if isValid {
-                                    handleSave()
-                                }
-                            }
-
-                        if showDuplicateError {
-                            Text("A pile with this name already exists")
-                                .font(typography.labelMedium)
-                                .foregroundColor(.red)
-                        }
-                    }
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Pile Color")
-                            .font(typography.bodyLarge)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-
-                        ColorPickerGrid(selectedColor: $selectedColorHex)
-                    }
-
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Preview")
-                            .font(typography.bodyLarge)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-
-                        if !displayName.trimmingCharacters(in: .whitespaces).isEmpty {
-                            HStack {
-                                CategoryChip(
-                                    displayName: displayName,
-                                    colorHex: selectedColorHex,
-                                    isSelected: true
-                                )
-
-                                Spacer()
-                            }
-                        } else {
-                            HStack {
-                                Text("Enter pile name to see preview")
-                                    .font(typography.bodyLarge)
-                                    .foregroundColor(.secondary)
-                                    .italic()
-
-                                Spacer()
-                            }
-                        }
-                    }
-
-                    if category?.isDefault == true {
-                        HStack {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.orange)
-
-                            Text("This is a default pile. Only the color can be changed.")
-                                .font(typography.labelMedium)
+                    VStack(spacing: isIPad ? 28 : 24) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Pile Name")
+                                .font(typography.bodyLarge)
+                                .fontWeight(.medium)
                                 .foregroundColor(.secondary)
 
-                            Spacer()
-                        }
-                        .padding()
-                        .background(Color.orange.opacity(0.1))
-                        .cornerRadius(8)
-                    }
+                            TextField("Enter pile name", text: $displayName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .focused($isNameFieldFocused)
+                                .onSubmit {
+                                    if isValid {
+                                        handleSave()
+                                    }
+                                }
 
-                    Spacer(minLength: 40)
+                            if showDuplicateError {
+                                Text("A pile with this name already exists")
+                                    .font(typography.labelMedium)
+                                    .foregroundColor(.red)
+                            }
+                        }
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Pile Color")
+                                .font(typography.bodyLarge)
+                                .fontWeight(.medium)
+                                .foregroundColor(.secondary)
+
+                            ColorPickerGrid(selectedColor: $selectedColorHex)
+                        }
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Preview")
+                                .font(typography.bodyLarge)
+                                .fontWeight(.medium)
+                                .foregroundColor(.secondary)
+
+                            if !displayName.trimmingCharacters(in: .whitespaces).isEmpty {
+                                HStack {
+                                    CategoryChip(
+                                        displayName: displayName,
+                                        colorHex: selectedColorHex,
+                                        isSelected: true
+                                    )
+
+                                    Spacer()
+                                }
+                            } else {
+                                HStack {
+                                    Text("Enter pile name to see preview")
+                                        .font(typography.bodyLarge)
+                                        .foregroundColor(.secondary)
+                                        .italic()
+
+                                    Spacer()
+                                }
+                            }
+                        }
+
+                        if category?.isDefault == true {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                    .foregroundColor(.orange)
+
+                                Text("This is a default pile. Only the color can be changed.")
+                                    .font(typography.labelMedium)
+                                    .foregroundColor(.secondary)
+
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color.orange.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+
+                        Spacer(minLength: 40)
+                    }
+                    .frame(maxWidth: contentMaxWidth)
+                    .padding(horizontalPadding)
+
+                    if isIPad { Spacer() }
                 }
-                .padding()
             }
             .navigationTitle(isEditMode ? "Edit Pile" : "Add Pile")
             .navigationBarTitleDisplayMode(.inline)

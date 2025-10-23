@@ -32,10 +32,6 @@ class CategoryRepositoryImpl @Inject constructor(
     private fun CategoryEntity.toCategory(): Category {
         val name = this.displayName.lowercase().replace(" ", "_")
 
-        // Determine if category is a demo category based on name pattern
-        val demoCategoryNames = listOf("milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures")
-        val isDemoCategory = demoCategoryNames.contains(name)
-
         return Category(
             id = this.id, // Now directly uses Long
             name = name,
@@ -44,7 +40,7 @@ class CategoryRepositoryImpl @Inject constructor(
             iconResource = this.iconName, // Use iconName from entity
             colorHex = this.colorHex,
             isDefault = this.isDefault,
-            isDemoCategory = isDemoCategory,
+            isDemoCategory = this.isDemoCategory, // Use database field instead of name matching
             createdAt = this.createdAt
         )
     }
@@ -59,6 +55,7 @@ class CategoryRepositoryImpl @Inject constructor(
             colorHex = this.colorHex ?: "#4CAF50", // Default color if none provided
             position = this.position,
             isDefault = this.isDefault,
+            isDemoCategory = this.isDemoCategory ?: false, // Properly save demo flag to database
             createdAt = this.createdAt
         )
     }
@@ -258,23 +255,32 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun deleteDemoCategories() = withContext(ioDispatcher) {
         try {
-            val demoCategoryNames = listOf("milestones", "birthdays", "holidays", "family", "playtime", "friends", "creativity", "adventures")
             val allCategories = categoryDao.getAll().first()
 
             var deletedCount = 0
             allCategories.forEach { entity ->
-                val name = entity.displayName.lowercase().replace(" ", "_")
-                if (demoCategoryNames.contains(name)) {
+                // Use the database flag instead of name matching
+                if (entity.isDemoCategory) {
                     categoryDao.delete(entity)
                     deletedCount++
                 }
             }
 
             if (deletedCount > 0) {
-                android.util.Log.d("CategoryRepository", "Deleted $deletedCount demo categories")
+                android.util.Log.d("CategoryRepository", "Deleted $deletedCount demo categories using database flag")
             }
         } catch (e: Exception) {
             throw CategoryRepositoryException("Failed to delete demo categories: ${e.message}", e)
+        }
+    }
+
+    override suspend fun getAllCategoriesUnfiltered(): List<Category> = withContext(ioDispatcher) {
+        try {
+            // Get all categories without demo mode filtering
+            // Used for clearing all data during reset
+            categoryDao.getAll().first().map { it.toCategory() }
+        } catch (e: Exception) {
+            throw CategoryRepositoryException("Failed to get all categories unfiltered: ${e.message}", e)
         }
     }
 }

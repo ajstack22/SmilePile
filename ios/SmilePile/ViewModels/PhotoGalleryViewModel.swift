@@ -9,6 +9,7 @@ class PhotoGalleryViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var photos: [Photo] = []
     @Published var visiblePhotos: [Photo] = []
+    @Published var refreshTrigger: Int = 0
     @Published var isLoading = false
     @Published var loadingProgress: Double = 0
     @Published var currentScrollOffset: CGFloat = 0
@@ -141,6 +142,7 @@ class PhotoGalleryViewModel: ObservableObject {
     /// Refresh photos from repository
     func refreshPhotos() async {
         await loadPhotos()
+        refreshTrigger += 1  // Force view refresh
     }
 
     /// Handle scroll position changes for virtual scrolling

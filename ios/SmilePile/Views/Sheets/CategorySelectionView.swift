@@ -10,11 +10,29 @@ struct CategorySelectionView: View {
     @State private var newCategoryName = ""
     @State private var newCategoryColor = "#4CAF50"
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var gridMinimum: CGFloat {
+        isIPad ? 120 : 100
+    }
+
+    private var gridSpacing: CGFloat {
+        isIPad ? 16 : 12
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 800 : nil
+    }
 
     // Configuration
-    private let columns = [
-        GridItem(.adaptive(minimum: 100), spacing: 12)
-    ]
+    private var columns: [GridItem] {
+        [GridItem(.adaptive(minimum: gridMinimum), spacing: gridSpacing)]
+    }
 
     var body: some View {
         NavigationStack {
@@ -127,19 +145,26 @@ struct CategorySelectionView: View {
 
     private var categoryGrid: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(filteredCategories) { categoryWithCount in
-                    CategorySelectionCard(
-                        category: categoryWithCount.category,
-                        photoCount: categoryWithCount.photoCount,
-                        isSelected: selectedCategoryIds.contains(categoryWithCount.category.id),
-                        onTap: {
-                            toggleCategory(categoryWithCount.category.id)
-                        }
-                    )
+            HStack {
+                if isIPad { Spacer() }
+
+                LazyVGrid(columns: columns, spacing: gridSpacing) {
+                    ForEach(filteredCategories) { categoryWithCount in
+                        CategorySelectionCard(
+                            category: categoryWithCount.category,
+                            photoCount: categoryWithCount.photoCount,
+                            isSelected: selectedCategoryIds.contains(categoryWithCount.category.id),
+                            onTap: {
+                                toggleCategory(categoryWithCount.category.id)
+                            }
+                        )
+                    }
                 }
+                .frame(maxWidth: contentMaxWidth)
+                .padding(isIPad ? 24 : 16)
+
+                if isIPad { Spacer() }
             }
-            .padding()
         }
     }
 
@@ -224,7 +249,7 @@ struct CategorySelectionCard: View {
                 // Icon and selection indicator
                 ZStack {
                     Circle()
-                        .fill(Color(hex: category.colorHex ?? "#4CAF50") ?? .green)
+                        .fill(Color(hex: category.colorHex ?? "#4CAF50"))
                         .frame(width: 60, height: 60)
 
                     if let iconName = category.iconResource {
@@ -361,7 +386,7 @@ struct CreateCategorySheet: View {
                         ForEach(CategoryManager.Configuration.defaultIcons, id: \.self) { iconName in
                             IconSelectionButton(
                                 iconName: iconName,
-                                color: Color(hex: selectedColor) ?? .green,
+                                color: Color(hex: selectedColor),
                                 isSelected: selectedIcon == iconName,
                                 onTap: {
                                     selectedIcon = iconName
@@ -449,7 +474,7 @@ struct ColorSelectionCircle: View {
     var body: some View {
         Button(action: onTap) {
             Circle()
-                .fill(Color(hex: colorHex) ?? .gray)
+                .fill(Color(hex: colorHex))
                 .frame(width: 44, height: 44)
                 .overlay(
                     Circle()

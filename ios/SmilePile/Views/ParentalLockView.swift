@@ -12,17 +12,38 @@ struct ParentalLockView: View {
     @State private var showBiometricOption = false
     @State private var unlockAnimationScale: CGFloat = 1.0
     @Environment(\.typography) var typography
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
+    // Adaptive sizing for iPad
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+
+    private var iconSize: CGFloat {
+        isIPad ? 100 : 80
+    }
+
+    private var contentMaxWidth: CGFloat? {
+        isIPad ? 500 : nil
+    }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 30) {
-                lockIconAndTitle
-                Spacer()
-                authenticationOptions
-                Spacer()
-                warningsAndStatus
+        NavigationStack {
+            HStack {
+                if isIPad { Spacer() }
+
+                VStack(spacing: isIPad ? 36 : 30) {
+                    lockIconAndTitle
+                    Spacer()
+                    authenticationOptions
+                    Spacer()
+                    warningsAndStatus
+                }
+                .frame(maxWidth: contentMaxWidth)
+                .padding(isIPad ? 32 : 16)
+
+                if isIPad { Spacer() }
             }
-            .padding()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -52,9 +73,9 @@ struct ParentalLockView: View {
     // MARK: - Extracted Views
 
     private var lockIconAndTitle: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: isIPad ? 20 : 16) {
             Image(systemName: viewModel.isUnlocked ? "lock.open.fill" : "lock.fill")
-                .font(.system(size: 80))
+                .font(.system(size: iconSize))
                 .foregroundColor(Color(red: 1.0, green: 0.792, blue: 0.157))
                 .scaleEffect(unlockAnimationScale)
                 .animation(.spring(), value: viewModel.isUnlocked)

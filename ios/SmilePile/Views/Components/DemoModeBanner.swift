@@ -10,37 +10,20 @@ struct DemoModeBanner: View {
 
     var body: some View {
         if settingsManager.isDemoMode {
-            VStack(spacing: 0) {
-                HStack(spacing: 12) {
-                    Image(systemName: "star.fill")
-                        .font(typography.bodyMedium)
-                        .foregroundColor(.white)
-
-                    Text("Demo Mode - Viewing Jamie's Photos")
-                        .font(typography.bodyLarge)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-
-                    Spacer()
-
-                    Button(action: {
-                        showExitConfirmation = true
-                    }) {
-                        Text("Exit")
-                            .font(typography.bodyMedium)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(red: 156/255, green: 39/255, blue: 176/255))
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 6)
-                            .background(Color.white)
-                            .cornerRadius(6)
-                    }
-                    .disabled(isExiting)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(Color(red: 156/255, green: 39/255, blue: 176/255))
+            Button(action: {
+                showExitConfirmation = true
+            }) {
+                Text("Exit Demo")
+                    .font(typography.bodyMedium)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color(red: 156/255, green: 39/255, blue: 176/255))
+                    .cornerRadius(8)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
             }
+            .disabled(isExiting)
             .alert("Exit Demo Mode?", isPresented: $showExitConfirmation) {
                 Button("Cancel", role: .cancel) {}
                 Button("Exit Demo", role: .destructive) {

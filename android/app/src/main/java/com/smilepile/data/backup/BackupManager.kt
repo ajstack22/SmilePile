@@ -690,14 +690,14 @@ class BackupManager @Inject constructor(
                 photoRepository.deletePhoto(photo)
             }
 
-            // Delete ALL categories (including defaults)
-            // This is used for complete reset and REPLACE imports
-            val allCategories = categoryRepository.getAllCategories()
+            // Delete ALL categories (including defaults and demo categories)
+            // Use unfiltered query to ensure we get everything regardless of demo mode
+            val allCategories = categoryRepository.getAllCategoriesUnfiltered()
             allCategories.forEach { category ->
                 categoryRepository.deleteCategory(category)
             }
 
-            Log.i(TAG, "Cleared all existing data and files")
+            Log.i(TAG, "Cleared all existing data and files (${allCategories.size} categories)")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to clear existing data", e)
             throw e

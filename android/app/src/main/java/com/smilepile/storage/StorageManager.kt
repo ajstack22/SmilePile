@@ -137,6 +137,28 @@ class StorageManager @Inject constructor(
     }
 
     /**
+     * Save edited photo to existing file path
+     * @param bitmap The edited bitmap to save
+     * @param existingPath The existing file path to overwrite
+     * @return The saved file or null if failed
+     */
+    suspend fun saveEditedPhoto(bitmap: Bitmap, existingPath: String): File? = withContext(Dispatchers.IO) {
+        try {
+            val photoFile = File(existingPath)
+
+            FileOutputStream(photoFile).use { out ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, PHOTO_QUALITY, out)
+            }
+
+            Log.d(TAG, "Successfully saved edited photo to: $existingPath")
+            photoFile
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving edited photo: $existingPath", e)
+            null
+        }
+    }
+
+    /**
      * Import multiple photos in batch
      * @param sourceUris List of photo URIs to import
      * @return List of successful import results

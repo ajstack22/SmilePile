@@ -42,25 +42,39 @@ struct CompletionScreen: View {
             // Summary card
             if showContent {
                 VStack(alignment: .leading, spacing: 16) {
-                    // Piles created
-                    if !coordinator.onboardingData.categories.isEmpty {
-                        HStack(spacing: 12) {
-                            Image(systemName: "square.stack")
-                                .foregroundColor(.smilePileOrange)
-
-                            Text("\(coordinator.onboardingData.categories.count) piles created")
+                    if coordinator.onboardingData.isDemoMode {
+                        // Demo mode messages
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Demo Data Loaded")
                                 .font(typography.bodyMedium)
+                                .fontWeight(.semibold)
+
+                            Text("Use the purple exit button to leave Demo Mode")
+                                .font(typography.bodyMedium)
+                                .foregroundColor(.secondary)
                         }
-                    }
+                    } else {
+                        // Regular onboarding summary
+                        // Piles created
+                        if !coordinator.onboardingData.categories.isEmpty {
+                            HStack(spacing: 12) {
+                                Image(systemName: "square.stack")
+                                    .foregroundColor(.smilePileOrange)
 
-                    // PIN enabled
-                    if !coordinator.onboardingData.skipPIN && coordinator.onboardingData.pinCode != nil {
-                        HStack(spacing: 12) {
-                            Image(systemName: "lock.fill")
-                                .foregroundColor(Color(hex: "#45B7D1") ?? .smilePileBlue)
+                                Text("\(coordinator.onboardingData.categories.count) piles created")
+                                    .font(typography.bodyMedium)
+                            }
+                        }
 
-                            Text("PIN protection enabled")
-                                .font(typography.bodyMedium)
+                        // PIN enabled
+                        if !coordinator.onboardingData.skipPIN && coordinator.onboardingData.pinCode != nil {
+                            HStack(spacing: 12) {
+                                Image(systemName: "lock.fill")
+                                    .foregroundColor(Color(hex: "#45B7D1"))
+
+                                Text("PIN protection enabled")
+                                    .font(typography.bodyMedium)
+                            }
                         }
                     }
                 }
@@ -79,8 +93,9 @@ struct CompletionScreen: View {
             // Start button
             if showContent {
                 Button(action: {
-                    // This will trigger the dismissal via notification
+                    // Dismiss onboarding and return to main app
                     coordinator.isComplete = true
+                    coordinator.dismissOnboarding()
                 }) {
                     Text("Start Using SmilePile")
                         .font(typography.bodyLarge)

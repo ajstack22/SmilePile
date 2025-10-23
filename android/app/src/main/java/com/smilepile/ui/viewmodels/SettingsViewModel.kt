@@ -503,6 +503,10 @@ class SettingsViewModel @Inject constructor(
             try {
                 _uiState.value = _uiState.value.copy(isLoading = true)
 
+                // Clear demo mode first (before clearing data)
+                settingsManager.setDemoMode(false)
+                settingsManager.setDemoModeEntered(false)
+
                 // Clear all app data
                 backupManager.clearAllData()
 

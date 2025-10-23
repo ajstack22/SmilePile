@@ -40,6 +40,7 @@ struct OnboardingData {
     var importedPhotos: [ImportedPhoto] = []
     var pinCode: String? = nil
     var skipPIN: Bool = false
+    var isDemoMode: Bool = false
 }
 
 struct TempCategory {
@@ -141,7 +142,7 @@ class OnboardingCoordinator: ObservableObject {
                 let categoryRepo = CategoryRepositoryImpl.shared
                 for (index, tempCategory) in onboardingData.categories.enumerated() {
                     let category = Category(
-                        id: Int64(index + 1),
+                        id: 0, // Auto-generate ID to avoid conflicts
                         name: tempCategory.name.lowercased().replacingOccurrences(of: " ", with: "_"),
                         displayName: tempCategory.name,
                         position: index,
@@ -174,12 +175,7 @@ class OnboardingCoordinator: ObservableObject {
 
                 // Navigate to complete screen
                 currentStep = .complete
-                isComplete = true
-
-                // Delay before dismissing
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.dismissOnboarding()
-                }
+                // Don't auto-dismiss - let user tap "Start Using SmilePile" button (matches Android)
 
             } catch {
                 showError(message: "Failed to save onboarding data: \(error.localizedDescription)")
@@ -239,7 +235,7 @@ class OnboardingCoordinator: ObservableObject {
         }
     }
 
-    private func dismissOnboarding() {
+    func dismissOnboarding() {
         // This will be handled by the parent view
         NotificationCenter.default.post(name: .onboardingComplete, object: nil)
     }
@@ -254,6 +250,9 @@ class OnboardingCoordinator: ObservableObject {
     func enterDemoMode() {
         Task { @MainActor in
             do {
+                // Set demo mode flag in onboarding data
+                onboardingData.isDemoMode = true
+
                 // Set demo mode flags
                 let settings = SettingsManager.shared
                 settings.isDemoMode = true
@@ -267,14 +266,11 @@ class OnboardingCoordinator: ObservableObject {
                 // Load demo data if needed
                 try await loadDemoDataIfNeeded()
 
-                // Navigate to complete screen
-                currentStep = .complete
-                isComplete = true
+                // Wait for data to propagate through the system
+                try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
 
-                // Delay before dismissing
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    self.dismissOnboarding()
-                }
+                // Navigate to complete screen - wait for user to tap "Start Using SmilePile"
+                currentStep = .complete
 
             } catch {
                 showError(message: "Failed to enter demo mode: \(error.localizedDescription)")
@@ -291,11 +287,13 @@ class OnboardingCoordinator: ObservableObject {
         let demoPhotos = existingPhotos.filter { $0.isFromAssets }
 
         if !demoPhotos.isEmpty {
-            print("Demo data already exists (\(demoPhotos.count) photos), skipping load")
+            print("ℹ️ Demo data already exists (\(demoPhotos.count) photos), skipping load")
             return
         }
 
-        print("Loading demo data...")
+        print("📸 Starting demo data load...")
+        print("   Total categories to create: \(DemoData.categories.count)")
+        print("   Total photos to load: \(DemoData.photoMetadata.count)")
 
         // Load categories first
         var loadedCategories: [Category] = []
@@ -325,50 +323,89 @@ class OnboardingCoordinator: ObservableObject {
                 createdAt: category.createdAt
             )
             loadedCategories.append(insertedCategory)
-            print("Created demo category: \(categoryData.displayName) (id: \(categoryId))")
+            print("✅ Created demo category: \(categoryData.displayName) (id: \(categoryId))")
         }
+
+        print("\n📷 Loading demo photos (priority: first 10, then background)...")
 
         // Load first 10 photos immediately (high priority)
         let priorityPhotos = Array(DemoData.photoMetadata.prefix(10))
+        var successCount = 0
+        var failCount = 0
+
         for photoMeta in priorityPhotos {
-            try await loadDemoPhoto(photoMeta, from: loadedCategories, using: photoRepo)
+            do {
+                try await loadDemoPhoto(photoMeta, from: loadedCategories, using: photoRepo)
+                successCount += 1
+            } catch {
+                failCount += 1
+                print("❌ Failed to load priority photo \(photoMeta.assetName): \(error)")
+            }
         }
+
+        print("📊 Priority photo load complete: \(successCount) succeeded, \(failCount) failed")
 
         // Load remaining photos in background
         let remainingPhotos = Array(DemoData.photoMetadata.dropFirst(10))
         if !remainingPhotos.isEmpty {
             Task.detached {
+                var bgSuccessCount = 0
+                var bgFailCount = 0
+
                 for photoMeta in remainingPhotos {
                     do {
                         try await self.loadDemoPhoto(photoMeta, from: loadedCategories, using: photoRepo)
+                        bgSuccessCount += 1
                     } catch {
-                        print("Warning: Failed to load demo photo \(photoMeta.assetName): \(error)")
+                        bgFailCount += 1
+                        print("❌ Failed to load background photo \(photoMeta.assetName): \(error)")
                     }
                 }
-                print("Background demo photo loading complete")
+                print("📊 Background photo load complete: \(bgSuccessCount) succeeded, \(bgFailCount) failed")
             }
         }
 
-        print("Demo data loading initiated (10 photos loaded, \(remainingPhotos.count) loading in background)")
+        print("✅ Demo data loading initiated (\(successCount) photos loaded immediately, \(remainingPhotos.count) loading in background)")
     }
 
     private func loadDemoPhoto(_ photoMeta: DemoData.PhotoMetadata, from categories: [Category], using photoRepo: PhotoRepositoryImpl) async throws {
         guard let categoryId = DemoData.getCategoryId(for: photoMeta.categoryName, from: categories) else {
-            print("Warning: Category not found for \(photoMeta.categoryName)")
+            print("⚠️ Demo Photo Load Error: Category not found for \(photoMeta.categoryName)")
             return
         }
 
-        // Load image from Assets
+        // Load image from Assets with detailed diagnostics
+        print("🔍 Attempting to load demo asset: \(photoMeta.assetName)")
         guard let image = UIImage(named: photoMeta.assetName) else {
-            print("Warning: Asset not found: \(photoMeta.assetName)")
+            // Try alternative loading methods for diagnostics
+            if let bundlePath = Bundle.main.path(forResource: photoMeta.assetName, ofType: "png"),
+               let altImage = UIImage(contentsOfFile: bundlePath) {
+                print("✅ Demo Photo Load SUCCESS via bundle path: \(photoMeta.assetName)")
+                // Use altImage instead
+                if let imageData = altImage.jpegData(compressionQuality: 0.9) {
+                    try await saveDemoPhotoToDocuments(photoMeta, imageData: imageData, image: altImage, categoryId: categoryId, photoRepo: photoRepo)
+                }
+                return
+            }
+
+            print("❌ Demo Photo Load Error: Asset not found: \(photoMeta.assetName)")
+            print("   Expected asset name: '\(photoMeta.assetName)' in Assets.xcassets")
+            print("   Bundle path search also failed")
+            print("   Available resources: \(Bundle.main.paths(forResourcesOfType: "png", inDirectory: nil).filter { $0.contains("demo") }.joined(separator: ", "))")
             return
         }
+
+        print("✅ Demo asset loaded successfully: \(photoMeta.assetName) - size: \(image.size)")
 
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {
-            print("Warning: Failed to convert image to JPEG data: \(photoMeta.assetName)")
+            print("⚠️ Demo Photo Load Error: Failed to convert image to JPEG data: \(photoMeta.assetName)")
             return
         }
 
+        try await saveDemoPhotoToDocuments(photoMeta, imageData: imageData, image: image, categoryId: categoryId, photoRepo: photoRepo)
+    }
+
+    private func saveDemoPhotoToDocuments(_ photoMeta: DemoData.PhotoMetadata, imageData: Data, image: UIImage, categoryId: Int64, photoRepo: PhotoRepositoryImpl) async throws {
         // Save to Documents directory
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileName = "\(photoMeta.assetName).jpg"
@@ -376,8 +413,9 @@ class OnboardingCoordinator: ObservableObject {
 
         do {
             try imageData.write(to: imagePath)
+            print("✅ Demo photo file written: \(fileName)")
         } catch {
-            print("Warning: Failed to save demo photo \(fileName): \(error)")
+            print("❌ Demo Photo Load Error: Failed to save demo photo \(fileName): \(error)")
             return
         }
 
@@ -395,7 +433,7 @@ class OnboardingCoordinator: ObservableObject {
         )
 
         _ = try await photoRepo.insertPhoto(photo)
-        print("Loaded demo photo: \(photoMeta.assetName) -> category \(categoryId)")
+        print("✅ Demo photo loaded successfully: \(photoMeta.assetName) -> category \(categoryId)")
     }
 }
 

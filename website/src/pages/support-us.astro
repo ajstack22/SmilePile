@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SmilePileLogo from '../components/SmilePileLogo.astro';
+---
+
+<BaseLayout
+  title="Support Us - SmilePile"
+  description="Learn about SmilePile and how you can support our mission to help families stay connected through photos."
+>
+  <Header slot="header" />
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <section class="text-center mb-16">
+      <div class="flex flex-col items-center mb-6">
+        <!-- Logo Icon -->
+        <img
+          src="/smilepile-logo.svg"
+          alt="SmilePile icon"
+          class="w-24 h-24 mb-4"
+        />
+        <!-- SmilePile Text -->
+        <span class="font-display font-black text-5xl" style="letter-spacing: -0.02em; text-shadow: 1px 1px 1px rgba(0,0,0,0.3);">
+          <span class="text-smilepile-yellow">Smile</span><span class="text-smilepile-green">P</span><span class="text-smilepile-blue">i</span><span class="text-smilepile-orange">l</span><span class="text-smilepile-pink">e</span>
+        </span>
+      </div>
+      <p class="text-xl text-gray-700 mb-6 max-w-2xl mx-auto leading-relaxed">
+        <strong>SmilePile is brought to you by StackMap.</strong> Built by parents, for families everywhere. SmilePile is free and always will be.
+      </p>
+    </section>
+
+    <!-- Buy Me a Coffee Button -->
+    <section class="mb-8 text-center">
+      <a
+        href="https://www.buymeacoffee.com/stackmap"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center bg-primary text-white px-8 py-4 rounded-full hover:bg-primary-600 transition-colors focus-visible-ring text-lg font-bold shadow-lg min-h-[48px] no-underline"
+      >
+        ☕ Support StackMap
+      </a>
+      <p class="text-sm text-gray-600 mt-2">via Buy Me a Coffee</p>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="mb-16 bg-gray-50 rounded-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-left">Your support helps us provide:</h2>
+
+      <div class="space-y-6">
+        <!-- Impact Item 1 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Private & Ad-Free</h3>
+            <p class="text-gray-600">No ads, no tracking, your data stays yours</p>
+          </div>
+        </div>
+
+        <!-- Impact Item 2 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Free Forever</h3>
+            <p class="text-gray-600">No subscriptions, no paywalls, accessible to everyone</p>
+          </div>
+        </div>
+
+        <!-- Impact Item 3 -->
+        <div class="flex items-start">
+          <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Ongoing Development</h3>
+            <p class="text-gray-600">Continuous improvements and support for families</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ways to Contribute Section -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Ways to Contribute</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Contribution Option 1 -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200 text-center">
+          <div class="text-4xl mb-3">🎆</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Leave a Review</h3>
+          <p class="text-gray-600">Help other families find us</p>
+        </div>
+
+        <!-- Contribution Option 2 -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200 text-center">
+          <div class="text-4xl mb-3">📣</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Tell a Friend</h3>
+          <p class="text-gray-600">Share with someone who could use SmilePile</p>
+        </div>
+
+        <!-- Contribution Option 3 -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200 text-center">
+          <div class="text-4xl mb-3">💬</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Share Your Story</h3>
+          <p class="text-gray-600">We'd love to hear how SmilePile helps</p>
+        </div>
+
+        <!-- Contribution Option 4 -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200 text-center">
+          <div class="text-4xl mb-3">💡</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Send Ideas</h3>
+          <p class="text-gray-600">What would make SmilePile better for you?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="bg-primary-50 rounded-lg p-8 text-center mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+      <a
+        href="mailto:support@stackmap.app?subject=SmilePile Feedback"
+        class="text-primary hover:underline text-lg font-semibold"
+      >
+        support@stackmap.app
+      </a>
+    </section>
+
+    <!-- Footer Message -->
+    <div class="text-center">
+      <p class="text-gray-600">Thank you for being part of SmilePile</p>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>

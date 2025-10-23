@@ -1988,14 +1988,15 @@ class BackupManagerTest {
         val categories = listOf(createTestCategory(1, "test", "Test"))
         val photos = (1..1000).map { createTestPhoto(it.toLong(), "photo$it.jpg", 1) }
 
-        coEvery { categoryRepository.getAllCategories() } returns categories
-        coEvery { photoRepository.getAllPhotos() } returns photos
+        coEvery { categoryRepository.getCategoryCount() } returns 1
+        coEvery { photoRepository.getPhotoCount() } returns 1000
 
         // When
         val stats = backupManager.getBackupStats()
 
         // Then
         assertTrue(stats.success)
+        assertEquals(1, stats.categoryCount)
         assertEquals(1000, stats.photoCount)
     }
 

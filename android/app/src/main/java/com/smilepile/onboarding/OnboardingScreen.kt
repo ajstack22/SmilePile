@@ -126,6 +126,7 @@ fun OnboardingScreen(
                             biometricEnabled = uiState.biometricEnabled,
                             importMode = uiState.importMode,
                             importStats = uiState.importStats,
+                            isDemoMode = uiState.isDemoMode,
                             onComplete = onComplete
                         )
                     }

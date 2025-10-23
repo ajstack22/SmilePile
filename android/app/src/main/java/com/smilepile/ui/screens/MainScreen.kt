@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,12 +14,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.outlined.PhotoLibrary
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.filled.Layers
+import androidx.compose.ui.Alignment
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -58,6 +61,8 @@ import com.smilepile.ui.viewmodels.AppModeViewModel
 import com.smilepile.ui.toast.ToastUI
 import com.smilepile.ui.toast.rememberToastState
 import com.smilepile.ui.toast.ToastManager
+import com.smilepile.ui.components.CustomFloatingActionButton
+import com.smilepile.ui.viewmodels.DemoModeViewModel
 import javax.inject.Inject
 
 /**
@@ -81,12 +86,15 @@ fun MainScreen(
     showKidsModeExitDialog: Boolean = false,
     onKidsModeExitDialogDismiss: () -> Unit = {},
     modeViewModel: AppModeViewModel = hiltViewModel(),
+    demoModeViewModel: DemoModeViewModel = hiltViewModel(),
     toastManager: ToastManager? = null
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val modeState by modeViewModel.uiState.collectAsState()
     val currentMode = modeState.currentMode
+    val demoState by demoModeViewModel.uiState.collectAsState()
+    var showExitDemoDialog by remember { mutableStateOf(false) }
 
     // Toast state
     val scope = rememberCoroutineScope()
@@ -133,15 +141,9 @@ fun MainScreen(
         else -> false
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
-        Scaffold(
-            topBar = {
-                // Show demo banner only in Parent Mode
-                if (currentMode == AppMode.PARENT) {
-                    com.smilepile.ui.components.DemoModeBanner()
-                }
-            },
-            bottomBar = {
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        bottomBar = {
             if (shouldShowBottomNavigation) {
                 SmilePileBottomNavigation(
                     items = bottomNavigationItems,
@@ -151,23 +153,72 @@ fun MainScreen(
                     }
                 )
             }
-        }
+        },
+        contentWindowInsets = WindowInsets(0.dp) // Match nested screens
     ) { paddingValues ->
+        Box(modifier = Modifier.fillMaxSize()) {
             AppNavHost(
                 navController = navController,
                 modifier = Modifier
                     .fillMaxSize(),
                 paddingValues = paddingValues,
-                toastState = toastState
+                toastState = toastState,
+                demoState = demoState,
+                onShowExitDemoDialog = { showExitDemoDialog = true }
             )
-        }
 
-        // Toast UI overlay - Only show toast in Parent Mode
-        // Kids Mode handles its own toast in KidsModeGalleryScreen (only in fullscreen)
-        if (currentMode == AppMode.PARENT) {
-            ToastUI(toastState = toastState)
+            // Toast UI overlay - Only show toast in Parent Mode
+            // Kids Mode handles its own toast in KidsModeGalleryScreen (only in fullscreen)
+            if (currentMode == AppMode.PARENT) {
+                ToastUI(toastState = toastState)
+            }
+            // No toast for Kids Mode - handled by KidsModeGalleryScreen
         }
-        // No toast for Kids Mode - handled by KidsModeGalleryScreen
+    }
+
+    // Exit Demo confirmation dialog
+    if (showExitDemoDialog) {
+        AlertDialog(
+            onDismissRequest = { if (!demoState.isExiting) showExitDemoDialog = false },
+            title = { Text("Exit Demo Mode?") },
+            text = { Text("This will remove all demo photos and categories. You can try demo mode again later.") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        demoModeViewModel.exitDemoMode()
+                        showExitDemoDialog = false
+                    },
+                    enabled = !demoState.isExiting,
+                    colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text("Exit Demo")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showExitDemoDialog = false },
+                    enabled = !demoState.isExiting
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
+    // Error dialog
+    demoState.error?.let { error ->
+        AlertDialog(
+            onDismissRequest = { demoModeViewModel.clearError() },
+            title = { Text("Error") },
+            text = { Text(error) },
+            confirmButton = {
+                TextButton(onClick = { demoModeViewModel.clearError() }) {
+                    Text("OK")
+                }
+            }
+        )
     }
 
     // Navigate to ParentalLockScreen for Kids Mode Exit

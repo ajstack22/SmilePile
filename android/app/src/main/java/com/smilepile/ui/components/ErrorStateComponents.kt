@@ -44,8 +44,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ErrorState(
     errorMessage: String,
-    onRetry: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
+    onRetry: (() -> Unit)? = null,
     errorType: ErrorType = ErrorType.GENERIC,
     showRetry: Boolean = true
 ) {

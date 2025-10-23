@@ -245,14 +245,6 @@ private fun SettingsContent(
         }
 
         item {
-            DemoSection(
-                isDemoMode = uiState.isDemoMode,
-                demoModeEntered = uiState.demoModeEntered,
-                demoModeEntryCount = uiState.demoModeEntryCount
-            )
-        }
-
-        item {
             AboutSection(onAboutClick = onShowAboutDialog)
         }
     }
@@ -521,39 +513,6 @@ private fun DataSection(
                 }
             }
         )
-    }
-}
-
-@Composable
-private fun DemoSection(
-    isDemoMode: Boolean,
-    demoModeEntered: Boolean,
-    demoModeEntryCount: Int
-) {
-    SettingsSection(title = "Demo") {
-        if (isDemoMode) {
-            SettingsActionItem(
-                title = "Demo Mode Active",
-                subtitle = "Use banner to exit",
-                icon = Icons.Default.Star,
-                iconTint = Color(0xFF9C27B0),
-                onClick = {}
-            )
-        } else {
-            SettingsActionItem(
-                title = "Try Demo Mode",
-                subtitle = if (demoModeEntered) {
-                    "Entered $demoModeEntryCount time${if (demoModeEntryCount == 1) "" else "s"}"
-                } else {
-                    "Experience SmilePile with pre-filled photos"
-                },
-                icon = Icons.Default.Star,
-                iconTint = Color(0xFF9C27B0),
-                onClick = {
-                    // TODO: Navigate to demo mode entry
-                }
-            )
-        }
     }
 }
 

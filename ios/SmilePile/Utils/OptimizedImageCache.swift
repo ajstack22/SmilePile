@@ -30,6 +30,7 @@ actor OptimizedImageCache {
 
     // MARK: - Properties
     private let cache = NSCache<NSString, UIImage>()
+    private var cacheDelegate: CacheDelegate?
     private var cacheEntries: [String: CacheEntry] = [:]
     private var loadingTasks: [String: Task<UIImage?, Never>] = [:]
     private let logger = Logger(subsystem: "com.smilepile", category: "ImageCache")
@@ -54,12 +55,14 @@ actor OptimizedImageCache {
         cache.totalCostLimit = Configuration.maxCacheSize
         cache.evictsObjectsWithDiscardedContent = true
 
-        // Set delegate for eviction callbacks
-        cache.delegate = CacheDelegate { [weak self] key in
+        // Set delegate for eviction callbacks - store to retain it
+        let delegate = CacheDelegate { [weak self] key in
             Task {
                 await self?.handleEviction(key: key)
             }
         }
+        self.cacheDelegate = delegate
+        cache.delegate = delegate
     }
 
     private func observeMemoryWarnings() {
