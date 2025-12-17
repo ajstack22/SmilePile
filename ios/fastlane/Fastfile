@@ -54,9 +54,9 @@ platform :ios do
 
     # Upload to TestFlight using App Store Connect API
     api_key = app_store_connect_api_key(
-      key_id: "BJAC3957M4",
+      key_id: "RAGW8S622J",
       issuer_id: "a608e0f8-9834-49e6-8f6e-623d726ba970",
-      key_filepath: File.expand_path("~/.fastlane/AuthKey_BJAC3957M4.p8"),
+      key_filepath: File.expand_path("~/.fastlane/AuthKey_RAGW8S622J.p8"),
       in_house: false
     )
 
@@ -99,7 +99,16 @@ platform :ios do
       buildlog_path: "./build/logs"
     )
 
+    # Upload to TestFlight using App Store Connect API
+    api_key = app_store_connect_api_key(
+      key_id: "RAGW8S622J",
+      issuer_id: "a608e0f8-9834-49e6-8f6e-623d726ba970",
+      key_filepath: File.expand_path("~/.fastlane/AuthKey_RAGW8S622J.p8"),
+      in_house: false
+    )
+
     pilot(
+      api_key: api_key,
       skip_waiting_for_build_processing: false,  # Wait for processing before external distribution
       distribute_external: true,
       groups: ["Beta Testers"],
@@ -137,8 +146,17 @@ platform :ios do
       buildlog_path: "./build/logs"
     )
 
+    # Upload to App Store Connect using API key
+    api_key = app_store_connect_api_key(
+      key_id: "RAGW8S622J",
+      issuer_id: "a608e0f8-9834-49e6-8f6e-623d726ba970",
+      key_filepath: File.expand_path("~/.fastlane/AuthKey_RAGW8S622J.p8"),
+      in_house: false
+    )
+
     # Upload but don't auto-submit
     deliver(
+      api_key: api_key,
       skip_metadata: true,
       skip_screenshots: true,
       submit_for_review: false,  # Manual submission required

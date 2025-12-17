@@ -33,6 +33,7 @@ platform :android do
     )
 
     upload_to_play_store(
+      json_key: "fastlane/service-account.json",
       track: "internal",
       release_status: "completed",
       aab: "app/build/outputs/bundle/stageRelease/app-stage-release.aab",
@@ -60,6 +61,7 @@ platform :android do
     )
 
     upload_to_play_store(
+      json_key: "fastlane/service-account.json",
       track: "beta",
       release_status: "completed",
       aab: "app/build/outputs/bundle/betaRelease/app-beta-release.aab",
@@ -86,6 +88,7 @@ platform :android do
     )
 
     upload_to_play_store(
+      json_key: "fastlane/service-account.json",
       track: "production",
       release_status: "draft",  # Draft for manual rollout control
       aab: "app/build/outputs/bundle/prodRelease/app-prod-release.aab",

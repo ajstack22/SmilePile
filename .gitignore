@@ -239,3 +239,7 @@ android/app/keystore.properties
 
 # Screenshot captures (from /screenshots command)
 screenshots/
+android/fastlane/service-account.json
+
+# Large binary files
+*.dmg

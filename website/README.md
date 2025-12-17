@@ -136,7 +136,30 @@ Both methods ensure compatibility across all platforms.
 
 ## Deployment
 
-### Option 1: Vercel (Recommended)
+### Option 1: cPanel via SSH + rsync (Primary)
+
+Direct deployment using SSH + rsync - same method as Manylla/StackMap. See `DEPLOYMENT.md` for full setup guide.
+
+**Quick Start**:
+```bash
+cd /Users/adamstack/SmilePile/website
+./scripts/deploy-website-prod.sh
+```
+
+**How it works**:
+1. Builds Astro site locally (`npm run build`)
+2. Uses rsync to upload `dist/` to cPanel
+3. Deploys to `~/smilepile` via SSH
+
+**Features**:
+- Automatic backup before deployment
+- Rollback capability
+- Deployment verification
+- Same infrastructure as Manylla/StackMap
+
+**Documentation**: See `DEPLOYMENT.md` for detailed instructions.
+
+### Option 2: Vercel (Alternative)
 
 ```bash
 # Install Vercel CLI
@@ -152,7 +175,7 @@ Configuration is in `vercel.json`:
 - Redirects for query parameters
 - Security headers (X-Frame-Options, CSP, etc.)
 
-### Option 2: Netlify
+### Option 3: Netlify
 
 ```bash
 # Install Netlify CLI
@@ -168,7 +191,7 @@ Configuration is in `netlify.toml`:
 - Redirects for query parameters
 - Security headers
 
-### Option 3: Cloudflare Pages
+### Option 4: Cloudflare Pages
 
 1. Go to pages.cloudflare.com
 2. Connect GitHub repository
